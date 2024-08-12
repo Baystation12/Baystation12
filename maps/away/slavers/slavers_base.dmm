@@ -18,8 +18,21 @@
 /turf/space,
 /area/space)
 "af" = (
-/turf/simulated/mineral,
-/area/mine/unexplored)
+/obj/decal/cleanable/dirt,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
 "ag" = (
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
@@ -31,156 +44,196 @@
 /turf/space,
 /area/space)
 "aj" = (
-/obj/structure/ore_box{
-	desc = "A heavy box covered with dried blood.";
-	name = "Big dirty box"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"ak" = (
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"al" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"am" = (
-/obj/structure/crematorium,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"an" = (
-/obj/decal/cleanable/ash,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"ao" = (
-/obj/structure/table/standard,
-/obj/item/wirecutters,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"ap" = (
-/obj/structure/table/standard,
-/obj/landmark/corpse/slavers_base/slave,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aq" = (
-/obj/structure/table/standard,
-/obj/item/paper/spacer{
-	info = "If they'll keep having fun with cargo in such manner, we'll run out of freezers to keep what's left from it.";
-	name = "Note"
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"ar" = (
-/obj/structure/table/standard,
-/obj/item/material/knife/table,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"as" = (
-/obj/structure/table/rack,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"at" = (
-/obj/gibspawner/human,
-/turf/simulated/floor/asteroid,
-/area/mine/explored)
-"au" = (
-/obj/structure/table/rack,
-/obj/item/wirecutters,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"av" = (
-/obj/item/shovel,
-/turf/simulated/floor/asteroid,
-/area/mine/explored)
-"aw" = (
-/obj/item/remains/human,
-/turf/simulated/floor/asteroid,
-/area/mine/explored)
-"ax" = (
-/obj/item/remains/human,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"ay" = (
-/obj/item/bodybag,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"az" = (
-/obj/item/material/knife/table,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aA" = (
-/obj/structure/table/rack,
-/obj/item/material/hatchet,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aB" = (
-/obj/structure/closet/crate/freezer,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aC" = (
-/obj/gibspawner/human,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aD" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aE" = (
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "Slaves Mortuary";
-	pixel_x = 24
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aF" = (
-/obj/machinery/light/small,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aG" = (
-/obj/machinery/gibber,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aH" = (
-/obj/structure/kitchenspike,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aI" = (
-/obj/structure/kitchenspike,
-/obj/machinery/light/small,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/mort)
-"aK" = (
+/obj/decal/cleanable/dirt,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"ak" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"al" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"am" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/morgue{
+	dir = 2
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/mort)
+"an" = (
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"ao" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/morgue{
+	dir = 2
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"ap" = (
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"aq" = (
+/obj/structure/table/standard,
+/obj/item/wirecutters,
+/obj/item/material/knife/kitchen/cleaver,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"ar" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/storage/box/monkeycubes,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"as" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"at" = (
+/obj/floor_decal/corner_techfloor_grid/full{
+	dir = 8
+	},
+/obj/floor_decal/corner/research,
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/storage/box/beakers/insulated,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"au" = (
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"av" = (
+/obj/decal/cleanable/dirt,
+/obj/item/material/sword/katana/vibro,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"aw" = (
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"ay" = (
+/obj/structure/closet/crate/freezer,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"az" = (
+/obj/item/bodybag,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"aB" = (
+/obj/structure/closet/crate/freezer,
+/obj/machinery/light/small,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aC" = (
+/obj/floor_decal/carpet,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"aD" = (
+/obj/gibspawner/human,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aE" = (
+/obj/landmark/corpse/slavers_base/slaver2,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aF" = (
+/mob/living/carbon/human/zombie,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aG" = (
+/obj/structure/barricade/spike{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"aH" = (
+/obj/item/bodybag,
+/mob/living/carbon/human/zombie,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aI" = (
+/obj/machinery/gibber,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aJ" = (
+/obj/structure/kitchenspike,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"aK" = (
+/obj/floor_decal/carpet{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
 "aL" = (
-/obj/machinery/door/airlock{
-	name = "Mortuary backyard"
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/mort)
@@ -189,7 +242,7 @@
 /area/slavers_base/cells)
 "aN" = (
 /obj/machinery/door/airlock{
-	name = "Slaves mortuary"
+	name = "Mortuary"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -213,6 +266,7 @@
 /obj/machinery/light/small/red{
 	dir = 1
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "aR" = (
@@ -220,10 +274,14 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "aS" = (
-/obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/structure/table/standard,
+/obj/item/clothing/gloves/latex/nitrile,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "aT" = (
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/blood,
@@ -234,6 +292,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/barricade,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "aU" = (
@@ -255,17 +314,19 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "aY" = (
-/obj/item/reagent_containers/glass/rag,
-/obj/random/trash,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/bed/chair,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
 "aZ" = (
 /obj/structure/mattress/dirty,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "ba" = (
 /obj/item/remains/human,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bb" = (
@@ -285,12 +346,13 @@
 	name = "Floor mounted flash"
 	},
 /obj/item/reagent_containers/glass/rag,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bd" = (
 /obj/structure/mattress/dirty,
 /obj/item/trash/liquidfood,
-/obj/landmark/corpse/slavers_base/slave,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "be" = (
@@ -310,6 +372,7 @@
 	name = "Floor mounted flash"
 	},
 /obj/random/trash,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bh" = (
@@ -318,6 +381,7 @@
 	id_tag = "permentryflash";
 	name = "Floor mounted flash"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bi" = (
@@ -326,10 +390,6 @@
 /area/slavers_base/cells)
 "bj" = (
 /obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bk" = (
@@ -354,6 +414,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/structure/barricade/spike,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bn" = (
@@ -364,17 +425,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bo" = (
-/obj/machinery/door/airlock{
-	name = "Cell block B"
-	},
 /obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -382,10 +435,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+/obj/machinery/door/airlock{
+	name = "Cell block"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
@@ -397,101 +448,57 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bq" = (
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/obj/item/gun/projectile/automatic/machine_pistol,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
 "br" = (
-/obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
+/obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/area/slavers_base/med)
 "bs" = (
 /obj/machinery/flasher{
 	id_tag = "permentryflash";
 	name = "Floor mounted flash"
 	},
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bt" = (
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
+/mob/living/carbon/human/zombie,
 /turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/area/slavers_base/maint)
 "bu" = (
-/obj/structure/mattress/dirty,
-/obj/landmark/corpse/slavers_base/slave,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/floor_decal/corner/research/three_quarters{
+	dir = 8
+	},
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 4;
+	icon_state = "console"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bv" = (
 /obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bw" = (
-/obj/item/paper/spacer{
-	info = "Tonight, when lights are out. Prepare shivs, pieces of glass, whatever you might find.";
-	name = "Note"
+/obj/decal/cleanable/generic,
+/obj/floor_decal/techfloor/corner{
+	dir = 8
 	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
 "bx" = (
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "by" = (
@@ -499,28 +506,16 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bz" = (
-/obj/structure/closet/crate/freezer/rations,
 /obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bA" = (
-/obj/random/trash,
-/obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
+/obj/decal/cleanable/filth,
 /turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/area/slavers_base/dorms)
 "bB" = (
 /obj/decal/cleanable/dirt,
 /obj/item/remains/human,
@@ -531,21 +526,25 @@
 	dir = 4
 	},
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bD" = (
-/obj/random/shoes,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/table/standard,
+/obj/item/clothing/glasses/science,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bE" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bF" = (
 /obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -558,183 +557,102 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bG" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bH" = (
 /obj/machinery/door/window/brigdoor/northright,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bI" = (
-/obj/random/trash,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bJ" = (
 /obj/item/storage/bag/trash,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bK" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/carpet{
+	dir = 1
 	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
 "bL" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+/obj/structure/bed/chair{
+	dir = 1
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bM" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
-"bN" = (
 /obj/machinery/door/airlock{
-	name = "Den B"
+	name = "Den"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
+"bN" = (
+/obj/floor_decal/corner/research/three_quarters{
+	dir = 4
+	},
+/obj/structure/table/rack,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/beakers,
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_x = -5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bO" = (
 /obj/machinery/light/small/red,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "bP" = (
-/obj/machinery/light/small/red,
-/obj/structure/mattress/dirty,
-/obj/landmark/corpse/slavers_base/slave,
-/turf/simulated/floor/ceiling,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bQ" = (
-/obj/structure/mattress/dirty,
-/obj/random/junk,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/table/rack,
+/obj/item/storage/firstaid/adv,
+/obj/random/medical/lite,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/random/medical/lite,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bR" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
+/obj/structure/closet/l3closet/scientist,
+/obj/floor_decal/techfloor{
+	dir = 6
 	},
 /obj/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bS" = (
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+/obj/floor_decal/corner/red{
+	dir = 10
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bT" = (
-/obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"bU" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"bV" = (
-/obj/random/trash,
-/obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"bW" = (
-/obj/machinery/flasher{
-	id_tag = "permentryflash";
-	name = "Floor mounted flash"
-	},
-/obj/decal/cleanable/dirt,
-/obj/item/ammo_casing/shotgun/beanbag{
-	pixel_x = -8;
-	pixel_y = -4
-	},
-/obj/item/ammo_casing/shotgun/beanbag{
-	pixel_y = 5;
-	pixel_z = 7
-	},
-/obj/item/ammo_casing/shotgun/beanbag,
-/obj/item/ammo_casing/shotgun/beanbag,
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"bX" = (
-/obj/machinery/door/airlock{
-	name = "Dens block"
-	},
 /obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -742,13 +660,38 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/light/spot{
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
+"bU" = (
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"bV" = (
+/obj/machinery/door/airlock{
+	name = "Laboratory"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"bW" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"bX" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/reagent_containers/glass/beaker/vial/random,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "bY" = (
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/blood,
@@ -757,61 +700,30 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
 /obj/landmark/corpse/slavers_base/slaver4,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "bZ" = (
-/obj/decal/cleanable/dirt,
-/obj/decal/cleanable/blood,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/floor_decal/techfloor{
+	dir = 1
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/lino,
+/area/slavers_base/demo)
 "ca" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
+/obj/floor_decal/industrial/warning,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/area/slavers_base/hangar)
 "cb" = (
-/obj/machinery/door/airlock{
-	name = "Den A"
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/roller_bed,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cc" = (
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/blood,
@@ -820,35 +732,39 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "cd" = (
-/obj/structure/hygiene/toilet{
-	dir = 4
-	},
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/turf/simulated/floor/ceiling,
+/obj/structure/table/standard,
+/obj/item/ammo_casing/shotgun/pellet,
+/obj/item/ammo_casing/shotgun/pellet,
+/turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "ce" = (
-/obj/machinery/light/small/red{
-	dir = 1
-	},
-/obj/structure/mattress/dirty,
-/turf/simulated/floor/ceiling,
+/turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "cf" = (
-/obj/structure/mattress/dirty,
-/obj/random/snack,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/machinery/vitals_monitor,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cg" = (
-/obj/machinery/light/small/red{
-	dir = 1
-	},
-/obj/random/medical/lite,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
 "ch" = (
 /obj/structure/mattress/dirty,
 /obj/item/remains/human,
@@ -869,6 +785,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "cl" = (
@@ -887,107 +804,36 @@
 /turf/simulated/wall,
 /area/slavers_base/hangar)
 "cn" = (
+/obj/decal/cleanable/blood,
 /obj/decal/cleanable/dirt,
-/obj/item/ammo_casing/shotgun/beanbag,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
 "co" = (
-/obj/machinery/door/airlock{
-	name = "Cell block A"
+/obj/machinery/vending/medical/torch{
+	dir = 1
 	},
 /obj/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"cp" = (
-/obj/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/floor_decal/corner/red{
 	dir = 10
 	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"cp" = (
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
 "cq" = (
+/obj/landmark/corpse/slavers_base/slaver6,
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
 "cr" = (
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
 /obj/decal/cleanable/dirt,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cs" = (
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hangar)
@@ -1005,42 +851,50 @@
 /area/slavers_base/hangar)
 "cv" = (
 /obj/landmark/corpse/slavers_base/slave,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "cw" = (
+/obj/decal/cleanable/blood,
+/obj/machinery/power/apc{
+	name = "Slavers security wing";
+	pixel_y = -24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"cx" = (
+/obj/item/ammo_casing/pistol/used,
 /obj/decal/cleanable/dirt,
-/obj/item/ammo_casing/shotgun/beanbag,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
+"cy" = (
+/obj/decal/cleanable/blood,
+/obj/item/gun/projectile/shotgun/pump{
+	starts_loaded = 0
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"cz" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light{
+	dir = 8
+	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"cx" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable/cyan,
-/turf/simulated/floor/tiled,
-/area/slavers_base/cells)
-"cy" = (
-/obj/random/medical/lite,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
-"cz" = (
-/obj/decal/cleanable/dirt,
-/obj/structure/cable,
 /obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/cable{
+	d1 = 2;
 	d2 = 4;
-	icon_state = "0-4"
+	icon_state = "2-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "cA" = (
@@ -1054,17 +908,12 @@
 	name = "Slavers holding area";
 	pixel_x = 24
 	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
+/obj/random/junk,
 /turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "cB" = (
-/obj/machinery/door/window/brigdoor/northright,
-/obj/item/reagent_containers/glass/rag,
-/turf/simulated/floor/ceiling,
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled,
 /area/slavers_base/cells)
 "cC" = (
 /obj/floor_decal/industrial/warning{
@@ -1088,13 +937,21 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hangar)
 "cF" = (
-/obj/item/paper,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/window/reinforced,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
 "cG" = (
-/obj/item/trash/liquidfood,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/machinery/light,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
 "cH" = (
 /obj/floor_decal/industrial/warning{
 	dir = 8
@@ -1110,51 +967,55 @@
 /area/slavers_base/hangar)
 "cJ" = (
 /obj/item/paper/spacer{
-	info = "Doc who checked us told implants won't explode our heads. Gotta make guys know. Seems I see a silver lining.";
+	info = "Doc who checked us said that the implants won't track us once we get outta here. Also told us to make everyone else know, looks like we also got some special tools to help us. Seems like we got our lucky break outta here.";
 	name = "Note"
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "cK" = (
-/obj/machinery/light/small/red,
-/obj/item/remains/human,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
 "cL" = (
 /obj/random/snack,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/cells)
 "cM" = (
-/obj/structure/mattress/dirty,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
-/obj/random/junk,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/item/reagent_containers/syringe/zombie,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
 "cN" = (
-/obj/machinery/light/small/red,
-/obj/random/trash,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/table/standard,
+/obj/random/medical/lite,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cO" = (
-/obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
-/obj/item/reagent_containers/food/drinks/cans/waterbottle,
-/obj/landmark/corpse/slavers_base/slave,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
-"cP" = (
-/obj/structure/hygiene/toilet{
+/obj/structure/table/steel,
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/steel/ten,
+/obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/item/trash/liquidfood,
 /turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/area/slavers_base/powatm)
+"cP" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/rifle/used,
+/obj/item/ammo_casing/rifle/used,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cQ" = (
-/obj/machinery/light/small/red,
-/obj/structure/mattress/dirty,
-/obj/item/reagent_containers/glass/rag,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/cells)
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "cR" = (
 /turf/simulated/wall,
 /area/slavers_base/powatm)
@@ -1173,17 +1034,17 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "cU" = (
 /obj/decal/cleanable/dirt,
 /obj/machinery/door/airlock{
 	name = "Slave hold hallway"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
@@ -1227,11 +1088,10 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "de" = (
-/obj/structure/closet,
-/obj/random/snack,
-/obj/random/projectile,
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/structure/mattress/dirty,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
 "df" = (
 /obj/machinery/light{
 	dir = 1
@@ -1240,7 +1100,7 @@
 /area/slavers_base/secwing)
 "dg" = (
 /obj/structure/bed,
-/obj/random/projectile,
+/obj/item/material/hatchet/machete,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dh" = (
@@ -1252,8 +1112,9 @@
 /area/slavers_base/secwing)
 "di" = (
 /obj/structure/table/rack,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/trauma,
 /obj/item/device/flashlight,
-/obj/random/medical/lite,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dj" = (
@@ -1266,52 +1127,50 @@
 /area/slavers_base/secwing)
 "dk" = (
 /obj/structure/table/rack,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
-/obj/item/melee/baton,
-/obj/random/tool,
+/obj/item/melee/baton/loaded,
+/obj/item/melee/baton/loaded,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dl" = (
 /obj/structure/table/rack,
 /obj/item/device/flash,
-/obj/random/ammo,
+/obj/item/device/flash,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dm" = (
 /obj/structure/table/rack,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/gun/projectile/shotgun/pump,
+/obj/item/storage/box/ammo/beanbags,
+/obj/item/gun/projectile/shotgun/doublebarrel,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dn" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "do" = (
-/obj/structure/cable{
-	d2 = 6;
-	icon_state = "0-6"
-	},
-/obj/machinery/power/smes/buildable,
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/decal/cleanable/blood,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
 "dp" = (
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dq" = (
-/obj/structure/cable/cyan{
+/obj/machinery/power/smes/buildable,
+/obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/smes/buildable,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dr" = (
 /obj/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -1328,13 +1187,8 @@
 	},
 /obj/structure/cable{
 	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8"
+	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
@@ -1346,113 +1200,83 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "du" = (
-/obj/machinery/door/airlock{
-	name = "Slave processing"
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/machinery/door/airlock{
+	name = "Storage"
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dv" = (
-/obj/machinery/flasher{
-	id_tag = "permentryflash";
-	name = "Floor mounted flash"
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dw" = (
+/obj/random/junk,
 /obj/decal/cleanable/dirt,
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "Medical room";
-	pixel_y = 24
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
 "dx" = (
 /obj/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/item/beartrap,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dy" = (
 /obj/decal/cleanable/dirt,
-/obj/machinery/light{
-	dir = 1
+/obj/structure/fireaxecabinet{
+	pixel_y = 32
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dz" = (
 /obj/decal/cleanable/dirt,
-/obj/structure/hygiene/shower{
-	pixel_y = 30
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
-"dA" = (
-/obj/machinery/door/airlock{
-	name = "Storage"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
-"dB" = (
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
-"dC" = (
-/obj/structure/reagent_dispensers/watertank,
 /obj/machinery/light/small{
 	dir = 1
 	},
 /turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/area/slavers_base/hallway)
+"dA" = (
+/obj/structure/bed/chair/office/dark,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"dB" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/barricade/spike,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"dC" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "dD" = (
-/obj/structure/reagent_dispensers/watertank,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/item/gun/energy/laser,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "dE" = (
-/obj/structure/closet/crate/freezer/rations,
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "dF" = (
-/obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/structure/table/steel,
+/obj/item/device/binoculars,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "dG" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	dir = 8
@@ -1465,6 +1289,7 @@
 /area/slavers_base/powatm)
 "dI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
+/obj/item/stack/material/rods,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "dJ" = (
@@ -1478,8 +1303,15 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "dL" = (
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
+/obj/structure/table/standard,
+/obj/item/clothing/head/beret/guard,
+/obj/item/clothing/glasses/hud/security/prot/sunglasses,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "dM" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -1506,34 +1338,23 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dP" = (
-/obj/machinery/power/terminal{
-	dir = 1
+/obj/floor_decal/techfloor{
+	dir = 6
 	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/structure/table/rack,
+/obj/item/storage/box/glowsticks,
+/obj/item/device/radio,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
 "dQ" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/structure/hygiene/shower{
+	dir = 4
 	},
-/obj/structure/cable{
-	icon_state = "2-9"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
 "dR" = (
 /obj/structure/table/steel,
-/obj/item/storage/box/ammo/stunshells,
-/obj/item/melee/baton,
 /obj/machinery/power/terminal{
 	dir = 1
 	},
@@ -1541,42 +1362,26 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/melee/baton,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dS" = (
-/obj/wallframe_spawn/reinforced,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/carpet,
 /turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/area/slavers_base/demo)
 "dT" = (
 /obj/decal/cleanable/dirt,
-/obj/item/ammo_casing/shotgun/beanbag,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/decal/cleanable/dirt,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "dU" = (
 /obj/decal/cleanable/dirt,
-/obj/decal/cleanable/dirt,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+/obj/machinery/light/small{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
@@ -1585,31 +1390,38 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dW" = (
 /obj/decal/cleanable/dirt,
 /obj/random/junk,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dX" = (
 /obj/decal/cleanable/dirt,
 /obj/random/medical/lite,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "dY" = (
-/obj/structure/bed,
-/obj/item/remains/human,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/table/steel,
+/obj/item/paper_bin,
+/obj/item/pen,
 /turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/area/slavers_base/maint)
 "dZ" = (
-/obj/item/reagent_containers/food/snacks/liquidfood,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/machinery/computer/modular{
+	name = "Cameras console"
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "ea" = (
-/obj/structure/closet/crate/trashcart,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "eb" = (
 /obj/floor_decal/industrial/warning{
 	dir = 10;
@@ -1636,10 +1448,11 @@
 /area/slavers_base/powatm)
 "ef" = (
 /obj/machinery/atmospherics/binary/pump,
+/obj/landmark/corpse/slavers_base/slaver5,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "eg" = (
-/obj/machinery/atmospherics/pipe/simple/visible/yellow,
+/obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "eh" = (
@@ -1661,9 +1474,9 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "ek" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
-/turf/simulated/floor/tiled,
-/area/slavers_base/secwing)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
 "el" = (
 /obj/landmark/corpse/slavers_base/slaver6,
 /obj/decal/cleanable/blood,
@@ -1682,12 +1495,6 @@
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
-/obj/decal/cleanable/blood,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "ep" = (
@@ -1695,7 +1502,7 @@
 /obj/item/device/flash,
 /obj/item/device/radio,
 /obj/item/paper/spacer{
-	info = "If this fuck from A-3 keeps thinking he's better then piece of meat, throw him to hangar and show how little pressure turns diamonds into shit.";
+	info = "If this coy smartass from A-3 keeps thinking he's better than me, throw him into hangar and show how little pressure turns diamonds into shit.";
 	name = "Note"
 	},
 /turf/simulated/floor/tiled,
@@ -1711,61 +1518,62 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "es" = (
-/obj/item/ammo_casing/shotgun/beanbag,
+/mob/living/carbon/human/zombie,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"et" = (
 /obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
-"et" = (
-/obj/structure/window/basic{
-	dir = 1
-	},
-/obj/item/clothing/gloves/latex,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
 "eu" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
+/obj/decal/cleanable/ash,
 /obj/decal/cleanable/dirt,
-/obj/landmark/corpse/slavers_base/slaver5,
-/obj/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
 "ev" = (
-/obj/structure/window/basic{
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
+"ew" = (
+/obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
-"ew" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
 /obj/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
 /area/slavers_base/med)
 "ex" = (
 /obj/decal/cleanable/dirt,
-/obj/item/ammo_casing/shotgun/beanbag,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/area/slavers_base/secwing)
 "ey" = (
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_magazine/machine_pistol/empty,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
 "ez" = (
-/obj/structure/bed,
-/obj/item/handcuffs,
 /turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/area/slavers_base/maint)
 "eA" = (
-/obj/item/beartrap,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "eB" = (
-/obj/item/mop,
-/obj/structure/mopbucket,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "eC" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume,
 /turf/simulated/floor/ceiling,
@@ -1774,7 +1582,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
-/obj/machinery/light/small{
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/ceiling,
@@ -1796,25 +1604,20 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "eH" = (
-/obj/machinery/atmospherics/pipe/simple/visible/yellow{
-	dir = 4
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "eI" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4
-	},
+/obj/decal/cleanable/generic,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "eJ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
+/obj/decal/cleanable/generic,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "eK" = (
-/obj/machinery/light/small{
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/obj/machinery/light/spot{
 	dir = 4
 	},
 /turf/simulated/floor/ceiling,
@@ -1831,6 +1634,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eM" = (
@@ -1876,11 +1680,22 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eP" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1894,108 +1709,87 @@
 /obj/machinery/computer/modular{
 	name = "Riot control console"
 	},
-/obj/machinery/power/apc{
-	name = "Slavers security wing";
-	pixel_y = -24
-	},
-/obj/structure/cable,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eS" = (
 /obj/structure/table/steel,
 /obj/item/handcuffs,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eT" = (
-/obj/item/gun/projectile/shotgun/pump,
-/obj/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/slavers_base/hallway)
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
 "eU" = (
-/obj/machinery/optable,
-/obj/item/scalpel/basic,
-/obj/decal/cleanable/blood,
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/structure/mopbucket,
+/obj/item/mop,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "eV" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
-/obj/structure/table/standard,
-/obj/item/implanter,
-/obj/item/implantcase/tracking,
-/obj/item/surgicaldrill,
-/obj/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/electrical,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "eW" = (
-/obj/machinery/optable,
-/obj/decal/cleanable/blood,
-/obj/item/screwdriver,
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/crate/freezer/rations,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/machinery/light/small,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "eX" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
-/obj/structure/table/standard,
-/obj/item/implantpad,
-/obj/item/reagent_containers/pill/spaceacillin,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/crate/freezer/rations,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "eY" = (
 /obj/structure/table/standard,
-/obj/item/storage/firstaid/empty,
 /obj/item/handcuffs,
-/obj/item/melee/baton,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/machinery/light/small,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "eZ" = (
 /obj/structure/table/standard,
-/obj/item/storage/firstaid/o2,
-/obj/item/folder/white,
-/obj/item/paper/spacer{
-	info = "Seems they don't really look over my shoulder anymore. We have now maybe a dozen of them with inactive implants. Hope they will pick right moment to flip the lid. I'll kill few bastards myself soon as I have a chance.";
-	name = "Note"
-	},
-/obj/item/pen,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/obj/item/material/twohanded/jack,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "fa" = (
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/regular,
-/obj/item/material/hatchet,
-/turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
 "fb" = (
-/obj/item/roller_bed,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/area/slavers_base/dorms)
 "fc" = (
-/obj/structure/bed,
+/obj/structure/flora/pottedplant/large,
 /turf/simulated/floor/tiled,
-/area/slavers_base/med)
+/area/slavers_base/maint)
 "fd" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/handcuffs,
 /obj/item/storage/box/handcuffs,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "fe" = (
 /obj/structure/table/standard,
-/obj/item/storage/box/bodybags,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/item/clothing/glasses/aviators_gold,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
 "ff" = (
-/obj/structure/table/standard,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "fg" = (
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/barricade/spike,
 /turf/simulated/floor/ceiling,
-/area/slavers_base/med)
+/area/slavers_base/powatm)
 "fh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 8
@@ -2011,6 +1805,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/item/ammo_casing/pistol/used,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hangar)
 "fj" = (
@@ -2029,17 +1824,19 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hangar)
 "fl" = (
-/obj/decal/cleanable/generic,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "fm" = (
 /obj/decal/cleanable/generic,
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
@@ -2075,16 +1872,24 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hangar)
 "fr" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
 	},
-/obj/decal/cleanable/generic,
+/obj/structure/barricade/spike{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "fs" = (
+/obj/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2092,9 +1897,9 @@
 	dir = 4
 	},
 /obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
@@ -2114,25 +1919,30 @@
 	icon_state = "4-8"
 	},
 /obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/hallway)
 "fu" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/structure/cable/green,
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
 /obj/decal/cleanable/dirt,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "fv" = (
@@ -2271,6 +2081,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
 	},
+/obj/item/caution/cone,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "fH" = (
@@ -2311,16 +2122,28 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 10
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "fO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "fP" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/barricade/spike{
 	dir = 4
 	},
 /turf/simulated/floor/ceiling,
@@ -2411,6 +2234,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/item/caution/cone,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gb" = (
@@ -2443,30 +2267,29 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "gg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
-"gh" = (
+/obj/decal/cleanable/dirt,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"gh" = (
 /obj/machinery/power/apc{
 	dir = 4;
 	name = "Slavers atmos and power room";
 	pixel_x = 24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
@@ -2514,8 +2337,11 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gn" = (
-/obj/machinery/atmospherics/binary/pump,
-/obj/machinery/light/small{
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/ceiling,
@@ -2529,28 +2355,22 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "gq" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
-"gr" = (
-/obj/structure/table/steel,
+/obj/decal/cleanable/dirt,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stock_parts/circuitboard/broken,
-/obj/item/contraband/poster,
-/obj/item/device/radio,
-/obj/machinery/light/small{
-	dir = 4
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
 	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
+"gr" = (
+/obj/structure/table/standard,
+/obj/item/material/ashtray/plastic,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
 "gs" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -2562,8 +2382,10 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "gt" = (
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/obj/structure/bed/chair,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "gu" = (
 /obj/machinery/vending/wallmed2{
 	pixel_y = 30
@@ -2583,7 +2405,7 @@
 /obj/structure/closet,
 /obj/random/smokes,
 /obj/random/loot,
-/obj/random/contraband,
+/obj/random/tool,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "gx" = (
@@ -2604,16 +2426,20 @@
 /area/slavers_base/dorms)
 "gA" = (
 /obj/structure/table/standard,
+/obj/item/ammo_casing/shotgun/pellet,
+/obj/item/ammo_casing/shotgun/pellet,
+/obj/item/ammo_casing/shotgun/pellet,
 /turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/area/slavers_base/cells)
 "gB" = (
 /obj/structure/closet,
 /obj/random/loot,
+/obj/random/clothing,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "gC" = (
 /obj/structure/table/standard,
-/obj/random/contraband,
+/obj/random/action_figure,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "gD" = (
@@ -2661,26 +2487,18 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gK" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/decal/cleanable/generic,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/maint)
+/obj/structure/table/standard,
+/obj/item/clothing/mask/smokable/cigarette/cigar/cohiba,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
 "gL" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister,
+/obj/machinery/light/small,
+/obj/structure/closet/crate,
+/obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "gM" = (
 /obj/structure/table/steel,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
@@ -2704,6 +2522,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gP" = (
@@ -2718,6 +2537,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gQ" = (
@@ -2748,15 +2568,9 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gS" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/decal/cleanable/generic,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
-/area/slavers_base/maint)
+/area/slavers_base/powatm)
 "gT" = (
 /obj/machinery/door/airlock{
 	name = "Exchange tunnel"
@@ -2779,28 +2593,20 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "gV" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
+/obj/structure/bed/chair,
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 1
 	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/maint)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "gW" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "gX" = (
 /obj/structure/table/steel,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
+/obj/item/material/sword/makeshift,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "gY" = (
@@ -2814,6 +2620,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "gZ" = (
@@ -2821,9 +2628,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ha" = (
-/obj/decal/cleanable/generic,
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/obj/machinery/atmospherics/unary/cryo_cell,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "hb" = (
 /obj/machinery/light{
 	dir = 8
@@ -2856,28 +2667,41 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "hf" = (
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_y = 8
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/visible/yellow{
+	dir = 4
 	},
 /turf/simulated/floor/ceiling,
-/area/slavers_base/maint)
-"hh" = (
-/obj/random/junk,
-/turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
-"hi" = (
-/obj/structure/table/steel,
-/obj/structure/cable/green{
+"hg" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/stack/material/phoron{
-	amount = 25
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/obj/machinery/light{
+	dir = 8
 	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"hh" = (
+/obj/random/junk,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
+"hi" = (
+/obj/structure/table/steel,
+/obj/item/paper/spacer{
+	info = "We made over 200 grand these past two week. Stay low-key at least for month or so, or we'll get our base discovered by fucking marshalls so shut your whining and relax, I'll get you three crates of booze and some cargo to play with.";
+	name = "Note"
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "hj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -2886,21 +2710,24 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hk" = (
-/obj/structure/table/standard,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "hl" = (
 /obj/structure/bed,
 /obj/item/device/radio,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hm" = (
 /obj/structure/closet,
-/obj/random/projectile,
 /obj/random/loot,
+/obj/random/handgun,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hn" = (
@@ -2914,38 +2741,51 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hp" = (
-/obj/structure/closet,
-/obj/random/loot,
-/obj/random/contraband,
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/obj/decal/cleanable/dirt,
+/obj/item/device/taperecorder,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "hq" = (
 /obj/structure/closet,
-/obj/random/projectile,
-/obj/random/ammo,
+/obj/item/material/hatchet/machete/deluxe,
+/obj/random/drinkbottle,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hr" = (
 /obj/structure/safe,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/storage/secure/briefcase/money,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "hs" = (
-/obj/machinery/light{
+/obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/structure/safe,
-/obj/item/storage/bag/cash,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/demo)
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/secure_closet/scientist,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
 "ht" = (
 /obj/structure/safe,
-/obj/item/storage/bag/cash,
+/obj/item/spacecash/bundle/c500,
+/obj/item/spacecash/bundle/c500,
+/obj/item/spacecash/bundle/c500,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/spacecash/bundle/c1000,
+/obj/item/stack/material/gold/ten,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "hu" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
@@ -2977,19 +2817,24 @@
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "hA" = (
-/obj/item/stock_parts/computer/card_slot,
+/obj/structure/barricade,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "hB" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/item/stack/material/glass/ten,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "hC" = (
 /obj/machinery/power/smes/buildable,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "hD" = (
@@ -3021,6 +2866,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "hG" = (
@@ -3042,18 +2888,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "hI" = (
-/obj/random/coin,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/ceiling,
-/area/slavers_base/demo)
+/area/slavers_base/powatm)
 "hJ" = (
 /obj/machinery/door/airlock{
 	name = "Cashier room"
@@ -3080,42 +2921,41 @@
 	dir = 4
 	},
 /obj/item/device/radio,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "hM" = (
-/obj/structure/table/reinforced,
-/obj/random/coin,
-/obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
-	id_tag = "SC BD"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
-"hN" = (
 /obj/structure/bed/chair/comfy/beige{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
-"hO" = (
-/obj/structure/table/woodentable,
-/obj/item/device/radio,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
-"hP" = (
+"hN" = (
 /obj/structure/table/woodentable,
 /obj/item/storage/secure/briefcase/money,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/turf/simulated/floor/tiled,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
-"hQ" = (
+"hO" = (
 /obj/structure/bed/chair/comfy/beige{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
+"hP" = (
+/obj/structure/closet,
+/obj/random/snack,
+/obj/random/cash,
+/obj/random/tool,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"hQ" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
 "hR" = (
 /obj/machinery/power/terminal{
 	dir = 1
@@ -3138,6 +2978,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hT" = (
@@ -3158,7 +2999,6 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/vending/dinnerware,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3168,7 +3008,6 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hW" = (
-/obj/machinery/cooker/oven,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -3178,17 +3017,16 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hX" = (
-/obj/structure/table/standard,
-/obj/machinery/microwave,
+/obj/machinery/computer/arcade,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "hY" = (
-/obj/structure/table/standard,
-/obj/random/snack,
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "hZ" = (
 /obj/structure/table/standard,
+/obj/item/clothing/mask/smokable/cigarette/cigar,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ia" = (
@@ -3196,11 +3034,11 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/trash/plate,
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ib" = (
-/obj/structure/closet/fridge,
+/obj/structure/bed/chair/armchair/purple,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "ic" = (
@@ -3212,155 +3050,93 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "ie" = (
-/obj/structure/closet/secure_closet/guncabinet,
-/obj/random/projectile,
-/obj/random/projectile,
+/obj/machinery/light/small,
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "if" = (
-/obj/structure/closet/secure_closet/guncabinet,
-/obj/random/projectile,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "ig" = (
 /obj/random/coin,
+/obj/machinery/light/small,
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/demo)
 "ih" = (
-/turf/simulated/floor/ceiling,
+/obj/structure/table/standard,
+/obj/item/pen/fancy,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "ii" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "ij" = (
-/obj/structure/table/woodentable,
-/obj/item/storage/bag/cash,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/decal/cleanable/dirt,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "ik" = (
-/obj/structure/table/woodentable,
-/obj/random/cash,
+/obj/floor_decal/carpet{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "il" = (
-/obj/structure/ore_box,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
 "im" = (
 /obj/structure/ore_box,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "in" = (
-/obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/floor_decal/techfloor,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "io" = (
-/obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/machinery/light/small,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/decal/cleanable/dirt,
+/obj/random/junk,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
 "ip" = (
-/obj/structure/closet/crate,
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/obj/item/stack/material/phoron{
-	amount = 25
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
 "iq" = (
-/obj/machinery/power/port_gen/pacman/super,
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/decal/cleanable/dirt,
+/obj/structure/filingcabinet/chestdrawer,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
 "ir" = (
-/obj/machinery/power/port_gen/pacman/super,
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
+/obj/machinery/power/port_gen/pacman,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/powatm)
 "is" = (
-/obj/machinery/power/port_gen/pacman/super,
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/light/small,
-/turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/obj/item/ammo_magazine/mil_rifle/heavy/empty,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "it" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
+/obj/decal/cleanable/generic,
+/obj/machinery/light/small{
+	dir = 1
 	},
 /turf/simulated/floor/ceiling,
-/area/slavers_base/powatm)
+/area/slavers_base/maint)
 "iu" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -3383,19 +3159,16 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iy" = (
-/obj/structure/table/woodentable,
-/obj/item/paper/spacer{
-	info = "<center><b> Contract </b></center> <br>This contract describes exchanging of monetary pieces for the right o? the ownership for following examples: <list><*> Human, age 17. Price - 1500 thalers. <*> Human, age 49. Price - 1100 thalers. <*> Unathi, age 28. Good fist fighter. Price - 2400 thalers. <*> Human, age 34. Expirienced medic. Price - 6800 thalers. </list> <b> Overall price: 11800 thalers</b><br><small>Place for signatures</small>";
-	name = "Contract"
+/obj/structure/table/standard,
+/obj/floor_decal/techfloor{
+	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "iz" = (
-/obj/structure/table/woodentable,
-/obj/random/coin,
-/obj/item/pen,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
 "iA" = (
 /obj/machinery/light{
 	dir = 8
@@ -3405,14 +3178,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/decal/cleanable/dirt,
+/obj/structure/table/standard,
+/obj/floor_decal/techfloor,
+/obj/item/storage/box/glasses,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iB" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/structure/bed/chair,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iC" = (
@@ -3430,9 +3206,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iE" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
 "iF" = (
 /obj/machinery/vending/fitness,
 /turf/simulated/floor/tiled,
@@ -3453,6 +3233,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "iI" = (
@@ -3460,12 +3241,11 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "iJ" = (
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/decal/cleanable/dirt,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
 "iK" = (
 /obj/item/clothing/suit/nun,
 /obj/decal/cleanable/dirt,
@@ -3480,23 +3260,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "iM" = (
-/obj/structure/cable{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/power/apc{
-	name = "Slavers Dorms";
-	pixel_y = -24
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
-"iN" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -3505,11 +3269,6 @@
 /area/slavers_base/dorms)
 "iO" = (
 /obj/structure/table/standard,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/item/reagent_containers/food/condiment/small/peppermill,
 /obj/item/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = 3;
@@ -3520,74 +3279,37 @@
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
-"iP" = (
-/obj/structure/table/standard,
-/obj/random/smokes,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
-"iQ" = (
-/obj/structure/table/standard,
-/obj/random/drinkbottle,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
 "iR" = (
 /obj/structure/table/standard,
 /obj/item/trash/plate,
 /obj/item/material/kitchen/utensil/fork,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iS" = (
 /obj/structure/table/standard,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iT" = (
-/obj/random/junk,
-/obj/structure/cable{
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iU" = (
 /obj/item/material/kitchen/utensil/fork,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iV" = (
 /obj/machinery/vending/cola,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iW" = (
@@ -3602,6 +3324,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/decal/cleanable/dirt,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "iX" = (
@@ -3669,27 +3392,17 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "je" = (
-/obj/machinery/door/airlock{
-	name = "Maintenance"
-	},
+/obj/decal/cleanable/dirt,
 /obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/dorms)
-"jf" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/wall,
+/turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jg" = (
 /obj/structure/table/standard,
-/obj/random/projectile,
+/obj/random/handgun,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jh" = (
@@ -3714,11 +3427,6 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jl" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3741,35 +3449,38 @@
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
-"jp" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/ceiling,
-/area/slavers_base/dorms)
 "jq" = (
-/obj/structure/table/standard,
-/obj/item/device/radio,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/turf/simulated/floor/ceiling,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/generic,
+/turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "jr" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "js" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
@@ -3778,15 +3489,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /obj/decal/cleanable/dirt,
 /obj/machinery/power/apc{
 	dir = 8;
 	name = "west bump";
 	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
@@ -3795,58 +3506,90 @@
 	dir = 10
 	},
 /obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "jv" = (
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
-"jw" = (
+/obj/structure/table/standard,
+/obj/item/paper/spacer{
+	info = "I swear to god, can you bastards stop bitching for more meat from these damned cubes? It's bad enough that I have to take care of them, I never even agreed to be your butcher. If you want more of this shit you gotta pay me more.";
+	name = "Note"
+	},
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"jw" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
 "jx" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/floor_decal/carpet,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jy" = (
-/obj/structure/cable/green,
-/obj/machinery/power/terminal{
-	dir = 4
-	},
-/turf/simulated/floor/ceiling,
+/obj/machinery/light/small,
+/obj/structure/flora/pottedplant/drooping,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "jz" = (
-/obj/structure/cable,
-/obj/machinery/power/smes/buildable,
-/turf/simulated/floor/ceiling,
+/obj/machinery/power/apc{
+	name = "Slavers Dorms";
+	pixel_y = -24
+	},
+/obj/structure/cable/green,
+/obj/structure/table/standard,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/item/storage/box/donkpocket_mixed,
+/turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "jA" = (
 /obj/decal/cleanable/blood,
-/turf/simulated/floor/tiled,
+/obj/floor_decal/corner/blue/diagonal,
+/obj/structure/reagent_dispensers/beerkeg,
+/turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "jB" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/slavers_base/dorms)
-"jC" = (
-/obj/item/paper/spacer{
-	info = "We made over 200 grands for two last weeks. We should stay low-key for month or so, or we'll get our base discovered by fucking marshalls so shut your whining and relax, I'l l get you three crates of booze and some cargo to play with.";
-	name = "Note"
+/obj/structure/table/standard,
+/obj/machinery/microwave,
+/obj/floor_decal/techfloor{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
+"jC" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
 "jD" = (
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jE" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -3857,7 +3600,7 @@
 /obj/machinery/door/airlock{
 	name = "Mess"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -3867,12 +3610,13 @@
 "jG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "jH" = (
@@ -3880,6 +3624,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
+/obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "jI" = (
@@ -3889,35 +3634,45 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/obj/item/device/scanner/health,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jJ" = (
 /obj/structure/table/standard,
 /obj/item/device/megaphone,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jK" = (
 /obj/structure/table/standard,
 /obj/item/clothing/mask/smokable/cigarette,
-/turf/simulated/floor/tiled,
+/obj/item/material/ashtray/glass,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jL" = (
 /obj/structure/table/standard,
-/turf/simulated/floor/tiled,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "jM" = (
 /obj/structure/table/standard,
-/obj/item/device/scanner/health,
-/turf/simulated/floor/tiled,
+/obj/random/drinkbottle,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jN" = (
 /obj/structure/table/standard,
 /obj/random/drinkbottle,
-/turf/simulated/floor/tiled,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "jO" = (
-/obj/structure/table/standard,
-/obj/item/pen,
+/obj/decal/cleanable/generic,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jP" = (
@@ -3933,10 +3688,14 @@
 /obj/machinery/door/airlock{
 	name = "Southern hallway"
 	},
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "jR" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jS" = (
@@ -3948,25 +3707,26 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jT" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/tiled,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/carpet,
 /area/slavers_base/demo)
 "jU" = (
-/obj/structure/bed/chair{
-	dir = 1
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner/research{
+	dir = 5
 	},
-/obj/item/storage/secure/briefcase/money,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
 "jV" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -3976,7 +3736,10 @@
 "jW" = (
 /obj/structure/table/standard,
 /obj/item/clothing/mask/smokable/cigarette/professionals,
-/turf/simulated/floor/tiled,
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "jX" = (
 /obj/structure/hygiene/shower{
@@ -4003,10 +3766,16 @@
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "kc" = (
-/obj/landmark/corpse/slavers_base/slaver1,
-/obj/decal/cleanable/blood,
-/turf/simulated/floor/tiled/white,
-/area/slavers_base/dorms)
+/obj/structure/closet,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/cash,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
 "kd" = (
 /obj/machinery/door/airlock{
 	name = "Toilet"
@@ -4030,6 +3799,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "kh" = (
@@ -4039,6 +3811,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/item/ammo_magazine/pistol/empty,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "ki" = (
@@ -4063,18 +3836,24 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kk" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/decal/cleanable/dirt,
+/obj/machinery/door/airlock{
+	name = "Laboratory"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "kl" = (
-/obj/decal/cleanable/generic,
-/turf/simulated/floor/tiled,
-/area/slavers_base/demo)
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
 "km" = (
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "kn" = (
 /obj/machinery/light{
@@ -4090,6 +3869,7 @@
 /area/slavers_base/dorms)
 "kp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled,
 /area/slavers_base/hallway)
 "kq" = (
@@ -4131,17 +3911,16 @@
 "kv" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/glass_extras,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "kw" = (
 /obj/structure/table/standard,
 /obj/machinery/chemical_dispenser/bar_alc,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/lino,
 /area/slavers_base/demo)
 "kz" = (
-/mob/living/simple_animal/hostile/abolition_extremist,
-/turf/simulated/floor/tiled/white,
-/area/slavers_base/dorms)
+/turf/simulated/floor/lino,
+/area/slavers_base/demo)
 "kA" = (
 /obj/machinery/door/airlock{
 	name = "Customers entry"
@@ -4166,6 +3945,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
+/obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/ceiling,
 /area/slavers_base/maint)
 "kE" = (
@@ -4209,13 +3989,20 @@
 /area/slavers_base/maint)
 "kM" = (
 /obj/structure/table/standard,
-/obj/item/device/radio,
-/turf/simulated/floor/ceiling,
+/obj/item/ammo_magazine/pistol,
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/slavers_base/maint)
 "kN" = (
 /obj/structure/table/standard,
-/obj/random/handgun,
-/turf/simulated/floor/ceiling,
+/obj/item/material/twohanded/spear,
+/obj/item/gun/projectile/pistol/bobcat,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/slavers_base/maint)
 "kO" = (
 /obj/machinery/door/airlock/external,
@@ -4228,14 +4015,24 @@
 /area/slavers_base/maint)
 "kQ" = (
 /obj/structure/table/standard,
-/obj/random/junk,
-/turf/simulated/floor/ceiling,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/item/paper/spacer{
+	info = "God, fucking, damn, it, RICHARD. That trigger-happy, dumb-looking, piece of sub-human trash has the worst aim in this whole damn galaxy. Bastard hit ME more than those god damned THINGS. <br><br>Okay... well, I tried to stop the bleeding but I don't think I'm making it. First its our captives escaping and taking our fucking shuttle, and then that damned letter written by that damned doctor. We barely got to finish reading it before those things started popping out from the morgue. Shit, we barely had time to barricade them in there before our own guys started vomiting and shaking like crazy.<br><br>Yeah, not gonna take them on, barely got in here before they got everyone else. If we still had that shuttle that our stupid, sunvabitch engineer could've secured and not prone to somebody stealing it, maybe I could've survived. But, I get to die in the shittiest way out there. I did not deserve this kind of shit. <br><br>When I see you in hell Richard, I am kicking you in the crotch so fucking hard that your family jewels will make their way up to heaven.";
+	name = "Bloodstained note"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/slavers_base/maint)
 "kR" = (
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/turf/simulated/floor/ceiling,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled/techfloor,
 /area/slavers_base/maint)
 "kS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
@@ -4243,8 +4040,12 @@
 /area/slavers_base/maint)
 "kT" = (
 /obj/structure/table/standard,
-/obj/random/loot,
-/turf/simulated/floor/ceiling,
+/obj/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/random/smokes,
+/obj/item/flame/lighter/random,
+/turf/simulated/floor/tiled/techfloor,
 /area/slavers_base/maint)
 "kU" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
@@ -4276,6 +4077,27 @@
 /obj/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
+"lc" = (
+/obj/structure/table/woodentable,
+/obj/item/spacecash/bundle/c100,
+/obj/item/spacecash/bundle/c500,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"li" = (
+/obj/structure/kitchenspike,
+/obj/machinery/light/small,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"lt" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
 "mb" = (
 /obj/structure/hygiene/sink{
 	pixel_y = -20
@@ -4285,6 +4107,1984 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
+"me" = (
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/syringe/zombie,
+/obj/item/reagent_containers/syringe/zombie,
+/obj/item/reagent_containers/syringe/zombie,
+/obj/machinery/door/window/brigdoor/westleft,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"mx" = (
+/obj/landmark/corpse/slavers_base/slaver2,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"mG" = (
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
+"mQ" = (
+/obj/structure/table/standard,
+/obj/random/drinkbottle,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
+/area/slavers_base/demo)
+"mU" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/table/standard,
+/obj/floor_decal/techfloor,
+/obj/random/junk,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"nc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"nl" = (
+/obj/structure/barricade/spike{
+	dir = 8
+	},
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"nn" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/barricade/spike{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"nv" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/insulated,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"nI" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"nN" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/paper/spacer{
+	info = "By the time all of you are reading this note, you're not getting out of here alive. It does not matter if you killed all of us in that escape attempt we just made before the writing of this, but I can rest well knowing that all of you are probably not going to make it.<br><br>Unfortunately for you and very fortunately for me and the others locked in here, a radiation storm had hit this station not too long ago.<br><br>Now, the medication that I did made for you did in fact contain anti-radiation and some pain-killing drugs, but I added a little extra something to it. Remember the vials that I got out of our storage that I 'needed'? Let's just say those vials turn our monkey specimens we were using to research these drugs into reanimated corpses with some side effects such as nerve damage, muscle atrophy, and a slight case of skin falling off your body. If you hadn't have raided us when you did, maybe we would've had developed a compound that didn't have those nasty side effects. <br><br>Would this have the same effects to the select few that I did administer this to? Guess that's what you're about to find out.<br><br>It is now all up to you to figure out which people I decided to give this concoction to before the effects kick in... well, just a couple of minutes from now.<br><br>Best wishes, your bestest friend.";
+	name = "Crumpled Note"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"nX" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/floor_decal/carpet,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"ol" = (
+/obj/random/snack,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"on" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hallway)
+"oy" = (
+/obj/floor_decal/corner/pink/mono,
+/obj/machinery/body_scanconsole{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/slavers_base/med)
+"oz" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"oC" = (
+/obj/structure/table/standard,
+/obj/item/ammo_casing/shotgun/pellet,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"oD" = (
+/obj/machinery/door/airlock{
+	name = "Safe room"
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"oK" = (
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	icon_state = "chair_preview"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"oM" = (
+/obj/item/stack/material/rods/ten,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"oO" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"oS" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"oV" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/teargas,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"oW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/random/coin,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/demo)
+"oZ" = (
+/obj/decal/cleanable/blood/gibs/limb,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"pl" = (
+/obj/decal/cleanable/dirt,
+/obj/item/gun/projectile/automatic/battlerifle,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"pv" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/nitrilegloves,
+/obj/item/storage/box/nitrilegloves,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"pB" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"pH" = (
+/obj/structure/closet/secure_closet/guncabinet,
+/obj/item/ammo_magazine/speedloader,
+/obj/item/ammo_magazine/speedloader,
+/obj/item/ammo_magazine/speedloader,
+/obj/machinery/light,
+/obj/item/gun/projectile/revolver/medium,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"pK" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"pO" = (
+/obj/decal/cleanable/generic,
+/obj/item/ammo_magazine/pistol,
+/obj/floor_decal/techfloor,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"qI" = (
+/obj/item/reagent_containers/pill/tramadol,
+/obj/floor_decal/techfloor,
+/obj/decal/cleanable/dirt,
+/obj/random/junk,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"qR" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"qU" = (
+/obj/structure/table/standard,
+/obj/random/medical,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"qX" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/filth,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"rg" = (
+/obj/structure/sign/poster,
+/turf/simulated/wall,
+/area/slavers_base/dorms)
+"rl" = (
+/obj/structure/closet,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/clothing,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"rw" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/table/standard,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"rx" = (
+/obj/floor_decal/corner_techfloor_grid/full{
+	dir = 4
+	},
+/obj/floor_decal/corner/research{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/secure_closet/scientist,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"rW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"rX" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"sa" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"sc" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/barricade/spike{
+	dir = 4
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"so" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "Medical room";
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"su" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/filth,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"sF" = (
+/obj/item/reagent_containers/glass/rag,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"sN" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/closet/fridge,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"sU" = (
+/obj/structure/table/standard,
+/obj/item/trash/plate,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"sX" = (
+/obj/item/gun/magnetic,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"sZ" = (
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"tb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
+"tq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"tC" = (
+/obj/structure/ore_box{
+	desc = "A heavy box covered with dried blood.";
+	name = "Big dirty box"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"tD" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"tE" = (
+/obj/structure/closet/crate/freezer,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"tJ" = (
+/mob/living/carbon/human/zombie,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"tZ" = (
+/obj/floor_decal/corner_techfloor_grid/full{
+	dir = 1
+	},
+/obj/floor_decal/corner/research{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/secure_closet/scientist,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"uf" = (
+/obj/machinery/light,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"uj" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"um" = (
+/obj/structure/closet/secure_closet/guncabinet,
+/obj/item/gun/projectile/revolver,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/item/ammo_magazine/speedloader/magnum,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"uP" = (
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"uX" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/stock_parts/manipulator/nano,
+/obj/item/stock_parts/manipulator/nano,
+/obj/item/stock_parts/micro_laser/high,
+/obj/item/stock_parts/micro_laser/high,
+/obj/item/stock_parts/scanning_module/adv,
+/obj/item/stock_parts/scanning_module/adv,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"vq" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/filth,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"vw" = (
+/obj/structure/barricade/spike,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"vz" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"vC" = (
+/obj/item/clothing/head/infilhat,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"vE" = (
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"vN" = (
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"vU" = (
+/obj/structure/table/reinforced,
+/obj/random/coin,
+/obj/machinery/door/blast/regular/open{
+	icon_state = "pdoor0";
+	id_tag = "SC BD"
+	},
+/obj/random/cash,
+/obj/random/cash,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"vX" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/melee/telebaton,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"wb" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/yellow{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"wd" = (
+/obj/structure/table/steel,
+/obj/item/device/radio,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"wh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/machinery/light,
+/obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"wz" = (
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"wH" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/generic,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"wN" = (
+/obj/structure/table/steel,
+/obj/item/material/ashtray,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"wT" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"wZ" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/random/medical,
+/obj/random/medical,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"xf" = (
+/obj/structure/closet,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/loot,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"xw" = (
+/obj/machinery/light/small/red,
+/obj/random/trash,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"xB" = (
+/obj/floor_decal/corner/research/three_quarters,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"xD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"xV" = (
+/obj/item/reagent_containers/syringe,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"yd" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
+"yt" = (
+/obj/structure/table/standard,
+/obj/item/trash/plate,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"yu" = (
+/obj/structure/closet/crate/freezer,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/obj/item/reagent_containers/glass/beaker/vial/ejected_datapod,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"yH" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
+"yY" = (
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"zb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"zj" = (
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"zn" = (
+/obj/structure/morgue,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"zo" = (
+/obj/machinery/flasher{
+	id_tag = "permentryflash";
+	name = "Floor mounted flash"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"zC" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"zE" = (
+/obj/structure/mattress/dirty,
+/obj/item/remains/human,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"zI" = (
+/obj/decal/cleanable/dirt,
+/obj/landmark/corpse/slavers_base/slaver4,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"zT" = (
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Ad" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/decal/cleanable/generic,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"Ae" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"As" = (
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"At" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Au" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"AB" = (
+/obj/structure/table/woodentable,
+/obj/item/paper/spacer{
+	info = "<large><b><center>Contract</center></b></large><br>This contract describes exchanging of monetary pieces for the right of the ownership for following examples: <br>- Human, age 21. Decent worker Price <br>- 1500 thalers. <br> Human, age 49.  Price - 1100 thalers. <br> Unathi, age 28. Good fist fighter. Price - 2400 thalers. <br> Human, age 34. Experienced medic. Price - 6800 thalers. </list><b> Overall price: 11800 thalers</b><br><small>A friendly reminder that we are not responsible for any damages that occur after the transaction has been completed. Any deaths, loss of limb, stolen ships, or any other issues that occur are not our problem.</small><br><small>Place for signatures:</small>";
+	name = "Contract"
+	},
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"AM" = (
+/obj/structure/table/rack,
+/obj/item/pickaxe/drill,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/obj/item/device/flashlight/flare,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"AV" = (
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/reagent_containers/glass/beaker/vial/random,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"AW" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/vending/dinnerware,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"Bh" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Bt" = (
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"Bu" = (
+/obj/machinery/door/airlock{
+	name = "Cell block"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"By" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Cn" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Ct" = (
+/obj/structure/bed/chair,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"Cw" = (
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/machinery/chemical_dispenser/full,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"CF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
+"CW" = (
+/obj/decal/cleanable/dirt,
+/obj/item/paper/spacer{
+	info = "<b><large><center>Autopsy Report.</center></large></b><br><br> Visual examination of cadaver z-261 reveals several findings consistent of previous examinations. Epidermal layers around the body are noted to slough off the body, likely due to the intense effects of the compound.<br><br> Opening the cranial cavity reveals decay all around the brain, most notably in the frontal and parietal lobes. White matter of the brain however remains largely intact, with the tissues appearing to be healthier than previous autopsies observing the effects of older compounds. The brain has been placed in the freezer for further analysis.<br><br> An incision in the thoracic cavity reveals that the cardiovascular system remains somewhat intact. There are still spasms that occur periodically within the heart during the autopsy. <br><br> Incisions on the limbs of the specimen were done; the skeletal muscles, especially the smaller ones connecting to the hands and feet of the cadaver were especially atrophied and torn. Nerve connections distal to the body were noted of having significant damage compared to those proximal of the body.";
+	name = "Compound Observations"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Dk" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"DJ" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"DZ" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"Ez" = (
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"EE" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/freezer{
+	dir = 4;
+	icon_state = "freezer";
+	set_temperature = 80;
+	use_power = 1
+	},
+/obj/floor_decal/industrial/outline/yellow,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"EF" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/obj/item/material/twohanded/jack,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"Fj" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/paper/spacer{
+	info = "<b><large><center>Observation of Compound 541z.</center></large></b><br><br>- Cadaver z-261 who has been deceased for three days has been administered a dose of fifteen units of compound 541z. Observation period lasting two hours.<br>- Thirty minutes after administration, cadaver started to spasm sporadically, increasing in intensity as time went on. <br>- Forty minutes after administration, cadaver's cardiovascular system has started functioning again, with cadaver being observed to make slight movements.<br>- A hour after administration, cadaver started to make full use of their muscles, seeming to move their limbs in a voluntary manner. <br>-  Monkey cadaver was sedated and euthanized after two hours in accordance of safety and ethical guidelines.<br><br> Notes: Experimental goal of reviving a cadaver was a success, but cognitive behavior is noted to be significantly reduced. New compounds will have to be adjusted in order to elevate the subject's cognitive behavior, a suggestion of administering rezadone to the patient alongside peridaxon in order to maximize cognitive ability after revival.";
+	name = "Autopsy Report"
+	},
+/obj/floor_decal/techfloor{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Fn" = (
+/obj/item/material/hatchet,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"Fy" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/welding,
+/obj/item/clothing/head/welding,
+/obj/item/clothing/gloves/insulated,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"FL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"FR" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/flora/pottedplant/decorative,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"FS" = (
+/obj/floor_decal/corner/research/three_quarters{
+	dir = 8
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Gg" = (
+/obj/decal/cleanable/blood/drip,
+/obj/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"GF" = (
+/obj/floor_decal/corner/research{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner_techfloor_grid/full,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"GJ" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/door/airlock{
+	name = "Medical"
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"GL" = (
+/turf/simulated/wall,
+/area/mine/unexplored)
+"Hb" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"Hs" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
+"Hz" = (
+/obj/machinery/flasher{
+	id_tag = "permentryflash";
+	name = "Floor mounted flash"
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"HC" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/hangar)
+"HF" = (
+/obj/random/junk,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"HJ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"HK" = (
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/item/clothing/accessory/stethoscope,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"HP" = (
+/obj/structure/table/standard,
+/obj/item/pen,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"HT" = (
+/obj/item/storage/pill_bottle,
+/obj/item/reagent_containers/pill/tramadol,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"HV" = (
+/obj/decal/cleanable/dirt,
+/obj/landmark/corpse/slavers_base/slaver2,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Id" = (
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"In" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"Iw" = (
+/obj/machinery/optable,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"IA" = (
+/obj/structure/table/woodentable,
+/obj/item/device/radio,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"Jd" = (
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"JC" = (
+/obj/machinery/atmospherics/pipe/simple/visible/yellow,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"JD" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"JW" = (
+/obj/decal/cleanable/dirt,
+/obj/item/drain,
+/mob/living/carbon/human/zombie,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"JY" = (
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"Kd" = (
+/obj/item/remains/human,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"Ko" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"Ku" = (
+/obj/structure/table/standard,
+/obj/item/device/taperecorder,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Ky" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"KF" = (
+/obj/decal/cleanable/dirt,
+/obj/item/paper/spacer{
+	info = "When the lights get cut out, get your shivs and prepare those spears. We won't be able to escape if we don't fight for it, so fight with all you got and get to the hangar. The airlock's broke, so book it there.";
+	name = "Note"
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"KK" = (
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/surgery,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"KS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
+"Lc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"Ls" = (
+/obj/structure/filingcabinet/chestdrawer,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Lw" = (
+/obj/item/material/knife/table,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"LL" = (
+/obj/floor_decal/corner/research{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"LQ" = (
+/obj/landmark/corpse/slavers_base/slaver5,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"LS" = (
+/obj/structure/table/rack,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"Mr" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"My" = (
+/obj/decal/cleanable/blood/drip,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"MD" = (
+/obj/item/reagent_containers/food/snacks/monkeycube,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"MJ" = (
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"MP" = (
+/obj/structure/table/standard,
+/obj/item/storage/box/bodybags,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"MZ" = (
+/obj/decal/cleanable/dirt,
+/obj/random/tool,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Na" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/barricade,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Nz" = (
+/obj/structure/table/standard,
+/obj/item/device/camera,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"NC" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/machinery/sleeper,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/slavers_base/med)
+"NQ" = (
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/generic,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"NS" = (
+/obj/structure/table/rack,
+/obj/item/material/hatchet,
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"NX" = (
+/obj/structure/table/standard,
+/obj/item/storage/box/freezer,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Oj" = (
+/obj/item/material/knife/combat,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/table/standard,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"Oo" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/table/rack,
+/obj/item/device/radio,
+/obj/item/contraband/poster,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/random/tool,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Ov" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/flora/pottedplant,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Oz" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/decal/cleanable/blood/drip,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"OM" = (
+/obj/machinery/door/airlock{
+	name = "Hangar Checkpoint"
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"OU" = (
+/obj/structure/closet/l3closet/scientist,
+/obj/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Pk" = (
+/obj/decal/cleanable/blood,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Pl" = (
+/mob/living/carbon/human/zombie,
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"Pn" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/table/steel,
+/obj/random/drinkbottle,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"Pr" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/barricade/spike,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"Pt" = (
+/obj/decal/cleanable/blood,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"PA" = (
+/obj/item/ammo_casing/pistol/used,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"PD" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"PF" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/reagent_containers/food/snacks/meat/monkey,
+/obj/item/reagent_containers/food/snacks/meat/monkey,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"PL" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/bed/chair/office/dark{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"PN" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"PU" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/gun/energy/taser,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"QK" = (
+/obj/structure/table/rack,
+/obj/item/wirecutters,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"QL" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/research{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/obj/structure/closet/secure_closet/scientist,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"QN" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"QR" = (
+/obj/decal/cleanable/dirt,
+/mob/living/carbon/human/zombie,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Rp" = (
+/mob/living/carbon/human/zombie,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Rs" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"RH" = (
+/obj/floor_decal/corner/blue/diagonal,
+/obj/decal/cleanable/dirt,
+/obj/random/junk,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"RJ" = (
+/obj/structure/table/rack,
+/obj/item/storage/box/handcuffs,
+/obj/item/melee/baton/loaded,
+/obj/item/melee/baton/loaded,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"RO" = (
+/obj/machinery/bodyscanner{
+	dir = 1
+	},
+/obj/floor_decal/corner/pink/mono,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/slavers_base/med)
+"RQ" = (
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/structure/closet/crate/freezer,
+/obj/item/organ/internal/brain,
+/obj/item/organ/internal/brain,
+/obj/item/organ/internal/brain,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"RS" = (
+/obj/structure/table/reinforced,
+/obj/random/coin,
+/obj/random/coin,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/demo)
+"RT" = (
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/obj/item/implantpad,
+/obj/item/implantcase/tracking,
+/obj/item/implanter,
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"RX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/decal/cleanable/dirt,
+/obj/item/material/twohanded/baseballbat,
+/turf/simulated/floor/tiled,
+/area/slavers_base/hallway)
+"RZ" = (
+/obj/random/trash,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"Sb" = (
+/obj/decal/cleanable/dirt,
+/obj/item/roller_bed,
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Sf" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/machinery/sleeper,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Sh" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"Sm" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/rifle/used,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Su" = (
+/obj/structure/bed/chair,
+/obj/landmark/corpse/slavers_base/slaver1,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"SG" = (
+/obj/floor_decal/corner/research{
+	dir = 6
+	},
+/obj/machinery/reagentgrinder,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"SH" = (
+/obj/item/storage/firstaid/regular,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor,
+/area/slavers_base/maint)
+"SI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"ST" = (
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Ta" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"Tb" = (
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"Tj" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/mob/living/carbon/human/zombie,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
+/area/slavers_base/secwing)
+"Tn" = (
+/obj/structure/closet/secure_closet/guncabinet,
+/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/obj/item/ammo_magazine/smg_top,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"Tx" = (
+/obj/floor_decal/corner/research/three_quarters{
+	dir = 1
+	},
+/obj/item/storage/lockbox/vials,
+/obj/structure/table/standard,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Tz" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"TA" = (
+/obj/floor_decal/corner/research{
+	dir = 5
+	},
+/obj/machinery/chem_master,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"TI" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"TQ" = (
+/obj/machinery/cooker/oven,
+/obj/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/dorms)
+"TV" = (
+/obj/floor_decal/carpet{
+	dir = 8
+	},
+/obj/item/storage/briefcase,
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"Uc" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/yellow,
+/obj/item/stock_parts/capacitor,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Uw" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/structure/barricade,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"UC" = (
+/obj/item/storage/box/monkeycubes,
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"UU" = (
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/techfloor{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Vb" = (
+/obj/structure/barricade,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/mort)
+"Vj" = (
+/obj/landmark/corpse/slavers_base/slaver6,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"Vn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"VA" = (
+/obj/machinery/light/small,
+/obj/structure/reagent_dispensers/watertank,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"VD" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"VY" = (
+/obj/structure/table/woodentable,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"Wi" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/random/junk,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"Wo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"WI" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/barricade/spike,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"WJ" = (
+/obj/structure/hygiene/shower,
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"WM" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "Slaves Mortuary";
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/mort)
+"WR" = (
+/obj/structure/table/standard,
+/obj/item/melee/telebaton,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"WU" = (
+/obj/floor_decal/corner/research{
+	dir = 9
+	},
+/obj/decal/cleanable/dirt,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"Xr" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet,
+/obj/item/clothing/head/helmet,
+/obj/item/clothing/suit/armor/pcarrier/medium,
+/obj/item/clothing/suit/armor/pcarrier/medium,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"XA" = (
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"XF" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"XI" = (
+/obj/structure/table/woodentable,
+/obj/random/coin,
+/obj/item/pen,
+/turf/simulated/floor/carpet,
+/area/slavers_base/demo)
+"Yp" = (
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/cells)
+"Yt" = (
+/obj/decal/cleanable/blood,
+/obj/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/demo)
+"YF" = (
+/obj/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"YG" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/item/shield/riot,
+/obj/item/shield/riot,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/maint)
+"YN" = (
+/obj/decal/cleanable/dirt,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/melee/baton/loaded,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"YQ" = (
+/obj/item/cell/super,
+/turf/simulated/floor/ceiling,
+/area/slavers_base/powatm)
+"YU" = (
+/obj/decal/cleanable/dirt,
+/obj/landmark/corpse/slavers_base/slaver6,
+/obj/decal/cleanable/blood,
+/turf/simulated/floor/tiled,
+/area/slavers_base/maint)
+"YX" = (
+/obj/decal/cleanable/dirt,
+/obj/item/ammo_casing/pistol/used,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
+"Zg" = (
+/obj/structure/closet,
+/obj/random/smokes,
+/obj/random/loot,
+/obj/random/cash,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"Zn" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled,
+/area/slavers_base/cells)
+"Zr" = (
+/obj/structure/table/rack,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/decal/cleanable/dirt,
+/obj/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/slavers_base/med)
+"ZI" = (
+/obj/structure/bed,
+/obj/machinery/light,
+/turf/simulated/floor/tiled,
+/area/slavers_base/dorms)
+"ZN" = (
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced,
+/area/slavers_base/med)
 
 (1,1,1) = {"
 aa
@@ -11637,19 +13437,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-aa
-ad
-aa
-aa
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -11657,7 +13444,20 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -11833,24 +13633,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -11858,8 +13640,26 @@ aa
 aa
 aa
 aa
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12032,27 +13832,19 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -12061,6 +13853,14 @@ aa
 ad
 ad
 ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12235,6 +14035,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12242,26 +14055,13 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12437,6 +14237,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12444,24 +14257,11 @@ ad
 ad
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -12632,26 +14432,26 @@ aa
 aa
 aa
 aa
-ad
-ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -12834,26 +14634,26 @@ aa
 aa
 aa
 aa
-ad
-ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -13036,23 +14836,23 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -13238,6 +15038,17 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -13246,18 +15057,7 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -13434,6 +15234,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -13445,21 +15259,7 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -13638,6 +15438,9 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -13646,11 +15449,8 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -13837,6 +15637,9 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
 ad
 aa
 aa
@@ -13848,11 +15651,8 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -14037,9 +15837,9 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -14238,9 +16038,9 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -14440,8 +16240,9 @@ aa
 aa
 aa
 aa
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -14507,8 +16308,7 @@ cR
 cR
 cR
 cR
-cR
-cR
+ad
 ad
 ad
 ad
@@ -14641,8 +16441,9 @@ aa
 aa
 aa
 aa
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -14699,18 +16500,17 @@ cX
 dG
 ee
 eD
-da
-da
 fK
 gb
+eg
 gn
-gL
 gW
 gW
 hz
-da
-il
+hI
+im
 cR
+ad
 ad
 ad
 ad
@@ -14843,6 +16643,7 @@ aa
 aa
 aa
 aa
+aa
 ad
 ad
 ad
@@ -14901,18 +16702,17 @@ cX
 dH
 ef
 eE
-da
-da
 fK
 gc
 go
-go
+hA
+gS
 da
-da
-da
-da
-im
+Vj
+oM
+AM
 cR
+ad
 ad
 ad
 ad
@@ -15043,8 +16843,9 @@ aa
 aa
 aa
 aa
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -15100,21 +16901,20 @@ ad
 ad
 cR
 cX
-dI
-da
-da
-da
-da
+Uc
+sX
+gS
 da
 gd
 da
-go
+fg
+PA
+al
+Rp
 da
-da
-da
-da
-in
+JD
 cR
+ad
 ad
 ad
 ad
@@ -15245,11 +17045,12 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -15303,20 +17104,19 @@ ad
 cR
 cY
 dI
-da
+YQ
 eF
-da
-da
 fL
 gc
 da
+fg
+bq
+ey
+cn
 da
-da
-da
-da
-da
-io
+VA
 cR
+ad
 ad
 ad
 ad
@@ -15447,11 +17247,12 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -15505,20 +17306,19 @@ ad
 cR
 cZ
 dJ
-eg
-dG
-eg
-eg
+JC
+wb
 fM
 ge
 gp
-da
-da
-da
 hA
-da
-ip
+hI
+hA
+hA
+hA
+hA
 cR
+ad
 ad
 ad
 ad
@@ -15652,10 +17452,11 @@ aa
 aa
 aa
 aa
+aa
 ad
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -15705,22 +17506,21 @@ ad
 ad
 ad
 cR
-da
-da
 cZ
+da
+da
 eG
-da
-da
 fN
 ge
-da
+fg
 eF
-da
+iJ
 hh
 da
 da
-iq
+Fy
 cR
+ad
 ad
 ad
 ad
@@ -15854,10 +17654,11 @@ aa
 aa
 aa
 aa
+aa
 ad
 ad
 ad
-ad
+aa
 ad
 ad
 ad
@@ -15908,21 +17709,20 @@ ad
 ad
 cR
 cZ
-cZ
+hI
 da
-eH
-da
-da
-da
+hf
+gS
 gd
+hI
+sc
+sc
+MZ
+gS
 da
-da
-da
-da
-da
-da
-ir
+gM
 cR
+ad
 ad
 ad
 ad
@@ -16053,13 +17853,14 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
 aa
 aa
 ad
 ad
+ad
+aa
 ad
 ad
 ad
@@ -16110,21 +17911,20 @@ ad
 ad
 cR
 db
-cZ
 da
 eI
 fl
-da
 fO
 gf
 da
 da
 eF
 da
+eF
 da
-da
-is
+gL
 cR
+ad
 ad
 ad
 ad
@@ -16255,14 +18055,15 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
+aa
+aa
 aa
 aa
 ad
 ad
 ad
+aa
+aa
 ad
 ad
 ad
@@ -16312,21 +18113,20 @@ ad
 ad
 cR
 dc
-dK
-da
+Pk
 eJ
 fm
 fr
 fP
 gg
 gq
-gq
-gq
-gq
+fQ
+fQ
 hB
 da
 ir
 cR
+ad
 ad
 ad
 ad
@@ -16457,14 +18257,15 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 aa
 aa
-ad
-ad
-ad
 ad
 ad
 ad
@@ -16514,21 +18315,20 @@ ad
 ad
 cR
 dc
-da
 dK
 eK
-da
+gS
 fs
-fQ
+da
 gh
-gr
-gM
+sZ
+cO
 gX
-hi
 hC
 hR
-it
+Oo
 cR
+ad
 ad
 ad
 ad
@@ -16659,12 +18459,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
 ad
 ad
 ad
 aa
 aa
-aa
 ad
 ad
 ad
@@ -16690,30 +18496,24 @@ ad
 ad
 ad
 ad
-ah
-ah
-ah
-ah
-ah
-ah
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cS
 cS
 cS
 cS
@@ -16736,10 +18536,10 @@ gi
 gi
 gi
 gi
-gi
-gi
-gi
-gi
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -16861,12 +18661,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
 ad
 aa
 aa
 ad
-aa
-aa
 ad
 ad
 ad
@@ -16891,35 +18698,28 @@ ad
 ad
 ad
 ad
-ad
-ah
-aj
-aj
-ak
-ak
-ak
-aM
-aO
-aX
-bi
-aP
-aP
-aP
-aP
-aM
-bR
-aM
-aP
-aP
-aP
-aP
-bi
-aX
-aO
+cV
+xV
+wz
+bW
+wz
+cV
+Ov
+Ku
+bU
+cV
+cQ
+HP
+cV
+Sb
+Bh
+yY
+RQ
 cS
-dd
-dL
-dL
+hP
+wN
+xf
+dp
 eL
 fn
 fu
@@ -16933,14 +18733,14 @@ gs
 hS
 iu
 iA
-iu
-je
-jp
+qX
+sN
+AW
 jy
 gi
-jX
 gi
-jX
+gi
+gi
 gi
 ad
 ad
@@ -17063,7 +18863,10 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -17094,55 +18897,52 @@ ad
 ad
 ad
 ad
-ah
-ak
-ak
-aj
-ak
-ak
-aM
-aP
-aP
-aP
-aR
-aV
-aP
-aP
-aM
-aU
-aM
-aW
-aZ
-aP
-cv
-ba
-aW
-aP
+ad
+ad
+ad
+cV
+wz
+ZN
+wz
+oZ
+br
+dn
+bL
+bL
+cV
+gt
+dn
+br
+QR
+cf
+ST
+RT
 cS
-de
-dL
+dd
+dp
+dd
 eh
-eM
+Rs
 cS
 fv
 fo
 gi
-gi
-gi
-gi
-gi
-gi
-hT
 ic
 ic
-iM
-jf
+fb
+fb
+ic
+tq
+fb
+mU
+Tb
+RH
 jq
 jz
 gi
-jY
-gi
-jY
+jX
+ip
+dQ
 gi
 ad
 ad
@@ -17268,10 +19068,16 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -17296,54 +19102,48 @@ ad
 ad
 ad
 ad
-ah
-ak
-ak
-ak
-aj
-ak
-aM
-aP
+cV
+oZ
 aY
-aW
-be
-aP
-aR
-aW
-bK
-aU
-bK
-aP
-aP
-aP
-be
-aP
-aP
-cJ
+ZN
+wz
+br
+CW
+bL
+oS
+cV
+gV
+hp
+br
+hk
+Iw
+dn
+KK
 cS
-df
-dL
-dL
+dp
+vE
+vE
+vE
 eM
 cS
 fv
 fo
 gi
-gt
-gt
-gZ
-hj
-hD
-hU
+gi
+gi
+gi
+gi
+rg
+hT
 iv
-ic
-iN
+rw
+nI
+DZ
+vq
+TQ
 gi
-gi
-gi
-gi
-jZ
-kn
+kb
+ip
 kb
 gi
 ad
@@ -17470,10 +19270,16 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -17498,33 +19304,27 @@ ad
 ad
 ad
 ad
-ah
-al
-aj
-ak
-ak
-aF
-aM
-aQ
-aP
-aR
-aP
-aP
-aP
-aP
+cV
+ZN
+cq
+YX
+cM
+br
+dn
 bL
-bS
-ca
-aP
-aP
-aP
-ch
-aP
-aP
-bO
+bL
+cV
+gt
+dn
+br
+hk
+dn
+dn
+NX
 cS
 dg
-dL
+dp
+dd
 ei
 eM
 cS
@@ -17532,21 +19332,21 @@ fv
 fT
 gi
 gu
-gt
-gt
-hk
-gi
-hT
-ic
-ic
-iN
-ic
-ic
+fb
+gZ
+hj
+hD
+hU
+fb
+pK
+HF
+wH
+oz
 jA
-jP
-ka
-kb
-lb
+gi
+jY
+gi
+gi
 gi
 ad
 ad
@@ -17681,9 +19481,9 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -17701,54 +19501,54 @@ ad
 ad
 ad
 ah
-ak
-ak
-ax
-ak
-ak
-aM
-aP
-aP
-ba
-aP
-aW
-aP
-aP
-bM
-bq
-bM
-aP
-aP
-aP
-aP
-aP
-cv
-aP
+ah
+ah
+ah
+ah
+ah
+cV
+In
+YX
+Ky
+wz
+cV
+FR
+dn
+Nz
+cV
+dn
+dn
+cV
+UU
+wT
+bG
+Fj
 cS
 dh
-dL
-dL
+Pn
+kc
+dp
 eM
 cS
 fv
 fU
 gi
 gv
-gt
-gt
+ic
+PD
 hl
 gi
 hV
 ic
-iv
-iN
-ic
-ic
+bw
+yt
+yt
+Oj
 jB
 gi
+jZ
+kn
 kb
-kb
-mb
 gi
 ad
 ad
@@ -17903,29 +19703,29 @@ ad
 ad
 ad
 ah
-ak
-ak
-ak
-ak
-aB
-aM
-aP
-aZ
-aP
-aV
-aW
-aP
-aP
-aM
-bq
-aM
-aP
-aR
-aV
-aV
-aP
-cF
-aP
+ao
+tC
+zn
+zn
+an
+cV
+cV
+kk
+br
+cV
+cV
+cV
+kk
+cV
+cV
+GJ
+cV
+cV
+cV
+cV
+GJ
+cV
+cV
 cS
 cS
 cS
@@ -17933,24 +19733,24 @@ cS
 eN
 cS
 fv
-fo
+kq
 gi
 gw
 gN
-gt
+fb
 hm
 gi
 hW
 iw
 iB
-iO
-jg
-jr
+HJ
+ic
+iM
 ic
 gi
-kc
-ko
-kz
+ka
+ip
+lb
 gi
 ad
 ad
@@ -18105,29 +19905,29 @@ ad
 ad
 ad
 ah
-ak
+ao
 an
+Kd
 an
-ak
-ak
-aM
-aP
-aP
-aR
-aP
+tC
+cV
+WJ
+oO
+zC
+cV
 bu
-aP
-aP
-bK
-bq
-bK
-aP
-aP
-aP
-aP
-aP
-aP
-bf
+dL
+dn
+xB
+cV
+dn
+dn
+cV
+ha
+xD
+dn
+EE
+qR
 cS
 di
 dM
@@ -18135,24 +19935,24 @@ ej
 eO
 cS
 fv
-fo
+kq
 gi
 gx
-gt
-gt
+fb
+su
 hn
 gi
-hX
+ap
 ic
-iC
-iP
-jh
-jr
+FL
 ic
-gi
-kd
-gi
-kd
+fb
+je
+ic
+jP
+kb
+tJ
+mb
 gi
 ad
 ad
@@ -18308,53 +20108,53 @@ ad
 ad
 ah
 am
-an
-ak
+EF
+tC
 ak
 aB
-aM
-aP
-aP
-aP
-be
-aP
-aP
-aP
-bL
-bT
-ca
-aP
-aP
-aP
-be
-aP
-aR
-aP
+cV
+VD
+JW
+in
+cV
+oK
+vX
+HV
+kl
+cV
+dn
+dn
+br
+By
+Wo
+dn
+Vn
+bS
 cS
 dj
 dN
-ek
+dp
 eP
 cS
-fv
+CF
 fo
 gi
-gy
-gt
-ha
+gD
+fb
+iv
 gD
 gi
 hX
 ic
-iC
-iQ
-ji
+Ct
+iO
+jg
 jr
-ic
+fb
 gi
-ke
-gi
-ke
+ip
+ko
+kb
 gi
 ad
 ad
@@ -18509,54 +20309,54 @@ ad
 ad
 ad
 ah
+ao
+eu
+eu
 an
-ak
-ak
-aB
-ak
-aM
-aP
-aP
-aP
-aP
-aV
-aW
-ba
-bM
-bU
-bM
-ci
-aP
-aW
-ci
-aP
-aP
-aP
+an
+cV
+OU
+Jd
+bR
+cV
+MJ
+eH
+dn
+zj
+cV
+As
+dn
+cV
+At
+Dk
+sa
+hY
+wh
 cS
 dk
-dN
-dp
-dp
+lt
+vE
+ex
 cS
 fv
 fo
 gi
-gz
-gt
-gt
+Zg
+fb
+fb
 gz
 gi
-hY
+gr
 ic
 iC
-iR
-jj
+jk
+jh
 jr
-ic
+fb
 gi
+kd
 gi
-gi
-gi
+kd
 gi
 ad
 ad
@@ -18711,55 +20511,55 @@ ad
 ad
 ad
 ah
-ak
-ak
+ao
+eu
+LQ
+an
 ay
-aC
-ay
-aM
-aR
-aP
-ba
-aR
-aP
-aP
-aP
-aM
-bq
-aM
-aP
-aP
-aP
-aP
-aP
-aP
-aP
+cV
+cV
+kk
+br
+cV
+zT
+is
+eH
+kl
+cV
+eH
+dn
+br
+NC
+dn
+eH
+eH
+co
 cS
 dl
 dO
 el
-dp
+dN
 cS
 fv
 fo
 gi
-gA
-gt
-gt
-ho
-gi
 hZ
 ic
-iD
-iS
-jk
+ic
+ho
+gi
+ib
+gN
+iC
+jh
+ji
 jr
 ic
 gi
-ad
-ad
-ad
-ad
+ke
+gi
+ke
+gi
 ad
 ad
 ad
@@ -18914,54 +20714,54 @@ ad
 ad
 ah
 ao
-ak
+an
 ak
 ay
-aG
-aM
-aS
-aP
-aP
-aP
-aV
-aP
-aP
-bK
-bq
-bK
-aP
-aP
-ch
-aP
-ch
-ch
-aP
+an
+cV
+FS
+dn
+cr
+WU
+LL
+cP
+pl
+kl
+cV
+so
+ij
+cV
+Sf
+eH
+eH
+dn
+bQ
 cS
 dm
 dN
 em
-dp
+cw
 cS
-fv
+KS
 fU
 gi
 gv
-gt
+bA
 gN
-gD
+ZI
 gi
 ia
 ic
-ic
-iN
-ic
-ic
-jB
+iC
+iR
+jj
+jr
+uf
 gi
-ad
-ad
-ad
-ad
+gi
+gi
+gi
+gi
 ad
 ad
 ad
@@ -19115,50 +20915,50 @@ ad
 ad
 ad
 ah
-ap
-ak
+ao
+an
 az
-ak
+aD
 aH
-aM
+cV
 aS
-aP
-aP
-aP
-bv
-aP
-aP
-bL
-bV
-ca
-aP
-aP
-aP
-aP
-cy
-aP
-aP
-cS
+ST
 dn
-dN
-en
-dp
+dn
+qU
+wZ
+ST
+cP
+bV
+Cn
+dn
+GJ
+dn
+dn
+dn
+eH
+Zr
 cS
-fv
+df
+Tj
+vE
+pH
+cS
+KS
 fo
 gi
+rl
+ic
+ic
 gB
-gt
-gt
-hp
 gi
-ib
+sU
 ic
-ic
+iD
+iS
+jk
 iT
-iv
-ic
-jC
+fb
 gi
 ad
 ad
@@ -19318,48 +21118,48 @@ ad
 ad
 ah
 aq
-ak
-ak
-ak
+an
+an
+az
 aI
-aM
-aQ
-ba
-aP
-be
-aP
+cV
+TA
+dn
+ST
+dn
+nv
 bD
-aP
-bM
-bq
-bM
-aP
-aV
-aP
-be
-bJ
-aP
-cK
+cP
+Sm
+kk
+Cn
+eH
+GJ
+dn
+eH
+eH
+dn
+PN
 cS
-do
-dP
+uP
+dN
 en
 eQ
 cS
 fv
-fo
+kq
 gi
 gC
-gt
+fb
 gN
-gA
+jk
 gi
-ib
-ic
-iE
-iN
 ic
 ic
+fb
+fb
+ic
+XF
 ic
 gi
 ad
@@ -19520,31 +21320,31 @@ ad
 ad
 ah
 ar
-ak
-ak
-aC
-aH
-aM
-aP
-aP
-aP
-aP
-bw
-aP
-aP
-aM
-bq
-aM
-aR
-aP
-aR
-aP
-aP
-cG
-cL
+aF
+Lw
+an
+aJ
+cV
+Cw
+ST
+dn
+dn
+nN
+bX
+dn
+kl
+cV
+Cn
+Na
+cV
+DJ
+dn
+eH
+cN
+ew
 cS
 dp
-dQ
+dN
 eo
 eR
 cS
@@ -19552,24 +21352,24 @@ fv
 fo
 gi
 gD
-gt
-gt
+fb
+su
 gy
 gi
-ic
+il
 ic
 ic
 iU
 iv
-ic
+XF
 jD
 gi
 ad
 ad
 fJ
 gI
-gI
 kH
+gI
 gI
 kO
 kH
@@ -19721,29 +21521,29 @@ ad
 ad
 ad
 ah
+jv
+an
+an
 ak
-ak
-ak
-ak
-ak
-aM
-aP
-aP
-aR
-aP
-aP
+li
+cV
+Tx
+SG
+AV
+bI
+bI
 bE
 bI
 bN
-bW
+cV
+Cn
+Au
+cV
+RO
+oy
 cb
-cj
-ck
-aP
-aP
-aW
-aP
-bv
+HK
+Ls
 cS
 dq
 dR
@@ -19754,8 +21554,8 @@ fv
 fo
 gi
 gE
-gt
-gt
+ic
+Tz
 hq
 gi
 ic
@@ -19923,32 +21723,32 @@ ad
 ad
 ad
 ah
-ak
-ak
+PF
+an
 ak
 aD
-aJ
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-bX
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-aM
+an
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+cV
+nn
+Au
+cV
+cV
+cV
+cV
+cV
+cV
 cS
 dr
-dS
+eq
 eq
 eq
 cS
@@ -20125,35 +21925,35 @@ ad
 ad
 ad
 ah
-as
-au
-aA
+af
+an
+an
 aE
-aK
+jC
 aN
 aT
-bb
+WI
 bb
 bm
 bb
-bF
-bb
-bb
+hg
+Zn
+YN
 bY
 cc
-bb
+aj
 cl
-bm
-cw
+bb
+bb
 cz
 bb
-bb
+bF
 cT
 ds
 dT
 er
-er
-er
+cK
+tb
 fx
 fW
 gk
@@ -20163,10 +21963,10 @@ hb
 er
 er
 er
-er
+RX
 hb
-er
-er
+cK
+cK
 jt
 jG
 jQ
@@ -20325,36 +22125,36 @@ ad
 ad
 ad
 ad
-af
+ad
 ah
-ah
-ah
-ah
-ah
+an
+Pl
+an
+vz
 aL
 aM
 aU
-aU
-aU
+Uw
+Pr
 bn
+KF
+ce
 bx
 bx
-bx
-bx
-bZ
-bx
-bx
-bx
-cn
-bx
+aU
+pB
+tD
+aU
+aU
+aU
 cA
-bx
-bx
+aU
+aU
 cU
 dt
 dU
-es
-eT
+cg
+fo
 fo
 fy
 fo
@@ -20367,8 +22167,8 @@ fo
 id
 fo
 iG
-fo
-fo
+Hs
+et
 ju
 jH
 gl
@@ -20376,7 +22176,7 @@ kh
 kq
 kB
 gI
-gI
+My
 fJ
 ad
 ad
@@ -20526,14 +22326,14 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-ag
-ag
-ag
-ag
+ad
+ad
+ah
+LS
+QK
+NS
+WM
+zb
 aM
 aM
 aM
@@ -20544,20 +22344,20 @@ aM
 aM
 aM
 aM
+Bu
+by
 aM
 aM
 aM
-co
-cx
 aM
 aM
 aM
-cV
+kf
 du
-cV
-cV
-cV
-cV
+kf
+kf
+kf
+kf
 fz
 fJ
 fJ
@@ -20728,38 +22528,38 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-at
-at
-ag
-ag
+ad
+ad
+ah
+ah
+ah
+ah
+ah
+oD
 aM
-aO
-aV
+iz
+RZ
 bj
 bp
 bz
-bG
-aW
-aO
-aM
-cd
-aP
 bj
-cp
-bz
-bG
+sF
+iz
+aM
+Lc
+ce
+aM
 aP
+cL
+bi
+aX
 aO
-cV
+kf
 dv
 dV
-et
+dx
 eU
-cV
+kf
 fA
 fX
 gm
@@ -20769,18 +22569,18 @@ hc
 gH
 hE
 gH
-gH
+SI
 iH
 iW
 hd
-jv
-jv
+hw
+hw
 jR
 kj
 ks
 hd
 gI
-gI
+My
 kJ
 kM
 kQ
@@ -20930,63 +22730,63 @@ ad
 ad
 ad
 ad
-af
-af
-ag
+ad
+ad
+ah
 at
-ag
-ag
-av
-ag
+as
+vw
+as
+GF
 aM
 aQ
 bc
 bk
-bq
+aU
 aU
 bH
-be
+zo
 bO
 aM
-ce
-be
-bk
-bq
+bn
 aU
-cB
-be
-bO
-cV
-dw
-dx
-eu
+bj
+aW
+aZ
+ba
+sF
+aP
+kf
+ev
+ev
+ev
 eV
-cV
+kf
 fB
 fY
 fJ
-gI
+aw
 gP
 gI
 gI
 hF
-gI
-gI
+aw
+aw
 gI
 iX
 hd
-jv
-jv
-jv
-jv
+hw
+hw
+hw
+iI
 kt
 hd
-gJ
+Oz
 gI
 kJ
 kN
 kR
-gI
+qI
 fJ
 ad
 ad
@@ -21132,42 +22932,42 @@ ad
 ad
 ad
 ad
-af
-ag
-ag
-ag
-ag
-ag
-ag
-ag
+ad
+ad
+ah
+pv
+ek
+Vb
+aG
+nl
 aM
-aP
+iz
 bd
 bj
-br
-bx
-bG
+aU
+aU
+bj
 aR
 aP
 aM
-aP
-aP
+bT
+ce
 bj
-cq
-bx
-bG
 aP
-cM
-cV
-dx
+iz
+be
+iz
+cJ
+kf
+dz
 dx
 ev
 eW
-cV
+kf
 fC
 fZ
 fJ
-gI
+aw
 gQ
 hd
 hd
@@ -21177,18 +22977,18 @@ hd
 hd
 iY
 hd
-jw
-jv
-jv
-jv
+hx
+au
+aK
+iI
 kt
 hd
 gI
-gI
+My
 kJ
-gI
-hf
-kF
+HT
+mx
+pO
 fJ
 ad
 ad
@@ -21334,14 +23134,14 @@ ad
 ad
 ad
 ad
-af
-ag
-ag
-ag
-at
-ag
-ag
-ag
+ad
+ad
+ah
+yu
+ek
+ek
+ek
+Mr
 aM
 aM
 aM
@@ -21349,48 +23149,48 @@ aM
 bs
 aU
 aM
+bj
+bj
 aM
-aM
-aM
-aM
-aM
-aM
-bs
-aU
-aM
-aM
-aM
-cV
+Lc
+ce
+bj
+aP
+aP
+ch
+zE
+xw
+kf
 dy
-dx
-ew
+ev
+dX
 eX
-cV
+kf
 fC
 fZ
 fJ
-gI
+aw
 gR
 hd
 hr
 hH
 ie
 hd
-iI
+iK
 iZ
 jm
 jx
 jI
 jS
-jx
+Hb
 ku
 hd
 kE
 kE
 fJ
-gI
-fJ
-fJ
+Pt
+SH
+do
 fJ
 ad
 ad
@@ -21536,64 +23336,64 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-ag
-ag
-ag
-ag
+ad
+ad
+ah
+tE
+ek
+zI
+ek
+jw
 aM
-aO
-aP
+iz
+iz
 bj
-br
-bA
-bG
-bJ
-aO
-aM
-aO
-ch
-bj
-cq
-bx
-bG
+aU
+aU
+ce
+ce
+aU
+aU
+YF
+Wi
+bM
+aA
+iz
 aP
-aO
-cV
+cv
+aP
+kf
 dz
-dx
-dx
+ev
+ev
 eY
-cV
-fD
+kf
+fC
 fZ
 fJ
-gJ
-gR
+gI
+nc
 hd
-hs
-hH
+RS
+oW
 if
 hd
-iJ
+hx
 ja
 jn
-jv
+aC
 jJ
-jT
-kk
-jv
+XA
+Id
+hw
 hd
 gI
-gI
+My
 kK
-gI
+Gg
+NQ
+dP
 fJ
-ad
-ad
 ad
 ad
 ad
@@ -21739,63 +23539,63 @@ ad
 ad
 ad
 ad
-af
-af
-ag
+ad
+ah
+hs
 av
-ag
-ag
-ag
+ek
+ek
+jU
 aM
 aQ
-be
+zo
 bk
-bq
 aU
-bH
-be
-bP
-aM
-aQ
-be
-bk
-bq
 aU
-bH
-be
-cN
-cV
-dz
+aU
+aU
+vN
+es
+ce
+aU
+bj
+Ta
+aR
+Fn
+iz
+ol
+kf
+ev
 dW
-ex
+ev
 eZ
-cV
-fC
+kf
+fD
 fZ
 fJ
-gI
-gR
+gJ
+nc
 hd
-hr
+ht
 hH
 ig
 hd
 iI
 jb
 jn
-jv
+aC
 jK
-jT
-jv
-jv
+XA
+jO
+hw
 hd
 kF
 gI
 fJ
 fJ
 fJ
-ad
-ad
+fJ
+GL
 ad
 ad
 ad
@@ -21941,57 +23741,57 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-ag
-ag
-ag
+ad
+ah
+QL
+ek
+ek
+ek
+uX
 aM
 aV
 bf
 bj
-br
-bx
-bG
-aV
-aW
-aM
-aP
-aP
+aU
+aU
+cd
+ce
+UC
+gK
+ce
+ce
 bj
-cq
-bx
-bG
-ch
-aW
-cV
-dx
+rW
+cj
+ck
+aP
+Yp
+kf
+on
 dX
-dx
+ev
 fa
-cV
+kf
 fC
 fZ
 fJ
 gI
-gR
+nc
 hd
-hr
-hI
-ig
 hd
-iK
+hJ
+hd
+hd
 iI
+hw
 jn
-jv
-jL
+aC
+fe
 jT
-kl
-jv
+Id
+jd
 hd
-gI
+aw
 kF
 fJ
 ad
@@ -22144,56 +23944,56 @@ ad
 ad
 ad
 ad
-af
-ag
-ag
-ag
-ag
-ag
+ah
+tZ
+cF
+me
+Ez
+rx
 aM
 aM
 aM
 aM
-bs
+Hz
 bB
-aM
-aM
-aM
-aM
-aM
-aM
-aM
-bs
-aU
-aM
-aM
-aM
-cV
-dx
-dx
-ey
-fb
-cV
+cB
+cy
+Su
+cB
+ce
+ce
+bj
+iz
+aP
+bJ
+de
+iz
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
 fC
 fZ
 fJ
-gI
-gR
+kF
+nc
 hd
-ht
-hH
-ih
+hu
+hK
+ii
 hd
-iI
-iI
+iL
+hw
 jn
-jv
+aC
 jM
-jT
-jv
-jv
+XA
+Yt
+Bt
 hd
-gI
+aw
 gI
 fJ
 ad
@@ -22320,6 +24120,9 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -22343,60 +24146,57 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-af
-af
-ag
-ag
-ag
-ag
+ah
+ah
+ah
+ah
+ah
+ah
 aM
-aO
-aP
+iz
+MD
 bj
-br
-bx
-bG
-aP
-aO
+aU
+aU
+gA
+ce
+oC
+WR
+ce
+aU
 aM
-aO
+ci
+aV
+be
 aP
-bj
-cq
-bx
-bG
-aP
-aO
-cV
-dx
+bv
+fJ
+iq
 dY
-ez
+hi
 fc
-cV
+fJ
 fC
 fZ
 fJ
 gI
-gR
+nc
 hd
-hd
-hJ
-hd
+hv
+hL
+QN
 hd
 iI
 iI
 jn
-jv
-jL
-jT
-jv
-jv
+aC
+ih
+TI
+vC
+hw
 hd
-gI
-kF
+dw
+aw
 fJ
 ad
 ad
@@ -22522,6 +24322,9 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -22548,56 +24351,53 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-ag
-ag
+ad
+ad
+ad
 aM
 aQ
 bg
 bk
-bq
 aU
-bH
-be
-bO
-aM
-aQ
-be
-bk
-bq
 aU
-bH
-be
-bO
-cV
+bP
+ce
+ce
+ce
+ce
+aU
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
 dA
-cV
-cV
-cV
-cV
-fD
+ff
+PL
+MP
+fJ
+fC
 fZ
 fJ
-gK
-gR
+aw
+Ad
 hd
-hu
-hK
-ii
 hd
-iL
-iI
-jn
-jv
-jN
-jT
-jv
-jv
+vU
 hd
-gJ
+hd
+hd
+hd
+hd
+hx
+ik
+TV
+Bt
+hw
+hd
+gI
 gI
 fJ
 ad
@@ -22724,6 +24524,9 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -22750,56 +24553,53 @@ ad
 ad
 ad
 ad
-af
-af
-ag
-ag
-aw
-ag
+ad
+ad
+ad
 aM
 aR
 aP
 bj
-br
-bx
-bG
-aP
-bQ
-aM
-cf
-aP
-bj
-cq
-bx
-bG
-aP
-cO
-cV
-dB
-dB
+aU
+io
+ce
+aU
+aU
+aU
+io
+ce
+fJ
+RJ
+gI
+oV
+fJ
+Ko
+ez
+eA
+ez
 eA
 fd
-cV
+fJ
 fC
 fZ
 fJ
-gI
+aw
 gR
 hd
-hv
-hL
+hw
+au
+au
+au
+hw
+Ae
+hd
+hw
+Bt
+hw
+hw
 hw
 hd
-iI
-iI
-jn
-jv
-jO
-jU
-jv
-jv
-hd
-hy
+it
 gI
 fJ
 ad
@@ -22919,6 +24719,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -22948,16 +24758,6 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-af
-ag
-ag
-ag
-ag
-ag
 aM
 aM
 aM
@@ -22965,44 +24765,44 @@ aM
 bs
 aU
 aM
+bj
+bj
 aM
-aM
-aM
-aM
-aM
-aM
-bs
 aU
-aM
-aM
-aM
-cV
+ce
+fJ
+Xr
+aw
+aw
+fJ
+JY
+YU
 dC
+eA
 dB
-dB
-fe
-cV
+ez
+fJ
 fC
 fZ
 fJ
 gI
-gS
+gR
 hd
-hd
+aC
 hM
+hM
+hM
+Id
+jc
 hd
+iI
+iI
+jV
+jV
+jV
 hd
-hd
-hd
-hd
-jw
-jv
-jv
-jv
-jv
-hd
-gI
-gI
+kF
+hy
 fJ
 ad
 ad
@@ -23121,6 +24921,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+aa
+aa
 ad
 ad
 ad
@@ -23146,64 +24960,50 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-af
-af
-aw
-ag
-ag
-ag
 aM
-aO
-aP
+iz
+iz
 bj
-br
-bx
-bG
+aU
+aU
+bj
 aV
-aO
+MD
 aM
-aO
-aP
-bj
-cq
-bx
-bG
-aP
-cP
-cV
+rX
+aU
+fJ
+YG
+aw
+aw
+OM
+dC
+ez
 dD
-dB
-dB
+eA
+bt
 ff
-cV
+OM
 fC
 fZ
 fJ
-gI
+gJ
 gR
 hd
-hw
-hw
-hw
-hw
-hw
-hw
+nX
+IA
+VY
+AB
+bK
+cG
 hd
-jv
-jv
-jv
-jv
-jv
+hw
+iI
+jW
+mQ
+jL
 hd
-kF
+gI
 gI
 fJ
 ad
@@ -23323,6 +25123,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -23348,65 +25162,51 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-af
-af
-af
-ag
-ag
-ag
 aM
 aQ
 bh
 bl
-bq
+aU
 aU
 bH
-be
+zo
 bO
 aM
-cg
-be
-bk
-bq
+ce
 aU
-bH
-be
-cQ
-cV
+fJ
+um
+gI
+gI
+fJ
+ez
+eA
 dE
 dZ
-dB
-dB
-cV
+ez
+eA
+fJ
 fE
 fZ
 fJ
 gI
 gR
 hd
+dS
+hN
+lc
+XI
+Id
 hw
-hN
-hN
-hN
-hw
-jc
 hd
-jv
-jv
-jV
-jV
-jV
+hw
+hw
+iy
+kz
+kz
 hd
 kF
-hy
+gI
 fJ
 ad
 ad
@@ -23525,6 +25325,21 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -23549,63 +25364,48 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-af
-af
-af
-ag
-ag
 aM
 aW
 aW
 bj
-bt
+aU
 bC
-bG
-aW
-aR
-aM
-ch
-bf
 bj
-cr
-bC
-bG
-aP
-aV
-cV
+sF
+de
+aM
+ce
+aU
+fJ
+Tn
+aw
+PU
+fJ
+Sh
+wd
 dF
 ea
 eB
-fg
-cV
+ez
+fJ
 fF
 fZ
 fJ
-gJ
+gI
 gR
 hd
-hx
+dS
 hO
-ij
-iy
+hO
+hO
+Id
 hw
-jd
 hd
-jv
-jv
-jW
+hw
+hw
 jN
-jL
+kz
+kv
 hd
 gI
 gI
@@ -23727,10 +25527,21 @@ aa
 aa
 aa
 aa
-ad
-ad
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -23755,17 +25566,6 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-af
-af
-af
-af
 aM
 aM
 aM
@@ -23778,18 +25578,18 @@ aM
 aM
 aM
 aM
-aM
-aM
-aM
-aM
-aM
-aM
-cV
-cV
-cV
-cV
-cV
-cV
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+kJ
+kJ
+kJ
+fJ
+fJ
+fJ
 fG
 fZ
 fJ
@@ -23797,19 +25597,19 @@ gI
 gR
 hd
 hw
-hP
 ik
-iz
+ik
+ik
 hw
 hw
+jo
+hw
+hw
+bZ
+km
+kw
 hd
-jv
-jv
-jL
-jv
-jv
-hd
-gK
+gI
 gI
 fJ
 ad
@@ -23933,18 +25733,18 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -23989,30 +25789,30 @@ cs
 cs
 cs
 cs
-eC
+HC
 fh
 fp
 fH
 fZ
 fJ
-gI
-gR
+fJ
+gT
 hd
-hw
-hQ
-hQ
-hQ
-hw
-hw
 hd
-jv
-jv
-jN
-jv
-kv
+hd
+hd
+hd
+hd
+hd
+hd
+hd
+hd
+hd
+hd
+hd
 hd
 gI
-gI
+aw
 fJ
 ad
 ad
@@ -24136,17 +25936,17 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -24187,10 +25987,10 @@ cs
 cs
 cs
 cs
+cp
 cs
-cs
-cs
-cs
+mG
+mG
 eC
 fi
 fq
@@ -24198,23 +25998,23 @@ fI
 ga
 fJ
 gI
-gR
-hd
-hw
-hw
-hw
-hw
-hw
-hw
-jo
-jv
-jv
-jv
-km
-kw
-hd
+gU
+he
+aw
+aw
+dw
+aw
 gI
 gI
+gI
+aw
+gI
+aw
+aw
+aw
+aw
+aw
+aw
 fJ
 ad
 ad
@@ -24338,23 +26138,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+aa
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -24391,31 +26191,31 @@ cC
 cH
 cH
 cH
-cH
+yd
 eb
-cs
+eT
 fj
 cm
 fJ
 fJ
 fJ
-fJ
-gT
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
-hd
 gI
+uj
+aw
+dw
+gI
+gI
+hQ
+aw
+gI
+gI
+aw
+aw
+aw
+hy
+gI
+hQ
+aw
 gI
 fJ
 ad
@@ -24538,7 +26338,14 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -24546,18 +26353,11 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -24592,33 +26392,33 @@ cs
 cD
 cs
 cs
-cs
-cs
+mG
+mG
 ec
-cs
+eT
 fk
 cm
 ad
 ad
 fJ
-gI
-gU
-he
-gI
-gI
-hy
-gI
-gI
-gI
-gI
-gI
-gI
-gI
-gI
-gI
-gI
-gI
-gI
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
+fJ
 fJ
 ad
 ad
@@ -24740,7 +26540,14 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -24748,18 +26555,11 @@ ad
 ad
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -24794,34 +26594,34 @@ cs
 cD
 cs
 cs
-cs
+mG
 cs
 ec
-cs
+cp
 cs
 cm
 ad
 ad
-fJ
-gI
-gV
-hf
-hy
-gI
-gI
-gI
-gI
-gI
-hf
-gI
-gI
-gI
-hy
-gI
-hf
-gI
-gI
-fJ
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -24942,7 +26742,14 @@ aa
 aa
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 ad
@@ -24950,15 +26757,8 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -24992,7 +26792,7 @@ ad
 ad
 cm
 cs
-cs
+mG
 cD
 cs
 cs
@@ -25004,26 +26804,26 @@ cs
 cm
 ad
 ad
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
-fJ
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -25144,23 +26944,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -25195,7 +26995,7 @@ ad
 cm
 cs
 cs
-cD
+yH
 cs
 cs
 cs
@@ -25346,23 +27146,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -25397,13 +27197,13 @@ ad
 cm
 cs
 cs
-cD
+yH
+mG
 cs
-cs
-cs
+eT
 cs
 ec
-cs
+mG
 cs
 cm
 ad
@@ -25548,23 +27348,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -25600,12 +27400,12 @@ cm
 cs
 cs
 cD
-cs
-cs
-cs
+mG
+mG
+mG
 cs
 ec
-cs
+cx
 cs
 cm
 ad
@@ -25750,23 +27550,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -25806,9 +27606,9 @@ cs
 cs
 cs
 cs
-ec
-cs
-cs
+ca
+mG
+eT
 cm
 ad
 ad
@@ -25952,6 +27752,23 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+aa
+aa
 ad
 ad
 ad
@@ -25962,24 +27779,7 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -26004,11 +27804,11 @@ cm
 cs
 cs
 cD
-cs
-cs
-cs
-cs
-ec
+mG
+mG
+mG
+mG
+ca
 cs
 cs
 cm
@@ -26157,6 +27957,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26167,21 +27981,7 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -26206,7 +28006,7 @@ cm
 ct
 cs
 cD
-cs
+mG
 cs
 cs
 cs
@@ -26246,11 +28046,11 @@ ad
 ad
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
+aa
+aa
 aa
 aa
 aa
@@ -26359,6 +28159,20 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26369,24 +28183,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26408,7 +28208,7 @@ cm
 cs
 cs
 cE
-cI
+iE
 cI
 cI
 cI
@@ -26451,10 +28251,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -26561,34 +28361,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -26653,10 +28453,10 @@ ad
 ad
 ad
 ad
-ad
 aa
 aa
-ad
+aa
+aa
 aa
 aa
 aa
@@ -26768,6 +28568,16 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26777,20 +28587,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26855,10 +28655,10 @@ ad
 ad
 ad
 ad
-ad
 aa
 aa
-ad
+aa
+aa
 aa
 aa
 aa
@@ -26969,6 +28769,19 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -26976,23 +28789,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -27057,10 +28857,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -27172,29 +28972,29 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -27259,10 +29059,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -27371,56 +29171,28 @@ aa
 aa
 aa
 aa
-ad
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
 aa
 aa
 aa
@@ -27443,6 +29215,16 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -27465,6 +29247,24 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -27573,32 +29373,32 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -27663,10 +29463,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -27775,36 +29575,36 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -27865,10 +29665,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -27977,34 +29777,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28067,10 +29867,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -28179,34 +29979,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28269,10 +30069,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -28381,6 +30181,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28390,6 +30218,23 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28430,51 +30275,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -28583,6 +30383,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28593,6 +30421,22 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28633,50 +30477,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -28785,6 +30585,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28795,6 +30623,22 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28835,50 +30679,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -28987,6 +30787,34 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -28997,6 +30825,22 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -29036,50 +30880,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -29190,33 +30990,33 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -29275,12 +31075,12 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -29392,31 +31192,31 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -29477,12 +31277,12 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -29596,29 +31396,29 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -29675,16 +31475,16 @@ ad
 ad
 ad
 ad
+aa
+aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -29799,6 +31599,28 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -29812,6 +31634,24 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+aa
 ad
 ad
 ad
@@ -29845,46 +31685,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -30001,6 +31801,28 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -30013,6 +31835,25 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+aa
 ad
 ad
 ad
@@ -30046,47 +31887,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -30203,6 +32003,26 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -30212,6 +32032,30 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+aa
 ad
 ad
 ad
@@ -30244,50 +32088,6 @@ ad
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-ad
 aa
 aa
 aa
@@ -30405,26 +32205,26 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -30456,38 +32256,38 @@ aa
 aa
 aa
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 aa
 aa
 aa
@@ -30608,7 +32408,55 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 aa
 aa
@@ -30642,55 +32490,7 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -30810,45 +32610,14 @@ aa
 aa
 aa
 aa
-ad
-ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -30877,6 +32646,22 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -30896,6 +32681,21 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -31012,45 +32812,13 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
 aa
 aa
-ad
-ad
 aa
 aa
-ad
-ad
-ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 aa
 aa
 aa
@@ -31080,6 +32848,22 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31098,6 +32882,22 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -31223,39 +33023,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-aa
 aa
 aa
 aa
@@ -31283,6 +33050,22 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31300,6 +33083,23 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -31425,36 +33225,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -31482,6 +33252,24 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31502,6 +33290,18 @@ ad
 ad
 ad
 ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -31637,12 +33437,9 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31667,6 +33464,14 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31695,15 +33500,10 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -31839,12 +33639,9 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31869,6 +33666,24 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -31884,28 +33699,13 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -32041,13 +33841,9 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -32071,19 +33867,32 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -32094,20 +33903,11 @@ ad
 ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -32259,6 +34059,46 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -32270,46 +34110,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -32462,9 +34262,6 @@ ad
 ad
 ad
 ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -32475,13 +34272,24 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -32499,16 +34307,8 @@ ad
 ad
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 aa
 aa
 aa
@@ -32660,6 +34460,46 @@ ad
 ad
 ad
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+aa
+ad
+ad
+ad
+ad
+aa
 ad
 ad
 ad
@@ -32671,46 +34511,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -32852,20 +34652,12 @@ aa
 aa
 aa
 aa
+aa
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -32879,24 +34671,37 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
 ad
 ad
 ad
@@ -32905,14 +34710,9 @@ ad
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
 aa
 aa
 aa
@@ -33054,20 +34854,12 @@ aa
 aa
 aa
 aa
+aa
 ad
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -33081,28 +34873,26 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -33113,8 +34903,18 @@ ad
 ad
 ad
 ad
+aa
 ad
 ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -33256,20 +35056,8 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
 ad
 ad
 ad
@@ -33283,17 +35071,41 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 ad
 ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -33305,18 +35117,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33459,22 +35259,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-ad
-ad
-ad
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33487,22 +35271,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33512,11 +35280,43 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+aa
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
 ad
+ad
+ad
+aa
+aa
 aa
 aa
 aa
@@ -33661,21 +35461,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-ad
-ad
-ad
-aa
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33689,23 +35474,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33714,11 +35482,43 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+ad
+ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
 ad
+aa
+aa
 ad
+aa
+aa
 aa
 aa
 aa
@@ -33864,20 +35664,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -33892,22 +35678,25 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
 aa
 aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -33919,10 +35708,21 @@ aa
 ad
 ad
 ad
+aa
+aa
+aa
+aa
 ad
 ad
+aa
+aa
+aa
+aa
 ad
-ad
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34076,11 +35876,6 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -34094,22 +35889,16 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
 aa
 aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34121,10 +35910,21 @@ aa
 ad
 ad
 ad
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34305,10 +36105,10 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
+aa
+aa
+aa
+aa
 ad
 ad
 ad
@@ -34320,13 +36120,13 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
 aa
 aa
-ad
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34507,28 +36307,28 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-aa
-aa
 aa
 aa
 aa
 aa
 ad
 ad
-aa
-aa
-aa
-aa
 ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -34709,10 +36509,10 @@ aa
 aa
 aa
 aa
-ad
 aa
 aa
-ad
+aa
+aa
 ad
 ad
 ad
@@ -34914,7 +36714,7 @@ aa
 aa
 aa
 aa
-ad
+aa
 ad
 aa
 aa
