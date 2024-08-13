@@ -190,7 +190,7 @@
 		else
 			timer_start()
 			if(timetoset > 18000)
-				log_and_message_admins("has started a brig timer over 30 minutes in length!")
+				log_and_message_admins("has started a brig timer over 30 minutes in length!", user)
 		. =  TOPIC_REFRESH
 
 	if (href_list["flash"])

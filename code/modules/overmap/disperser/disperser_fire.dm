@@ -15,7 +15,7 @@
  * Finally checks type of target to fire the specific proc (event, ship, empty).
  */
 /obj/machinery/computer/ship/disperser/proc/fire(mob/user)
-	log_and_message_admins("attempted to launch a disperser beam.")
+	log_and_message_admins("attempted to launch a disperser beam.", user)
 	if(!link_parts())
 		return FALSE
 	if(!front.powered() || !middle.powered() || !back.powered())
@@ -110,7 +110,7 @@
 		return TRUE
 
 	var/obj/overmap/finaltarget = pick(candidates)
-	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
+	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", user=user, location=finaltarget)
 
 	// Deletion of the overmap effect and the actual event trigger. Bye bye pesky meteors.
 	if(istype(finaltarget, /obj/overmap/event))
@@ -153,7 +153,7 @@
 	else if (tx == 0 && ty == 0 && tz == 0)
 		targetturf = areaturf
 
-	log_and_message_admins("Disperser beam hit sector at [targetturf.loc.name].", location=targetturf)
+	log_and_message_admins("Disperser beam hit sector at [targetturf.loc.name].", user=null, location=targetturf)
 	charge.fire(targetturf, strength, range)
 	qdel(charge)
 

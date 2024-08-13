@@ -171,7 +171,7 @@ var/global/const/NO_EMAG_ACT = -50
 	uses -= used_uses
 	target.add_fingerprint(user, tool = src)
 	if (used_uses)
-		log_and_message_admins("emagged \a [target].")
+		log_and_message_admins("emagged \a [target].", user)
 
 	if (uses < 1)
 		user.visible_message(

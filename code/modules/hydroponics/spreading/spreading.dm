@@ -18,9 +18,9 @@
 			//make vine zero start off fully matured
 			new /obj/vine(T,seed, start_matured = 1)
 
-			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
+			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", user = null, location = T)
 			return
-		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."))
+		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."), null)
 
 /obj/dead_plant
 	anchored = TRUE

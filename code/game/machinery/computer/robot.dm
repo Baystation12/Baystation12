@@ -54,7 +54,7 @@
 			return TOPIC_HANDLED
 
 		if(target.SetLockdown(!target.lockcharge))
-			log_and_message_admins("[target.lockcharge ? "locked down" : "released"] [target.name]!")
+			log_and_message_admins("[target.lockcharge ? "locked down" : "released"] [target.name]!", user)
 			if(target.lockcharge)
 				to_chat(target, SPAN_DANGER("You have been locked down!"))
 			else
@@ -85,7 +85,7 @@
 		if(!target || !istype(target))
 			return TOPIC_HANDLED
 
-		log_and_message_admins("emagged [target.name] using robotic console!")
+		log_and_message_admins("emagged [target.name] using robotic console!", user)
 		target.emagged = TRUE
 		to_chat(target, SPAN_NOTICE("Failsafe protocols overriden. New tools available."))
 		. = TOPIC_REFRESH
@@ -99,7 +99,7 @@
 		if(!message || !istype(target))
 			return
 
-		log_and_message_admins("sent message '[message]' to [target.name] using robotics control console!")
+		log_and_message_admins("sent message '[message]' to [target.name] using robotics control console!", user)
 		to_chat(target, SPAN_NOTICE("New remote message received using R-SSH protocol:"))
 		to_chat(target, message)
 		. = TOPIC_REFRESH

@@ -172,7 +172,7 @@ SUBSYSTEM_DEF(jobs)
 			return FALSE
 		else
 			// Let the staff know, in case the person complains about dying due to this later. They've been warned.
-			log_and_message_admins("User [spawner] spawned at spawn point with dangerous atmosphere.")
+			log_and_message_admins("spawned at spawn point with dangerous atmosphere.", spawner)
 	return TRUE
 
 /datum/controller/subsystem/jobs/proc/assign_role(mob/new_player/player, rank, latejoin = 0, datum/game_mode/mode = SSticker.mode)

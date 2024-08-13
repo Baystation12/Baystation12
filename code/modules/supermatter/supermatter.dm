@@ -193,7 +193,7 @@
 	if(exploded)
 		return
 
-	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
+	log_and_message_admins("Supermatter delaminating at [x] [y] [z]", null, src)
 	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
@@ -589,7 +589,7 @@
 			power *= 3
 		if(EX_ACT_LIGHT)
 			power *= 2
-	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
+	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].", null, src)
 
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
 	name = "supermatter shard"

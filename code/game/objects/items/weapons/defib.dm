@@ -386,7 +386,7 @@
 		var/obj/item/cell/C = potato.cell
 		C.give(chargecost)
 	H.AdjustSleeping(-60)
-	log_and_message_admins("used \a [src] to revive [key_name(H)].")
+	log_and_message_admins("used \a [src] to revive [key_name(H)].", user)
 
 /obj/item/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
 	if(prob(60))

@@ -54,7 +54,7 @@
 		connect_to_network()
 
 /obj/machinery/power/emitter/Destroy()
-	log_and_message_admins("deleted \the [src]")
+	log_and_message_admins("deleted \the [src]", location = src)
 	investigate_log("[SPAN_COLOR("red", "deleted")] at ([x],[y],[z])","singulo")
 	return ..()
 

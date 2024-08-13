@@ -38,7 +38,7 @@
 		SetName("unsecured grenade with [length(beakers)] containers[detonator?" and detonator":""]")
 	if(stage > 1 && !active && clown_check(user))
 		to_chat(user, SPAN_WARNING("You prime \the [name]!"))
-		log_and_message_admins("has primed \a [src].")
+		log_and_message_admins("has primed \a [src].", user)
 		activate()
 		add_fingerprint(user)
 		if(iscarbon(user))
@@ -59,7 +59,7 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, det)
 			return TRUE
 		path = 1
-		log_and_message_admins("has attached \a [W] to \the [src].")
+		log_and_message_admins("has attached \a [W] to \the [src].", user)
 		to_chat(user, SPAN_NOTICE("You add [W] to the metal casing."))
 		playsound(loc, 'sound/items/Screwdriver2.ogg', 25, -3)
 		detonator = det
@@ -136,7 +136,7 @@
 	if(active)
 		icon_state = initial(icon_state) + "_active"
 		if(user)
-			log_and_message_admins("has primed \a [src].")
+			log_and_message_admins("has primed \a [src].", user)
 	return
 
 

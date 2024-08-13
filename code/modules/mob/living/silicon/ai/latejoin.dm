@@ -17,7 +17,7 @@
 		return
 
 	if(is_special_character(src))
-		log_and_message_admins("removed themselves from the round via Wipe Core")
+		log_and_message_admins("removed themselves from the round via Wipe Core", src)
 
 	GLOB.global_announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
 	despawn()

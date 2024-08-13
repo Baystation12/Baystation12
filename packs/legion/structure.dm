@@ -212,7 +212,7 @@
 	forceMove(target_turf)
 	effect_warp()
 	visible_message(SPAN_DANGER("\The [src] warps in!"))
-	log_and_message_admins("\The [src] has teleported to a new location at [get_area(target_turf)]", location = target_turf)
+	log_and_message_admins("\The [src] has teleported to a new location at [get_area(target_turf)]", null, location = target_turf)
 
 
 	for (var/mob/living/child in linked_mobs)

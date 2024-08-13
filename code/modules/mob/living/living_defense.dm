@@ -28,7 +28,7 @@
 	//Being hit while using a deadman switch
 	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
 	if(istype(signaler) && signaler.deadman)
-		log_and_message_admins("has triggered a signaler deadman's switch")
+		log_and_message_admins("has triggered a signaler deadman's switch", src)
 		visible_message(SPAN_WARNING("[src] triggers their deadman's switch"))
 		signaler.signal()
 

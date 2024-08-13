@@ -66,7 +66,7 @@
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else
-			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].")
+			log_and_message_admins("planted \a [src] with a [timer] second fuse on \the [target].", user)
 
 		target.AddOverlays(image_overlay)
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")

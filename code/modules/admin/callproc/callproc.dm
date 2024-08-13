@@ -223,13 +223,13 @@
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
 			return
-		log_and_message_admins("[key_name(C)] called \the [target]'s [procname]() with [LAZYLEN(arguments) ? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
+		log_and_message_admins("called \the [target]'s [procname]() with [LAZYLEN(arguments) ? "the arguments [list2params(arguments)]" : "no arguments"].", user = C, location = get_turf(target))
 		if(LAZYLEN(arguments))
 			returnval = call(target, procname)(arglist(arguments))
 		else
 			returnval = call(target, procname)()
 	else
-		log_and_message_admins("[key_name(C)] called [procname]() with [LAZYLEN(arguments)? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
+		log_and_message_admins("called [procname]() with [LAZYLEN(arguments)? "the arguments [list2params(arguments)]" : "no arguments"].", user = C, location = get_turf(target))
 
 		var/P = text2path("/proc/[procname]")
 		returnval = call(P)(arglist(arguments))

@@ -412,9 +412,9 @@ var/global/bomb_set
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/obj/D = new /obj/item/disk/nuclear(T)
-			log_and_message_admins("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", location = T)
+			log_and_message_admins("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", user = null, location = T)
 		else
-			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!")
+			log_and_message_admins("[src], the last authentication disk, has been destroyed. Failed to respawn disc!", user = null)
 	return ..()
 
 //====the nuclear football (holds the disk and instructions)====

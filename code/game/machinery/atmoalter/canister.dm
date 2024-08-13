@@ -254,7 +254,7 @@
 	if(href_list["toggle"])
 		if (!valve_open)
 			if(!holding)
-				log_open()
+				log_open(user)
 		valve_open = !valve_open
 		. = TOPIC_REFRESH
 
