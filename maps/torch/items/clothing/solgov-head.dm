@@ -15,7 +15,8 @@
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_head_solgov_unathi.dmi'
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_head_solgov_unathi.dmi',
+		SPECIES_NABBER = 'maps/torch/icons/mob/nabber/onmob_head_solgov_gas.dmi'
 	)
 
 /obj/item/clothing/head/soft/solgov/veteranhat
