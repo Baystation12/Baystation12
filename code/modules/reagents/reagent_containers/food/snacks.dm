@@ -484,7 +484,7 @@
 	filling_color = "#e0d7c5"
 	center_of_mass = "x=17;y=16"
 	nutriment_amt = 3
-	nutriment_desc = list("raw" = 2, "mushroom" = 2)
+	nutriment_desc = list("fleshy mushroom" = 2)
 	bitesize = 6
 /obj/item/reagent_containers/food/snacks/hugemushroomslice/Initialize()
 	.=..()
@@ -497,7 +497,7 @@
 	filling_color = "#db0000"
 	center_of_mass = "x=17;y=16"
 	nutriment_amt = 3
-	nutriment_desc = list("raw" = 2, "tomato" = 3)
+	nutriment_desc = list("fleshy tomato" = 3)
 	bitesize = 6
 
 /obj/item/reagent_containers/food/snacks/bearmeat
