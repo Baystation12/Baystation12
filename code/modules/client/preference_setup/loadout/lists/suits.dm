@@ -5,33 +5,33 @@
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
-	path = /obj/item/clothing/suit/poncho/colored
+	path = /obj/item/clothing/suit/poncho
 	cost = 1
 	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/suit/security_poncho
 	display_name = "poncho, security"
-	path = /obj/item/clothing/suit/poncho/roles/security
+	path = /obj/item/clothing/suit/poncho/security
 
 /datum/gear/suit/medical_poncho
 	display_name = "poncho, medical"
-	path = /obj/item/clothing/suit/poncho/roles/medical
+	path = /obj/item/clothing/suit/poncho/medical
 
 /datum/gear/suit/engineering_poncho
 	display_name = "poncho, engineering"
-	path = /obj/item/clothing/suit/poncho/roles/engineering
+	path = /obj/item/clothing/suit/poncho/engineering
 
 /datum/gear/suit/science_poncho
 	display_name = "poncho, science"
-	path = /obj/item/clothing/suit/poncho/roles/science
+	path = /obj/item/clothing/suit/poncho/science
 
 /datum/gear/suit/nanotrasen_poncho
 	display_name = "poncho, NanoTrasen"
-	path = /obj/item/clothing/suit/poncho/roles/science/nanotrasen
+	path = /obj/item/clothing/suit/poncho/nanotrasen
 
 /datum/gear/suit/cargo_poncho
 	display_name = "poncho, supply"
-	path = /obj/item/clothing/suit/poncho/roles/cargo
+	path = /obj/item/clothing/suit/poncho/cargo
 
 /datum/gear/suit/suit_jacket
 	display_name = "standard suit jackets"
