@@ -1,7 +1,0 @@
-author: rootoo807
-changes:
-  - {bugfix: "Fixes broken sprites / adds missing sprites for armbands, insulated
-      gloves, soft caps, blood masks on GAS. GAS can no longer wear overalls or wizard
-      voidsuit [snakes don't have legs for pants :(  ]."}
-  - {bugfix: Adds missing sprite for flipped veteran's cap.}
-delete-after: true
