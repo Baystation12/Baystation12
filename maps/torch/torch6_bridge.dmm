@@ -11441,7 +11441,7 @@
 "GX" = (
 /obj/machinery/vending/wallmed1{
 	pixel_y = 32;
-	products = list(/obj/item/stack/medical/bruise_pack=6,/obj/item/stack/medical/ointment=6,/obj/item/reagent_containers/pill/paracetamol=8,/obj/item/storage/med_pouch/trauma=4,/obj/item/storage/med_pouch/burn=2,/obj/item/storage/med_pouch/oxyloss=2,/obj/item/storage/med_pouch/toxin=2)
+	products = list(/obj/item/stack/medical/bruise_pack = 6, /obj/item/stack/medical/ointment = 6, /obj/item/reagent_containers/pill/paracetamol = 8, /obj/item/storage/med_pouch/trauma = 4, /obj/item/storage/med_pouch/burn = 2, /obj/item/storage/med_pouch/oxyloss = 2, /obj/item/storage/med_pouch/toxin = 2)
 	},
 /obj/machinery/pointdefense_control{
 	initial_id_tag = "torch_primary_pd";
@@ -14162,6 +14162,7 @@
 	pixel_x = 23;
 	pixel_y = -23
 	},
+/obj/machinery/papershredder,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Sf" = (
