@@ -5,7 +5,8 @@
 #}}
 {{##def.common_request_header:
   <th style="width:5%">ID
-  <th style="width:25%">Requested item
+  <th style="width:5%">Time
+  <th style="width:20%">Requested item
   <th style="width:20%">Requested by
   <th style="width:20%">Reason
   <th style="width:10%">Cost
@@ -14,6 +15,7 @@
 {{##def.supply_request_item:
 	<tr class="candystripe">
 	<td>{{:value.id}}
+	<td>{{:value.time}}
 	<td>{{:value.object}}
 	<td>{{:value.orderer}}
 	<td>{{:value.reason || '<i>No reason provided.</i>'}}
@@ -86,7 +88,7 @@
 	{{for data.point_breakdown}}
 		<div class="item">
 			<div class="itemLabel">
-				{{:value.desc}}: 
+				{{:value.desc}}:
 			</div>
 			<div class="itemContent">
 				{{:value.points}} {{:data.currency_short}}
@@ -131,7 +133,7 @@
 		{{if data.is_NTOS}}
 			<div class="item">
 				<div class="itemLabel">
-					Notifications are: 
+					Notifications are:
 				</div>
 				<div class="itemContent">
 					{{:helper.link((data.notifications_enabled ? 'Enabled' : 'Disabled'), null, {'toggle_notifications': 1})}}
