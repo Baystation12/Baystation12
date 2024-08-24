@@ -257,11 +257,12 @@
 		return 0 //unsuitable weapon
 	user.visible_message(SPAN_DANGER("\The [user] begins to slit \the [affecting]'s throat with \the [W]!"))
 
-	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
-	if(!do_after(user, 2 SECONDS * user.skill_delay_mult(SKILL_COMBAT), affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	var/attack_time = 3 SECONDS * user.skill_delay_mult(SKILL_COMBAT, 0.125) // 3.75 ~ 2.25 seconds
+	if(!do_after(user, attack_time, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return 0
-	if(!(G && G.affecting == affecting)) //check that we still have a grab
+	if(!(G && G.affecting == affecting))
 		return 0
+	user.next_move = world.time + 1 SECOND
 
 	var/damage_mod = 1
 	var/damage_flags = W.damage_flags()
