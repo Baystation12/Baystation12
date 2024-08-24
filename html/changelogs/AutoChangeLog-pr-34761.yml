@@ -1,0 +1,4 @@
+author: sick trigger
+changes:
+  - {rscadd: Orders from supply now record what time the requst was made}
+delete-after: true
