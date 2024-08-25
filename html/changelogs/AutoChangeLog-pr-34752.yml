@@ -1,0 +1,7 @@
+author: sdtwbaj
+changes:
+  - {tweak: Flora can be cut away with a hatchet.}
+  - {tweak: 'Trees can be destroyed, and drop wood!'}
+  - {rscadd: woodcutting.ogg from Polaris}
+  - {rscadd: tree stumps from Polaris}
+delete-after: true
