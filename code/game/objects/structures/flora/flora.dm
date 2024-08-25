@@ -1,39 +1,20 @@
-//trees
-/obj/structure/flora/tree
-	name = "tree"
-	anchored = TRUE
-	density = TRUE
-	pixel_x = -16
+/obj/structure/flora
+	name = "flora"
 	layer = ABOVE_HUMAN_LAYER
 
-/obj/structure/flora/tree/pine
-	name = "pine tree"
-	icon = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_1"
 
-/obj/structure/flora/tree/pine/New()
-	..()
-	icon_state = "pine_[rand(1, 3)]"
+/obj/structure/flora/use_tool(obj/item/tool, mob/user, list/click_params)
+	if (isHatchet(tool))
+		if (!density)
+			user.visible_message(
+				SPAN_NOTICE("[user] cuts away \the [src]."),
+				SPAN_NOTICE("You cut away \the [src].")
+			)
+			qdel_self()
+			return TRUE
+	return ..()
 
-/obj/structure/flora/tree/pine/xmas
-	name = "\improper Christmas tree"
-	desc = "O Christmas tree, O Christmas tree..."
-	icon = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_c"
 
-/obj/structure/flora/tree/pine/xmas/New()
-	..()
-	icon_state = "pine_c"
-
-/obj/structure/flora/tree/dead
-	icon = 'icons/obj/flora/deadtrees.dmi'
-	icon_state = "tree_1"
-
-/obj/structure/flora/tree/dead/New()
-	..()
-	icon_state = "tree_[rand(1, 6)]"
-
-//grass
 /obj/structure/flora/grass
 	name = "grass"
 	icon = 'icons/obj/flora/snowflora.dmi'
