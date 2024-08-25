@@ -1,4 +1,0 @@
-author: Mucker
-changes:
-  - {tweak: 'Adjusted the spawn target for merc and raider to 3, and traitor to 1.'}
-delete-after: true

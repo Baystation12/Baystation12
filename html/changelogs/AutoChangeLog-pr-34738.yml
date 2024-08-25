@@ -1,5 +1,0 @@
-author: Ryan180602
-changes:
-  - {tweak: 'Throat-slit timer changed from 3.24 ~ 0.8! seconds to 3.75 ~ 2.25. On
-      success, the user cannot act again for an extra second.'}
-delete-after: true
