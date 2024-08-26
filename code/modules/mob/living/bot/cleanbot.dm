@@ -107,7 +107,7 @@
 		icon_state = "cleanbot[on]"
 
 /mob/living/bot/cleanbot/GetInteractTitle()
-	. = "<head><title>Cleanbot controls</title></head>"
+	. = "<head><meta charset='utf-8'><title>Cleanbot controls</title></head>"
 	. += "<b>Automatic Cleaner v1.0</b>"
 
 /mob/living/bot/cleanbot/GetInteractPanel()

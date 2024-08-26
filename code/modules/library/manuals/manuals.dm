@@ -5,7 +5,7 @@
 	title = "Chef Recipes"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -64,7 +64,7 @@
 	title = "Barman Recipes"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -119,7 +119,7 @@
 	title = "The Film Noir: Proper Procedures for Investigations"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -162,7 +162,7 @@
 	title = "Fission Mailed: Nuclear Sabotage 101"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -213,7 +213,7 @@
 	title = "Psychonetics"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}

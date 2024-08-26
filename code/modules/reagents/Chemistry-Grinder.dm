@@ -213,7 +213,7 @@
 			for (var/datum/reagent/R in container.reagents.reagent_list)
 				window += "<br>[R.volume] - [R.name]"
 
-	window = strip_improper("<head><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
+	window = strip_improper("<head><meta charset='utf-8'><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
 	var/datum/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
 	popup.set_content(window)
 	popup.open()

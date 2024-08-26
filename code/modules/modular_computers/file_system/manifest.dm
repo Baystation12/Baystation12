@@ -25,7 +25,7 @@
 	var/list/isactive = new()
 	var/list/mil_ranks = list() // HTML to prepend to name
 	var/dat = {"
-	<head><style>
+	<head><meta charset='utf-8'><style>
 		.manifest {border-collapse:collapse;width:100%;}
 		.manifest td, th {border:1px solid [monochrome?"black":"black; background-color:#272727; color:white"]; padding:.25em}
 		.manifest th {height: 2em; [monochrome?"border-top-width: 3px":"background-color: #40628a; color:white"]}

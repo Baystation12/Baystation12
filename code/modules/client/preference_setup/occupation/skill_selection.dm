@@ -172,7 +172,7 @@
 
 /datum/category_item/player_setup_item/occupation/proc/generate_skill_content(datum/job/job)
 	var/dat  = list()
-	dat += "<body>"
+	dat += "<head><meta charset='utf-8'></head><body>"
 	dat += "<style>.Selectable,.Current,.Unavailable,.Toohigh{border: 1px solid #161616;padding: 1px 4px 1px 4px;margin: 0 2px 0 0}</style>"
 	dat += "<style>.Selectable,a.Selectable{background: #40628a}</style>"
 	dat += "<style>.Current,a.Current{background: #2f943c}</style>"

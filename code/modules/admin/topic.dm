@@ -330,7 +330,7 @@
 			return
 
 		var/dat = ""
-		var/header = "<head><title>Job-Ban Panel: [M.name]</title></head>"
+		var/header = "<head><meta charset='utf-8'><title>Job-Ban Panel: [M.name]</title></head>"
 		var/body
 		var/jobs = ""
 
@@ -631,7 +631,7 @@
 		jobs += "</tr></table>"
 
 	// Finalize and display.
-		body = "<body>[jobs]</body>"
+		body = "<head><meta charset='utf-8'></head><body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"
 		show_browser(usr, dat, "window=jobban2;size=800x490")
 		return

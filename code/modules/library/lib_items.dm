@@ -283,7 +283,7 @@
 				url = config.wiki_url + "?title=" + url
 		dat = {"
 			<html>
-				<head>
+				<head><meta charset='utf-8'>
 				</head>
 				<body>
 					<iframe width='100%' height='100%' src="[url]&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>

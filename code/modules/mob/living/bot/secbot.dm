@@ -66,7 +66,7 @@
 	icon_state = "secbot[on]"
 
 /mob/living/bot/secbot/GetInteractTitle()
-	. = "<head><title>Securitron controls</title></head>"
+	. = "<head><meta charset='utf-8'><title>Securitron controls</title></head>"
 	. += "<b>Automatic Security Unit</b>"
 
 /mob/living/bot/secbot/GetInteractPanel()

@@ -100,7 +100,7 @@
 		return
 	if(active.fields["arrestsearch"] == "arrest")
 		var/output = {"
-		<HTML><HEAD><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
+		<HTML><head><meta charset='utf-8'><meta charset='utf-8'><TITLE>[active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>
 		</br>
 		Issued in the jurisdiction of the</br>
@@ -119,7 +119,7 @@
 		show_browser(user, output, "window=Warrant for the arrest of [active.fields["namewarrant"]]")
 	if(active.fields["arrestsearch"] ==  "search")
 		var/output= {"
-		<HTML><HEAD><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
+		<HTML><head><meta charset='utf-8'><meta charset='utf-8'><TITLE>Search Warrant: [active.fields["namewarrant"]]</TITLE></HEAD>
 		<BODY bgcolor='#ffffff'><center><large><b>SCG SFP Warrant Tracker System</b></large></br>
 		</br>
 		Issued in the jurisdiction of the</br>

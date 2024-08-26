@@ -2,7 +2,7 @@
 	name = "\improper Union Charter"
 	title = "Union Charter of Workplace Rights"
 	author = "Expeditionary Corps Organisation Corporate Union"
-	dat = {"<head><title>Expeditionary Corps Organisation Union Charter of Workplace Rights</title></head>
+	dat = {"<head><meta charset='utf-8'><title>Expeditionary Corps Organisation Union Charter of Workplace Rights</title></head>
 	<body>
 	<h2>0. Summary</h2>
 	<hr>

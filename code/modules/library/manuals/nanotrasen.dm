@@ -13,7 +13,7 @@
 	title = "The Diona Harvest - From Seed to Market"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -50,7 +50,7 @@
 	title = "Research and Development 101"
 
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
 				h2 {font-size: 18px; margin: 15px 0px 5px;}
@@ -117,7 +117,7 @@
 	author = "Professor Patrick Mason, Curator of the Antiquities Museum on Ichar VII"
 	title = "Out on the Dig"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -230,7 +230,7 @@
 	author = "Winton Rice, Chief Mass Spectrometry Technician at the Institute of Applied Sciences on Arcadia"
 	title = "High powered mass spectrometry, a comprehensive guide"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -301,7 +301,7 @@
 	author = "Doctor Martin Boyle, Director Research at the Lower Hydrolian Sector Listening Array"
 	title = "Spectroscopy: Analysing the Anomalies of the Cosmos"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -326,7 +326,7 @@
 	author = "Jasper Pascal, Senior Lecturer in Materials Analysis at the University of Jol'Nar"
 	title = "Materials Analysis and the Chemical Implications"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -353,7 +353,7 @@
 	author = "Norman York, formerly of the Tyrolion Institute on Titan"
 	title = "Anomalous Materials and Energies"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}
@@ -431,7 +431,7 @@
 	author = "Elvin Schmidt"
 	title = "Cellular Suspension, the New Cryogenics?"
 	dat = {"<html>
-				<head>
+				<head><meta charset='utf-8'>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
 				h2 {font-size: 15px; margin: 15px 0px 5px;}

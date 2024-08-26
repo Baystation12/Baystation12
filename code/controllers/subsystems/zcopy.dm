@@ -568,7 +568,7 @@ SUBSYSTEM_DEF(zcopy)
 
 	var/is_above_space = T.is_above_space()
 	var/list/out = list(
-		"<head><meta charset='utf-8'/></head><body>",
+		"<head><meta charset='utf-8'><meta charset='utf-8'/></head><body>",
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z]</h1>",
 		"<b>Queue occurrences:</b> [T.z_queued]",
 		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [is_above_space ? "Yes" : "No"] - [T.z_eventually_space == is_above_space ? SPAN_COLOR("green", "OK") : SPAN_COLOR("red", "MISMATCH")]",

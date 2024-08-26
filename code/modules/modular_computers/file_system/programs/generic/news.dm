@@ -47,7 +47,7 @@
 		var/datum/feed_message/story = locate(href_list["view_photo"]) in active_channel.messages
 		if (istype(story) && story.img)
 			send_rsc(usr, story.img, "tmp_photo.png")
-			var/output = "<html><head><title>photo - [story.author]</title></head>"
+			var/output = "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>photo - [story.author]</title></head>"
 			output += "<body style='overflow:hidden; margin:0; text-align:center'>"
 			output += "<img src='tmp_photo.png' width='192' style='-ms-interpolation-mode:nearest-neighbor' />"
 			output += "</body></html>"

@@ -201,7 +201,7 @@
 	user.set_machine(src)
 
 	var/dat = list()
-	dat += "<HEAD><TITLE>Suit Cycler Interface</TITLE></HEAD>"
+	dat += "<head><meta charset='utf-8'><TITLE>Suit Cycler Interface</TITLE></HEAD>"
 
 	if(active)
 		dat+= "<br>[SPAN_COLOR("red", "<b>The [model_text ? "[model_text] " : ""]suit cycler is currently in use. Please wait...</b>")]"

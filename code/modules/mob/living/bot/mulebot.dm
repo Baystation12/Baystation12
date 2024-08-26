@@ -69,7 +69,7 @@
 	load(C)
 
 /mob/living/bot/mulebot/GetInteractTitle()
-	. = "<head><title>Mulebot [suffix ? "([suffix])" : ""]</title></head>"
+	. = "<head><meta charset='utf-8'><title>Mulebot [suffix ? "([suffix])" : ""]</title></head>"
 	. += "<b>Multiple Utility Load Effector Mk. III</b>"
 	. += "<br>ID: [suffix]"
 

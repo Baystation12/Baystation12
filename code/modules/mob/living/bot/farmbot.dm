@@ -36,7 +36,7 @@
 	on = 0
 
 /mob/living/bot/farmbot/GetInteractTitle()
-	. = "<head><title>Farmbot controls</title></head>"
+	. = "<head><meta charset='utf-8'><title>Farmbot controls</title></head>"
 	. += "<b>Automatic Hyrdoponic Assisting Unit v1.0</b>"
 
 /mob/living/bot/farmbot/GetInteractStatus()

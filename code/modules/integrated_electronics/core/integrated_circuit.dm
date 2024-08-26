@@ -136,7 +136,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	var/table_edge_width = "30%"
 	var/table_middle_width = "40%"
 	var/list/HTML = list()
-	HTML += "<html><head><title>[src.displayed_name]</title></head><body>"
+	HTML += "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>[src.displayed_name]</title></head><body>"
 	HTML += "<div align='center'>"
 	HTML += "<table border='1' style='undefined;table-layout: fixed; width: 80%'>"
 

@@ -44,8 +44,8 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
-	var/body = "<html><head><title>Options for [M.key]</title></head>"
-	body += "<body>Options panel for <b>[M]</b>"
+	var/body = "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>Options for [M.key]</title></head>"
+	body += "<head><meta charset='utf-8'></head><body>Options panel for <b>[M]</b>"
 	var/last_ckey = LAST_CKEY(M)
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
@@ -332,7 +332,7 @@ var/global/floorIsLava = 0
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" \
 			"http://www.w3.org/TR/html4/strict.dtd">\n\
 		<html lang="en">\
-		<head>\
+		<head><meta charset='utf-8'>\
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\
 			<meta http-equiv="X-UA-Compatible" content="IE=IE8">\
 			<meta name="viewport" content="width=device-width,initial-scale=1">\
@@ -345,7 +345,7 @@ var/global/floorIsLava = 0
 			</style>\
 			<title>[title]</title>\
 			[head]\
-		<head>\
+		<head><meta charset='utf-8'>\
 		<body scroll="auto">\
 			[body]\
 		</body>\
@@ -419,7 +419,7 @@ var/global/floorIsLava = 0
 	var/datum/feed_network/torch_network = news_network[1] //temp change until the UI can be updated to support switching networks.
 
 	var/dat
-	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
+	dat = text("<head><meta charset='utf-8'><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
 
 	switch(admincaster_screen)
 		if(0)
@@ -1548,7 +1548,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			data += "[item.name] - <a href='?_src_=holder;AdminFaxView=\ref[item]'>view message</a><br>"
 	else
 		data += "<center>No faxes yet.</center>"
-	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
+	show_browser(usr, "<HTML><head><meta charset='utf-8'><meta charset='utf-8'><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
 /datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 

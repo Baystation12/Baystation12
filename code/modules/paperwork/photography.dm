@@ -78,7 +78,7 @@ var/global/photo_count = 0
 
 /obj/item/photo/proc/show(mob/user as mob)
 	send_rsc(user, img, "tmp_photo_[id].png")
-	var/output = "<html><head><title>[name]</title></head>"
+	var/output = "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>[name]</title></head>"
 	output += "<body style='overflow:hidden;margin:0;text-align:center'>"
 	output += "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />"
 	output += "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"

@@ -2,12 +2,12 @@
 /datum/admins/proc/player_panel()//The new one
 	if (!usr.client.holder)
 		return
-	var/dat = "<html><head><title>Admin Player Panel</title></head>"
+	var/dat = "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>Admin Player Panel</title></head>"
 
 	//javascript, the part that does most of the work~
 	dat += {"
 
-		<head>
+		<head><meta charset='utf-8'>
 			<script type='text/javascript'>
 
 				var locked_tabs = new Array();
@@ -325,7 +325,7 @@
 /datum/admins/proc/check_antagonists()
 	if (GAME_STATE >= RUNLEVEL_GAME)
 		var/dat = list()
-		dat += "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
+		dat += "<html><head><meta charset='utf-8'><meta charset='utf-8'><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
 		dat += "Current Game Mode: <B>[SSticker.mode.name]</B><BR>"
 		dat += "Round Duration: <B>[roundduration2text()]</B><BR>"
 		dat += "<B>Evacuation</B><BR>"

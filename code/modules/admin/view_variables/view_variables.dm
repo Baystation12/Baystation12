@@ -29,7 +29,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 
 	var/html = {"
 		<html>
-		<head>
+		<head><meta charset='utf-8'>
 			<script src='view_variables.js'></script>
 			<title>[D] (\ref[D] - [D.type])</title>
 			<style>

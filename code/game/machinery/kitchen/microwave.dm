@@ -274,7 +274,7 @@
 					display_name = "Coldsauce"
 				dat += "<b>[display_name]:</b> [reagent.volume] unit\s"
 		dat += "<hr><br><a href='?src=\ref[src];action=cook'>Turn on!<br><a href='?src=\ref[src];action=dispose'>Eject ingredients!"
-	show_browser(user, "<head><title>Microwave Controls</title></head><tt>[jointext(dat,"<br>")]</tt>", "window=microwave")
+	show_browser(user, "<head><meta charset='utf-8'><title>Microwave Controls</title></head><tt>[jointext(dat,"<br>")]</tt>", "window=microwave")
 	onclose(user, "microwave")
 
 

@@ -72,7 +72,7 @@
 
 	user.set_machine(src)
 	var/list/dat = list()
-	dat += "<span style='font-family: Courier'><HEAD><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
+	dat += "<span style='font-family: Courier'><head><meta charset='utf-8'><TITLE>[src.name]</TITLE></HEAD><center><H3>[src.name] Access</H3></center>"
 	dat += "<br>[temp]<br>"
 	dat += "<br>Power Status: <a href='?src=\ref[src];input=toggle'>[src.toggled ? "On" : "Off"]</a>"
 	if(overloaded_for)

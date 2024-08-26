@@ -369,7 +369,7 @@
 
 /datum/preferences/proc/open_load_dialog(mob/user, details)
 	var/dat  = list()
-	dat += "<body>"
+	dat += "<head><meta charset='utf-8'></head><body>"
 	dat += "<tt><center>"
 
 	dat += "<b>Select a character slot to load</b><hr>"

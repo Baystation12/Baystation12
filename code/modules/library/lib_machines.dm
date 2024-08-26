@@ -29,7 +29,7 @@
 
 /obj/machinery/libraryscanner/interact(mob/user)
 	usr.set_machine(src)
-	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
+	var/dat = "<head><meta charset='utf-8'><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	if(cache)
 		dat += "[SPAN_COLOR("#005500", "Data stored in memory.")]<BR>"
 	else
