@@ -295,14 +295,7 @@
 /singleton/hierarchy/supply_pack/nonessent/pronounbadges
 	name = "Costume - Pronoun Badge Crate"
 	contains = list(
-		/obj/item/clothing/accessory/pronouns/they = 2,
-		/obj/item/clothing/accessory/pronouns/hehim = 2,
-		/obj/item/clothing/accessory/pronouns/sheher = 2,
-		/obj/item/clothing/accessory/pronouns/hethey = 2,
-		/obj/item/clothing/accessory/pronouns/shethey = 2,
-		/obj/item/clothing/accessory/pronouns/heshe = 2,
-		/obj/item/clothing/accessory/pronouns/zehir = 2,
-		/obj/item/clothing/accessory/pronouns/ask = 2
+		/obj/item/clothing/accessory/pronouns = 5
 	)
-	cost = 20
+	cost = 10
 	containername = "pronoun badge crate"
