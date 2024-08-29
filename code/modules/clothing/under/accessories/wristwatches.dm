@@ -5,6 +5,25 @@
 	body_location = HANDS
 
 
+/obj/item/clothing/accessory/wristwatch/examine(mob/user, distance)
+	. = ..()
+	if (distance > 1)
+		return
+	var/list/date = text2numlist(stationdate2text(), "-")
+	var/year = date[1]
+	var/month = GLOB.month_names[date[2]]
+	var/day = date[3]
+	var/time = stationtime2text()
+	to_chat(user, "You check \the [src]. It is [time] on the [day]\th of [month], [year].")
+
+
+/obj/item/clothing/accessory/wristwatch/OnTopic(mob/user, list/href_list)
+	if (href_list["check_watch"])
+		if (istype(user))
+			examinate(user, src)
+			return TOPIC_HANDLED
+
+
 /obj/item/clothing/accessory/wristwatch/leather
 	name = "leather wrist watch"
 	desc = "A rugged timekeeping device. Its leather strap is quite fashionable."
@@ -15,22 +34,3 @@
 	name = "fancy wrist watch"
 	desc = "A gaudy timekeeping device. It probably cost more than your education."
 	icon_state = "wristwatch_fancy"
-
-
-/obj/item/clothing/accessory/wristwatch/examine(mob/user, distance)
-	. = ..()
-	if (distance <= 1)
-		CheckTime(user)
-
-
-/obj/item/clothing/accessory/wristwatch/proc/CheckTime(mob/user)
-	var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
-	var/timeofday = world.timeofday + extra_days
-	to_chat(user, "You check \the [src]. The time is [stationtime2text()] on the [time2text(timeofday, "DD")]\th of [time2text(timeofday, "Month")], [GLOB.using_map.game_year].")
-
-
-/obj/item/clothing/accessory/wristwatch/OnTopic(mob/user, list/href_list)
-	if(href_list["check_watch"])
-		if(istype(user))
-			examinate(user, src)
-			return TOPIC_HANDLED
