@@ -679,7 +679,7 @@
 
 	if(client.holder)
 		if(statpanel("MC"))
-			var/time = Uptime()
+			var/time = uptime()
 			if(Master)
 				Master.UpdateStat(time)
 			else

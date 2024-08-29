@@ -59,22 +59,22 @@ SUBSYSTEM_DEF(lighting)
 /// Generate overlays for all Zlevels and then fire normally
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	var/overlaycount = 0
-	var/starttime = REALTIMEOFDAY
+	var/starttime = uptime()
 
 	// Generate overlays.
 	for (var/zlevel = 1 to world.maxz)
 		overlaycount += InitializeZlev(zlevel)
 
-	admin_notice(SPAN_DANGER("Created [overlaycount] lighting overlays in [(REALTIMEOFDAY - starttime)/10] seconds."), R_DEBUG)
+	admin_notice(SPAN_DANGER("Created [overlaycount] lighting overlays in [(uptime() - starttime)/10] seconds."), R_DEBUG)
 
-	starttime = REALTIMEOFDAY
+	starttime = uptime()
 	// Tick once to clear most lights.
 	fire(FALSE, TRUE)
 
 	admin_notice(SPAN_DANGER("Processed [processed_lights] light sources."), R_DEBUG)
 	admin_notice(SPAN_DANGER("Processed [processed_corners] light corners."), R_DEBUG)
 	admin_notice(SPAN_DANGER("Processed [processed_overlays] light overlays."), R_DEBUG)
-	admin_notice(SPAN_DANGER("Lighting pre-bake completed in [(REALTIMEOFDAY - starttime)/10] seconds."), R_DEBUG)
+	admin_notice(SPAN_DANGER("Lighting pre-bake completed in [(uptime() - starttime)/10] seconds."), R_DEBUG)
 
 	log_ss("lighting", "NOv:[overlaycount] L:[processed_lights] C:[processed_corners] O:[processed_overlays]")
 
