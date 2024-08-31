@@ -33,7 +33,7 @@
 	l_ear = /obj/item/device/radio/headset/map_preset/playablecolony2
 
 /obj/submap_landmark/spawnpoint/colonist_spawn2
-	name = "Colonist"
+	name = "Ship Colonist"
 
 /obj/submap_landmark/joinable_submap/colony2
 	name = "Landed Colony Ship"
