@@ -1,0 +1,5 @@
+author: PsiOmegaDelta
+changes:
+  - {tweak: Select loadout items again display an extended description when selected
+      for use.}
+delete-after: true
