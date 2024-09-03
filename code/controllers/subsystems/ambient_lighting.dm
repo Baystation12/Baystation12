@@ -68,8 +68,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
  */
 /datum/ambient_group/proc/set_ambient_light(turf/T)
 	set waitfor = FALSE
-
-	UNTIL(!busy)
+	while (busy)
+		stoplag()
 	T.add_ambient_light_raw(apparent_r, apparent_g, apparent_b)
 
 /**
@@ -81,8 +81,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
  */
 /datum/ambient_group/proc/remove_ambient_light(turf/T)
 	set waitfor = FALSE
-
-	UNTIL(!busy)
+	while (busy)
+		stoplag()
 	T.add_ambient_light_raw(-apparent_r, -apparent_g, -apparent_b)
 
 /**
@@ -94,8 +94,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
  */
 /datum/ambient_group/proc/add_turf(turf/T)
 	set waitfor = FALSE
-
-	UNTIL(!busy)
+	while (busy)
+		stoplag()
 	//Already existing
 	if(T.ambient_bitflag & FLAG(global_index))
 		return
@@ -116,8 +116,8 @@ SUBSYSTEM_DEF(ambient_lighting) //A simple SS that handles updating ambient ligh
  */
 /datum/ambient_group/proc/remove_turf(turf/T)
 	set waitfor = FALSE
-
-	UNTIL(!busy)
+	while (busy)
+		stoplag()
 	if(!(T.ambient_bitflag & FLAG(global_index)))
 		return
 

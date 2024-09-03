@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(atoms)
 	var/atom/atom
 	var/list/params
 	var/count = 0
-	var/time = Uptime()
+	var/time = uptime()
 	if (!initialized)
 		for (atom in world)
 			if (!atom || atom.atom_flags & ATOM_FLAG_INITIALIZED)
@@ -71,13 +71,13 @@ SUBSYSTEM_DEF(atoms)
 				continue
 			CHECK_TICK
 		init_queue.Cut(1, init_queue_length + 1)
-	time = max((Uptime() - time) * 0.1, 0.1)
+	time = max((uptime() - time) * 0.1, 0.1)
 	report_progress("Initialized [count] atom\s in [time]s ([floor(count/time)]/s)")
 	atom_init_stage = INITIALIZATION_INNEW_REGULAR
 	var/late_queue_length = length(late_init_queue)
 	if (late_queue_length)
 		count = 0
-		time = Uptime()
+		time = uptime()
 		for (var/i = 1 to late_queue_length)
 			atom = late_init_queue[i]
 			if (!atom)
@@ -87,7 +87,7 @@ SUBSYSTEM_DEF(atoms)
 				continue
 			CHECK_TICK
 		late_init_queue.Cut(1, late_queue_length + 1)
-		time = max((Uptime() - time) * 0.1, 0.1)
+		time = max((uptime() - time) * 0.1, 0.1)
 		report_progress("LateInitialized [count] atom\s in [time]s ([floor(count/time)]/s)")
 
 

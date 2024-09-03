@@ -46,7 +46,7 @@
 
 /datum/controller/proc/PreventUpdateStat(time)
 	if (!isnum(time))
-		time = Uptime()
+		time = uptime()
 	if (time < statNext)
 		return TRUE
 	statNext = time + 1 SECONDS
