@@ -235,6 +235,86 @@
 	call(item, custom_setup_proc)(user)
 
 /*
+* Custom [Var]
+*/
+/datum/gear_tweak/custom_var
+	var/var_to_tweak
+	/// The user input method to use if `valid_list_options` does not contain any items.
+	var/input_method = /datum/gear_tweak/custom_var/proc/InputText
+	var/content_text
+	var/input_title = CHARACTER_PREFERENCE_INPUT_TITLE
+	var/input_message
+	/// Used to sanitize when using the input_message and input_text methods.
+	var/max_input_length = MAX_MESSAGE_LEN
+	/// Used to sanitize when using the input_num method. Setting this var does not mandate setting max_input_value.
+	var/min_input_value
+	/// Used to sanitize when using the input_num method. Setting this var does not mandate setting min_input_value.
+	var/max_input_value
+	/// If this list contains items the user is limited to these choices.
+	var/list/valid_list_options
+
+/datum/gear_tweak/custom_var/New(list/valid_list_options)
+	src.valid_list_options = valid_list_options
+	..()
+
+/datum/gear_tweak/custom_var/get_metadata(user, metadata, title)
+	var/final_title = title || input_title || CHARACTER_PREFERENCE_INPUT_TITLE
+	if(length(valid_list_options))
+		return input(user, input_message + " Click cancel to use the default.", final_title, metadata) as null|anything in valid_list_options
+	var/default = html_decode(metadata)
+	return call(src, input_method)(user, input_message + " Leave blank to use the default.", final_title, default)
+
+/datum/gear_tweak/custom_var/tweak_item(user, obj/item/item, metadata)
+	if(!metadata)
+		return
+	if (length(valid_list_options) && !(metadata in valid_list_options))
+		return
+	metadata = TweakMetadata(metadata)
+	SetVar(item, metadata)
+
+/// Override this var if a particular proc call is needed, for example /SetName() when setting the name-var
+/datum/gear_tweak/custom_var/proc/SetVar(obj/item/item, metadata)
+	SHOULD_NOT_SLEEP(TRUE)
+	PROTECTED_PROC(TRUE)
+	item.vars[var_to_tweak] = metadata
+
+/datum/gear_tweak/custom_var/proc/TweakMetadata(metadata)
+	SHOULD_BE_PURE(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
+	PROTECTED_PROC(TRUE)
+	return metadata
+
+/datum/gear_tweak/custom_var/get_contents(metadata)
+	return "[content_text]: [metadata]"
+
+// Note, didn't make these available for general use mainly due to the number of arguments needed for both input and sanitize
+// Nothing stops you from generalizing these if you really wanted to
+/datum/gear_tweak/custom_var/proc/InputNum(mob/user, message, title, default)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	PROTECTED_PROC(TRUE)
+	var/num = input(user, message, title, default) as null|num
+	if (isnum(min_input_value))
+		num = max(min_input_value, num)
+	if (isnum(max_input_value))
+		num = min(max_input_value, num)
+	return num
+
+/datum/gear_tweak/custom_var/proc/InputText(mob/user, message, title, default, max_length)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	PROTECTED_PROC(TRUE)
+	return sanitize(input(user, message, title, default) as null|text, max_input_length || MAX_MESSAGE_LEN, extra = FALSE)
+
+/datum/gear_tweak/custom_var/proc/InputMessage(mob/user, message, title, default, max_length)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	PROTECTED_PROC(TRUE)
+	return sanitize(input(user, message, title, default) as null|message, max_input_length || MAX_MESSAGE_LEN, extra = FALSE)
+
+/datum/gear_tweak/custom_var/proc/InputColor(mob/user, message, title, default, max_length)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	PROTECTED_PROC(TRUE)
+	return input(user, message, title, default) as null|color
+
+/*
 * Custom Name
 */
 
@@ -251,12 +331,16 @@
 /datum/gear_tweak/custom_name/get_metadata(user, metadata, title)
 	if(valid_custom_names)
 		return input(user, "Choose an item name.", "Character Preference", metadata) as null|anything in valid_custom_names
+	metadata = html_decode(metadata)
 	return sanitize(input(user, "Choose the item's name. Leave it blank to use the default name.", "Item Name", metadata) as text|null, MAX_LNAME_LEN, extra = FALSE)
 
 /datum/gear_tweak/custom_name/tweak_item(user, obj/item/I, metadata)
 	if(!metadata)
-		return I.name
-	return I.name = metadata
+		return
+	var/lower = lowertext(metadata)
+	if (!text_starts_with(lower, "a ") && !text_starts_with(lower, "an ") && !text_starts_with(lower, "the "))
+		metadata = "\improper[metadata]"
+	I.SetName(metadata)
 
 /*
 Custom Description
@@ -275,13 +359,13 @@ Custom Description
 /datum/gear_tweak/custom_desc/get_metadata(user, metadata, title)
 	if(valid_custom_desc)
 		return input(user, "Choose an item description.", "Character Preference", metadata) as null|anything in valid_custom_desc
+	metadata = html_decode(metadata)
 	return sanitize(input(user, "Choose the item's description. Leave it blank to use the default description.", "Item Description", metadata) as message|null, MAX_DESC_LEN, extra = FALSE)
 
 /datum/gear_tweak/custom_desc/tweak_item(user, obj/item/I, metadata)
 	if(!metadata)
-		return I.desc
-	return I.desc = metadata
-
+		return
+	I.desc = metadata
 
 /*
 * Tablet Stuff
