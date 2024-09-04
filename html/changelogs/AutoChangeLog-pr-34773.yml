@@ -1,4 +1,0 @@
-author: sick-trigger
-changes:
-  - {bugfix: Fixed being unable to spawn on landed colony ship.}
-delete-after: true
