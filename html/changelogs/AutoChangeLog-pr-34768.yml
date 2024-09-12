@@ -1,0 +1,5 @@
+author: PurplePineapple
+changes:
+  - {bugfix: Clicking a victim with an item on disarm intent calls use_weapon(). Disarm
+      intent/Dislocation combat for melee works again.}
+delete-after: true
