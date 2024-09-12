@@ -564,6 +564,70 @@
 		var/mob/living/L = locate(href_list["debug_mob_ai"])
 		log_debug("AI Debugging toggled [L.ai_holder.debug() ? "ON" : "OFF"] for \the [L]")
 
+	else if (href_list["settrait"])
+		if (!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/target = locate(href_list["settrait"])
+		if (!istype(target))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of /mob/living."))
+			return
+
+		var/list/trait_list = GET_SINGLETON_SUBTYPE_LIST(/singleton/trait)
+		var/singleton/trait/selected = input("Select a trait to apply to \the [target].", "Add Trait") as null | anything in trait_list
+
+		if (!selected || !istype(selected) || QDELETED(target))
+			return
+
+		var/selected_level
+		if (length(selected.levels) > 1)
+			var/list/letterized_levels = list()
+			for (var/severity in selected.levels)
+				LAZYSET(letterized_levels, LetterizeSeverity(severity), severity)
+			var/letter_level = input("Select the trait's level to apply to \the [target].", "Select Level") as null | anything in letterized_levels
+			selected_level = letterized_levels[letter_level]
+		else
+			selected_level = selected.levels[1]
+
+		if (QDELETED(target))
+			return
+
+		var/additional_data
+		if (length(selected.metaoptions))
+			var/list/sanitized_metaoptions
+			for (var/atom/option as anything in selected.metaoptions)
+				var/named_option = initial(option.name)
+				LAZYSET(sanitized_metaoptions, named_option, option)
+			var/sanitized_additional = input("[selected.addprompt]", "Select Option") as null | anything in sanitized_metaoptions
+			additional_data = sanitized_metaoptions[sanitized_additional]
+
+		if (target.SetTrait(selected.type, selected_level, additional_data))
+			to_chat(usr, SPAN_NOTICE("Successfuly set \the [selected.name] in \the [target]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed to set \the [selected.name] in \the [target]."))
+		return
+
+	else if (href_list["removetrait"])
+		if (!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/target = locate(href_list["removetrait"])
+		if (!istype(target))
+			to_chat(usr, SPAN_WARNING("This can only be done to instances of /mob/living."))
+			return
+		var/input = input("Select a trait to remove from \the [target].", "Remove Trait") as null | anything in target.traits
+		var/singleton/trait/selected = GET_SINGLETON(input)
+		if (!selected || !istype(selected) || QDELETED(target))
+			return
+
+		var/additional_option
+		if (length(selected.metaoptions))
+			var/list/interim = target.traits[selected.type]
+			additional_option = input("[selected.remprompt]", "Select Option") as null | anything in interim
+			if (!additional_option)
+				return
+
+		target.RemoveTrait(selected.type, additional_option)
+		to_chat(usr, SPAN_NOTICE("Successfuly removed \the [selected.name] in \the [target]."))
+		return
+
+
 	else if (href_list["addmovementhandler"])
 		if (!check_rights(R_DEBUG))
 			return

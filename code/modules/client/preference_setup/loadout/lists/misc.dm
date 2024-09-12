@@ -291,3 +291,9 @@
 	crosstype["cross, silver"] = /obj/item/material/cross/silver
 	crosstype["cross, gold"] = /obj/item/material/cross/gold
 	gear_tweaks += new/datum/gear_tweak/path(crosstype)
+
+/datum/gear/allergy_pen
+	display_name = "Allergy Autoinjector"
+	path = /obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy
+	cost = 1
+	allowed_traits = list(/singleton/trait/malus/allergy)

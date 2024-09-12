@@ -21,6 +21,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/list/organ_data
 	var/list/rlimb_data
 	var/disabilities = 0
+	var/list/picked_traits
 
 
 /datum/category_item/player_setup_item/physical/body
@@ -65,6 +66,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.rlimb_data = R.read("rlimb_data")
 	pref.body_markings = R.read("body_markings")
 	pref.body_descriptors = R.read("body_descriptors")
+	pref.picked_traits = R.read("traits")
+	pref.picked_traits = sanitize_trait_prefs(pref.picked_traits)
 
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
@@ -86,6 +89,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	W.write("rlimb_data", pref.rlimb_data)
 	W.write("body_markings", pref.body_markings)
 	W.write("body_descriptors", pref.body_descriptors)
+	W.write("traits", pref.picked_traits)
 
 
 /datum/category_item/player_setup_item/physical/body/sanitize_character()
@@ -114,6 +118,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!istype(pref.organ_data)) pref.organ_data = list()
 	if(!istype(pref.rlimb_data)) pref.rlimb_data = list()
+	if (!istype(pref.picked_traits)) pref.picked_traits = list()
 	if(!istype(pref.body_markings))
 		pref.body_markings = list()
 	else
@@ -239,6 +244,37 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<br />[alt_organs.Join(", ")]"
 	. = jointext(., null)
 
+	. += "<br />[TBTN("res_trait", "Reset Traits", "Traits")] [BTN("add_trait", "Add Trait")]"
+	var/list/alt_traits = list()
+	for (var/picked_type as anything in pref.picked_traits)
+		var/singleton/trait/picked = GET_SINGLETON(picked_type)
+		if (!picked || !istype(picked))
+			continue
+		var/name = picked.name
+		var/severity
+		if (length(picked.metaoptions))
+			var/list/metaoptions = pref.picked_traits[picked_type]
+			for (var/option as anything in metaoptions)
+				severity = metaoptions[option]
+				if (isnull(severity))
+					continue
+				severity = LetterizeSeverity(severity)
+				if (ispath(option, /datum/reagent))
+					var/datum/reagent/picked_reagent = option
+					option = initial(picked_reagent.name)
+				alt_traits += "[name] [option] [severity]"
+		else
+			severity = pref.picked_traits[picked_type]
+			if (isnull(severity))
+				continue
+			severity = LetterizeSeverity(severity)
+			alt_traits += "[name] [severity]"
+
+	if (!length(alt_traits))
+		alt_traits += "No traits selected."
+	. += "<br />[alt_traits.Join("; ")]"
+	. = jointext(., null)
+
 
 /datum/category_item/player_setup_item/physical/body/proc/HasAppearanceFlag(datum/species/mob_species, flag)
 	return mob_species && (mob_species.appearance_flags & flag)
@@ -334,6 +370,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 			pref.body_markings.Cut() // Basically same as above.
+			pref.picked_traits.Cut()
 
 			prune_occupation_prefs()
 			pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)
@@ -636,6 +673,64 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/disability_flag = text2num(href_list["disabilities"])
 		pref.disabilities ^= disability_flag
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+
+	else if (href_list["res_trait"])
+		if (!length(pref.picked_traits))
+			return
+		pref.picked_traits.Cut()
+		return TOPIC_REFRESH
+
+	else if (href_list["add_trait"])
+		if (!mob_species)
+			return
+		var/list/possible_traits = mob_species.get_selectable_traits()
+		var/picked = input(user, "Select a trait to apply.", "Add Trait") as null | anything in possible_traits
+		var/singleton/trait/selected = possible_traits[picked]
+		if (!selected || !istype(selected))
+			return
+
+		var/list/possible_levels = selected.levels
+		var/selected_level
+		if (length(possible_levels) > 1)
+			var/list/letterized_levels
+			for (var/severity in possible_levels)
+				LAZYSET(letterized_levels, LetterizeSeverity(severity), severity)
+			var/letterized_input = input(user, "Select the trait's level to apply.", "Select Level") as null | anything in letterized_levels
+			selected_level = letterized_levels[letterized_input]
+		else
+			selected_level = possible_levels[1]
+
+		var/additional_data
+		if (length(selected.metaoptions))
+			var/list/sanitized_metaoptions
+			for (var/atom/option as anything in selected.metaoptions)
+				var/named_option = initial(option.name)
+				LAZYSET(sanitized_metaoptions, named_option, option)
+
+			var/additional_input = input(user, "[selected.addprompt]", "Select Option") as null | anything in sanitized_metaoptions
+			additional_data = sanitized_metaoptions[additional_input]
+
+		for (var/existing_type as anything in pref.picked_traits)
+			var/singleton/trait/existing_trait = GET_SINGLETON(existing_type)
+			if (!existing_trait || !istype(existing_trait))
+				continue
+			if (LAZYISIN(existing_trait.incompatible_traits, selected.type) || LAZYISIN(selected.incompatible_traits, existing_type))
+				to_chat(usr, SPAN_WARNING("The [selected.name] trait is incompatible with [existing_trait.name]."))
+				return
+
+		if (additional_data)
+			var/list/interim = list()
+			if (!LAZYISIN(pref.picked_traits, selected.type))
+				LAZYSET(pref.picked_traits, selected.type, interim)
+
+			var/list/existing_meta_options = pref.picked_traits[selected.type]
+			if (existing_meta_options[additional_data] == selected_level)
+				return
+			LAZYSET(existing_meta_options, additional_data, selected_level)
+			LAZYSET(pref.picked_traits, selected.type, existing_meta_options)
+		else
+			LAZYSET(pref.picked_traits, selected.type, selected_level)
+		return TOPIC_REFRESH
 
 	return ..()
 
