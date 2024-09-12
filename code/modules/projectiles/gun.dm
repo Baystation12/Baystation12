@@ -237,8 +237,6 @@
 
 	// Point blank shooting
 	if (user.a_intent == I_HURT && !user.isEquipped(target))
-		if (safety()) // Pistol whip instead of unsafety+fire
-			return ..()
 		Fire(target, user, pointblank = TRUE)
 		return TRUE
 
