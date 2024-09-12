@@ -45,7 +45,7 @@ exactly 2 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 2 ">> uses" '(?<!>)>>(?!>)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
-exactly 4 "update_icon() override" '/update_icon\((.*)\)'  -P
+exactly 5 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 4 "goto use" 'goto '
 exactly 1 "NOOP match" 'NOOP'
 exactly 338 "spawn uses" '^\s*spawn\s*\(\s*(-\s*)?\d*\s*\)' -P

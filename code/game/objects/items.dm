@@ -165,6 +165,12 @@
 			return TRUE
 	return FALSE
 
+
+/obj/item/update_icon()
+	..()
+	update_twohanding()
+
+
 /obj/item/ex_act(severity)
 	..()
 	if (get_max_health())

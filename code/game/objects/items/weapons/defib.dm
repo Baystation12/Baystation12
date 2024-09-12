@@ -245,7 +245,6 @@
 	else
 		wielded = 0
 		SetName(initial(name))
-	update_icon()
 	..()
 
 /obj/item/shockpaddles/on_update_icon()

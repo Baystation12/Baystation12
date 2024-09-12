@@ -152,8 +152,6 @@
 		icon_state = "pneumatic"
 		item_state = "pneumatic"
 
-	update_held_icon()
-
 /obj/item/gun/launcher/pneumatic/small
 	name = "small pneumatic cannon"
 	desc = "It looks smaller than your garden variety cannon."
