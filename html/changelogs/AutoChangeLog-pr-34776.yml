@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - {bugfix: Antag latespawn scaling no longer considers players that aren't alive
+      or are offship when deciding maximum antags.}
+delete-after: true
