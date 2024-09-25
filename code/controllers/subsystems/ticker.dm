@@ -539,19 +539,19 @@ Helpers
 			if(D == vendor_account) //yes we know you get lots of money
 				continue
 			var/saldo = D.get_profit()
-			if(saldo > max_profit)
+			if (saldo > max_profit)
 				max_profit = saldo
 				max_profit_owner = D.owner_name
-			if(saldo < max_loss)
+			if (saldo < max_loss)
 				max_loss = saldo
 				max_loss_owner = D.owner_name
 
-		if(max_profit > 0)
+		if (max_profit > 0)
 			to_world("<b>[max_profit_owner]</b> received most [SPAN_COLOR("green", "<B>PROFIT</B>")] today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit]</b>.")
 		else
 			to_world("[SPAN_BAD("Nobody")] earned any extra profit today!")
 
-		if(max_loss < 0)
+		if (max_loss < 0)
 			to_world("[max_profit > 0 ? "On the other hand," : "On top of that,"] <b>[max_loss_owner]</b> had most [SPAN_BAD("LOSS")], with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss]</b>.")
 		else
 			to_world("[SPAN_COLOR("green", "<B>Nobody</B>")] suffered any extra losses today!")
