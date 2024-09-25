@@ -484,7 +484,7 @@
 #define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.
 
 #define PRONOUNS_THEY_THEM	"they/them"
-#define PRONOUNS_HE_HIM		"he/his"
+#define PRONOUNS_HE_HIM		"he/him"
 #define PRONOUNS_SHE_HER	"she/her"
 #define PRONOUNS_IT_ITS		"it/its"
 #define PRONOUNS_HE_THEY	"he/they"
