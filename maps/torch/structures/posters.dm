@@ -10,7 +10,7 @@
 /singleton/poster/torch/event1
 	icon_state="bsposter_event1"
 	name = "Justice for Joe"
-	desc = "A hand-written poster demanding the release of one SCPO Joseph Tornakov from Fleet Intelligence custody. It's somewhat faded."
+	desc = "A hand-written poster demanding the release of one SCPO Joseph Tornakov from Fleet Intelligence custody. It's somewhat faded, and someone's drawn an impressive moustache on Tornakov in permanent marker. Someone has also written general anti-government statements written around the poster's fringes."
 
 /singleton/poster/torch/event2
 	icon_state="bsposter_event2"
