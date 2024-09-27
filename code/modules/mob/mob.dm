@@ -602,7 +602,9 @@
 
 		else //Otherwise we're probably just holding their arm to lead them somewhere
 			var/grabtype
-			if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they have at least one arm
+			if ((H.has_organ(BP_L_HAND) || H.has_organ(BP_R_HAND)) && (zone_sel.selecting == BP_L_HAND || zone_sel.selecting == BP_R_HAND))
+				grabtype = "hand"
+			else if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they have at least one arm
 				grabtype = "arm"
 			else //If they have no arms
 				grabtype = "shoulder"
