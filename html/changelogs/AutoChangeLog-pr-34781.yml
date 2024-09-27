@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - {rscadd: You can now "hold" a humanoid mobs' hand when pulling them and targeting
-      one of their hands.}
-delete-after: true
