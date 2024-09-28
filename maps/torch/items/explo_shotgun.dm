@@ -7,7 +7,8 @@
 	req_access = list(access_hop)
 	authorized_modes = list(UNAUTHORIZED)
 	firemodes = list(
-		list(mode_name="fire"),
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="fire"),
 		)
 	var/explosion_chance = 50
 	var/obj/item/pipe/reinforced

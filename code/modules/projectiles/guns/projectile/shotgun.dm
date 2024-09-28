@@ -22,9 +22,11 @@
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 8
 	bulk = 6
-	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "shotgun-wielded"
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
+	racksound = 'sound/weapons/guns/interaction/shotgunpump.ogg'
+	rackdelay = 10
+	hold_open = FALSE
 
 /obj/item/gun/projectile/shotgun/on_update_icon()
 	..()
@@ -35,7 +37,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/on_update_icon()
 	..()
-	if(chambered)
+	if(!bolt_open)
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-empty"
@@ -44,58 +46,6 @@
 	if(chambered)
 		return chambered.BB
 	return null
-
-/obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
-	if(world.time >= recentpump + 10)
-		if(!is_held_twohanded(user))
-			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
-			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
-
-			if (!fail_chance)
-				user.visible_message(
-					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
-					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
-				)
-				pump(user)
-			else if (prob(fail_chance))
-				if (prob(drop_chance) && user.unEquip(src, user.loc))
-					user.visible_message(
-						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
-						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
-					)
-				else
-					user.visible_message(
-						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
-						SPAN_WARNING("You fail to rack \the [src]!")
-					)
-			else
-				user.visible_message(
-					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
-					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
-				)
-				pump(user)
-
-		else
-			pump(user)
-
-		recentpump = world.time
-
-/obj/item/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
-
-	if(chambered)//We have a shell in the chamber
-		chambered.dropInto(loc)//Eject casing
-		if(LAZYLEN(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
-		chambered = null
-
-	if(length(loaded))
-		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-		loaded -= AC //Remove casing from loaded list.
-		chambered = AC
-
-	update_icon()
-
 
 /obj/item/gun/projectile/shotgun/pump/use_tool(obj/item/tool, mob/user, list/click_params)
 	if (type != /obj/item/gun/projectile/shotgun/pump)
@@ -175,7 +125,7 @@
 	one_hand_penalty = 4
 	bulk = 4
 	wielded_item_state = "rshotgun-wielded"
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
 
 
 /obj/item/gun/projectile/shotgun/pump/combat
@@ -221,11 +171,13 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 8
 	wielded_item_state = "gun_wielded"
+	allow_dump = TRUE
 
 	burst_delay = 0
 	firemodes = list(
-		list(mode_name="fire one barrel at a time", burst=1),
-		list(mode_name="fire both barrels at once", burst=2),
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="fire one barrel at a time", burst=1),
+		list(safety_state=0, mode_name="fire both barrels at once", burst=2),
 		)
 
 /obj/item/gun/projectile/shotgun/doublebarrel/pellet
@@ -235,9 +187,6 @@
 	name = "signal shotgun"
 	desc = "A double-barreled shotgun meant to fire signal flash shells."
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
-
-/obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
-	..(user, allow_dump=1)
 
 
 //this is largely hacky and bad :(	-Pete
@@ -335,13 +284,17 @@
 	bulk = GUN_BULK_RIFLE
 	burst_delay = 2
 	accuracy = -1
-	jam_chance = 0.5
+	jam_chance = 0.2
 	safety_icon = "safety"
+	fire_closed_bolt = TRUE
+	hold_open = FALSE
+
 
 	firemodes = list(
-		list(mode_name="semi-auto",     burst=1, fire_delay=2, move_delay=3, one_hand_penalty=7, burst_accuracy=null, dispersion=1.5),
-		list(mode_name="3 shell burst", burst=3, fire_delay=1.5, move_delay=6, one_hand_penalty=9, burst_accuracy=list(-1,-1, -2), dispersion=list(2, 2, 4)),
-		list(mode_name="full auto",		can_autofire=TRUE, burst=1, fire_delay=1, move_delay=6, one_hand_penalty=15, burst_accuracy = list(-1,-2,-2,-3,-3,-3,-4,-4), dispersion = list(2, 4, 4, 6, 6, 8))
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="semi-auto",     burst=1, fire_delay=2, move_delay=3, one_hand_penalty=7, burst_accuracy=null, dispersion=1.5),
+		list(safety_state=0, mode_name="3 shell burst", burst=3, fire_delay=1.5, move_delay=6, one_hand_penalty=9, burst_accuracy=list(-1,-1, -2), dispersion=list(2, 2, 4)),
+		list(safety_state=0, mode_name="full auto",		can_autofire=TRUE, burst=1, fire_delay=1, move_delay=6, one_hand_penalty=15, burst_accuracy = list(-1,-2,-2,-3,-3,-3,-4,-4), dispersion = list(2, 4, 4, 6, 6, 8))
 		)
 
 /obj/item/gun/projectile/shotgun/magshot/on_update_icon()

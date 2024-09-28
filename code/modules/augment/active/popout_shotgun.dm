@@ -4,14 +4,14 @@
 	action_button_name = "Deploy shotgun"
 	icon_state = "popout_shotgun"
 	augment_slots = AUGMENT_ARM
-	item = /obj/item/gun/projectile/shotgun/popout
+	item = /obj/item/gun/projectile/boltloader/shotgun_popout
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/weapons/guns/interaction/rifle_boltback.ogg'
 	retract_sound = 'sound/weapons/guns/interaction/rifle_boltforward.ogg'
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE | AUGMENT_INSPECTABLE
 
 
-/obj/item/gun/projectile/shotgun/popout
+/obj/item/gun/projectile/boltloader/shotgun_popout
 	name = "pop-out shotgun"
 	desc = "A specialized 12-gauge shotgun concealed in the forearm. A deadly surprise."
 	icon = 'icons/obj/augment.dmi'
@@ -24,11 +24,24 @@
 	caliber = CALIBER_SHOTGUN
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	caliber = CALIBER_SHOTGUN
 	handle_casings = EJECT_CASINGS
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	slot_flags = null
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
 	has_safety = FALSE // No brakes on this train baby
 	unacidable = TRUE
 
+/obj/item/gun/projectile/boltloader/shotgun_popout/Initialize()
+	. = ..()
+	open_bolt(FALSE)
+	close_bolt(FALSE)
 
-/obj/item/gun/projectile/shotgun/popout/check_accidents(mob/living/user, message, skill_path, fail_chance, no_more_fail, factor)
+/obj/item/gun/projectile/boltloader/shotgun_popout/load_ammo(obj/item/A, mob/user)
+	..()
+	if (length(loaded))
+		to_chat(user, "\The [src]'s bolt snaps shut.")
+		close_bolt(manual = FALSE)
+
+
+/obj/item/gun/projectile/boltloader/shotgun_popout/check_accidents(mob/living/user, message, skill_path, fail_chance, no_more_fail, factor)
 	return FALSE // Ignore the effects of weapons training for this, since it's special

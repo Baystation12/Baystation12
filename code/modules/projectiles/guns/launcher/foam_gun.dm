@@ -77,11 +77,11 @@
 	one_hand_penalty = 1
 	max_darts = 6
 
-/obj/item/gun/launcher/foam/revolver/tampered
+/obj/item/gun/launcher/foam/revolving/tampered
 	release_force = 3
 	throw_distance = 12
 
-/obj/item/gun/launcher/foam/revolver/tampered/examine(mob/user, distance)
+/obj/item/gun/launcher/foam/revolving/tampered/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, "The hammer is a lot more resistant than you'd expect.")
@@ -145,7 +145,7 @@
 	startswith = list(/obj/item/gun/launcher/foam/revolver,
 					  /obj/item/foam_dart = 8)
 
-/obj/item/storage/box/large/foam_gun/revolver/tampered
+/obj/item/storage/box/large/foam_gun/revolving/tampered
 	desc = "It's a Jorf brand Desperado, with fourteen Jorf brand darts!"
-	startswith = list(/obj/item/gun/launcher/foam/revolver/tampered,
+	startswith = list(/obj/item/gun/launcher/foam/revolving/tampered,
 					  /obj/item/foam_dart/tampered = 14)

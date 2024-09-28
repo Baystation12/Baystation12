@@ -47,8 +47,8 @@
 "ag" = (
 /obj/structure/table/rack,
 /obj/floor_decal/corner/b_green/mono,
-/obj/item/gun/projectile/heavysniper/boltaction,
-/obj/item/gun/projectile/pistol/broomstick,
+/obj/item/gun/projectile/boltloader/boltaction,
+/obj/item/gun/projectile/boltloader/broomstick,
 /obj/item/gun/projectile/pistol/throwback,
 /turf/simulated/floor/tiled/dark/monotile/vox,
 /area/map_template/vox_raider)

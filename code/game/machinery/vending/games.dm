@@ -61,7 +61,7 @@
 	rare_products = list(
 		/obj/item/reagent_containers/spray/waterflower = 30,
 		/obj/item/storage/box/snappops = 30,
-		/obj/item/storage/box/large/foam_gun/revolver/tampered = 20,
+		/obj/item/storage/box/large/foam_gun/revolving/tampered = 20,
 		/obj/item/toy/balloon = 5
 	)
 	contraband = list(
@@ -69,7 +69,7 @@
 		/obj/item/toy/ammo/crossbow = 4,
 		/obj/item/toy/sword = 3,
 		/obj/item/toy/katana = 3,
-		/obj/item/gun/projectile/revolver/capgun = 1,
+		/obj/item/gun/projectile/revolving/capgun = 1,
 		/obj/item/ammo_magazine/caps = 4
 	)
 	premium = list(
@@ -77,6 +77,6 @@
 	)
 	antag = list(
 		/obj/item/clothing/head/bowlerhat/razor = 1,
-		/obj/item/storage/box/large/foam_gun/revolver/tampered = 0,
+		/obj/item/storage/box/large/foam_gun/revolving/tampered = 0,
 		/obj/item/toy/balloon = 0
 	)

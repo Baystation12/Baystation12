@@ -1,4 +1,4 @@
-/obj/item/gun/projectile/revolver
+/obj/item/gun/projectile/revolving
 	name = "revolver"
 	desc = "The al-Maliki & Mosley Magnum Double Action is a choice revolver for when you absolutely, positively need to put a hole in the other guy. You feelin' lucky punk?"
 	icon = 'icons/obj/guns/revolvers.dmi'
@@ -17,14 +17,18 @@
 	accuracy_power = 8
 	one_hand_penalty = 2
 	bulk = 3
+	allow_dump = TRUE
+	hold_open = FALSE
+	var/misaligned = FALSE
+	var/misaligned_penalty = 2
 
-/obj/item/gun/projectile/revolver/AltClick()
+/obj/item/gun/projectile/revolving/AltClick()
 	if(CanPhysicallyInteract(usr))
 		spin_cylinder()
 		return TRUE
 	return ..()
 
-/obj/item/gun/projectile/revolver/verb/spin_cylinder()
+/obj/item/gun/projectile/revolving/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
 	set category = "Object"
@@ -37,17 +41,28 @@
 	if(rand(1,max_shells) > length(loaded))
 		chamber_offset = rand(0,max_shells - length(loaded))
 
-/obj/item/gun/projectile/revolver/consume_next_projectile()
-	if(chamber_offset)
+/obj/item/gun/projectile/revolving/consume_next_projectile()
+	if (chamber_offset)
 		chamber_offset--
 		return
-	return ..()
+	if (prob(jam_chance))
+		misaligned = TRUE //timing malfunction
+		accuracy -= misaligned_penalty
+	. = ..()
 
-/obj/item/gun/projectile/revolver/load_ammo(obj/item/A, mob/user)
+/obj/item/gun/projectile/revolving/load_ammo(obj/item/A, mob/user)
 	chamber_offset = 0
 	return ..()
 
-/obj/item/gun/projectile/revolver/medium
+/obj/item/gun/projectile/revolving/handle_post_fire()
+	if (misaligned)
+		playsound(src.loc, 'sound/weapons/guns/ricochet1.ogg', 10, 1)
+		accuracy += misaligned_penalty //return to normal accuracy after the shot has already gone wide
+		misaligned = FALSE
+	. = ..()
+
+
+/obj/item/gun/projectile/revolving/medium
 	name = "revolver"
 	icon_state = "medium"
 	safety_icon = "medium_safety"
@@ -59,7 +74,7 @@
 	bulk = 0
 	fire_delay = 9
 
-/obj/item/gun/projectile/revolver/holdout
+/obj/item/gun/projectile/revolving/holdout
 	name = "holdout revolver"
 	desc = "The al-Maliki & Mosley Partner is a concealed-carry revolver made for people who do not trust automatic pistols any more than the people they're dealing with."
 	icon_state = "holdout"
@@ -73,7 +88,7 @@
 	bulk = 0
 	fire_delay = 7
 
-/obj/item/gun/projectile/revolver/capgun
+/obj/item/gun/projectile/revolving/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	icon_state = "revolver-toy"
@@ -84,7 +99,7 @@
 	var/snipped = FALSE
 
 
-/obj/item/gun/projectile/revolver/capgun/on_update_icon()
+/obj/item/gun/projectile/revolving/capgun/on_update_icon()
 	if (snipped)
 		icon_state = "revolver"
 	else
@@ -92,7 +107,7 @@
 	..()
 
 
-/obj/item/gun/projectile/revolver/capgun/proc/set_snipped(new_snipped = TRUE)
+/obj/item/gun/projectile/revolving/capgun/proc/set_snipped(new_snipped = TRUE)
 	snipped = new_snipped
 	if (new_snipped)
 		SetName("revolver")
@@ -103,7 +118,7 @@
 	update_icon()
 
 
-/obj/item/gun/projectile/revolver/capgun/use_tool(obj/item/tool, mob/user, list/click_params)
+/obj/item/gun/projectile/revolving/capgun/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Wirecutters - Remove toy marking
 	if (isWirecutter(tool))
 		if (snipped)

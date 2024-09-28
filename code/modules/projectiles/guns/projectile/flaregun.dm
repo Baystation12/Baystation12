@@ -16,7 +16,7 @@
 	handle_casings = CYCLE_CASINGS
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 1
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 
 /obj/item/gun/projectile/flare/loaded
