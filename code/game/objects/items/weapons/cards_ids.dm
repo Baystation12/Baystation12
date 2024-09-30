@@ -46,6 +46,42 @@
 
 	return ..()
 
+/obj/item/card/party/cen/fet
+	name = "party card"
+	desc = "A card showing membership in the Citizens for Free Enterprise & Trade party."
+	icon_state = "party_cen"
+	slot_flags = SLOT_ID
+
+/obj/item/card/party/cen/pac
+	name = "party card"
+	desc = "A card showing membership in the Progressive Alliance of Citizens."
+	icon_state = "party_cen"
+	slot_flags = SLOT_ID
+
+/obj/item/card/party/lef/ugl
+	name = "party card"
+	desc = "A card showing membership in the United Green-Left of Sol party."
+	icon_state = "party_lef"
+	slot_flags = SLOT_ID
+
+/obj/item/card/party/lef/ldd
+	name = "party card"
+	desc = "A card showing membership in the Leftists for Direct Democracy & Freedom party."
+	icon_state = "party_lef"
+	slot_flags = SLOT_ID
+
+/obj/item/card/party/rig/sfr
+	name = "party card"
+	desc = "A card showing membership in the Solarians for Freedom & Rights party."
+	icon_state = "party_rig"
+	slot_flags = SLOT_ID
+
+/obj/item/card/party/rig/osn
+	name = "party card"
+	desc = "A card showing membership in the Order of Solarian Nations."
+	icon_state = "party_rig"
+	slot_flags = SLOT_ID
+
 /obj/item/card/operant_card
 	name = "operant registration card"
 	icon_state = "warrantcard_civ"
