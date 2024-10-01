@@ -106,7 +106,7 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_emplRecord(employment_record)
 
 	// Misc cultural info.
-	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_HOMEWORLD)) : "Unset")
+	set_homeSystem(H ? html_decode(H.get_cultural_value(TAG_CULTURE)) : "Unset")
 	set_religion(H ? html_decode(H.get_cultural_value(TAG_RELIGION)) : "Unset")
 
 	if(H)
@@ -119,7 +119,6 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 		set_skillset(jointext(skills,"\n"))
 
 	// Antag record
-	set_faction(H ? html_decode(H.get_cultural_value(TAG_FACTION)) : "Unset")
 	set_antagRecord(H && H.exploit_record && !jobban_isbanned(H, "Records") ? html_decode(H.exploit_record) : "")
 
 // Global methods
@@ -226,7 +225,7 @@ FIELD_SHORT("Fingerprint", fingerprint, access_security, access_security)
 
 // EMPLOYMENT RECORDS
 FIELD_LONG("Employment Record", emplRecord, access_bridge, access_bridge)
-FIELD_SHORT("Home System", homeSystem, access_bridge, access_change_ids)
+FIELD_SHORT("Origin Culture", homeSystem, access_bridge, access_change_ids)
 FIELD_LONG("Qualifications", skillset, access_bridge, access_bridge)
 
 // ANTAG RECORDS

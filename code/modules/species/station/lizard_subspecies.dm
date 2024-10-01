@@ -27,16 +27,10 @@
 			CULTURE_UNATHI_YEOSA_ABYSS,
 			CULTURE_UNATHI_YEOSA_LITTORAL
 		),
-		TAG_FACTION = list(
-			FACTION_UNATHI_RAH_ZAKEH,
-			FACTION_UNATHI_KHARZA
-		),
 		TAG_RELIGION = list(
 			RELIGION_UNATHI_AGA_EAKHE
 		)
 	)
-
-	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_INDEPENDENT)
 
 	override_organ_types = list(
 		BP_LUNGS =  /obj/item/organ/internal/lungs/gills
