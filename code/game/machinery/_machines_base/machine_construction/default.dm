@@ -5,8 +5,10 @@
 	var/up_state
 	var/down_state
 
-/singleton/machine_construction/default/no_deconstruct/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	. = FALSE
+
+/singleton/machine_construction/default/no_deconstruct/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	return FALSE
+
 
 /singleton/machine_construction/default/panel_closed
 	down_state = /singleton/machine_construction/default/panel_open
@@ -19,22 +21,37 @@
 	if(!.)
 		try_change_state(machine, down_state)
 
-/singleton/machine_construction/default/panel_closed/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
-		return
-	if (!machine.can_use_tools)
-		to_chat(user, SPAN_WARNING("\The [src] cannot be modified!"))
+
+/singleton/machine_construction/default/panel_closed/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	. = ..()
+	if (!.)
 		return TRUE
-	if(isScrewdriver(I))
+
+	if (!machine.can_use_tools)
+		USE_FEEDBACK_FAILURE("\The [src] cannot be modified.")
+		return TRUE
+
+	// Screwdriver - Open maintenance panel
+	if (isScrewdriver(tool))
 		TRANSFER_STATE(down_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
+		playsound(machine, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		machine.panel_open = TRUE
-		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] opens \a [machine]'s maintenance panel with \a [tool]."),
+			SPAN_NOTICE("You open \the [machine]'s maintenance panel with \the [tool].")
+		)
 		machine.update_icon()
 		return TRUE
-	if(istype(I, /obj/item/storage/part_replacer))
+
+	// Part Replacer - List parts.
+	if (istype(tool, /obj/item/storage/part_replacer))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [machine] with \a [tool]."),
+			SPAN_NOTICE("You scan \the [machine] with \the [tool].")
+		)
 		machine.display_parts(user)
 		return TRUE
+
 
 /singleton/machine_construction/default/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, down_state)
@@ -61,29 +78,46 @@
 	if(!.)
 		try_change_state(machine, up_state)
 
-/singleton/machine_construction/default/panel_open/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+
+/singleton/machine_construction/default/panel_open/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	. = ..()
+	if (.)
 		return
-	if(isCrowbar(I))
+
+	// Crowbar - Dismantle machine.
+	if (isCrowbar(tool))
 		TRANSFER_STATE(down_state)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] dismantles \a [machine] with \a [tool]."),
+			SPAN_NOTICE("You dismantle \the [machine] with \the [tool].")
+		)
 		machine.dismantle()
 		return TRUE
-	if(isScrewdriver(I))
+
+	// Screwdriver - Close panel.
+	if (isScrewdriver(tool))
 		TRANSFER_STATE(up_state)
-		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
+		playsound(machine, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		machine.panel_open = FALSE
-		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] closes \a [machine]'s maintenance hatch with \a [tool]."),
+			SPAN_NOTICE("You close \the [machine]'s maintenance panel with \the [tool].")
+		)
 		machine.update_icon()
 		return TRUE
 
-	if(istype(I, /obj/item/storage/part_replacer))
-		return machine.part_replacement(user, I)
+	// Part replacer - Replace parts.
+	if (istype(tool, /obj/item/storage/part_replacer))
+		return machine.part_replacement(user, tool)
 
-	if(isWrench(I))
+	// Wrench - Remove individual part.
+	if (isWrench(tool))
 		return machine.part_removal(user)
 
-	if(istype(I))
-		return machine.part_insertion(user, I)
+	// Items - Attempt part insertion.
+	if (istype(tool))
+		return machine.part_insertion(user, tool)
+
 
 /singleton/machine_construction/default/panel_open/mechanics_info()
 	. = list()

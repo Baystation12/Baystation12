@@ -11,15 +11,23 @@
 	if(!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_open)
 
-/singleton/machine_construction/tcomms/panel_closed/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+
+/singleton/machine_construction/tcomms/panel_closed/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	. = ..()
+	if (.)
 		return
-	if(isScrewdriver(I))
+
+	// Screwdriver - Open panel
+	if (isScrewdriver(tool))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open)
 		machine.panel_open = TRUE
-		to_chat(user, "You unfasten the bolts.")
-		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] opens \the [machine]'s panel with \a [tool]."),
+			SPAN_NOTICE("You open \the [machine]'s panel with \the [tool].")
+		)
+		playsound(machine, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		return TRUE
+
 
 /singleton/machine_construction/tcomms/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, /singleton/machine_construction/tcomms/panel_open/no_cable)
@@ -41,10 +49,14 @@
 	if(!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_closed)
 
-/singleton/machine_construction/tcomms/panel_open/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	if((. = ..()))
+
+/singleton/machine_construction/tcomms/panel_open/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	. = ..()
+	if (.)
 		return
-	return state_interactions(I, user, machine)
+
+	return state_interactions(tool, user, machine)
+
 
 /singleton/machine_construction/tcomms/panel_open/proc/state_interactions(obj/item/I, mob/user, obj/machinery/machine)
 	if(isScrewdriver(I))

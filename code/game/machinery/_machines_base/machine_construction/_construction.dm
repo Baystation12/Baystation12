@@ -78,14 +78,22 @@
 		machine.attack_hand(user)
 		return TRUE
 
-/*
-This returning FALSE means if component_attackby under use_tool called this it will also return FALSE; which means the use_tool call will proceed.
-In that same vein, the use_tool() children of this proc will also continue the rest of its code if this crashes; since this check is called at the beginning.
-*/
-/singleton/machine_construction/proc/use_tool(obj/item/I, mob/user, obj/machinery/machine)
-	if(!validate_state(machine))
+
+/**
+ * Handles tool usage on the parent machine. Has the same return rules as `/atom/proc/use_tool()`.
+ *
+ * **Parameters**:
+ * - `tool` - The item being used.
+ * - `user` - The mob performing the interaction.
+ * - `machine` - The parent machine being interacted with.
+ *
+ * Returns boolean. Indicates whether the interaction was handled or not. If `TRUE`, no other interactions will occur.
+ */
+/singleton/machine_construction/proc/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
+	if (!validate_state(machine))
 		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
 		return FALSE
+
 
 /singleton/machine_construction/proc/mechanics_info()
 

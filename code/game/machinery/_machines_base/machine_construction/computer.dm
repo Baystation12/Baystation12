@@ -4,7 +4,7 @@
 	down_state = /singleton/machine_construction/default/panel_open/computer
 	needs_board = "computer"
 
-/singleton/machine_construction/default/panel_closed/computer/no_deconstruct/use_tool(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/computer/no_deconstruct/use_tool(obj/item/tool, mob/user, obj/machinery/machine)
 	return FALSE
 
 /singleton/machine_construction/default/panel_open/computer
