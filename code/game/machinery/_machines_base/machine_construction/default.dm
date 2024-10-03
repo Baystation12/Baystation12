@@ -112,7 +112,7 @@
 
 	// Wrench - Remove individual part.
 	if (isWrench(tool))
-		return machine.part_removal(user)
+		return machine.part_removal(user, tool)
 
 	// Items - Attempt part insertion.
 	if (istype(tool))
