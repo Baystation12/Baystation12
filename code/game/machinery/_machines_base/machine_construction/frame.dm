@@ -18,6 +18,7 @@
 			TRANSFER_STATE(/singleton/machine_construction/frame/wrenched)
 			to_chat(user, SPAN_NOTICE("You wrench \the [machine] into place."))
 			machine.anchored = TRUE
+		return TRUE
 	if(isWelder(I))
 		var/obj/item/weldingtool/WT = I
 		if(!WT.can_use(3, user))
@@ -29,6 +30,7 @@
 			TRANSFER_STATE(/singleton/machine_construction/default/deconstructed)
 			to_chat(user, SPAN_NOTICE("You deconstruct \the [machine]."))
 			machine.dismantle()
+		return TRUE
 
 
 /singleton/machine_construction/frame/unwrenched/mechanics_info()
@@ -54,7 +56,7 @@
 			TRANSFER_STATE(/singleton/machine_construction/frame/unwrenched)
 			to_chat(user, SPAN_NOTICE("You unfasten \the [machine]."))
 			machine.anchored = FALSE
-			return
+			return TRUE
 	if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(C.get_amount() < 5)
@@ -95,7 +97,7 @@
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			to_chat(user, SPAN_NOTICE("You add the circuit board to \the [machine]."))
 			machine.circuit = I
-			return
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("This frame does not accept circuit boards of this type!"))
 			return TRUE
@@ -104,6 +106,7 @@
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 		to_chat(user, SPAN_NOTICE("You remove the cables."))
 		new /obj/item/stack/cable_coil(machine.loc, 5)
+		return TRUE
 
 /singleton/machine_construction/frame/awaiting_circuit/mechanics_info()
 	. = list()
@@ -128,7 +131,7 @@
 		machine.circuit.dropInto(machine.loc)
 		machine.circuit = null
 		to_chat(user, SPAN_NOTICE("You remove the circuit board."))
-		return
+		return TRUE
 	if(isScrewdriver(I))
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/machinery/new_machine = new machine.circuit.build_path(machine.loc, machine.dir, FALSE)

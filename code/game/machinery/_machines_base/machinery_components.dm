@@ -318,7 +318,7 @@ Standard helpers for users interacting with machinery parts.
 		var/obj/item/stack/stack = part
 		if (!stack.can_use(number))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, number, "to install into \the [src].")
-			return FALSE
+			return TRUE
 		install_component(stack.split(number, TRUE))
 	else
 		user.unEquip(part, src)

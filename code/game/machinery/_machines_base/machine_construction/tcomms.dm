@@ -19,6 +19,7 @@
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		return TRUE
 
 /singleton/machine_construction/tcomms/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, /singleton/machine_construction/tcomms/panel_open/no_cable)
@@ -51,11 +52,12 @@
 		machine.panel_open = FALSE
 		to_chat(user, "You fasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		return
+		return TRUE
 	if(isWrench(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/unwrenched)
 		to_chat(user, "You dislodge the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		return TRUE
 
 /singleton/machine_construction/tcomms/panel_open/mechanics_info()
 	. = list()
@@ -67,7 +69,7 @@
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open)
 		to_chat(user, "You secure the external plating.")
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 75, 1)
-		return
+		return TRUE
 	if(isWirecutter(I))
 		TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/no_cable)
 		playsound(machine.loc, 'sound/items/Wirecutter.ogg', 50, 1)
@@ -75,6 +77,7 @@
 		var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( user.loc )
 		A.amount = 5
 		machine.set_broken(TRUE, TRUE) // the machine's been borked!
+		return TRUE
 
 /singleton/machine_construction/tcomms/panel_open/unwrenched/mechanics_info()
 	. = list()
@@ -89,14 +92,14 @@
 			A.use(5)
 			to_chat(user, SPAN_NOTICE("You insert the cables."))
 			machine.set_broken(FALSE, TRUE) // the machine's not borked anymore!
-			return
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
 			return TRUE
 	if(isCrowbar(I))
 		TRANSFER_STATE(/singleton/machine_construction/default/deconstructed)
 		machine.dismantle()
-		return
+		return TRUE
 
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(I, user)

@@ -31,7 +31,7 @@
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
-		return
+		return TRUE
 	if(istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
@@ -67,14 +67,14 @@
 	if(isCrowbar(I))
 		TRANSFER_STATE(down_state)
 		machine.dismantle()
-		return
+		return TRUE
 	if(isScrewdriver(I))
 		TRANSFER_STATE(up_state)
 		playsound(get_turf(machine), 'sound/items/Screwdriver.ogg', 50, 1)
 		machine.panel_open = FALSE
 		to_chat(user, SPAN_NOTICE("You close the maintenance hatch of \the [machine]."))
 		machine.update_icon()
-		return
+		return TRUE
 
 	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)

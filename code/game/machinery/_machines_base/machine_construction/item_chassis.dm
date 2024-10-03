@@ -10,7 +10,7 @@
 	if(isWrench(I))
 		TRANSFER_STATE(down_state)
 		machine.dismantle()
-		return
+		return TRUE
 
 /singleton/machine_construction/default/item_chassis/state_is_valid(obj/machinery/machine)
 	return TRUE
