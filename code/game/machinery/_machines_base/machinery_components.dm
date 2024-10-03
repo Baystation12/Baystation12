@@ -261,7 +261,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			continue
 		if((. = part.use_tool(I, user)))
 			return
-	return construct_state && construct_state.attackby(I, user, src)
+	return construct_state && construct_state.use_tool(I, user, src)
 
 /// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attack_hand(mob/user)

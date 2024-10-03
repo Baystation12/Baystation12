@@ -5,7 +5,7 @@
 	var/up_state
 	var/down_state
 
-/singleton/machine_construction/default/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/no_deconstruct/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	. = FALSE
 
 /singleton/machine_construction/default/panel_closed
@@ -19,7 +19,7 @@
 	if(!.)
 		try_change_state(machine, down_state)
 
-/singleton/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/panel_closed/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if (!machine.can_use_tools)
@@ -61,7 +61,7 @@
 	if(!.)
 		try_change_state(machine, up_state)
 
-/singleton/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/panel_open/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isCrowbar(I))

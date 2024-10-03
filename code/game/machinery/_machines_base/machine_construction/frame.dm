@@ -11,7 +11,7 @@
 		else
 			try_change_state(machine, /singleton/machine_construction/frame/wrenched)
 
-/singleton/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/frame/unwrenched/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, (I.toolspeed * 2) SECONDS, machine, DO_REPAIR_CONSTRUCT))
@@ -49,7 +49,7 @@
 		else
 			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/singleton/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/frame/wrenched/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, (I.toolspeed * 2) SECONDS, machine, DO_REPAIR_CONSTRUCT))
@@ -86,7 +86,7 @@
 		else
 			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/singleton/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_circuit/use_tool(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(istype(I, /obj/item/stock_parts/circuitboard))
 		var/obj/item/stock_parts/circuitboard/circuit = I
 		if(circuit.board_type == machine.expected_machine_type)
@@ -124,7 +124,7 @@
 		else
 			try_change_state(machine, /singleton/machine_construction/frame/unwrenched)
 
-/singleton/machine_construction/frame/awaiting_parts/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/singleton/machine_construction/frame/awaiting_parts/use_tool(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(isCrowbar(I))
 		TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_circuit)
 		playsound(machine.loc, 'sound/items/Crowbar.ogg', 50, 1)

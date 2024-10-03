@@ -4,7 +4,7 @@
 	needs_board = null
 	down_state = /singleton/machine_construction/default/deconstructed
 
-/singleton/machine_construction/default/item_chassis/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/default/item_chassis/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isWrench(I))

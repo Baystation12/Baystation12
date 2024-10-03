@@ -11,7 +11,7 @@
 	if(!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_open)
 
-/singleton/machine_construction/tcomms/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/tcomms/panel_closed/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
@@ -41,7 +41,7 @@
 	if(!.)
 		try_change_state(machine, /singleton/machine_construction/tcomms/panel_closed)
 
-/singleton/machine_construction/tcomms/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/singleton/machine_construction/tcomms/panel_open/use_tool(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	return state_interactions(I, user, machine)
