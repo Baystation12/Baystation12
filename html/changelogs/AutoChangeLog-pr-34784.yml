@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - {tweak: Added a preference option for toggling run on shift.}
-delete-after: true
