@@ -304,6 +304,13 @@ var/global/list/_client_preferences_by_type
 	default_value = GLOB.PREF_NO
 
 
+/datum/client_preference/toggle_run
+	description = "Shift toggles run (vs hold to run)"
+	key = "TOGGLE_RUN"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+	default_value = GLOB.PREF_NO
+
+
 /********************
 * General Staff Preferences *
 ********************/
