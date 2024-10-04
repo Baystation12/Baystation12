@@ -173,7 +173,7 @@
 
 	give_up_movement()
 
-	if ((!old_target || !can_see_target(old_target)) && target_last_seen_turf && intelligence_level >= AI_NORMAL)
+	if ((!old_target || !can_see_target(old_target)) && target_last_seen_turf && (lose_target_timeout > (lose_target_time - world.time)) && intelligence_level >= AI_NORMAL)
 		ai_log("lose_target() : Going into 'engage unseen enemy' mode.", AI_LOG_INFO)
 		engage_unseen_enemy()
 		return TRUE //We're still working on it
