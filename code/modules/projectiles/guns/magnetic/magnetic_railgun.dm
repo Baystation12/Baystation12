@@ -182,4 +182,5 @@
 	power_cost = 100
 	wielded_item_state = "skrell_rifle-wielded"
 	firemodes = list(
-		list(safety_state=1, mode_name="safe"),)
+		safety_state=1, mode_name="safe",
+		safety_state=0, mode_name="fire")
