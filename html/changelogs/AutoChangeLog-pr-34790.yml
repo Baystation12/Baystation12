@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - {bugfix: Simple mobs will not longer endlessly attack doors when they lose their
+      target.}
+delete-after: true
