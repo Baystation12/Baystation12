@@ -130,6 +130,8 @@
 	var/gun_skill = SKILL_WEAPONS
 	/// What skill level is needed in the gun's skill to completely negate the chance of an accident.
 	var/safety_skill = SKILL_EXPERIENCED
+	var/datum/firemode/safe_mode
+	var/datum/firemode/unsafe_mode
 
 /obj/item/gun/Initialize()
 	. = ..()
@@ -143,7 +145,15 @@
 		verbs += /obj/item/gun/proc/scope
 
 	if (!has_safety)
-		firemodes -= firemodes[1]
+		for (var/datum/firemode/mode in firemodes)
+			if (safety_state)
+				firemodes -= mode
+
+	for (var/datum/firemode/mode in firemodes)
+		if (safety_state)
+			safe_mode = mode
+			if (firemodes.Find(mode) < length(firemodes))
+				unsafe_mode = firemodes[firemodes.Find(safe_mode) + 1]
 
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
@@ -174,7 +184,8 @@
 	var/mob/living/M = user
 	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if (prob(30))
-			sel_mode = firemodes[1]
+			if (safe_mode)
+				sel_mode = safe_mode
 			return 1
 	if((MUTATION_CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
@@ -622,7 +633,12 @@
 
 /obj/item/gun/proc/get_next_firemode()
 	if (!sel_mode)
-		sel_mode = firemodes[1]
+		if (safe_mode)
+			sel_mode = safe_mode
+		else if (unsafe_mode)
+			sel_mode = unsafe_mode
+		else
+			return
 	if (length(firemodes) <= 1)
 		return null
 	. = sel_mode + 1
@@ -641,10 +657,11 @@
 		to_chat(user, SPAN_WARNING("You can't do this right now!"))
 		return
 
-	if (safety_state)
-		sel_mode = firemodes[1]
-	else
-		sel_mode = firemodes[2]
+
+	if (safety_state && safe_mode)
+		sel_mode = safe_mode
+	else if (unsafe_mode)
+		sel_mode = unsafe_mode
 	update_icon()
 	if(user)
 		playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
