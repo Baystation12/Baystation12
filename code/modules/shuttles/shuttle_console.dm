@@ -14,10 +14,8 @@
 	var/ui_template = "shuttle_control_console.tmpl"
 
 
-/obj/machinery/computer/shuttle_control/Initialize(mapload, init_shuttle_tag)
+/obj/machinery/computer/shuttle_control/Initialize(mapload)
 	. = ..()
-	if (init_shuttle_tag)
-		shuttle_tag = init_shuttle_tag
 	if (!shuttle_tag)
 		sync_shuttle()
 
