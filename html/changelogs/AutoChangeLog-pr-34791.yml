@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - {bugfix: Shuttle control consoles will once again reconnect to their shuttle if
+      dismantled and rebuilt.}
+delete-after: true
