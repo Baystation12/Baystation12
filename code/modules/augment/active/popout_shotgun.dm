@@ -24,7 +24,6 @@
 	caliber = CALIBER_SHOTGUN
 	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
-	caliber = CALIBER_SHOTGUN
 	handle_casings = EJECT_CASINGS
 	slot_flags = null
 	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
