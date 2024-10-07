@@ -201,6 +201,24 @@
 	dominates the green planet, and the myriad of exotic life found in its freshwater system."
 	economic_power = 0.7
 
+/singleton/cultural_info/culture/human/theia
+	name = CULTURE_HUMAN_THEIA
+	description = "Theia is an inhabited system on the borders of the Sol Central Government known primarily for being the headquarters of the Third Fleet. \
+	Located strategically at the gateway closest to several key frontier systems, Theia became known early on as a strategic chokepoint worth defending. \
+	Today, military and civilian personnel alike call the Theia system home and work tirelessly to maintain it as the Fortress of Sol. "
+	economic_power = 1.1
+
+/singleton/cultural_info/culture/human/offworld
+	name = CULTURE_HUMAN_OFFWORLD
+	description =  "You are from one of many far flung and outlying settlements that aren't notable enough to be on standard Solar maps. Raised out of touch and out of connection with the galaxyat large, \
+	those who live so far from anything only look to their close family and friends rather than any larger group. Whether it's a fueling station, an agriculutral dome, or a planet that is far removed from \
+	the luxuries of the gateway network, such people are raised in small, confined environments with few others, and tend to be most familiar with older, reliable but outdated \
+	technology. An independent sort, Offworlders are more likely to be isolationist and self-driven."
+	economic_power = 0.9
+	language = LANGUAGE_SPACER
+
+// NON SCG BELOW
+
 /singleton/cultural_info/culture/human/magnitka
 	name = CULTURE_HUMAN_MAGNITKA
 	description = "Magnitka often gives birth to rough-hewn, sturdy citizens with its austere political and environmental climate, and many are often well-sought for the \
@@ -218,37 +236,93 @@
 	economic_power = 1
 	language = LANGUAGE_SPACER
 
-/singleton/cultural_info/culture/human/offworld
-	name = CULTURE_HUMAN_OFFWORLD
-	description =  "You are from one of many far flung and outlying settlements that aren't notable enough to be on standard Solar maps. Raised out of touch and out of connection with the galaxyat large, \
-	those who live so far from anything only look to their close family and friends rather than any larger group. Whether it's a fueling station, an agriculutral dome, or a planet that is far removed from \
-	the luxuries of the gateway network, such people are raised in small, confined environments with few others, and tend to be most familiar with older, reliable but outdated \
-	technology. An independent sort, Offworlders are more likely to be isolationist and self-driven."
-	economic_power = 0.9
-	language = LANGUAGE_SPACER
-
-/singleton/cultural_info/culture/human/confederate
-	name = CULTURE_HUMAN_CONFEDC
-	description = "You are from the core of the Gilgamesh Colonial Confederation. Largely influenced by the planet Terra(not Earth), the Confederation's capital, your people embody what it means to be a part of the GCC. \
+/singleton/cultural_info/culture/human/confederate_terra
+	name = CULTURE_HUMAN_CONFED_TERRA
+	description = "You are from the core of the Gilgamesh Colonial Confederation. Being from the Confederation's capital, your people embody what it means to be a part of the GCC. \
 	Unfortunately, the years since the war have not been easy on Terra and the long period of economic recovery has not made life easy. The people of Terra are typically employed \
 	in the military, industrial, government or service sectors, with an emphasis being placed on mandatory military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
 	resentful about their loss in the Gaia Conflict. An upbringing from Terra emphasises an odd mix of service to the state, liberalism and militarism."
 	language = LANGUAGE_HUMAN_RUSSIAN
-	economic_power = 0.9
+	economic_power = 1.1
+
+/singleton/cultural_info/culture/human/confederate_zemlya
+	name = CULTURE_HUMAN_CONFED_ZEMLYA
+	description = "You are from the core of the Gilgamesh Colonial Confederation. Being from Gilgamesh's Industrial Capital, your people embody what it means to be a part of the working class GCC. \
+	Unfortunately, the years since the war have not been easy on Zemlya and the long period of economic recovery has not made life easy. The people of Zemlya are typically employed \
+	in the vast industrial sector, less patriotic then those from Terra itself, Zemlyans are still an extremely proud people who have pride in their industrial and working class origins."
+	language = LANGUAGE_HUMAN_RUSSIAN
+	economic_power = 1.0
+
+/singleton/cultural_info/culture/human/confederate_sestris
+	name = CULTURE_HUMAN_CONFED_SESTRIS
+	description = " You are from the Union of Sestris and Bratis - second only to Gilgamesh in terms of political and economic power within the GCC, \
+	citizens of Sestris enjoy a generally high standard of living and many can be found within the ranks of the ICCG Defense Forces. Those from Amelie, \
+	within Sestris itself are immensely proud of their Franco heratige, with many holding on to some of their cultural roots. "
+	language = LANGUAGE_HUMAN_RUSSIAN
+	secondary_langs = list(LANGUAGE_HUMAN_EURO)
+	economic_power = 1.3
+
+/singleton/cultural_info/culture/human/confederate_putkari
+	name = CULTURE_HUMAN_CONFED_PUTKARI
+	description = "You are from Putkari in the Baroda system. Settled in the wake of the Terran Commonwealth's exploration Boom, Putkari was abandoned by \
+	the SCG following it's founding and left to die. Embracing the newly founded GCC, Putkari has been a loyal and devoted member of the Confederation \
+	ever since. Extremely hostile to the SCG ever since it's abandonment, Putkarians are some of the most vocal within the Confederation in terms of \
+	resentment of the loss in the Gaia Conflict, many beat the war drums and fan the fires of jingoism in hopes of one day enacting a form of vengance. "
+	language = LANGUAGE_HUMAN_INDIAN
+	economic_power = 0.7
+
+/singleton/cultural_info/culture/human/confederate_altair
+	name = CULTURE_HUMAN_CONFED_ALTAIR
+	description = "You are from Altair. Once a free economic zone, the breaking of the moon of Qabil brought sweeping and more authoritarian change to Altair. \
+	One of the more materially wealthy members of the Confederation outside of the Founders, Altarians are not overly interested in the Confederation as a whole, \
+	with most choosing to be public workers such as paramedics or infastructure maintainers for the duration of their mandatory state service."
+	language = LANGUAGE_HUMAN_ARABIC
+	economic_power = 1.0
+
+/singleton/cultural_info/culture/human/confederate_penglai
+	name = CULTURE_HUMAN_CONFED_PENGLAI
+	description = "You are from Penglai, a traditionalist world within the Gilgamesh Colonial Confederation. A small world with a marginal atmosphere, \
+	breathable by its inhabitants, its main economic contribution to the confederation is in rare earth elements, of which it has a great deal. Another \
+	colony that was in need of support following the founding of the SCG, Pengali is a content member of the Confederation while keeping their own traditions alive. "
+	language = LANGUAGE_HUMAN_CHINESE
+	economic_power = 0.8
+
+/singleton/cultural_info/culture/human/confederate_providence
+	name = CULTURE_HUMAN_CONFED_PROVIDENCE
+	description = "You are from Providence, settled originally by private ventures, Providence's planet of Atlanticus developed a booming space station industry, \
+	resulting in the construction of three mega-space-complexes within the system. Bolstered by a flood of working class immigrants and research funding following \
+	their entry to the Confederation, those from Providence are typically quite pleased with their position within the Confederation, though many still choose to \
+	emigrate elsewhere in hopes of finding work outside of the industrial or scientific sectors. "
+	language = LANGUAGE_HUMAN_RUSSIAN
+	economic_power = 1.0
+
+/singleton/cultural_info/culture/human/confederate_valy
+	name = CULTURE_HUMAN_CONFED_VALY
+	description = "You are from Valy, the 'black sheep' of the Confederation. Brought into the Confederation when Valy's civil war was ended by the GCN's intervention \
+	Valy has possessed a resistance to the Confederation ever since. The emergance of the Frontier Alliance has emboldened these resistance actions, with \
+	public desires to join the Alliance only being held back by the Confederation's continued presence. Those from Valy are typically quite bitter about their present \
+	situation, with many who choose to emigrate continuing to support efforts to bring about the Alliance's agenda in 'freeing Valy from it's shackles'. "
+	language = LANGUAGE_HUMAN_RUSSIAN
+	economic_power = 0.6
 
 /singleton/cultural_info/culture/human/confederate_colony
 	name = CULTURE_HUMAN_CONFEDO
-	description = "You are from the outskirts of the Gilgamesh Colonial Confederation. Terran Colonists have a mixed view of their nation state, raging from strong nationalism to resentment for the state, but \
-	they all have the legacy of resource extraction and mandatory conscription in common. Being from a nation of conscripts means that Terran Colonists are often resourceful and experienced, \
-	having grown to cope with the horrors of dysfunctional economics and mandatory military service. Terrans today are generally poor, bitter and a somewhat broken people angry and \
+	description = "You are from the outskirts of the Gilgamesh Colonial Confederation. Confederates have a mixed view of their nation state, raging from strong nationalism to resentment for the state, but \
+	they all have the legacy of resource extraction and mandatory conscription in common. Being from a nation of conscripts means that Confederates are often resourceful and experienced, \
+	having grown to cope with the horrors of dysfunctional economics and mandatory military service. Confederates today are generally poor, bitter and a somewhat broken people angry and \
 	resentful about their loss in the Gaia Conflict. Colonial Confederation education emphasizes service to the state, liberalism and militarism."
 	language = LANGUAGE_HUMAN_RUSSIAN
 	economic_power = 0.7
 
 /singleton/cultural_info/culture/human/gaia
 	name = CULTURE_HUMAN_GAIAN
-	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the Sol Central Government and the Independent Colonial Confederation of Gilgamesh. It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into Sol-Controlled Gaian Administrative Area and Independent-Guided Protectorate of Gaia, with the International City of New Venice remaining a neutral zone inside the DMZ that circles the planet's equator. The planet's population remain divided even more then 10 years after the Gaia Conflict. While Gaia is divided, the current Mayor of New Venice serves as a vital mediator between the galactic superpowers. The Gaian People are tired of war, and long to see their families once again; They suffered hard twenty years prior, and will not let themselves suffer again."
-	economic_power = 0.9
+	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the Sol Central Government and the Independent Colonial Confederation of Gilgamesh. \
+	It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into Sol-Controlled Gaian Administrative Area \
+	and Independent-Guided Protectorate of Gaia, with the International City of New Venice remaining a neutral zone inside the DMZ that circles the planet's equator. \
+	The planet's population remain divided even more then 10 years after the Gaia Conflict. While Gaia is divided, the current Mayor of New Venice serves as a vital mediator \
+	between the galactic superpowers. The Gaian People are tired of war, and long to see their families once again; They suffered hard twenty years prior, and will not let themselves suffer again."
+	language = LANGUAGE_HUMAN_IBERIAN
+	economic_power = 1.0
 
 /singleton/cultural_info/culture/human/other
 	name = CULTURE_HUMAN_OTHER

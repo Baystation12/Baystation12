@@ -22,6 +22,21 @@
 		var/obj/item/card/union/card = .
 		card.signed_by = H.real_name
 
+/datum/gear/party_card
+	display_name = "party membership"
+	path = /obj/item/card/party
+
+/datum/gear/party_card/New()
+	..()
+	var/party_card_type = list()
+	party_card_type["Citizens for Free Enterprise & Trade"] = /obj/item/card/party/cen/fet
+	party_card_type["Progressive Alliance of Citizens"] = /obj/item/card/party/cen/pac
+	party_card_type["United Green-Left of Sol"] = /obj/item/card/party/lef/ugl
+	party_card_type["Leftists for Direct Democracy & Freedom"] = /obj/item/card/party/lef/ldd
+	party_card_type["Solarians for Freedom & Rights"] = /obj/item/card/party/rig/sfr
+	party_card_type["Order of Solarian Nations"] = /obj/item/card/party/rig/osn
+	gear_tweaks += new/datum/gear_tweak/path(party_card_type)
+
 /datum/gear/dice
 	display_name = "dice pack"
 	path = /obj/item/storage/pill_bottle/dice
