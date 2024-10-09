@@ -154,7 +154,7 @@
 
 
 /atom/VV_static()
-	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")
+	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size", "underlays", "overlays")
 
 /client/VV_static()
 	return ..() + list("holder", "prefs")
