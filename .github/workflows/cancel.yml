@@ -14,7 +14,7 @@ jobs:
     name: 'Cancel Redundant Builds'
     permissions:
       actions: write # required to cancel other actions
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 3
     steps:
       - uses: styfle/cancel-workflow-action@85880fa0301c86cca9da44039ee3bb12d3bedbfa

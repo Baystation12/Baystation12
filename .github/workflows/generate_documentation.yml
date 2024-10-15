@@ -14,7 +14,7 @@ env:
 
 jobs:
   PreFlight:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -28,7 +28,7 @@ jobs:
   generate_documentation:
     permissions:
       contents: write # required to push the doc commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: PreFlight
     if: |
       (needs.PreFlight.outputs.dm == 'true') &&
