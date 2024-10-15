@@ -80,9 +80,13 @@
 				closest = emag
 			else
 				for(var/obj/overmap/visitable/other in get_area(source)) // This is every visitable overmap object
-					if(get_dist(source, other) < dist && other != source)
-						closest = other
-						dist = get_dist(source, other)
+                    if (other == source)
+                        continue
+                    new_dist = get_dist(source, other)
+					if (new_dist >= dist)
+                        continue
+					closest = other
+					dist = new_dist
 
 			var/area/landing_area = pick(closest.get_areas()) /// Give a fairer shot NOT to land in space.
 
