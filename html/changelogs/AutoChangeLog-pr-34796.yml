@@ -1,0 +1,5 @@
+author: The_Spanish_1nquisition
+changes:
+  - {rscdel: Removed outdated event related memos}
+  - {rscadd: Added new event related (and other) memos}
+delete-after: true
