@@ -12,7 +12,7 @@ jobs:
   CompileCL:
     permissions:
       contents: write # required to push the updated changelog commit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:
       - name: Checkout

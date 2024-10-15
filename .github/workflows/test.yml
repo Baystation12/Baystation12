@@ -16,7 +16,7 @@ env:
 
 jobs:
   PreFlight:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
@@ -28,7 +28,7 @@ jobs:
     outputs:
       dm: ${{ steps.filter.outputs.dm }}
   DreamChecker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: PreFlight
     if: needs.PreFlight.outputs.dm == 'true'
     steps:
@@ -54,7 +54,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   Code:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
@@ -84,7 +84,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   ExampleMap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
@@ -113,7 +113,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   TorchMap:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
@@ -142,7 +142,7 @@ jobs:
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
   AwaySites:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
     - PreFlight
     - DreamChecker
