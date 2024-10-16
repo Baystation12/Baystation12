@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - {admin: Atom overlays and underlays no longer incorrectly appear modifiable via
-      VV.}
-delete-after: true
