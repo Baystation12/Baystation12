@@ -242,6 +242,7 @@
 						SPAN_NOTICE("\The [src]'s suit whirrs loudly as \the [rig] absorbs the fall!"),
 						SPAN_NOTICE("You hear an electric <i>*whirr*</i> right after the slam!")
 					)
+
 		if (fall_damage())
 			for (var/mob/living/M in landing.contents)
 				if (M == src)
@@ -263,7 +264,8 @@
 /mob/living/carbon/human/handle_fall_effect(turf/landing)
 	if(species && species.handle_fall_special(src, landing))
 		return
-
+	if(src.mind && src.mind.changeling && src.mind.changeling.tendons_reinforced)
+		return
 	var/obj/item/rig/rig = get_rig()
 	if (istype(rig))
 		for (var/obj/item/rig_module/actuators/A in rig.installed_modules)

@@ -23,6 +23,7 @@
 	if (!chameleon_choices)
 		var/chameleon_type = chameleon_base_type || holder.parent_type
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
+
 		if (!chameleon_choices)
 			chameleon_choices = GenerateChameleonChoices(chameleon_type)
 			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
@@ -69,8 +70,10 @@
 	return null
 
 /datum/extension/chameleon/proc/GenerateChameleonChoices(basetype)
+
 	var/choices = list()
 	var/types = islist(basetype) ? basetype : typesof(basetype)
+
 	for (var/path in types)
 		AddChameleonChoice(choices, path)
 	return sortAssoc(choices)

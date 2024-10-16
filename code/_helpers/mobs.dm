@@ -103,6 +103,52 @@
 /proc/get_exposed_defense_zone(atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = FALSE, progress = TRUE, ignore_movement = FALSE, incapacitation_affected = TRUE)
+	if(!user || !target)
+		return 0
+	var/user_loc = user.loc
+	var/target_loc = target.loc
+
+	var/holding = user.get_active_hand()
+	var/datum/progressbar/private/progbar
+	if (progress)
+		progbar = new(user, time, target)
+
+	var/endtime = world.time+time
+	var/starttime = world.time
+	. = TRUE
+	while (world.time < endtime)
+		stoplag(1)
+		if (progress)
+			progbar.update(world.time - starttime)
+		if(!user || !target)
+			. = FALSE
+			break
+		if(uninterruptible)
+			continue
+
+		if(!user || (user.incapacitated() && incapacitation_affected))
+			. = FALSE
+			break
+
+		if(user.loc != user_loc && !ignore_movement)
+			. = FALSE
+			break
+
+		if(target.loc != target_loc && !ignore_movement)
+			. = FALSE
+			break
+
+		if(user.get_active_hand() != holding)
+			. = FALSE
+			break
+
+		if(target_zone && user.zone_sel.selecting != target_zone)
+			. = FALSE
+			break
+
+	if (progbar)
+		qdel(progbar)
 
 /// Integer. Unique sequential ID from the `do_after` proc used to validate `DO_USER_UNIQUE_ACT` flag checks.
 /mob/var/do_unique_user_handle = 0
