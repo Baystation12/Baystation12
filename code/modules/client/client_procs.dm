@@ -437,14 +437,12 @@
 		winset(usr, "mainwindow", "can-resize=false")
 		winset(usr, "mainwindow", "is-maximized=false")
 		winset(usr, "mainwindow", "is-maximized=true")
-		winset(usr, "mainwindow", "statusbar=false")
 		winset(usr, "mainwindow", "menu=")
 //		winset(usr, "mainwindow.mainvsplit", "size=0x0")
 	else
 		winset(usr, "mainwindow", "is-maximized=false")
 		winset(usr, "mainwindow", "titlebar=true")
 		winset(usr, "mainwindow", "can-resize=true")
-		winset(usr, "mainwindow", "statusbar=true")
 		winset(usr, "mainwindow", "menu=menu")
 
 	fit_viewport()
