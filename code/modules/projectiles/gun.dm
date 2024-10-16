@@ -60,6 +60,8 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 	waterproof = FALSE
+	action_button_name = "Use Scope"
+	default_action_type = /datum/action/item_action/gun/zoom
 
 	var/burst = 1
 	/// Checks if the gun will continue firing if the mouse button is held down.
@@ -565,7 +567,6 @@
 	set category = "Object"
 	set name = "Use Scope"
 	set popup_menu = 1
-
 	toggle_scope(usr, scope_zoom)
 
 /obj/item/gun/proc/toggle_scope(mob/user, zoom_amount=2.0)
@@ -573,6 +574,10 @@
 	//still, increase the view size by a tiny amount so that sniping isn't too restricted to NSEW
 	var/zoom_offset = round(world.view * zoom_amount)
 	var/view_size = round(world.view + zoom_amount)
+
+	if (!zoom_amount)
+		to_chat(user, "<span class='warning'>\The [src] does not have a valid optic!")
+		return
 
 	if(zoom)
 		unzoom(user)

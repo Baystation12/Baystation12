@@ -15,6 +15,7 @@
 	var/name = "Generic Action"
 	var/action_type = AB_ITEM
 	var/procname = null
+	var/arguments = list()
 	var/atom/movable/target = null
 	var/check_flags = 0
 	var/processing = 0
@@ -76,7 +77,7 @@
 				Deactivate()
 		if(AB_GENERIC)
 			if(target && procname)
-				call(target,procname)(usr)
+				call(target,procname)(arglist(arguments))
 	return
 
 /datum/action/proc/Activate()
@@ -252,6 +253,25 @@
 
 /datum/action/item_action/organ/augment
 	button_icon = 'icons/obj/augment.dmi'
+
+
+/datum/action/item_action/gun
+	action_type = AB_ITEM_USE_ICON
+
+/datum/action/item_action/gun/zoom
+	action_type = AB_GENERIC
+	button_icon = 'icons/obj/guns/gui.dmi'
+	button_icon_state = "scope"
+
+/datum/action/item_action/gun/zoom/Trigger()
+	var/obj/item/gun/G = target
+	procname = "toggle_scope"
+	arguments = list(
+		usr,
+		G.scope_zoom
+	)
+	. = ..()
+	return
 
 #undef AB_WEST_OFFSET
 #undef AB_NORTH_OFFSET
