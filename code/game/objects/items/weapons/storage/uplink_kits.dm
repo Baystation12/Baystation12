@@ -109,7 +109,7 @@
 
 /obj/item/storage/backpack/satchel/syndie_kit/revolver
 	startswith = list(
-		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/revolving,
 		/obj/item/ammo_magazine/speedloader/magnum
 	)
 
@@ -147,7 +147,7 @@
 
 /obj/item/storage/secure/briefcase/heavysniper
 	startswith = list(
-		/obj/item/gun/projectile/heavysniper,
+		/obj/item/gun/projectile/boltloader,
 		/obj/item/storage/box/ammo/sniperammo
 	)
 

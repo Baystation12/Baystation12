@@ -44,7 +44,7 @@
 		/obj/item/storage/box/syndie_kit/spy = 50
 	)
 	antag = list(
-		/obj/item/gun/projectile/heavysniper/boltaction = 1,
+		/obj/item/gun/projectile/boltloader/boltaction = 1,
 		/obj/item/ammo_magazine/rifle  = 1,
 		/obj/item/card/id/syndicate = 0,
 		/obj/item/storage/box/syndie_kit/spy = 0

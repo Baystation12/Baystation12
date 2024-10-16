@@ -9,8 +9,9 @@
 	combustion = 0
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
+		list(safety_state=0, mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
 		)
 
 /obj/item/gun/energy/taser/disposable
@@ -35,8 +36,9 @@
 	wielded_item_state = "tasercarbine-wielded"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
+		list(safety_state=0, mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
 		)
 
 /obj/item/gun/energy/taser/mounted

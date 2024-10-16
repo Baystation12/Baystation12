@@ -87,10 +87,10 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 		/obj/item/gun/projectile/pistol/sec,
 		/obj/item/gun/projectile/pistol/holdout,
-		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/revolving,
 		/obj/item/gun/projectile/pirate,
-		/obj/item/gun/projectile/revolver/medium,
-		/obj/item/gun/projectile/pistol/broomstick
+		/obj/item/gun/projectile/revolving/medium,
+		/obj/item/gun/projectile/boltloader/broomstick
 		)
 
 	var/list/raider_holster = list(

@@ -221,7 +221,7 @@
 "so" = (
 /obj/structure/table/standard,
 /obj/item/ammo_magazine/speedloader/magnum,
-/obj/item/gun/projectile/revolver{
+/obj/item/gun/projectile/revolving{
 	starts_loaded = 0
 	},
 /obj/floor_decal/corner/red/mono,

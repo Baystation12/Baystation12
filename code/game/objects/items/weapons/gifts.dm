@@ -40,7 +40,7 @@
 		/obj/item/toy/water_balloon,
 		/obj/item/toy/blink,
 		/obj/item/toy/crossbow,
-		/obj/item/gun/projectile/revolver/capgun,
+		/obj/item/gun/projectile/revolving/capgun,
 		/obj/item/toy/katana,
 		/obj/item/toy/prize/deathripley,
 		/obj/item/toy/prize/durand,

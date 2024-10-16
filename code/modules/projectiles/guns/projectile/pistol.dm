@@ -8,18 +8,19 @@
 	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
 	var/ammo_indicator = FALSE
+	racksound = 'sound/weapons/guns/interaction/pistol_rack.ogg'
 
 /obj/item/gun/projectile/pistol/on_update_icon()
 	..()
-	if(empty_icon)
-		if(ammo_magazine && length(ammo_magazine.stored_ammo))
-			icon_state = initial(icon_state)
-		else
+	if (empty_icon)
+		if (bolt_open)
 			icon_state = "[initial(icon_state)]-e"
-	if(ammo_indicator)
-		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+		else
+			icon_state = "[initial(icon_state)]"
+	if (ammo_indicator)
+		if (!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
 			AddOverlays(image(icon, "[initial(icon_state)]-ammo0"))
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+		else if (LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
 			AddOverlays(image(icon, "[initial(icon_state)]-ammo1"))
 		else
 			AddOverlays(image(icon, "[initial(icon_state)]-ammo2"))
@@ -82,10 +83,10 @@
 
 /obj/item/gun/projectile/pistol/throwback/on_update_icon()
 	..()
-	if(ammo_magazine && length(ammo_magazine.stored_ammo))
-		icon_state = base_icon
-	else
+	if (bolt_open)
 		icon_state = "[base_icon]-e"
+	else
+		icon_state = "[base_icon]"
 
 /obj/item/gun/projectile/pistol/gyropistol
 	name = "gyrojet pistol"
@@ -126,21 +127,24 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 	var/obj/item/silencer/silencer
 
-/obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
-	if(user.get_inactive_hand() == src)
-		if(silenced)
-			if (!user.IsHolding(src))
-				..()
+/obj/item/gun/projectile/pistol/holdout/verb/remove_silencer()
+	set name = "Remove Pistol Silencer"
+	set category = "Object"
+	set src in usr
+	if (usr.incapacitated())
+		return
+	if (usr.get_inactive_hand() == src)
+		if (silenced)
+			if (!usr.IsHolding(src))
 				return
 			if (silencer)
-				to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
-				user.put_in_hands(silencer)
+				to_chat(usr, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+				usr.put_in_hands(silencer)
 				silencer = null
 			silenced = FALSE
 			w_class = initial(w_class)
 			update_icon()
 			return
-	..()
 
 
 /obj/item/gun/projectile/pistol/holdout/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -175,7 +179,7 @@
 		icon_state = "pistol-silencer"
 	else
 		icon_state = "pistol"
-	if(!(ammo_magazine && length(ammo_magazine.stored_ammo)))
+	if(bolt_open)
 		icon_state = "[icon_state]-e"
 
 /obj/item/silencer
@@ -185,7 +189,7 @@
 	icon_state = "silencer"
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/gun/projectile/pistol/broomstick
+/obj/item/gun/projectile/boltloader/broomstick
 	name = "broomstick"
 	desc = "An antique gun that makes you want to yell 'IT BELONGS IN A MUSEUM!'. There appears to be some thing scratched next to the fireselector, though you cant make it out."
 	icon = 'icons/obj/guns/broomstick.dmi'
@@ -193,6 +197,7 @@
 	accuracy_power = 6
 	one_hand_penalty = 3
 	fire_delay = 5
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	caliber = CALIBER_PISTOL_SMALL
 	origin_tech = list(
 						TECH_COMBAT = 2,
@@ -200,10 +205,13 @@
 						)
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 10
+	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
+	load_sound = 'sound/weapons/guns/interaction/bullet_insert.ogg'
 
 	firemodes = list(
+		list(safety_state=1, mode_name="safe"),
 		list(
-			mode_name="semi auto",
+			safety_state=0, mode_name="semi auto",
 			burst=1,
 			fire_delay=5,
 			move_delay=null,
@@ -212,7 +220,7 @@
 			dispersion=null
 			),
 		list(
-			mode_name="scratched out option",
+			safety_state=0, mode_name="scratched out option",
 			burst=10,
 			fire_delay=1,
 			one_hand_penalty=8,

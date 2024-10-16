@@ -22,7 +22,7 @@
 		/obj/item/gun/projectile/pistol/holdout = TRADER_ALL,
 		/obj/item/gun/projectile/pistol/magnum_pistol = TRADER_ALL,
 		/obj/item/gun/projectile/pistol/sec = TRADER_ALL,
-		/obj/item/gun/projectile/heavysniper/boltaction	= TRADER_ALL,
+		/obj/item/gun/projectile/boltloader/boltaction	= TRADER_ALL,
 		/obj/item/gun/projectile/pistol/sec/MK = TRADER_BLACKLIST,
 		/obj/item/gun/projectile/shotgun/pump = TRADER_SUBTYPES_ONLY,
 		/obj/item/ammo_magazine = TRADER_SUBTYPES_ONLY,
@@ -93,7 +93,7 @@
 
 	possible_trading_items = list(/obj/item/gun/projectile/pirate                = TRADER_THIS_TYPE,
 								/obj/item/gun/projectile/pistol/sec/MK                  = TRADER_THIS_TYPE,
-								/obj/item/gun/projectile/heavysniper/ant         = TRADER_THIS_TYPE,
+								/obj/item/gun/projectile/boltloader/heavysniper/ant         = TRADER_THIS_TYPE,
 								/obj/item/gun/energy/laser/dogan                 = TRADER_THIS_TYPE,
 								/obj/item/gun/projectile/automatic/machine_pistol/usi  = TRADER_THIS_TYPE,
 								/obj/item/clothing/accessory/storage/holster                    = TRADER_ALL)

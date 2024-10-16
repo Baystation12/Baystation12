@@ -94,7 +94,7 @@
 	/// Allows for different accuracies for each shot in a burst. Applied on top of accuracy.
 	var/list/burst_accuracy = list(0)
 	var/list/dispersion = list(0)
-	var/one_hand_penalty
+	var/one_hand_penalty = 0
 	var/wielded_item_state
 	/// Whether it creates hotspot when fired.
 	var/combustion
@@ -102,7 +102,10 @@
 
 	/// Index of the currently selected mode.
 	var/sel_mode = 1
-	var/list/firemodes = list()
+	var/list/firemodes = list(
+		list(safety_state=1, mode_name="safe"),
+		list(safety_state=0, mode_name="fire")
+	)
 	var/selector_sound = 'sound/weapons/guns/selector.ogg'
 
 	//Aiming system stuff
@@ -127,17 +130,30 @@
 	var/gun_skill = SKILL_WEAPONS
 	/// What skill level is needed in the gun's skill to completely negate the chance of an accident.
 	var/safety_skill = SKILL_EXPERIENCED
+	var/datum/firemode/safe_mode
+	var/datum/firemode/unsafe_mode
 
 /obj/item/gun/Initialize()
 	. = ..()
-	for(var/i in 1 to length(firemodes))
+	for (var/i in 1 to length(firemodes))
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
-	if(isnull(scoped_accuracy))
+	if (isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
-	if(scope_zoom)
+	if (scope_zoom)
 		verbs += /obj/item/gun/proc/scope
+
+	if (!has_safety)
+		for (var/datum/firemode/mode in firemodes)
+			if (safety_state)
+				firemodes -= mode
+
+	for (var/datum/firemode/mode in firemodes)
+		if (safety_state)
+			safe_mode = mode
+			if (firemodes.Find(mode) < length(firemodes))
+				unsafe_mode = firemodes[firemodes.Find(safe_mode) + 1]
 
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
@@ -167,8 +183,9 @@
 
 	var/mob/living/M = user
 	if(!safety() && world.time > last_safety_check + 5 MINUTES && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		if(prob(30))
-			toggle_safety()
+		if (prob(30))
+			if (safe_mode)
+				sel_mode = safe_mode
 			return 1
 	if((MUTATION_CLUMSY in M.mutations) && prob(40)) //Clumsy handling
 		var/obj/P = consume_next_projectile()
@@ -253,8 +270,8 @@
 		return
 
 	if(safety())
-		if(user.a_intent == I_HURT && user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED) && user.client?.get_preference_value(/datum/client_preference/safety_toggle_on_intent) == GLOB.PREF_YES)
-			toggle_safety(user)
+		if (user.a_intent == I_HURT && user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED) && user.client?.get_preference_value(/datum/client_preference/safety_toggle_on_intent) == GLOB.PREF_YES)
+			switch_firemodes(user)
 		else
 			handle_click_safety(user)
 			return
@@ -422,11 +439,7 @@
 	var/acc_mod = burst_accuracy[min(burst, length(burst_accuracy))]
 	var/disp_mod = dispersion[min(burst, length(dispersion))]
 	var/stood_still = last_handled
-	//Not keeping gun active will throw off aim (for non-Masters)
-	if(user.skill_check(SKILL_WEAPONS, SKILL_MASTER))
-		stood_still = min(user.l_move_time, last_handled)
-	else
-		stood_still = max(user.l_move_time, last_handled)
+	stood_still = max(user.l_move_time, last_handled)
 
 	stood_still = max(0,round((world.time - stood_still)/10) - 1)
 	if(stood_still)
@@ -597,12 +610,11 @@
 	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(length(firemodes) > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
-			to_chat(user, "The fire selector is set to [current_mode.name].")
-	if(has_safety)
-		to_chat(user, "The safety is [safety() ? "on" : "off"].")
+			if (current_mode && current_mode.name)
+				to_chat(user, "The fire selector is set to [current_mode.name].")
 	last_safety_check = world.time
 
-/obj/item/gun/proc/switch_firemodes()
+/obj/item/gun/proc/switch_firemodes(mob/user)
 
 	var/next_mode = get_next_firemode()
 	if(!next_mode || next_mode == sel_mode)
@@ -615,13 +627,23 @@
 	var/datum/firemode/new_mode = firemodes[sel_mode]
 	new_mode.apply_to(src)
 	playsound(loc, selector_sound, 50, 1)
+	if (user)
+		to_chat(user, "\The [src]'s fire selector is set to [new_mode].")
+	update_icon()
 	return new_mode
 
 /obj/item/gun/proc/get_next_firemode()
-	if(length(firemodes) <= 1)
+	if (!sel_mode)
+		if (safe_mode)
+			sel_mode = safe_mode
+		else if (unsafe_mode)
+			sel_mode = unsafe_mode
+		else
+			return
+	if (length(firemodes) <= 1)
 		return null
 	. = sel_mode + 1
-	if(. > length(firemodes))
+	if (. > length(firemodes))
 		. = 1
 
 /obj/item/gun/attack_self(mob/user)
@@ -629,18 +651,20 @@
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes(user)
 	if(new_mode)
-		to_chat(user, SPAN_NOTICE("\The [src] is now set to [new_mode.name]."))
+		to_chat(user, SPAN_NOTICE("\The [src]'s fire selector is set to [new_mode.name]."))
 
 /obj/item/gun/proc/toggle_safety(mob/user)
 	if (user?.is_physically_disabled())
 		to_chat(user, SPAN_WARNING("You can't do this right now!"))
 		return
 
-	safety_state = !safety_state
+
+	if (safety_state && safe_mode)
+		sel_mode = safe_mode
+	else if (unsafe_mode)
+		sel_mode = unsafe_mode
 	update_icon()
 	if(user)
-		user.visible_message(SPAN_WARNING("[user] switches the safety of \the [src] [safety_state ? "on" : "off"]."), SPAN_NOTICE("You switch the safety of \the [src] [safety_state ? "on" : "off"]."), range = 3)
-		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
 
 
@@ -661,8 +685,8 @@
 
 
 /obj/item/gun/CtrlClick(mob/user)
-	if(loc == user)
-		toggle_safety(user)
+	if (loc == user)
+		switch_firemodes(user)
 		return TRUE
 	return ..()
 

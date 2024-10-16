@@ -36,7 +36,7 @@
 	)
 	rare_products = list(
 		/obj/item/clothing/accessory/armor_plate/sneaky = 0,
-		/obj/item/gun/projectile/revolver/holdout = 40
+		/obj/item/gun/projectile/revolving/holdout = 40
 	)
 	contraband = list(
 		/obj/item/clothing/glasses/sunglasses = 2,
@@ -45,5 +45,5 @@
 	antag = list(
 		/obj/item/device/uplink_service/fake_command_report = 1,
 		/obj/item/clothing/accessory/armor_plate/sneaky = 0,
-		/obj/item/gun/projectile/revolver/holdout = 0
+		/obj/item/gun/projectile/revolving/holdout = 0
 	)

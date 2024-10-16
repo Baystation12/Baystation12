@@ -88,7 +88,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	authorized_modes[mode] = authorized
 
 	if(mode == sel_mode && !authorized)
-		switch_firemodes()
+		toggle_safety()
 
 	var/mob/user = get_holder_of_type(src, /mob)
 	if(user)
