@@ -329,14 +329,14 @@ h1.alert, h2.alert		{color: #a4bad6;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.danger					{color: #c51e1e;}
-.warning				{color: #c51e1e;	font-style: italic;}
-.subtle					{color: #4343ca; font-size: 75%; font-style: italic;}
+.danger					{color: #f73e50; font-weight: bold;}
+.warning				{color: #f58e09; font-weight: bold; font-style: italic;}
+.subtle					{color: #808991; font-style: italic;}
 .boldannounce			{color: #c51e1e;	font-weight: bold;}
 .rose					{color: #ff5050;}
-.info					{color: #6685f5;}
+.info					{color: #b13ef3; font-style: italic;}
 .debug					{color: #ff66ff;}
-.notice					{color: #6685f5;}
+.notice					{color: #327fd1;}
 .alium					{color: #00ff00;}
 .cult					{color: #aa1c1c;}
 .legion					{color: #e09000; font-weight: bold; font-family: 'Courier New', Courier, monospace}

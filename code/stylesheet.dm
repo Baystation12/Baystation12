@@ -85,16 +85,16 @@ h1.alert, h2.alert		{color: #000080;}
 
 .italic				{font-style: italic;}
 .bold					{font-weight: bold;}
-.danger					{color: #ff0000; font-weight: bold;}
-.bigdanger					{color: #ff0000; font-weight: bold; font-size: 115%;}
-.warning				{color: #ff0000; font-style: italic;}
-.bigwarning				{color: #ff0000; font-style: italic; font-size: 115%;}
+.danger					{color: #dc3545; font-weight: bold;}
+.bigdanger				{color: #dc3545; font-weight: bold; font-size: 115%;}
+.warning				{color: #cc7606; font-weight: bold; font-style: italic;}
+.bigwarning				{color: #cc7606; font-weight: bold; font-style: italic; font-size: 115%;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
 .rose					{color: #ff5050;}
-.info					{color: #0000cc;}
+.info					{color: #9b53c4; font-style: italic;}
 .debug					{color: #ff00ff;}
-.notice					{color: #000099;}
-.subtle					{color: #000099; font-size: 75%; font-style: italic;}
+.notice					{color: #0d5ef3;}
+.subtle					{color: #919ca7; font-style: italic;}
 .alium					{color: #00ff00;}
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
 .cultannounce			{color: #800080; font-style: italic; font-size: 175%;}
