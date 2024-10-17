@@ -2,7 +2,7 @@
 	name = "military pistol"
 	desc = "A Hephaestus Industries M22F. A large pistol issued as an SCGDF service weapon."
 	magazine_type = /obj/item/ammo_magazine/pistol/double
-	allowed_magazines = /obj/item/ammo_magazine/pistol/double
+	allowed_magazines = list(/obj/item/ammo_magazine/pistol/double)
 	icon = 'maps/torch/icons/obj/weapons.dmi'
 	icon_state = "m22f"
 	item_state = "secgundark"
@@ -18,7 +18,7 @@
 	name = "military pistol"
 	desc = "A Hephaestus Industries M19. A light pistol issued as an SCGDF service weapon."
 	magazine_type = /obj/item/ammo_magazine/pistol
-	allowed_magazines = /obj/item/ammo_magazine/pistol
+	allowed_magazines = list(/obj/item/ammo_magazine/pistol)
 	banned_magazines = list(
 		/obj/item/ammo_magazine/pistol/double,
 		/obj/item/ammo_magazine/pistol/small

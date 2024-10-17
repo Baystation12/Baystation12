@@ -10,7 +10,8 @@
 	space_recoil = 1
 	combustion = 1
 
-	var/caliber = CALIBER_PISTOL		//determines which casings will fit
+	/// String (One of `CALIBER_*`). Determines which casings will fit.
+	var/caliber = CALIBER_PISTOL
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 4 = magazine
 	var/obj/item/ammo_casing/chambered = null
@@ -29,8 +30,10 @@
 	//For MAGAZINE guns
 	var/magazine_type = null	//the type of magazine that the gun comes preloaded with
 	var/obj/item/ammo_magazine/ammo_magazine = null //stored magazine
-	var/allowed_magazines		//magazine types that may be loaded. Can be a list or single path
-	var/banned_magazines 		//magazine types that may NOT be loaded. Can be a list or single path
+	/// LAZYLIST (Types of `/obj/item/ammo_magazine`). Magazine types that may be loaded.
+	var/list/allowed_magazines
+	/// LAZYLIST (Types of `/obj/item/ammo_magazine`). Magazine types that may NOT be loaded. Overrides `allowed_magazines`.
+	var/list/banned_magazines
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
@@ -131,166 +134,235 @@
 
 
 
-//Attempts to load A into src, depending on the type of thing being loaded and the load_method
-//Maybe this should be broken up into separate procs for each load method?
-/obj/item/gun/projectile/proc/load_ammo(obj/item/A, mob/user)
-	if(istype(A, /obj/item/ammo_magazine))
-		. = TRUE
-		var/obj/item/ammo_magazine/AM = A
-		if (((istext(caliber) && caliber != AM.caliber) || (islist(caliber) && !is_type_in_list(AM.caliber, caliber))))
-			return //incompatible
-		else if (load_method == SINGLE_CASING && AM.mag_type == SPEEDLOADER && world.time >= recentload)
-			if (length(AM.stored_ammo))
-				var/C = AM.stored_ammo[1]
-				if (length(loaded) >= max_shells)
-					to_chat(user, SPAN_WARNING("[src] is full!"))
-					return
-				if (!user.unEquip(C, src))
-					return
-				loaded.Insert(1, C) //add to the head of the list
-				AM.stored_ammo -= C
-				user.visible_message("[user] inserts \a [C] into [src].", SPAN_NOTICE("You insert \a [C] into [src]."))
-				playsound(loc, load_sound, 50, 1)
-				recentload = world.time + 0.5 SECONDS
-			AM.update_icon()
-			update_icon()
-			return
-		else if (!(load_method & AM.mag_type))
-			return //incompatible
+/**
+ * Attempts to load an item into `src`, depending on the type of thing being loaded and `load_method`.
+ *
+ * **Parameters**:
+ * - `ammo` - The item to attempt to load.
+ * - `user` - The mob attempting to load `ammo`.
+ *
+ * Returns boolean. `TRUE` if the interaction was handled, `FALSE` otherwise.
+ */
+/obj/item/gun/projectile/proc/load_ammo(obj/item/ammo, mob/user)
+	// Magazines
+	if (istype(ammo, /obj/item/ammo_magazine))
+		var/obj/item/ammo_magazine/magazine = ammo
+		if (caliber != magazine.caliber)
+			USE_FEEDBACK_FAILURE("\The [ammo]'s caliber is not compatible with \the [src].")
+			return TRUE
+		if (!GET_FLAGS(load_method, magazine.mag_type))
+			USE_FEEDBACK_FAILURE("\The [ammo] can't be loaded in \the [src].")
+			return TRUE
 
-		switch(AM.mag_type)
-			if(MAGAZINE)
-				if((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)) || (ispath(banned_magazines) && istype(A, banned_magazines)) || (islist(banned_magazines) && is_type_in_list(A, banned_magazines)))
-					to_chat(user, SPAN_WARNING("\The [A] won't fit into [src]."))
-					return
-				if(ammo_magazine)
-					if(user.a_intent == I_HELP || user.a_intent == I_DISARM || !user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED))
-						to_chat(user, SPAN_WARNING("[src] already has a magazine loaded."))//already a magazine here
-						return
+		switch (magazine.mag_type)
+			if (MAGAZINE)
+				if (!is_type_in_list(ammo, allowed_magazines) || is_type_in_list(ammo, banned_magazines))
+					USE_FEEDBACK_FAILURE("\The [ammo] doesn't fit in \the [src].")
+					return TRUE
+
+				// Tactical/speed reload checks
+				if (ammo_magazine)
+					if ((user.a_intent in list(I_HELP, I_DISARM)) || !user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED))
+						USE_FEEDBACK_FAILURE("\The [src] already has \a [ammo_magazine] loaded.")
+						return TRUE
+					if (!can_special_reload)
+						USE_FEEDBACK_FAILURE("\The [src] can't be tactical or speed reloaded.")
+						return TRUE
+					if (!user.canUnEquip(ammo, src))
+						return TRUE
+
+					var/obj/item/prior_magazine = ammo_magazine
+					var/prof_reload_time = 0
+					var/exp_reload_time = 0
+					var/drop_magazine = FALSE
+					switch (user.a_intent)
+						if (I_GRAB) // Tactical Reloading
+							prof_reload_time = PROF_TAC_RELOAD
+							exp_reload_time = EXP_TAC_RELOAD
+
+						if (I_HURT) // Speed Reloading
+							prof_reload_time = PROF_SPD_RELOAD
+							exp_reload_time = EXP_SPD_RELOAD
+							drop_magazine = TRUE
+
+					var/do_after_time = user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? prof_reload_time : exp_reload_time
+					if (!do_after(user, do_after_time, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+						return TRUE
+					if (!user.use_sanity_check(src, ammo))
+						return TRUE
+					if (ammo_magazine != prior_magazine)
+						USE_FEEDBACK_FAILURE("\The [src] is no longer holding [QDELETED(prior_magazine) ? "the magazine" : "\the [prior_magazine]"] you were swapping out.")
+						return TRUE
+					if (!user.unEquip(ammo, src))
+						return TRUE
+
+					playsound(src, mag_insert_sound, 75, TRUE)
+					if (drop_magazine)
+						ammo_magazine.dropInto(user.loc)
 					else
-						if(user.a_intent == I_GRAB) //Tactical reloading
-							if(!can_special_reload)
-								to_chat(user, SPAN_WARNING("You can't tactically reload this gun!"))
-								return
-							if(!user.unEquip(AM, src))
-								return
-							//Experienced gets a 1 second delay, master gets a 0.5 second delay
-							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_TAC_RELOAD : EXP_TAC_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
-								if(jam_chance && (!(ammo_magazine.type == magazine_type)))
-									jam_chance -= 20
-								ammo_magazine.update_icon()
-								user.put_in_hands(ammo_magazine)
-								user.visible_message(
-									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-									SPAN_WARNING("You tactically reload \the [src] with \the [AM]!")
-								)
-						else //Speed reloading
-							if(!can_special_reload)
-								to_chat(user, SPAN_WARNING("You can't speed reload with this gun!"))
-								return
-							if(!user.unEquip(AM, src))
-								return
-							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
-							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
-								if(jam_chance && istype(ammo_magazine, magazine_type))
-									jam_chance -= 10
-								ammo_magazine.update_icon()
-								ammo_magazine.dropInto(user.loc)
-								user.visible_message(
-									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-									SPAN_WARNING("You speed reload \the [src] with \the [AM]!")
-								)
-					ammo_magazine = AM
-					playsound(loc, mag_insert_sound, 75, 1)
+						user.put_in_hands(ammo_magazine)
+					ammo_magazine.update_icon()
+					ammo_magazine = ammo
+					ammo.update_icon()
 					update_icon()
-					AM.update_icon()
-					if(!istype(AM, magazine_type))
-						jam_chance += 10
-					return
-				ammo_magazine = AM
-				if(!user.unEquip(AM, src))
-					ammo_magazine = null
-					return
-				user.visible_message("[user] inserts [AM] into [src].", SPAN_NOTICE("You insert [AM] into [src]."))
-				playsound(loc, mag_insert_sound, 50, 1)
-				if(!istype(AM, magazine_type))
-					jam_chance += 10
-			if(SPEEDLOADER)
-				if(length(loaded) >= max_shells)
-					to_chat(user, SPAN_WARNING("[src] is full!"))
-					return
-				var/count = 0
-				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
-					if(length(loaded) >= max_shells)
-						break
-					if(C.caliber == caliber)
-						C.forceMove(src)
-						loaded += C
-						AM.stored_ammo -= C //should probably go inside an ammo_magazine proc, but I guess less proc calls this way...
-						count++
-				if(count)
-					user.visible_message("[user] reloads [src].", SPAN_NOTICE("You load [count] round\s into [src]."))
-					playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
-		AM.update_icon()
-	else if(istype(A, /obj/item/ammo_casing))
-		. = TRUE
-		var/obj/item/ammo_casing/C = A
-		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
-			return //incompatible
-		if(length(loaded) >= max_shells)
-			to_chat(user, SPAN_WARNING("[src] is full."))
-			return
-		if(!user.unEquip(C, src))
-			return
-		loaded.Insert(1, C) //add to the head of the list
-		user.visible_message("[user] inserts \a [C] into [src].", SPAN_NOTICE("You insert \a [C] into [src]."))
-		playsound(loc, load_sound, 50, 1)
 
-	update_icon()
+					if (!istype(ammo_magazine, magazine_type))
+						jam_chance = initial(jam_chance) + 10
+					else
+						jam_chance = initial(jam_chance)
+
+					user.visible_message(
+						SPAN_NOTICE("\The [user] reloads \a [src] with \a [ammo]."),
+						SPAN_NOTICE("You swap \the [src]'s [ammo_magazine.name] with \a [ammo].")
+					)
+					return TRUE
+
+				// Normal reload
+				if (!user.unEquip(ammo, src))
+					return TRUE
+				playsound(src, mag_insert_sound, 50, TRUE)
+				ammo_magazine = ammo
+				ammo.update_icon()
+				update_icon()
+				if (!istype(ammo_magazine, magazine_type))
+					jam_chance = initial(jam_chance) + 10
+				else
+					jam_chance = initial(jam_chance)
+				user.visible_message(
+					SPAN_NOTICE("\The [user] loads \a [src] with \a [ammo]."),
+					SPAN_NOTICE("You load \the [src] with \the [ammo].")
+				)
+				return TRUE
+
+			if (SPEEDLOADER)
+				if (length(loaded) >= max_shells) {
+					USE_FEEDBACK_FAILURE("\The [src] is full of ammunition.")
+					return TRUE
+				}
+				var/count = 0
+				for (var/obj/item/ammo_casing/casing in magazine.stored_ammo)
+					if (length(loaded) >= max_shells)
+						break
+					if (casing.caliber == caliber)
+						casing.forceMove(src)
+						loaded += casing
+						magazine.stored_ammo -= casing
+						count++
+				if (!count)
+					USE_FEEDBACK_FAILURE("The casings stored in \the [ammo] are not compatible with \the [src].")
+					return TRUE
+				playsound(src, 'sound/weapons/empty.ogg', 50, TRUE)
+				ammo.update_icon()
+				update_icon()
+				user.visible_message(
+					SPAN_NOTICE("\The [user] loads \a [src] with \a [ammo]."),
+					SPAN_NOTICE("You load [count] round\s into \the [src] with \the [ammo].")
+				)
+				return TRUE
+
+	// Casings
+	if (istype(ammo, /obj/item/ammo_casing))
+		var/obj/item/ammo_casing/casing = ammo
+		if (!GET_FLAGS(load_method, SINGLE_CASING))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be loaded with single casings.")
+			return TRUE
+		if (caliber != casing.caliber)
+			USE_FEEDBACK_FAILURE("\The [casing] does not fit in \the [src]'s chamber.")
+			return TRUE
+		if (length(loaded) >= max_shells)
+			USE_FEEDBACK_FAILURE("\The [src] is full of ammo.")
+			return TRUE
+		if (!user.unEquip(ammo, src))
+			return TRUE
+		playsound(src, load_sound, 50, TRUE)
+		loaded.Insert(1, ammo)
+		update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \a [casing] into \a [src]."),
+			SPAN_NOTICE("You load \the [casing] into \the [src].")
+		)
+		return TRUE
+
+	return FALSE
+
 
 #undef EXP_TAC_RELOAD
 #undef PROF_TAC_RELOAD
 #undef EXP_SPD_RELOAD
 #undef PROF_SPD_RELOAD
 
-//attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
-/obj/item/gun/projectile/proc/unload_ammo(mob/user, allow_dump=1)
-	if(is_jammed)
-		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src]")
-		if(!do_after(user, 0.4 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+
+/**
+ * Attempts to unload the gun.
+ *
+ * **Parameters**:
+ * - `user` - The mob unloading the gun.
+ * - `allow_dump` (Boolean, default `TRUE`) - If set and the gun accepts speed loaders, allows dumping rounds onto the floor.
+ *
+ * Has no return value.
+ */
+/obj/item/gun/projectile/proc/unload_ammo(mob/user, allow_dump = TRUE)
+	// Clear jams
+	if (is_jammed)
+		if (!do_after(user, 0.4 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) || !user.use_sanity_check(src))
 			return
-		is_jammed = 0
-		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-	if(ammo_magazine)
-		if(jam_chance && !istype(ammo_magazine, magazine_type))
-			jam_chance -= 10
+		user.visible_message(
+			SPAN_NOTICE("\The [user] unjams \a [src]."),
+			SPAN_NOTICE("You unjam \the [src].")
+		)
+		is_jammed = FALSE
+		update_icon()
+		playsound(src, 'sound/weapons/flipblade.ogg', 50, TRUE)
+		return
+
+	// Eject magazine
+	if (ammo_magazine)
+		jam_chance = initial(jam_chance)
 		user.put_in_hands(ammo_magazine)
-		user.visible_message("[user] removes [ammo_magazine] from [src].", SPAN_NOTICE("You remove [ammo_magazine] from [src]."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] ejects \a [ammo_magazine] from \a [src]."),
+			SPAN_NOTICE("You eject \the [ammo_magazine] from \the [src].")
+		)
 		playsound(loc, mag_remove_sound, 50, 1)
 		ammo_magazine.update_icon()
 		ammo_magazine = null
-	else if(length(loaded))
-		//presumably, if it can be speed-loaded, it can be speed-unloaded.
-		if(allow_dump && (load_method & SPEEDLOADER))
-			var/count = 0
-			var/turf/T = get_turf(user)
-			if(T)
-				for(var/obj/item/ammo_casing/C in loaded)
-					if(LAZYLEN(C.fall_sounds))
-						playsound(loc, pick(C.fall_sounds), 50, 1)
-					C.forceMove(T)
-					count++
-				loaded.Cut()
-			if(count)
-				user.visible_message("[user] unloads [src].", SPAN_NOTICE("You unload [count] round\s from [src]."))
-		else if(load_method & SINGLE_CASING)
-			var/obj/item/ammo_casing/C = loaded[length(loaded)]
-			LIST_DEC(loaded)
-			user.put_in_hands(C)
-			user.visible_message("[user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
-	else
-		to_chat(user, SPAN_WARNING("[src] is empty."))
-	update_icon()
+		update_icon()
+		return
+
+	if (!length(loaded))
+		USE_FEEDBACK_FAILURE("\The [src] has no ammunition to unload.")
+		return
+
+	// Dump everything on the floor
+	if (allow_dump && GET_FLAGS(load_method, SPEEDLOADER))
+		var/count = 0
+		var/turf/turf = get_turf(src)
+		if (!turf)
+			return
+		for (var/obj/item/ammo_casing/casing in loaded)
+			if (LAZYLEN(casing.fall_sounds))
+				playsound(src, pick(casing.fall_sounds), 50, TRUE)
+			casing.forceMove(turf)
+			count++
+		loaded.Cut()
+		if (count)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] dumps \a [src]'s casing[count > 1 ? "s" : null] on \the [turf]."),
+				SPAN_NOTICE("You dump \the [src]'s casing[count > 1 ? "s" : null] on \the [turf].")
+			)
+		update_icon()
+		return
+
+	// Unload single casings
+	if (GET_FLAGS(load_method, SINGLE_CASING))
+		var/obj/item/ammo_casing/casing = pop(loaded)
+		user.put_in_hands(casing)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \a [casing] from \a [src]."),
+			SPAN_NOTICE("You remove \a [casing] from \the [src].")
+		)
+		update_icon()
+		return
 
 
 /obj/item/gun/projectile/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -309,7 +381,7 @@
 
 /obj/item/gun/projectile/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
-		unload_ammo(user, allow_dump=0)
+		unload_ammo(user, FALSE)
 	else
 		return ..()
 

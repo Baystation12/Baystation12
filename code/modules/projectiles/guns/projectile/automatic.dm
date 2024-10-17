@@ -12,7 +12,7 @@
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/flechette
 	magazine_type = /obj/item/ammo_magazine/proto_smg
-	allowed_magazines = /obj/item/ammo_magazine/proto_smg
+	allowed_magazines = list(/obj/item/ammo_magazine/proto_smg)
 	multi_aim = 1
 	burst_delay = 2
 	mag_insert_sound = 'sound/weapons/guns/interaction/smg_magin.ogg'
@@ -37,7 +37,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 3)
 	ammo_type = /obj/item/ammo_casing/pistol
 	magazine_type = /obj/item/ammo_magazine/machine_pistol
-	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
+	allowed_magazines = list(/obj/item/ammo_magazine/machine_pistol)
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	one_hand_penalty = 2
 
@@ -74,7 +74,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/smg
-	allowed_magazines = /obj/item/ammo_magazine/smg
+	allowed_magazines = list(/obj/item/ammo_magazine/smg)
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
@@ -110,7 +110,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/rifle
 	one_hand_penalty = 8
-	allowed_magazines = /obj/item/ammo_magazine/rifle
+	allowed_magazines = list(/obj/item/ammo_magazine/rifle)
 	accuracy_power = 7
 	accuracy = 2
 	bulk = GUN_BULK_HEAVY_RIFLE
@@ -127,13 +127,13 @@
 		)
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
-	..()
 	if(ammo_magazine)
 		icon_state = "arifle"
 		wielded_item_state = "arifle-wielded"
 	else
 		icon_state = "arifle-empty"
 		wielded_item_state = "arifle-wielded-empty"
+	..()
 
 /obj/item/gun/projectile/automatic/sec_smg
 	name = "submachine gun"
@@ -149,7 +149,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/small
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/smg_top
-	allowed_magazines = /obj/item/ammo_magazine/smg_top
+	allowed_magazines = list(/obj/item/ammo_magazine/smg_top)
 	accuracy_power = 7
 	one_hand_penalty = 3
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
@@ -186,7 +186,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
-	allowed_magazines = /obj/item/ammo_magazine/mil_rifle //Interchangable but poor performance
+	allowed_magazines = list(/obj/item/ammo_magazine/mil_rifle) //Interchangable but poor performance
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	accuracy = 2
@@ -363,16 +363,18 @@
 		item_state = "l6[cover_open ? "open" : "closed"]-empty"
 		wielded_item_state = "l6[cover_open ? "open" : "closed"]-empty-wielded"
 
-/obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
-	if(!cover_open)
-		to_chat(user, SPAN_WARNING("You need to open the cover to load that into [src]."))
-		return
-	..()
+/obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/ammo, mob/user)
+	if (!cover_open)
+		USE_FEEDBACK_FAILURE("\The [src]'s cover needs to be open before you can reload it.")
+		return TRUE
 
-/obj/item/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, allow_dump=1)
-	if(!cover_open)
-		to_chat(user, SPAN_WARNING("You need to open the cover to unload [src]."))
+	return ..()
+
+/obj/item/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, allow_dump = TRUE)
+	if (!cover_open)
+		USE_FEEDBACK_FAILURE("\The [src]'s cover needs to be open before you can unload it.")
 		return
+
 	..()
 
 /obj/item/gun/projectile/automatic/battlerifle
@@ -388,7 +390,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mil_rifle/heavy
-	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
+	allowed_magazines = list(/obj/item/ammo_magazine/mil_rifle)
 	one_hand_penalty = 10
 	accuracy_power = 9
 	accuracy = 1
@@ -426,7 +428,7 @@
 	slot_flags = 0
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/box/minigun
-	allowed_magazines = /obj/item/ammo_magazine/box/minigun
+	allowed_magazines = list(/obj/item/ammo_magazine/box/minigun)
 	accuracy = 1
 	one_hand_penalty = 20
 	mag_insert_sound = 'sound/weapons/guns/interaction/lmg_magin.ogg'
@@ -452,24 +454,44 @@
 		list(mode_name="longer bursts",		can_autofire=0, burst=10, fire_delay=0.2, burst_accuracy = list(0,-1,-2,-3,-4,-8,-8,-16,-16), dispersion = list(1.0, 2.0, 3.0, 3.0, 4.0), burst_delay = 1)
 		)
 
-/obj/item/gun/projectile/automatic/minigun/mounted/load_ammo(obj/item/A, mob/user)
+/obj/item/gun/projectile/automatic/minigun/mounted/load_ammo(obj/item/ammo, mob/user)
 	var/obj/item/rig/rig = get_rig()
-	if (istype(rig))
-		if (!rig.offline && rig.suit_is_deployed())
-			user.visible_message(SPAN_NOTICE("\The [user] begins the slow process of re-arming \The [src]."), range = 4)
-			do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
-			..()
-		else
-			to_chat(user, SPAN_DANGER("You can't reload your minigun without deploying your hardsuit!"))
-			return
+	if (!istype(rig))
+		USE_FEEDBACK_FAILURE("ERROR: Could not find a rig to reload \the [src]. This is a bug. Report it.")
+		crash_with("\A [src] ([type]) tried to load ammo but couldn't find a rig.")
+		return TRUE
+	if (rig.offline)
+		USE_FEEDBACK_FAILURE("\The [rig] needs to be online before you can reload \the [src].")
+		return TRUE
+	if (!rig.suit_is_deployed())
+		USE_FEEDBACK_FAILURE("\The [rig] needs to be deployed before you can reload \the [src].")
+		return TRUE
 
-/obj/item/gun/projectile/automatic/minigun/mounted/unload_ammo(mob/user, allow_dump=0)
+	user.visible_message(
+		SPAN_NOTICE("\The [user] begins the slow process of re-arming \the [rig]'s [name] with \a [ammo]."),
+		SPAN_NOTICE("You begin the slow process of re-arming \the [rig]'s [name] with \the [ammo].")
+	)
+	if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || !user.use_sanity_check(src, ammo))
+		return TRUE
+	return ..()
+
+/obj/item/gun/projectile/automatic/minigun/mounted/unload_ammo(mob/user, allow_dump = FALSE)
 	var/obj/item/rig/rig = get_rig()
-	if (istype(rig))
-		if (!rig.offline && rig.suit_is_deployed())
-			user.visible_message(SPAN_NOTICE("\The [user] begins ejecting the magazine from \The [src]."), range = 4)
-			do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
-			..()
-		else
-			to_chat(user, SPAN_DANGER("You can't unload your minigun without deploying your hardsuit!"))
-			return
+	if (!istype(rig))
+		USE_FEEDBACK_FAILURE("ERROR: Could not find a rig to unload \the [src]. This is a bug. Report it.")
+		crash_with("\A [src] ([type]) tried to unload ammo but couldn't find a rig.")
+		return TRUE
+	if (rig.offline)
+		USE_FEEDBACK_FAILURE("\The [rig] needs to be online before you can unload \the [src].")
+		return TRUE
+	if (!rig.suit_is_deployed())
+		USE_FEEDBACK_FAILURE("\The [rig] needs to be deployed before you can unload \the [src].")
+		return TRUE
+
+	user.visible_message(
+		SPAN_NOTICE("\The [user] starts ejecting \the [rig]'s [name]'s magazine."),
+		SPAN_NOTICE("You start ejecting \the [rig]'s [name]'s magazine.")
+	)
+	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || !user.use_sanity_check(src))
+		return
+	..()

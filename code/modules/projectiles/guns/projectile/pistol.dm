@@ -3,7 +3,7 @@
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
-	allowed_magazines = /obj/item/ammo_magazine/pistol
+	allowed_magazines = list(/obj/item/ammo_magazine/pistol)
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
@@ -53,7 +53,7 @@
 	fire_delay = 12
 	screen_shake = 2
 	magazine_type = /obj/item/ammo_magazine/magnum
-	allowed_magazines = /obj/item/ammo_magazine/magnum
+	allowed_magazines = list(/obj/item/ammo_magazine/magnum)
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
@@ -96,7 +96,7 @@
 	caliber = CALIBER_GYROJET
 	origin_tech = list(TECH_COMBAT = 3)
 	magazine_type = /obj/item/ammo_magazine/gyrojet
-	allowed_magazines = /obj/item/ammo_magazine/gyrojet
+	allowed_magazines = list(/obj/item/ammo_magazine/gyrojet)
 	handle_casings = CLEAR_CASINGS	//the projectile is the casing
 	fire_delay = 25
 	auto_eject = 1
@@ -123,7 +123,7 @@
 	fire_delay = 4
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ESOTERIC = 2)
 	magazine_type = /obj/item/ammo_magazine/pistol/small
-	allowed_magazines = /obj/item/ammo_magazine/pistol/small
+	allowed_magazines = list(/obj/item/ammo_magazine/pistol/small)
 	var/obj/item/silencer/silencer
 
 /obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
