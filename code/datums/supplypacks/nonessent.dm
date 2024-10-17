@@ -41,9 +41,9 @@
 /singleton/hierarchy/supply_pack/nonessent/lasertag
 	name = "Rec - Lasertag equipment"
 	contains = list(/obj/item/gun/energy/lasertag/red = 3,
-					/obj/item/clothing/suit/redtag = 3,
+					/obj/item/clothing/suit/lasertag/red = 3,
 					/obj/item/gun/energy/lasertag/blue = 3,
-					/obj/item/clothing/suit/bluetag = 3)
+					/obj/item/clothing/suit/lasertag/blue = 3)
 	cost = 20
 	containertype = /obj/structure/closet
 	containername = "lasertag Closet"
