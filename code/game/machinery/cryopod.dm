@@ -195,59 +195,6 @@
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
 	applies_stasis = 0
 
-/obj/machinery/cryopod/lifepod
-	name = "life pod"
-	desc = "A man-sized pod for entering suspended animation. Dubbed 'cryocoffin' by more cynical spacers, it is pretty barebone, counting on stasis system to keep the victim alive rather than packing extended supply of food or air. Can be ordered with symbols of common religious denominations to be used in space funerals too."
-	on_store_name = "Life Pod Oversight"
-	time_till_despawn = 20 MINUTES
-	icon_state = "redpod0"
-	base_icon_state = "redpod0"
-	occupied_icon_state = "redpod1"
-	var/launched = 0
-	var/datum/gas_mixture/airtank
-
-/obj/machinery/cryopod/lifepod/Initialize()
-	. = ..()
-	airtank = new()
-	airtank.temperature = T0C
-	airtank.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
-	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
-
-/obj/machinery/cryopod/lifepod/return_air()
-	return airtank
-
-/obj/machinery/cryopod/lifepod/proc/launch()
-	launched = 1
-	for(var/d in GLOB.cardinal)
-		var/turf/T = get_step(src,d)
-		var/obj/machinery/door/blast/B = locate() in T
-		if(B && B.density)
-			B.force_open()
-			break
-
-	var/list/possible_locations = list()
-	if(GLOB.using_map.use_overmap)
-		var/obj/overmap/visitable/O = map_sectors["[z]"]
-		for(var/obj/overmap/visitable/OO in range(O,2))
-			if(HAS_FLAGS(OO.sector_flags, OVERMAP_SECTOR_IN_SPACE) || istype(OO,/obj/overmap/visitable/sector/exoplanet))
-				possible_locations |= text2num(level)
-
-	var/newz = GLOB.using_map.get_empty_zlevel()
-	if(length(possible_locations) && prob(10))
-		newz = pick(possible_locations)
-	var/turf/nloc = locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE),newz)
-	if(!istype(nloc, /turf/space))
-		explosion(nloc, 6)
-	playsound(loc,'sound/effects/rocket.ogg',100)
-	forceMove(nloc)
-
-//Don't use these for in-round leaving
-/obj/machinery/cryopod/lifepod/Process()
-	if(evacuation_controller && evacuation_controller.state >= EVAC_LAUNCHING)
-		if(occupant && !launched)
-			launch()
-		..()
-
 /obj/machinery/cryopod/New()
 	announce = new /obj/item/device/radio/intercom(src)
 	..()
