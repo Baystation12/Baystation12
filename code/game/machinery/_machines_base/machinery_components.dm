@@ -261,7 +261,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			continue
 		if((. = part.use_tool(I, user)))
 			return
-	return construct_state && construct_state.attackby(I, user, src)
+	return construct_state && construct_state.use_tool(I, user, src)
 
 /// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attack_hand(mob/user)
@@ -276,52 +276,70 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 Standard helpers for users interacting with machinery parts.
 */
 
+
 /// Handles replacement of components by a user using a part replacer. Returns boolean.
 /obj/machinery/proc/part_replacement(mob/user, obj/item/storage/part_replacer/part_replacer)
-	for(var/obj/item/stock_parts/component_part in component_parts)
-		if(!component_part.base_type)
+	. = FALSE
+
+	for (var/obj/item/stock_parts/component_part as anything in component_parts)
+		if (!component_part.base_type)
 			continue
-		if(!(component_part.part_flags & PART_FLAG_HAND_REMOVE))
+		if (!HAS_FLAGS(component_part.part_flags, PART_FLAG_HAND_REMOVE))
 			continue
 
-		for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
-			if(istype(new_component_part, component_part.base_type) && new_component_part.rating > component_part.rating)
-				replace_part(user, part_replacer, component_part, new_component_part)
-				. = TRUE
-				playsound(loc, 'sound/items/rped.ogg', 70)
-				break
+		for (var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+			if (!istype(new_component_part, component_part.base_type))
+				continue
+			if (new_component_part.rating <= component_part.rating)
+				continue
+			replace_part(user, part_replacer, component_part, new_component_part)
+			. = TRUE
+			break
 
-	for(var/path in uncreated_component_parts)
+	for (var/path in uncreated_component_parts)
 		var/obj/item/stock_parts/component_part = path
 		var/part_count = uncreated_component_parts[path]
-		if(!(initial(component_part.part_flags) & PART_FLAG_HAND_REMOVE))
+		if (!HAS_FLAGS(initial(component_part.part_flags), PART_FLAG_HAND_REMOVE))
 			continue
 		var/base_type = initial(component_part.base_type)
-		if(base_type)
-			for (var/i = 1 to part_count)
-				for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
-					if(istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
-						replace_part(user, part_replacer, component_part, new_component_part)
-						. = TRUE
-						playsound(loc, 'sound/items/rped.ogg', 70)
-						break
+		if (!base_type)
+			continue
+		for (var/i = 1 to part_count)
+			for (var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+				if (!istype(new_component_part, base_type))
+					continue
+				if (new_component_part.rating <= initial(component_part.rating))
+					continue
+				replace_part(user, part_replacer, component_part, new_component_part)
+				. = TRUE
+				break
+
+	if (.)
+		playsound(src, 'sound/items/rped.ogg', 70)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] replaces some parts in \a [src] with \a [part_replacer]."),
+			SPAN_NOTICE("You replace some parts in \the [src] with \the [part_replacer].")
+		)
+		return
 
 
 /// Handles inserting a component or item into the machine by a user. Returns boolean. `TRUE` should halt further processing in `attack*()` procs.
 /obj/machinery/proc/part_insertion(mob/user, obj/item/stock_parts/part) // Second argument may actually be an arbitrary item.
-	if(!user.canUnEquip(part) && !isstack(part))
+	if (!user.canUnEquip(part) && !isstack(part))
 		return FALSE
 	var/number = can_add_component(part, user)
-	if(!number)
-		return istype(part) // If it's not a stock part, we don't block further interactions; presumably the user meant to do something else.
-	if(isstack(part))
+	if (!number)
+		return TRUE
+	if (isstack(part))
 		var/obj/item/stack/stack = part
 		if (!stack.can_use(number))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, number, "to install into \the [src].")
-			return FALSE
+			return TRUE
 		install_component(stack.split(number, TRUE))
 	else
-		user.unEquip(part, src)
+		if (!user.unEquip(part, src))
+			FEEDBACK_UNEQUIP_FAILURE(user, part)
+			return TRUE
 		install_component(part)
 	user.visible_message(
 		SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"),
@@ -329,34 +347,45 @@ Standard helpers for users interacting with machinery parts.
 	)
 	return TRUE
 
+
 /// Handles removal of a component by a user. Returns boolean.
-/obj/machinery/proc/part_removal(mob/user)
+/obj/machinery/proc/part_removal(mob/user, obj/item/tool)
 	var/list/removable_parts = list()
-	for(var/path in types_of_component(/obj/item/stock_parts))
+	for (var/path in types_of_component(/obj/item/stock_parts))
 		var/obj/item/stock_parts/part = path
-		if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
+		if (!HAS_FLAGS(initial(part.part_flags), PART_FLAG_HAND_REMOVE))
 			continue
-		if(components_are_accessible(path))
-			removable_parts[initial(part.name)] = path
-	if(length(removable_parts))
-		var/input = input(user, "Which part would you like to uninstall from \the [src]?", "Part Removal") as null|anything in removable_parts
-		if(!input || QDELETED(src) || !Adjacent(user) || user.incapacitated())
-			return TRUE
-		var/path = removable_parts[input]
-		if(!path || !components_are_accessible(path))
-			return TRUE
-		remove_part_and_give_to_user(path, user)
+		if (!components_are_accessible(path))
+			continue
+		removable_parts[initial(part.name)] = path
+
+	if (!length(removable_parts))
+		USE_FEEDBACK_FAILURE("\The [src] has no more removable parts.")
 		return TRUE
+
+	var/input = input(user, "Which part would you like to uninstall from \the [src]?", "Part Removal") as null|anything in removable_parts
+	if (!input || !user.use_sanity_check(src, tool))
+		return TRUE
+
+	var/path = removable_parts[input]
+	if (!path || !components_are_accessible(path))
+		return TRUE
+
+	remove_part_and_give_to_user(path, user)
+	return TRUE
+
 
 /// Removes a part of the given `path` and places it in the hands of `user`.
 /obj/machinery/proc/remove_part_and_give_to_user(path, mob/user)
 	var/obj/item/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
-	if(part)
-		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
-		user.visible_message(
-			SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."),
-			SPAN_NOTICE("You remove \the [part] from \the [src].")
-		)
+	if (!part)
+		return
+	user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
+	user.visible_message(
+		SPAN_NOTICE("\The [user] removes \a [part] from \a [src]."),
+		SPAN_NOTICE("You remove \the [part] from \the [src].")
+	)
+
 
 /// Returns a list of required components that are missing from the machine, or `null` if no components are missing or the machine lacks a `construct_state`.
 /obj/machinery/proc/missing_parts()
