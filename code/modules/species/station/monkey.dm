@@ -50,9 +50,7 @@
 	)
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_MONKEY,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_CULTURE = CULTURE_MONKEY
 	)
 
 	ingest_amount = 6
@@ -86,9 +84,7 @@
 	base_color = "#333333"
 	tail = "farwatail"
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_FARWA,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_CULTURE = CULTURE_FARWA
 	)
 
 /datum/species/monkey/skrell
@@ -104,9 +100,7 @@
 	blood_color = "#1d2cbf"
 	tail = null
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_NEARA,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_CULTURE = CULTURE_NEARA
 	)
 
 
@@ -123,9 +117,7 @@
 	flesh_color = "#34af10"
 	base_color = "#066000"
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_STOK,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_TEST_SUBJECTS
+		TAG_CULTURE = CULTURE_STOK
 	)
 
 	traits = list(

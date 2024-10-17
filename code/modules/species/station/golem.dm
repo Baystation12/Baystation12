@@ -40,9 +40,7 @@
 	pronouns = list(PRONOUNS_IT_ITS)
 
 	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_CULTIST,
-		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
-		TAG_FACTION =   FACTION_OTHER
+		TAG_CULTURE = CULTURE_CULTIST
 	)
 
 	traits = list(
