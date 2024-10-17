@@ -34,7 +34,7 @@ exactly 2 "/datum text paths" '"/datum'
 exactly 2 "/mob text paths" '"/mob'
 exactly 10 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
-exactly 115 "to_world uses" '\sto_world\('
+exactly 117 "to_world uses" '\sto_world\('
 exactly 0 "globals with leading /" '^/var' -P
 exactly 0 "globals without global sugar" '^var/(?!global/)' -P
 exactly 0 "apparent paths with trailing /" '\w/[,\)\n]' -P
