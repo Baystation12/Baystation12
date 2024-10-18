@@ -76,6 +76,9 @@ LOG_ATTACK
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
+## log computer commands
+# LOG_COMPUTER_COMMANDS
+
 ## Log all timers on timer auto reset
 # LOG_TIMERS_ON_BUCKET_RESET
 
