@@ -60,3 +60,10 @@
 	name = "chaplain insignia (taoism)"
 	desc = "An insignia worn by chaplains. The yin yang represents Taoism."
 	icon_state = "taoinsignia"
+
+
+/obj/item/clothing/accessory/stole
+	name = "stole"
+	desc = "A long, colourful liturgical vestment used by Christian clergy."
+	icon_state = "stole"
+	w_class = ITEM_SIZE_SMALL

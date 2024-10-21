@@ -224,3 +224,10 @@
 	description = "A piece of cloth tied around the neck. A favorite of Sailors and Partisans everywhere."
 	path = /obj/item/clothing/accessory/neckerchief
 	flags = GEAR_HAS_COLOR_SELECTION
+
+
+/datum/gear/accessory/stole
+	display_name = "stole, colour select"
+	description = "A long, colourful liturgical vestment used by Christian clergy."
+	path = /obj/item/clothing/accessory/stole
+	flags = GEAR_HAS_COLOR_SELECTION
