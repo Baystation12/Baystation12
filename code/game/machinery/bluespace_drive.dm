@@ -30,6 +30,11 @@
 	///Chance to teleport someone to the interlude during a pulse.
 	var/interlude_chance = 55
 
+	var/affect_chance = 50
+
+	var/interlude_min_time = 30 SECONDS
+	var/interlude_max_time = 3 MINUTES
+
 
 /obj/machinery/bluespacedrive/Destroy()
 	QDEL_NULL(drive_sound)
@@ -146,7 +151,7 @@
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, TRUE)
 	var/datum/bubble_effect/bluespace_pulse/parent
 	for (var/level in GetConnectedZlevels(z))
-		parent = new (x, y, level, 1, 1, parent, interlude_teleport_chance = interlude_chance)
+		parent = new (x, y, level, 1, 1, parent)
 
 
 /// Creates a blinding flash of light that will blind and deafen those in range, and change turfs to bluespace
@@ -174,11 +179,13 @@
 /datum/bubble_effect/bluespace_pulse
 	///List of mobs that can be swapped around when the pulse hits
 	var/list/mob/living/mobs_to_switch = list()
+	var/obj/machinery/bluespacedrive/parent
 	var/interlude_teleport_chance = 0
+	var/affect_chance = 0
 
-/datum/bubble_effect/bluespace_pulse/New(interlude_teleport_chance = 50)
+/datum/bubble_effect/bluespace_pulse/New(obj/machinery/bluespacedrive/parent)
 	..()
-	src.interlude_teleport_chance = interlude_teleport_chance
+	src.parent = parent
 	START_PROCESSING(SSfastprocess, src)
 	var/list/zlevels = GetConnectedZlevels(z)
 	for (var/mob/living/L as anything in GLOB.alive_mobs)
@@ -210,24 +217,27 @@
 	if (light && prob(20))
 		light.broken()
 	var/mob/living/being = locate() in turf
-	if (being && prob(50))
-		//swap places with another mob
+	if (being && prob(parent.affect_chance))
 		var/list/zlevels = GetConnectedZlevels(being.z)
+		if (GLOB.using_map.use_bluespace_interlude && prob(parent.interlude_chance))
+			if (istype(being, /mob/living/simple_animal) && prob(80))
+				return
+			if (istype(being, /mob/living/exosuit))
+				return
+			var/turf/T = pick_area_turf_in_connected_z_levels(
+				list(/proc/is_not_space_area),
+				list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe),
+				zlevels[1])
+			if (!T)
+				return
+			GLOB.using_map.do_interlude_teleport(being, T, Frand(parent.interlude_min_time, parent.interlude_max_time) MINUTES)
+			return
+
+		//swap places with another mob
 		for (var/mob/living/mob as anything in mobs_to_switch)
 			if (!(mob.z in zlevels))
 				continue
 
-			if (GLOB.using_map.use_bluespace_interlude && prob(interlude_teleport_chance))
-				if (istype(mob, /mob/living/simple_animal) && prob(80))
-					return
-				var/turf/T = pick_area_turf_in_connected_z_levels(
-					list(/proc/is_not_space_area),
-					list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe),
-					zlevels[1])
-				if (!T)
-					return
-				GLOB.using_map.do_interlude_teleport(mob, T, Frand(1, 2.5) MINUTES)
-				return
 			if (mob != being)
 				var/source_position = being.loc
 				var/other_position = mob.loc
