@@ -8,6 +8,7 @@
 		/obj/item/clothing/under/rank/chaplain,
 		/obj/item/clothing/shoes/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
+		/obj/item/clothing/head/chaplain_hood,
 		/obj/item/storage/candle_box = 2,
 		/obj/item/storage/candle_box/incense,
 		/obj/item/deck/tarot,

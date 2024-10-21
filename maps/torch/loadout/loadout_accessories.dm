@@ -166,6 +166,9 @@
 /datum/gear/accessory/stethoscope
 	allowed_roles = STERILE_ROLES
 
+/datum/gear/accessory/stole
+	allowed_roles = list(/datum/job/chaplain)
+
 /datum/gear/tactical/holster
 	allowed_roles = ARMED_ROLES
 
