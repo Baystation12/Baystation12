@@ -114,21 +114,21 @@
 /obj/item/stack/tile/mono
 	name = "steel mono tile"
 	singular_name = "steel mono tile"
-	icon_state = "tile"
+	icon_state = "tile_mono"
 	matter = list(MATERIAL_STEEL = 450)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono/dark
 	name = "dark mono tile"
 	singular_name = "dark mono tile"
-	icon_state = "fr_tile"
+	icon_state = "fr_tile_mono"
 	matter = list(MATERIAL_STEEL = 450)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono/white
 	name = "white mono tile"
 	singular_name = "white mono tile"
-	icon_state = "tile_white"
+	icon_state = "tile_white_mono"
 	matter = list(MATERIAL_PLASTIC = 450)
 
 /obj/item/stack/tile/grid
