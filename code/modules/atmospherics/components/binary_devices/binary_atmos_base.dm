@@ -1,7 +1,6 @@
 /obj/machinery/atmospherics/binary
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
-	layer = ABOVE_CATWALK_LAYER
 
 	var/datum/gas_mixture/air1
 	var/datum/gas_mixture/air2
