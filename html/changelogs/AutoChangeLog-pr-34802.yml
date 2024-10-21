@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {tweak: Fleet сhaplains can be unskilled in small arms now.}
+delete-after: true
