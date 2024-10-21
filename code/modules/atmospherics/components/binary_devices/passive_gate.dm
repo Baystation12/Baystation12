@@ -5,7 +5,7 @@
 /obj/machinery/atmospherics/binary/passive_gate
 	icon = 'icons/atmos/passive_gate.dmi'
 	icon_state = "map_off"
-	level = ATOM_LEVEL_UNDER_TILE
+	level = ATOM_LEVEL_OVER_TILE
 
 	name = "pressure regulator"
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."

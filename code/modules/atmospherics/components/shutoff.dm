@@ -13,6 +13,7 @@
 	var/shutoff_state = 0
 	connect_types = CONNECT_TYPE_REGULAR
 	build_icon_state = "svalve"
+	level = ATOM_LEVEL_UNDER_TILE
 
 /obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[icon_connect_type]"

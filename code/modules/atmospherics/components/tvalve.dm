@@ -5,7 +5,7 @@
 	name = "manual switching valve"
 	desc = "A pipe valve."
 
-	level = ATOM_LEVEL_UNDER_TILE
+	level = ATOM_LEVEL_OVER_TILE
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|WEST
 
