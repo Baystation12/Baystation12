@@ -1,0 +1,4 @@
+author: Qlonever
+changes:
+  - {bugfix: Toggling fullscreen no longer adds a line of empty space to the window.}
+delete-after: true
