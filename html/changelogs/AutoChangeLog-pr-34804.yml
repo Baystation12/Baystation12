@@ -1,4 +1,0 @@
-author: Mucker
-changes:
-  - {admin: Added logging of computer commands to the Secrets 'Investigation' menu.}
-delete-after: true
