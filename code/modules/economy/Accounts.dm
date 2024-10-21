@@ -4,6 +4,7 @@
 	var/account_number = 0
 	var/remote_access_pin = 0
 	var/money = 0
+	var/opening_balance = 0
 	var/list/transaction_log = list()
 	var/suspended = 0
 	var/security_level = 0	//0 - auto-identify from worn ID, require only account number
@@ -21,6 +22,9 @@
 
 /datum/money_account/proc/get_balance()
 	return money
+
+/datum/money_account/proc/get_profit()
+	return money - opening_balance
 
 /datum/money_account/proc/log_msg(msg, machine_id)
 	var/datum/transaction/log/T = new(src, msg, machine_id)
@@ -88,6 +92,7 @@
 
 	//add the account
 	T.perform()
+	M.opening_balance = M.money
 	all_money_accounts.Add(M)
 
 	return M
