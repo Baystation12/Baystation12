@@ -42,7 +42,7 @@
 /obj/structure/closet/coffin/lifepod/return_air()
 	return airtank
 
-/obj/structure/closet/coffin/lifepod/make_broken()
+/obj/structure/closet/coffin/lifepod/emag_act()
 	. = ..()
 
 	if(GLOB.using_map.use_overmap && !emag)
@@ -58,39 +58,47 @@
 			else
 				visitables += site
 
-			emag = input(usr, "Where do you want to go?", "Hijacking \the [src]", null) in visitables
+		emag = input(usr, "Where do you want to go?", "Hijacking \the [src]", null) in visitables
 
 /obj/structure/closet/coffin/lifepod/touch_map_edge()
 	if(launched)
 		..()
-	else
-		var/cache_z = z
-		var/landing_z = GLOB.using_map.get_empty_zlevel()
+		return
 
-		launched = TRUE
-		playsound(loc,'sound/effects/rocket.ogg',100)
-		forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), landing_z))
+	launch()
 
-		if(GLOB.using_map.use_overmap)
-			var/obj/overmap/visitable/source = map_sectors["[cache_z]"]
-			var/obj/overmap/visitable/closest
-			var/dist = GLOB.using_map.overmap_size
+/obj/structure/closet/coffin/lifepod/proc/launch()
+	var/cache_z = z
+	var/landing_z = GLOB.using_map.get_empty_zlevel()
 
-			if(emag)
-				closest = emag
-			else
-				for(var/obj/overmap/visitable/other in get_area(source)) // This is every visitable overmap object
-                    if (other == source)
-                        continue
-                    new_dist = get_dist(source, other)
-					if (new_dist >= dist)
-                        continue
-					closest = other
-					dist = new_dist
+	launched = TRUE
+	playsound(loc,'sound/effects/rocket.ogg',100)
+	forceMove(locate(rand(TRANSITIONEDGE, world.maxx-TRANSITIONEDGE), rand(TRANSITIONEDGE, world.maxy-TRANSITIONEDGE), landing_z))
 
-			var/area/landing_area = pick(closest.get_areas()) /// Give a fairer shot NOT to land in space.
+	if(GLOB.using_map.use_overmap)
+		var/obj/overmap/visitable/source = map_sectors["[cache_z]"]
+		var/obj/overmap/visitable/closest
+		var/dist = GLOB.using_map.overmap_size
 
-			forceMove(landing_area)
+		if(emag)
+			closest = emag
+		else
+			for(var/obj/overmap/visitable/other in get_area(source)) // This is every visitable overmap object
+				if(other == source)
+					continue
+
+				var/new_dist = get_dist(source, other)
+
+				if(new_dist >= dist)
+					continue
+
+				closest = other
+				dist = new_dist
+
+		var/area/landing_area = pick(closest.get_areas()) /// Give a fairer shot NOT to land in space.
+
+		forceMove(landing_area)
+		if(!istype(loc, /turf/space))
 			visible_message(SPAN_DANGER("\The [src] crashes into \the [loc]!"))
-			new /obj/landmark/clear(loc)
-			playsound(loc,'sound/effects/clang.ogg',100)
+		new /obj/landmark/clear(loc)
+		playsound(loc,'sound/effects/clang.ogg',100)
