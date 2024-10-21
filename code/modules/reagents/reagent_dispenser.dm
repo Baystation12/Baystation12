@@ -279,7 +279,7 @@
 			else
 				log_and_message_admins("shot a fuel tank outside the world.", Proj.firer, loc)
 
-		if(!istype(Proj ,/obj/item/projectile/beam/lastertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
+		if(!istype(Proj ,/obj/item/projectile/beam/lasertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
 			explode()
 
 /obj/structure/reagent_dispensers/fueltank/proc/explode()

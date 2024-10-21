@@ -1,32 +1,8 @@
 /*
  * Contains:
- *		Lasertag
  *		Costume
  *		Misc
  */
-
-/*
- * Lasertag
- */
-/obj/item/clothing/suit/bluetag
-	name = "blue laser tag armour"
-	desc = "Blue Pride, Galaxy Wide."
-	icon_state = "bluetag"
-	blood_overlay_type = "armor"
-	item_flags = null
-	body_parts_covered = UPPER_TORSO
-	allowed = list (/obj/item/gun/energy/lasertag/blue)
-	siemens_coefficient = 3.0
-
-/obj/item/clothing/suit/redtag
-	name = "red laser tag armour"
-	desc = "Reputed to go faster."
-	icon_state = "redtag"
-	blood_overlay_type = "armor"
-	item_flags = null
-	body_parts_covered = UPPER_TORSO
-	allowed = list (/obj/item/gun/energy/lasertag/red)
-	siemens_coefficient = 3.0
 
 /*
  * Costume

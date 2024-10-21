@@ -410,6 +410,8 @@
 		var/obj/projectile/M = new muzzle_type(get_turf(src))
 
 		if(istype(M))
+			if (color)
+				M.set_color(color)
 			M.SetTransform(others = effect_transform)
 			M.pixel_x = round(location.pixel_x, 1)
 			M.pixel_y = round(location.pixel_y, 1)
@@ -423,6 +425,8 @@
 		var/obj/projectile/P = new tracer_type(location.loc)
 
 		if(istype(P))
+			if (color)
+				P.set_color(color)
 			P.SetTransform(others = effect_transform)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
@@ -434,6 +438,8 @@
 		var/obj/projectile/P = new impact_type(location ? location.loc : get_turf(src))
 
 		if(istype(P) && location)
+			if (color)
+				P.set_color(color)
 			P.SetTransform(others = effect_transform)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
