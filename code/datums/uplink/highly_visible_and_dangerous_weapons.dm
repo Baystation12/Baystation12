@@ -59,7 +59,7 @@
 	name = "Broomstick Pistol"
 	desc = "An antique pistol stolen from a museum. Be warned, it may be faulty and comes unloaded."
 	item_cost = 40
-	path = /obj/item/gun/projectile/pistol/broomstick
+	path = /obj/item/gun/projectile/boltloader/broomstick
 
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"
@@ -118,7 +118,7 @@
 	name = "Carbine Rifle"
 	desc = "For arming your comrades on the (not so) cheap!"
 	item_cost = 55
-	path = /obj/item/gun/projectile/sniper/semistrip
+	path = /obj/item/gun/projectile/boltloader/semistrip
 	antag_roles = list(MODE_REVOLUTIONARY, MODE_MERCENARY)
 
 
@@ -128,7 +128,7 @@
 	item_cost = 60
 	path = /obj/item/gun/energy/gun/nuclear
 
-/datum/uplink_item/item/visible_weapons/heavysniper
+/datum/uplink_item/item/visible_weapons/boltloader
 	name = "Anti-materiel Sniper Rifle"
 	desc = "A secure briefcase that contains an immensely powerful penetrating rifle, as well as seven extra sniper rounds."
 	item_cost = 68
@@ -172,7 +172,7 @@
 	name = "Small Revolver"
 	desc = "A pocket-sized holdout revolver. Easily concealable.."
 	item_cost = 24
-	path = /obj/item/gun/projectile/revolver/holdout
+	path = /obj/item/gun/projectile/revolving/holdout
 
 /datum/uplink_item/item/visible_weapons/pulserifle
 	name = "Pulse Rifle"
@@ -220,5 +220,5 @@
 	name = "Bolt Action Rifle"
 	desc = "For arming your comrades on the cheap!"
 	item_cost = 12
-	path = /obj/item/gun/projectile/heavysniper/boltaction
+	path = /obj/item/gun/projectile/boltloader/boltaction
 	antag_roles = list(MODE_REVOLUTIONARY)

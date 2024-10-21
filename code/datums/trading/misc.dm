@@ -105,7 +105,7 @@
 								/obj/item/bikehorn               = TRADER_THIS_TYPE,
 								/obj/item/reagent_containers/spray/waterflower = TRADER_THIS_TYPE,
 								/obj/item/gun/launcher/pneumatic/small = TRADER_THIS_TYPE,
-								/obj/item/gun/projectile/revolver/capgun = TRADER_THIS_TYPE,
+								/obj/item/gun/projectile/revolving/capgun = TRADER_THIS_TYPE,
 								/obj/item/clothing/mask/fakemoustache   = TRADER_THIS_TYPE,
 								/obj/item/grenade/spawnergrenade/fake_carp = TRADER_THIS_TYPE)
 

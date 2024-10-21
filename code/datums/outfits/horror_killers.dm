@@ -57,7 +57,7 @@
 	for(var/i=3, i>0, i--)
 		new /obj/item/spacecash/bundle/c1000(sec_briefcase)
 	new /obj/item/gun/energy/crossbow(sec_briefcase)
-	new /obj/item/gun/projectile/revolver(sec_briefcase)
+	new /obj/item/gun/projectile/revolving(sec_briefcase)
 	new /obj/item/ammo_magazine/speedloader/magnum(sec_briefcase)
 	new /obj/item/plastique(sec_briefcase)
 	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand)

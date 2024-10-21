@@ -1166,8 +1166,8 @@
 /obj/item/gun/projectile/pistol/optimus,
 /obj/item/gun/projectile/pistol/throwback,
 /obj/item/gun/projectile/pistol/throwback,
-/obj/item/gun/projectile/revolver/medium,
-/obj/item/gun/projectile/revolver/medium,
+/obj/item/gun/projectile/revolving/medium,
+/obj/item/gun/projectile/revolving/medium,
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},

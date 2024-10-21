@@ -10,7 +10,7 @@
 							/obj/item/toy/blink															= 200,
 							/obj/item/clothing/under/syndicate/tacticool								= 200,
 							/obj/item/toy/sword															= 200,
-							/obj/item/gun/projectile/revolver/capgun								= 200,
+							/obj/item/gun/projectile/revolving/capgun								= 200,
 							/obj/item/toy/crossbow														= 200,
 							/obj/item/storage/fancy/crayons										= 200,
 							/obj/item/toy/spinningtoy													= 200,
@@ -32,7 +32,7 @@
 							/obj/item/storage/box/large/foam_gun									= 100,
 							/obj/item/storage/box/large/foam_gun/burst							= 50,
 							/obj/item/storage/box/large/foam_gun/revolver						= 25,
-							/obj/item/storage/box/large/foam_gun/revolver/tampered				= 1
+							/obj/item/storage/box/large/foam_gun/revolving/tampered				= 1
 							)
 
 /obj/machinery/computer/arcade/Initialize()

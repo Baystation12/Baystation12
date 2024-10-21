@@ -11413,7 +11413,7 @@
 /area/maintenance/bridge/foreport)
 "GU" = (
 /obj/structure/displaycase,
-/obj/item/gun/projectile/revolver/medium/captain{
+/obj/item/gun/projectile/revolving/medium/captain{
 	pixel_y = -3
 	},
 /obj/structure/sign/ecplaque{

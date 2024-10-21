@@ -404,7 +404,7 @@
 	find_type = ARCHAEO_GUN
 
 /obj/item/archaeological_find/gun/spawn_item()
-	var/obj/item/gun/projectile/revolver/new_gun = new(loc)
+	var/obj/item/gun/projectile/revolving/new_gun = new(loc)
 
 	new_gun.icon = 'icons/obj/xenoarchaeology_finds.dmi'
 	new_gun.icon_state = "gun[rand(1,4)]"

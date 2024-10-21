@@ -21,7 +21,7 @@
 	uniform = /obj/item/clothing/under/det
 	suit_store = /obj/item/clothing/suit/storage/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
-	r_hand = /obj/item/gun/projectile/revolver
+	r_hand = /obj/item/gun/projectile/revolving
 	l_pocket = /obj/item/ammo_magazine/speedloader
 
 /singleton/hierarchy/outfit/tournament_gear/chef

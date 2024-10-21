@@ -55,7 +55,7 @@
 	dir = 1
 	},
 /obj/decal/cleanable/blood,
-/obj/item/gun/projectile/revolver/medium,
+/obj/item/gun/projectile/revolving/medium,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "an" = (

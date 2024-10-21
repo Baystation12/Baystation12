@@ -15,7 +15,7 @@
 	head = /obj/item/clothing/head/ushanka
 	gloves = /obj/item/clothing/gloves/thick/combat
 	back = /obj/item/storage/backpack/satchel
-	belt = /obj/item/gun/projectile/revolver
+	belt = /obj/item/gun/projectile/revolving
 
 /singleton/hierarchy/outfit/soviet_soldier/admiral
 	name = "Soviet admiral"

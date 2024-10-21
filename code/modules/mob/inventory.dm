@@ -226,6 +226,10 @@
 	if(W)
 		remove_from_mob(W, target)
 		if(!(W && W.loc)) return 1 // self destroying objects (tk, grabs)
+		if(l_hand)
+			l_hand.update_icon()
+		if(r_hand)
+			r_hand.update_icon()
 		update_icons()
 		return 1
 	return 0

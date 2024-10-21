@@ -104,7 +104,7 @@ Unique items
 Weapons
 ******/
 
-/obj/item/gun/projectile/revolver/medium/captain
+/obj/item/gun/projectile/revolving/medium/captain
 	name = "\improper Final Argument"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "mosley"
