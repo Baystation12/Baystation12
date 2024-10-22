@@ -14,7 +14,8 @@
 		/datum/mil_branch/alien,
 		/datum/mil_branch/skrell_fleet,
 		/datum/mil_branch/iccgn,
-		/datum/mil_branch/scga
+		/datum/mil_branch/scga,
+		/datum/mil_branch/auf
 	)
 
 	spawn_branch_types = list(
@@ -25,7 +26,8 @@
 		/datum/mil_branch/alien,
 		/datum/mil_branch/skrell_fleet,
 		/datum/mil_branch/iccgn,
-		/datum/mil_branch/scga
+		/datum/mil_branch/scga,
+		/datum/mil_branch/auf
 	)
 
 	species_to_branch_blacklist = list(
