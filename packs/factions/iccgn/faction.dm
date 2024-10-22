@@ -63,7 +63,8 @@
 	name = "Eleve Sailor"
 	name_short = "Elv"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or1
+		/obj/item/clothing/accessory/iccgn_rank/or1,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 10
 
@@ -72,7 +73,8 @@
 	name = "Sailor"
 	name_short = "Slr"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or3
+		/obj/item/clothing/accessory/iccgn_rank/or3,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 30
 
@@ -81,7 +83,8 @@
 	name = "Bosman"
 	name_short = "Bsn"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or4
+		/obj/item/clothing/accessory/iccgn_rank/or4,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 40
 
@@ -90,7 +93,8 @@
 	name = "Starszy Bosman"
 	name_short = "SBsn"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or5
+		/obj/item/clothing/accessory/iccgn_rank/or5,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 50
 
@@ -99,7 +103,8 @@
 	name = "Sierzant"
 	name_short = "Szt"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or6
+		/obj/item/clothing/accessory/iccgn_rank/or6,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 60
 
@@ -108,7 +113,8 @@
 	name = "Starshyna"
 	name_short = "Strs"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or7
+		/obj/item/clothing/accessory/iccgn_rank/or7,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 70
 
@@ -117,7 +123,8 @@
 	name = "Adjutant"
 	name_short = "Adj"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or8
+		/obj/item/clothing/accessory/iccgn_rank/or8,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 80
 
@@ -126,7 +133,8 @@
 	name = "Major"
 	name_short = "Mjr"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or9
+		/obj/item/clothing/accessory/iccgn_rank/or9,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 90
 
@@ -135,7 +143,8 @@
 	name = "Major of the Confederation Navy"
 	name_short = "MjN"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/or9_alt
+		/obj/item/clothing/accessory/iccgn_rank/or9_alt,
+		/obj/item/clothing/accessory/iccgn_badge/enlisted
 	)
 	sort_order = 100
 
@@ -144,7 +153,8 @@
 	name = "Michman"
 	name_short = "Mch"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of1
+		/obj/item/clothing/accessory/iccgn_rank/of1,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 110
 
@@ -153,7 +163,8 @@
 	name = "Sous-Leytenant"
 	name_short = "SLyt"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of2
+		/obj/item/clothing/accessory/iccgn_rank/of2,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 120
 
@@ -162,7 +173,8 @@
 	name = "Leytenant"
 	name_short = "Lyt"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of3
+		/obj/item/clothing/accessory/iccgn_rank/of3,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 130
 
@@ -171,7 +183,8 @@
 	name = "Sub-Komandor"
 	name_short = "SKdr"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of4
+		/obj/item/clothing/accessory/iccgn_rank/of4,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 140
 
@@ -180,7 +193,8 @@
 	name = "Komandor"
 	name_short = "Kdr"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of5
+		/obj/item/clothing/accessory/iccgn_rank/of5,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 150
 
@@ -189,7 +203,8 @@
 	name = "Kapitan"
 	name_short = "Kpt"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of6
+		/obj/item/clothing/accessory/iccgn_rank/of6,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 160
 
@@ -198,7 +213,8 @@
 	name = "Starshy Kapitan"
 	name_short = "SKpt"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of7
+		/obj/item/clothing/accessory/iccgn_rank/of7,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 170
 
@@ -207,7 +223,8 @@
 	name = "Vice-Admiral"
 	name_short = "VAdm"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of8
+		/obj/item/clothing/accessory/iccgn_rank/of8,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 180
 
@@ -216,7 +233,8 @@
 	name = "Admiral"
 	name_short = "Adm"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of9
+		/obj/item/clothing/accessory/iccgn_rank/of9,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 190
 
@@ -225,6 +243,7 @@
 	name = "Marshal of the Confederation Navy"
 	name_short = "Mshl"
 	accessory = list(
-		/obj/item/clothing/accessory/iccgn_rank/of9_alt
+		/obj/item/clothing/accessory/iccgn_rank/of9_alt,
+		/obj/item/clothing/accessory/iccgn_badge/officer
 	)
 	sort_order = 200
