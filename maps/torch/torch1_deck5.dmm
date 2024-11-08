@@ -4524,7 +4524,7 @@
 	dir = 1
 	},
 /obj/item/storage/box/ammo/flashshells,
-/obj/item/gun/projectile/flare,
+/obj/item/gun/projectile/shotgun/flare,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "kt" = (

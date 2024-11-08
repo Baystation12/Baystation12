@@ -7919,7 +7919,7 @@
 /obj/structure/railing/mapped,
 /obj/floor_decal/industrial/warning/dust,
 /obj/structure/table/rack,
-/obj/item/gun/projectile/heavysniper/ant{
+/obj/item/gun/projectile/boltloader/heavysniper/ant{
 	desc = "A large, unwieldy bolt-action rifle in shoddy condition. Chambered in small caliber, looks far scarier than it is. Vamoos ya varmint!";
 	name = "anti-varmint rifle"
 	},

@@ -9,7 +9,7 @@
 	fire_delay = 20
 	w_class = ITEM_SIZE_LARGE
 	bulk = GUN_BULK_RIFLE
-	combustion = 1
+	combustion = TRUE
 
 	var/obj/item/cell/cell                              // Currently installed powercell.
 	var/obj/item/stock_parts/capacitor/capacitor        // Installed capacitor. Higher rating == faster charge between shots.

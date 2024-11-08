@@ -76,9 +76,9 @@ GLOBAL_TYPED_NEW(raiders, /datum/antagonist/raider)
 		/obj/item/gun/launcher/crossbow,
 		/obj/item/gun/launcher/grenade/loaded,
 		/obj/item/gun/launcher/pneumatic,
-		/obj/item/gun/projectile/automatic/machine_pistol,
-		/obj/item/gun/projectile/automatic/merc_smg,
-		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/automatic/smg/machine_pistol,
+		/obj/item/gun/projectile/automatic/smg/merc,
+		/obj/item/gun/projectile/automatic/smg/security,
 		/obj/item/gun/projectile/automatic/assault_rifle,
 		/obj/item/gun/projectile/shotgun/pump,
 		/obj/item/gun/projectile/shotgun/pump/combat,
@@ -87,10 +87,10 @@ GLOBAL_TYPED_NEW(raiders, /datum/antagonist/raider)
 		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 		/obj/item/gun/projectile/pistol/sec,
 		/obj/item/gun/projectile/pistol/holdout,
-		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/revolving/heavy,
 		/obj/item/gun/projectile/pirate,
-		/obj/item/gun/projectile/revolver/medium,
-		/obj/item/gun/projectile/pistol/broomstick
+		/obj/item/gun/projectile/revolving/medium,
+		/obj/item/gun/projectile/boltloader/broomstick
 		)
 
 	var/list/raider_holster = list(

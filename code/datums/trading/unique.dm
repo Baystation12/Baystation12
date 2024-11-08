@@ -36,7 +36,7 @@
 							)
 
 	possible_trading_items = list(/obj/item/gun/projectile/automatic                            = TRADER_SUBTYPES_ONLY,
-							/obj/item/gun/projectile/automatic/machine_pistol/usi                     = TRADER_BLACKLIST,
+							/obj/item/gun/projectile/automatic/smg/machine_pistol/usi                     = TRADER_BLACKLIST,
 							/obj/item/gun/projectile/automatic/l6_saw/mag                       = TRADER_BLACKLIST
 							)
 

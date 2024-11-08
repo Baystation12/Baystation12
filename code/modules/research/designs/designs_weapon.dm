@@ -121,14 +121,14 @@
 	id = "wt550"
 	req_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 3000, MATERIAL_DIAMOND = 1500)
-	build_path = /obj/item/gun/projectile/automatic/sec_smg
+	build_path = /obj/item/gun/projectile/automatic/smg/security
 	sort_string = "TAPAA"
 
 /datum/design/item/weapon/smg
 	id = "smg"
 	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_SILVER = 2000, MATERIAL_DIAMOND = 2000)
-	build_path = /obj/item/gun/projectile/automatic
+	build_path = /obj/item/gun/projectile/automatic/smg/prototype
 	sort_string = "TAPAB"
 
 /datum/design/item/weapon/bullpup

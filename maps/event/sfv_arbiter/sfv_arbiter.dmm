@@ -743,9 +743,9 @@
 /obj/structure/closet/secure_closet/guncabinet{
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/obj/item/gun/projectile/automatic/merc_smg,
-/obj/item/gun/projectile/automatic/merc_smg,
-/obj/item/gun/projectile/automatic/merc_smg,
+/obj/item/gun/projectile/automatic/smg/merc,
+/obj/item/gun/projectile/automatic/smg/merc,
+/obj/item/gun/projectile/automatic/smg/merc,
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/sfv_arbiter)

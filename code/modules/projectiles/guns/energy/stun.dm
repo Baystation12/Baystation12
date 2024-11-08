@@ -6,7 +6,7 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
-	combustion = 0
+	combustion = FALSE
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
@@ -60,7 +60,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
@@ -94,7 +94,7 @@
 	max_shots = 8
 	self_recharge = 1
 	charge_meter = 0
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
@@ -124,7 +124,7 @@
 	fire_delay = 20
 	max_shots = 4
 	projectile_type = /obj/item/projectile/energy/plasmastun
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/confuseray
 	name = "disorientator"
@@ -136,4 +136,4 @@
 	w_class = ITEM_SIZE_SMALL
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
-	combustion = 0
+	combustion = FALSE

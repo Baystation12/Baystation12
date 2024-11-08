@@ -59,7 +59,7 @@
 	name = "Broomstick Pistol"
 	desc = "An antique pistol stolen from a museum. Be warned, it may be faulty and comes unloaded."
 	item_cost = 40
-	path = /obj/item/gun/projectile/pistol/broomstick
+	path = /obj/item/gun/projectile/boltloader/broomstick
 
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"
@@ -97,7 +97,7 @@
 	name = "Standard Submachine Gun"
 	desc = "A quick-firing weapon with three togglable fire modes."
 	item_cost = 52
-	path = /obj/item/gun/projectile/automatic/merc_smg
+	path = /obj/item/gun/projectile/automatic/smg/merc
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
@@ -118,7 +118,7 @@
 	name = "Carbine Rifle"
 	desc = "For arming your comrades on the (not so) cheap!"
 	item_cost = 55
-	path = /obj/item/gun/projectile/sniper/semistrip
+	path = /obj/item/gun/projectile/boltloader/semistrip
 	antag_roles = list(MODE_REVOLUTIONARY, MODE_MERCENARY)
 
 
@@ -128,7 +128,7 @@
 	item_cost = 60
 	path = /obj/item/gun/energy/gun/nuclear
 
-/datum/uplink_item/item/visible_weapons/heavysniper
+/datum/uplink_item/item/visible_weapons/boltloader
 	name = "Anti-materiel Sniper Rifle"
 	desc = "A secure briefcase that contains an immensely powerful penetrating rifle, as well as seven extra sniper rounds."
 	item_cost = 68
@@ -147,7 +147,7 @@
 	name = "Standard Machine Pistol"
 	desc = "A high rate of fire weapon in a smaller form factor, able to sling standard ammunition almost as quick as a submachine gun."
 	item_cost = 45
-	path = /obj/item/gun/projectile/automatic/machine_pistol
+	path = /obj/item/gun/projectile/automatic/smg/machine_pistol
 
 /datum/uplink_item/item/visible_weapons/combat_shotgun
 	name = "Combat Shotgun"
@@ -172,7 +172,7 @@
 	name = "Small Revolver"
 	desc = "A pocket-sized holdout revolver. Easily concealable.."
 	item_cost = 24
-	path = /obj/item/gun/projectile/revolver/holdout
+	path = /obj/item/gun/projectile/revolving/holdout
 
 /datum/uplink_item/item/visible_weapons/pulserifle
 	name = "Pulse Rifle"
@@ -194,7 +194,7 @@
 			capable of firing slugs at intense speeds."
 	item_cost = 65
 	antag_roles = list(MODE_MERCENARY)
-	path = /obj/item/gun/magnetic/railgun
+	path = /obj/item/gun/magnetic/railgun/thunderclap
 
 /datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
 	name = "Advanced Railgun"
@@ -202,7 +202,7 @@
 			now with even MORE stopping power."
 	antag_roles = list(MODE_MERCENARY)
 	item_cost = 75
-	path = /obj/item/gun/magnetic/railgun/tcc
+	path = /obj/item/gun/magnetic/railgun/tc
 
 /datum/uplink_item/item/visible_weapons/harpoonbomb
 	name = "Explosive Harpoon"
@@ -220,7 +220,7 @@
 	name = "Bolt Action Rifle"
 	desc = "For arming your comrades on the cheap!"
 	item_cost = 12
-	path = /obj/item/gun/projectile/heavysniper/boltaction
+	path = /obj/item/gun/projectile/boltloader/boltaction
 	antag_roles = list(MODE_REVOLUTIONARY)
 
 /datum/uplink_item/item/visible_weapons/sniperlaser

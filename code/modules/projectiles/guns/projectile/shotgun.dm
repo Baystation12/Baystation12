@@ -2,29 +2,40 @@
 	abstract_type = /obj/item/gun/projectile/shotgun
 	name = "master shotgun object"
 	desc = "You should not see this."
+
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	racksound = 'sound/weapons/guns/interaction/shotgunpump.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
+
+	force = 10
+	rackdelay = 10
+
+	w_class = ITEM_SIZE_HUGE
+	handle_casings = HOLD_CASINGS
+	caliber = CALIBER_SHOTGUN
+	load_method = SINGLE_CASING
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	bulk = GUN_BULK_HEAVY_RIFLE
+
 
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 'Crawford' is a common sight across much of settled space. Useful for sweeping alleys or ship corridors."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 'Crawford' is a common sight across much of \
+			settled space. Useful for sweeping alleys or ship corridors."
+
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"
 	item_state = "shotgun"
-	max_shells = 4
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
-	load_method = SINGLE_CASING
-	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	handle_casings = HOLD_CASINGS
-	one_hand_penalty = 8
-	bulk = 6
-	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "shotgun-wielded"
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+
+	slot_flags = SLOT_BACK
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
+	hold_open = FALSE
+
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	one_hand_penalty = 8
+	max_shells = 4
+
 
 /obj/item/gun/projectile/shotgun/on_update_icon()
 	..()
@@ -33,73 +44,31 @@
 	else
 		icon_state = "[initial(icon_state)]-empty"
 
+
 /obj/item/gun/projectile/shotgun/pump/on_update_icon()
 	..()
-	if(chambered)
+	if(!bolt_open)
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-empty"
+
 
 /obj/item/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
 		return chambered.BB
 	return null
 
-/obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
-	if(world.time >= recentpump + 10)
-		if(!is_held_twohanded(user))
-			var/fail_chance = user.skill_fail_chance(SKILL_WEAPONS, 90, SKILL_EXPERIENCED, 0.25)
-			var/drop_chance = user.skill_fail_chance(SKILL_WEAPONS, 50, SKILL_EXPERIENCED, 0.5)
-
-			if (!fail_chance)
-				user.visible_message(
-					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
-					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
-				)
-				pump(user)
-			else if (prob(fail_chance))
-				if (prob(drop_chance) && user.unEquip(src, user.loc))
-					user.visible_message(
-						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
-						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
-					)
-				else
-					user.visible_message(
-						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
-						SPAN_WARNING("You fail to rack \the [src]!")
-					)
-			else
-				user.visible_message(
-					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
-					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
-				)
-				pump(user)
-
-		else
-			pump(user)
-
-		recentpump = world.time
-
-/obj/item/gun/projectile/shotgun/pump/proc/pump(mob/M as mob)
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
-
-	if(chambered)//We have a shell in the chamber
-		chambered.dropInto(loc)//Eject casing
-		if(LAZYLEN(chambered.fall_sounds))
-			playsound(loc, pick(chambered.fall_sounds), 50, 1)
-		chambered = null
-
-	if(length(loaded))
-		var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-		loaded -= AC //Remove casing from loaded list.
-		chambered = AC
-
-	update_icon()
-
 
 /obj/item/gun/projectile/shotgun/pump/use_tool(obj/item/tool, mob/user, list/click_params)
-	if (type != /obj/item/gun/projectile/shotgun/pump)
-		return ..() // ugly hack for now, /pump needs abstracting
+	if (istype(tool, /obj/item/ammo_magazine/shotholder))
+		var/obj/item/ammo_magazine/shotholder/SH = tool
+		if (!length(SH.stored_ammo))
+			return TRUE
+		if (user.a_intent != I_HURT)
+			return TRUE
+		var/obj/item/ammo_casing/C = SH.stored_ammo[length(SH.stored_ammo)]
+		SH.stored_ammo-=C
+		load_ammo(C, user)
 
 	// Circular saw, energy sword, plasma cutter - Saw off stock
 	if (is_type_in_list(tool, list(/obj/item/circular_saw, /obj/item/melee/energy, /obj/item/gun/energy/plasmacutter)))
@@ -134,6 +103,7 @@
 
 	return ..()
 
+
 /obj/item/gun/projectile/shotgun/pump/DrawChamber()
 	var/chamberlist = ""
 	if (chambered)
@@ -153,41 +123,46 @@
 		chamberlist += "🌣"
 	return chamberlist
 
+
 /obj/item/gun/projectile/shotgun/pump/empty
 	starts_loaded = FALSE
 
+
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
-	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 is a common sight across much of settled space. MSI sells its own 'riot' configuration as the 870 'Bateman'."
+	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 is a common sight across much of settled space. \
+			MSI sells its own 'riot' configuration as the 870 'Bateman'."
+
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "rshotgun"
 	item_state = "rshotgun"
-	max_shells = 4
-	w_class = ITEM_SIZE_LARGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BELT|SLOT_BACK
-	caliber = CALIBER_SHOTGUN
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
-	load_method = SINGLE_CASING
-	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	handle_casings = HOLD_CASINGS
-	one_hand_penalty = 4
-	bulk = 4
 	wielded_item_state = "rshotgun-wielded"
-	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
+
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BELT|SLOT_BACK
+	bulk = GUN_BULK_LIGHT_RIFLE
+
+	force = 5
+	max_shells = 4
+	one_hand_penalty = 4
+	accuracy = -1
 
 
 /obj/item/gun/projectile/shotgun/pump/combat
 	name = "combat shotgun"
-	desc = "Built for close quarters combat, the Hephaestus Industries KS-40 is widely regarded as a weapon of choice for repelling boarders."
+	desc = "Built for close quarters combat, the Hephaestus Industries KS-40 is widely regarded as a weapon of choice for \
+			repelling boarders."
 	icon_state = "cshotgun"
 	item_state = "cshotgun"
 	wielded_item_state = "cshotgun-wielded"
+
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
-	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
+
 	ammo_type = /obj/item/ammo_casing/shotgun
 	one_hand_penalty = 8
+	max_shells = 7 // Match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
+	rackdelay = 5 // Faster to cycle.
+
 
 /obj/item/gun/projectile/shotgun/pump/combat/on_update_icon()
 	..()
@@ -197,47 +172,49 @@
 			I.pixel_x = i * 2
 			AddOverlays(I)
 
+
 /obj/item/gun/projectile/shotgun/pump/combat/empty
 	starts_loaded = FALSE
 
+
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
-	desc = "A classic double-barreled shotgun. In production for centuries, it has proliferated across human space, earning a sizable reputation for being simple and effective. Produced by Novaya Zemlya Arms."
+	desc = "A classic double-barreled shotgun. In production for centuries, it has proliferated across human space, \
+			earning a sizable reputation for being simple and effective. This one is produced by Novaya Zemlya Arms."
+
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "dshotgun"
 	item_state = "dshotgun"
 	wielded_item_state = "dshotgun-wielded"
-	//SPEEDLOADER because rapid unloading.
-	//In principle someone could make a speedloader for it, so it makes sense.
-	load_method = SINGLE_CASING|SPEEDLOADER
-	handle_casings = CYCLE_CASINGS
-	max_shells = 2
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
-	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
-	one_hand_penalty = 8
 	wielded_item_state = "gun_wielded"
 
+	load_method = SINGLE_CASING|SPEEDLOADER //SPEEDLOADER because rapid unloading.
+	handle_casings = CYCLE_CASINGS
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
+	allow_dump = TRUE
+
+	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
+	one_hand_penalty = 8
+	max_shells = 2
 	burst_delay = 0
+
 	firemodes = list(
+
 		list(mode_name="fire one barrel at a time", burst=1),
 		list(mode_name="fire both barrels at once", burst=2),
 		)
 
+
 /obj/item/gun/projectile/shotgun/doublebarrel/pellet
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+
 
 /obj/item/gun/projectile/shotgun/doublebarrel/flare
 	name = "signal shotgun"
 	desc = "A double-barreled shotgun meant to fire signal flash shells."
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
-
-/obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
-	..(user, allow_dump=1)
 
 
 //this is largely hacky and bad :(	-Pete
@@ -298,68 +275,82 @@
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
-	desc = "A ubiquitous weapon, commonplace in almost every settlement and slum. It is one of many basic firearms for those who want to be able to defend themselves with as little fuss as possible. Produced by Novaya Zemlya Arms."
+	desc = "A ubiquitous weapon, commonplace in almost every settlement and slum. It is one of many basic firearms \
+			for those who want to be able to defend themselves with as little fuss as possible. \
+			This one is produced by Novaya Zemlya Arms."
 	icon_state = "sawnshotgun"
 	item_state = "sawnshotgun"
 	wielded_item_state = "sawnshotgun-wielded"
+
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	w_class = ITEM_SIZE_NORMAL
+	bulk = GUN_BULK_LIGHT_RIFLE - 2
+
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	force = 5
 	one_hand_penalty = 4
-	bulk = 2
+	accuracy = -1
+
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty
 	starts_loaded = FALSE
 
-/obj/item/gun/projectile/shotgun/magshot
-	name = "auto shotgun"
-	desc = "A remnant of a bygone era, the NZ CSG-242 was formerly standard issue for Confederate Naval Forces for ship defense during hostile boarding actions. With a change in doctrine after the losses at Gaia, and with more focus on a multi-role weapons platform, the weapon is slowly being phased out of service."
-	icon = 'icons/obj/guns/magshot.dmi'
-	icon_state = "magshot"
-	item_state = "magshot"
-	wielded_item_state = "magshot-wielded"
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/shotgunmag
-	allowed_magazines = /obj/item/ammo_magazine/shotgunmag
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	obj_flags =  OBJ_FLAG_CONDUCTIBLE
-	slot_flags = SLOT_BACK
-	caliber = CALIBER_SHOTGUN
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
-	auto_eject = TRUE
-	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+
+/obj/item/gun/projectile/shotgun/flare
+	name = "flare launcher"
+	desc = "A single shot polymer flare gun, the XI-54 'Sirius' is a reliable way to launch flares away from yourself."
+
+	icon = 'icons/obj/guns/flaregun.dmi'
+	icon_state = "flaregun"
+	item_state = "flaregun"
+
+	fire_sound = 'sound/weapons/empty.ogg'
+	load_sound = 'sound/weapons/guns/interaction/shotgun_insert.ogg'
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	one_hand_penalty = 8
-	bulk = GUN_BULK_RIFLE
-	burst_delay = 2
-	accuracy = -1
-	jam_chance = 0.5
-	safety_icon = "safety"
+	fire_sound_text = "a satisfying 'thump'"
 
-	firemodes = list(
-		list(mode_name="semi-auto",     burst=1, fire_delay=2, move_delay=3, one_hand_penalty=7, burst_accuracy=null, dispersion=1.5),
-		list(mode_name="3 shell burst", burst=3, fire_delay=1.5, move_delay=6, one_hand_penalty=9, burst_accuracy=list(-1,-1, -2), dispersion=list(2, 2, 4)),
-		list(mode_name="full auto",		can_autofire=TRUE, burst=1, fire_delay=1, move_delay=6, one_hand_penalty=15, burst_accuracy = list(-1,-2,-2,-3,-3,-3,-4,-4), dispersion = list(2, 4, 4, 6, 6, 8))
-		)
+	matter = list(MATERIAL_STEEL = 1500, MATERIAL_PLASTIC = 2000)
+	handle_casings = CYCLE_CASINGS
+	load_method = SINGLE_CASING|SPEEDLOADER
+	slot_flags = SLOT_BELT | SLOT_HOLSTER
+	w_class = ITEM_SIZE_SMALL
+	obj_flags = 0
 
-/obj/item/gun/projectile/shotgun/magshot/on_update_icon()
-	..()
+	max_shells = 1
 
-	if(ammo_magazine)
-		icon_state = initial(icon_state)
-		wielded_item_state = initial(wielded_item_state)
 
-		if(LAZYLEN(ammo_magazine.stored_ammo) == ammo_magazine.max_ammo)
-			AddOverlays(image(icon, "ammo100"))
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.75 * ammo_magazine.max_ammo)
-			AddOverlays(image(icon, "ammo75"))
-		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
-			AddOverlays(image(icon, "ammo50"))
-		else
-			AddOverlays(image(icon, "ammo25"))
+/obj/item/gun/projectile/shotgun/flare/loaded
+	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
-	else
-		icon_state = "[initial(icon_state)]-empty"
-		wielded_item_state = "[initial(wielded_item_state)]-empty"
+
+/obj/item/gun/projectile/shotgun/flare/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2 && length(loaded))
+		to_chat(user, "\A [loaded[1]] is chambered.")
+
+
+/obj/item/gun/projectile/shotgun/flare/special_check()
+	if(!length(loaded))
+		return
+	var/obj/item/ammo_casing/casing = loaded[1]
+	if(istype(casing) && istype(casing.BB) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))
+		var/damage = casing.BB.get_structure_damage()
+		if(istype(casing.BB, /obj/item/projectile/bullet/pellet))
+			var/obj/item/projectile/bullet/pellet/PP = casing.BB
+			damage = PP.damage*PP.pellets
+		if(damage > 5)
+			var/mob/living/carbon/C = loc
+			if(istype(C))
+				C.visible_message(
+					SPAN_DANGER("[src] explodes in [C]'s hands!"),
+					SPAN_DANGER("[src] explodes in your face!")
+				)
+				C.drop_from_inventory(src)
+				for(var/zone in list(BP_L_HAND, BP_R_HAND))
+					C.apply_damage(rand(10,20), def_zone=zone)
+			else
+				visible_message(SPAN_DANGER("[src] explodes!"))
+			explosion(get_turf(src), 1, EX_ACT_LIGHT)
+			qdel(src)
+			return FALSE
+	return ..()

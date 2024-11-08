@@ -11,7 +11,7 @@
 
 /datum/fabricator_recipe/arms_ammo/flaregun
 	name = "flare launcher"
-	path = /obj/item/gun/projectile/flare
+	path = /obj/item/gun/projectile/shotgun/flare
 
 /datum/fabricator_recipe/arms_ammo/hidden
 	path = /obj/item/material/hatchet/machete/steel

@@ -1150,10 +1150,10 @@
 /area/map_template/rescue_base/base)
 "cF" = (
 /obj/structure/table/rack,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/smg/security,
+/obj/item/gun/projectile/automatic/smg/security,
+/obj/item/gun/projectile/automatic/smg/security,
+/obj/item/gun/projectile/automatic/smg/security,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

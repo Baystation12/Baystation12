@@ -151,7 +151,7 @@
 /turf/simulated/floor/exoplanet/snow,
 /area/map_template/deepmaint)
 "S" = (
-/obj/item/gun/projectile/flare/loaded,
+/obj/item/gun/projectile/shotgun/flare/loaded,
 /obj/structure/table/rack,
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,

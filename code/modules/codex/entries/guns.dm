@@ -31,16 +31,19 @@
 		traits += "It's best fired with two-handed grip."
 
 	if(has_safety)
-		traits += "It has a safety switch. Control-Click it to toggle safety."
+		traits += "It has a safety switch. MidMouse-Click it to toggle safety."
 
 	if(is_secure_gun())
 		traits += "It's fitted with secure registration chip. Swipe ID on it to register."
 
 	if(scope_zoom)
-		traits += "It has a magnifying optical scope. It can be toggled with Use Scope verb."
+		traits += "It has a magnifying optical scope. It can be toggled with the Use Scope verb."
+
+	if(foldable)
+		traits += "It has a folding stock. It can be toggled with the Toggle Stock verb."
 
 	if(LAZYLEN(firemodes) > 1)
-		traits += "It has multiple firemodes. Click it in hand to cycle them."
+		traits += "It has multiple firemodes. Click the appropriate menu button to cycle them."
 
 	return jointext(traits, "<br>")
 
@@ -62,7 +65,7 @@
 	if(load_method & (SINGLE_CASING|SPEEDLOADER))
 		traits += "It can hold [max_shells] rounds."
 
-	if(jam_chance)
+	if(initial(jam_chance))
 		traits += "It's prone to jamming."
 
 	. += jointext(traits, "<br>")

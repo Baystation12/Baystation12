@@ -38,7 +38,6 @@
 /obj/item/gun/projectile/changeling
 	name = "thin mass"
 	desc = "A thin, narrow and hollow mass of flesh protruding from the palm. It twitches and pulses, eager to strike."
-	can_reload = FALSE
 	screen_shake = FALSE
 	space_recoil = FALSE
 	has_safety = FALSE

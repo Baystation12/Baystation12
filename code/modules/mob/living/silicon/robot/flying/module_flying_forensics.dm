@@ -31,7 +31,7 @@
 		/obj/item/melee/baton/robot/electrified_arm,
 		/obj/item/device/flash,
 		/obj/item/gun/energy/gun,
-		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/automatic/smg/security,
 		/obj/item/gun/energy/plasmacutter
 	)
 	skills = list(

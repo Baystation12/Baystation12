@@ -4432,7 +4432,7 @@
 /area/slavers_base/med)
 "pl" = (
 /obj/decal/cleanable/dirt,
-/obj/item/gun/projectile/automatic/machine_pistol,
+/obj/item/gun/projectile/automatic/smg/machine_pistol,
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/med)
 "pt" = (

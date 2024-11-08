@@ -47,7 +47,7 @@ var/global/list/uplink_random_selections_
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/silenced)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/boltloader, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/crossbow, 33)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/energy_sword, 75)

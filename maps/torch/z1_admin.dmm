@@ -3035,9 +3035,9 @@
 /obj/item/ammo_magazine/smg_top/rubber,
 /obj/item/ammo_magazine/smg_top/rubber,
 /obj/item/ammo_magazine/smg_top/rubber,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
-/obj/item/gun/projectile/automatic/sec_smg,
+/obj/item/gun/projectile/automatic/smg/security,
+/obj/item/gun/projectile/automatic/smg/security,
+/obj/item/gun/projectile/automatic/smg/security,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

@@ -17,6 +17,7 @@
 	var/action_type = AB_ITEM
 	var/procname = null
 	var/atom/movable/target = null
+	var/arguments = list()
 	var/check_flags = 0
 	var/processing = 0
 	var/active = 0
@@ -77,7 +78,7 @@
 				Deactivate()
 		if(AB_GENERIC)
 			if(target && procname)
-				call(target,procname)(usr)
+				call(target,procname)(arglist(arguments))
 	return
 
 /datum/action/proc/Activate()
@@ -264,6 +265,20 @@
 
 /datum/action/item_action/organ/augment
 	button_icon = 'icons/obj/augment.dmi'
+
+/datum/action/item_action/gun
+	action_type = AB_ITEM_USE_ICON
+
+/datum/action/item_action/gun/firemode
+	action_type = AB_GENERIC
+	button_icon = 'icons/obj/guns/gui.dmi'
+	button_icon_state = "firemode"
+
+/datum/action/item_action/gun/firemode/Trigger()
+	procname = "firemode"
+	. = ..()
+	return
+
 
 #undef AB_WEST_OFFSET
 #undef AB_NORTH_OFFSET

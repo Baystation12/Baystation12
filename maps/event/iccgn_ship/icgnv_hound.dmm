@@ -814,12 +814,6 @@
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
 /obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol/double,
-/obj/item/ammo_magazine/pistol,
-/obj/item/ammo_magazine/pistol,
-/obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
 /obj/item/ammo_magazine/pistol,
@@ -829,18 +823,18 @@
 /obj/structure/closet/walllocker{
 	pixel_x = 32
 	},
-/obj/item/gun/projectile/automatic/merc_smg,
-/obj/item/gun/projectile/automatic/merc_smg,
-/obj/item/gun/projectile/automatic/merc_smg,
-/obj/item/ammo_magazine/smg,
-/obj/item/ammo_magazine/smg,
-/obj/item/ammo_magazine/smg,
-/obj/item/ammo_magazine/smg,
-/obj/item/ammo_magazine/smg,
-/obj/item/ammo_magazine/smg,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/item/gun/projectile/automatic/panther,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/gun/projectile/automatic/smg/jaguar,
+/obj/item/gun/projectile/automatic/smg/jaguar,
+/obj/item/ammo_magazine/machine_pistol,
+/obj/item/ammo_magazine/machine_pistol,
+/obj/item/ammo_magazine/machine_pistol,
+/obj/item/ammo_magazine/machine_pistol,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "Ng" = (

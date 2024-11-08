@@ -37,7 +37,7 @@
 /obj/item/gun/energy/gun/secure/preauthorized
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED, AUTHORIZED)
 
-/obj/item/gun/energy/revolver/secure
+/obj/item/gun/energy/revolving/secure
 	name = "smart service revolver"
 	desc = "The LAER680-S, a standard issue service revolver commonly used by higher ranking offcers among the SCG. Fitted with an NT1019 chip which allows remote authorization of the weapon's functionality."
 	icon = 'icons/obj/guns/energy_revolver.dmi'
@@ -57,7 +57,7 @@
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
-/obj/item/gun/energy/revolver/secure/preauthorized
+/obj/item/gun/energy/revolving/secure/preauthorized
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED, AUTHORIZED)
 
 /obj/item/gun/energy/gun/secure/mounted

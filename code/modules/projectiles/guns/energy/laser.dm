@@ -116,7 +116,7 @@
 	charge_cost = 15
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/xray/pistol
 	name = "x-ray laser gun"

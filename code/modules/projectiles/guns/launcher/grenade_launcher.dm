@@ -12,7 +12,7 @@
 	screen_shake = 0
 	throw_distance = 7
 	release_force = 5
-	combustion = 1
+	combustion = TRUE
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = list()
@@ -28,7 +28,7 @@
 
 //revolves the magazine, allowing players to choose between multiple grenade types
 /obj/item/gun/launcher/grenade/proc/pump(mob/M as mob)
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	playsound(M, 'sound/weapons/guns/interaction/shotgunpump.ogg', 60, 1)
 
 	var/obj/item/grenade/next
 	if(length(grenades))
@@ -136,6 +136,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	force = 5
 	max_grenades = 0
+	has_safety = FALSE
 
 /obj/item/gun/launcher/grenade/underslung/attack_self()
 	return

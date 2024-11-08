@@ -80,7 +80,7 @@
 
 /singleton/hierarchy/supply_pack/security/pdw
 	name = "Weapons - Ballistic PDWs"
-	contains = list(/obj/item/gun/projectile/automatic/sec_smg/empty = 2)
+	contains = list(/obj/item/gun/projectile/automatic/smg/security/empty = 2)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Ballistic PDW crate"

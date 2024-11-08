@@ -115,8 +115,8 @@
 	health = 150
 	casingtype = /obj/item/ammo_casing/pistol
 	projectiletype = /obj/item/projectile/bullet/pistol
-	natural_weapon = /obj/item/gun/projectile/automatic/machine_pistol
-	weapon1 = /obj/item/gun/projectile/automatic/machine_pistol
+	natural_weapon = /obj/item/gun/projectile/automatic/smg/machine_pistol
+	weapon1 = /obj/item/gun/projectile/automatic/smg/machine_pistol
 	status_flags = FLAGS_OFF
 
 	corpse = /obj/landmark/corpse/fleet/leader

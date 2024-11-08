@@ -3,10 +3,12 @@
 	var/datum/detective_gun_skin/unique_reskin
 	var/static/list/gun_options
 
+
 /obj/item/gun/projectile/pistol/sec/detective/Initialize()
 	. = ..()
 	if(!gun_options)
 		gun_options = init_subtypes(/datum/detective_gun_skin)
+
 
 /obj/item/gun/projectile/pistol/sec/detective/on_update_icon()
 	if(ammo_magazine && length(ammo_magazine.stored_ammo))
@@ -19,6 +21,7 @@
 			icon_state = "[unique_reskin.icon_state]-e"
 		else
 			icon_state = "[initial(icon_state)]-e"
+
 
 /obj/item/gun/projectile/pistol/sec/detective/verb/rename_gun()
 	set name = "Name Gun"
@@ -41,6 +44,7 @@
 		unique_name = input
 		to_chat(M, "You name the gun '[input]'. Say hello to your new friend.")
 		return 1
+
 
 /obj/item/gun/projectile/pistol/sec/detective/verb/reskin_gun()
 	set name = "Reskin gun"
@@ -68,10 +72,12 @@
 		return
 	..()
 
+
 /datum/detective_gun_skin
 	var/name
 	var/icon_state
 	var/icon
+
 
 /datum/detective_gun_skin/default/New()
 	..()
@@ -79,6 +85,7 @@
 	name = initial(d.name)
 	icon_state = initial(d.icon)
 	icon_state = initial(d.icon_state)
+
 
 /datum/detective_gun_skin/mk_standard
 	name = "\improper NT Mk. 58"

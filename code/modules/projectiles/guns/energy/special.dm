@@ -15,7 +15,7 @@
 	fire_delay = 60
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
@@ -51,7 +51,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
 	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/floragun
 	name = "floral somatoray"
@@ -66,7 +66,7 @@
 	modifystate = "floramut"
 	self_recharge = 1
 	var/singleton/plantgene/gene = null
-	combustion = 0
+	combustion = FALSE
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
@@ -117,7 +117,7 @@
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
-	combustion = 0
+	combustion = FALSE
 
 /obj/item/gun/energy/meteorgun/pen
 	name = "meteor pen"
