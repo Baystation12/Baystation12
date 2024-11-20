@@ -1244,12 +1244,6 @@
 	req_access = list(access_teleporter)
 	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
-/area/maintenance/auxsolarbridge
-	name = "Solar Maintenance - Bridge"
-	icon_state = "SolarcontrolS"
-	sound_env = SMALL_ENCLOSED
-	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
-
 /area/solar/bridge
 	name = "\improper Bridge Solar Array"
 	icon_state = "panelsS"
@@ -1379,14 +1373,21 @@
 	name = "Solar Maintenance - Port"
 	icon_state = "SolarcontrolP"
 	sound_env = SMALL_ENCLOSED
-	req_access = list(access_engine_equip, access_maint_tunnels)
+	req_access = list(access_engine_equip)
 	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/maintenance/auxsolarstarboard
 	name = "Solar Maintenance - Starboard"
 	icon_state = "SolarcontrolS"
 	sound_env = SMALL_ENCLOSED
-	req_access = list(access_engine_equip, access_maint_tunnels)
+	req_access = list(access_engine_equip)
+	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
+
+/area/maintenance/auxsolarbridge
+	name = "Solar Maintenance - Bridge"
+	icon_state = "SolarcontrolS"
+	sound_env = SMALL_ENCLOSED
+	req_access = list(access_engine_equip)
 	holomap_color = HOLOMAP_AREACOLOR_AIRLOCK
 
 /area/solar
