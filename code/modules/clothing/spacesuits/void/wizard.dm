@@ -17,6 +17,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	siemens_coefficient = 0.7
 	sprite_sheets_obj = null
 	wizard_garb = TRUE

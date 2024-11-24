@@ -121,6 +121,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 	) //Real tanky shit.
+	flash_protection = FLASH_PROTECTION_MAJOR
 	siemens_coefficient = 0.3 //Bone is not very conducive to electricity.
 
 /obj/item/clothing/suit/space/cult

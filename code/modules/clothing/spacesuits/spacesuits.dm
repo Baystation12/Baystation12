@@ -27,7 +27,7 @@
 	siemens_coefficient = 0.9
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
-	flash_protection = FLASH_PROTECTION_MAJOR
+	flash_protection = FLASH_PROTECTION_NONE
 
 	var/obj/machinery/camera/camera
 

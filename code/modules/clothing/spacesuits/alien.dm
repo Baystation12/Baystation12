@@ -34,6 +34,7 @@
 		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0

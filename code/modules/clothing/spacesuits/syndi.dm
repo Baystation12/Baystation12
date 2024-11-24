@@ -13,6 +13,7 @@
 		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
+	flash_protection = FLASH_PROTECTION_MODERATE
 	siemens_coefficient = 0.3
 
 /obj/item/clothing/suit/space/syndicate

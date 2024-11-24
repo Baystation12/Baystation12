@@ -18,6 +18,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
 	siemens_coefficient = 0.3
 
@@ -66,6 +67,7 @@
 		)
 	light_overlay = "helmet_light_dual_alt"
 	max_pressure_protection = ENG_VOIDSUIT_MAX_PRESSURE
+	flash_protection = FLASH_PROTECTION_MAJOR
 
 /obj/item/clothing/suit/space/void/mining
 	icon_state = "rig-mining"
@@ -148,6 +150,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
+	flash_protection = FLASH_PROTECTION_MINOR
 	siemens_coefficient = 0.3
 	light_overlay = "helmet_light_dual"
 
@@ -193,6 +196,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	light_overlay = "helmet_light_dual"
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE

@@ -30,6 +30,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	valid_accessory_slots = null
 	restricted_accessory_slots = null

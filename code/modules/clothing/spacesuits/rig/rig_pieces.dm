@@ -14,6 +14,7 @@
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_unathi.dmi',
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig

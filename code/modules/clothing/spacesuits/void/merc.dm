@@ -13,6 +13,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
+	flash_protection = FLASH_PROTECTION_MAJOR
 	siemens_coefficient = 0.3
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC, SPECIES_VOX)
 	sprite_sheets = list(
