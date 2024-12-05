@@ -26,7 +26,6 @@
 		W.update_icon()
 	var/obj/structure/wall_frame/WF = locate() in loc
 	if(WF)
-		WF.paint_color = color
 		WF.stripe_color = color
 		WF.update_icon()
 	qdel(src)
@@ -60,6 +59,12 @@
 
 /obj/paint/brown
 	color = COLOR_DARK_BROWN
+
+/obj/paint/white
+	color = COLOR_WHITE
+
+/obj/paint/gray60
+	color = COLOR_GRAY60
 
 //Stripes the wall it spawns on, then dies
 /obj/paint_stripe

@@ -172,5 +172,7 @@
 		if(material.wall_blend_icons[W.material.wall_icon_base])
 			return 2
 		if(material.wall_icon_base == W.material.wall_icon_base)
+			if(paint_color != W.paint_color)
+				return 2
 			return 1
 	return 0

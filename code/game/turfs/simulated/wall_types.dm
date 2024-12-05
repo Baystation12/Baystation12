@@ -9,24 +9,35 @@
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
 	color = COLOR_SOL
+	paint_color = COLOR_SOL
+	stripe_color = COLOR_SOL
 
 /turf/simulated/wall/r_wall/hull/vox
 	initial_gas = list("nitrogen" = 101.38)
 	color = COLOR_GREEN_GRAY
 
 /turf/simulated/wall/prepainted
+	color = COLOR_WALL_GUNMETAL
 	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
 
 /turf/simulated/wall/r_wall/prepainted
+	color = COLOR_WALL_GUNMETAL
 	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
 
+/turf/simulated/wall/prepainted/white
+	color = COLOR_GRAY80
+	paint_color = COLOR_GRAY80
+	stripe_color = COLOR_GRAY60
+
+/turf/simulated/wall/r_wall/prepainted/white
+	color = COLOR_GRAY80
+	paint_color = COLOR_GRAY80
+	stripe_color = COLOR_GRAY60
+
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()
-	paint_color = color
-	stripe_color = color
-	color = null //color is just for mapping
 	if(prob(40))
 		var/spacefacing = FALSE
 		for(var/direction in GLOB.cardinal)

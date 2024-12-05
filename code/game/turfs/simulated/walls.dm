@@ -39,6 +39,7 @@
 	hitsound = material.hitsound
 
 /turf/simulated/wall/Initialize()
+	color = null //color is just for mapping
 	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	START_PROCESSING(SSturf, src) //Used for radiation.
 	. = ..()

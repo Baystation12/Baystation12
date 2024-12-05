@@ -14,7 +14,6 @@
 	layer = TABLE_LAYER
 	health_max = 100
 
-	var/paint_color
 	var/stripe_color
 	rad_resistance_modifier = 0.5
 
@@ -49,7 +48,7 @@
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
 
-	if(paint_color)
+	if(stripe_color)
 		to_chat(user, SPAN_NOTICE("It has a smooth coat of paint applied."))
 
 
@@ -149,10 +148,6 @@
 		I.color = new_color
 		AddOverlays(I)
 
-/obj/structure/wall_frame/proc/paint_wall_frame(new_paint_color)
-	paint_color = new_paint_color
-	update_icon()
-
 /obj/structure/wall_frame/proc/stripe_wall_frame(new_paint_color)
 	stripe_color = new_paint_color
 	update_icon()
@@ -169,7 +164,6 @@
 				break
 		if(spacefacing)
 			var/bleach_factor = rand(10,50)
-			paint_color = adjust_brightness(paint_color, bleach_factor)
 			stripe_color = adjust_brightness(stripe_color, bleach_factor)
 		update_icon()
 
@@ -181,16 +175,14 @@
 	qdel(src)
 
 /obj/structure/wall_frame/get_color()
-	return paint_color
-
-/obj/structure/wall_frame/set_color(color)
-	paint_color = color
-	update_icon()
+	return stripe_color
 
 //Subtypes
 /obj/structure/wall_frame/standard
-	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
+
+/obj/structure/wall_frame/white
+	stripe_color = COLOR_GRAY60
 
 /obj/structure/wall_frame/titanium
 	material = MATERIAL_TITANIUM
@@ -199,13 +191,10 @@
 	material = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
 
 /obj/structure/wall_frame/hull
-	paint_color = COLOR_SOL
 	stripe_color = COLOR_SOL
 
 /obj/structure/wall_frame/hull/vox
-	paint_color = COLOR_GREEN_GRAY
 	stripe_color = COLOR_GREEN_GRAY
 
 /obj/structure/wall_frame/hull/verne
-	paint_color = COLOR_GUNMETAL
 	stripe_color = COLOR_GUNMETAL

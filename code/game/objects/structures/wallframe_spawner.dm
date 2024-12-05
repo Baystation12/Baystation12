@@ -91,8 +91,19 @@
 /obj/wallframe_spawn/proc/handle_grille_spawn(obj/structure/grille/G)
 	return
 
+/obj/wallframe_spawn/white
+	name = "white wall frame window spawner"
+	color = COLOR_GRAY60
+	frame_path = /obj/structure/wall_frame/white
+
 /obj/wallframe_spawn/no_grille
 	name = "wall frame window spawner (no grille)"
+	grille_path = null
+
+/obj/wallframe_spawn/no_grille/white
+	name = "white wall frame window spawner (no grille)"
+	color = COLOR_GRAY60
+	frame_path = /obj/structure/wall_frame/white
 	grille_path = null
 
 /obj/wallframe_spawn/reinforced
@@ -100,9 +111,21 @@
 	icon_state = "r-wingrille"
 	win_path = /obj/structure/window/reinforced/full
 
+/obj/wallframe_spawn/reinforced/white
+	name = "white reinforced wall frame window spawner"
+	icon_state = "r-wingrille"
+	color = COLOR_GRAY60
+	frame_path = /obj/structure/wall_frame/white
+
 /obj/wallframe_spawn/reinforced/no_grille
 	name = "reinforced wall frame window spawner (no grille)"
 	grille_path = null
+
+/obj/wallframe_spawn/reinforced/no_grille/white
+	name = "white reinforced wall frame window spawner (no grille)"
+	grille_path = null
+	color = COLOR_GRAY60
+	frame_path = /obj/structure/wall_frame/white
 
 /obj/wallframe_spawn/reinforced/titanium
 	name = "reinforced titanium wall frame window spawner"

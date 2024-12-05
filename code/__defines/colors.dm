@@ -47,6 +47,7 @@
 #define COLOR_PALE_BLUE_GRAY   "#8bbbd5"
 #define COLOR_LUMINOL          "#66ffff"
 #define COLOR_SILVER           "#c0c0c0"
+#define COLOR_GRAY60           "#999999"
 #define COLOR_GRAY80           "#cccccc"
 #define COLOR_OFF_WHITE        "#eeeeee"
 #define COLOR_WHITE            "#ffffff"
