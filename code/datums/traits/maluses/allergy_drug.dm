@@ -1,5 +1,5 @@
-/singleton/trait/malus/allergy
-	name = "Allergy"
+/singleton/trait/malus/allergy_drug
+	name = "Drug Allergy"
 	levels = list(TRAIT_LEVEL_MINOR, TRAIT_LEVEL_MAJOR)
 	///Used to select which reagent mob is allergic to.
 	metaoptions = list(
@@ -33,6 +33,6 @@
 		/datum/reagent/toxin/carpotoxin,
 		/datum/reagent/toxin/venom
 	)
-	addprompt = "Select reagent to make mob allergic to."
-	remprompt = "Select reagent to remove allergy to."
+	addprompt = "Select drug to make mob allergic to."
+	remprompt = "Select drug to remove allergy to."
 	selectable = TRUE

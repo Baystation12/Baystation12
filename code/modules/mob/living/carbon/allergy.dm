@@ -15,7 +15,7 @@ As long as you have inaprovaline in your system, an allergy cannot trigger. Key 
 /mob/living/carbon/proc/check_allergy(datum/reagent/reagent, current_level = 0)
 	if (!ispath(reagent))
 		return
-	var/allergy_severity = GetTraitLevel(/singleton/trait/malus/allergy, reagent)
+	var/allergy_severity = GetTraitLevel(/singleton/trait/malus/allergy_drug, reagent)
 	if (!allergy_severity)
 		return
 	var/threshold = 1/allergy_severity //For Medium sized mobs; threshold of 1 for minor allergies and 0.33 for major allergies.
@@ -78,9 +78,9 @@ As long as you have inaprovaline in your system, an allergy cannot trigger. Key 
 /mob/living/carbon/handle_allergy()
 	if (stat == DEAD)
 		return
-	if (!HAS_TRAIT(src, /singleton/trait/malus/allergy))
+	if (!HAS_TRAIT(src, /singleton/trait/malus/allergy_drug))
 		return
-	var/list/allergy_list = traits[/singleton/trait/malus/allergy]
+	var/list/allergy_list = traits[/singleton/trait/malus/allergy_drug]
 
 	for (var/picked as anything in allergy_list)
 		if (!(picked in chem_doses) && !(picked in active_allergies))

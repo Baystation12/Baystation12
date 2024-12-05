@@ -62,8 +62,8 @@ GLOBAL_VAR_INIT(arrest_security_status, "Arrest")
 	set_medRecord((H && H.med_record && !jobban_isbanned(H, "Records") ? html_decode(H.med_record) : "No record supplied"))
 
 	if(H)
-		if (H.HasTrait(/singleton/trait/malus/allergy))
-			var/list/allergies = H.GetMetaOptions(/singleton/trait/malus/allergy)
+		if (H.HasTrait(/singleton/trait/malus/allergy_drug))
+			var/list/allergies = H.GetMetaOptions(/singleton/trait/malus/allergy_drug)
 			var/list/allergy_data = list()
 			var/severity
 			for (var/datum/reagent/picked as anything in allergies)
