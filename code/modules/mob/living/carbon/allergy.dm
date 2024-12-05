@@ -5,11 +5,13 @@ Mild allergies increase heart rate and give itch messages. Inaprovaline resolves
 Severe allergies cause breathing problems and an even faster heart rate. Inaprovaline markedly stabilizes these symptoms; but only adrenaline can stop a severe allergy
 As long as you have inaprovaline in your system, an allergy cannot trigger. Key is to keep inaprov longer than the allergen exists above threshold after treatment */
 
-/*
-Checks if allergy will be triggered at a reagent level. Called by handle_allergy().
-If all offending reagent levels fall below threshold and no severe allergy is running; will stop allergies.
-Also checks if medications that stop allergies from triggering are in system. This is done after the list of active_allergies is updated.
-*/
+/**
+ * Checks if allergy will be triggered at a reagent level. `Called by handle_allergy()`.
+ *
+ * If all offending reagent levels fall below threshold and no severe allergy is running; will stop allergies.
+ *
+ * Also checks if medications that stop allergies from triggering are in system. This is done after the list of `active_allergies` is updated.
+ */
 /mob/living/carbon/proc/check_allergy(datum/reagent/reagent, current_level = 0)
 	if (!ispath(reagent))
 		return
@@ -24,7 +26,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 	LAZYDISTINCTADD(active_allergies, reagent)
 	start_allergy(allergy_severity)
 
-///This starts an allergy. Dosage/drug are handled at check_allergy proc, if you call this proc directly you must do your own checks.
+/// This starts an allergy. Dosage/drug are handled at `check_allergy()` proc, if you call this proc directly you must do your own checks.
 /mob/living/carbon/proc/start_allergy(allergy_severity)
 	if (trait_flags & SEVERE_ALLERGY)
 		return
@@ -47,8 +49,11 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		else
 			crash_with("Allergy called with incorrect severity of [allergy_severity].")
 
-///Ends allergies and unsets flag. Conditions handled at handle_allergy proc; if you call this directly do your own checks.
-///If no severity supplied will end all allergies.
+/**
+ * Ends allergies and unsets flag. Conditions handled at `handle_allergy()` proc; if you call this directly do your own checks.
+ *
+ * If no severity supplied will end all allergies.
+ */
 /mob/living/carbon/proc/stop_allergy(allergy_flag)
 	if (!(trait_flags & (MILD_ALLERGY|SEVERE_ALLERGY)))
 		return
@@ -66,8 +71,6 @@ Also checks if medications that stop allergies from triggering are in system. Th
 /mob/living/proc/handle_allergy()
 	return
 
-///Main proc through which all other allergy procs are called; it is called by carbon/Life().
-///If adrenaline is in system, all active allergies will be stopped. Having inaprov (CE_STABLE) will prevent them from retriggering when adrenaline washes out.
 /mob/living/carbon/handle_allergy()
 	if (stat)
 		return
@@ -90,7 +93,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 	run_allergy_symptoms()
 
 
-///Proc called by handle_allergy, handles chemical effects and symptoms.
+/// Proc called by `handle_allergy()`, handles chemical effects and symptoms.
 /mob/living/carbon/proc/run_allergy_symptoms()
 	if (!(trait_flags & (MILD_ALLERGY|SEVERE_ALLERGY)))
 		return
