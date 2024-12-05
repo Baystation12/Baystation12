@@ -4120,7 +4120,6 @@
 /obj/machinery/door/firedoor,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "bsdwindow";
 	name = "Drive Containment"
 	},
@@ -5773,9 +5772,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
-"mT" = (
-/turf/simulated/wall/walnut,
-/area/vacant/cargo)
 "mW" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/shutters{
@@ -6733,9 +6729,13 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/seconddeck)
 "pN" = (
-/obj/random_multi/single_item/poppy,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "pO" = (
 /obj/floor_decal/industrial/warning{
 	dir = 4
@@ -8245,7 +8245,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "borg";
 	name = "Cyborg Upload"
 	},
@@ -8977,7 +8976,6 @@
 "vo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "bsdwindow";
 	name = "Drive Containment"
 	},
@@ -9653,7 +9651,6 @@
 /obj/wallframe_spawn/reinforced_phoron/ocp,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/reinforced,
@@ -9863,10 +9860,10 @@
 /turf/simulated/floor/plating,
 /area/engineering/atmos/storage)
 "yo" = (
-/obj/machinery/cryopod/robot{
-	dir = 4
-	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/upload/ai{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/synth/borg_upload)
 "yp" = (
@@ -10700,19 +10697,17 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
@@ -10728,6 +10723,9 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -10876,24 +10874,28 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)
-"Bk" = (
-/turf/simulated/wall/prepainted,
-/area/vacant/cargo)
 "Bl" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/mining{
-	name = "Quartermaster"
+/obj/machinery/door/airlock/vault{
+	name = "ECOM Core"
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
-/area/vacant/cargo)
+/area/ecom_core)
 "Bm" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/vacant/cargo)
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/seconddeck/aftport)
 "Bq" = (
 /obj/floor_decal/industrial/warning/corner{
 	dir = 8
@@ -11095,98 +11097,82 @@
 /obj/floor_decal/industrial/warning/full,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
-"BO" = (
-/obj/item/stool,
-/obj/decal/cleanable/cobweb,
+"BR" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
+"BS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable,
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
+"BT" = (
 /obj/machinery/firealarm{
 	pixel_y = 21
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BP" = (
-/obj/machinery/alarm{
-	pixel_y = 24
+/obj/machinery/power/smes/buildable/preset/torch/substation_full{
+	RCon_tag = "Substation - ECOM"
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BQ" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/window/brigdoor/eastleft{
-	name = "Requisitions"
-	},
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/plating,
-/area/vacant/cargo)
-"BR" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 8
-	},
-/obj/structure/noticeboard{
-	pixel_y = 32
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BS" = (
 /obj/structure/cable/green{
-	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2"
+	icon_state = "0-2"
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BT" = (
-/obj/machinery/constructable_frame/machine_frame,
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "BU" = (
-/obj/structure/table/rack{
-	dir = 8
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/obj/random/action_figure,
-/obj/random/action_figure,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BV" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/bomb_supply,
-/obj/random/bomb_supply,
-/obj/random/bomb_supply,
-/obj/random/bomb_supply,
-/obj/random/bomb_supply,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BW" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/obj/random/junk,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BX" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"BY" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/auxsolarport)
+/area/ecom_core)
+"BV" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
+"BW" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
+"BX" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
+"BY" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "BZ" = (
 /obj/structure/sign/warning/high_voltage{
 	dir = 1
@@ -11325,50 +11311,38 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
 "Cq" = (
-/obj/item/stool,
-/obj/item/frame/fire_alarm,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"Cr" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/item/device/radio/intercom/custom{
+	dir = 4;
+	pixel_x = -24
+	},
+/obj/item/device/radio/intercom/custom{
+	dir = 1;
+	pixel_y = -32
+	},
+/obj/item/device/radio/intercom/custom{
+	pixel_y = 20
+	},
+/turf/simulated/floor/bluegrid,
+/area/ecom_core)
 "Cs" = (
-/obj/structure/barricade,
-/obj/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
-/area/vacant/cargo)
+/turf/simulated/floor/bluegrid,
+/area/ecom_core)
 "Ct" = (
-/obj/structure/table/rack{
-	dir = 8
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
 	},
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/tech_supply,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "Cu" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
 	},
-/obj/random/junk,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
-"Cv" = (
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/vacant/cargo)
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "Cw" = (
 /obj/random/torchcloset,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "Cx" = (
 /obj/structure/cable{
 	d2 = 4;
@@ -11550,59 +11524,42 @@
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
-"CT" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/mining{
-	name = "Requisitions"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/vacant/cargo)
 "CU" = (
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/turf/simulated/wall/r_wall/prepainted,
+/area/ecom_core)
 "CV" = (
-/obj/structure/closet/secure_closet/crew,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
-/obj/random/maintenance/solgov/clean,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/machinery/newscaster/security_unit{
+	pixel_y = -32
+	},
+/turf/simulated/floor/bluegrid,
+/area/ecom_core)
 "CW" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/junk,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/machinery/light,
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "CX" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/structure/cable/green,
 /obj/machinery/power/apc{
 	name = "south bump";
 	pixel_y = -24
 	},
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "CY" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/single/cola,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/machinery/firealarm{
+/obj/machinery/alarm{
 	dir = 1;
-	pixel_y = -26
+	pixel_y = -22
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/reinforced,
+/area/ecom_core)
 "CZ" = (
 /obj/item/stool,
 /obj/machinery/alarm{
@@ -11744,7 +11701,7 @@
 /obj/random/torchcloset,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/maintenance/seconddeck/foreport)
+/area/maintenance/seconddeck/aftport)
 "Dt" = (
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -12075,7 +12032,6 @@
 /area/storage/research)
 "Ej" = (
 /obj/machinery/door/blast/regular/open{
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /obj/wallframe_spawn/reinforced_phoron/ocp,
@@ -12906,6 +12862,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "Go" = (
@@ -13198,7 +13157,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/landmark{
 	name = "xeno_spawn";
 	pixel_x = -1
@@ -13206,6 +13164,9 @@
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
@@ -13514,6 +13475,11 @@
 "In" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /obj/floor_decal/industrial/outline/grey,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
 "Io" = (
@@ -13861,6 +13827,11 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
 "Jo" = (
@@ -16411,9 +16382,6 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)
-"RT" = (
-/turf/simulated/wall/r_wall/hull,
-/area/vacant/cargo)
 "RV" = (
 /obj/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/engineering_torch,
@@ -16769,6 +16737,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/foreport)
 "Th" = (
@@ -16803,7 +16774,6 @@
 /obj/wallframe_spawn/reinforced_phoron/ocp,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/reinforced,
@@ -17379,6 +17349,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "VL" = (
@@ -17866,18 +17839,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/atmos)
-"WT" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/machinery/firealarm{
-	pixel_y = 21
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/vacant/cargo)
 "WU" = (
 /obj/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -18148,7 +18109,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "bsd_access";
 	name = "Drive Containment"
 	},
@@ -34341,11 +34301,11 @@ pi
 pi
 pi
 AF
-Bk
-Bk
-Bk
-CT
-Bk
+CU
+CU
+CU
+CU
+CU
 pi
 Wp
 Wp
@@ -34543,11 +34503,11 @@ zO
 zO
 zO
 AF
-mT
-BO
+CU
+CU
 Cq
 CU
-mT
+CU
 pi
 Wp
 Wp
@@ -34745,11 +34705,11 @@ yl
 zb
 zO
 AF
-mT
-BP
-Cr
+CU
+Cs
+Cs
 CV
-mT
+CU
 pi
 Wp
 Wp
@@ -34947,11 +34907,11 @@ yl
 zb
 zO
 AF
-Bk
-BQ
+CU
+CU
 Cs
-Cs
-Bk
+CU
+CU
 DR
 Wp
 fT
@@ -35149,11 +35109,11 @@ Xz
 Xz
 zO
 AF
-mT
+CU
 BR
 Ct
 CW
-mT
+CU
 pi
 Wp
 fT
@@ -35355,7 +35315,7 @@ Bl
 BS
 Cu
 CX
-mT
+CU
 lG
 Wp
 fT
@@ -35553,11 +35513,11 @@ oy
 ze
 zO
 Tg
-mT
+BU
 BT
 pN
 CY
-mT
+CU
 yq
 Wp
 ag
@@ -35755,12 +35715,12 @@ oy
 zO
 zO
 AH
-Bk
-Bk
-Cv
-Bk
-Bk
-pi
+BU
+CU
+CU
+CU
+CU
+nc
 Wp
 ag
 ag
@@ -35957,13 +35917,13 @@ TJ
 TJ
 QD
 VK
-mT
-BU
-Cr
-mT
-pi
-pi
-Wp
+BV
+lt
+Ma
+Ky
+Ky
+Ky
+wU
 aa
 aa
 EA
@@ -36159,13 +36119,13 @@ qy
 TJ
 Ky
 VK
-mT
-BV
-Cr
-mT
+BW
+BI
+Ky
+Ky
 Ds
-Wp
-Wp
+wU
+wU
 aa
 aa
 EA
@@ -36361,12 +36321,12 @@ yr
 TJ
 Ky
 VK
-mT
 BW
-Cr
-Bk
-Wp
-Wp
+BI
+BI
+BY
+wU
+wU
 ag
 ag
 ag
@@ -36563,11 +36523,11 @@ nN
 TJ
 Ky
 VK
-mT
-WT
-Cr
-RT
-Wp
+BW
+BI
+BI
+wU
+wU
 ag
 ag
 ag
@@ -36765,10 +36725,10 @@ Rn
 TJ
 Ky
 VK
-mT
 BX
+Ky
 Cw
-RT
+wU
 aa
 aa
 aa
@@ -36968,8 +36928,8 @@ TJ
 Ky
 VK
 Bm
-BY
-BY
+Cc
+Cc
 Ir
 Ir
 Ir

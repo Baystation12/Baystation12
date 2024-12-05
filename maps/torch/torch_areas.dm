@@ -805,10 +805,12 @@
 	name = "\improper Auxiliary Monitoring Room"
 	icon_state = "engine_monitoring"
 
-/area/vacant/cargo
-	name = "\improper Requisitions Office"
+/area/ecom_core
+	name = "\improper ECOM Core"
 	icon_state = "quart"
-	holomap_color = HOLOMAP_AREACOLOR_CARGO
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
 
 /area/vacant/brig
 	name = "\improper Permanent Brig"
