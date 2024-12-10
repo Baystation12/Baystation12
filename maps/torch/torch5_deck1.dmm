@@ -6967,7 +6967,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "auy" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7269,7 +7269,7 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "avO" = (
 /obj/floor_decal/corner/pink/mono,
 /obj/machinery/body_scanconsole{
@@ -8798,9 +8798,6 @@
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "aCy" = (
-/obj/machinery/door/airlock/glass/security{
-	name = "Security Processing"
-	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -8812,6 +8809,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/door/airlock/security{
+	name = "Security Processing"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/processing)
@@ -16212,7 +16212,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "dRb" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/bodybags{
@@ -18227,7 +18227,7 @@
 	beacon_name = "Security - Lobby"
 	},
 /turf/simulated/floor/plating,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "hnN" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -22383,7 +22383,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "mDb" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -23971,23 +23971,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
-"oIb" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/security/wing)
 "oIq" = (
 /obj/floor_decal/industrial/outline/grey,
 /obj/structure/closet/emcloset,
@@ -27390,7 +27373,7 @@
 	dir = 8;
 	id_tag = "BrigFoyer";
 	name = "Security Wing";
-	req_access = list(list("ACCESS_SEC_DOORS","ACCESS_TORCH_CREW"))
+	req_access = list("ACCESS_SEC_DOORS")
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
@@ -29407,7 +29390,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "vKA" = (
 /obj/item/device/radio/intercom/department/medbay{
 	dir = 8;
@@ -30049,7 +30032,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled,
-/area/security/wing)
+/area/hallway/primary/firstdeck/fore)
 "xzN" = (
 /obj/floor_decal/corner/paleblue/mono,
 /obj/item/flame/candle/scented/incense{
@@ -40137,7 +40120,7 @@ aiu
 cfn
 aNH
 vJO
-oIb
+ybv
 avI
 xRh
 axK
@@ -40340,7 +40323,7 @@ mfb
 aNH
 vJO
 auv
-jpt
+aFV
 vTY
 eyY
 eyY
@@ -40744,7 +40727,7 @@ kUt
 aNH
 xzK
 auv
-jpt
+aFV
 xRh
 axN
 grI
@@ -40945,7 +40928,7 @@ aiu
 aiu
 eim
 vJO
-oIb
+ybv
 avI
 xRh
 axO
