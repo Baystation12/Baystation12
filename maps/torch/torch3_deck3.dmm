@@ -955,6 +955,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/plating,
 /area/thruster/d3starboard)
 "cv" = (
@@ -1387,6 +1390,14 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/commissary)
+"dq" = (
+/obj/wallframe_spawn/reinforced_phoron,
+/obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
+/turf/simulated/floor/reinforced,
+/area/thruster/d3port)
 "dr" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -1784,6 +1795,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "ef" = (
@@ -1798,6 +1812,12 @@
 "el" = (
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor/storage)
+"em" = (
+/obj/effect/event_torpedo_spawn{
+	sequence = "D3P"
+	},
+/turf/space,
+/area/space)
 "ep" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -3698,6 +3718,9 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/hatch/blue,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "ir" = (
@@ -3732,6 +3755,9 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "it" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3port)
 "iu" = (
@@ -3796,6 +3822,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
@@ -4948,6 +4977,9 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "lb" = (
@@ -5035,6 +5067,9 @@
 	},
 /obj/floor_decal/industrial/warning/corner{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
@@ -5911,6 +5946,9 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
 "nG" = (
@@ -6170,6 +6208,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"of" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/thruster/d3port)
 "og" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6832,6 +6876,16 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
+"pC" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3port)
 "pD" = (
 /obj/structure/flora/ausbushes/pointybush,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -7511,6 +7565,9 @@
 "rD" = (
 /obj/structure/lattice,
 /obj/structure/grille,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/space)
 "rE" = (
@@ -7673,6 +7730,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
+"sb" = (
+/obj/structure/lattice,
+/obj/structure/grille,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
+/turf/space,
+/area/space)
 "sc" = (
 /obj/floor_decal/corner/green/half{
 	dir = 1
@@ -8636,6 +8701,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 5
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
 "ug" = (
@@ -9033,6 +9101,9 @@
 	pump_direction = 0;
 	use_power = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
 "vk" = (
@@ -9135,6 +9206,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "vD" = (
@@ -9590,6 +9664,9 @@
 /obj/structure/sign/warning/vent_port{
 	dir = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d3port)
 "wV" = (
@@ -9986,6 +10063,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/habcheck)
+"xV" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/thruster/d3starboard)
 "xW" = (
 /obj/machinery/door/window/brigdoor{
 	dir = 8
@@ -10131,6 +10214,12 @@
 /obj/item/storage/box/cups,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
+"ym" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/thruster/d3starboard)
 "yp" = (
 /obj/structure/ladder,
 /obj/catwalk_plated,
@@ -10652,6 +10741,9 @@
 /area/crew_quarters/sleep/cryo)
 "zW" = (
 /obj/structure/sign/warning/hot_exhaust,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "zY" = (
@@ -10672,6 +10764,9 @@
 /area/storage/tools)
 "Ac" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
 "Ae" = (
@@ -10705,9 +10800,15 @@
 	dir = 9
 	},
 /obj/machinery/meter,
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3starboard)
 "Al" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3starboard)
 "Ap" = (
@@ -10965,6 +11066,9 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Bc" = (
@@ -11019,7 +11123,6 @@
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "d3sh_in";
 	use_power = 1
 	},
@@ -11294,6 +11397,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "BZ" = (
@@ -11301,6 +11407,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Cb" = (
@@ -12461,6 +12570,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"EM" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/thruster/d3starboard)
 "EN" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -12762,6 +12877,9 @@
 	pressure_checks = 2;
 	pressure_checks_default = 2;
 	use_power = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
 	},
 /turf/simulated/floor{
 	map_airless = 1
@@ -13243,6 +13361,12 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
 /area/vacant/cabin)
+"GM" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d3port)
 "GN" = (
 /obj/structure/table/steel,
 /obj/machinery/microwave{
@@ -13555,7 +13679,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
 	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -13569,7 +13692,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
 	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -13638,7 +13760,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
 	name = "Fire Control"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -14196,6 +14317,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Jm" = (
@@ -14207,6 +14331,9 @@
 	dir = 1
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Jo" = (
@@ -14216,12 +14343,18 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Jp" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
@@ -14344,6 +14477,9 @@
 	},
 /obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Jy" = (
@@ -14352,6 +14488,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
@@ -14680,6 +14819,9 @@
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/plating,
 /area/thruster/d3port)
 "Kg" = (
@@ -14689,6 +14831,9 @@
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Kh" = (
@@ -14697,6 +14842,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -14728,6 +14876,9 @@
 "Km" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d3port)
@@ -14775,6 +14926,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Kq" = (
@@ -14782,9 +14936,15 @@
 	dir = 10
 	},
 /obj/machinery/meter,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3port)
 "Kr" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3port)
 "Ks" = (
@@ -14840,6 +15000,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Kx" = (
@@ -14853,6 +15016,9 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/light/small,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Ky" = (
@@ -14869,6 +15035,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -14911,6 +15080,9 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "KF" = (
@@ -14936,6 +15108,9 @@
 /obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
@@ -14990,6 +15165,9 @@
 	},
 /obj/floor_decal/industrial/warning,
 /obj/machinery/meter,
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "KP" = (
@@ -15053,6 +15231,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "KV" = (
@@ -15086,6 +15267,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "La" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "Lb" = (
@@ -15107,6 +15291,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Le" = (
@@ -15116,6 +15303,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Lh" = (
@@ -15127,6 +15317,9 @@
 /obj/machinery/door/blast/regular{
 	id_tag = "cChamber3pV";
 	name = "Chamber Vent"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
@@ -15151,11 +15344,17 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Lm" = (
 /obj/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -15165,6 +15364,12 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 1
+	},
+/obj/effect/event_torpedo_target{
+	sequence = "D3P"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -15176,6 +15381,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Lq" = (
@@ -15184,6 +15392,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -15215,6 +15426,9 @@
 	},
 /obj/floor_decal/industrial/warning/full,
 /obj/floor_decal/industrial/outline/blue,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3port)
 "Lt" = (
@@ -15223,6 +15437,9 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d3port)
 "Lu" = (
@@ -15231,6 +15448,9 @@
 	dir = 4
 	},
 /obj/machinery/meter,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Lw" = (
@@ -15379,6 +15599,9 @@
 	pump_direction = 0;
 	use_power = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
 "LI" = (
@@ -15436,6 +15659,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "LP" = (
@@ -15593,6 +15819,13 @@
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techfloor,
 /area/hallway/primary/thirddeck/fore)
+"Me" = (
+/obj/structure/lattice,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
+/turf/space,
+/area/space)
 "Mf" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15612,6 +15845,9 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Mh" = (
@@ -15700,6 +15936,9 @@
 	injecting = 1;
 	use_power = 1
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -15781,6 +16020,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/disperser)
+"MF" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/thruster/d3port)
 "MG" = (
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
@@ -15851,6 +16096,9 @@
 /obj/machinery/air_sensor{
 	id_tag = "d3po2_sensor"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
 "MS" = (
@@ -15876,6 +16124,9 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "MX" = (
@@ -16033,6 +16284,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Nw" = (
@@ -16192,6 +16446,9 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -16205,6 +16462,9 @@
 "NS" = (
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 1
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
 	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
@@ -16267,6 +16527,9 @@
 	volume_rate = 4000
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Ob" = (
@@ -16370,6 +16633,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/fore)
+"On" = (
+/obj/wallframe_spawn/reinforced_phoron,
+/obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3starboard)
 "Oo" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/civilian{
@@ -16407,6 +16678,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
 	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
@@ -16522,6 +16796,9 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "OI" = (
@@ -16543,6 +16820,9 @@
 "OK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d3port)
@@ -16592,6 +16872,9 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "OT" = (
@@ -16735,6 +17018,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Pr" = (
@@ -17020,6 +17306,9 @@
 	dir = 1;
 	target_pressure = 3000
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "Qj" = (
@@ -17039,6 +17328,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -17089,6 +17381,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Qs" = (
@@ -17204,6 +17499,12 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
+"QI" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d3starboard)
 "QJ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -17320,6 +17621,12 @@
 /obj/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"Rb" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/space)
 "Rc" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -17362,6 +17669,9 @@
 /area/crew_quarters/service_break_room)
 "Ri" = (
 /obj/structure/sign/warning/fire,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "Rk" = (
@@ -17471,6 +17781,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Ry" = (
@@ -17547,6 +17860,9 @@
 "RI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/sign/warning/hot_exhaust,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3starboard)
 "RM" = (
@@ -17609,6 +17925,9 @@
 /obj/machinery/meter,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "RT" = (
@@ -17642,6 +17961,9 @@
 "Sb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
@@ -17702,6 +18024,9 @@
 /obj/machinery/door/blast/regular{
 	id_tag = "d3portnacelle"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Sj" = (
@@ -17717,6 +18042,12 @@
 /obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/cryolocker)
+"Sl" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/thirddeck/aftport)
 "Sm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -17858,9 +18189,11 @@
 "Sy" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "d3ph_in";
 	use_power = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d3port)
@@ -17932,6 +18265,9 @@
 "SJ" = (
 /obj/machinery/air_sensor{
 	id_tag = "d3so2_sensor"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
@@ -18133,6 +18469,9 @@
 /area/hallway/primary/thirddeck/aft)
 "To" = (
 /obj/structure/lattice,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/space)
 "Tp" = (
@@ -18392,6 +18731,9 @@
 /obj/machinery/atmospherics/unary/outlet_injector{
 	injecting = 1;
 	use_power = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
 	},
 /turf/simulated/floor{
 	map_airless = 1
@@ -19231,6 +19573,12 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"Wa" = (
+/obj/effect/event_torpedo_spawn{
+	sequence = "D3S"
+	},
+/turf/space,
+/area/space)
 "Wb" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -19285,12 +19633,24 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"Wn" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d3port)
 "Wo" = (
 /obj/machinery/meter,
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3S"
+	},
+/obj/effect/event_torpedo_target{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Wp" = (
@@ -19321,6 +19681,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
+"Wt" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/thruster/d3starboard)
 "Wu" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -19351,6 +19717,9 @@
 	},
 /obj/machinery/air_sensor{
 	id_tag = "cChamber3p"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
@@ -19707,6 +20076,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Xu" = (
@@ -19754,6 +20126,9 @@
 /area/engineering/hardstorage)
 "XA" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d3port)
 "XB" = (
@@ -19990,6 +20365,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Yi" = (
@@ -20226,6 +20604,9 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3S"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "YU" = (
@@ -20301,6 +20682,9 @@
 /obj/machinery/meter,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "Ze" = (
@@ -20533,6 +20917,9 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "ZH" = (
@@ -20550,6 +20937,9 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
+	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
 "ZJ" = (
@@ -20576,6 +20966,18 @@
 "ZL" = (
 /turf/simulated/floor/pool,
 /area/crew_quarters/observation)
+"ZM" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3S"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3starboard)
 "ZQ" = (
 /obj/machinery/newscaster{
 	pixel_x = 32
@@ -20596,6 +20998,9 @@
 	id = "d3po2_in";
 	injecting = 1;
 	use_power = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D3P"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3port)
@@ -48029,14 +48434,14 @@ aa
 jZ
 jZ
 jZ
-pI
+Wn
 it
 Sy
 Zd
 Lq
 Kw
 iq
-pI
+Wn
 aa
 aa
 aa
@@ -48229,17 +48634,17 @@ aa
 aa
 aa
 aa
-jZ
-bb
-pI
-pI
-pI
+Sl
+Me
+Wn
+Wn
+Wn
 Km
 Kp
 Kx
 OK
-pI
-pI
+Wn
+Wn
 aa
 aa
 aa
@@ -48431,17 +48836,17 @@ aa
 aa
 aa
 aa
-aV
+sb
 To
-pI
-La
-pI
+GM
+of
+GM
 ZF
 OS
 Jk
 RS
 ZR
-pI
+Wn
 aa
 aa
 aa
@@ -48634,8 +49039,8 @@ aa
 aa
 aa
 rD
-aU
-La
+Rb
+of
 Oa
 Qi
 Ll
@@ -48643,7 +49048,7 @@ Ls
 la
 Nu
 uf
-pI
+Wn
 aa
 aa
 aa
@@ -48843,9 +49248,9 @@ Ri
 Lm
 Lt
 Lu
-Ws
+dq
 nE
-pI
+Wn
 aa
 aa
 aa
@@ -49003,7 +49408,7 @@ aa
 aa
 bd
 LH
-WF
+On
 Jm
 Aj
 KN
@@ -49045,9 +49450,9 @@ Si
 Ln
 Kq
 Bb
-Ws
+dq
 vj
-pI
+Wn
 aa
 aa
 aa
@@ -49203,17 +49608,17 @@ aa
 aa
 aa
 aa
-bd
+Wt
 SJ
-WF
-Jh
+On
+ZM
 Al
 BY
-KP
-KP
-KP
-KP
-bd
+xV
+xV
+xV
+EM
+Wt
 aa
 aa
 aa
@@ -49239,17 +49644,17 @@ aa
 aa
 aa
 aa
-pI
-La
-La
-La
-La
+GM
+of
+of
+of
+MF
 Qk
 Kr
 Jk
-Ws
+dq
 MR
-pI
+GM
 aa
 aa
 aa
@@ -49406,10 +49811,10 @@ aa
 aa
 aa
 NS
-bd
-bd
+Wt
+Wt
 KG
-Al
+ym
 Jo
 KT
 OH
@@ -49449,8 +49854,8 @@ Lc
 Lp
 Kr
 Jx
-pI
-pI
+GM
+GM
 zW
 aa
 aa
@@ -49617,7 +50022,7 @@ vz
 Qr
 iA
 Jy
-bd
+QI
 aa
 aa
 aa
@@ -49643,12 +50048,12 @@ aa
 aa
 aa
 aa
-pI
+GM
 Kg
 Kh
 BZ
 Pq
-Pq
+pC
 Xt
 Kz
 KE
@@ -49810,16 +50215,16 @@ aa
 aa
 aa
 NS
-bd
+QI
 cu
 cu
-bd
+QI
 cu
 cu
-bd
+QI
 cu
 cu
-bd
+QI
 aa
 aa
 aa
@@ -49845,16 +50250,16 @@ aa
 aa
 aa
 aa
-pI
+GM
 Kf
 Kf
-pI
+GM
 Kf
 Kf
-pI
+GM
 Kf
 Kf
-pI
+GM
 zW
 aa
 aa
@@ -57728,7 +58133,7 @@ aa
 aa
 aa
 aa
-aa
+em
 aa
 aa
 aa
@@ -58490,7 +58895,7 @@ aa
 aa
 aa
 aa
-aa
+Wa
 aa
 aa
 aa
