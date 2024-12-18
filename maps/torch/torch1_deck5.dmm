@@ -43,6 +43,9 @@
 /area/shuttle/petrov/toxins)
 "ag" = (
 /obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/cockpit)
 "ah" = (
@@ -62,7 +65,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -226,6 +228,9 @@
 	opacity = 0
 	},
 /obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "aB" = (
@@ -400,6 +405,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "aS" = (
@@ -449,17 +457,26 @@
 /area/quartermaster/hangar)
 "aY" = (
 /obj/paint/red,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "aZ" = (
 /obj/machinery/atmospherics/unary/engine,
 /obj/structure/window/reinforced,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "ba" = (
 /obj/paint/red,
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
@@ -492,12 +509,18 @@
 /area/shuttle/petrov/toxins)
 "bf" = (
 /obj/machinery/computer/shuttle_control/explore/exploration_shuttle,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bg" = (
 /obj/paint/hull,
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "bh" = (
@@ -505,6 +528,9 @@
 	dir = 5
 	},
 /obj/structure/bed/chair/shuttle/blue,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "bi" = (
@@ -518,6 +544,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "bk" = (
@@ -527,6 +556,9 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -558,6 +590,9 @@
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -591,6 +626,9 @@
 	opacity = 0
 	},
 /obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "bp" = (
@@ -623,6 +661,9 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -678,6 +719,9 @@
 /obj/item/device/radio/intercom/hailing{
 	pixel_y = 22
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bw" = (
@@ -694,6 +738,9 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
@@ -714,6 +761,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cockpit)
 "by" = (
@@ -731,6 +781,9 @@
 /obj/machinery/door/airlock/glass{
 	name = "Cockpit"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/cockpit)
 "bz" = (
@@ -744,6 +797,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -764,6 +820,9 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "bB" = (
@@ -771,6 +830,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -780,8 +842,20 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
+"bD" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "bE" = (
 /obj/machinery/computer/air_control{
 	dir = 8;
@@ -813,11 +887,17 @@
 	},
 /obj/machinery/atmospherics/portables_connector,
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "bH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -835,6 +915,9 @@
 /obj/floor_decal/techfloor{
 	dir = 9
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "bJ" = (
@@ -851,6 +934,9 @@
 /obj/floor_decal/techfloor{
 	dir = 5
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "bK" = (
@@ -862,6 +948,9 @@
 	frequency = 1431;
 	id_tag = "guppy_shuttle_interior_sensor";
 	pixel_x = 24
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -878,6 +967,9 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -922,7 +1014,6 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_outer";
 	name = "Petrov Exterior Access"
 	},
@@ -930,6 +1021,9 @@
 /area/shuttle/petrov/maint)
 "bS" = (
 /obj/machinery/shipsensors,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "bT" = (
@@ -940,6 +1034,9 @@
 	dir = 1;
 	pixel_y = -22;
 	req_access = list("ACCESS_TORCH_CREW")
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -976,6 +1073,9 @@
 /obj/structure/handrail{
 	dir = 1
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bW" = (
@@ -984,6 +1084,9 @@
 	pixel_y = -24
 	},
 /obj/structure/table/steel_reinforced,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bY" = (
@@ -992,6 +1095,9 @@
 	},
 /obj/floor_decal/corner/green{
 	dir = 10
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/crew)
@@ -1008,6 +1114,9 @@
 /obj/floor_decal/corner/green{
 	dir = 10
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/crew)
 "ca" = (
@@ -1021,11 +1130,17 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
 "cb" = (
 /obj/machinery/computer/ship/navigation/telescreen{
 	pixel_y = -32
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -1034,6 +1149,9 @@
 	dir = 1;
 	pixel_y = -22;
 	req_access = list("ACCESS_TORCH_CREW")
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
@@ -1063,6 +1181,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "cg" = (
@@ -1085,6 +1206,9 @@
 /obj/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "ch" = (
@@ -1099,6 +1223,9 @@
 /obj/floor_decal/techfloor{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "ci" = (
@@ -1109,10 +1236,16 @@
 /obj/structure/handrail{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cj" = (
 /obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "cl" = (
@@ -1126,6 +1259,9 @@
 "cm" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/crew)
 "cn" = (
@@ -1137,6 +1273,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/crew)
 "cq" = (
@@ -1150,11 +1289,17 @@
 	opacity = 0
 	},
 /obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/medical)
 "cr" = (
 /obj/machinery/cryopod{
 	dir = 2
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
@@ -1162,6 +1307,9 @@
 /obj/structure/bed/chair/shuttle/blue,
 /obj/machinery/computer/cryopod{
 	pixel_y = 25
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
@@ -1185,6 +1333,9 @@
 	pixel_y = 24;
 	req_access = list("ACCESS_TORCH_CREW")
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "cv" = (
@@ -1203,14 +1354,33 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "cw" = (
 /obj/paint/hull,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/medical)
 "cy" = (
 /obj/floor_decal/industrial/warning/corner,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"cz" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/floodlight,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "cA" = (
@@ -1226,6 +1396,9 @@
 	},
 /obj/floor_decal/techfloor{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1249,6 +1422,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cE" = (
@@ -1267,6 +1443,9 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cF" = (
@@ -1279,6 +1458,9 @@
 /obj/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cG" = (
@@ -1290,6 +1472,9 @@
 /obj/floor_decal/techfloor{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cH" = (
@@ -1299,11 +1484,17 @@
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "cI" = (
 /obj/machinery/mech_recharger,
 /obj/floor_decal/industrial/warning/fulltile,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cJ" = (
@@ -1314,6 +1505,9 @@
 /obj/item/device/drone_designator{
 	network = "torch_transport"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cK" = (
@@ -1323,6 +1517,9 @@
 	pixel_y = 25
 	},
 /obj/structure/handrail,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
 "cL" = (
@@ -1359,22 +1556,37 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cargo)
 "cO" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "cP" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "cQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "cR" = (
 /obj/structure/bed/padded,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
 "cS" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
@@ -1396,12 +1608,18 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cU" = (
 /obj/machinery/tele_beacon,
 /obj/floor_decal/techfloor{
 	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1429,6 +1647,9 @@
 	},
 /obj/item/device/drone_designator{
 	network = "torch_transport"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -1482,6 +1703,9 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/warning/corner,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "dd" = (
@@ -1489,6 +1713,9 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/warning,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
 "de" = (
@@ -1507,6 +1734,9 @@
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/box/glowsticks,
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dh" = (
@@ -1515,6 +1745,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
@@ -1532,6 +1765,9 @@
 	},
 /obj/floor_decal/corner/blue{
 	dir = 6
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
@@ -1551,6 +1787,9 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/medical)
 "dk" = (
@@ -1567,6 +1806,9 @@
 	},
 /obj/floor_decal/corner/blue{
 	dir = 9
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
@@ -1590,6 +1832,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
@@ -1619,11 +1864,17 @@
 /obj/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dp" = (
 /obj/floor_decal/techfloor{
 	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1647,11 +1898,17 @@
 /obj/item/shuttle_beacon,
 /obj/item/shuttle_beacon,
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dy" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/medical)
@@ -1666,11 +1923,17 @@
 /obj/structure/handrail{
 	dir = 8
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dA" = (
 /obj/structure/handrail{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
@@ -1684,6 +1947,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/cargo)
@@ -1703,12 +1969,18 @@
 /obj/floor_decal/techfloor{
 	dir = 10
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "dF" = (
 /obj/structure/bed/chair/shuttle/blue,
 /obj/floor_decal/techfloor{
 	dir = 6
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1733,6 +2005,9 @@
 /obj/item/device/radio/intercom/hailing{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -1764,11 +2039,17 @@
 	dir = 1;
 	req_access = list(list("ACCESS_TORCH_GUP_HELM"))
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "dN" = (
 /obj/machinery/computer/shuttle_control/explore/guppy{
 	dir = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -1819,12 +2100,18 @@
 	pixel_x = -32
 	},
 /obj/machinery/recharger,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dV" = (
 /obj/machinery/light,
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dW" = (
@@ -1839,6 +2126,9 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/medical)
 "dY" = (
@@ -1851,6 +2141,9 @@
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
@@ -1868,6 +2161,9 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cargo)
@@ -1920,6 +2216,9 @@
 	id_tag = "guppy_window";
 	name = "blast shield"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "eg" = (
@@ -1948,11 +2247,17 @@
 	dir = 8;
 	icon_state = "warning"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "el" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/cargo)
 "em" = (
@@ -1964,6 +2269,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/cargo)
 "en" = (
@@ -1999,6 +2307,9 @@
 	pixel_x = 20;
 	pixel_y = 20
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "er" = (
@@ -2015,6 +2326,9 @@
 	},
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "et" = (
@@ -2027,6 +2341,9 @@
 	},
 /obj/floor_decal/techfloor{
 	dir = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
@@ -2063,6 +2380,9 @@
 /obj/floor_decal/techfloor{
 	dir = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "ey" = (
@@ -2078,6 +2398,9 @@
 /obj/floor_decal/techfloor{
 	dir = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "ez" = (
@@ -2086,6 +2409,9 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "eA" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
 "eB" = (
@@ -2114,6 +2440,13 @@
 /obj/structure/cable/cyan,
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/airlock)
+"eD" = (
+/obj/paint/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/fuel)
 "eE" = (
 /obj/paint/hull,
 /turf/simulated/wall/titanium,
@@ -2208,6 +2541,9 @@
 	icon_state = "warning"
 	},
 /obj/machinery/floodlight,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
 "eV" = (
@@ -2252,6 +2588,9 @@
 	dir = 8;
 	icon_state = "warning"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fa" = (
@@ -2265,11 +2604,17 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
@@ -2277,10 +2622,16 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fe" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "ff" = (
@@ -2292,6 +2643,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
@@ -2310,6 +2664,9 @@
 	name = "east bump";
 	pixel_x = 24
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "fl" = (
@@ -2318,6 +2675,9 @@
 "fm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/airlock)
@@ -2534,6 +2894,9 @@
 	c_tag = "Charon - Airlock Compartment";
 	dir = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fK" = (
@@ -2546,6 +2909,9 @@
 	id_tag = "charon_shuttle_pump"
 	},
 /obj/floor_decal/techfloor,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "fL" = (
@@ -2560,6 +2926,9 @@
 /obj/item/device/radio/intercom/hailing{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
@@ -2729,6 +3098,9 @@
 	dir = 6
 	},
 /obj/machinery/meter,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "gl" = (
@@ -2741,6 +3113,9 @@
 /obj/machinery/alarm{
 	pixel_y = 24;
 	req_access = list("ACCESS_TORCH_CREW")
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
@@ -2810,6 +3185,9 @@
 /obj/structure/cable/green{
 	d2 = 8;
 	icon_state = "0-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -3044,6 +3422,9 @@
 "gY" = (
 /obj/paint/hull,
 /obj/structure/sign/solgov,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/cockpit)
 "gZ" = (
@@ -3103,6 +3484,9 @@
 	pixel_x = -10;
 	pixel_y = 22
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
 "he" = (
@@ -3115,6 +3499,9 @@
 /obj/machinery/alarm{
 	pixel_y = 24;
 	req_access = list("ACCESS_TORCH_CREW")
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
@@ -3208,6 +3595,9 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "ht" = (
@@ -3388,6 +3778,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "hY" = (
@@ -3415,6 +3808,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "ie" = (
@@ -3428,6 +3824,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
+"ig" = (
+/obj/paint/red,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/atmos)
 "ih" = (
 /obj/catwalk_plated,
 /obj/structure/cable/cyan{
@@ -3443,6 +3846,12 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
+"ik" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "il" = (
 /obj/catwalk_plated,
 /obj/machinery/rotating_alarm/security_alarm{
@@ -3488,6 +3897,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
@@ -3720,6 +4132,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
+"iN" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/medical)
 "iO" = (
 /obj/structure/table/steel,
 /obj/item/paper_bin{
@@ -3788,6 +4207,9 @@
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -4004,6 +4426,9 @@
 /obj/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "ju" = (
@@ -4078,6 +4503,9 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/mining{
 	name = "Expedition Prep"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/expedition/eva)
@@ -4375,6 +4803,22 @@
 /obj/machinery/rotating_alarm/security_alarm,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/hangar)
+"kc" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/cargo)
 "kd" = (
 /obj/catwalk_plated,
 /obj/machinery/light/spot{
@@ -4384,6 +4828,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -4472,6 +4919,9 @@
 /obj/structure/cable/cyan,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
@@ -4680,6 +5130,9 @@
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "kG" = (
@@ -4726,6 +5179,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/fuel)
@@ -4794,6 +5250,9 @@
 /obj/machinery/light/spot{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "kV" = (
@@ -4805,6 +5264,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -4878,6 +5340,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
@@ -5166,6 +5631,9 @@
 	},
 /obj/machinery/recharger,
 /obj/structure/table/steel_reinforced,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "lV" = (
@@ -5212,6 +5680,9 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
@@ -5328,6 +5799,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "mq" = (
@@ -5339,6 +5813,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
@@ -5377,6 +5854,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "mx" = (
@@ -5394,6 +5874,9 @@
 /obj/machinery/atmospherics/binary/pump/on{
 	name = "port thrust pump"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "mB" = (
@@ -5405,6 +5888,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "mC" = (
@@ -5449,6 +5935,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/structure/handrail{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
@@ -5538,6 +6027,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/fore)
+"mO" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4;
+	icon_state = "warningcorner"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "mP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -5794,6 +6293,9 @@
 /area/maintenance/fifthdeck/aftport)
 "np" = (
 /obj/paint/red,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/atmos)
 "nq" = (
@@ -6114,6 +6616,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "nT" = (
@@ -6125,6 +6630,9 @@
 	frequency = 1331;
 	id_tag = "charon_cargo_inner";
 	name = "Charon Cargo Bay"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/airlock)
@@ -6140,6 +6648,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -6588,6 +7099,9 @@
 /obj/structure/sign/warning/high_voltage{
 	pixel_y = 32
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "oJ" = (
@@ -6604,6 +7118,9 @@
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 21
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -7174,6 +7691,9 @@
 /area/vacant/infirmary)
 "pX" = (
 /obj/paint/red,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/fuel)
 "pY" = (
@@ -7202,6 +7722,9 @@
 	},
 /obj/machinery/atmospherics/portables_connector,
 /obj/floor_decal/industrial/outline/blue,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
 "qc" = (
@@ -7286,6 +7809,9 @@
 	dir = 4
 	},
 /obj/machinery/meter,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "ql" = (
@@ -7309,6 +7835,9 @@
 	},
 /obj/floor_decal/corner/brown/half,
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition/eva)
 "qo" = (
@@ -7427,7 +7956,6 @@
 "qC" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -7737,6 +8265,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/substation/fifthdeck)
+"rf" = (
+/obj/catwalk_plated,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "rg" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -7872,6 +8407,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
@@ -8443,6 +8981,9 @@
 /obj/machinery/atmospherics/binary/pump/on{
 	name = "starboard thrust pump"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "sC" = (
@@ -8459,12 +9000,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"sG" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/atmos)
 "sH" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /obj/structure/fuel_port{
 	pixel_x = 32
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
@@ -8496,6 +9047,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "sL" = (
@@ -8506,6 +9060,9 @@
 /obj/floor_decal/industrial/outline/blue,
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
@@ -8809,6 +9366,9 @@
 	start_pressure = 4559.63
 	},
 /obj/floor_decal/industrial/outline/blue,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "tx" = (
@@ -8876,7 +9436,6 @@
 "tF" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -8885,7 +9444,6 @@
 "tG" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -8915,8 +9473,25 @@
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
+"tP" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external{
+	autoset_access = 0;
+	frequency = 1331;
+	id_tag = "charon_cargo_outer";
+	name = "Charon External Access"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/exploration_shuttle/airlock)
 "tQ" = (
 /obj/floor_decal/corner/brown{
 	dir = 10
@@ -9387,6 +9962,9 @@
 /obj/machinery/pipedispenser{
 	anchored = 1
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "uO" = (
@@ -9605,6 +10183,9 @@
 	dir = 1
 	},
 /obj/floor_decal/industrial/outline/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/atmos)
 "vt" = (
@@ -9788,6 +10369,9 @@
 	id_tag = "charon_cargo_sensor";
 	pixel_x = -23
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "wj" = (
@@ -9873,6 +10457,9 @@
 	tag_interior_door = "charon_cargo_inner";
 	tag_interior_sensor = "charon_cargo_sensor"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "wx" = (
@@ -9897,6 +10484,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
+"wy" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "wz" = (
 /obj/machinery/door/airlock/research{
 	name = "Cockpit"
@@ -9954,6 +10551,9 @@
 	start_pressure = 1013.25
 	},
 /obj/floor_decal/industrial/outline/orange,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "wL" = (
@@ -9990,6 +10590,9 @@
 	dir = 1;
 	start_pressure = 1013.25
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "wU" = (
@@ -10002,6 +10605,23 @@
 	map_airless = 1
 	},
 /area/shuttle/petrov/toxins)
+"wV" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/obj/paint/hull,
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/crew)
 "wW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -10057,6 +10677,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"xb" = (
+/obj/paint/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
 "xd" = (
 /obj/structure/bed/chair/office/comfy/red{
 	dir = 4
@@ -10068,6 +10695,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/control)
+"xe" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "xg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -10086,6 +10723,13 @@
 /obj/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/cockpit)
+"xj" = (
+/obj/catwalk_plated,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "xl" = (
 /obj/structure/sign/deck/fifth{
 	dir = 4;
@@ -10099,6 +10743,9 @@
 "xm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/machinery/meter,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
 "xn" = (
@@ -10108,6 +10755,9 @@
 	},
 /obj/machinery/light{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/exploration_shuttle/fuel)
@@ -10147,6 +10797,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
 "xv" = (
@@ -10160,6 +10813,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
@@ -10179,6 +10835,9 @@
 	},
 /obj/structure/handrail{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
@@ -10206,6 +10865,9 @@
 /obj/structure/handrail{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "xJ" = (
@@ -10215,6 +10877,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/fuel)
@@ -10275,6 +10940,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/fuel)
 "xS" = (
@@ -10304,6 +10972,9 @@
 "xW" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/atmos)
@@ -10407,6 +11078,9 @@
 	pixel_x = 22;
 	pixel_y = -10
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "yo" = (
@@ -10420,6 +11094,9 @@
 /obj/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/airlock)
@@ -10458,6 +11135,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
+"yt" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/airlock)
 "yu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/floor_decal/techfloor{
@@ -10595,6 +11280,9 @@
 /obj/structure/handrail{
 	dir = 4
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/airlock)
 "yO" = (
@@ -10697,6 +11385,9 @@
 "zg" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 1
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/fuel)
@@ -10816,6 +11507,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
+"zx" = (
+/obj/floor_decal/industrial/warning,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "zB" = (
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -10828,6 +11526,22 @@
 "zC" = (
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/control)
+"zD" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"zF" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/prepainted,
+/area/quartermaster/expedition)
 "zH" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -10883,7 +11597,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_outer";
 	name = "Petrov Exterior Access"
 	},
@@ -11079,6 +11792,9 @@
 /obj/paint/hull,
 /obj/machinery/door/firedoor,
 /obj/wallframe_spawn/reinforced/titanium,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/medical)
 "AY" = (
@@ -11119,7 +11835,6 @@
 "Bf" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_inner";
 	name = "Petrov Interior Access"
 	},
@@ -11354,6 +12069,9 @@
 /obj/structure/handrail{
 	dir = 1
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Cn" = (
@@ -11430,7 +12148,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_inner";
 	name = "Petrov Interior Access"
 	},
@@ -11599,6 +12316,9 @@
 	name = "Rear Hatch Control";
 	req_access = list("ACCESS_TORCH_GUP")
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
 "Dd" = (
@@ -11683,6 +12403,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"Dr" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "Ds" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11752,7 +12481,6 @@
 "Dz" = (
 /obj/machinery/door/airlock/multi_tile/glass/research{
 	dir = 8;
-	icon_state = "closed";
 	id_tag = "PetrovAccess";
 	name = "Petrov Access"
 	},
@@ -11972,6 +12700,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
+"Er" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
 "Es" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11999,6 +12734,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "Ex" = (
@@ -12110,6 +12848,14 @@
 	},
 /turf/space,
 /area/space)
+"EQ" = (
+/obj/machinery/atmospherics/unary/engine,
+/obj/structure/window/reinforced,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/guppy_hangar/start)
 "ER" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -12127,6 +12873,28 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/vacant/infirmary)
+"EU" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/guppy_hangar/start)
+"EV" = (
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "charon_shutters";
+	name = "Protective Shutters";
+	opacity = 0
+	},
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/crew)
 "EX" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12136,12 +12904,22 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"EZ" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/crew)
 "Fd" = (
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
 "Fe" = (
 /obj/paint/hull,
 /obj/structure/sign/solgov,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/crew)
 "Ff" = (
@@ -12325,6 +13103,9 @@
 	id_tag = "guppy_hatch";
 	name = "Rear Hatch"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "Gh" = (
@@ -12358,8 +13139,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"Gp" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "Gq" = (
 /obj/machinery/shipsensors,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Gr" = (
@@ -12599,7 +13392,6 @@
 "Hf" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_inner";
 	name = "Petrov Interior Access"
 	},
@@ -12973,6 +13765,12 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
+"ID" = (
+/obj/effect/event_torpedo_target{
+	sequence = "D5"
+	},
+/turf/space,
+/area/space)
 "IF" = (
 /obj/machinery/computer/shuttle_control{
 	dir = 4;
@@ -12984,6 +13782,12 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/cockpit)
+"IG" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/expedition/eva)
 "IH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -13023,6 +13827,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
+"IQ" = (
+/obj/paint/red,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/atmos)
 "IR" = (
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/light_switch{
@@ -13038,6 +13849,9 @@
 "IS" = (
 /obj/paint/hull,
 /obj/structure/sign/solgov,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/wall/titanium,
 /area/exploration_shuttle/fuel)
 "IU" = (
@@ -13119,6 +13933,9 @@
 /obj/catwalk_plated,
 /obj/structure/closet/hydrant{
 	pixel_x = -32
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
 	},
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
@@ -13228,6 +14045,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
+"JD" = (
+/obj/catwalk_plated,
+/obj/machinery/rotating_alarm/security_alarm{
+	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "JG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13367,6 +14194,14 @@
 /obj/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/rd)
+"Kd" = (
+/obj/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/expedition)
 "Kf" = (
 /obj/machinery/drone_pad{
 	initial_id_tag = "torch_transport"
@@ -13420,8 +14255,17 @@
 	pixel_x = -21
 	},
 /obj/machinery/recharge_station,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
+"Kp" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Kr" = (
 /obj/structure/closet/secure_closet/scientist_torch,
 /obj/floor_decal/industrial/outline/yellow,
@@ -13430,6 +14274,13 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
+"Ks" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/cockpit)
 "Kt" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
@@ -13963,6 +14814,13 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
+"Mu" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/fuel)
 "Mv" = (
 /obj/structure/table/steel,
 /obj/item/paper_bin,
@@ -14049,7 +14907,6 @@
 "ML" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_outer";
 	name = "Petrov Exterior Access"
 	},
@@ -14179,6 +15036,13 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/control)
+"Nn" = (
+/obj/floor_decal/industrial/warning,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "Np" = (
 /obj/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -14296,7 +15160,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_inner";
 	name = "Docking Port Airlock"
 	},
@@ -14329,6 +15192,17 @@
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
+"NR" = (
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/crew)
 "NS" = (
 /obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14459,6 +15333,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"Op" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "Oq" = (
 /obj/machinery/door/blast/regular{
 	id_tag = "petrovcell1";
@@ -14575,7 +15458,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_inner";
 	name = "Petrov Interior Access"
 	},
@@ -14741,6 +15623,17 @@
 	map_airless = 1
 	},
 /area/shuttle/petrov/toxins)
+"PH" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/machinery/floodlight,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "PK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -14980,6 +15873,16 @@
 /obj/item/stack/material/glass/fifty,
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/rnd)
+"QG" = (
+/obj/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/structure/bed/chair/shuttle/blue,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled,
+/area/exploration_shuttle/crew)
 "QH" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
@@ -15028,6 +15931,20 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/custodial)
+"QT" = (
+/obj/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "QV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -15109,6 +16026,9 @@
 	name = "Guppy External Access"
 	},
 /obj/machinery/shield_diffuser,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "Re" = (
@@ -15153,6 +16073,25 @@
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/tiled/techmaint,
 /area/maintenance/fifthdeck/fore)
+"Rk" = (
+/obj/catwalk_plated,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
+"Rm" = (
+/obj/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Rn" = (
 /obj/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced{
@@ -15194,6 +16133,13 @@
 /obj/paint/silver,
 /turf/simulated/wall/ocp_wall,
 /area/shuttle/petrov/toxins)
+"Ru" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/cockpit)
 "Rv" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/tiled/techfloor,
@@ -15237,7 +16183,6 @@
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "phoron_in";
 	use_power = 1
 	},
@@ -15273,6 +16218,16 @@
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
+"RU" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "RX" = (
 /obj/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced,
@@ -15352,6 +16307,13 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
+"Sk" = (
+/obj/paint/red,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/fuel)
 "So" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/floor_decal/industrial/outline/blue,
@@ -15426,6 +16388,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"SC" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/conveyor{
+	id = "cargobay"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/exploration_shuttle/cargo)
 "SE" = (
 /obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -15553,6 +16527,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"Ta" = (
+/obj/effect/event_torpedo_spawn{
+	sequence = "D5"
+	},
+/turf/space,
+/area/space)
 "Tc" = (
 /obj/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/binary/pump,
@@ -15604,7 +16584,6 @@
 "Tr" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_outer";
 	name = "Petrov Exterior Access"
 	},
@@ -15736,6 +16715,13 @@
 /obj/item/melee/baton/loaded,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
+"TJ" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/medical)
 "TL" = (
 /obj/machinery/camera/network/fifth_deck{
 	c_tag = "Fifth Deck - Ladders";
@@ -15852,7 +16838,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -16034,6 +17019,27 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/hallwaya)
+"Vd" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"Vi" = (
+/obj/catwalk_plated,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Vk" = (
 /obj/structure/bed/chair/office/light{
 	dir = 4
@@ -16049,7 +17055,6 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "petrov_shuttle_dock_outer";
 	name = "Docking Port Airlock"
 	},
@@ -16082,6 +17087,24 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/rnd)
+"Vw" = (
+/obj/catwalk_plated,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Vy" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -16410,6 +17433,13 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition/eva)
+"WN" = (
+/obj/floor_decal/industrial/warning,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/exploration_shuttle/cargo)
 "WO" = (
 /obj/structure/table/standard,
 /obj/item/disk/tech_disk,
@@ -16549,6 +17579,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"Xy" = (
+/obj/paint/hull,
+/obj/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
+	},
+/turf/simulated/floor/plating,
+/area/exploration_shuttle/cockpit)
 "Xz" = (
 /obj/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -16674,6 +17713,19 @@
 "XW" = (
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/equipment)
+"XX" = (
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/prepainted,
+/area/quartermaster/expedition/eva)
+"XY" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/crew)
 "Yb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
@@ -16681,6 +17733,9 @@
 "Yc" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/guppy_hangar/start)
@@ -16827,6 +17882,13 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
+"Yx" = (
+/obj/paint/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "D5"
+	},
+/turf/simulated/wall/titanium,
+/area/exploration_shuttle/fuel)
 "Yz" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -16959,9 +18021,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "YZ" = (
-/obj/machinery/atmospherics/unary/freezer{
-	icon_state = "freezer"
-	},
+/obj/machinery/atmospherics/unary/freezer,
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
@@ -17055,6 +18115,9 @@
 	},
 /obj/floor_decal/techfloor{
 	dir = 8
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "D5"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -28493,7 +29556,7 @@ aa
 aa
 aa
 aa
-aa
+Ta
 aa
 aa
 aa
@@ -32687,11 +33750,11 @@ mc
 jt
 jt
 jB
-aX
+xj
 kU
-aX
+xj
 Jn
-aX
+xj
 tO
 zf
 aX
@@ -32703,11 +33766,11 @@ ev
 aX
 aX
 aX
-aX
+xj
 kU
-aX
-aX
-aX
+xj
+xj
+xj
 oM
 lQ
 lM
@@ -32886,31 +33949,31 @@ CR
 zv
 lY
 eM
-aX
+xj
 cy
-Ho
+zD
 eU
 eU
-eU
+PH
+xe
+xe
+zD
+zD
+zD
+zD
+zD
 Ho
 Ho
 Ho
 Ho
 Ho
 Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-Ho
-hT
-aX
+zD
+zD
+zD
+zD
+mO
+xj
 lV
 lS
 pF
@@ -33088,18 +34151,18 @@ Rz
 aQ
 lZ
 EC
-aX
-ee
-bi
-bi
-bi
+xj
+zx
+ik
+ik
+Kp
 bS
 gY
 cq
 cq
 cq
 cq
-cw
+iN
 ek
 eq
 eZ
@@ -33107,12 +34170,12 @@ fI
 fR
 Nr
 fZ
-fZ
-np
-np
-np
-fS
-aX
+sG
+IQ
+IQ
+IQ
+RU
+xj
 UH
 lW
 pF
@@ -33290,31 +34353,31 @@ lD
 lE
 lZ
 EC
-aX
-ee
-bi
-ag
+xj
+zx
+ik
+Ks
 bo
 bo
-ag
+Ru
 cr
 cO
 dg
 dx
-cw
-cw
+TJ
+TJ
 es
 fa
 es
-fZ
-fZ
+sG
+sG
 hV
 mo
 sL
 xu
 xW
-fS
-aX
+RU
+xj
 UH
 kD
 lS
@@ -33492,31 +34555,31 @@ QA
 SE
 lZ
 EC
-aX
-ee
+xj
+zx
 ag
 ag
 bv
 bT
-ag
+Ru
 cs
 cP
 cP
 cP
 dU
-cw
+TJ
 et
 fb
 fJ
-fZ
+sG
 gk
 hW
 mr
 tw
 xw
 xW
-fS
-aX
+RU
+xj
 UH
 kD
 pF
@@ -33694,31 +34757,31 @@ tV
 Hm
 lY
 hY
-aX
-ee
+xj
+zx
 aA
 aR
 bw
 bV
-ag
+Ru
 cu
 cQ
 dh
 dy
 dV
-cw
+TJ
 ew
 fd
 fK
-fZ
+sG
 gl
 ia
 mA
 uN
-np
-np
-fS
-aX
+ig
+IQ
+RU
+xj
 lX
 pF
 lT
@@ -33896,19 +34959,19 @@ tV
 lz
 lY
 UH
-aX
-ee
+xj
+zx
 aA
 bf
 bx
 bW
-ag
+Ru
 cv
 cR
 di
 dz
 dW
-cw
+iN
 ey
 fe
 fL
@@ -33917,10 +34980,10 @@ gm
 iM
 mG
 vs
-np
+IQ
 ym
-fS
-aX
+wy
+xj
 lR
 lN
 lF
@@ -34098,30 +35161,30 @@ lY
 lY
 lY
 md
-aX
-ee
-ag
+xj
+zx
+Ks
 bg
 by
-bg
-ag
+Xy
+Ru
 cw
 AW
 dj
-cw
-cw
-cw
-ez
+iN
+iN
+iN
+yt
 ff
 ez
 fZ
 go
 fZ
 np
-np
+IQ
 np
 yp
-fS
+wy
 aX
 gO
 gO
@@ -34300,9 +35363,9 @@ iX
 fX
 aJ
 UH
-aX
-ee
-aB
+xj
+zx
+EV
 bh
 bz
 bY
@@ -34322,8 +35385,8 @@ jv
 nT
 wh
 xz
-yv
-fS
+tP
+wy
 aX
 jR
 jT
@@ -34503,8 +35566,8 @@ fX
 lk
 UH
 aX
-ee
-aB
+zx
+EV
 bj
 bA
 bZ
@@ -34706,11 +35769,11 @@ aJ
 UH
 aX
 ee
-aB
+EV
 bk
 bB
 ca
-aP
+XY
 cI
 dd
 dm
@@ -34722,12 +35785,12 @@ fo
 eE
 gi
 gz
-gi
+Yx
 pX
 pX
 pX
 yp
-fS
+wy
 Bm
 jR
 ld
@@ -34908,13 +35971,13 @@ aJ
 UH
 aX
 ee
-aB
-bh
-bB
+EV
+QG
+NR
 cb
-aP
+EZ
 cJ
-de
+WN
 dv
 dJ
 eb
@@ -34927,10 +35990,10 @@ hd
 km
 qk
 wI
-pX
+eD
 yM
-fS
-Bm
+wy
+Vw
 gO
 gO
 gO
@@ -35114,7 +36177,7 @@ aB
 bm
 bC
 cc
-aP
+EZ
 cK
 de
 dv
@@ -35129,10 +36192,10 @@ he
 kK
 rs
 wM
-pX
-pX
-fS
-Bm
+Sk
+eD
+RU
+Vw
 VN
 aJ
 mR
@@ -35316,7 +36379,7 @@ aP
 aP
 bE
 cl
-aP
+EZ
 cL
 df
 dw
@@ -35333,7 +36396,7 @@ sB
 xm
 xJ
 zg
-fS
+RU
 nR
 nJ
 aJ
@@ -35517,9 +36580,9 @@ ee
 bi
 aP
 bF
-bF
-aP
-cM
+wV
+EZ
+SC
 cM
 cM
 dL
@@ -35529,14 +36592,14 @@ eX
 fu
 eX
 gi
-gi
+Yx
 mb
 sH
 xn
 xR
 zg
-fS
-Bm
+RU
+Vw
 xp
 aJ
 mK
@@ -35719,9 +36782,9 @@ ee
 bi
 bi
 bi
-bi
+ik
 Fe
-cN
+kc
 cN
 cN
 dT
@@ -35732,13 +36795,13 @@ fx
 eY
 gj
 IS
-gi
-gi
-pX
-pX
-pX
-fS
-Bm
+Yx
+Mu
+eD
+eD
+eD
+RU
+Vw
 UH
 aJ
 mL
@@ -35921,10 +36984,10 @@ eH
 eT
 eV
 eV
-eV
-eT
-eT
-eT
+cz
+bD
+bD
+bD
 eT
 eT
 eT
@@ -35933,13 +36996,13 @@ OE
 fy
 eT
 eT
-eT
-eT
-eT
-eT
-eT
-eT
-hY
+bD
+bD
+bD
+bD
+bD
+bD
+Vd
 nU
 nK
 aJ
@@ -36124,10 +37187,10 @@ mw
 mB
 Et
 bL
-mC
-mC
-mC
-mC
+QT
+QT
+QT
+QT
 mC
 mC
 im
@@ -36136,12 +37199,12 @@ Yu
 mF
 mF
 mF
-mF
-mF
-mF
-mF
-mF
-mF
+Rm
+Rm
+Rm
+Rm
+Rm
+Rm
 nV
 KA
 oF
@@ -36321,15 +37384,15 @@ hb
 aJ
 ih
 cy
-Ho
-Ho
-Ho
-Ho
+zD
+zD
+xe
+xe
 cf
-Ho
-Ho
-Ho
-Ho
+zD
+zD
+zD
+zD
 Ho
 Ho
 nM
@@ -36522,17 +37585,17 @@ aW
 ie
 aJ
 kd
-ee
+zx
 ba
-aY
+xb
 cj
 cj
 iq
 Cm
 cj
-cj
-cj
-cj
+Er
+Er
+Er
 Gq
 fS
 aX
@@ -36723,19 +37786,19 @@ aW
 gT
 Ge
 aJ
-ih
-ee
+Vi
+Nn
 aZ
 bG
 bH
-cj
+EU
 sJ
 Rd
 cj
 Ko
 lU
-cj
-cj
+Er
+Er
 fS
 aX
 ee
@@ -36925,8 +37988,8 @@ WD
 Ea
 FR
 aJ
-ih
-ee
+Vi
+Nn
 aZ
 br
 bI
@@ -37127,9 +38190,9 @@ pI
 PM
 CB
 aJ
-ih
-ee
-aZ
+Vi
+Nn
+EQ
 gr
 bJ
 ch
@@ -37329,8 +38392,8 @@ Ig
 Ig
 rC
 Ig
-ih
-ee
+Vi
+Nn
 aY
 qb
 bK
@@ -37340,8 +38403,8 @@ cH
 cV
 Yc
 dG
-cj
-cj
+Er
+Er
 fS
 aX
 ee
@@ -37532,18 +38595,18 @@ Ov
 pe
 Ig
 kd
-ee
+Nn
 aY
 aY
-cj
+EU
 Dc
 Gg
 Gg
 cj
 cj
-cj
-cj
-bi
+Er
+Er
+ik
 fS
 aX
 ee
@@ -37734,18 +38797,18 @@ bN
 QX
 Ig
 oI
-eH
-eT
-eT
-eT
-eT
-eT
-eT
-eT
-eT
-eT
-eT
-eT
+Op
+Gp
+Gp
+Dr
+Gp
+bD
+bD
+Gp
+Gp
+bD
+bD
+bD
 fT
 aX
 eH
@@ -37936,14 +38999,14 @@ sx
 sz
 gG
 iW
-aX
-aX
-il
-aX
-kT
-aX
-aX
-aX
+xj
+xj
+JD
+rf
+Rk
+xj
+xj
+xj
 fj
 kV
 oL
@@ -38139,11 +39202,11 @@ wt
 Ig
 aW
 Qn
-Qn
-Qn
+XX
+XX
 jC
-Qn
-WU
+XX
+zF
 WU
 WU
 WU
@@ -38343,9 +39406,9 @@ bM
 Qn
 cW
 cY
-hq
+IG
 qn
-ql
+Kd
 jW
 pK
 pP
@@ -38998,7 +40061,7 @@ aa
 aa
 aa
 aa
-aa
+ID
 aa
 aa
 aa

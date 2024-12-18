@@ -499,6 +499,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "ba" = (
@@ -543,6 +546,9 @@
 	name = "Bridge Sensor Shroud Control";
 	pixel_x = -28;
 	req_access = list("ACCESS_BRIDGE")
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
@@ -1104,6 +1110,9 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "ck" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/prepainted,
 /area/bridge)
 "cl" = (
@@ -1313,6 +1322,9 @@
 /obj/item/pen,
 /obj/item/pen/red,
 /obj/item/pen/blue,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "cz" = (
@@ -1323,6 +1335,9 @@
 	},
 /obj/item/storage/toolbox/emergency,
 /obj/item/device/flashlight,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "cA" = (
@@ -1672,6 +1687,9 @@
 	pixel_y = -24
 	},
 /obj/structure/cable/green,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "cW" = (
@@ -1841,6 +1859,9 @@
 /obj/item/device/radio/intercom/hailing{
 	dir = 8;
 	pixel_x = 24
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -2188,6 +2209,9 @@
 /obj/item/flora/pottedplantsmall/leaf{
 	desc = "A tiny waxy leafed plant specimen. It has 'Green's replacement' scribbled onto the pot."
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "dU" = (
@@ -2202,6 +2226,9 @@
 	dir = 8
 	},
 /obj/item/storage/box/donut,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "dV" = (
@@ -2215,6 +2242,9 @@
 /obj/machinery/camera/network/bridge{
 	c_tag = "Bridge";
 	dir = 1
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -2252,6 +2282,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
@@ -2428,11 +2461,17 @@
 /obj/structure/table/glass,
 /obj/item/book/manual/solgov_law,
 /obj/item/book/manual/sol_sop,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ew" = (
 /obj/structure/table/glass,
 /obj/floor_decal/corner/blue/mono,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ex" = (
@@ -2602,11 +2641,17 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/wallframe_spawn/reinforced/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/bridge/storage)
 "eN" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -2929,6 +2974,9 @@
 /obj/structure/sign/warning/high_voltage{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/forestarboard)
 "fv" = (
@@ -2944,6 +2992,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
@@ -3164,6 +3215,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -3611,7 +3665,6 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridge_eva_outer";
 	locked = 1;
 	name = "Bridge EVA External Access"
@@ -3688,6 +3741,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "hn" = (
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "hq" = (
@@ -3897,6 +3953,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -4362,6 +4421,9 @@
 /area/aquila/crew)
 "jw" = (
 /obj/floor_decal/corner/blue,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "jx" = (
@@ -4567,7 +4629,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
 	name = "Bridge EVA Internal Access"
@@ -4577,7 +4638,6 @@
 "jZ" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridge_eva_inner";
 	locked = 1;
 	name = "Bridge EVA Internal Access"
@@ -4664,6 +4724,9 @@
 	},
 /obj/floor_decal/corner/blue{
 	dir = 9
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -4879,6 +4942,12 @@
 	dir = 9
 	},
 /obj/floor_decal/industrial/outline/yellow,
+/obj/effect/event_torpedo_target{
+	sequence = "BRIDGE"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lo" = (
@@ -4887,6 +4956,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -4917,6 +4989,9 @@
 /obj/random_multi/single_item/memo_medical,
 /obj/item/material/folder/envelope/preset/ndaorder,
 /obj/item/paper/immediateorder,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lu" = (
@@ -5070,6 +5145,9 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/bridge)
 "lN" = (
@@ -5225,6 +5303,9 @@
 	dir = 4;
 	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -5540,6 +5621,9 @@
 	pixel_y = 24
 	},
 /obj/machinery/computer/ship/sensors,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ni" = (
@@ -5655,6 +5739,9 @@
 	dir = 5
 	},
 /obj/item/device/binoculars,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "nv" = (
@@ -5692,6 +5779,9 @@
 "nH" = (
 /obj/floor_decal/corner/blue{
 	dir = 4
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -6519,6 +6609,9 @@
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "qg" = (
@@ -6557,6 +6650,9 @@
 	},
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -6772,6 +6868,9 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "qQ" = (
@@ -6780,6 +6879,9 @@
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
 "qR" = (
@@ -6952,6 +7054,20 @@
 /obj/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
+"ri" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/heads/office/co)
 "rk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -7089,6 +7205,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "rA" = (
@@ -7139,6 +7258,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
@@ -7357,6 +7479,9 @@
 /area/crew_quarters/heads/office/xo)
 "sm" = (
 /obj/machinery/shipsensors/upgraded,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -7390,6 +7515,9 @@
 "sx" = (
 /obj/structure/sign/warning/high_voltage{
 	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/foreport)
@@ -7455,6 +7583,9 @@
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -7611,6 +7742,9 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "ti" = (
@@ -7653,6 +7787,12 @@
 /obj/structure/flora/pottedplant/unusual,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
+"tn" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/space,
+/area/space)
 "to" = (
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 4;
@@ -7755,6 +7895,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
+"tF" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
+/turf/space,
+/area/space)
 "tH" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -7826,6 +7972,9 @@
 /area/aquila/storage)
 "tR" = (
 /obj/machinery/hologram/holopad,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "tT" = (
@@ -8100,6 +8249,19 @@
 	map_airless = 1
 	},
 /area/aquila/medical)
+"ux" = (
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	id_tag = "bridge sensors";
+	name = "Sensor Shroud"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/floor/reinforced{
+	map_airless = 1
+	},
+/area/bridge/storage)
 "uy" = (
 /turf/simulated/wall/walnut,
 /area/crew_quarters/heads/cobed)
@@ -8315,6 +8477,9 @@
 /obj/floor_decal/scglogo{
 	icon_state = "top-center"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "vg" = (
@@ -8325,6 +8490,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -8462,6 +8630,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/space)
@@ -8765,7 +8936,6 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
-	icon_state = "closed";
 	name = "Bridge Solar Access"
 	},
 /obj/structure/cable{
@@ -8840,7 +9010,6 @@
 	},
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "solar_bridge_inner";
 	locked = 1;
 	name = "Engineering External Access"
@@ -8863,7 +9032,6 @@
 /obj/machinery/shield_diffuser,
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "solar_bridge_outer";
 	locked = 1;
 	name = "Engineering External Access"
@@ -9026,6 +9194,9 @@
 	dir = 4;
 	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -9590,6 +9761,9 @@
 /obj/floor_decal/scglogo{
 	icon_state = "bottom-center"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "yi" = (
@@ -9769,6 +9943,9 @@
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "zh" = (
@@ -9821,6 +9998,9 @@
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/space)
@@ -9896,6 +10076,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -9997,6 +10180,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ag" = (
@@ -10039,6 +10225,9 @@
 	},
 /obj/floor_decal/corner/blue{
 	dir = 8
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -10105,6 +10294,9 @@
 /obj/structure/sign/warning/high_voltage{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "Ay" = (
@@ -10117,6 +10309,15 @@
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
+"Az" = (
+/obj/structure/cable/green,
+/obj/machinery/door/firedoor,
+/obj/wallframe_spawn/reinforced/hull,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/floor/plating,
+/area/bridge/storage)
 "AA" = (
 /obj/floor_decal/corner/red/half{
 	dir = 4
@@ -10145,6 +10346,9 @@
 	dir = 4;
 	id_tag = "bridge blast";
 	name = "Bridge Blast Doors"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -10350,6 +10554,9 @@
 /obj/machinery/rotating_alarm/security_alarm{
 	dir = 4
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "BG" = (
@@ -10385,6 +10592,9 @@
 	dir = 4;
 	id_tag = "cap_window";
 	name = "CO's Quarters Shutters"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/co)
@@ -10552,6 +10762,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ci" = (
@@ -10680,6 +10893,9 @@
 	icon_state = "4-8"
 	},
 /obj/item/device/radio,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "CH" = (
@@ -10850,6 +11066,9 @@
 /obj/structure/cable/green,
 /obj/machinery/door/firedoor,
 /obj/wallframe_spawn/reinforced/hull,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/bridge/storage)
 "DH" = (
@@ -10994,6 +11213,9 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/bridge)
 "Ey" = (
@@ -11060,6 +11282,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11135,6 +11360,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Fi" = (
@@ -11164,6 +11392,9 @@
 	icon_state = "1-4"
 	},
 /obj/item/material/folder/envelope/preset/lauletter1,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Fn" = (
@@ -11177,8 +11408,23 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "Fp" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/bridge/storage)
+"Fx" = (
+/obj/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge)
 "Fy" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -11189,6 +11435,9 @@
 	},
 /obj/floor_decal/corner/blue{
 	dir = 1
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11204,6 +11453,9 @@
 	dir = 1
 	},
 /obj/floor_decal/corner/blue/mono,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "FG" = (
@@ -11309,6 +11561,9 @@
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 4;
 	icon_state = "console"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11478,6 +11733,9 @@
 	icon_state = "console"
 	},
 /obj/floor_decal/corner/blue/mono,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "GW" = (
@@ -11549,6 +11807,9 @@
 /obj/item/paper/dclassreport1,
 /obj/item/material/folder/envelope,
 /obj/item/material/folder/envelope,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hg" = (
@@ -11719,6 +11980,9 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Hz" = (
@@ -11739,6 +12003,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/bridge)
 "HC" = (
@@ -11747,10 +12014,16 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HE" = (
 /obj/machinery/status_display,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "HF" = (
@@ -11763,6 +12036,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/computer/modular/preset/medical,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "HG" = (
@@ -11789,12 +12065,18 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HI" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge Storage"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -11814,6 +12096,9 @@
 /area/crew_quarters/heads/office/sgr)
 "HK" = (
 /obj/overmap/visitable/ship/torch,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HP" = (
@@ -11829,7 +12114,16 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/bridge)
+"HQ" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/wall/r_wall/prepainted,
 /area/bridge)
 "HS" = (
 /obj/floor_decal/corner/blue{
@@ -11839,6 +12133,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11856,6 +12153,9 @@
 	},
 /obj/machinery/newscaster/security_unit{
 	pixel_y = -32
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -11876,6 +12176,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -11916,9 +12219,15 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Ie" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/bridge)
 "If" = (
@@ -11938,6 +12247,9 @@
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Ig" = (
@@ -11947,11 +12259,17 @@
 	},
 /obj/item/pen,
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Ih" = (
 /obj/item/stamp/co,
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Ii" = (
@@ -11993,6 +12311,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/co)
@@ -12242,6 +12563,9 @@
 /area/shield/bridge)
 "Je" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Jg" = (
@@ -12253,6 +12577,9 @@
 "Jh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -12371,6 +12698,9 @@
 /area/aquila/air)
 "Ke" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Kf" = (
@@ -12419,7 +12749,6 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	icon_state = "closed";
 	id_tag = "aquila_shuttle_inner";
 	locked = 1;
 	name = "Aquila External Access";
@@ -12442,6 +12771,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Kt" = (
@@ -12452,6 +12784,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -12524,6 +12859,9 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -12654,6 +12992,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
+"Lp" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/bridge/foreport)
 "Lr" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12721,6 +13065,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "LJ" = (
@@ -12749,6 +13096,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -12786,6 +13136,9 @@
 /obj/structure/sign/double/solgovflag/right{
 	dir = 4;
 	pixel_x = -32
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
@@ -12834,6 +13187,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -12901,6 +13257,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/crew)
 "Mz" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/wall/r_wall/hull,
 /area/crew_quarters/heads/office/co)
 "MA" = (
@@ -12978,6 +13337,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Nf" = (
@@ -13016,6 +13378,9 @@
 	pixel_y = 33
 	},
 /obj/structure/table/woodentable_reinforced/ebony/walnut,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Ni" = (
@@ -13143,6 +13508,9 @@
 	dir = 4;
 	pixel_x = -37
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "NM" = (
@@ -13158,6 +13526,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
@@ -13228,6 +13599,9 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -13389,6 +13763,9 @@
 /obj/floor_decal/spline/fancy/wood{
 	dir = 1
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "OO" = (
@@ -13412,6 +13789,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
+"OT" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/wall/r_wall/prepainted,
+/area/bridge)
 "OX" = (
 /obj/machinery/shipsensors,
 /obj/floor_decal/industrial/hatch/yellow,
@@ -13516,6 +13899,9 @@
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/heads/office/cl/backroom)
 "Pt" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
 "Py" = (
@@ -13552,6 +13938,12 @@
 /obj/machinery/meter,
 /turf/simulated/floor/plating,
 /area/aquila/air)
+"PM" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/wall/prepainted,
+/area/bridge)
 "PP" = (
 /obj/floor_decal/techfloor{
 	dir = 1
@@ -13755,6 +14147,9 @@
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Qv" = (
@@ -13785,6 +14180,9 @@
 /obj/random_multi/single_item/memo_engineering,
 /obj/random_multi/single_item/memo_research,
 /obj/random_multi/single_item/memo_exploration,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Qz" = (
@@ -13878,6 +14276,9 @@
 	dir = 4
 	},
 /obj/floor_decal/corner/blue/mono,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "QX" = (
@@ -13915,6 +14316,9 @@
 "Ra" = (
 /obj/floor_decal/corner/blue/mono,
 /obj/machinery/computer/modular/preset/security,
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Rb" = (
@@ -14054,6 +14458,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Rs" = (
@@ -14185,6 +14592,9 @@
 	id_tag = "cap_window";
 	name = "CO's Quarters Shutters"
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/co)
 "Sb" = (
@@ -14209,6 +14619,9 @@
 /obj/machinery/light_switch{
 	pixel_x = 23;
 	pixel_y = -23
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
@@ -14304,6 +14717,12 @@
 /obj/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
+"SC" = (
+/obj/effect/event_torpedo_spawn{
+	sequence = "BRIDGE"
+	},
+/turf/space,
+/area/space)
 "SE" = (
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -14321,6 +14740,9 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -14340,6 +14762,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -14491,7 +14916,6 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_inner";
 	locked = 1;
 	name = "Docking Port Airlock";
@@ -14590,6 +15014,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/forestarboard)
 "TB" = (
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
 	},
@@ -14599,6 +15026,9 @@
 	dir = 5
 	},
 /obj/machinery/light,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "TJ" = (
@@ -14630,6 +15060,9 @@
 	},
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -14693,7 +15126,6 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	icon_state = "closed";
 	id_tag = "aquila_shuttle_dock_outer";
 	locked = 1;
 	name = "Docking Port Airlock";
@@ -14850,6 +15282,9 @@
 "UY" = (
 /obj/machinery/computer/modular/preset/cardslot/command,
 /obj/item/modular_computer/tablet/lease/preset/command,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/office/co)
 "Vb" = (
@@ -14877,7 +15312,6 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	icon_state = "closed";
 	id_tag = "aquila_shuttle_outer";
 	locked = 1;
 	name = "Aquila External Access";
@@ -15009,6 +15443,9 @@
 	pixel_y = 22;
 	req_access = list("ACCESS_BRIDGE")
 	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "VB" = (
@@ -15058,6 +15495,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/aft)
+"VR" = (
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/maintenance/bridge/forestarboard)
 "VW" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/captain,
@@ -15182,6 +15625,9 @@
 "Wv" = (
 /obj/structure/closet/secure_closet/bridgeofficer,
 /obj/floor_decal/industrial/outline/grey,
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Ww" = (
@@ -15211,6 +15657,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/devastating{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
@@ -15350,6 +15799,9 @@
 "Xz" = (
 /obj/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/PPE,
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "XB" = (
@@ -15362,6 +15814,9 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -15396,6 +15851,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "XQ" = (
@@ -15403,6 +15861,9 @@
 	dir = 4;
 	id_tag = "bridge sensors";
 	name = "Sensor Shroud"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/reinforced{
 	map_airless = 1
@@ -15415,6 +15876,9 @@
 	},
 /obj/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
+	},
+/obj/effect/event_ex_act/heavy{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
@@ -15554,6 +16018,9 @@
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
@@ -15719,6 +16186,9 @@
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
+	},
+/obj/effect/event_ex_act/light{
+	sequence = "BRIDGE"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -19634,7 +20104,7 @@ aa
 aa
 aa
 aa
-aa
+SC
 aa
 aa
 aa
@@ -22021,8 +22491,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+tn
+tn
 aa
 aa
 aa
@@ -22223,20 +22693,20 @@ aa
 aa
 aa
 aa
+tn
+tn
+tn
+tn
 aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+tn
+tn
+tn
+tn
+tn
+tn
 aa
 aa
 aa
@@ -22424,22 +22894,22 @@ aa
 aa
 aa
 aa
+tn
+tn
+tn
+tn
+tn
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+tn
 aa
 aa
 aa
@@ -22625,24 +23095,24 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+tn
+tn
+tF
+tF
+tF
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+tF
+tF
+tF
+tn
+tn
+tn
 aa
 aa
 aa
@@ -22825,26 +23295,26 @@ af
 af
 af
 af
-af
-aa
-aa
-aa
-aa
+VR
+tn
+tn
+tn
+tF
 zx
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+tF
+tn
+tn
+tn
+tn
+tn
+tn
+tn
+tF
 zx
-aa
-aa
-aa
-aa
+tF
+tn
+tn
+tn
 tg
 tg
 tg
@@ -23027,27 +23497,27 @@ af
 af
 af
 af
-af
-af
-aa
-aa
-aa
+VR
+VR
+tn
+tF
+tF
 vA
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
+tF
 vA
-aa
-aa
-aa
-tg
-tg
+tF
+tn
+tn
+Lp
+Lp
 tg
 tg
 tg
@@ -23229,11 +23699,11 @@ af
 af
 af
 af
-af
-af
+VR
+VR
 fu
 XQ
-XQ
+ux
 sF
 Hz
 SE
@@ -23245,11 +23715,11 @@ Aw
 KG
 Hz
 Es
-aa
-aa
+tF
+tF
 sx
-tg
-tg
+Lp
+Lp
 tg
 tg
 uy
@@ -23637,7 +24107,7 @@ rz
 Xz
 Fp
 eM
-DE
+Az
 Ie
 nf
 If
@@ -23840,7 +24310,7 @@ Hf
 bf
 ee
 Wv
-eP
+HQ
 cy
 Af
 hn
@@ -24042,11 +24512,11 @@ eN
 Ke
 Ks
 TI
-eP
+OT
 cz
 HC
 jw
-kw
+Fx
 lm
 kw
 nH
@@ -24259,7 +24729,7 @@ qP
 rI
 fv
 In
-tT
+ri
 uB
 tT
 Iv
@@ -24456,7 +24926,7 @@ Kt
 Lw
 fN
 HW
-ck
+PM
 qQ
 rJ
 Ii
@@ -24650,13 +25120,13 @@ qO
 yM
 eP
 hV
-eP
+OT
 nu
 vf
 lo
 yh
 dW
-eP
+OT
 HX
 eP
 Dx
