@@ -132,7 +132,7 @@ var/global/datum/singleton_manager/Singletons = new
 /singleton/Destroy()
 	SHOULD_CALL_PARENT(FALSE)
 	SHOULD_NOT_OVERRIDE(TRUE)
-	crash_with("Prevented qdel of a singleton: [log_info_line(src)]")
+	log_debug("Prevented qdel of a singleton: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE
 
 
