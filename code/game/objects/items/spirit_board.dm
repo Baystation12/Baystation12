@@ -21,9 +21,7 @@
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/item/spirit_board/attack_ghost(mob/observer/ghost/user)
-	if(GLOB.cult.max_cult_rating >= CULT_GHOSTS_2)
-		spirit_board_pick_letter(user)
-	return ..()
+	spirit_board_pick_letter(user)
 
 /obj/item/spirit_board/proc/spirit_board_pick_letter(mob/M)
 	if(!spirit_board_checks(M))
@@ -35,6 +33,10 @@
 	if(!planchette || !spirit_board_checks(M))
 		return	next_use = world.time + rand(30,50)
 	lastuser = M.ckey
+	if(isghost(M) && prob(10) && locate(/mob/observer/ghost) in range(1, src)) // flicker lights if a ghost is participating in the board
+		for(var/obj/machinery/light/L in get_area(src))
+			L.flicker()
+
 	//blind message is the same because not everyone brings night vision to seances
 	visible_message(SPAN_NOTICE("The planchette slowly moves... and stops at the letter \"[planchette]\"."))
 
