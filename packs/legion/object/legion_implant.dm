@@ -11,6 +11,11 @@
 	return "<b>Error: Unrecognized device.</b>"
 
 
+/obj/item/implant/legion/emp_act(severity)
+	SHOULD_CALL_PARENT(FALSE)
+	return
+
+
 /obj/item/implant/legion/implanted(mob/source)
 	var/mob/living/carbon/human/human = source
 	if (!istype(human))
