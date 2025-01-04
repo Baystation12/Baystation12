@@ -5,6 +5,7 @@
 #include "ai/legion_ai_reaver.dm"
 
 #include "helpers/legion_narrate.dm"
+#include "helpers/legion_recall.dm"
 #include "helpers/legion_warp_effect.dm"
 
 #include "mob/legion_bellator.dm"
