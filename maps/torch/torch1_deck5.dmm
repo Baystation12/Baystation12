@@ -2688,6 +2688,7 @@
 	dir = 4;
 	pixel_x = -23
 	},
+/obj/item/pen,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/hangar)
 "fY" = (
@@ -4375,12 +4376,8 @@
 "jX" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/donkpocket_mixed{
-	pixel_x = -4;
-	pixel_y = 14
-	},
-/obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	pixel_y = 2;
+	pixel_x = 2
 	},
 /turf/simulated/floor/lino,
 /area/quartermaster/hangar)
@@ -4949,8 +4946,7 @@
 /area/command/pilot)
 "lk" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/mining{
-	id_tag = "hangarexit";
+/obj/machinery/door/airlock/glass/mining{
 	name = "Hangar Office"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
@@ -12158,7 +12154,7 @@
 /area/shuttle/petrov/equipment)
 "Eq" = (
 /obj/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/secure_closet/crew,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/lino,
 /area/quartermaster/hangar)
 "Es" = (
