@@ -47,10 +47,12 @@
 
 	add_language(LANGUAGE_HUMAN_EURO)
 	add_language(LANGUAGE_LEGION_GLOBAL)
+	GLOB.all_legion_mobs += src
 
 
 /mob/living/simple_animal/hostile/legion/Destroy()
 	clear_beacon()
+	GLOB.all_legion_mobs -= src
 	return ..()
 
 
