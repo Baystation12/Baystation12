@@ -2679,7 +2679,16 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/exploration)
 "fX" = (
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/steel,
+/obj/item/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/hangar)
 "fY" = (
 /obj/machinery/door/firedoor,
@@ -3203,10 +3212,11 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "ho" = (
-/obj/random/junk,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftstarboard)
+/obj/machinery/computer/ship/navigation{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/quartermaster/hangar)
 "hp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -3807,11 +3817,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "iX" = (
-/obj/random/torchcloset,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/obj/machinery/computer/modular/preset/dock{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/hangar)
 "iY" = (
 /obj/machinery/door/firedoor,
@@ -4027,9 +4036,10 @@
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "ju" = (
-/obj/structure/closet/firecloset,
-/obj/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
+	},
+/turf/simulated/floor/lino,
 /area/quartermaster/hangar)
 "jv" = (
 /obj/floor_decal/industrial/warning,
@@ -4363,13 +4373,16 @@
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "jX" = (
-/obj/structure/largecrate,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/random/maintenance/solgov,
-/obj/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/steel,
+/obj/item/storage/box/donkpocket_mixed{
+	pixel_x = -4;
+	pixel_y = 14
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	icon_state = "bulb1"
+	},
+/turf/simulated/floor/lino,
 /area/quartermaster/hangar)
 "jY" = (
 /obj/floor_decal/industrial/warning/corner{
@@ -4920,15 +4933,12 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fifthdeck/aft)
 "li" = (
-/obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+/obj/structure/table/steel,
+/obj/machinery/microwave{
+	pixel_x = -3;
+	pixel_y = 6
 	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -24
-	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/lino,
 /area/quartermaster/hangar)
 "lj" = (
 /obj/machinery/alarm{
@@ -4939,8 +4949,9 @@
 /area/command/pilot)
 "lk" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance{
-	name = "Hangar Maintenance"
+/obj/machinery/door/airlock/mining{
+	id_tag = "hangarexit";
+	name = "Hangar Office"
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/hangar)
@@ -5147,6 +5158,9 @@
 "lH" = (
 /obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
+/area/quartermaster/hangar)
+"lI" = (
+/turf/simulated/floor/lino,
 /area/quartermaster/hangar)
 "lK" = (
 /obj/machinery/conveyor{
@@ -12142,6 +12156,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/equipment)
+"Eq" = (
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/closet/secure_closet/crew,
+/turf/simulated/floor/lino,
+/area/quartermaster/hangar)
 "Es" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14286,6 +14305,12 @@
 "MS" = (
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
+"MV" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/lino,
+/area/quartermaster/hangar)
 "MW" = (
 /obj/structure/closet/medical_wall/filled{
 	pixel_y = 32
@@ -34507,11 +34532,11 @@ aa
 ZG
 ZG
 aH
-ye
 aJ
+ho
 iX
 fX
-aJ
+pF
 UH
 ih
 ee
@@ -34709,10 +34734,10 @@ aa
 ZG
 ZG
 aH
-ye
 aJ
+MV
 ju
-fX
+lI
 lk
 UH
 ih
@@ -34911,11 +34936,11 @@ aa
 ZG
 ZG
 aH
-ho
 aJ
+Eq
 jX
 li
-aJ
+pF
 UH
 ih
 ee
@@ -35113,7 +35138,7 @@ aa
 ZG
 ZG
 aH
-ye
+aJ
 aJ
 aJ
 aJ
