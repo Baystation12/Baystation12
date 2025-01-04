@@ -41,3 +41,7 @@ GLOBAL_LIST_AS(legion_last_words_player, list(
 	list("Brock Bunten", "This isn't what was supposed to happen. They're intelligent. They're understanding. Why the hell did they eat Schmidt? I just wanted to try talking. I just want to understand- no, NO, NO, STAY AWAY! AH, FUCK, LET GO, FUCK, MY NECK, STOP, I CAN'T DO THAT-- AHHHH!--"),
 	list("Karl Emberchest", "GET THE HELL OUTTA HERE!")
 ))
+
+
+/// List of all legion mobs, for use by procs that affect all or a majority of said mobs.
+GLOBAL_LIST_EMPTY(all_legion_mobs)
