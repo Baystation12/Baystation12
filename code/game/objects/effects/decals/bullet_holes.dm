@@ -5,3 +5,4 @@
 	icon = 'icons/effects/effects.dmi'
 	layer = DECAL_LAYER
 	icon_state = "scorch"
+	anchored = TRUE
