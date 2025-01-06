@@ -168,6 +168,29 @@
 			kill_health()
 			return TRUE
 
+	// Bullet hole repair
+	if (isWelder(W) && (locate(/obj/overlay/bmark) in src))
+		var/obj/item/weldingtool/weldingtool = W
+		if (!weldingtool.can_use(1, user))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts patching all the bullet holes in \the [src] with \a [W]."),
+			SPAN_NOTICE("You start patching all the bullet holes in \the [src] with \the [W].")
+		)
+		for (var/obj/overlay/bmark/bmark in src)
+			if (!user.do_skilled(0.5 SECONDS, SKILL_CONSTRUCTION, bmark) || !user.use_sanity_check(bmark, W))
+				return TRUE
+			if (!weldingtool.remove_fuel(1, user))
+				return TRUE
+			qdel(bmark)
+			playsound(src, 'sound/items/Welder.ogg', 10, 1)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] finished patching \the [src]'s bullet holes with \a [W]."),
+			SPAN_NOTICE("You finish patching \the [src]'s bullet holes with \the [W].")
+		)
+		return TRUE
+
+
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 	if(thermite)
 		if(isWelder(W))
