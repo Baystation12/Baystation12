@@ -373,14 +373,6 @@
 	increase confidence and feel good. The main thing is - be sure to ask permission.\""
 
 
-/singleton/poster/no_alcohol
-	icon_state = "no_alcohol"
-	name = "СП * РТ"
-	desc = "At the very top of the poster is a word, where one of the letters is replaced by \
-	an asterisk: \"СП * РТ\", and below - two signatures. The first: \"o - сила\", the second \
-	\"и - могила\". The poster is clean and without small text, which makes it clear the \
-	seriousness of the statement."
-
 
 /singleton/poster/pizza_for_captain
 	icon_state = "pizza_for_captain"
