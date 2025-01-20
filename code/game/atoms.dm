@@ -96,6 +96,8 @@
 
 	if (health_max)
 		health_current = health_max
+		if (initial_damage_percent)
+			damage_health(health_max * (initial_damage_percent/100))
 
 	return INITIALIZE_HINT_NORMAL
 

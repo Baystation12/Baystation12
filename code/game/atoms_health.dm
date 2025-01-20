@@ -10,6 +10,9 @@
 /// Bitflag (Any of `HEALTH_FLAG_*`). Various health-related config flags for the atom. See `code\__defines\health.dm` for details.
 /atom/var/health_flags = FLAGS_OFF
 
+// Damage to deal to the atom on spawn (as a percentage of max_health)
+/atom/var/initial_damage_percent = 0
+
 /**
  * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
  *
