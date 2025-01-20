@@ -72,6 +72,10 @@
 /obj/machinery/power/apc/hyper
 	cell_type = /obj/item/cell/hyper
 
+// APC that barely has any juice
+/obj/machinery/power/apc/near_empty
+	cell_type = /obj/item/cell/crap/discharged
+
 // Main APC code
 /obj/machinery/power/apc
 	name = "area power controller"

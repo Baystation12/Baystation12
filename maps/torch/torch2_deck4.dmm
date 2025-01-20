@@ -300,6 +300,10 @@
 /obj/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod6/station)
+"bj" = (
+/obj/shuttle_landmark/nav_salvage_shuttle/torch/d4,
+/turf/space,
+/area/space)
 "bk" = (
 /obj/floor_decal/corner/red/half{
 	dir = 8
@@ -21840,7 +21844,7 @@ aa
 aa
 aa
 aa
-aa
+bj
 aa
 aa
 aa

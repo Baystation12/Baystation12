@@ -16,6 +16,9 @@
 
 	var/ceiling_type = /turf/unsimulated/floor/shuttle_ceiling
 
+	/// List of shuttle locations (as relative positions from the initial location) that should inherit the turf type of the target location when moving
+	var/list/inheriting_turfs = list()
+
 	var/sound_takeoff = 'sound/effects/shuttle_takeoff.ogg'
 	var/sound_landing = 'sound/effects/shuttle_landing.ogg'
 
@@ -51,6 +54,23 @@
 	if(!istype(current_location))
 		CRASH("Shuttle \"[name]\" could not find its starting location.")
 
+	var/list/areas = list()
+	if(!islist(shuttle_area))
+		shuttle_area = list(shuttle_area)
+	for(var/area_type in shuttle_area)
+		var/area/A = locate(area_type)
+		if(!istype(A))
+			CRASH("Shuttle \"[name]\" couldn't locate area [area_type].")
+		areas += A
+
+		for(var/turf/T in A)
+			if (should_inherit_turf(T))
+				var/relative_x = T.x - current_location.x
+				var/relative_y = T.y - current_location.y
+				inheriting_turfs += list(relative_x, relative_y)
+
+	shuttle_area = areas
+
 	if(src.name in SSshuttle.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
 	SSshuttle.shuttles[src.name] = src
@@ -71,6 +91,9 @@
 	SSshuttle.shuttle_logs -= src
 	if(SSsupply.shuttle == src)
 		SSsupply.shuttle = null
+
+	inheriting_turfs.Cut()
+	inheriting_turfs = null
 
 	. = ..()
 

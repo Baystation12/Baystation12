@@ -25,6 +25,9 @@
 	/// Boolean (Default `FALSE`) - If set, the tile will not have atmosphere on init.
 	var/map_airless = FALSE
 
+	/// Whether this tile should spawn in a broken state
+	var/spawn_broken = FALSE
+
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	var/lava = 0
@@ -47,6 +50,8 @@
 		floortype = initial_flooring
 	if(floortype)
 		set_flooring(GET_SINGLETON(floortype))
+	if(spawn_broken)
+		break_tile()
 
 /turf/simulated/floor/proc/set_flooring(singleton/flooring/newflooring)
 	make_plating(defer_icon_update = 1)

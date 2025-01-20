@@ -162,6 +162,9 @@
 	maxcharge = 100
 	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
 
+/obj/item/cell/crap/discharged
+	charge = 5
+
 /obj/item/cell/crap/empty
 	charge = 0
 

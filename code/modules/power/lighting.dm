@@ -235,7 +235,7 @@
 	else
 		var/light_color = get_color_from_area()
 		lightbulb = new light_type(src, light_color)
-		if(prob(lightbulb.broken_chance) || spawn_broken)
+		if(spawn_broken || prob(lightbulb.broken_chance))
 			broken(TRUE)
 
 	on = powered()
