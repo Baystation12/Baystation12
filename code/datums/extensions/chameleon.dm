@@ -311,12 +311,12 @@
 /datum/extension/chameleon/emag
 	expected_type = /obj/item/card
 	chameleon_choices = list(
-		("Broken ID Card" = /obj/item/card/emag),
-		("ID Card" = /obj/item/card/id),
-		("Union Card" = /obj/item/card/union),
-		("Data Card" = /obj/item/card/data),
-		("Data Card (Full Color)" = /obj/item/card/data/full_color),
-		("Floppy Disk" = /obj/item/card/data/disk)
+		"Broken ID Card" = /obj/item/card/emag,
+		"ID Card" = /obj/item/card/id,
+		"Union Card" = /obj/item/card/union,
+		"Data Card" = /obj/item/card/data,
+		"Data Card (Full Color)" = /obj/item/card/data/full_color,
+		"Floppy Disk" = /obj/item/card/data/disk
 	)
 
 /datum/extension/chameleon/emag/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
