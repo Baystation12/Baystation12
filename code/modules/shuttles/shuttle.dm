@@ -37,16 +37,6 @@
 	if(_name)
 		src.name = _name
 
-	var/list/areas = list()
-	if(!islist(shuttle_area))
-		shuttle_area = list(shuttle_area)
-	for(var/T in shuttle_area)
-		var/area/A = locate(T)
-		if(!istype(A))
-			CRASH("Shuttle \"[name]\" couldn't locate area [T].")
-		areas += A
-	shuttle_area = areas
-
 	if(initial_location)
 		current_location = initial_location
 	else
@@ -96,6 +86,11 @@
 	inheriting_turfs = null
 
 	. = ..()
+
+/// Whether or not the given turf should inherit the target turf type when the shuttle moves
+/datum/shuttle/proc/should_inherit_turf(turf/shuttle_turf)
+	// By default, all space turfs inherit target turfs
+	return istype(shuttle_turf, /turf/space)
 
 /datum/shuttle/proc/short_jump(obj/shuttle_landmark/destination)
 	if(moving_status != SHUTTLE_IDLE) return
@@ -252,6 +247,15 @@
 		var/datum/shuttle_log/s_log = SSshuttle.shuttle_logs[src]
 		s_log.handle_move(current_location, destination)
 
+	// inherit turfs before the actual movement by copying the target to the source
+	for(var/i = 1; i <= length(inheriting_turfs); i += 2)
+		var/turf/source = locate(current_location.x + inheriting_turfs[i], current_location.y + inheriting_turfs[i + 1], current_location.z)
+		var/turf/target = turf_translation[source]
+		if(target)
+			var/turf/inherited_turf = source.ChangeTurf(target.type, FALSE, FALSE, TRUE)
+			inherited_turf.transport_properties_from(target)
+
+	// move shuttle turfs to the target location
 	translate_turfs(turf_translation, current_location.base_area, current_location.base_turf)
 	current_location = destination
 
