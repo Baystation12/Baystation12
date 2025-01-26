@@ -222,6 +222,7 @@
 	var/burn_damage_amt = 5
 
 	var/wielded = 0
+	var/wield_check = 1
 	var/cooldown = 0
 	var/busy = 0
 
@@ -259,7 +260,7 @@
 	if(!check_charge(chargecost))
 		to_chat(user, SPAN_WARNING("\The [src] doesn't have enough charge left to do that."))
 		return 0
-	if(!wielded && !isrobot(user))
+	if(wield_check && !wielded && !isrobot(user))
 		to_chat(user, SPAN_WARNING("You need to wield the paddles with both hands before you can use them on someone!"))
 		return 0
 	if(cooldown)
@@ -532,6 +533,7 @@
 	chargecost = 150
 	safety = 0
 	wielded = 1
+	wield_check = 0
 
 /obj/item/shockpaddles/rig/check_charge(charge_amt)
 	if(istype(src.loc, /obj/item/rig_module/device/defib))
