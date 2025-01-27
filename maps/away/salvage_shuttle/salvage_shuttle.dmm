@@ -625,20 +625,6 @@
 /obj/item/bedsheet/hop,
 /turf/simulated/floor/carpet,
 /area/salvage_shuttle/lounge)
-"hx" = (
-/obj/structure/grille,
-/obj/machinery/door/blast/regular/open{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "crab_shutters";
-	name = "Protective Shutters";
-	opacity = 0;
-	dir = 4;
-	test_exemptions = list("DOOR_ON_APPROPRIATE_TURF")
-	},
-/obj/floor_decal/industrial/warning,
-/turf/simulated/floor/plating,
-/area/salvage_shuttle/net)
 "hD" = (
 /obj/paint/green,
 /obj/structure/sign/poster,
@@ -3073,9 +3059,6 @@
 /area/salvage_shuttle/cockpit)
 "QZ" = (
 /obj/structure/grille,
-/obj/floor_decal/industrial/warning{
-	dir = 1
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	icon_state = "pdoor0";
@@ -3085,6 +3068,23 @@
 	dir = 4;
 	test_exemptions = list("DOOR_ON_APPROPRIATE_TURF")
 	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/salvage_shuttle/net)
+"Rb" = (
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "crab_shutters";
+	name = "Protective Shutters";
+	opacity = 0;
+	dir = 4;
+	test_exemptions = list("DOOR_ON_APPROPRIATE_TURF")
+	},
+/obj/structure/grille,
+/obj/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/net)
 "Rt" = (
@@ -3708,7 +3708,8 @@
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;
-	dir = 4
+	dir = 4;
+	test_exemptions = list("DOOR_ON_APPROPRIATE_TURF")
 	},
 /obj/structure/net,
 /turf/space,
@@ -7876,7 +7877,7 @@ IE
 Ah
 Ah
 IE
-hx
+Rb
 YK
 YK
 YK
