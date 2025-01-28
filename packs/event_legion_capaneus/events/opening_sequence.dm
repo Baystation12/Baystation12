@@ -21,7 +21,7 @@
 			/datum/announcement/proc/Announce,\
 			"Attention all hands: Jump sequence initiated. Transit procedures are now in effect. Jump in 10 minutes."\
 		),\
-		5 SECONDS\
+		5 MINUTES\
 	)
 	// 10 minutes - Jump prep phase 2
 	addtimer(\
@@ -30,7 +30,7 @@
 			/datum/announcement/proc/Announce,\
 			"Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately 5 minutes."\
 		),\
-		10 SECONDS\
+		10 MINUTES\
 	)
 	// 13 minutes - Jump aborted
 	addtimer(\
@@ -39,7 +39,7 @@
 			/datum/announcement/proc/Announce,\
 			"Attention all hands: Jump sequence aborted. Undefined error. Tracing."\
 		),\
-		13 SECONDS\
+		13 MINUTES\
 	)
 	// 14 minutes - Something's been hacked
 	addtimer(\
@@ -47,7 +47,7 @@
 			GLOBAL_PROC,\
 			/proc/event_system_hack\
 		),\
-		14 SECONDS\
+		14 MINUTES\
 	)
 
 	// Oh god oh fuck moment
@@ -60,7 +60,7 @@
 			"SEV Torch Sensors",\
 			'packs/event_legion_capaneus/sounds/torpedo_incoming.ogg'\
 		),\
-		15 SECONDS\
+		15 MINUTES\
 	)
 	// 15.5 minutes - Capaneus appears on sensors
 	addtimer(\
@@ -70,7 +70,7 @@
 			"New vessel detected on intercept course. Ident: SFV Capaneus. Warning: Legion signal detected.",\
 			"SEV Torch Sensors"\
 		),\
-		15.5 SECONDS\
+		15.5 MINUTES\
 	)
 	// 16 minutes - Torpedo impacts (Bridge, nacelles, hangar)
 	addtimer(\
@@ -78,7 +78,7 @@
 			GLOBAL_PROC,\
 			/proc/event_torpedo_impacts\
 		),\
-		16 SECONDS\
+		16 MINUTES\
 	)
 
 	// 17 minutes - Curio appears on sensors
@@ -89,7 +89,7 @@
 			"New vessel detected on intercept course. Ident: SFV Curio. Warning: Legion signal detected.",\
 			"SEV Torch Sensors"\
 		),\
-		17 SECONDS\
+		17 MINUTES\
 	)
 
 	// 20 minutes - Curio impacts
@@ -101,7 +101,7 @@
 			"SEV Torch Sensors",\
 			'packs/event_legion_capaneus/sounds/torpedo_incoming.ogg'\
 		),\
-		20 SECONDS\
+		20 MINUTES\
 	)
 
 	// 21 minutes - Capaneus docks
@@ -112,7 +112,7 @@
 			"Warning. Unauthorized vessel SFV Capaneus has attached to Deck 4 Fore Airlock.",\
 			"SEV Torch Sensors"\
 		),\
-		21 SECONDS\
+		21 MINUTES\
 	)
 
 	message_admins("Opening sequence complete.")
