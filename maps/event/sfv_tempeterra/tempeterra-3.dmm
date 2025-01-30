@@ -1,0 +1,18222 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"ad" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"an" = (
+/obj/floor_decal/scglogo{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"at" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"ay" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"aE" = (
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/borderfloorblack/corner{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/bordercorner{
+	dir = 1
+	},
+/obj/machinery/cooker/candy{
+	pixel_y = 13
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"aF" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/structure/sign/warning/moving_parts{
+	pixel_y = 32
+	},
+/obj/floor_decal/industrial/loading{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/crew/disposals)
+"aN" = (
+/obj/machinery/oxygen_pump{
+	pixel_y = -32
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/computer/ship/sensors{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"aT" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "Primary External Access";
+	dir = 4
+	},
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	name = "Airlock Shutters"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"ba" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/mess)
+"bh" = (
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 10
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 9
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 6
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/airlock)
+"bs" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"bx" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8;
+	icon_state = "map-supply"
+	},
+/obj/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/janitorial)
+"bA" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/disposalpipe/segment/bent,
+/obj/catwalk_plated/dark,
+/turf/simulated/floor,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"bH" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"bI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"bM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/crew/fridge)
+"bU" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"bZ" = (
+/obj/structure/table/rack,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/item/device/radio,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = -32
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/eva)
+"cd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"cg" = (
+/obj/structure/closet/walllocker{
+	pixel_x = 32
+	},
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/floor_decal/industrial/warning,
+/obj/item/reagent_containers/food/drinks/pitcher,
+/obj/item/reagent_containers/food/drinks/pitcher,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"cr" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"ct" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"cu" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/engineering/it/telecomms)
+"cw" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/kitchen)
+"cC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"cR" = (
+/obj/structure/janitorialcart,
+/obj/item/mop,
+/obj/floor_decal/corner/green/mono,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/structure/railing/mapped,
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/janitorial)
+"cU" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/maint)
+"db" = (
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 10
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 9
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 6
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/airlock)
+"dh" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"di" = (
+/obj/structure/table/rack,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/item/tank/oxygen_emergency_double,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/eva)
+"dj" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/turf/simulated/floor,
+/area/tempeterra/crew/storage)
+"dp" = (
+/obj/structure/catwalk,
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"dr" = (
+/obj/machinery/porta_turret/stationary,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"dv" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"dy" = (
+/obj/machinery/constructable_frame/machine_frame,
+/obj/floor_decal/industrial/warning/fulltile,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/armaments/storage/starboard)
+"dL" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"dN" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = -32
+	},
+/obj/item/reagent_containers/food/drinks/cans/waterbottle{
+	pixel_y = 4;
+	pixel_x = -1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"dP" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8;
+	icon_state = "map-scrubbers"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"er" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump";
+	dir = 1
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/handrail{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"ev" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"ez" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/item/stool/padded,
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"eH" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 10
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"eJ" = (
+/obj/structure/window/boron_reinforced{
+	dir = 8
+	},
+/obj/machinery/telecomms/hub,
+/obj/floor_decal/corner/green/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"eL" = (
+/obj/structure/closet/hydroponics_torch,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 1;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"eN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor,
+/area/tempeterra/armaments/storage/port)
+"fa" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"fc" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"fi" = (
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/closet,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"fj" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/chemical_dispenser/bar_coffee/full{
+	pixel_y = 3;
+	dir = 1;
+	pixel_x = 3
+	},
+/obj/floor_decal/corner/paleblue/half,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"fl" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/crew/storage)
+"fm" = (
+/obj/floor_decal/corner/green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/obj/structure/closet/crate/trashcart,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/janitorial)
+"fp" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"ft" = (
+/obj/machinery/light/small/red,
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/port)
+"fx" = (
+/obj/floor_decal/scglogo{
+	icon_state = "bottom-left";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"fy" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"fB" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid/full{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"fK" = (
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/smes/buildable/preset/on_full{
+	RCon_tag = "Substation - Telecommunications"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/maint)
+"fR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"fZ" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/command/eva)
+"gd" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/computer/ship/engines,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"gn" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"gr" = (
+/obj/structure/closet/crate/secure,
+/obj/item/stock_parts/subspace/transmitter,
+/obj/item/stock_parts/subspace/transmitter,
+/obj/item/stock_parts/subspace/analyzer,
+/obj/item/stock_parts/subspace/analyzer,
+/obj/item/stock_parts/subspace/treatment,
+/obj/item/stock_parts/subspace/treatment,
+/obj/item/stock_parts/circuitboard/telecomms/broadcaster,
+/obj/item/stock_parts/circuitboard/telecomms/bus,
+/obj/item/stock_parts/circuitboard/telecomms/server,
+/obj/item/stock_parts/circuitboard/telecomms/receiver,
+/obj/item/stock_parts/circuitboard/telecomms/processor,
+/obj/item/stock_parts/subspace/crystal,
+/obj/item/stock_parts/subspace/crystal,
+/obj/item/stock_parts/subspace/ansible,
+/obj/item/stock_parts/subspace/ansible,
+/obj/item/stock_parts/subspace/amplifier,
+/obj/item/stock_parts/subspace/amplifier,
+/obj/item/stock_parts/subspace/filter,
+/obj/item/stock_parts/subspace/filter,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/item/stack/nanopaste,
+/obj/item/stack/nanopaste,
+/obj/item/stack/nanopaste,
+/obj/item/stack/nanopaste,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/maint)
+"gs" = (
+/obj/machinery/nav_light/port,
+/turf/simulated/floor/reinforced,
+/area/space)
+"gz" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"gJ" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/reagent_temperature{
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_y = 2
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"gM" = (
+/obj/structure/railing/mapped,
+/turf/simulated/floor/reinforced,
+/area/space)
+"gN" = (
+/obj/structure/bed/chair/comfy/brown{
+	dir = 1
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"gP" = (
+/obj/floor_decal/scglogo{
+	icon_state = "top-left";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"gW" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/sign/solgov{
+	pixel_y = 32
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"hh" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/floor_decal/spline/fancy/black,
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/tempeterra/command/eva)
+"hj" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/maint)
+"hC" = (
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/icecream_vat,
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"hE" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/light,
+/obj/structure/disposalpipe/segment/bent{
+	dir = 8
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"hV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/port)
+"if" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/light,
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"ik" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/structure/railing/mapped,
+/obj/item/reagent_containers/food/condiment/small/peppermill{
+	pixel_x = 3
+	},
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
+	pixel_x = -3
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"is" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/closet,
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"iu" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/valve/shutoff/supply{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/industrial/shutoff{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/flight)
+"ix" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/hydro)
+"iE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"iS" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"ja" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"jm" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 6
+	},
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"jn" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"js" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/handrail,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"jv" = (
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "Primary External Access";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"jy" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/command/eva)
+"jI" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/industrial/warning,
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/obj/structure/grille,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"jJ" = (
+/obj/structure/catwalk,
+/obj/structure/lattice,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"jW" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/brigdoor/southleft,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/airlock)
+"kk" = (
+/obj/floor_decal/techfloor,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"ks" = (
+/obj/machinery/disposal/deliveryChute{
+	dir = 8
+	},
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/disposalpipe/trunk,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/crew/disposals)
+"ku" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"kU" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/barbecue,
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/item/pizzabox/meat,
+/obj/item/pizzabox/meat,
+/obj/item/pizzabox/meat,
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"lc" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"lz" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"lB" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/floor_decal/borderfloorblack/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"lJ" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"lK" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/airlock)
+"lO" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"lQ" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/structure/bed/chair/office/comfy/blue{
+	dir = 8
+	},
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"lR" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"ma" = (
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/starboard)
+"mo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment,
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"mF" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"mI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"mL" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/obj/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"mN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Missile Maintenence Blast Shutters";
+	opacity = 0;
+	dir = 2
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"mS" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8;
+	icon_state = "map-scrubbers"
+	},
+/obj/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/janitorial)
+"mY" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/sign/deck/first{
+	pixel_y = 32
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"no" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8;
+	icon_state = "map-supply"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"nq" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"nO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"od" = (
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 24
+	},
+/obj/floor_decal/borderfloor{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 5
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"oi" = (
+/obj/floor_decal/corner/paleblue/half{
+	dir = 1
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"or" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = -32
+	},
+/obj/item/reagent_containers/food/snacks/mars,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"oz" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"oF" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"oM" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/power/apc/tempeterra{
+	pixel_y = -24
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"oO" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/crew/fridge)
+"pa" = (
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"pb" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/floor_decal/borderfloor/corner{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/bordercorner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"pi" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"po" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor,
+/area/tempeterra/armaments/storage/starboard)
+"pr" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"pH" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"qt" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/floor_decal/borderfloor/corner{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/bordercorner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"qu" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/airlock)
+"qz" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/engineering/it/sensors)
+"qB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"qD" = (
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/flight)
+"qE" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/light,
+/obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/valve/shutoff/supply{
+	dir = 4
+	},
+/obj/floor_decal/industrial/shutoff{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"qF" = (
+/obj/structure/hygiene/sink/kitchen{
+	dir = 4;
+	pixel_x = -20
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"qJ" = (
+/obj/structure/bed/chair/comfy/brown,
+/obj/structure/sign/double/solgovflag/right{
+	dir = 4;
+	pixel_x = -32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"qP" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/janitorial)
+"qS" = (
+/obj/floor_decal/corner/paleblue,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"qU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"rd" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump";
+	dir = 1
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/oxygen_pump{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"rf" = (
+/obj/floor_decal/spline/fancy/black,
+/obj/floor_decal/techfloor/hole/right,
+/obj/floor_decal/techfloor/hole,
+/turf/simulated/floor/reinforced,
+/area/space)
+"rF" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"rH" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/techfloor,
+/obj/machinery/door/airlock/external{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"rI" = (
+/obj/machinery/vending/dinnerware,
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"rK" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/eva)
+"rO" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8;
+	icon_state = "map-supply"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/hydro)
+"rQ" = (
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"rU" = (
+/obj/structure/table/rack,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"rZ" = (
+/obj/wallframe_spawn/reinforced_phoron/titanium,
+/obj/machinery/door/blast/shutters{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"sb" = (
+/obj/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"si" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/janitorial)
+"sy" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/computer/ship/helm{
+	dir = 4;
+	req_access = list(list("ACCESS_TORCH_HELM"))
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"sE" = (
+/obj/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"sH" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/tableflag,
+/obj/structure/sign/double/solgovflag/left{
+	pixel_x = -32;
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"sJ" = (
+/obj/machinery/alarm/tempeterra{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"sM" = (
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"sP" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"sS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/tempeterra/engineering/it/telecomms)
+"tb" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/techfloor,
+/obj/machinery/door/airlock/external{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"td" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment/bent,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/item/storage/box/silverware{
+	pixel_x = -3;
+	pixel_y = 10
+	},
+/obj/item/storage/box/silverware{
+	pixel_x = -3;
+	pixel_y = 3
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"tf" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"th" = (
+/obj/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"tj" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/power/apc/tempeterra{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"tl" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack/corner2{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 1
+	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"tn" = (
+/obj/machinery/smartfridge/foods,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor,
+/area/tempeterra/crew/mess)
+"tt" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/structure/closet,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"tA" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"tN" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/airlock)
+"tQ" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/barbecue,
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"tT" = (
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/light,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/obj/structure/closet/crate/plastic,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/chem_disp_cartridge/coffee,
+/obj/item/reagent_containers/chem_disp_cartridge/coffee,
+/obj/item/reagent_containers/chem_disp_cartridge/coffee,
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"tW" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"tY" = (
+/obj/structure/railing,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 4
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"tZ" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/closet,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"ui" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/floor_decal/spline/fancy/black,
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/tempeterra/command/eva)
+"ul" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1;
+	icon_state = "map-scrubbers"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/crew/fridge)
+"uq" = (
+/obj/structure/noticeboard{
+	pixel_y = 30
+	},
+/obj/floor_decal/corner/paleblue/half{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"uu" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"uv" = (
+/obj/structure/table/rack,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = 32
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"uA" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8
+	},
+/obj/structure/window/boron_reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"uL" = (
+/obj/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"vb" = (
+/obj/floor_decal/industrial/warning/full,
+/obj/machinery/mech_recharger,
+/mob/living/exosuit/premade/powerloader,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"vd" = (
+/obj/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"vu" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"vP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"vY" = (
+/obj/machinery/telecomms/bus,
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"vZ" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced,
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"wc" = (
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/floor_decal/borderfloor{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"wg" = (
+/obj/floor_decal/corner/b_green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/hydro)
+"wq" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"ws" = (
+/obj/machinery/cooker/oven,
+/obj/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"wt" = (
+/obj/machinery/atmospherics/pipe/zpipe/down/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,
+/obj/structure/cable{
+	d1 = 32;
+	icon_state = "32-1"
+	},
+/obj/structure/disposalpipe/down{
+	dir = 8
+	},
+/obj/catwalk_plated/dark,
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"wx" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/fridge)
+"wy" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"wH" = (
+/obj/machinery/door/airlock{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/starboard)
+"wJ" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"wX" = (
+/obj/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/light,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"xa" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/crew/disposals)
+"xd" = (
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"xq" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"xr" = (
+/obj/floor_decal/industrial/warning,
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/obj/structure/railing/mapped,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"xw" = (
+/obj/machinery/power/breakerbox,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/cyan,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"xF" = (
+/obj/paint/sfv_arbiter,
+/obj/structure/sign/solgov,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/engineering/it/sensors)
+"xO" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"xV" = (
+/obj/floor_decal/scglogo{
+	icon_state = "top-center";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"yb" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/vent/high_volume,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"yf" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/obj/machinery/fabricator/micro/bartender,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"yg" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/airlock)
+"yi" = (
+/obj/floor_decal/techfloor/orange{
+	dir = 9
+	},
+/obj/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"yq" = (
+/obj/structure/ladder,
+/obj/catwalk_plated/dark,
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/open,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"yL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/floor_decal/corner/black/mono,
+/obj/floor_decal/industrial/outline/grey,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"yQ" = (
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/structure/hygiene/sink/kitchen{
+	dir = 8;
+	pixel_x = 20
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/janitorial)
+"yR" = (
+/obj/machinery/door/airlock/vault{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"yU" = (
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/janitorial)
+"za" = (
+/obj/floor_decal/techfloor/orange,
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/machinery/light/small/red,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"ze" = (
+/obj/structure/ladder,
+/obj/catwalk_plated/dark,
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/turf/simulated/open,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"zi" = (
+/obj/machinery/light,
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"zk" = (
+/obj/structure/bed/chair/shuttle/blue{
+	dir = 8
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"zm" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"zo" = (
+/obj/floor_decal/scglogo{
+	icon_state = "bottom-right";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"zp" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"zv" = (
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/starboard)
+"zw" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/sign/deck/first{
+	pixel_y = 32
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"zH" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/catwalk_plated/dark,
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"Ab" = (
+/obj/machinery/conveyor_switch/oneway{
+	convdir = -1;
+	id = "garbage2";
+	name = "disposal conveyor"
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/crew/disposals)
+"Ad" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"Af" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Ai" = (
+/obj/machinery/door/window/brigdoor/northleft,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm/tempeterra/cold{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/white,
+/area/tempeterra/engineering/it/telecomms)
+"Aj" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Ao" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/item/tableflag,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"Aq" = (
+/obj/structure/ladder,
+/obj/catwalk_plated/dark,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/open,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"As" = (
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/janitorial)
+"Az" = (
+/obj/floor_decal/techfloor/orange{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"AB" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/hydro)
+"AD" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"AE" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"Bb" = (
+/obj/structure/window/boron_reinforced{
+	dir = 1
+	},
+/obj/machinery/telecomms/receiver,
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/structure/sign/warning/server_room{
+	dir = 8;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"Bo" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"Bz" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"BF" = (
+/obj/machinery/telecomms/processor,
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"BH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"BP" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 5
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"BS" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/sign/deck/first{
+	pixel_y = -32;
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"Ca" = (
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"Cb" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"Cc" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Cj" = (
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"Cv" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/command/eva)
+"CG" = (
+/obj/floor_decal/scglogo{
+	icon_state = "top-right";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"CR" = (
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"CS" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Df" = (
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/starboard)
+"Dg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"Dp" = (
+/obj/floor_decal/scglogo{
+	icon_state = "center-right";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Dr" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/floor_decal/spline/fancy/wood,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"DC" = (
+/obj/structure/bed/chair/comfy/captain{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"DG" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "ert_brig";
+	name = "Flight Deck Blast Shutters";
+	opacity = 0;
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"DJ" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"DZ" = (
+/obj/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/command/flight)
+"Ed" = (
+/obj/machinery/shipsensors/upgraded,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"Ef" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"Eh" = (
+/obj/structure/table/rack,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"Et" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"Ey" = (
+/obj/structure/railing/mapped,
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"EA" = (
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"EX" = (
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/brigdoor/southleft,
+/obj/machinery/atmospherics/portables_connector,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"Fc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/railing/mapped,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Fn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced,
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"Fx" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/floor_decal/corner_techfloor_grid/full{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"FJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/steeldecal/steel_decals_central2,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"FM" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"FO" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/engineering/it/sensors)
+"FQ" = (
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"FX" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 6
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/command/flight)
+"Gg" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/corner/paleblue/mono,
+/obj/item/flora/pottedplantsmall/fern{
+	pixel_y = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"Gs" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/structure/railing/mapped,
+/obj/structure/closet,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"Gz" = (
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"GC" = (
+/obj/structure/window/boron_reinforced{
+	dir = 8
+	},
+/obj/machinery/ntnet_relay,
+/obj/floor_decal/corner/green/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"GL" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 9
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -21
+	},
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"GQ" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"GZ" = (
+/obj/machinery/nav_light/dorsal,
+/turf/simulated/floor/reinforced,
+/area/space)
+"Hc" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"Hj" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/computer/ship/helm{
+	dir = 4;
+	req_access = list(list("ACCESS_TORCH_HELM"))
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"Hl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/port)
+"Hp" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Hv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/disposalpipe/segment,
+/obj/floor_decal/techfloor,
+/obj/floor_decal/steeldecal/steel_decals_central2{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"HA" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"HH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"HO" = (
+/obj/machinery/vending/hydronutrients/generic{
+	dir = 8
+	},
+/obj/floor_decal/corner/b_green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"HP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/janitorial)
+"HT" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/disposals)
+"Ib" = (
+/obj/machinery/door/window/brigdoor/southleft,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/cable/cyan,
+/turf/simulated/floor/tiled/white,
+/area/tempeterra/engineering/it/telecomms)
+"Ip" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/crew/mess)
+"Iq" = (
+/obj/machinery/alarm/tempeterra{
+	dir = 4;
+	pixel_x = -23
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/closet,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"IC" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 1;
+	target_pressure = 200
+	},
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"IG" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/command/eva)
+"IH" = (
+/obj/catwalk_plated/dark,
+/obj/structure/ladder,
+/obj/structure/sign/deck/first{
+	dir = 4;
+	pixel_x = -32
+	},
+/turf/simulated/open,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"II" = (
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Ja" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/command/eva)
+"Jc" = (
+/obj/machinery/alarm/tempeterra{
+	dir = 4;
+	pixel_x = -23
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 10
+	},
+/obj/structure/table/steel_reinforced,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Jd" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Jl" = (
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 9
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Jt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"JA" = (
+/obj/machinery/nav_light/ventral,
+/turf/simulated/floor/reinforced,
+/area/space)
+"JG" = (
+/obj/paint/sfv_arbiter,
+/obj/structure/sign/solgov,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/airlock)
+"JI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"JJ" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"JM" = (
+/obj/machinery/oxygen_pump{
+	pixel_y = 32
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/computer/ship/sensors,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"JP" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"JQ" = (
+/obj/floor_decal/corner/b_green/half{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/hydro)
+"JV" = (
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/hole{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Kb" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"Km" = (
+/obj/structure/window/boron_reinforced,
+/obj/machinery/telecomms/broadcaster,
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/structure/sign/warning/server_room{
+	dir = 8;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"Ko" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 5
+	},
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 5
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"Ku" = (
+/obj/floor_decal/scglogo{
+	icon_state = "center-left";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Kz" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/obj/structure/cable,
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"KA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"KO" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/storage)
+"KU" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/command/eva)
+"KW" = (
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = 32
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/hydro)
+"KX" = (
+/obj/machinery/jukebox/old,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/floor_decal/corner/black/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"La" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"Ls" = (
+/obj/landmark/map_data{
+	height = 3
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Lz" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/industrial/loading,
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"LM" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/brigdoor/northleft,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/airlock)
+"LT" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/floor_decal/corner/b_green/mono,
+/obj/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"LY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"Mf" = (
+/obj/machinery/computer/ship/sensors{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"Mg" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/command/eva)
+"Mk" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"Mp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/janitorial)
+"Mu" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/floor_decal/borderfloor/corner,
+/obj/floor_decal/corner/paleblue/bordercorner,
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"MJ" = (
+/obj/floor_decal/techfloor/hole/right{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/hole{
+	dir = 1
+	},
+/obj/floor_decal/steeldecal/steel_decals10{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/obj/floor_decal/steeldecal/steel_decals7,
+/turf/simulated/floor/reinforced,
+/area/space)
+"MM" = (
+/obj/structure/sign/warning/vacuum{
+	dir = 4;
+	pixel_x = -32
+	},
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/catwalk_plated/dark,
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"MP" = (
+/obj/machinery/constructable_frame/machine_frame,
+/obj/floor_decal/industrial/warning/fulltile,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/armaments/storage/port)
+"MQ" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"Nc" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/armaments/storage/starboard)
+"Nh" = (
+/turf/space,
+/area/space)
+"Nk" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Nm" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/structure/sign/solgov{
+	pixel_y = -32
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Ny" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/airlock)
+"ND" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"NF" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/machinery/pointdefense,
+/turf/simulated/floor/reinforced,
+/area/space)
+"NH" = (
+/obj/floor_decal/techfloor/orange{
+	dir = 10
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"NJ" = (
+/obj/structure/bed/chair/padded/lime{
+	dir = 8
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/tempeterra/engineering/it/telecomms)
+"NL" = (
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/airlock)
+"NO" = (
+/obj/machinery/cooker/grill,
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"NR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner,
+/obj/floor_decal/techfloor/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/port)
+"NS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/crew/fridge)
+"NT" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 6
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"NV" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"NW" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/mess)
+"Oa" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/catwalk_plated/dark,
+/turf/simulated/floor,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"Oc" = (
+/obj/structure/bed/chair/comfy/brown,
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"Oj" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	target_pressure = 200
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/sign/hydro{
+	pixel_y = 32
+	},
+/obj/floor_decal/borderfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"Ok" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Om" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/fridge)
+"Oy" = (
+/turf/simulated/floor/reinforced,
+/area/tempeterra/airlock)
+"OQ" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/machinery/computer/modular/preset/engineering{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"OU" = (
+/obj/floor_decal/scglogo{
+	icon_state = "bottom-center";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Pc" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Ph" = (
+/obj/floor_decal/industrial/warning,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/item/toy/desk/newtoncradle{
+	pixel_y = 8
+	},
+/obj/random/single/playing_cards,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"Pv" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"Px" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/material/chopping_board,
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
+	pixel_x = -3;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/condiment/small/peppermill{
+	pixel_x = 3;
+	pixel_y = 11
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"PA" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"PH" = (
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/structure/cable/cyan,
+/obj/machinery/power/smes/buildable/preset/on_full{
+	RCon_tag = "Substation - Telecommunications"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"PL" = (
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/floor_decal/borderfloor{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"PO" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"PQ" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -21
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"PW" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/catwalk_plated,
+/turf/simulated/floor,
+/area/tempeterra/airlock)
+"Qc" = (
+/obj/structure/window/boron_reinforced{
+	dir = 8
+	},
+/obj/machinery/computer/telecomms/server{
+	dir = 4;
+	network = "tcommsat"
+	},
+/obj/floor_decal/corner/green/mono,
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"Qd" = (
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Qo" = (
+/obj/machinery/power/apc/tempeterra{
+	dir = 4;
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"Qp" = (
+/turf/simulated/floor/reinforced,
+/area/space)
+"Qz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/obj/floor_decal/spline/fancy/black,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/tempeterra/command/eva)
+"QA" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 1;
+	pixel_y = 3;
+	pixel_x = -3
+	},
+/obj/floor_decal/corner/paleblue/half,
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"QC" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/armaments/storage/port)
+"QJ" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/obj/structure/grille,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"QN" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/armaments/storage/starboard)
+"QW" = (
+/obj/structure/table/rack,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/item/clothing/mask/plunger,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/janitorial)
+"Rb" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/alarm/tempeterra/cold{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"Rg" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"Rj" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/borderfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/bordercorner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"Rn" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/command/flight)
+"Rx" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"RA" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing,
+/obj/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"RB" = (
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -21
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/modular/preset/cardslot/command_eng{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/engineering/it/sensors)
+"RC" = (
+/obj/overmap/visitable/ship/sfv_tempeterra,
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"RL" = (
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	dir = 4;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Sf" = (
+/obj/machinery/smartfridge/drying_rack,
+/obj/floor_decal/corner/b_green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"Sp" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/floor_decal/corner/b_green/mono,
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"Sw" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/sign/deck/first{
+	pixel_y = -32;
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"Sy" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/light,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"SI" = (
+/obj/floor_decal/techfloor/hole,
+/obj/floor_decal/techfloor/hole/right,
+/obj/floor_decal/steeldecal/steel_decals10,
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/floor_decal/spline/fancy/black,
+/obj/floor_decal/steeldecal/steel_decals7{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"SV" = (
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = 32
+	},
+/obj/item/deck/cards{
+	pixel_x = 4;
+	pixel_y = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/mess)
+"Tc" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8;
+	icon_state = "map-scrubbers"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/hydro)
+"Td" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/alarm/tempeterra{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Te" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/hydro)
+"Tn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"Tp" = (
+/obj/machinery/recharger/wallcharger{
+	dir = 1;
+	pixel_x = -3;
+	pixel_y = -23
+	},
+/obj/floor_decal/borderfloor{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/tempeterra/command/eva)
+"TJ" = (
+/obj/structure/lattice,
+/obj/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"TN" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/storage)
+"TU" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/floor_decal/spline/fancy/black,
+/obj/floor_decal/spline/fancy/black{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/tempeterra/command/eva)
+"TW" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/storage)
+"Ug" = (
+/obj/structure/closet/fridge/meat,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/turf/simulated/floor/tiled,
+/area/tempeterra/crew/fridge)
+"Un" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Up" = (
+/obj/floor_decal/techfloor/orange{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	dir = 4
+	},
+/obj/structure/railing/mapped,
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"Ur" = (
+/obj/machinery/cooker/fryer,
+/obj/machinery/light,
+/obj/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"Us" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 6
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"Uv" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/storage)
+"Uz" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/mess)
+"UW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/engineering/it/sensors)
+"UX" = (
+/obj/structure/closet/jcloset_torch,
+/obj/item/reagent_containers/spray/cleaner,
+/obj/floor_decal/corner/green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/janitorial)
+"Vd" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/corner_techfloor_grid,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/power/apc/tempeterra{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Vf" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/reagent_containers/food/drinks/bottle/brandy{
+	pixel_y = 8
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = -32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/tempeterra/crew/storage)
+"Vj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/kitchen)
+"Vk" = (
+/obj/structure/table/rack,
+/obj/item/device/paint_sprayer,
+/obj/item/device/lightreplacer,
+/obj/item/storage/box/lights/mixed,
+/obj/floor_decal/corner/green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/storage/box/mousetraps,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/janitorial)
+"Vn" = (
+/obj/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/floor_decal/steeldecal/steel_decals7,
+/obj/floor_decal/steeldecal/steel_decals7{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/space)
+"Vq" = (
+/obj/structure/ladder,
+/obj/catwalk_plated/dark,
+/obj/machinery/alarm/tempeterra{
+	pixel_y = 24
+	},
+/turf/simulated/open,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"Vy" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"VC" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor,
+/area/tempeterra/engineering/it/sensors)
+"VD" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"VI" = (
+/obj/catwalk_plated/dark,
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/mess)
+"VL" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/engineering/it/maint)
+"VN" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning/corner,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"VR" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/armaments/storage/port)
+"VW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/tempeterra/engineering/it/telecomms)
+"We" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"Wi" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/light{
+	dir = 1;
+	icon_state = "tube1"
+	},
+/obj/machinery/suit_storage_unit/security/alt,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/command/eva)
+"Wn" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump";
+	dir = 1
+	},
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/structure/handrail{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"Wu" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "packageSort1"
+	},
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/structure/plasticflaps,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/crew/disposals)
+"Ww" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 4
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/wrench,
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"WE" = (
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor,
+/area/tempeterra/crew/disposals)
+"WI" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/engineering/it/sensors)
+"WK" = (
+/obj/machinery/power/apc/tempeterra{
+	pixel_y = -24
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 4
+	},
+/obj/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/starboard)
+"WL" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/structure/closet,
+/obj/structure/railing/mapped,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"WY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/wall/r_wall/prepainted,
+/area/tempeterra/airlock)
+"WZ" = (
+/obj/machinery/floor_light/mapped_on,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor,
+/area/tempeterra/crew/mess)
+"Xj" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/obj/structure/grille,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"Xr" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/firstdeck/hallway/ladder/starboard)
+"Xs" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/fore/midships)
+"XA" = (
+/obj/floor_decal/industrial/warning,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/valve/shutoff/supply{
+	dir = 4
+	},
+/obj/floor_decal/industrial/shutoff{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/ladder/port)
+"XB" = (
+/obj/floor_decal/techfloor,
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"XQ" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/armaments/storage/port)
+"XT" = (
+/obj/floor_decal/industrial/warning/fulltile,
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/industrial/warning,
+/obj/machinery/door/blast/regular{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/tempeterra/engineering/it/sensors)
+"XZ" = (
+/obj/machinery/porta_turret/stationary,
+/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/reinforced,
+/area/tempeterra/airlock)
+"Ya" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "bridge_eva_pump"
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/structure/handrail,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/airlock)
+"Yi" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8;
+	icon_state = "map-scrubbers"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/firstdeck/hallway/aft/midships)
+"Yn" = (
+/obj/paint/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/command/flight)
+"Yq" = (
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 8
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"Yr" = (
+/obj/paint/sfv_arbiter,
+/obj/structure/sign/warning/radioactive{
+	dir = 8
+	},
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/engineering/it/sensors)
+"YM" = (
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 1
+	},
+/obj/floor_decal/techfloor/corner{
+	dir = 1
+	},
+/obj/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"YO" = (
+/obj/machinery/telecomms/server,
+/obj/floor_decal/corner/green/half{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/tempeterra/engineering/it/telecomms)
+"YQ" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"YZ" = (
+/obj/machinery/door/airlock{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/fridge)
+"Zb" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/cooker/cereal{
+	pixel_y = 8
+	},
+/obj/floor_decal/borderfloorblack{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"Zh" = (
+/turf/simulated/open,
+/area/tempeterra/command/flight)
+"Zv" = (
+/obj/machinery/seed_storage/garden{
+	dir = 8
+	},
+/obj/floor_decal/corner/b_green/mono,
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/hydro)
+"Zw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/power/apc/tempeterra{
+	dir = 1;
+	pixel_y = 24
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/storage)
+"ZE" = (
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/floor_decal/corner_techfloor_grid{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/tempeterra/engineering/it/maint)
+"ZH" = (
+/obj/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/structure/disposalpipe/segment/bent{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/storage)
+"ZK" = (
+/obj/machinery/conveyor{
+	dir = 8;
+	id = "packageSort1"
+	},
+/obj/floor_decal/techfloor,
+/obj/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/structure/sign/warning/deathsposal{
+	icon_state = "space";
+	pixel_y = 32
+	},
+/obj/machinery/door/window/brigdoor/southleft{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/tempeterra/crew/disposals)
+"ZO" = (
+/obj/machinery/light,
+/obj/floor_decal/borderfloor,
+/obj/floor_decal/corner/paleblue/border,
+/turf/simulated/floor/tiled/monotile,
+/area/tempeterra/airlock)
+"ZP" = (
+/obj/structure/table/steel_reinforced,
+/obj/floor_decal/borderfloorblack{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/reagentgrinder/juicer{
+	pixel_y = 10;
+	pixel_x = -1
+	},
+/obj/item/reagent_containers/glass/beaker/large{
+	pixel_y = 6
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/tempeterra/crew/kitchen)
+"ZS" = (
+/obj/machinery/light,
+/obj/floor_decal/borderfloorblack,
+/obj/floor_decal/corner/paleblue/border,
+/obj/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/tempeterra/crew/storage)
+"ZW" = (
+/obj/machinery/nav_light/starboard,
+/turf/simulated/floor/reinforced,
+/area/space)
+"ZX" = (
+/obj/paint/sfv_arbiter,
+/turf/simulated/wall/ocp_wall,
+/area/tempeterra/crew/disposals)
+
+(1,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(2,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(3,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(4,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(5,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(6,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(7,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(8,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(9,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(10,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(11,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(12,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(13,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(14,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(15,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(16,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(17,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(18,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(19,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(20,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(21,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(22,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(23,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(24,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(25,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(26,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(27,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(28,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(29,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(30,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(31,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(32,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Nh
+Qp
+Qp
+JA
+Qp
+Qp
+Nh
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(33,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(34,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(35,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(36,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(37,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(38,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+zo
+Dp
+CG
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(39,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+OU
+an
+xV
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(40,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+fx
+Ku
+gP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(41,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(42,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(43,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(44,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(45,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(46,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(47,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(48,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(49,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+dr
+Qp
+Qp
+Qp
+dr
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(50,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Ca
+Qp
+Qp
+Qp
+Ca
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(51,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Ca
+Qp
+Qp
+Qp
+Ca
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(52,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Yr
+QJ
+Xj
+jI
+Yr
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(53,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+xF
+FO
+oF
+rF
+XT
+FO
+xF
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(54,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+FO
+yi
+Az
+NH
+FO
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(55,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+FO
+Up
+Ed
+za
+FO
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(56,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+yb
+Ef
+uA
+WI
+RA
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(57,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+FO
+tb
+qz
+rZ
+qz
+qz
+FO
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(58,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+Hc
+pH
+qz
+tY
+RB
+Mf
+Eh
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(59,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+qz
+rH
+qz
+zH
+pr
+lQ
+VC
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(60,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+EX
+UW
+MM
+Tn
+sb
+IC
+Kz
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(61,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+xd
+BH
+tj
+dh
+Ph
+xw
+PH
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(62,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+FO
+FO
+qz
+qz
+qz
+bH
+qz
+qz
+qz
+FO
+FO
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(63,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+VL
+rQ
+Vd
+wJ
+Jl
+wJ
+wq
+uL
+VL
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(64,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+fK
+ku
+cu
+GC
+Qc
+eJ
+cu
+zm
+gr
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(65,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+sE
+YM
+Ai
+VW
+NJ
+sS
+Ib
+Yq
+wX
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(66,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+FM
+Fx
+Bb
+BF
+YO
+vY
+Km
+fB
+dv
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(67,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+VL
+cU
+at
+at
+at
+at
+at
+at
+at
+hj
+VL
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(68,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+ad
+Pc
+at
+GL
+xr
+IH
+fa
+Jc
+at
+tA
+tf
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(69,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+ZE
+XB
+mN
+cd
+no
+JI
+Af
+qU
+mN
+VD
+xq
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(70,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+ZW
+Qp
+Qp
+VL
+VL
+gn
+II
+at
+vb
+Xs
+CS
+Fc
+vb
+at
+Cc
+kk
+VL
+VL
+Qp
+Qp
+gs
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(71,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+fy
+Nk
+at
+sP
+ja
+Qo
+Aj
+sJ
+at
+oz
+Td
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(72,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+VL
+VL
+ct
+Jd
+DZ
+DZ
+Yn
+DZ
+DZ
+DZ
+DZ
+VN
+bU
+VL
+VL
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(73,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Nc
+Nc
+Nc
+wH
+DZ
+DZ
+DZ
+DZ
+DZ
+DZ
+DZ
+DZ
+DZ
+XQ
+VR
+VR
+VR
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(74,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+DZ
+sy
+PQ
+Hj
+DZ
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(75,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+JM
+lB
+qD
+wy
+aN
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(76,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+NF
+Qp
+Nc
+Nc
+zv
+Df
+DZ
+DZ
+gd
+FX
+wt
+BP
+Rn
+DZ
+DZ
+NR
+ft
+VR
+VR
+Qp
+NF
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(77,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+TJ
+Ok
+CR
+Hp
+Sy
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(78,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+dp
+Vy
+Zh
+Gz
+jJ
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(79,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+zv
+ma
+DZ
+DZ
+dp
+YQ
+RC
+Ey
+jJ
+DZ
+DZ
+hV
+ft
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(80,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+gW
+YQ
+Ls
+Ey
+Nm
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(81,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+dp
+YQ
+Zh
+Ey
+jJ
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(82,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+NF
+Qp
+Nc
+Nc
+zv
+WK
+DZ
+DZ
+dp
+cr
+EA
+RL
+jJ
+DZ
+DZ
+Hl
+ft
+VR
+VR
+Qp
+NF
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(83,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+uu
+PO
+JJ
+Un
+hE
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(84,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Nc
+Nc
+dy
+po
+DZ
+DZ
+DZ
+zk
+iu
+pi
+DZ
+DZ
+DZ
+eN
+MP
+VR
+VR
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(85,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Nc
+Nc
+Nc
+QN
+DZ
+DZ
+DZ
+DZ
+yR
+DZ
+DZ
+DZ
+DZ
+QC
+VR
+VR
+VR
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(86,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Xr
+Xr
+zw
+ay
+DZ
+DZ
+DZ
+DG
+DZ
+DZ
+DZ
+vd
+BS
+NV
+NV
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(87,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Xr
+Xr
+Vq
+qE
+gz
+tt
+Gs
+Kb
+Iq
+tt
+gz
+XA
+yq
+NV
+NV
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(88,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+ZW
+Qp
+Qp
+Xr
+Xr
+ze
+Rx
+gz
+xO
+ev
+Oa
+ev
+GQ
+gz
+th
+Aq
+NV
+NV
+Qp
+Qp
+gs
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(89,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Xr
+Xr
+mY
+tW
+vP
+FJ
+Yi
+bA
+dP
+Hv
+mo
+Rg
+Sw
+NV
+NV
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(90,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Xr
+Xr
+La
+HH
+gz
+is
+WL
+vu
+tZ
+fi
+gz
+nO
+oM
+NV
+NV
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(91,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Xr
+Xr
+Xr
+mF
+fp
+gz
+gz
+gz
+jn
+gz
+gz
+gz
+lc
+fl
+KO
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(92,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+Us
+qF
+qS
+tn
+oi
+Lz
+ba
+PA
+eH
+Ip
+qB
+qJ
+sH
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(93,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+NT
+LY
+fj
+Ip
+uq
+KX
+WZ
+dL
+or
+Ip
+Dg
+Oc
+zi
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(94,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+cw
+rI
+LY
+QA
+Ip
+tl
+Bo
+Uz
+Cb
+JP
+Ip
+Zw
+Oc
+Vf
+KO
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(95,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+Zb
+aE
+lR
+Jt
+FQ
+AE
+fR
+Et
+fR
+NW
+FQ
+Dr
+Oc
+pa
+gN
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(96,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+gJ
+MQ
+iE
+NO
+Ip
+bs
+aa
+VI
+aa
+HA
+Ip
+mL
+TN
+DC
+sM
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(97,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+ZP
+Px
+Pv
+Ur
+Ip
+SV
+Ao
+WZ
+dL
+dN
+Ip
+td
+Uv
+ZH
+ZS
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(98,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+cw
+cw
+yf
+Vj
+cg
+ws
+Ip
+Ko
+Cb
+VI
+fc
+jm
+Ip
+Gg
+ik
+dj
+TW
+KO
+KO
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(99,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+wx
+wx
+oO
+YZ
+oO
+Mg
+Mg
+Mg
+Mg
+Ja
+Mg
+Mg
+Mg
+Mg
+xa
+lJ
+xa
+ZX
+ZX
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(100,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+wx
+wx
+kU
+bM
+tQ
+Mg
+Wi
+vZ
+yL
+ui
+mI
+AD
+if
+Mg
+Ab
+Ad
+OQ
+ZX
+ZX
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(101,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+wx
+wx
+kU
+bM
+tQ
+Mg
+wc
+Rj
+jy
+hh
+fZ
+pb
+PL
+Mg
+aF
+Cj
+ez
+ZX
+ZX
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(102,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+wx
+wx
+hC
+ul
+tT
+Mg
+uv
+rU
+Cv
+TU
+IG
+di
+bZ
+Mg
+ZK
+KA
+WE
+ZX
+ZX
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(103,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+wx
+wx
+Bz
+bM
+Ug
+Mg
+od
+qt
+KU
+TU
+fZ
+Mu
+Tp
+Mg
+Wu
+DJ
+Ww
+ZX
+ZX
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(104,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+wx
+wx
+ND
+NS
+Rb
+Mg
+Wi
+zp
+Fn
+Qz
+cC
+zp
+if
+Mg
+ks
+lO
+lz
+ZX
+ZX
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(105,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+wx
+wx
+oO
+Om
+oO
+Mg
+Mg
+Mg
+Mg
+rK
+Mg
+Mg
+Mg
+Mg
+xa
+HT
+xa
+ZX
+ZX
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(106,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+eL
+Te
+Sp
+LT
+LT
+lK
+jW
+PW
+LM
+lK
+UX
+UX
+cR
+Mp
+QW
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(107,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+AB
+KW
+ix
+rO
+Tc
+NL
+bI
+qu
+We
+NL
+bx
+mS
+si
+HP
+qP
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(108,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+AB
+Sf
+JQ
+wg
+WY
+Oj
+tN
+ZO
+lK
+As
+yU
+yQ
+qP
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(109,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+AB
+Zv
+HO
+lK
+iS
+Ny
+Mk
+lK
+fm
+Vk
+qP
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(110,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+AB
+AB
+yg
+yg
+jv
+yg
+yg
+qP
+qP
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(111,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+AB
+AB
+yg
+Ya
+bh
+er
+yg
+qP
+qP
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(112,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+yg
+nq
+bh
+rd
+yg
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(113,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+AB
+yg
+js
+db
+Wn
+yg
+qP
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(114,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Oy
+JG
+aT
+aT
+aT
+JG
+Oy
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(115,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Oy
+gM
+JV
+Qp
+rf
+Qd
+Oy
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(116,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+XZ
+gM
+MJ
+Vn
+SI
+Qd
+XZ
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(117,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+GZ
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+GZ
+Nh
+Nh
+Nh
+Nh
+Nh
+GZ
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+Qp
+GZ
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(118,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Qp
+Qp
+Qp
+Qp
+Qp
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(119,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(120,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(121,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(122,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(123,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(124,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(125,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(126,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(127,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(128,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(129,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(130,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(131,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(132,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(133,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(134,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(135,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(136,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(137,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(138,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(139,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(140,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(141,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(142,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(143,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(144,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(145,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(146,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(147,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(148,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(149,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
+(150,1,1) = {"
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+Nh
+"}
