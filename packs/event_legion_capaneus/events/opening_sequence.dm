@@ -6,12 +6,12 @@
 	message_admins("Random events have been disabled.")
 
 	// Set event text
-	config.event = {"The SEV Torch is preparing for it's final bluespace jump before it will arrive at Outpost E14-b. While your current position is still technically outside of Sol-controlled space, you've finally made it. Only a few more minutes before you're home..."}
+	config.event = {"The SEV Torch is preparing for it's final stretch of bluespace jumps before it will arrive at Outpost E14-b. While your current position is still technically outside of Sol controlled space, you've finally made it. Only a few more jumps before you're home..."}
 	to_world("<h1 class='alert'>Event</h1>")
 	to_world("<h2 class='alert'>An event is starting. OOC Info:</h2>")
 	to_world(SPAN_CLASS("alert", "[config.event]"))
 	to_world("<br>")
-	SSwebhooks.send(WEBHOOK_CUSTOM_EVENT, list("text" = config.event))
+//	SSwebhooks.send(WEBHOOK_CUSTOM_EVENT, list("text" = config.event))
 
 	// Initial sequence of bluespace jump announcements
 	// 05 minutes - Jump prep phase 1
@@ -37,7 +37,7 @@
 		new Callback(\
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
-			"Attention all hands: Jump sequence aborted. Undefined error. Tracing."\
+			"Attention all hands: Jump sequence aborted. Printing error log to Command Program terminals."\
 		),\
 		13 MINUTES\
 	)
@@ -51,68 +51,27 @@
 	)
 
 	// Oh god oh fuck moment
-	// 15 minutes - Torpedo warnings
+	// 20 minutes - Torpedo warnings
 	addtimer(\
 		new Callback(\
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
-			"Warning. Multiple torpedoes detected on intercept course. Estimated impact points: Bridge. Nacelles. Hangar. ETA 60 seconds.",\
-			"SEV Torch Sensors",\
-			'packs/event_legion_capaneus/sounds/torpedo_incoming.ogg'\
-		),\
-		15 MINUTES\
-	)
-	// 15.5 minutes - Capaneus appears on sensors
-	addtimer(\
-		new Callback(\
-			priority_announcement,\
-			/datum/announcement/proc/Announce,\
-			"New vessel detected on intercept course. Ident: SFV Capaneus. Warning: Legion signal detected.",\
-			"SEV Torch Sensors"\
-		),\
-		15.5 MINUTES\
-	)
-	// 16 minutes - Torpedo impacts (Bridge, nacelles, hangar)
-	addtimer(\
-		new Callback(\
-			GLOBAL_PROC,\
-			/proc/event_torpedo_impacts\
-		),\
-		16 MINUTES\
-	)
-
-	// 17 minutes - Curio appears on sensors
-	addtimer(\
-		new Callback(\
-			priority_announcement,\
-			/datum/announcement/proc/Announce,\
-			"New vessel detected on intercept course. Ident: SFV Curio. Warning: Legion signal detected.",\
-			"SEV Torch Sensors"\
-		),\
-		17 MINUTES\
-	)
-
-	// 20 minutes - Curio impacts
-	addtimer(\
-		new Callback(\
-			priority_announcement,\
-			/datum/announcement/proc/Announce,\
-			"Warning. Collision course with SFV Curio detected. Brace for impact.",\
+			"WARNING. Multiple minor-class collision tracks detected. Brace for impact.",\
 			"SEV Torch Sensors",\
 			'packs/event_legion_capaneus/sounds/torpedo_incoming.ogg'\
 		),\
 		20 MINUTES\
 	)
 
-	// 21 minutes - Capaneus docks
+	// 25 minutes - Capaneus docks
 	addtimer(\
 		new Callback(\
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
-			"Warning. Unauthorized vessel SFV Capaneus has attached to Deck 4 Fore Airlock.",\
+			"WARNING. Medium-class interception track detected. Vessel designation - SFV Capanaeus. Unauthorised docking procedures at Aft Starboard EVA, Deck Four",\
 			"SEV Torch Sensors"\
 		),\
-		21 MINUTES\
-	)
+		25 MINUTES\
 
-	message_admins("Opening sequence complete.")
+		message_admins("Opening sequence complete.")
+	)

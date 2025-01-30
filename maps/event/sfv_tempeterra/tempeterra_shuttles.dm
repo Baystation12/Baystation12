@@ -8,25 +8,12 @@
 	vessel_size = SHIP_SIZE_TINY
 
 /obj/machinery/computer/ship/helm/tempeterra
-	req_access = list(access_fleet_crew)
+	req_access = list("ACCESS_TORCH")
 
 /obj/machinery/computer/shuttle_control/explore/sfc_wolfe
 	name = "landing control console"
 	shuttle_tag = "SFC Wolfe"
-/*
-/datum/shuttle/autodock/overmap/sfc_wolfe
-	name = "SFC Wolfe"
-	warmup_time = 5
-	move_time = 15
-	shuttle_area = list(/area/tempeterra/shuttle, /area/tempeterra/shuttle/fuel, /area/tempeterra/shuttle/airlock)
-	current_location = "nav_hangar_tempeterra"
-	landmark_transition = "nav_transit_sfc_wolfe"
-	range = 1
-	fuel_consumption = 2
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
-	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
-	defer_initialisation = TRUE
-*/
+
 /obj/shuttle_landmark/sfc_wolfe
 	name = "TempeTerra Hangar"
 	landmark_tag = "nav_hangar_tempeterra"

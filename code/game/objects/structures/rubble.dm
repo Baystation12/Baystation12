@@ -46,6 +46,9 @@
 		AddOverlays(image(icon,"twinkle[rand(1,3)]"))
 
 /obj/structure/rubble/attack_hand(mob/user)
+	if(istype(src, /obj/structure/rubble/unbreakable))
+		to_chat(user, SPAN_WARNING("It is impossible to sift through \the [src]!"))
+		return
 	if(!is_rummaging)
 		if(!lootleft)
 			to_chat(user, SPAN_WARNING("There's nothing left in this one but unusable garbage..."))
@@ -64,6 +67,9 @@
 
 
 /obj/structure/rubble/use_tool(obj/item/tool, mob/user, list/click_params)
+	if(istype(src, /obj/structure/rubble/unbreakable))
+		to_chat(user, SPAN_WARNING("It is impossible to sift through \the [src]!"))
+		return
 	// Pickaxe - Clear rubble
 	if (istype(tool, /obj/item/pickaxe))
 		var/obj/item/pickaxe/pickaxe = tool
@@ -125,3 +131,6 @@
 	/obj/item/archaeological_find/laser,
 	/obj/item/archaeological_find/sword,
 	/obj/item/archaeological_find/katana)
+
+/obj/structure/rubble/unbreakable
+	emptyprob = 100
