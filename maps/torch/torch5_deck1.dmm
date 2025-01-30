@@ -1006,17 +1006,11 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "aca" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/plating,
 /area/thruster/d1starboard)
@@ -1185,9 +1179,6 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "acq" = (
@@ -1197,9 +1188,6 @@
 	},
 /obj/floor_decal/industrial/warning/corner{
 	dir = 1
-	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
@@ -1231,9 +1219,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "acv" = (
@@ -1260,9 +1245,6 @@
 	volume_rate = 4000
 	},
 /obj/floor_decal/industrial/outline/red,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "acy" = (
@@ -1557,9 +1539,6 @@
 	dir = 9
 	},
 /obj/machinery/meter,
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1starboard)
 "ade" = (
@@ -1568,12 +1547,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
-/obj/effect/event_torpedo_target{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adf" = (
@@ -1920,9 +1893,6 @@
 	dir = 6
 	},
 /obj/floor_decal/industrial/warning,
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adH" = (
@@ -1951,18 +1921,12 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adJ" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
 /obj/floor_decal/industrial/warning{
 	dir = 4
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
@@ -2508,9 +2472,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
@@ -3226,9 +3187,6 @@
 /obj/machinery/atmospherics/valve/digital{
 	id_tag = "fuelmode"
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "afA" = (
@@ -3760,9 +3718,6 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/yellow,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "agz" = (
@@ -4287,9 +4242,6 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "ahB" = (
@@ -4298,9 +4250,6 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
@@ -4808,9 +4757,6 @@
 "aiI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/sign/warning/hot_exhaust,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1starboard)
 "aiK" = (
@@ -5080,9 +5026,6 @@
 	dir = 1;
 	injecting = 1;
 	use_power = 1
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
 	},
 /turf/simulated/floor{
 	map_airless = 1
@@ -10594,9 +10537,6 @@
 /area/maintenance/firstdeck/centralport)
 "aLj" = (
 /obj/structure/grille,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/space)
 "aLo" = (
@@ -11346,9 +11286,6 @@
 	injecting = 1;
 	use_power = 1
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -11488,19 +11425,10 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics/office)
-"aPq" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/simulated/wall/ocp_wall,
-/area/thruster/d1port)
 "aPs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 1
-	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
 	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
@@ -11830,9 +11758,6 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aQm" = (
@@ -11844,9 +11769,6 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aQn" = (
@@ -11856,17 +11778,11 @@
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aQo" = (
 /obj/machinery/atmospherics/unary/engine{
 	dir = 8
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/plating,
 /area/thruster/d1port)
@@ -12129,17 +12045,11 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aRh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 4
-	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -12153,9 +12063,6 @@
 	dir = 8
 	},
 /obj/floor_decal/industrial/outline/yellow,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aRk" = (
@@ -12164,9 +12071,6 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -12585,9 +12489,6 @@
 	internal_pressure_bound_default = 35000
 	},
 /obj/floor_decal/industrial/outline/grey,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "aSk" = (
@@ -12598,9 +12499,6 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aSl" = (
@@ -12608,9 +12506,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aSm" = (
@@ -12748,9 +12643,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -12920,9 +12812,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
 "aTj" = (
@@ -12940,9 +12829,6 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTk" = (
@@ -12951,17 +12837,11 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTl" = (
 /obj/floor_decal/industrial/warning{
 	dir = 1
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -12971,12 +12851,6 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 1
-	},
-/obj/effect/event_torpedo_target{
-	sequence = "D1P"
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -12992,9 +12866,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTo" = (
@@ -13004,9 +12875,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -13156,9 +13024,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTS" = (
@@ -13178,9 +13043,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTT" = (
@@ -13189,9 +13051,6 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTU" = (
@@ -13207,9 +13066,6 @@
 	},
 /obj/floor_decal/industrial/warning/full,
 /obj/floor_decal/industrial/outline/blue,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "aTV" = (
@@ -13218,9 +13074,6 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "aTW" = (
@@ -13228,9 +13081,6 @@
 	dir = 10
 	},
 /obj/machinery/meter,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "aTY" = (
@@ -13239,9 +13089,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aTZ" = (
@@ -13359,9 +13206,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUj" = (
@@ -13375,9 +13219,6 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/light/small,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUk" = (
@@ -13386,9 +13227,6 @@
 	dir = 4
 	},
 /obj/machinery/meter,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUm" = (
@@ -13401,9 +13239,6 @@
 	},
 /obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/light/small,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aUn" = (
@@ -13413,9 +13248,6 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -13535,9 +13367,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
@@ -14236,9 +14065,6 @@
 /obj/machinery/air_sensor{
 	id_tag = "d1po2_sensor"
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
 "bdL" = (
@@ -14507,9 +14333,6 @@
 	id_tag = "cChamber1pV";
 	name = "Chamber Vent"
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "btE" = (
@@ -14571,16 +14394,10 @@
 	dir = 1;
 	target_pressure = 3000
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "bzb" = (
 /obj/structure/sign/warning/fire,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "bAb" = (
@@ -14588,9 +14405,6 @@
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
 	id_tag = "d1portnacelle"
-	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -14951,12 +14765,6 @@
 /obj/structure/bed/chair/shuttle,
 /turf/simulated/floor/plating,
 /area/shuttle/escape_pod15/station)
-"bTB" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
-/turf/simulated/wall/ocp_wall,
-/area/thruster/d1starboard)
 "bUb" = (
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -15608,12 +15416,6 @@
 /obj/floor_decal/corner/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/medical_lift)
-"cJX" = (
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/thruster/d1starboard)
 "cKO" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
@@ -15798,18 +15600,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
-"cXP" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/floor_decal/industrial/warning{
-	dir = 1
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1starboard)
 "cYe" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	controlled = 0;
@@ -15819,9 +15609,6 @@
 	pressure_checks = 2;
 	pressure_checks_default = 2;
 	use_power = 1
-	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
 	},
 /turf/simulated/floor{
 	map_airless = 1
@@ -16131,9 +15918,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "drc" = (
@@ -16148,9 +15932,6 @@
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "dtb" = (
@@ -16500,9 +16281,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "dVw" = (
@@ -16792,12 +16570,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/medpaperworkoffice)
-"eoZ" = (
-/obj/effect/event_torpedo_spawn{
-	sequence = "D1S"
-	},
-/turf/space,
-/area/space)
 "epb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -16921,9 +16693,6 @@
 	dir = 4
 	},
 /obj/floor_decal/industrial/hatch/blue,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "eyY" = (
@@ -17573,9 +17342,6 @@
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 1
 	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1starboard)
 "fRN" = (
@@ -17904,12 +17670,6 @@
 "gvJ" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/questioning)
-"gvZ" = (
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
-/turf/simulated/wall/ocp_wall,
-/area/thruster/d1starboard)
 "gww" = (
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology/cell_4)
@@ -18095,9 +17855,6 @@
 "gML" = (
 /obj/structure/sign/warning/vent_port{
 	dir = 1
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -18420,9 +18177,6 @@
 /obj/machinery/air_sensor{
 	id_tag = "d1so2_sensor"
 	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
 "hmQ" = (
@@ -18431,9 +18185,6 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
 "hnL" = (
@@ -18491,9 +18242,6 @@
 /area/rnd/entry)
 "hqS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1starboard)
 "hrb" = (
@@ -19011,9 +18759,6 @@
 	dir = 1
 	},
 /obj/floor_decal/industrial/outline/red,
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "hUM" = (
@@ -19131,9 +18876,6 @@
 /area/hallway/primary/firstdeck/center)
 "igK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "iib" = (
@@ -19178,9 +18920,6 @@
 	id_tag = "fuelmode"
 	},
 /obj/floor_decal/industrial/outline/red,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "ilb" = (
@@ -19477,9 +19216,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/armoury)
 "iBT" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
 "iCj" = (
@@ -19573,9 +19309,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "iLb" = (
@@ -19812,9 +19545,6 @@
 	pressure_checks_default = 2;
 	pump_direction = 0;
 	use_power = 1
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -20396,9 +20126,6 @@
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "jGb" = (
@@ -20505,9 +20232,6 @@
 	id = "d1po2_in";
 	injecting = 1;
 	use_power = 1
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -20793,9 +20517,6 @@
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "kfG" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1starboard)
 "kgi" = (
@@ -21276,17 +20997,11 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "kPD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -22055,9 +21770,6 @@
 /obj/machinery/meter,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "lKb" = (
@@ -22827,12 +22539,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
-"mMu" = (
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1S"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/thruster/d1starboard)
 "mMX" = (
 /obj/floor_decal/corner/green,
 /turf/simulated/floor/tiled,
@@ -23795,14 +23501,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
-"oaQ" = (
-/obj/wallframe_spawn/reinforced_phoron,
-/obj/machinery/door/firedoor,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
-/turf/simulated/floor/reinforced,
-/area/thruster/d1port)
 "obb" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -23821,9 +23519,6 @@
 /area/rnd/entry)
 "obr" = (
 /obj/structure/sign/warning/hot_exhaust,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "oby" = (
@@ -24841,9 +24536,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "ptA" = (
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1port)
 "pub" = (
@@ -25000,9 +24692,6 @@
 	},
 /obj/machinery/air_sensor{
 	id_tag = "cChamber1p"
-	},
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
@@ -25234,12 +24923,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
-"pPQ" = (
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/thruster/d1port)
 "pQb" = (
 /obj/machinery/botany/editor,
 /obj/floor_decal/industrial/outline/yellow,
@@ -25654,12 +25337,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/rnd/office)
-"qqL" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/thruster/d1port)
 "qrb" = (
 /obj/floor_decal/corner/research{
 	dir = 8
@@ -25848,16 +25525,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
-"qDM" = (
-/obj/floor_decal/industrial/warning{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1port)
 "qEb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -26765,9 +26432,6 @@
 	pressure_checks_default = 2;
 	use_power = 1
 	},
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
 /turf/simulated/floor{
 	map_airless = 1
 	},
@@ -27132,9 +26796,6 @@
 /turf/simulated/floor/tiled/freezer,
 /area/rnd/xenobiology/xenoflora)
 "rYd" = (
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "rYN" = (
@@ -27538,9 +27199,6 @@
 "spj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 5
-	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1port)
@@ -28550,12 +28208,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/cell_3)
-"tqJ" = (
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1S"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/thruster/d1starboard)
 "trb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -28786,9 +28438,6 @@
 	id = "d1ph_in";
 	use_power = 1
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
 "tJM" = (
@@ -28934,9 +28583,6 @@
 	target_pressure = 15000
 	},
 /obj/floor_decal/industrial/outline/orange,
-/obj/effect/event_ex_act/heavy{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "tZR" = (
@@ -29551,12 +29197,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
-"vmZ" = (
-/obj/effect/event_torpedo_spawn{
-	sequence = "D1P"
-	},
-/turf/space,
-/area/space)
 "vnz" = (
 /obj/floor_decal/industrial/outline/grey,
 /obj/machinery/light,
@@ -29608,12 +29248,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/security/detectives_office)
-"vwV" = (
-/obj/effect/event_ex_act/devastating{
-	sequence = "D1P"
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/thruster/d1port)
 "vxR" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -29670,21 +29304,12 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
 "vBV" = (
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
-"vDu" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/simulated/floor/reinforced,
-/area/space)
 "vDD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -30025,13 +29650,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/equipstorage)
-"wmv" = (
-/obj/structure/lattice,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/space,
-/area/space)
 "wmK" = (
 /obj/catwalk_plated,
 /obj/structure/cable/green{
@@ -30174,14 +29792,6 @@
 /obj/item/storage/box/lights/mixed,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralport)
-"wIr" = (
-/obj/structure/lattice,
-/obj/structure/grille,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/space,
-/area/space)
 "wMh" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/orange,
@@ -30518,14 +30128,6 @@
 "xFL" = (
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/robotics_lift)
-"xIW" = (
-/obj/wallframe_spawn/reinforced_phoron,
-/obj/machinery/door/firedoor,
-/obj/effect/event_ex_act/light{
-	sequence = "D1S"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/thruster/d1starboard)
 "xJP" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -30597,9 +30199,6 @@
 /obj/machinery/meter,
 /obj/wallframe_spawn/reinforced_phoron,
 /obj/machinery/door/firedoor,
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
 "xSf" = (
@@ -30641,12 +30240,6 @@
 /obj/floor_decal/corner/research/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
-"xYL" = (
-/obj/effect/event_ex_act/light{
-	sequence = "D1P"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/maintenance/firstdeck/aftport)
 "xYM" = (
 /turf/simulated/wall/prepainted,
 /area/medical/medpaperworkoffice)
@@ -57519,14 +57112,14 @@ aNB
 aNB
 bDK
 bDK
-qqL
+xPU
 iBT
 tIF
 xSd
 aTR
 aUi
 exc
-qqL
+xPU
 aaa
 aaa
 aaa
@@ -57719,17 +57312,17 @@ bDK
 bDK
 aNB
 aNB
-xYL
-vDu
-qqL
-qqL
-qqL
+bDK
+acd
+xPU
+xPU
+xPU
 aTi
 aTS
 aUj
 kPD
-qqL
-qqL
+xPU
+xPU
 aaa
 aaa
 aaa
@@ -57921,17 +57514,17 @@ bDK
 bDK
 aNB
 aNB
-wIr
-wmv
-pPQ
+abM
+adA
+xPU
 ptA
-pPQ
+xPU
 aTj
 aTT
 dqU
 lJj
 jMx
-qqL
+xPU
 aaa
 aaa
 aaa
@@ -58124,7 +57717,7 @@ acd
 acd
 acd
 aLj
-qqL
+xPU
 ptA
 acx
 byb
@@ -58133,7 +57726,7 @@ aTU
 tYV
 dsd
 spj
-qqL
+xPU
 aaa
 aaa
 aaa
@@ -58326,16 +57919,16 @@ acd
 acd
 aaa
 gML
-aPq
+ptA
 aRg
 aSh
 bzb
 aTl
 aTV
 aUk
-oaQ
+iej
 hmQ
-qqL
+xPU
 aaa
 aaa
 aaa
@@ -58489,7 +58082,7 @@ aaa
 aaa
 abN
 vBa
-xIW
+vci
 hUE
 adc
 adG
@@ -58535,9 +58128,9 @@ bAb
 aTm
 aTW
 ila
-oaQ
+iej
 jbR
-qqL
+xPU
 aaa
 aaa
 aaa
@@ -58689,17 +58282,17 @@ aaa
 aaa
 aaa
 aaa
-mMu
+abN
 hml
-xIW
-cXP
+vci
+bqv
 kfG
 acu
-bTB
-bTB
-bTB
-gvZ
-mMu
+aet
+aet
+aet
+aet
+abN
 aaa
 aaa
 aaa
@@ -58729,17 +58322,17 @@ acd
 aaa
 aaa
 aaa
-pPQ
+xPU
 ptA
 ptA
 ptA
-vwV
+wEw
 aTn
 rYd
 dqU
-oaQ
+iej
 bdz
-pPQ
+xPU
 aaa
 aaa
 aaa
@@ -58892,10 +58485,10 @@ aaa
 aaa
 aaa
 fRi
-mMu
-mMu
+abN
+abN
 acp
-cJX
+kfG
 adI
 aey
 afz
@@ -58939,8 +58532,8 @@ aSS
 aTo
 rYd
 aUm
-pPQ
-pPQ
+xPU
+xPU
 obr
 aaa
 aaa
@@ -59103,7 +58696,7 @@ dVp
 kPp
 jDX
 ahB
-tqJ
+abN
 aaa
 aaa
 acd
@@ -59133,11 +58726,11 @@ acd
 acd
 aaa
 aaa
-pPQ
+xPU
 aQn
 aRk
 aSl
-qDM
+iKO
 iKO
 aTY
 aUn
@@ -59296,16 +58889,16 @@ aaa
 aaa
 aaa
 fRi
-tqJ
+abN
 aca
 aca
-tqJ
+abN
 aca
 aca
-tqJ
+abN
 aca
 aca
-tqJ
+abN
 aaa
 aaa
 acd
@@ -59335,16 +58928,16 @@ acd
 acd
 aaa
 aaa
-pPQ
+xPU
 aQo
 aQo
-pPQ
+xPU
 aQo
 aQo
-pPQ
+xPU
 aQo
 aQo
-pPQ
+xPU
 obr
 aaa
 aaa
@@ -67373,7 +66966,6 @@ aaa
 aaa
 aaa
 aaa
-eoZ
 aaa
 aaa
 aaa
@@ -67419,7 +67011,8 @@ aaa
 aaa
 aaa
 aaa
-vmZ
+aaa
+aaa
 aaa
 aaa
 aaa
