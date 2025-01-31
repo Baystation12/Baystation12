@@ -1,11 +1,12 @@
-#include "tempeterra_area.dm"
-
 /datum/map_template/ruin/sfv_tempeterra
 	name = "SFV Capanaeus"
 	id = "sfv_tempeterra"
 	description = "A small, fairly modern dagger-shaped Lexington-class corvette, broadcasting SCGF codes and the designation 'SFV Capanaeus, LXC-224, Battle Group Bravo'"
 	suffixes = list("maps/event/sfv_tempeterra/tempeterra-2.dmm")
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
+
+	apc_test_exempt_areas = list(
+		/area/tempeterra = NO_SCRUBBER|NO_VENT
+	)
 
 /obj/overmap/visitable/sector/sfv_tempeterra_jump
 	name = "Jump Drive Signature"
@@ -29,3 +30,11 @@
 
 /obj/machinery/alarm/tempeterra/cold
 	target_temperature = T0C+4
+
+/area/tempeterra
+	name = "SFV Capanaeus"
+	icon = 'maps/event/sfv_tempeterra/tempeterra.dmi'
+	icon_state = "cap"
+	req_access = list("ACCESS_CENT_GENERAL")
+
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
