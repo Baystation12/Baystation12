@@ -8,6 +8,10 @@
 		/area/capanaeus = NO_SCRUBBER|NO_VENT
 	)
 
+	area_usage_test_exempted_areas = list(
+		/area/capanaeus
+	)
+
 /obj/overmap/visitable/sector/cap_jumpflash
 	name = "Jump Drive Signature"
 	desc = "Sensors readings on this sector indicate a jump pattern consistant with that of a fast moving fleet vessel."
