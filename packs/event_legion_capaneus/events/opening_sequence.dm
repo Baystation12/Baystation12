@@ -57,7 +57,7 @@
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
 			"WARNING. Multiple minor-class collision tracks detected. Brace for impact.",\
-			"SEV Torch Sensors",\
+			"SFV Arrow Sensors",\
 			'packs/event_legion_capaneus/sounds/torpedo_incoming.ogg'\
 		),\
 		20 MINUTES\
@@ -69,7 +69,7 @@
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
 			"WARNING. Medium-class interception track detected. Vessel designation - SFV Capanaeus. Unauthorised docking procedures at Aft Starboard EVA, Deck Four",\
-			"SEV Torch Sensors"\
+			"SFV Arrow Sensors"\
 		),\
 		25 MINUTES\
 	)
