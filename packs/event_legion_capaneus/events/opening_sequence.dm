@@ -69,7 +69,8 @@
 			priority_announcement,\
 			/datum/announcement/proc/Announce,\
 			"WARNING. Medium-class interception track detected. Vessel designation - SFV Capanaeus. Unauthorised docking procedures at Aft Starboard EVA, Deck Four",\
-			"SFV Arrow Sensors"\
+			"SFV Arrow Sensors",\
+			'packs/event_legion_capaneus/sounds/legion_boarding.ogg'\
 		),\
 		25 MINUTES\
 	)
