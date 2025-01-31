@@ -97,6 +97,7 @@ GLOBAL_TYPED_NEW(maploader, /dmm_suite)
 	if(!(world.area in initialized_areas_by_type))
 		initialized_areas_by_type[world.area] = locate(world.area)
 	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
+	SSzcopy.calculate_zstack_limits()
 	Master.StopLoadingMap()
 
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
