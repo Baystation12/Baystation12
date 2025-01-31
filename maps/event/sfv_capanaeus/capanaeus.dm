@@ -1,39 +1,32 @@
-/datum/map_template/ruin/sfv_tempeterra
+/datum/map_template/ruin/capanaeus
 	name = "SFV Capanaeus"
-	id = "sfv_tempeterra"
+	id = "capanaeus"
 	description = "A small, fairly modern dagger-shaped Lexington-class corvette, broadcasting SCGF codes and the designation 'SFV Capanaeus, LXC-224, Battle Group Bravo'"
-	suffixes = list("maps/event/sfv_tempeterra/tempeterra-2.dmm")
+	suffixes = list("maps/event/sfv_capanaeus/capanaeus.dmm")
 
 	apc_test_exempt_areas = list(
-		/area/tempeterra = NO_SCRUBBER|NO_VENT
+		/area/capanaeus = NO_SCRUBBER|NO_VENT
 	)
 
-/obj/overmap/visitable/sector/sfv_tempeterra_jump
+/obj/overmap/visitable/sector/cap_jumpflash
 	name = "Jump Drive Signature"
 	desc = "Sensors readings on this sector indicate a jump pattern consistant with that of a fast moving fleet vessel."
 	icon_state = "event"
 	hide_from_reports = TRUE
 	sensor_visibility = 10
 
-/obj/overmap/visitable/ship/sfv_tempeterra
-	name = "SFV Capanaeus"
-	desc = "A small, fairly modern dagger-shaped Lexington-class corvette, broadcasting SCGF codes and the designation 'SFV Capanaeus, LXC-224, Battle Group Bravo'"
-	fore_dir = WEST
-	vessel_size = SHIP_SIZE_SMALL
-	vessel_mass = 40000
-
-/obj/machinery/power/apc/tempeterra
+/obj/machinery/power/apc/capanaeus
 	req_access = list("ACCESS_ENGINEERING")
 
-/obj/machinery/alarm/tempeterra
+/obj/machinery/alarm/capanaeus
 	req_access = list("ACCESS_ENGINEERING")
 
-/obj/machinery/alarm/tempeterra/cold
+/obj/machinery/alarm/capanaeus/cold
 	target_temperature = T0C+4
 
-/area/tempeterra
+/area/capanaeus
 	name = "SFV Capanaeus"
-	icon = 'maps/event/sfv_tempeterra/tempeterra.dmi'
+	icon = 'maps/event/sfv_capanaeus/capanaeus.dmi'
 	icon_state = "cap"
 	req_access = list("ACCESS_CENT_GENERAL")
 
