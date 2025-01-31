@@ -2582,7 +2582,6 @@
 /obj/structure/sign/dedicationplaque{
 	name = "\improper Habitation Bay Twelve";
 	pixel_y = 32;
-	desc = Asigndenotingthecompartmentsdesignationas"Habitation Bay 12".Nothingtoseehere.
 	},
 /turf/simulated/floor/tiled/dark,
 /area/northstar/decktwo)

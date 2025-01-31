@@ -3382,7 +3382,6 @@
 #include "maps\_map_include.dm"
 #include "maps\_maps.dm"
 #include "packs\event_legion_capaneus\_pack.dm"
-#include "packs\event_legion_find\_pack.dm"
 #include "packs\legion\_pack.dm"
 #include "~code\global_init.dm"
 // END_INCLUDE
