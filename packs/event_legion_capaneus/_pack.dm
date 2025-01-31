@@ -7,4 +7,4 @@
 #include "overrides/pointdefense.dm"
 #include "overrides/shield_generator.dm"
 
-#include "obj/structure/macguffin.dm"
+#include "obj/structures/macguffin.dm"

@@ -72,6 +72,4 @@
 			"SEV Torch Sensors"\
 		),\
 		25 MINUTES\
-
-		message_admins("Opening sequence complete.")
 	)

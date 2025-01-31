@@ -191,6 +191,7 @@
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/empty/empty.dm"
+	#include "../event/sfv_tempeterra/tempeterra.dm"
 
 	#include "../bluespace_interlude/bluespace_interlude.dm"
 	#include "../bluespace_interlude/bluespace_interlude.dmm"
