@@ -1,7 +1,6 @@
 /obj/spawner/preset_human/legion_find
 	mob_name = "Shepherd FIND"
 	mob_pronouns = PRONOUNS_IT_ITS
-	eye_color = "#FFFF00"
 	head_hair_style = "Antennae"
 	species = SPECIES_IPC
 
