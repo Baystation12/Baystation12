@@ -8,9 +8,7 @@
 	spawn_cost = 1
 
 	apc_test_exempt_areas = list(
-		/area/northstar/deckone = NO_SCRUBBER|NO_VENT
-		/area/northstar/decktwo = NO_SCRUBBER|NO_VENT
-		/area/northstar/deckthree = NO_SCRUBBER|NO_VENT
+		/area/northstar = NO_SCRUBBER|NO_VENT
 	)
 
 	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
@@ -22,3 +20,27 @@
 	hide_from_reports = FALSE
 	scannable = TRUE
 	sensor_visibility = 15
+
+// Areas
+
+/area/northstar
+	icon = 'maps/event/e14b_station/northstar.dmi'
+	req_access = list("ACCESS_TORCH")
+
+
+// Deck One
+/area/northstar/deckone
+	name = "Maxim Interplanar Deck One"
+	icon_state = "d1"
+
+
+// Deck Two
+/area/northstar/decktwo
+	name = "Maxim Interplanar Deck Two"
+	icon_state = "d2"
+
+
+// Deck Three
+/area/northstar/deckthree
+	name = "Maxim Interplanar Deck Three"
+	icon_state = "d3"
