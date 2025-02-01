@@ -1824,7 +1824,7 @@
 	},
 /obj/floor_decal/borderfloorblack,
 /obj/floor_decal/industrial/warning/corner{
-	dir = s
+	dir = 1
 	},
 /turf/simulated/floor/reinforced,
 /area/capanaeus)
