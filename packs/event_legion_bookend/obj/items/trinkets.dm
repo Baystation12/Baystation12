@@ -19,9 +19,13 @@
 	icon = 'packs/event_legion_bookend/icons/northstar_trinket.dmi'
 	icon_state = "medal"
 
-/obj/item/storage/medalbox/sol/northstar
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/storage/medalbox/northstar
 	desc = "A small aluminum box for holding decorations, adorned with gold-on-blue ribbons."
 	icon_state = "medalbox_sol"
+
+	w_class = ITEM_SIZE_SMALL
 
 	startswith = list(
 		/obj/item/northstar_medal
