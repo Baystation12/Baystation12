@@ -52,7 +52,7 @@
 		"Senior Explorer Ziva Karim-Kirilisav | Expeditionary Corps",
 		"Petty Officer Third Class Tatyanna Svetka | Fleet",
 		"Lieutenant Adrian Schmidt | Expeditionary Corps",
-		"Ensign Brock Bunten | Expeditionary Corps"
+		"Ensign Brock Bunten | Expeditionary Corps",
 	)
 
 

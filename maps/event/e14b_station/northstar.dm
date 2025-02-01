@@ -1,25 +1,89 @@
-#include "northstar_area.dm"
+#include "northstar_comms.dm"
 
-/datum/map_template/ruin/away_site/northstar
+/datum/map_template/ruin/northstar
 	name = "Maxim Interplanar Layover"
 	id = "northstar"
-	description = "Considered a standout in recent Solar-Gilgameshi relations. Joint Station Northstar, as dubbed by the Solar Assembly - and Krasnyy-Balise by the Gilgameshi rests atop Maxim's World. It is transmitting a unique free-for-all IDENT-tag 'MIL-14b'."
-	suffixes = list("maps/event/e14b_station/northstar-1.dmm", "maps/event/e14b_station/northstar-2.dmm")
+	description = "Considered a standout in recent Solar-Gilgameshi relations. Joint Station Northstar, as dubbed by the Solar Assembly - and Krasnyy-Balise by the Gilgameshi rests atop Maxim's World. It is transmitting a unique free-for-all IDENT-tag 'MIL-E14b'."
+	suffixes = list("maps/event/e14b_station/northstar-1.dmm", "maps/event/e14b_station/northstar-2.dmm", "maps/event/e14b_station/northstar-3.dmm")
 	spawn_cost = 1
 
 	apc_test_exempt_areas = list(
 		/area/northstar = NO_SCRUBBER|NO_VENT
 	)
 
-	template_flags = TEMPLATE_FLAG_SPAWN_GUARANTEED
-
 /obj/overmap/visitable/sector/northstar
 	name = "Maxim Interplanar Layover"
-	desc = "Combined SCG-GCC joint transit base which leads to Maxim's World via shuttles. It is transmitting unique free-for-all IDENT-tags, 'MIL-14b'."
+	desc = "Considered a standout in recent Solar-Gilgameshi relations. Joint Station Northstar, as dubbed by the Solar Assembly - and Krasnyy-Balise by the Gilgameshi rests atop Maxim's World. It is transmitting a unique free-for-all IDENT-tag 'MIL-E14b'."
+	icon = 'packs/event_legion_bookend/icons/overmap.dmi'
 	icon_state = "northstar"
 	hide_from_reports = FALSE
 	scannable = TRUE
 	sensor_visibility = 15
+
+
+/obj/overmap/visitable/sector/northstar/generate_skybox()
+	var/image/res = image('icons/skybox/planet.dmi', "")
+
+	res.AddOverlays(image('icons/skybox/planet.dmi', "base", COMMS_COLOR_BEARCAT, RESET_COLOR))
+	res.AddOverlays(image('icons/skybox/planet.dmi', "water", COMMS_COLOR_VERNE, RESET_COLOR))
+
+	var/image/clouds = image('icons/skybox/planet.dmi', "weak_clouds")
+	clouds.AddOverlays(image('icons/skybox/planet.dmi', "clouds"))
+
+	clouds.color = COMMS_COLOR_BEARCAT
+
+	res.AddOverlays(clouds)
+
+	var/image/atmo = image('icons/skybox/planet.dmi', "atmoring")
+	res.underlays += atmo
+
+	var/image/shadow = image('icons/skybox/planet.dmi', "shadow")
+	shadow.blend_mode = BLEND_MULTIPLY
+	res.AddOverlays(shadow)
+
+	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
+	res.AddOverlays(light)
+
+	res.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	res.blend_mode = BLEND_OVERLAY
+	res.SetTransform(scale = 2)
+
+	res.pixel_x = 70
+	res.pixel_y = 96
+
+	return res
+
+/obj/overmap/visitable/sector/northstar/get_skybox_representation()
+	var/image/res = image('icons/skybox/planet.dmi', "")
+
+	res.AddOverlays(image('icons/skybox/planet.dmi', "base", COMMS_COLOR_BEARCAT, RESET_COLOR))
+	res.AddOverlays(image('icons/skybox/planet.dmi', "water", COMMS_COLOR_VERNE, RESET_COLOR))
+
+	var/image/clouds = image('icons/skybox/planet.dmi', "weak_clouds")
+	clouds.AddOverlays(image('icons/skybox/planet.dmi', "clouds"))
+
+	clouds.color = COMMS_COLOR_BEARCAT
+
+	res.AddOverlays(clouds)
+
+	var/image/atmo = image('icons/skybox/planet.dmi', "atmoring")
+	res.underlays += atmo
+
+	var/image/shadow = image('icons/skybox/planet.dmi', "shadow")
+	shadow.blend_mode = BLEND_MULTIPLY
+	res.AddOverlays(shadow)
+
+	var/image/light = image('icons/skybox/planet.dmi', "lightrim")
+	res.AddOverlays(light)
+
+	res.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	res.blend_mode = BLEND_OVERLAY
+	res.SetTransform(scale = 2)
+
+	res.pixel_x = 70
+	res.pixel_y = 96
+
+	return res
 
 // Areas
 

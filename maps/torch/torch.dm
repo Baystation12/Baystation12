@@ -191,7 +191,7 @@
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/empty/empty.dm"
-	#include "../event/sfv_capanaeus/capanaeus.dm"
+	#include "../event/e14b_station/northstar.dm"
 
 	#include "../bluespace_interlude/bluespace_interlude.dm"
 	#include "../bluespace_interlude/bluespace_interlude.dmm"

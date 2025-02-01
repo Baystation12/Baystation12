@@ -1,4 +1,20 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ak" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 1
+	},
+/obj/structure/railing/mapped/no_density{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
+"ao" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/structure/bed/chair/pew/left/mahogany,
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
 "ap" = (
 /obj/floor_decal/corner/green/half,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -22,6 +38,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/northstar/deckone)
+"ba" = (
+/obj/floor_decal/beach,
+/turf/unsimulated/beach/coastline,
+/area/northstar/deckone)
 "bd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -36,6 +56,23 @@
 	dir = 8
 	},
 /turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"bm" = (
+/obj/structure/table/woodentable_reinforced/mahogany/walnut,
+/obj/item/device/flashlight/lamp/green,
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
+"bo" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
 /area/northstar/deckone)
 "bF" = (
 /obj/floor_decal/corner/green{
@@ -83,6 +120,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/northstar/deckone)
+"bZ" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 5
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "ce" = (
 /obj/floor_decal/corner/green/half{
 	dir = 4
@@ -95,11 +141,24 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"cl" = (
+/obj/wallframe_spawn/reinforced/polarized/full,
+/turf/simulated/floor,
+/area/northstar/deckone)
 "cx" = (
 /obj/structure/window/reinforced,
 /obj/floor_decal/industrial/warning/fulltile,
 /obj/floor_decal/borderfloorblack,
 /turf/simulated/floor/reinforced,
+/area/northstar/deckone)
+"cC" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
 /area/northstar/deckone)
 "cE" = (
 /obj/floor_decal/corner/green/half,
@@ -126,6 +185,18 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"dK" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "dL" = (
 /obj/floor_decal/corner/green/half{
 	dir = 8
@@ -136,8 +207,23 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
 "dY" = (
-/obj/structure/stairs/east,
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
+"eb" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
+"ed" = (
+/obj/structure/railing/mapped/no_density,
+/obj/structure/railing/mapped/no_density{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/one,
 /area/northstar/deckone)
 "en" = (
 /obj/structure/grille,
@@ -196,11 +282,21 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/carpet/green,
 /area/northstar/deckone)
+"fu" = (
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
 "fJ" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
+/area/northstar/deckone)
+"fL" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 1
+	},
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "gb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -223,6 +319,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
+	},
+/obj/structure/closet/coffin{
+	name = "coffin of Paula Wojciak"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
@@ -276,6 +375,12 @@
 	},
 /turf/simulated/floor/wood/ebony,
 /area/northstar/deckone)
+"hA" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
 "hT" = (
 /obj/structure/bed/chair/padded/blue{
 	dir = 1
@@ -302,6 +407,19 @@
 	},
 /turf/simulated/floor/carpet/green,
 /area/northstar/deckone)
+"iJ" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
+"ja" = (
+/turf/unsimulated/mineral,
+/area/northstar/deckone)
+"jr" = (
+/obj/structure/fountain,
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
 "jt" = (
 /obj/floor_decal/spline/fancy/black{
 	dir = 8
@@ -318,6 +436,17 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/catwalk_plated/dark,
 /turf/simulated/floor,
+/area/northstar/deckone)
+"jG" = (
+/obj/structure/bed/chair/pew/left/mahogany,
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "jN" = (
 /turf/simulated/wall/r_wall,
@@ -346,6 +475,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/northstar/deckone)
+"kD" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "kU" = (
 /obj/floor_decal/corner/green/half,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -363,6 +501,10 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/northstar/deckone)
+"ln" = (
+/obj/overmap/visitable/sector/northstar,
+/turf/simulated/open,
 /area/northstar/deckone)
 "lI" = (
 /obj/structure/lattice,
@@ -396,6 +538,16 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
+/area/northstar/deckone)
+"mr" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/turf/simulated/floor/fixed/alium,
 /area/northstar/deckone)
 "mu" = (
 /obj/structure/table/woodentable_reinforced/walnut/maple,
@@ -435,6 +587,15 @@
 /obj/item/toy/torchmodel,
 /turf/simulated/floor/tiled/dark,
 /area/northstar/deckone)
+"mV" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 9
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "mW" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -454,14 +615,33 @@
 	},
 /turf/simulated/floor/wood/ebony,
 /area/northstar/deckone)
+"nB" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
 "oa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
 /area/northstar/deckone)
+"ok" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 1
+	},
+/obj/structure/railing/mapped/no_density{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
 "oz" = (
-/turf/simulated/floor/holofloor/beach/sand,
+/obj/structure/table/woodentable_reinforced/mahogany/walnut,
+/obj/item/material/twohanded/baseballbat/metal,
+/obj/item/material/hatchet/machete/steel,
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "oE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -487,6 +667,12 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/northstar/deckone)
+"pf" = (
+/obj/landmark/map_data{
+	height = 3
+	},
+/turf/simulated/open,
+/area/northstar/deckone)
 "pn" = (
 /obj/floor_decal/corner/green/half{
 	dir = 1
@@ -498,10 +684,20 @@
 "pR" = (
 /turf/simulated/wall/r_wall,
 /area/space)
+"qe" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 1
+	},
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
 "qr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"qw" = (
+/obj/item/beach_ball/holovolleyball,
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "qD" = (
 /obj/structure/window/basic{
@@ -565,6 +761,15 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/dark,
+/area/northstar/deckone)
+"sp" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "sz" = (
 /obj/floor_decal/corner/green{
@@ -631,6 +836,23 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/northstar/deckone)
+"uh" = (
+/obj/structure/bed/chair/pew/left/mahogany,
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
+"uS" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 1
+	},
+/obj/structure/railing/mapped/no_density{
+	dir = 8
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
 "vd" = (
 /obj/floor_decal/corner/green/half{
 	dir = 1
@@ -685,6 +907,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/northstar/deckone)
+"vX" = (
+/turf/simulated/floor/maximgrass,
+/area/northstar/deckone)
 "vZ" = (
 /obj/floor_decal/spline/fancy/black{
 	dir = 1
@@ -714,6 +939,12 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"wC" = (
+/obj/structure/closet/coffin{
+	name = "coffin of Ziva Karim-Kirilisav"
+	},
+/turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
 "wI" = (
 /obj/floor_decal/spline/fancy/black{
 	dir = 5
@@ -723,6 +954,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/structure/closet/coffin{
+	name = "coffin of Tatyana Svetka"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
@@ -734,18 +968,38 @@
 /obj/floor_decal/corner/green/half{
 	dir = 1
 	},
-/obj/structure/flora/pottedplant/stoutbush,
 /obj/floor_decal/spline/fancy/black{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"xK" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
+"xY" = (
+/obj/structure/railing/mapped/no_density{
+	dir = 8
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
 "yg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/floor/reinforced,
+/area/northstar/deckone)
+"yi" = (
+/obj/structure/bed/chair/wood/mahogany{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "yj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -755,6 +1009,13 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
+/area/northstar/deckone)
+"yq" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "yr" = (
 /obj/wallframe_spawn/reinforced/no_grille,
@@ -801,6 +1062,11 @@
 "zj" = (
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"zn" = (
+/obj/item/inflatable_duck,
+/obj/floor_decal/maximgrassedge,
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
 "zo" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -836,6 +1102,26 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"zy" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
+"zP" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
+"zR" = (
+/obj/catwalk_plated/dark,
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "Ac" = (
 /obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -852,6 +1138,12 @@
 	},
 /turf/simulated/wall/r_wall,
 /area/northstar/deckone)
+"AT" = (
+/obj/structure/bed/chair/wood/mahogany{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
 "Be" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
 	dir = 4
@@ -866,6 +1158,10 @@
 /obj/structure/table/woodentable_reinforced/walnut/maple,
 /obj/item/storage/slide_projector,
 /turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"Bo" = (
+/obj/item/beach_ball/holovolleyball,
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "Bu" = (
 /obj/floor_decal/corner/green/half{
@@ -885,6 +1181,10 @@
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
+/area/northstar/deckone)
+"Cr" = (
+/obj/item/inflatable_duck,
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "Cx" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
@@ -938,6 +1238,12 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"Dl" = (
+/obj/structure/bed/chair/wood/mahogany{
+	dir = 1
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
 "Dp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -949,6 +1255,7 @@
 	name = "Briefing Room";
 	dir = 4
 	},
+/obj/machinery/door/blast/shutters,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
 "Dr" = (
@@ -962,6 +1269,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
+/area/northstar/deckone)
+"Dt" = (
+/obj/structure/railing/mapped/no_density,
+/obj/structure/railing/mapped/no_density{
+	dir = 8
+	},
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "DB" = (
 /obj/floor_decal/spline/fancy/black{
@@ -983,6 +1297,7 @@
 	name = "Briefing Room";
 	dir = 4
 	},
+/obj/machinery/door/blast/shutters,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
 "Ee" = (
@@ -997,6 +1312,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/northstar/deckone)
+"Ew" = (
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
 "EF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1008,6 +1326,9 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
+/area/northstar/deckone)
+"EL" = (
+/turf/simulated/floor/maximgrass/one,
 /area/northstar/deckone)
 "Fm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1047,9 +1368,21 @@
 /obj/catwalk_plated/dark,
 /turf/simulated/floor,
 /area/northstar/deckone)
+"FU" = (
+/obj/structure/table/woodentable_reinforced/mahogany/walnut,
+/obj/item/material/twohanded/baseballbat/metal,
+/obj/item/beach_ball/holovolleyball,
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
 "FV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
+/area/northstar/deckone)
+"Gs" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "GC" = (
 /obj/wallframe_spawn/reinforced/hull,
@@ -1065,6 +1398,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/northstar/deckone)
+"GQ" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/structure/bed/chair/pew/left/mahogany,
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
 "Hg" = (
 /obj/machinery/light{
 	dir = 4;
@@ -1077,6 +1418,10 @@
 	dir = 4
 	},
 /turf/simulated/open,
+/area/northstar/deckone)
+"Hw" = (
+/obj/structure/bed/chair/pew/left/mahogany,
+/turf/simulated/floor/maximgrass/one,
 /area/northstar/deckone)
 "HA" = (
 /obj/floor_decal/spline/fancy/black/corner{
@@ -1124,6 +1469,15 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/northstar/deckone)
+"IE" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 9
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 5
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
 "IH" = (
 /obj/structure/table/woodentable_reinforced/walnut/maple,
 /obj/item/tableflag{
@@ -1140,6 +1494,15 @@
 	dir = 1
 	},
 /turf/simulated/floor/reinforced,
+/area/northstar/deckone)
+"IY" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
 /area/northstar/deckone)
 "Ju" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -1189,6 +1552,12 @@
 /obj/machinery/light,
 /turf/simulated/floor/wood/ebony,
 /area/northstar/deckone)
+"Lc" = (
+/obj/structure/closet/coffin{
+	name = "coffin of Adrian Schmidt"
+	},
+/turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
 "Ly" = (
 /obj/structure/sign/ecplaque{
 	pixel_y = 30
@@ -1199,6 +1568,20 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
 /area/northstar/deckone)
+"LN" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
+"LS" = (
+/obj/wallframe_spawn/reinforced/polarized/full,
+/turf/space,
+/area/space)
 "LW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1234,8 +1617,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/northstar/deckone)
 "MQ" = (
-/obj/structure/stairs/west,
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/unsimulated/beach/water,
 /area/northstar/deckone)
 "Nc" = (
 /obj/structure/sign/double/solgovflag/left{
@@ -1249,6 +1631,7 @@
 /obj/machinery/door/airlock/sol{
 	name = "Briefing Room"
 	},
+/obj/machinery/door/blast/shutters,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
 "Nw" = (
@@ -1269,6 +1652,12 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/northstar/deckone)
+"NI" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "NL" = (
 /obj/floor_decal/corner/green/half{
@@ -1309,6 +1698,32 @@
 	},
 /turf/simulated/floor/carpet/green,
 /area/northstar/deckone)
+"Pe" = (
+/obj/floor_decal/maximgrassedge,
+/obj/structure/bed/chair/pew/left/mahogany,
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
+"Pu" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 9
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
+"PA" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 9
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "PT" = (
 /obj/structure/bed/chair/padded/blue,
 /obj/floor_decal/corner/green/half{
@@ -1334,6 +1749,17 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"QJ" = (
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
+"QP" = (
+/obj/structure/railing/mapped/no_density,
+/obj/structure/railing/mapped/no_density{
+	dir = 8
+	},
+/turf/simulated/floor/maximgrass/one,
+/area/northstar/deckone)
 "QV" = (
 /obj/machinery/light,
 /turf/simulated/floor/carpet/green,
@@ -1342,7 +1768,6 @@
 /obj/floor_decal/corner/green/half{
 	dir = 1
 	},
-/obj/structure/flora/pottedplant/stoutbush,
 /obj/floor_decal/spline/fancy/black{
 	dir = 4
 	},
@@ -1353,10 +1778,14 @@
 /obj/structure/sign/double/gccflag/right,
 /turf/simulated/wall/prepainted,
 /area/northstar/deckone)
-"RJ" = (
-/turf/simulated/floor/reinforced{
-	name = "Holodeck Projector Floor"
+"Ru" = (
+/obj/structure/closet/coffin{
+	name = "coffin of Karl Emberchest"
 	},
+/turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"RJ" = (
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "Sh" = (
 /obj/structure/bed/chair/padded/blue{
@@ -1407,8 +1836,29 @@
 "SU" = (
 /turf/simulated/wall/prepainted,
 /area/northstar/deckone)
+"SY" = (
+/obj/floor_decal/maximgrassedge,
+/turf/simulated/floor/beach/sand,
+/area/northstar/deckone)
 "Te" = (
-/turf/simulated/floor/holofloor/beach/water,
+/obj/structure/closet/coffin{
+	name = "coffin of Brock Bunten"
+	},
+/turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"Tq" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
+"Tw" = (
+/obj/structure/bed/chair/pew/left/mahogany,
+/turf/simulated/floor/maximgrass/two,
 /area/northstar/deckone)
 "TQ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -1433,6 +1883,12 @@
 	dir = 4
 	},
 /turf/simulated/floor/wood/ebony,
+/area/northstar/deckone)
+"Uh" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
 /area/northstar/deckone)
 "Ui" = (
 /obj/floor_decal/corner/green/half,
@@ -1475,6 +1931,16 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
+"Vg" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/turf/simulated/floor/away/blueriver/alienfloor,
+/area/northstar/deckone)
 "Vp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1486,7 +1952,17 @@
 	name = "Briefing Room";
 	dir = 4
 	},
+/obj/machinery/door/blast/shutters,
 /turf/simulated/floor/tiled/dark/monotile,
+/area/northstar/deckone)
+"VU" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 5
+	},
+/turf/simulated/floor/fixed/alium,
 /area/northstar/deckone)
 "VV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1518,6 +1994,18 @@
 	},
 /turf/simulated/floor/carpet/green,
 /area/northstar/deckone)
+"WD" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 5
+	},
+/turf/simulated/floor/fixed/alium,
+/area/northstar/deckone)
 "WI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
@@ -1526,6 +2014,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/catwalk_plated/dark,
 /turf/simulated/floor,
+/area/northstar/deckone)
+"Xa" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 1
+	},
+/turf/simulated/floor/fixed/alium,
 /area/northstar/deckone)
 "Xj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1545,6 +2040,29 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
+/area/northstar/deckone)
+"Yn" = (
+/obj/structure/railing/mapped/no_density,
+/obj/structure/railing/mapped/no_density{
+	dir = 4
+	},
+/turf/simulated/floor/maximgrass/two,
+/area/northstar/deckone)
+"Yv" = (
+/obj/structure/closet/coffin{
+	name = "coffin of Felix Erben"
+	},
+/turf/simulated/floor/carpet/green,
+/area/northstar/deckone)
+"Yz" = (
+/obj/floor_decal/maximgrassedge,
+/obj/floor_decal/maximgrassedge{
+	dir = 4
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 8
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "YP" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -1577,6 +2095,15 @@
 	},
 /obj/catwalk_plated/dark,
 /turf/simulated/floor,
+/area/northstar/deckone)
+"ZL" = (
+/obj/floor_decal/maximgrassedge{
+	dir = 10
+	},
+/obj/floor_decal/maximgrassedge{
+	dir = 6
+	},
+/turf/simulated/floor/beach/sand,
 /area/northstar/deckone)
 "ZM" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -8264,7 +8791,7 @@ tb
 tb
 tb
 tb
-tb
+LS
 tb
 tb
 tb
@@ -11172,9 +11699,9 @@ GO
 FD
 zo
 SU
-MQ
-MQ
-MQ
+zj
+zj
+zj
 SU
 mc
 mc
@@ -11945,23 +12472,23 @@ vd
 yL
 mw
 yr
+ja
+ja
+EL
+EL
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+ja
+ja
+ja
+ja
+nB
+Gs
+Gs
+NI
+dY
+dY
+ba
+MQ
 jN
 jN
 rX
@@ -12098,23 +12625,23 @@ dD
 Mf
 Zi
 yr
+ja
+EL
+EL
+AT
+EL
 RJ
+ja
+ja
+ja
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+EL
+qw
+SY
+dY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -12234,9 +12761,9 @@ SU
 Dp
 DE
 SU
-yr
-yr
-yr
+cl
+cl
+cl
 SU
 SU
 zt
@@ -12251,23 +12778,23 @@ SU
 vK
 ce
 SU
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
+vX
+EL
+yi
 oz
-Te
-Te
-Te
-Te
+Dl
+EL
+RJ
+ja
+RJ
+EL
+Yz
+sp
+hA
+dY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -12404,23 +12931,23 @@ SU
 UF
 tX
 Bu
+vX
 RJ
+EL
+fu
+mr
+fL
+Vg
+QJ
+mr
+qe
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+uh
+NI
+dY
+dY
+ba
+MQ
 jN
 jN
 rX
@@ -12544,7 +13071,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 UF
 SU
@@ -12557,23 +13084,23 @@ SU
 UF
 Ul
 HW
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-Te
-Te
-Te
-Te
+zR
+EL
+EL
+fu
+Xa
+fL
+zP
+QJ
+Xa
+fL
+EL
+Tw
+GQ
+NI
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -12697,7 +13224,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 UF
 SU
@@ -12710,23 +13237,23 @@ SU
 UF
 tX
 Bu
+zR
+iJ
+iJ
+Yn
+Xa
+ak
+zP
+Yn
+Xa
+ok
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-Te
-Te
-Te
-Te
+Hw
+Tw
+SY
+Bo
+ba
+MQ
 IW
 GC
 rX
@@ -12842,7 +13369,7 @@ vZ
 UF
 SU
 Nc
-UF
+Yv
 wI
 sf
 hT
@@ -12850,7 +13377,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 QV
 SU
@@ -12863,23 +13390,23 @@ SU
 mz
 Ul
 HW
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-Te
-Te
-Te
-Te
+zR
+kD
+kD
+kD
+WD
+xK
+bZ
+mV
+WD
+dK
+EL
+Tw
+EL
+SY
+Cr
+ba
+MQ
 jN
 jN
 rX
@@ -12996,7 +13523,7 @@ UF
 SU
 Ib
 IH
-UF
+wC
 DB
 Sj
 Ue
@@ -13016,23 +13543,23 @@ iu
 UF
 tX
 Bu
+zR
+xY
+xY
+xY
+QP
+Pe
+Ew
+ao
+uS
+xY
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-oz
-oz
-Te
-Te
-Te
-Te
+EL
+EL
+SY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -13149,7 +13676,7 @@ QV
 SU
 Ly
 Bn
-UF
+Lc
 kc
 VZ
 QC
@@ -13161,31 +13688,31 @@ fo
 UF
 yC
 vg
-vg
-vg
+pf
+ln
 vg
 vg
 iu
 UF
 Ul
 HW
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-oz
-oz
-Te
-Te
-Te
-Te
+zR
+IY
+IY
+IY
+IY
+Uh
+jr
+IE
+cC
+bo
+EL
+EL
+yq
+hA
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -13302,7 +13829,7 @@ UF
 eS
 UF
 Wk
-UF
+Te
 eO
 zb
 nv
@@ -13322,23 +13849,23 @@ iu
 UF
 tX
 Bu
+zR
+iJ
+iJ
+iJ
+ed
+Pe
+Ew
+ao
+ak
+iJ
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-oz
-oz
-Te
-Te
-Te
-Te
+Yz
+ZL
+dY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -13454,7 +13981,7 @@ vZ
 UF
 Rp
 UF
-UF
+Ru
 gi
 sz
 hT
@@ -13462,7 +13989,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 QV
 SU
@@ -13475,23 +14002,23 @@ SU
 mz
 Ul
 HW
+zR
+kD
+kD
+kD
+Pu
+eb
+PA
+VU
+Pu
+dK
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-oz
-oz
-Te
-Te
-Te
-Te
+EL
+SY
+dY
+dY
+ba
+MQ
 jN
 jN
 rX
@@ -13615,7 +14142,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 UF
 SU
@@ -13628,23 +14155,23 @@ SU
 UF
 tX
 Bu
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+zR
+EL
+yi
+fu
+Xa
+uS
+zP
+Dt
+Xa
+uS
+EL
+jG
+zy
+NI
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -13768,7 +14295,7 @@ Ee
 Ee
 Ee
 Ee
-yr
+cl
 OU
 UF
 SU
@@ -13781,23 +14308,23 @@ SU
 UF
 Ul
 HW
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+zR
+AT
+FU
+fu
+Xa
+fL
+zP
+fu
+Xa
+fL
+EL
+Tw
+Hw
+SY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -13934,23 +14461,23 @@ SU
 UF
 tX
 Bu
+EL
+yi
+bm
+QJ
+Tq
+qe
+LN
+QJ
+Tq
+qe
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+Tw
+Hw
+zn
+dY
+ba
+MQ
 jN
 jN
 rX
@@ -14070,9 +14597,9 @@ SU
 Vp
 DE
 SU
-yr
-yr
-yr
+cl
+cl
+cl
 SU
 SU
 CZ
@@ -14088,22 +14615,22 @@ vn
 YY
 SU
 RJ
+EL
+AT
+EL
+EL
+EL
+EL
+EL
 RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+EL
+EL
+Hw
+yq
+hA
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -14240,23 +14767,23 @@ dD
 Mf
 Zi
 yr
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+EL
+EL
+ja
+ja
+ja
+ja
+EL
+ja
+ja
+EL
+EL
+yq
+hA
+dY
+dY
+ba
+MQ
 IW
 GC
 rX
@@ -14393,23 +14920,23 @@ pn
 FT
 WI
 yr
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-RJ
-oz
-Te
-Te
-Te
-Te
+EL
+ja
+ja
+ja
+ja
+ja
+ja
+ja
+ja
+ja
+yq
+hA
+dY
+dY
+dY
+ba
+MQ
 jN
 jN
 rX
@@ -15150,9 +15677,9 @@ Be
 dw
 zo
 SU
-dY
-dY
-dY
+zj
+zj
+zj
 SU
 mc
 mc
