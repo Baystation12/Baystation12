@@ -3,14 +3,14 @@
 	icon = 'packs/event_legion_bookend/icons/northstar_trinket.dmi'
 	icon_state = "c_coin"
 
-	name = "northstar token"
+	name = "maxim's token"
 	desc = "A silver coin denoting your visit, call, or service aboard the Maxim Interplanar Layover station - coloquially dubbed as 'Northstar' by the Solar Assembly, and 'Krasnyy-Balise' by the Gilgameshi."
 
 /obj/item/northstar_photo
 	icon = 'packs/event_legion_bookend/icons/northstar_trinket.dmi'
 	icon_state = "photo"
 
-	name = "northstar photograph"
+	name = "maxim photograph"
 	desc = "A well-laminated photograph depicting the station, with Maxim's World in the background. Often given to those visiting, calling-to or serving aboard the Maxim Interplanar Layover station at E-14b. On the back, is etched; 'A beacon. Always, forever.'."
 
 /obj/item/northstar_medal
