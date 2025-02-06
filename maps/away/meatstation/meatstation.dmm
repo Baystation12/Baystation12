@@ -1505,7 +1505,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "dB" = (
@@ -5133,7 +5133,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/machinery/light/small/red{
 	dir = 4
 	},
@@ -5151,12 +5151,12 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "ml" = (
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/random/trash,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
@@ -5169,7 +5169,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -5185,7 +5185,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/cargo)
 "mq" = (
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/machinery/light/small/red{
 	dir = 8
 	},
@@ -5421,7 +5421,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "mZ" = (
@@ -6212,7 +6212,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/item/stack/material/rods,
 /obj/decal/cleanable/blood/drip,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -6365,7 +6365,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "pQ" = (
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -7463,7 +7463,7 @@
 /turf/simulated/floor/plating,
 /area/meatstation/hydroponics)
 "sA" = (
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "sB" = (
@@ -7483,7 +7483,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7499,7 +7499,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/random/trash,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7533,7 +7533,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
@@ -7568,7 +7568,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "sK" = (
@@ -9061,14 +9061,14 @@
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/medical)
 "wc" = (
-/obj/structure/mine,
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
+/obj/item/mine/preset/frag,
 /obj/machinery/light/small/red,
 /turf/simulated/floor/tiled/dark,
 /area/meatstation/swhallway)
 "wd" = (
-/obj/structure/mine,
-/obj/structure/mine,
+/obj/item/mine/preset/frag,
+/obj/item/mine/preset/frag,
 /obj/decal/cleanable/blood/drip,
 /obj/random/trash,
 /obj/random/junk,

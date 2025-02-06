@@ -82,3 +82,9 @@
 	item_cost = 60
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/storage/box/supermatters
+
+/datum/uplink_item/item/grenades/template_mine
+	name = "Template Mine"
+	desc = "Universal Template Munitions that accept any grenade, and can be armed/disamed via a multi-tool."
+	item_cost = 20
+	path = /obj/item/mine
