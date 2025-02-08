@@ -5,7 +5,7 @@
 	be accurate at ranged while active. Afterwards, we will suffer extreme amounts of exhaustion, slowing us and potentially causing us to even pass out."
 	enhancedtext = "The length of our rage will be extended by an additional 30 seconds."
 	ability_icon_state = "ling_berserk"
-	genomecost = 2
+	genomecost = 4
 	power_category = CHANGELING_POWER_ENHANCEMENTS
 	allowduringlesserform = 1
 	verbpath = /mob/living/proc/changeling_berserk

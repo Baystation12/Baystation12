@@ -15,7 +15,7 @@
 	src.verbs |= /mob/proc/changeling_cryo_sting
 
 /mob/proc/ling_cryo(mob/living/carbon/M, duration)
-	M.reagents.add_reagent(/datum/reagent/toxin/cryotoxin, 10)
+	M.reagents.add_reagent(/datum/reagent/toxin/cryotoxin, 5)
 
 /mob/proc/changeling_cryo_sting()
 	set category = "Changeling"

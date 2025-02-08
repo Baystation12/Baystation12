@@ -18,7 +18,7 @@
 	desc = "We turn our skin into tough chitin to protect us from damage and space exposure."
 	helptext = "To remove the armor, use the ability again."
 	ability_icon_state = "ling_armor"
-	genomecost = 3
+	genomecost = 5
 	verbpath = /mob/proc/changeling_spacearmor
 
 /mob/proc/changeling_spacearmor()
@@ -42,21 +42,26 @@
 	can_breach = FALSE
 	flags_inv = BLOCKHAIR | HIDETAIL
 	var/remove_on_respec = TRUE
+	/// To keep a track of how much time has elapsed. 120s/2m to repair armoured suit. 60s/1m to repair regular.
+	var/heal_time = 600
 
 /obj/item/clothing/suit/space/changeling/Initialize()
 	. = ..()
+
 	slowdown_per_slot[slot_wear_suit] = 0
 	START_PROCESSING(SSobj, src)
 	if(ismob(loc))
 		to_chat(src,SPAN_WARNING("[loc.name]\'s flesh splits and twists, forming into a thin fleshy membrane around their body!"))
 
+
 /obj/item/clothing/suit/space/changeling/dropped(mob/user)
 	playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
 
+
 /obj/item/clothing/suit/space/changeling/Destroy()
 	STOP_PROCESSING(SSobj, src)
-
 	return ..()
+
 
 /obj/item/clothing/head/helmet/space/changeling
 	name = "flesh mass"
@@ -74,6 +79,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+
 /obj/item/clothing/shoes/magboots/changeling
 	desc = "A suction cupped mass of flesh, shaped like a foot."
 	name = "fleshy grippers"
@@ -83,6 +89,7 @@
 
 	online_slowdown = 3
 	var/remove_on_respec = TRUE
+
 
 /obj/item/clothing/shoes/magboots/changeling/set_slowdown()
 	slowdown_per_slot[slot_shoes] = shoes? max(0, shoes.slowdown_per_slot[slot_shoes]): 0	//So you can't put on magboots to make you walk faster.
@@ -108,11 +115,12 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+
 //Armor
 
 /obj/item/clothing/suit/space/changeling/armored
 	name = "chitinous mass"
-	desc = "A protective shell of muscle, bone and chitin, designed for violence and violence alone."
+	desc = "A protective shell of muscle, bone and chitin, designed for violence and violence alone. Far more brittle, and hence, capable of losing capabilities over damage."
 	icon_state = "lingarmor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	//It costs 3 points, so it should be very protective.
@@ -125,7 +133,8 @@
 		bomb = ARMOR_BOMB_PADDED,
 		)
 	siemens_coefficient = 0.3
-	can_breach = FALSE
+	can_breach = TRUE
+	heal_time = 1200
 
 	flags_inv = BLOCKHAIR | HIDETAIL
 	//max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -138,10 +147,39 @@
 	if(ismob(loc))
 		to_chat(src,SPAN_WARNING("Our muscles twist and our bones crack with a crunching noise as we form claws, teeth and armor!"))
 
-/obj/item/clothing/suit/space/changeling/armored/Destroy()
-	STOP_PROCESSING(SSobj, src)
 
-	return ..()
+/obj/item/clothing/suit/space/changeling/armored/calc_breach_damage()
+	. = ..()
+
+	if (!istype(src, /obj/item/clothing/suit/space/changeling/armored))
+		return
+
+	if (damage < 15)
+		armor = list(
+			melee = ARMOR_MELEE_VERY_HIGH,
+			bullet = ARMOR_BALLISTIC_RESISTANT,
+			laser = ARMOR_LASER_HANDGUNS,
+			energy = ARMOR_ENERGY_RESISTANT,
+			bomb = ARMOR_BOMB_PADDED,
+			)
+
+	else if (damage >= 15 && damage < 30) // Culls some of the melee and ballistic armour.
+		armor = list(
+			melee = ARMOR_MELEE_MAJOR,
+			bullet = ARMOR_BALLISTIC_PISTOL,
+			laser = ARMOR_LASER_HANDGUNS,
+			energy = ARMOR_ENERGY_RESISTANT,
+			bomb = ARMOR_BOMB_PADDED,
+			)
+
+	else if (damage >= 30) // Culls almost all type armour to some degrees.
+		armor = list(
+			melee = ARMOR_MELEE_KNIVES,
+			bullet = ARMOR_BALLISTIC_PISTOL,
+			laser = ARMOR_LASER_SMALL,
+			energy = ARMOR_ENERGY_SMALL,
+			bomb = ARMOR_BOMB_MINOR,
+		)
 
 
 /obj/item/clothing/head/helmet/space/changeling/armored

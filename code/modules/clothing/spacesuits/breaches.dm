@@ -77,10 +77,11 @@
 			amount_left = 0
 			B.update_descriptor()
 
-	user.visible_message(
-		SPAN_NOTICE("\The [user] patches some of the damage on \the [src]."),
-		SPAN_NOTICE("You patch some of the damage on \the [src].")
-	)
+	if (user)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] patches some of the damage on \the [src]."),
+			SPAN_NOTICE("You patch some of the damage on \the [src].")
+		)
 	calc_breach_damage()
 
 /obj/item/clothing/suit/space/proc/create_breaches(damtype, amount)

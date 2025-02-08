@@ -3,7 +3,7 @@
 
 	if(!ishuman(src))
 		return FALSE
-	var/list/species_restricted = list("exclude", SPECIES_NABBER, SPECIES_ADHERENT,SPECIES_VOX)
+	var/list/species_restricted = list("exclude", SPECIES_NABBER, SPECIES_ADHERENT,SPECIES_VOX, SPECIES_DIONA)
 	var/mob/living/carbon/human/M = src
 
 	if(istype(M.wear_suit, armor_type) || istype(M.head, helmet_type) || istype(M.shoes, boot_type))
@@ -17,8 +17,26 @@
 		to_chat(M,SPAN_WARNING("Our current form is not suited to such a transformation."))
 		return
 
-	//First, check if we're already wearing the armor, and if so, take it off.
+	var/obj/item/clothing/suit/space/changeling/ling_suit = armor_type
+
+	/// Time during Destroy(), to start the healing.
+	var/time_of_heal = null
+
+	//First, check if we're already wearing the armor, and if so, take it off. (And repair if needed)
 	if(istype(M.wear_suit, armor_type) || istype(M.head, helmet_type) || istype(M.shoes, boot_type))
+		if (ling_suit.damage >= 30)
+			to_chat(M, SPAN_WARNING("\The [src] requires time to heal. It will be mending itself."))
+			time_of_heal = world.time
+			if (ling_suit.damage)
+				ling_suit.damage = 0
+			if (ling_suit.brute_damage || ling_suit.burn_damage)
+				ling_suit.brute_damage = 0
+				ling_suit.burn_damage = 0
+			if (ling_suit.breaches)
+				ling_suit.breaches = null
+			ling_suit.calc_breach_damage()
+
+			time_of_heal = world.time
 		M.visible_message("<span class='warning'>[M] casts off their [M.wear_suit.name]!</span>",
 		"<span class='warning'>We cast off our [M.wear_suit.name]</span>",
 		"<span class='italics'>You hear the organic matter ripping and tearing!</span>")
@@ -33,6 +51,13 @@
 		M.update_hair()
 		M.update_inv_shoes()
 		return TRUE
+
+	if (time_of_heal) // Check if it's within the time-limit of "repair"
+		if (world.time < time_of_heal + ling_suit.heal_time)
+			to_chat(loc, SPAN_WARNING("The [src] has not been fully repaired, yet."))
+			return FALSE
+
+		time_of_heal = null
 
 	if(M.head || M.wear_suit) //Make sure our slots aren't full
 		to_chat(src, "<span class='warning'>We require nothing to be on our head, and we cannot wear any external suits, or shoes.</span>")

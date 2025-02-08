@@ -103,6 +103,7 @@
 	item_state = "arm_blade"
 	w_class = ITEM_SIZE_HUGE
 	force = 5
+	melee_accuracy_bonus = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	anchored = TRUE
 	throwforce = 0 //Just to be on the safe side
@@ -141,7 +142,7 @@
 	desc = "A hammer made out of flesh and bone, heavy enough to smash through armor and people alike."
 	icon_state = "ling_hammer"
 	item_state = "ling_hammer"
-	force = 25
+	force = 17
 	hitsound = 'sound/weapons/genhit3.ogg'
 	armor_penetration = 30
 	sharp = FALSE
@@ -179,7 +180,7 @@
 	icon_state = "ling_blade"
 	item_state = "arm_blade"
 	force = 35
-	armor_penetration = 15
+	armor_penetration = 10
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "ripped", "diced", "cut")
@@ -224,7 +225,7 @@
 /obj/item/melee/changeling/arm_blade/greater
 	name = "arm greatblade"
 	desc = "A grotesque blade made out of bone and flesh that cleaves through people and armor as a hot knife through butter."
-	armor_penetration = 30
+	armor_penetration = 20
 	base_parry_chance = 70
 
 /obj/item/melee/changeling/claw
@@ -258,7 +259,7 @@
 /obj/item/melee/changeling/claw/greater
 	name = "hand greatclaw"
 	force = 25
-	armor_penetration = 20
+	armor_penetration = 15
 	base_parry_chance = 60
 
 /datum/power/changeling/arm_shield

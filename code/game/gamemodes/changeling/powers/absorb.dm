@@ -38,6 +38,9 @@
 		return
 
 	var/mob/living/carbon/human/T = G.affecting
+	if (G.affecting.species == SPECIES_DIONA)
+		to_chat(src, SPAN_WARNING("Its form is unknown to our manifestation. We can't find their DNA to be compatible."))
+		return
 	for(var/datum/absorbed_dna/DNA in changeling.absorbed_dna)
 		names += "[DNA.name]"
 	if(T.real_name in names)
