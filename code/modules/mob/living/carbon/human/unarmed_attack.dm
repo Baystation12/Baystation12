@@ -87,8 +87,8 @@ var/global/list/sparring_attack_cache = list()
 			if(BP_GROIN)
 				var/datum/pronouns/pronouns = target.choose_from_pronouns()
 				target.visible_message(
-					SPAN_WARNING("\The [target] looks like [pronouns.he] is in pain!"),
-					SPAN_WARNING("[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your[pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]")
+					SPAN_WARNING("\The [target] looks like [pronouns.he] [pronouns.is] in pain!"),
+					SPAN_WARNING("[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your [pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]")
 				)
 				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
