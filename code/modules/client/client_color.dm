@@ -35,7 +35,7 @@
 	if (!length(client_colors))
 		client_colors = list()
 	client_colors |= new color_type
-	sortTim(client_colors, /proc/cmp_clientcolor_order)
+	sortTim(client_colors, GLOBAL_PROC_REF(cmp_clientcolor_order))
 	update_client_color()
 
 

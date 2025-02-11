@@ -408,7 +408,7 @@
 		choices |= PAINT_REGION_PAINT
 	if (wall.material.wall_flags & MATERIAL_PAINTABLE_STRIPE)
 		choices |= PAINT_REGION_STRIPE
-	var/choice = input(user, input_text) as null|anything in sortTim(choices, /proc/cmp_text_asc)
+	var/choice = input(user, input_text) as null|anything in sortTim(choices, GLOBAL_PROC_REF(cmp_text_asc))
 	if (!user.use_sanity_check(wall, src))
 		return FALSE
 	return choice

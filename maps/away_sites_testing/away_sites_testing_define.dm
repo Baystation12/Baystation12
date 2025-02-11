@@ -48,7 +48,7 @@
 
 /datum/map/away_sites_testing/build_away_sites()
 	var/list/unsorted_sites = list_values(SSmapping.away_sites_templates)
-	var/list/sorted_sites = sortTim(unsorted_sites, /proc/cmp_sort_templates_tallest_to_shortest)
+	var/list/sorted_sites = sortTim(unsorted_sites, GLOBAL_PROC_REF(cmp_sort_templates_tallest_to_shortest))
 	for (var/datum/map_template/ruin/away_site/A in sorted_sites)
 		A.load_new_z()
 		testing("Spawning [A] in [english_list(GetConnectedZlevels(world.maxz))]")

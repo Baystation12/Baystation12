@@ -982,9 +982,9 @@ Ccomp's first proc.
 		range = rand(8, 13)
 		var/turf/T
 		if (connected == "Yes")
-			T = pick_area_turf_in_connected_z_levels(list(/proc/is_not_space_area), z_level = zlevel)
+			T = pick_area_turf_in_connected_z_levels(list(GLOBAL_PROC_REF(is_not_space_area)), z_level = zlevel)
 		else
-			T = pick_area_turf_in_single_z_level(list(/proc/is_not_space_area), z_level = zlevel)
+			T = pick_area_turf_in_single_z_level(list(GLOBAL_PROC_REF(is_not_space_area)), z_level = zlevel)
 		explosion(T, range, max_power, turf_breaker = break_turfs)
 		booms = booms - 1
 		sleep(delay SECONDS)

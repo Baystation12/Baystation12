@@ -29,7 +29,9 @@
 /obj/overmap/visitable/sector/exoplanet/proc/handle_repopulation()
 	for (var/i = 1 to round(max_animal_count - length(animals)))
 		if (prob(10))
-			var/turf/simulated/T = pick_area_turf(planetary_area, list(/proc/not_turf_contains_dense_objects))
+			var/turf/simulated/T = pick_area_turf(planetary_area, list(
+				GLOBAL_PROC_REF(not_turf_contains_dense_objects)
+			))
 			var/mob_type = pick(repopulate_types)
 			var/mob/S = new mob_type(T)
 			track_animal(S)

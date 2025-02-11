@@ -76,7 +76,12 @@
 			if (length(portals) >= active_portals_max)
 				return
 
-			var/turf/T = pick(pick_turf_in_range(get_turf(holder), effectrange, list(/proc/not_turf_contains_dense_objects, /proc/is_not_space_turf, /proc/is_not_holy_turf, /proc/is_not_open_space)))
+			var/turf/T = pick(pick_turf_in_range(get_turf(holder), effectrange, list(
+				GLOBAL_PROC_REF(not_turf_contains_dense_objects),
+				GLOBAL_PROC_REF(is_not_space_turf),
+				GLOBAL_PROC_REF(is_not_holy_turf),
+				GLOBAL_PROC_REF(is_not_open_space)
+			)))
 
 			if (!T)
 				return

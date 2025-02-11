@@ -1,7 +1,7 @@
 /singleton/communication_channel/pray
 	name = "PRAY"
 	expected_communicator_type = /mob
-	log_proc = /proc/log_say
+	log_proc = GLOBAL_PROC_REF(log_say)
 	flags = COMMUNICATION_ADMIN_FOLLOW
 	mute_setting = MUTE_PRAY
 

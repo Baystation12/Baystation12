@@ -415,7 +415,7 @@
 			SPAN_WARNING("\The [L] starts flickering in and out of existence as they step onto the bluespace!"),
 			SPAN_WARNING("You feel your entire body tingle, and something pulling you away!")
 		)
-		addtimer(new Callback(GLOBAL_PROC, /proc/do_unstable_teleport_safe, L, GetConnectedZlevels(L.z)), rand(5, 15))
+		addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(do_unstable_teleport_safe), L, GetConnectedZlevels(L.z)), rand(5, 15))
 
 /turf/simulated/floor/forcefield
 	name = "ship airshield"

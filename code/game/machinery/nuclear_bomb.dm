@@ -409,7 +409,10 @@ var/global/bomb_set
 	GLOB.moved_event.unregister(src, src, PROC_REF(check_z_level))
 	nuke_disks -= src
 	if(!length(nuke_disks))
-		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
+		var/turf/T = pick_area_turf(/area/maintenance, list(
+			GLOBAL_PROC_REF(is_station_turf),
+			GLOBAL_PROC_REF(not_turf_contains_dense_objects)
+		))
 		if(T)
 			var/obj/D = new /obj/item/disk/nuclear(T)
 			log_and_message_admins("[src], the last authentication disk, has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).", user = null, location = T)

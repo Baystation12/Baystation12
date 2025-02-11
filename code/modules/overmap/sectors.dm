@@ -82,7 +82,9 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 /obj/overmap/visitable/proc/populate_sector_objects()
 
 /obj/overmap/visitable/proc/get_areas()
-	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
+	return get_filtered_areas(list(
+		GLOBAL_PROC_REF(area_belongs_to_zlevels) = map_z
+	))
 
 /obj/overmap/visitable/proc/find_z_levels()
 	map_z = GetConnectedZlevels(z)

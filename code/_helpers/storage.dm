@@ -20,7 +20,7 @@
 /datum/atom_creator/simple
 	var/path
 	var/probability
-	var/prob_method = /proc/prob_call
+	var/prob_method = GLOBAL_PROC_REF(prob_call)
 
 /datum/atom_creator/simple/New(path, probability)
 	if(length(args) != 2)
@@ -36,7 +36,7 @@
 
 /datum/atom_creator/weighted
 	var/list/paths
-	var/selection_method = /proc/pickweight
+	var/selection_method = GLOBAL_PROC_REF(pickweight)
 
 /datum/atom_creator/weighted/New(list/paths)
 	if(length(args) != 1)

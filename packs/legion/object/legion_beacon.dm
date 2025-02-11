@@ -159,9 +159,9 @@
 		spawntype = pick(spawn_types)
 
 	var/turf/target_turf = pick_turf_in_range(get_turf(src), spawn_range, list(
-		/proc/is_not_space_turf,
-		/proc/is_not_open_space,
-		/proc/not_turf_contains_dense_objects
+		GLOBAL_PROC_REF(is_not_space_turf),
+		GLOBAL_PROC_REF(is_not_open_space),
+		GLOBAL_PROC_REF(not_turf_contains_dense_objects)
 	))
 
 	if (target_turf)
@@ -177,9 +177,9 @@
  */
 /obj/structure/legion/beacon/proc/retreat()
 	var/list/predicates = list(
-		/proc/is_not_space_turf,
-		/proc/is_not_open_space,
-		/proc/not_turf_contains_dense_objects
+		GLOBAL_PROC_REF(is_not_space_turf),
+		GLOBAL_PROC_REF(is_not_open_space),
+		GLOBAL_PROC_REF(not_turf_contains_dense_objects)
 	)
 	var/turf/current_turf = get_turf(src)
 	var/list/turfs_in_min_range = get_turfs_in_range(current_turf, min_retreat_range, predicates)

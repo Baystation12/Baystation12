@@ -137,12 +137,12 @@
 		"health_max" = /atom/proc/set_max_health,
 		"health_current" = /atom/proc/set_health
 	)
-	predicates = list(/proc/is_num_predicate)
+	predicates = list(GLOBAL_PROC_REF(is_num_predicate))
 
 /singleton/vv_set_handler/health_dead_handler
 	handled_type = /atom
 	handled_vars = list("health_dead")
-	predicates = list(/proc/is_strict_bool_predicate)
+	predicates = list(GLOBAL_PROC_REF(is_strict_bool_predicate))
 
 /singleton/vv_set_handler/health_dead_handler/handle_set_var(atom/target, variable, var_value, client)
 	if (var_value == target.health_dead())
@@ -157,7 +157,7 @@
 	handled_type = /obj/overmap/visitable/ship
 	handled_vars = list("vessel_mass")
 	predicates = list(
-		/proc/is_num_predicate,
-		/proc/is_non_zero_predicate,
-		/proc/is_non_negative_predicate
+		GLOBAL_PROC_REF(is_num_predicate),
+		GLOBAL_PROC_REF(is_non_zero_predicate),
+		GLOBAL_PROC_REF(is_non_negative_predicate)
 	)

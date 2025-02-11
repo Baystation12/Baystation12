@@ -73,7 +73,7 @@
 	if (severity > EVENT_LEVEL_MODERATE)
 		for (var/i = 1 to effects_per_tick)
 			var/turf/turf = pick_area_turf_in_single_z_level(
-				list(/proc/is_not_space_area),
+				list(GLOBAL_PROC_REF(is_not_space_area)),
 				z_level = pick(affecting_z)
 			)
 			var/effect_state = pick("cyan_sparkles", "blue_electricity_constant", "shieldsparkles", "empdisabled")

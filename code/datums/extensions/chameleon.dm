@@ -9,7 +9,8 @@
 	var/static/chameleon_verbs = list(
 		/obj/item/proc/ChameleonFlexibleAppearance,
 		/obj/item/proc/ChameleonOutfitAppearanceSingle,
-		/obj/item/proc/ChameleonOutfitAppearanceAll)
+		/obj/item/proc/ChameleonOutfitAppearanceAll
+	)
 
 /**
  * **Parameters**:

@@ -82,8 +82,8 @@ var/global/list/floating_chat_colors = list()
 
 	LAZYADD(holder.stored_chat_text, I)
 
-	addtimer(new Callback(GLOBAL_PROC, /proc/remove_floating_text, holder, I), duration)
-	addtimer(new Callback(GLOBAL_PROC, /proc/remove_images_from_clients, I, show_to), duration + CHAT_MESSAGE_EOL_FADE)
+	addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(remove_floating_text), holder, I), duration)
+	addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(remove_images_from_clients), I, show_to), duration + CHAT_MESSAGE_EOL_FADE)
 
 	return I
 

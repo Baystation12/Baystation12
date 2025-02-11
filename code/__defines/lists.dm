@@ -72,4 +72,4 @@
 /// Passed into BINARY_INSERT to compare values
 #define COMPARE_VALUE __BIN_LIST[__BIN_LIST[__BIN_MID]]
 
-#define MERGE_ASSOCS_WITH_NUM_VALUES(a, b) merge_assoc_lists(a, b, /proc/assoc_merge_add, 1)
+#define MERGE_ASSOCS_WITH_NUM_VALUES(a, b) merge_assoc_lists(a, b, GLOBAL_PROC_REF(assoc_merge_add), 1)

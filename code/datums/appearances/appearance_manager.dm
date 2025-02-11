@@ -17,7 +17,7 @@ var/global/singleton/appearance_manager/appearance_manager = new()
 /singleton/appearance_manager/proc/add_appearance(mob/viewer, datum/appearance_data/ad)
 	var/PriorityQueue/pq = appearances_[viewer]
 	if(!pq)
-		pq = new/PriorityQueue(/proc/cmp_appearance_data)
+		pq = new/PriorityQueue(GLOBAL_PROC_REF(cmp_appearance_data))
 		appearances_[viewer] = pq
 		GLOB.logged_in_event.register(viewer, src, PROC_REF(apply_appearance_images))
 		GLOB.destroyed_event.register(viewer, src, PROC_REF(remove_appearances))

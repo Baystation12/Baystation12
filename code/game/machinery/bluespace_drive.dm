@@ -224,8 +224,11 @@
 			if (istype(being, /mob/living/exosuit))
 				return
 			var/turf/T = pick_area_turf_in_connected_z_levels(
-				list(/proc/is_not_space_area),
-				list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe),
+				list(GLOBAL_PROC_REF(is_not_space_area)),
+				list(
+					GLOBAL_PROC_REF(not_turf_contains_dense_objects),
+					GLOBAL_PROC_REF(IsTurfAtmosSafe)
+				),
 				zlevels[1])
 			if (!T)
 				return

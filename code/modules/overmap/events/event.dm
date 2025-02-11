@@ -12,7 +12,7 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 /singleton/overmap_event_handler/proc/create_events(z_level, overmap_size, number_of_events)
 	// Acquire the list of not-yet utilized overmap turfs on this Z-level
 	var/list/candidate_turfs = block(locate(OVERMAP_EDGE, OVERMAP_EDGE, z_level),locate(overmap_size - OVERMAP_EDGE, overmap_size - OVERMAP_EDGE,z_level))
-	candidate_turfs = where(candidate_turfs, /proc/can_not_locate, /obj/overmap/visitable)
+	candidate_turfs = where(candidate_turfs, GLOBAL_PROC_REF(can_not_locate), /obj/overmap/visitable)
 
 	for(var/i = 1 to number_of_events)
 		if(!length(candidate_turfs))

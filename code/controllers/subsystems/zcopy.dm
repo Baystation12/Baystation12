@@ -612,7 +612,7 @@ SUBSYSTEM_DEF(zcopy)
 			found_oo += D
 			temp_objects += D
 
-	sortTim(found_oo, /proc/cmp_planelayer)
+	sortTim(found_oo, GLOBAL_PROC_REF(cmp_planelayer))
 
 	var/list/atoms_list_list = list()
 	for (var/thing in found_oo)
