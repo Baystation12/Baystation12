@@ -19,7 +19,7 @@ GLOBAL_TYPED_NEW(dir_set_event, /singleton/observ/dir_set)
 
 	// Listen to the parent if possible.
 	if(. && ismovable(dir_changer.loc))	// We don't care about registering to turfs.
-		register(dir_changer.loc, dir_changer, /atom/proc/recursive_dir_set)
+		register(dir_changer.loc, dir_changer, TYPE_PROC_REF(/atom, recursive_dir_set))
 
 /*********************
 * Direction Handling *

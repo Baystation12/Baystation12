@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(powerinstances)
 	/// _defines/gamemode.dm
 	var/power_category = null
 	/// only override for sting powers, used for boost range
-	var/sting_effect = /mob/proc/generic_sting
+	var/sting_effect = TYPE_PROC_REF(/mob, generic_sting)
 	var/sting_duration = null
 	var/reagents_transferred = null
 
@@ -315,7 +315,7 @@ GLOBAL_LIST_EMPTY(powerinstances)
 		if(!istype(M))
 			return
 		purchasePower(M, href_list["P"])
-		call(/datum/changeling/proc/EvolutionTree)()
+		call(src, PROC_REF(EvolutionTree))()
 
 
 

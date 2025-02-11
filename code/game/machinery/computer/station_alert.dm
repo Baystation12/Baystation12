@@ -22,7 +22,7 @@
 
 /obj/machinery/computer/station_alert/Initialize()
 	alarm_monitor = new monitor_type(src)
-	alarm_monitor.register_alarm(src, /atom/proc/update_icon)
+	alarm_monitor.register_alarm(src, TYPE_PROC_REF(/atom, update_icon))
 	. = ..()
 	if(monitor_type)
 		register_monitor(new monitor_type(src))
@@ -36,7 +36,7 @@
 		return
 
 	alarm_monitor = monitor
-	alarm_monitor.register_alarm(src, /atom/proc/update_icon)
+	alarm_monitor.register_alarm(src, TYPE_PROC_REF(/atom, update_icon))
 
 /obj/machinery/computer/station_alert/proc/unregister_monitor()
 	if(alarm_monitor)

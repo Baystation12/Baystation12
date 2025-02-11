@@ -223,7 +223,6 @@
 	/*
 	* The fully qualified path of a proc on the created item.
 	* Provides the ability to carry out complex post-creation customization of a loadout object.
-	* Expects the signature /obj/item/.../proc/some_name(mob/living.../user)
 	*/
 	var/custom_setup_proc
 
@@ -240,7 +239,7 @@
 /datum/gear_tweak/custom_var
 	var/var_to_tweak
 	/// The user input method to use if `valid_list_options` does not contain any items.
-	var/input_method = /datum/gear_tweak/custom_var/proc/InputText
+	var/input_method = PROC_REF(InputText)
 	var/content_text
 	var/input_title = CHARACTER_PREFERENCE_INPUT_TITLE
 	var/input_message

@@ -1,12 +1,13 @@
 /datum/extension/on_click/alt/ghost_admin_killer
 	expected_type = /mob/living
 	var/mob/living/living_holder
-	var/death_proc
+	var/death_proc = TYPE_PROC_REF(/mob, death)
 
 /datum/extension/on_click/alt/ghost_admin_killer/New(host, death_proc)
 	..()
 	living_holder = host
-	src.death_proc = death_proc || /mob/proc/death
+	if (death_proc)
+		src.death_proc = death_proc
 
 /datum/extension/on_click/alt/ghost_admin_killer/Destroy()
 	living_holder = null

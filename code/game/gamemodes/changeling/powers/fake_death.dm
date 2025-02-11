@@ -8,7 +8,7 @@
 	verbpath = /mob/proc/changeling_fakedeath
 /mob/proc/finish_revive()
 	//The ling will now be able to choose when to revive
-	verbs.Add(/mob/proc/changeling_revive)
+	verbs += /mob/proc/changeling_revive
 	new /obj/changeling_revive_holder(src)
 	to_chat(src, "<span class='notice'><font size='5'>We are ready to rise.  Use the <b>Revive</b> verb when you are ready.</font></span>")
 //Fake our own death and fully heal. You will appear to be dead but regenerate fully after a short delay.

@@ -86,8 +86,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
-	verbs.Add(/datum/changeling/proc/EvolutionTree)
-	verbs.Add(/mob/proc/toggle_absorb_type)
+	verbs += /datum/changeling/proc/EvolutionTree
+	verbs += /mob/proc/toggle_absorb_type
 	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)

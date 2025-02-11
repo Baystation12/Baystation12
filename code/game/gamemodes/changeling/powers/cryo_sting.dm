@@ -7,7 +7,7 @@
 	ability_icon_state = "ling_sting_cryo"
 	genomecost = 1
 	verbpath = /mob/proc/changeling_cryo_sting
-	sting_effect = /mob/proc/ling_cryo
+	sting_effect = TYPE_PROC_REF(/mob, ling_cryo)
 	is_sting = TRUE
 
 /mob/proc/cryo_cooldown()

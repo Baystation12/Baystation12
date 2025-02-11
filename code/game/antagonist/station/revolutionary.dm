@@ -23,7 +23,7 @@ GLOBAL_TYPED_NEW(revs, /datum/antagonist/revolutionary)
 	//Inround revs.
 	faction_role_text = "Revolutionary"
 	faction_descriptor = "Revolution"
-	faction_verb = /mob/living/proc/convert_to_rev
+	faction_verb = TYPE_PROC_REF(/mob/living, convert_to_rev)
 	faction_welcome = "Help the cause overturn the ruling class. Do not harm your fellow freedom fighters."
 	faction_indicator = "hud_rev"
 	//faction_invisible = 1

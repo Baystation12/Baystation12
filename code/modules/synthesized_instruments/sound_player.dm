@@ -28,7 +28,7 @@
 	src.actual_instrument = where
 	src.echo = GLOB.musical_config.echo_default.Copy()
 	src.env = GLOB.musical_config.env_default.Copy()
-	src.proxy_listener = new(src.actual_instrument, /datum/sound_player/proc/on_turf_entered_relay, /datum/sound_player/proc/on_turfs_changed_relay, range, proc_owner = src)
+	src.proxy_listener = new(src.actual_instrument, PROC_REF(on_turf_entered_relay), PROC_REF(on_turfs_changed_relay), range, proc_owner = src)
 	proxy_listener.register_turfs()
 	GLOB.instrument_synchronizer.register_global(src, PROC_REF(check_wait))
 

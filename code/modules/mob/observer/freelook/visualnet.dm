@@ -109,7 +109,7 @@
 // Never access this proc directly!!!!
 // This will update the chunk and all the surrounding chunks.
 /datum/visualnet/proc/major_chunk_change(atom/source)
-	for_all_chunks_in_range(source, /datum/chunk/proc/visibility_changed, list())
+	for_all_chunks_in_range(source, TYPE_PROC_REF(/datum/chunk, visibility_changed), list())
 
 /datum/visualnet/proc/add_source(atom/source, update_visibility = TRUE, opacity_check = FALSE)
 	if(!(source && is_type_in_list(source, valid_source_types)))

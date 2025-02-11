@@ -5,7 +5,7 @@
 	helptext = "The target does not notice they have been stung.  The effect occurs after 30 to 60 seconds."
 	genomecost = 1
 	verbpath = /mob/proc/changeling_lsdsting
-	sting_effect = /mob/proc/ling_lsd
+	sting_effect = TYPE_PROC_REF(/mob, ling_lsd)
 	is_sting = TRUE
 	sting_duration = 400
 /mob/proc/time_lsd(T)

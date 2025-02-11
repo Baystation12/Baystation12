@@ -7,7 +7,7 @@
 	ability_icon_state = "ling_sting_del_toxin"
 	genomecost = 1
 	verbpath = /mob/proc/changeling_delayed_toxic_sting
-	sting_effect = /mob/proc/ling_delay_toxin
+	sting_effect = TYPE_PROC_REF(/mob, ling_delay_toxin)
 	is_sting = TRUE
 //disgusting copypasta, but the alternative is a new prop to ling powers just for this one sting
 /mob/proc/ling_delay_toxin(mob/living/carbon/M, null)

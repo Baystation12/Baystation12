@@ -7,7 +7,7 @@
 	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_silence_sting
-	sting_effect = /mob/proc/silence
+	sting_effect = TYPE_PROC_REF(/mob, silence)
 	is_sting = TRUE
 	sting_duration = 30
 /mob/proc/silence(mob/living/carbon/M, duration)

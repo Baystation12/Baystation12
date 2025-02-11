@@ -6,7 +6,7 @@
 	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_blind_sting
-	sting_effect = /mob/proc/ling_blind
+	sting_effect = TYPE_PROC_REF(/mob, ling_blind)
 	is_sting = TRUE
 /mob/proc/apply_blind()
 	src.disabilities &= ~NEARSIGHTED

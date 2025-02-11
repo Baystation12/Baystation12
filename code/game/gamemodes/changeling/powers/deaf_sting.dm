@@ -6,7 +6,7 @@
 	genomecost = 1
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_deaf_sting
-	sting_effect = /mob/proc/ling_deaf
+	sting_effect = TYPE_PROC_REF(/mob, ling_deaf)
 	sting_duration = 300
 	is_sting = TRUE
 /mob/proc/ling_deaf(mob/living/carbon/M, duration)

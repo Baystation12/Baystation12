@@ -19,7 +19,7 @@ GLOBAL_TYPED_NEW(moved_event, /singleton/observ/moved)
 
 	// Listen to the parent if possible.
 	if(. && istype(mover.loc, expected_type))
-		register(mover.loc, mover, /atom/movable/proc/recursive_move)
+		register(mover.loc, mover, TYPE_PROC_REF(/atom/movable, recursive_move))
 
 /********************
 * Movement Handling *

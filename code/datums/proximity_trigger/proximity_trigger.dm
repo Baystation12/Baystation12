@@ -175,7 +175,7 @@ var/global/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to mo
 /obj/item/proxy_debug/New()
 	..()
 	overlay = image('icons/misc/mark.dmi', icon_state = "x3")
-	var/datum/proximity_trigger/a = new proxy_type(src, /obj/item/proxy_debug/proc/turf_entered, /obj/item/proxy_debug/proc/update_turfs)
+	var/datum/proximity_trigger/a = new proxy_type(src, PROC_REF(turf_entered), PROC_REF(update_turfs))
 	a.register_turfs()
 
 /obj/item/proxy_debug/proc/turf_entered(atom/A)
