@@ -189,6 +189,7 @@
 
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
+	#include "../event/e14b_station/northstar.dm"
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/empty/empty.dm"
 
