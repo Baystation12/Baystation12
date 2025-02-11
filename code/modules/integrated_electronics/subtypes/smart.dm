@@ -119,7 +119,7 @@
 	if(Pl&&islist(Pl))
 		idc.access = Pl
 	var/turf/a_loc = get_turf(assembly)
-	var/list/P = AStar(a_loc, locate(get_pin_data(IC_INPUT, 1), get_pin_data(IC_INPUT, 2), a_loc.z), /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 200, id=idc, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
+	var/list/P = AStar(a_loc, locate(get_pin_data(IC_INPUT, 1), get_pin_data(IC_INPUT, 2), a_loc.z), TYPE_PROC_REF(/turf, CardinalTurfsWithAccess), TYPE_PROC_REF(/turf, Distance), 0, 200, id=idc, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
 
 	if(!P)
 		activate_pin(3)

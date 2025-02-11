@@ -6,7 +6,7 @@
 	var/use_astar = FALSE				// Do we use the more expensive A* implementation or stick with BYOND's default step_to()?
 	var/list/path = list()				// A list of tiles that A* gave us as a solution to reach the target.
 	var/list/obstacles = list()			// Things A* will try to avoid.
-	var/astar_adjacent_proc = /turf/proc/CardinalTurfsWithAccess // Proc to use when A* pathfinding.  Default makes them bound to cardinals.
+	var/astar_adjacent_proc = TYPE_PROC_REF(/turf, CardinalTurfsWithAccess) // Proc to use when A* pathfinding.  Default makes them bound to cardinals.
 	var/failed_steps = 0				// If move_once() fails to move the mob onto the correct tile, this increases. When it reaches 3, the path is recalc'd since they're probably stuck.
 
 // This clears the stored A* path.
@@ -42,7 +42,7 @@
 /datum/ai_holder/proc/get_path(turf/target,get_to = 1, max_distance = world.view*6)
 	ai_log("get_path() : Entering.",AI_LOG_DEBUG)
 	forget_path()
-	var/list/new_path = AStar(get_turf(holder.loc), target, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = get_to, max_node_depth = max_distance, id = holder.IGetID(), exclude = obstacles)
+	var/list/new_path = AStar(get_turf(holder.loc), target, astar_adjacent_proc, TYPE_PROC_REF(/turf, Distance), min_target_dist = get_to, max_node_depth = max_distance, id = holder.IGetID(), exclude = obstacles)
 
 	if (new_path && length(new_path))
 		path = new_path
