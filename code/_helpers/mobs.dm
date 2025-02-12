@@ -168,7 +168,7 @@
 
 	var/initial_handle
 	if (do_flags & DO_USER_UNIQUE_ACT)
-		initial_handle = sequential_id("/proc/do_after")
+		initial_handle = sequential_id("doafter")
 		user.do_unique_user_handle = initial_handle
 
 	var/do_feedback = do_flags & DO_FAIL_FEEDBACK

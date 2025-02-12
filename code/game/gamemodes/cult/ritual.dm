@@ -156,7 +156,7 @@
 /mob/living/carbon/human/get_rune_color()
 	return species.blood_color
 
-var/global/list/Tier1Runes = list(
+var/global/list/cult_verbs_tier1 = list(
 	/mob/proc/convert_rune,
 	/mob/proc/teleport_rune,
 	/mob/proc/tome_rune,
@@ -170,7 +170,7 @@ var/global/list/Tier1Runes = list(
 	/mob/proc/reveal
 	)
 
-var/global/list/Tier2Runes = list(
+var/global/list/cult_verbs_tier2 = list(
 	/mob/proc/armor_rune,
 	/mob/proc/offering_rune,
 	/mob/proc/drain_rune,
@@ -178,7 +178,7 @@ var/global/list/Tier2Runes = list(
 	/mob/proc/massdefile_rune
 	)
 
-var/global/list/Tier3Runes = list(
+var/global/list/cult_verbs_tier3 = list(
 	/mob/proc/weapon_rune,
 	/mob/proc/shell_rune,
 	/mob/proc/bloodboil_rune,
@@ -186,7 +186,7 @@ var/global/list/Tier3Runes = list(
 	/mob/proc/revive_rune
 )
 
-var/global/list/Tier4Runes = list(
+var/global/list/cult_verbs_tier4 = list(
 	/mob/proc/tearreality_rune
 	)
 

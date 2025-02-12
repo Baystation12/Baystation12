@@ -172,19 +172,19 @@ GLOBAL_TYPED_NEW(cult, /datum/antagonist/cultist)
 	cult_rating = max(0, cult_rating - amount)
 
 /datum/antagonist/cultist/proc/add_cult_magic(mob/M)
-	M.verbs += Tier1Runes
+	M.verbs += cult_verbs_tier1
 
 	if(max_cult_rating >= CULT_RUNES_1)
-		M.verbs += Tier2Runes
+		M.verbs += cult_verbs_tier2
 
 		if(max_cult_rating >= CULT_RUNES_2)
-			M.verbs += Tier3Runes
+			M.verbs += cult_verbs_tier3
 
 			if(max_cult_rating >= CULT_RUNES_3)
-				M.verbs += Tier4Runes
+				M.verbs += cult_verbs_tier4
 
 /datum/antagonist/cultist/proc/remove_cult_magic(mob/M)
-	M.verbs -= Tier1Runes
-	M.verbs -= Tier2Runes
-	M.verbs -= Tier3Runes
-	M.verbs -= Tier4Runes
+	M.verbs -= cult_verbs_tier1
+	M.verbs -= cult_verbs_tier2
+	M.verbs -= cult_verbs_tier3
+	M.verbs -= cult_verbs_tier4
