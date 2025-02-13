@@ -175,6 +175,10 @@
 		return TRUE
 	return ..()
 
+/obj/item/device/paint_sprayer/afterattack(atom/target, mob/living/user, proximity_flag, click_parameters)
+	if(get_dist(target, user) <= 1)
+		apply_paint(target, user, click_parameters)
+
 /obj/item/device/paint_sprayer/proc/pick_color(atom/A, mob/user)
 	if (!user.Adjacent(A) || user.incapacitated())
 		return FALSE
@@ -481,8 +485,6 @@
 /datum/click_handler/default/paint_sprayer/OnClick(atom/A, params)
 	var/list/modifiers = params2list(params)
 	if (A != paint_sprayer)
-		if(!istype(user.buckled) || user.buckled.buckle_movable)
-			user.face_atom(A)
 		if(modifiers["ctrl"] && paint_sprayer.pick_color(A, user))
 			return
 		if(modifiers["shift"] && paint_sprayer.remove_paint(A, user))
