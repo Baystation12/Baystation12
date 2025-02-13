@@ -1,7 +1,0 @@
-author: PurplePineapple
-changes:
-  - {bugfix: The Sol operative suit shield now has a 10 second cooldown before you
-      can turn it back on after it dies.}
-  - {tweak: The shield now takes 1000kw to fill instead of 500kw. It takes the same
-      amount of time but will drain your suit cell more than before now.}
-delete-after: true
