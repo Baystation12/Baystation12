@@ -34,6 +34,8 @@
 		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
+	if (powernet && owned_field)
+		powernet.apcs_overload(0, 1, 1)
 	if(MACHINE_IS_BROKEN(src) || !powernet || !owned_field)
 		Shutdown()
 

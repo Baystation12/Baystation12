@@ -14,6 +14,7 @@
 	name = "Nitrogen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol
+	flags = XGM_GAS_FUSION_FUEL
 	symbol_html = "N<sub>2</sub>"
 	symbol = "N2"
 
@@ -141,6 +142,7 @@
 	name = "Argon"
 	specific_heat = 10	// J/(mol*K)
 	molar_mass = 0.018	// kg/mol
+	flags = XGM_GAS_FUSION_FUEL
 	symbol_html = "Ar"
 	symbol = "Ar"
 
@@ -158,6 +160,7 @@
 	name = "Neon"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.01	// kg/mol
+	flags = XGM_GAS_FUSION_FUEL
 	symbol_html = "Ne"
 	symbol = "Ne"
 

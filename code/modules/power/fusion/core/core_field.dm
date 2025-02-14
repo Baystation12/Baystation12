@@ -202,9 +202,9 @@
 			radiation += radiate
 
 	check_instability()
-	Radiate()
 	if(radiation)
-		SSradiation.radiate(src, round(radiation*0.001))
+		SSradiation.radiate(src, radiation*0.04)
+	Radiate()
 	return 1
 
 /obj/fusion_em_field/proc/check_instability()
