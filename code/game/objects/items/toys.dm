@@ -804,12 +804,19 @@
 	name = "farwa plush"
 	desc = "A farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
+	item_state = "farwaplush"
 
 
 /obj/item/toy/plushie/thoom
 	name = "th'oom plush"
 	desc = "A plush Th'oom with big, button eyes. It smells like mushrooms."
 	icon_state = "thoomplushie"
+
+/obj/item/toy/plushie/bee
+	name = "bee plush"
+	desc = "A plush space bee with large compound eyes. It smells faintly of honey."
+	icon_state = "beeplushie"
+	item_state = "beeplush"
 
 
 /obj/item/toy/plushie/carp_gold
