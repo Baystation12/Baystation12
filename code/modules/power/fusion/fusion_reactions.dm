@@ -39,13 +39,18 @@ var/global/list/fusion_reactions
 //  supermatter
 
 // Gaseous/reagent fuels
-// hydrogen
+//  hydrogen
 //  helium
 //  lithium
 //  boron
 
-// Basic power production reactions.
-// This is not necessarily realistic, but it makes a basic failure more spectacular.
+// Things that probably should be avoided
+//  nitrogen
+//  oxygen
+//  phoron
+
+// H2 shouldn't really be used for this but adding more gases will make a big mess
+
 /singleton/fusion_reaction/hydrogen_hydrogen
 	p_react = GAS_HYDROGEN
 	s_react = GAS_HYDROGEN
@@ -59,14 +64,16 @@ var/global/list/fusion_reactions
 	s_react = GAS_DEUTERIUM
 	energy_consumption = 1
 	energy_production = 2
+	products = list(GAS_TRITIUM = 0.5, GAS_HELIUM = 1)
 	priority = 0
+	radiation = 1
 
-// Advanced production reactions (todo)
 /singleton/fusion_reaction/deuterium_helium
 	p_react = GAS_DEUTERIUM
 	s_react = GAS_HELIUM
 	energy_consumption = 1
 	energy_production = 5
+	minimum_reaction_temperature = 10000
 	radiation = 2
 
 /singleton/fusion_reaction/deuterium_tritium
@@ -75,45 +82,144 @@ var/global/list/fusion_reactions
 	energy_consumption = 1
 	energy_production = 1
 	products = list(GAS_HELIUM = 1)
-	instability = 0.5
 	radiation = 3
 
 /singleton/fusion_reaction/deuterium_lithium
 	p_react = GAS_DEUTERIUM
 	s_react = "lithium"
 	energy_consumption = 2
-	energy_production = 0
+	energy_production = 2
 	radiation = 3
-	products = list(GAS_TRITIUM= 1)
+	products = list(GAS_HELIUM = 2)
+
+/singleton/fusion_reaction/hydrogen_lithium
+	p_react = GAS_HYDROGEN
+	s_react = "lithium"
+	energy_consumption = 1
+	energy_production = 2
+	products = list(GAS_HELIUM = 2)
 	instability = 1
 
-// Unideal/material production reactions
+/singleton/fusion_reaction/helium_lithium
+	p_react = GAS_HELIUM
+	s_react = "lithium"
+	energy_consumption = 1
+	energy_production = 5
+	instability = 1
+	radiation = 1
+
+/singleton/fusion_reaction/helium_helium
+	p_react = GAS_HELIUM
+	s_react = GAS_HELIUM
+	energy_consumption = 2
+	energy_production = 4
+	minimum_reaction_temperature = 30000
+	priority = 10
+	radiation = 3
+
+/singleton/fusion_reaction/hydrogen_nitrogen
+	p_react = GAS_HYDROGEN
+	s_react = GAS_NITROGEN
+	energy_consumption = 2
+	energy_production = 3
+	products = list(GAS_HELIUM = 1, "carbon" = 1)
+	minimum_reaction_temperature = 30000
+	radiation = 2
+
+/singleton/fusion_reaction/carbon_carbon
+	p_react = "carbon"
+	s_react = "carbon"
+	energy_consumption = 3
+	energy_production = 2
+	products = list(GAS_HELIUM = 2, GAS_NEON = 0.5, GAS_HYDROGEN = 0.5, GAS_OXYGEN = 0.5, "sodium" = 1)
+	instability = 1
+	minimum_reaction_temperature = 30000
+	radiation = 10
+
+/singleton/fusion_reaction/hydrogen_carbon
+	p_react = GAS_HYDROGEN
+	s_react = "carbon"
+	energy_consumption = 4
+	energy_production = 5
+	minimum_reaction_temperature = 50000
+	radiation = 10
+
+/singleton/fusion_reaction/hydrogen_oxygen
+	p_react = GAS_HYDROGEN
+	s_react = GAS_OXYGEN
+	energy_consumption = 3
+	energy_production = 2
+	products = list(GAS_NITROGEN = 1, GAS_HELIUM = 1)
+	minimum_reaction_temperature = 50000
+	radiation = 10
+
+/singleton/fusion_reaction/helium_neon
+	p_react = GAS_HELIUM
+	s_react = GAS_NEON
+	energy_consumption = 2
+	energy_production = 3
+	products = list("silicon" = 1)
+	minimum_reaction_temperature = 50000
+	radiation = 12
+
 /singleton/fusion_reaction/oxygen_oxygen
 	p_react = GAS_OXYGEN
 	s_react = GAS_OXYGEN
-	energy_consumption = 10
-	energy_production = 0
-	instability = 5
+	energy_consumption = 3
+	energy_production = 2
+	products = list("silicon"= 1, "phosphorus"= 1, "sulfur"= 1, GAS_HELIUM = 0.5, GAS_HYDROGEN = 2, GAS_DEUTERIUM = 0.5)
+	minimum_reaction_temperature = 60000
+	instability = 2
 	radiation = 5
-	products = list("silicon"= 1)
 
-/singleton/fusion_reaction/iron_iron
+/singleton/fusion_reaction/helium_silicon
+	p_react = GAS_HELIUM
+	s_react = "silicon"
+	energy_consumption = 3
+	energy_production = 2
+	products = list("sulfur" = 10)
+	minimum_reaction_temperature = 60000
+	instability = 1
+	radiation = 3
+
+/singleton/fusion_reaction/helium_sulfur
+	p_react = GAS_HELIUM
+	s_react = "sulfur"
+	energy_consumption = 3
+	energy_production = 2
+	products = list(GAS_ARGON = 1)
+	minimum_reaction_temperature = 70000
+	instability = 1
+	radiation = 3
+
+/singleton/fusion_reaction/helium_argon
+	p_react = GAS_HELIUM
+	s_react = GAS_ARGON
+	energy_consumption = 3
+	energy_production = 1
+	products = list("titanium" = 10)
+	minimum_reaction_temperature = 70000
+	instability = 1
+	radiation = 3
+
+/singleton/fusion_reaction/helium_titanium
+	p_react = GAS_HELIUM
+	s_react = "titanium"
+	energy_consumption = 3
+	energy_production = 0
+	products = list("iron" = 10)
+	minimum_reaction_temperature = 80000
+	instability = 1
+	radiation = 3
+
+/singleton/fusion_reaction/phoron_iron
 	p_react = "iron"
-	s_react = "iron"
-	products = list("silver" = 10, "gold" = 10, "platinum" = 10) // Not realistic but w/e
-	energy_consumption = 10
+	s_react = GAS_PHORON
+	energy_consumption = 5
 	energy_production = 0
 	instability = 2
-	minimum_reaction_temperature = 10000
-
-/singleton/fusion_reaction/phoron_hydrogen
-	p_react = GAS_HYDROGEN
-	s_react = GAS_PHORON
-	energy_consumption = 10
-	energy_production = 0
-	instability = 5
-	products = list("mhydrogen" = 1)
-	minimum_reaction_temperature = 8000
+	products = list("silver" = 30, "gold" = 20, "platinum" = 10)
+	radiation = 5
 
 // VERY UNIDEAL REACTIONS.
 /singleton/fusion_reaction/phoron_supermatter
