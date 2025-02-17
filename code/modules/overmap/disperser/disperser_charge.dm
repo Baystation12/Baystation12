@@ -9,6 +9,12 @@
 /obj/structure/ship_munition/disperser_charge/proc/fire(turf/target, strength, range)
 	CRASH("OFD charge firing logic not set!")
 
+/obj/structure/ship_munition/disperser_charge/get_ofd_charge_type()
+	return chargetype
+
+/obj/structure/ship_munition/disperser_charge/get_ofd_charge_desc()
+	return chargedesc
+
 /obj/structure/ship_munition/disperser_charge/fire
 	name = "\improper FR1-ENFER charge"
 	color = "#b95a00"

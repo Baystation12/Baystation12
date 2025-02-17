@@ -141,13 +141,13 @@
 	return get_next_shot_seconds() * 1000 / coolinterval
 
 /obj/machinery/computer/ship/disperser/proc/get_charge_type()
-	var/obj/structure/ship_munition/disperser_charge/charge = get_charge()
+	var/obj/structure/charge = get_charge()
 	if (charge)
-		return charge.chargetype
+		return charge.get_ofd_charge_type()
 	return OVERMAP_WEAKNESS_NONE
 
 /obj/machinery/computer/ship/disperser/proc/get_charge()
-	return locate(/obj/structure/ship_munition/disperser_charge) in get_turf(back)
+	return locate(/obj/structure) in get_turf(back)
 
 /obj/machinery/computer/ship/disperser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	if(!linked)
@@ -177,8 +177,8 @@
 			if(OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
 			else
-				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
-				charge = B.chargedesc
+				var/obj/structure/B = get_charge()
+				charge = B.get_ofd_charge_desc()
 		data["chargeload"] = charge
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -252,3 +252,9 @@
 		fire(user)
 
 	return TOPIC_REFRESH
+
+/obj/structure/proc/get_ofd_charge_type()
+	return OVERMAP_WEAKNESS_NONE
+
+/obj/structure/proc/get_ofd_charge_desc()
+	return "UNKNOWN"

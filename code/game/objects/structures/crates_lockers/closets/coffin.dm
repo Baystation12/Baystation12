@@ -60,6 +60,12 @@
 	locked = FALSE
 	..()
 
+/obj/structure/closet/coffin/get_ofd_charge_type()
+	return OVEMRAP_WEAKNESS_MINISCULE_PROJECTILE
+
+/obj/structure/closet/coffin/get_ofd_charge_desc()
+	return "COFFIN"
+
 /obj/structure/closet/coffin/wooden
 	name = "coffin"
 	desc = "It's a burial receptacle for the dearly departed."
