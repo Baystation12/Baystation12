@@ -271,7 +271,6 @@ var/global/list/sparring_attack_cache = list()
 	var/datum/pronouns/user_pronouns = user.choose_from_pronouns()
 
 	attack_damage = clamp(attack_damage, 1, 5)
-
 	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
 	switch(attack_damage)
 		if(1 to 4)

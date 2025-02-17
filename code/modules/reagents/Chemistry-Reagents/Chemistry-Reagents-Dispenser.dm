@@ -368,6 +368,8 @@
 
 	if(removed < meltdose) // Not enough to melt anything
 		M.take_organ_damage(0, min(removed * power * 0.1, max_damage)) //burn damage, since it causes chemical burns. Acid doesn't make bones shatter, like brute trauma would.
+		for(var/obj/item/organ/external/affecting in M.organs)
+			affecting.add_autopsy_data(null, min(removed * power * 0.1, max_damage), INJURY_TYPE_BURN, "Acid Burns")
 	else
 		M.take_organ_damage(0, min(removed * power * 0.2, max_damage))
 		if(ishuman(M)) // Applies disfigurement
@@ -378,6 +380,7 @@
 					screamed = 1
 					H.emote("scream")
 				affecting.status |= ORGAN_DISFIGURED
+				affecting.add_autopsy_data("Acid Burns", min(removed * power * 0.2, max_damage), INJURY_TYPE_BURN)
 
 /datum/reagent/acid/touch_obj(obj/O)
 	if(O.unacidable)

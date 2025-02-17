@@ -331,6 +331,8 @@
 		if (R?.get_allergies())
 			msg += "[SPAN_CLASS("deptradio", "Allergies:")] <a href='byond://?src=\ref[src];allergies=1'>\[View\]</a>\n"
 
+	if(user.skill_check_multiple(list(SKILL_ANATOMY = SKILL_BASIC, SKILL_FORENSICS = SKILL_EXPERIENCED)))
+		msg += "[SPAN_CLASS("deptradio", "Basic Analysis:")] <a href='byond://?src=\ref[src];autopsy=1'>\[View\]</a>\n"
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 

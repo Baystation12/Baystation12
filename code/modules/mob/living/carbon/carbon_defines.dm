@@ -42,3 +42,5 @@
 	var/player_triggered_sleeping = 0
 	///Reagents towards which there is an active allergy.
 	var/list/active_allergies = list()
+	///Wound Data for forensics.
+	var/list/datum/autopsy_data_lookup/wound_data = list()

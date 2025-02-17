@@ -536,6 +536,16 @@
 			W.remove_webbing(user)
 		return TOPIC_HANDLED
 
+	if (href_list["autopsy"])
+		if(stat != DEAD && !(status_flags & FAKEDEATH))
+			to_chat(user, SPAN_WARNING("There's not much that you can tell, they're not dead. Yet."))
+			return TOPIC_HANDLED
+
+		for(var/obj/item/organ/external/O in organs)
+			var/string = GetInitialAutopsy(O)
+			if (string)
+				to_chat(user, SPAN_NOTICE("[string] on \the [O.name]"))
+		return TOPIC_HANDLED
 
 	return ..()
 

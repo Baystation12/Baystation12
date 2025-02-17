@@ -17,7 +17,8 @@
 	var/yo = null
 	var/xo = null
 	var/current = null
-	var/shot_from = "" // name of the object which shot us
+	var/shot_from = "" // name of the object which shot us.
+	var/shot_caliber = "" // caliber of the firearm.
 	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
@@ -205,6 +206,10 @@
 	firer = user
 	shot_from = launcher.name
 	silenced = launcher.silenced
+
+	if (istype(launcher, /obj/item/gun/projectile))
+		var/obj/item/gun/projectile/P = launcher
+		shot_caliber = P.caliber
 
 	return launch(target, target_zone, x_offset, y_offset)
 
@@ -538,8 +543,9 @@
 /obj/item/projectile/proc/get_shrapnel()
 	if(shrapnel_type)
 		var/obj/item/SP = new shrapnel_type()
-		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
-		SP.desc += " It looks like it was fired from [shot_from]."
+		if (name != "shrapnel")
+			SP.SetName("[name] shrapnel")
+		SP.desc += " It looks like it is from a weapon firing [shot_caliber]."
 		return SP
 
 /obj/item/projectile/Process_Spacemove(allow_movement)

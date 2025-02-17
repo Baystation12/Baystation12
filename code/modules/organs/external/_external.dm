@@ -1366,17 +1366,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
 		add_pain(clamp(0, max_halloss - owner.getHalLoss(), 30))
 
-//Adds autopsy data for used_weapon.
-/obj/item/organ/external/proc/add_autopsy_data(used_weapon, damage)
-	var/datum/autopsy_data/W = autopsy_data[used_weapon]
-	if(!W)
-		W = new()
-		W.weapon = used_weapon
-		autopsy_data[used_weapon] = W
-
-	W.hits += 1
-	W.damage += damage
-	W.time_inflicted = world.time
 
 /obj/item/organ/external/proc/has_genitals()
 	return !BP_IS_ROBOTIC(src) && species && species.sexybits_location == organ_tag
@@ -1392,3 +1381,199 @@ Note that amputating the affected organ does in fact remove the infection from t
 		. += max_delay * 3/8
 	else if(BP_IS_ROBOTIC(src))
 		. += max_delay * CLAMP01(damage/max_damage)
+
+
+/*
+* AUTOPSY
+*/
+
+/datum/autopsy_data
+	var/weapon = null
+	var/damage = 0
+	var/hits = 0
+	var/dtype = null
+	var/time_inflicted = 0
+
+
+/datum/autopsy_data/proc/copy()
+	var/datum/autopsy_data/W = new
+	W.weapon = weapon
+	W.damage = damage
+	W.hits = hits
+	W.dtype = dtype
+	W.time_inflicted = time_inflicted
+	return W
+
+
+/datum/autopsy_data_lookup
+	/// Weapon Type used.
+	var/weapon = null
+	/// Maps scanned organ # to the wounds of those organs with this data's weapon type.
+	var/list/organs_scanned = list()
+	var/organ_names = ""
+
+
+//Adds autopsy data for used_weapon.
+/obj/item/organ/external/proc/add_autopsy_data(used_weapon, damage, damage_type)
+	if (!used_weapon)
+		return
+
+	var/datum/autopsy_data/W = autopsy_data[used_weapon]
+	if(!W)
+		W = new()
+		W.weapon = used_weapon
+		autopsy_data[used_weapon] = W
+
+	W.dtype = damage_type
+	W.hits += 1
+	W.damage += damage
+	W.time_inflicted = world.time
+
+
+/mob/living/carbon/human/proc/AutopsyDataFetch(obj/item/organ/external/O)
+	if(!length(O.autopsy_data))
+		return
+
+	for(var/V in O.autopsy_data)
+		var/datum/autopsy_data/W = O.autopsy_data[V]
+		var/datum/autopsy_data_lookup/D = wound_data[V]
+		if(!D)
+			D = new()
+			D.weapon = W.weapon
+			wound_data[V] = D
+
+		if(!D.organs_scanned[O.name])
+			if(D.organ_names == "")
+				D.organ_names = O.name
+			else
+				D.organ_names += ", [O.name]"
+
+		qdel(D.organs_scanned[name])
+		D.organs_scanned[name] = W.copy()
+
+
+/mob/living/carbon/human/proc/GetWoundString(obj/item/organ/external/O)
+	AutopsyDataFetch(O)
+	var/w_string = ""
+	var/n = 1
+	for(var/wound_data_idx in wound_data)
+		var/datum/autopsy_data_lookup/D = wound_data[wound_data_idx]
+		var/total_hits = 0
+		var/total_score = 0
+		var/age = ""
+		var/damage_variety = ""
+
+		for(var/wound_idx in D.organs_scanned)
+			var/datum/autopsy_data/W = D.organs_scanned[wound_idx]
+			total_hits += W.hits
+			total_score += W.damage
+
+			var/wound_age = world.time - W.time_inflicted
+			switch (wound_age)
+				if (1 SECOND to 30 MINUTES)
+					age = SPAN_COLOR(COLOR_GRAY40, "Fresh")
+				if (30 MINUTES to 1 HOUR)
+					age = SPAN_COLOR(COLOR_GRAY20, "Old")
+				if (1 HOUR to 5 HOURS)
+					age = SPAN_COLOR(COLOR_GRAY15, "Very old")
+
+			if (!W.weapon)
+				return
+
+			if (!isprojectile(W.weapon))
+				var/obj/item/projectile/P = W.weapon
+				if (W.dtype == INJURY_TYPE_LASER)
+					damage_variety += SPAN_COLOR(COLOR_YELLOW_GRAY, "concentrated contact burns<br>")
+				else // Entry wounds are almost always smaller than exit wounds. Easier to figure out the exact caliber from entry wounds.
+					if (P.armor_penetration < 15)
+						damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "small entry wound<br>")
+					if (P.armor_penetration >= 15 && P.armor_penetration <=35)
+						damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "medium entry wound<br>")
+					if (P.armor_penetration > 35)
+						damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "large entry wound<br>")
+					if (P.damage < 45)
+						damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "small exit wound<br>")
+					if (P.damage >= 45)
+						damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "large exit wound<br>")
+			else
+				if (W.dtype == INJURY_TYPE_BRUISE)
+					damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "trauma<br>")
+				if (W.dtype == INJURY_TYPE_CUT)
+					damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "abrasion<br>")
+				if (W.dtype == INJURY_TYPE_PIERCE)
+					damage_variety += SPAN_COLOR(COLOR_RED_GRAY, "puncture<br>")
+				if (W.dtype == INJURY_TYPE_BURN)
+					if (W.weapon == "Radiation Poisoning")
+						damage_variety += SPAN_COLOR(COLOR_YELLOW_GRAY, "radiation burns<br>")
+					if (W.weapon == "Acid Burns")
+						damage_variety += SPAN_COLOR(COLOR_YELLOW_GRAY, "chemical burns<br>")
+					else
+						damage_variety += SPAN_COLOR(COLOR_YELLOW_GRAY, "thermal burns<br>")
+
+		var/damage_desc
+
+		// total score happens to be the total damage
+		switch(total_score)
+			if(0)
+				damage_desc = "Unknown"
+			if(1 to 5)
+				damage_desc = SPAN_COLOR(COLOR_GREEN, "negligible")
+			if(5 to 15)
+				damage_desc = SPAN_COLOR(COLOR_DARK_GRAY, "light")
+			if(15 to 30)
+				damage_desc = SPAN_COLOR(COLOR_ORANGE, "moderate")
+			if(30 to 1000)
+				damage_desc = SPAN_COLOR(COLOR_RED, "severe")
+
+		if(!total_score)
+			total_score = length(D.organs_scanned)
+
+		w_string += "<b>Source #[n]</b><br>"
+		w_string += "Wound Types: [damage_desc]<br>"
+		w_string += "(<br>[damage_variety])<br>"
+		w_string += "Wound Count: [total_hits]<br>"
+		w_string += "(Approx.) Time of Wounding: [age]<br>"
+		w_string += "Affected Appendages: [D.organ_names]<br>"
+
+		w_string += "<br>"
+		n++
+
+	return w_string
+
+
+/mob/living/carbon/human/proc/GetInitialAutopsy(obj/item/organ/external/O)
+	AutopsyDataFetch(O)
+
+	var/w_string = null
+	var/d_string = null
+	for(var/wound_data_idx in wound_data)
+		var/datum/autopsy_data_lookup/D = wound_data[wound_data_idx]
+		if (!D)
+			continue
+		for(var/wound_idx in D.organs_scanned)
+			var/datum/autopsy_data/W = D.organs_scanned[wound_idx]
+			if (!W)
+				continue
+			if (isprojectile(W.weapon))
+				continue
+			if (W.dtype == INJURY_TYPE_BRUISE)
+				d_string = SPAN_COLOR(COLOR_RED_GRAY, "blunt-force trauma")
+			if (W.dtype == INJURY_TYPE_CUT)
+				d_string = SPAN_COLOR(COLOR_RED_GRAY, "lacerations")
+			if (W.dtype == INJURY_TYPE_PIERCE)
+				d_string = SPAN_COLOR(COLOR_RED_GRAY, "deep-cut wounds")
+			if (W.dtype == INJURY_TYPE_BURN)
+				if (W.weapon == "Radiation Poisoning")
+					d_string = SPAN_COLOR(COLOR_YELLOW_GRAY, "dark-red spots")
+				if (W.weapon == "Acid Burns")
+					d_string = SPAN_COLOR(COLOR_YELLOW_GRAY, "crackled, peeling skin")
+				else
+					d_string = SPAN_COLOR(COLOR_YELLOW_GRAY, "white, charred skin")
+
+			wound_data.Cut()
+
+		if (!d_string || d_string == "")
+			continue
+		w_string += "You see [d_string],"
+
+	return w_string

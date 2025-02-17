@@ -226,7 +226,7 @@ GLOBAL_LIST_EMPTY(skills)
 	levels = list( "Unskilled"			= "You know that detectives solve crimes. You may have some idea that it's bad to contaminate a crime scene, but you're not too clear on the details.",
 						"Basic"				= "You know how to avoid contaminating a crime scene. You know how to bag the evidence without contaminating it unduly.",
 						"Trained"			= "You are trained in collecting forensic evidence - fibers, fingerprints, the works. You know how autopsies are done, and might've assisted performing one.<br>- You can more easily detect fingerprints.<br>- You no longer contaminate evidence.",
-						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizarre cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.<br>- You can notice additional details upon examining, such as fibers, partial prints, and gunshot residue.",
+						"Experienced"		= "You're a pathologist, or detective. You've seen your share of bizarre cases, and spent a lot of time putting pieces of forensic puzzle together, so you're faster now.<br>- You can notice additional details upon examining, such as fibers, partial prints, and gunshot residue; as well as conduct a basic wound-check of corpses (provided you've done your homework on anatomy).",
 						"Master"		= "You're a big name in forensic science. You might be an investigator who cracked a famous case, or you published papers on new methods of forensics. Either way, if there's a forensic trail, you will find it, period.<br>- You can notice traces of wiped off blood.")
 
 

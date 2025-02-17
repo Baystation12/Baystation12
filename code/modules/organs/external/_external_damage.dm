@@ -30,9 +30,6 @@
 		if(prob(25))
 			owner.visible_message(SPAN_WARNING("\The [owner]'s crystalline [name] shines with absorbed energy!"))
 
-	if(used_weapon)
-		add_autopsy_data("[used_weapon]", brute + burn)
-
 	var/spillover = 0
 	var/pure_brute = brute
 	if(!is_damageable(brute + burn))
@@ -84,11 +81,11 @@
 
 	if(burn)
 		if(laser)
-			createwound(INJURY_TYPE_LASER, burn)
+			created_wound = createwound(INJURY_TYPE_LASER, burn)
 			if(owner && prob(40))
 				owner.IgniteMob()
 		else
-			createwound(INJURY_TYPE_BURN, burn)
+			created_wound = createwound(INJURY_TYPE_BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)
@@ -121,6 +118,7 @@
 
 	if(created_wound && isobj(used_weapon))
 		var/obj/O = used_weapon
+		add_autopsy_data(used_weapon, created_wound.damage, created_wound.damage_type)
 		O.after_wounding(src, created_wound)
 
 	return created_wound

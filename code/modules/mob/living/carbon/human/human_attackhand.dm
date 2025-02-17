@@ -189,6 +189,7 @@
 
 			if (ai_holder)
 				ai_holder.react_to_attack(H)
+			affecting.add_autopsy_data("Melee", real_damage, INJURY_TYPE_BRUISE)
 
 		if (I_DISARM)
 			if (H.species)
