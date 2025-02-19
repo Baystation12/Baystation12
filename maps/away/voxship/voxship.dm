@@ -63,7 +63,6 @@
 	desc = "Sensor array detects a medium-sized vessel of irregular shape. Unknown origin."
 	color = "#233012"
 	icon_state = "ship"
-	moving_state = "ship_moving"
 	fore_dir = WEST
 	vessel_size = SHIP_SIZE_SMALL
 

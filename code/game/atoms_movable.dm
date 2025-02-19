@@ -548,3 +548,16 @@
  */
 /atom/movable/proc/CheckDexterity(mob/living/user)
 	return TRUE
+
+
+/**
+ * Special handler for post-movement logic. Called by `turf/Entered()` if this atom has the `MOVABLE_FLAG_POSTMOVEMENT` flag set.
+ *
+ * **Parametetrs**:
+ * - `old_turf` - The turf that was moved from.
+ * - `new_turf` - The turf that was moved to.
+ *
+ * Has no return value.
+ */
+/atom/movable/proc/post_movement(turf/old_turf, turf/new_turf)
+	return

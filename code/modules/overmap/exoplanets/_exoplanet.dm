@@ -155,6 +155,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	return engravings
 
 /obj/overmap/visitable/sector/exoplanet/Process(wait, tick)
+	. = ..()
 	if (length(animals) < 0.5*max_animal_count && !repopulating)
 		repopulating = TRUE
 		max_animal_count = round(max_animal_count * 0.5)

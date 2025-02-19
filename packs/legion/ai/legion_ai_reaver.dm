@@ -10,3 +10,5 @@
 
 	// Pathfinding
 	use_astar = TRUE
+
+	pry_flags = PRY_FLAG_AI_CONTROL_ONLY | PRY_FLAG_UNBOLT | PRY_FLAG_CAN_HACK

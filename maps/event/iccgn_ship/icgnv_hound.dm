@@ -19,7 +19,6 @@
 	desc = "A standard ALFA-pattern, armed ICCGN transport shuttle. The transponder reads on open channels as ICCG and is broadcasting the designation 'ICGNV Hound' in Zurich Accord Common."
 	shuttle = "ICGNV Hound"
 	icon_state = "ship"
-	moving_state = "ship_moving"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 	vessel_mass = 1000

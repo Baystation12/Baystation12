@@ -12,6 +12,15 @@
 
 	var/prying = FALSE                      // True when the mob is trying to force open a door.
 
+	/// Bitflag (Any of `src.PRY_FLAG_*`). Bitflags used for configuring what and how this AI can pry. Not used if `holder.can_pry` is `FALSE`.
+	var/pry_flags = EMPTY_BITFIELD
+	/// This AI can only perform special unlocking if the AI control wire is intact.
+	var/const/PRY_FLAG_AI_CONTROL_ONLY = FLAG(0)
+	/// This AI can unbolt doors.
+	var/const/PRY_FLAG_UNBOLT = FLAG(1)
+	/// This AI can 'hack' open working doors.
+	var/const/PRY_FLAG_CAN_HACK = FLAG(2)
+
 	// Excludes doors, shutters and windows, which are processed separately
 	var/list/valid_obstacles_by_priority = list(
 		/obj/structure/closet,
@@ -258,6 +267,27 @@
 
 // Pry open a door, if it's unpowered/broken
 /datum/ai_holder/proc/pry_door(obj/machinery/door/door)
+	if (door.operable())
+		if (!HAS_FLAGS(pry_flags, PRY_FLAG_CAN_HACK))
+			return FALSE
+		if (isairlock(door))
+			var/obj/machinery/door/airlock/airlock = door
+			if (HAS_FLAGS(pry_flags, PRY_FLAG_AI_CONTROL_ONLY) && airlock.ai_control_disabled)
+				return FALSE
+			if (airlock.locked && (!HAS_FLAGS(pry_flags, PRY_FLAG_UNBOLT) || !airlock.unlock()))
+				return FALSE
+			if (airlock.welded) // Welding check after the bolt check so the bot can still unbolt the door before trying to break it open.
+				return FALSE
+		door.open()
+		return TRUE
+
+	var/mob/living/simple_animal/holder_simple = holder
+	if (!prying && holder_simple.can_pry)
+		prying = TRUE
+		var/pry_time_holder = (door.pry_mod * holder_simple.pry_time)
+		holder_simple.pry_door(holder_simple, pry_time_holder, door)
+		return TRUE
+
 	return FALSE
 
 // Despite the name, this can also be used to help clear a path without any destruction.

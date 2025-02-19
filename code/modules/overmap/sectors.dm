@@ -106,6 +106,14 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	if((object.z in map_z) && !(get_area(object) in SSshuttle.shuttle_areas))
 		return 1
 
+/**
+ * Flags the effect as `known` and runs relevant update procs. Intended for admin event usage.
+ */
+/obj/overmap/visitable/proc/make_known(notify = FALSE)
+	if (!HAS_FLAGS(sector_flags, OVERMAP_SECTOR_KNOWN))
+		sector_flags = OVERMAP_SECTOR_KNOWN
+		update_known_connections(notify)
+
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.
 /obj/overmap/visitable/proc/add_landmark(obj/shuttle_landmark/landmark, shuttle_name)
 	landmark.sector_set(src, shuttle_name)
@@ -184,7 +192,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,GLOB.using_map.overmap_z), locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z)))
 		var/turf/T = square
-		if(T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
+		if(T.x == 1 || T.y == 1 || T.x == GLOB.using_map.overmap_size || T.y == GLOB.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map)

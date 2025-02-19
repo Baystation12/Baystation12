@@ -94,6 +94,7 @@
 #include "code\_global_vars\mapping.dm"
 #include "code\_global_vars\misc.dm"
 #include "code\_global_vars\mobs.dm"
+#include "code\_global_vars\overmap.dm"
 #include "code\_global_vars\radio.dm"
 #include "code\_global_vars\sensitive.dm"
 #include "code\_global_vars\lists\flavor.dm"

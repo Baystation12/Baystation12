@@ -114,7 +114,7 @@ var/global/list/meteors_major = list(
 /datum/event/meteor_wave/overmap/tick()
 	if(!victim)
 		return
-	if (victim.is_still() || victim.get_helm_skill() >= SKILL_TRAINED) //Unless you're standing or good at your job..
+	if (!victim.is_moving() || victim.get_helm_skill() >= SKILL_TRAINED) //Unless you're standing or good at your job..
 		start_side = pick(GLOB.cardinal)
 	else //..Meteors mostly fly in your face
 		start_side = prob(90) ? victim.fore_dir : pick(GLOB.cardinal)
@@ -127,12 +127,12 @@ var/global/list/meteors_major = list(
 	var/skill = victim.get_helm_skill()
 	var/speed = victim.get_speed()
 	if (skill < SKILL_EXPERIENCED)
-		if(victim.is_still() || speed < SHIP_SPEED_SLOW) //Standing still or being slow means less shit flies your way
+		if(!victim.is_moving() || speed < SHIP_SPEED_SLOW) //Standing still or being slow means less shit flies your way
 			. = round(. * 0.7)
 		if(speed > SHIP_SPEED_FAST) //Sanic stahp
 			. *= 2
 	if (skill == SKILL_EXPERIENCED)
-		if (victim.is_still())
+		if (!victim.is_moving())
 			. = round(. * 0.2)
 		if (speed < SHIP_SPEED_SLOW)
 			. = round(. * 0.5)
@@ -141,7 +141,7 @@ var/global/list/meteors_major = list(
 		if (speed > SHIP_SPEED_FAST)
 			. = round(. * 1.2)
 	if (skill > SKILL_EXPERIENCED)
-		if (victim.is_still())
+		if (!victim.is_moving())
 			. = round(. * 0.1)
 		if (speed < SHIP_SPEED_SLOW)
 			. = round(. * 0.2)

@@ -4,7 +4,6 @@
 	desc = "Sensor array detects a small vessel, claiming to be 'ITV The Reclaimer', an 'Armalev Industries Skyfin-E, Exoplanetary Suvival Pod'. Your sensors array describes the vessel exterior as 'irreconcilable' with the exterior of a 'Skyfin-E'"
 	fore_dir = SOUTH
 	vessel_size = SHIP_SIZE_SMALL
-	moving_state = "ship_moving"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 2 SECONDS
 	vessel_mass = 6000
@@ -19,7 +18,6 @@
 	fore_dir = NORTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_TINY
-	moving_state = "ship_moving"
 	max_speed = 1/(4 SECONDS)
 	burn_delay = 2.5 SECONDS
 	vessel_mass = 3500 //more inefficient than GUP

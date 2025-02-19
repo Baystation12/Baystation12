@@ -154,7 +154,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	appearance_flags = EMPTY_BITFIELD
 	var/scale = 1
 	var/rotation = 0
-	var/speed = 1
+	var/simple_speed = 1
 
 
 /obj/overmap/visitable/placeholder/Initialize()
@@ -169,7 +169,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	icon_state = "pv-a298"
 	pixel_x = -16
 	pixel_y = -16
-	speed = 0.75
+	simple_speed = 0.75
 
 
 /obj/overmap/visitable/placeholder/gcn_centurion
@@ -188,7 +188,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	icon_state = "fr-chevalier"
 	pixel_x = -16
 	pixel_y = -16
-	speed = 0.9
+	simple_speed = 0.9
 
 
 /obj/overmap/visitable/placeholder/gcn_lucerne
@@ -199,7 +199,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	pixel_x = -16
 	pixel_y = -16
 	scale = 1.5
-	speed = 1.5
+	simple_speed = 1.5
 
 
 /obj/overmap/visitable/placeholder/gcn_wombat
@@ -207,7 +207,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "A medium-sized interceptor platform, built by the Confederation Navy"
 	icon = 'gcn-32.dmi'
 	icon_state = "sf-wombat"
-	speed = 0.3
+	simple_speed = 0.3
 
 
 /obj/overmap/visitable/placeholder/scg_arrow
@@ -217,7 +217,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	icon_state = "cv-arrow"
 	pixel_x = -16
 	pixel_y = -16
-	speed = 1.2
+	simple_speed = 1.2
 
 
 /obj/overmap/visitable/placeholder/scg_lexington
@@ -245,7 +245,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	icon_state = "cv-rockfish"
 	pixel_x = -16
 	pixel_y = -16
-	speed = 0.8
+	simple_speed = 0.8
 
 
 /obj/overmap/visitable/placeholder/scg_nuum
@@ -271,7 +271,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "An aging model of space fighter built for the Solar Assembly Fleets but now common in private ownership."
 	icon = 'scg-32.dmi'
 	icon_state = "sf-kestrel"
-	speed = 0.2
+	simple_speed = 0.2
 
 
 /obj/overmap/visitable/placeholder/scg_eagle_ii
@@ -279,7 +279,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "A modernized take on a venerable payload-carrying platform, built for the Solar Assembly Fleets."
 	icon = 'scg-32.dmi'
 	icon_state = "sf-eagle-ii"
-	speed = 0.2
+	simple_speed = 0.2
 
 
 /obj/overmap/visitable/placeholder/scg_shikra
@@ -287,14 +287,14 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "A strike craft made to fill in the gap between the Kestrel, and the Eagle-II. It has since been shifted into a recon role, with its mini-AWACS suite and EM stealth capabilities, sacrificing some of its payload."
 	icon = 'scg-32.dmi'
 	icon_state = "sf-shikra"
-	speed = 0.1
+	simple_speed = 0.1
 
 /obj/overmap/visitable/placeholder/scg_hermes
 	name = "Hermes-Model Utility Pod"
 	desc = "A tiny workhorse found across human space, able to carry a pilot and some cargo a short distance."
 	icon = 'scg-32.dmi'
 	icon_state = "uv-hermes"
-	speed = 0.4
+	simple_speed = 0.4
 
 
 /obj/overmap/visitable/placeholder/gen_dingo
@@ -302,7 +302,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "A heavy cargo freighter often used in shipping and logistics, made for independent mercantile use."
 	icon = 'gen-64.dmi'
 	icon_state = "cf-dingo"
-	speed = 1.8
+	simple_speed = 1.8
 	pixel_x = -16
 	pixel_y = -16
 
@@ -312,7 +312,7 @@ Middle-Click / Ctrl-Click - Jump a placeholder to a point and deselect it
 	desc = "A light escort fighter carrying capable payload, made for independent defense use."
 	icon = 'gen-32.dmi'
 	icon_state = "sf-mantaray"
-	speed = 0.2
+	simple_speed = 0.2
 
 /obj/overmap/visitable/placeholder/ec_komarov
 	name = "SEV Komarov"

@@ -12,17 +12,6 @@
 	wander = TRUE
 	base_wander_delay = 4
 
-/datum/ai_holder/simple_animal/pry_door(obj/machinery/door/door)
-	. = FALSE
-	if (door.operable())
-		return FALSE
-
-	var/mob/living/simple_animal/holder_simple = holder
-	if (!prying && holder_simple.can_pry)
-		prying = TRUE
-		var/pry_time_holder = (door.pry_mod * holder_simple.pry_time)
-		return holder_simple.pry_door(holder_simple, pry_time_holder, door)
-
 // For non-hostile animals, and pets like Ian and Runtime.
 /datum/ai_holder/simple_animal/passive
 	hostile = FALSE

@@ -2,7 +2,7 @@
 	name = "Pizza Shop Employee"
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Pizzeria"
-	possible_origins = list("Papa Joe's", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise", "Little Taste o' Neo-Italy", "Pizza Gestapo")
+	possible_origins = list("Papa Joe's", "Pizza Ship", "Dominator Pizza", "Little Kaezars", "Pizza Planet", "Cheese Louise", "Little Taste o' Neo-Italy", "Petey Pete's Perfect Pepperoni Pizza Palace Protectors")
 	trade_flags = TRADER_MONEY
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
 	possible_trading_items = list(/obj/item/reagent_containers/food/snacks/sliceable/pizza   = TRADER_SUBTYPES_ONLY)

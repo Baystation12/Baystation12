@@ -19,7 +19,6 @@
 	desc = "A standard, armed transport shuttle belonging to the Sol Fleet. It's transponder reads 'SFV Arbiter'."
 	shuttle = "SFV Arbiter"
 	icon_state = "ship"
-	moving_state = "ship_moving"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 	vessel_mass = 1000

@@ -29,6 +29,8 @@ GLOBAL_LIST_AS(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048,
 #define MOVABLE_FLAG_Z_INTERACT       FLAG(1)
 /// This atom is effect that should move.
 #define MOVABLE_FLAG_EFFECTMOVE       FLAG(2)
+/// This atom should call `post_movement()` after moving across turfs.
+#define MOVABLE_FLAG_POSTMOVEMENT     FLAG(3)
 
 #define OBJ_FLAG_ANCHORABLE     FLAG(0)  // This object can be stuck in place with a tool
 #define OBJ_FLAG_CONDUCTIBLE    FLAG(1)  // Conducts electricity. (metal etc.)

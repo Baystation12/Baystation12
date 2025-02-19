@@ -8,7 +8,6 @@
 	var/multiz = 0										// Index of multi-z levels, starts at 0
 	var/status = SHIP_STATUS_LANDED
 	icon_state = "shuttle"
-	moving_state = "shuttle_moving"
 
 /obj/overmap/visitable/ship/landable/Destroy()
 	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)

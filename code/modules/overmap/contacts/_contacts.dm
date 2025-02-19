@@ -46,6 +46,7 @@
 
 /datum/overmap_contact/proc/update_marker_icon(range = 0)
 	marker.icon_state = effect.icon_state
+	marker.dir = effect.dir
 
 	marker.ClearOverlays()
 
@@ -53,6 +54,9 @@
 		var/image/shield_image = image(icon = 'icons/obj/overmap.dmi', icon_state = "shield")
 		shield_image.pixel_x = 8
 		marker.AddOverlays(shield_image)
+
+	if (effect.is_moving() && !isnull(effect.heading_overlay))
+		marker.AddOverlays(effect.heading_overlay)
 
 	if (range > 0)
 		radar.transform = null

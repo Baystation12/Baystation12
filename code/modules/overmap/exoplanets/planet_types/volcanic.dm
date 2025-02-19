@@ -125,6 +125,7 @@
 	LAZYREMOVE(victims, weakref(AM))
 
 /turf/simulated/floor/exoplanet/lava/Process()
+	. = ..()
 	if(locate(/obj/structure/catwalk) in src)
 		victims = null
 		return PROCESS_KILL

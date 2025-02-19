@@ -213,6 +213,10 @@ var/global/const/enterloopsanity = 100
 					A.HasProximity(thing)
 					if ((thing && A) && HAS_FLAGS(thing.movable_flags, MOVABLE_FLAG_PROXMOVE))
 						thing.HasProximity(A)
+
+	if (HAS_FLAGS(A.movable_flags, MOVABLE_FLAG_POSTMOVEMENT) && isturf(old_loc))
+		A.post_movement(old_loc, src)
+
 	return
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)

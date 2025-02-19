@@ -13,7 +13,6 @@
 	shuttle = "Skrellian Scout"
 	multiz = 1
 	icon_state = "ship"
-	moving_state = "ship_moving"
 	fore_dir = WEST
 	color = "#ff00ff"
 	vessel_mass = 1000

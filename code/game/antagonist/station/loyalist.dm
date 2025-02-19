@@ -21,7 +21,7 @@ GLOBAL_TYPED_NEW(loyalists, /datum/antagonist/loyalists)
 	// Inround loyalists.
 	faction_role_text = "Loyalist"
 	faction_descriptor = "COMPANY"
-	faction_verb = TYPE_PROC_REF(/mob/living, convert_to_loyalist)
+	faction_verb = /mob/living/proc/convert_to_loyalist
 	faction_indicator = "hud_loyal"
 	//faction_invisible = 1
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
