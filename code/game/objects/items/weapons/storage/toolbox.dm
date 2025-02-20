@@ -5,7 +5,7 @@
 	icon_state = "red"
 	item_state = "toolbox_red"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
-	force = 20
+	force = 15
 	attack_cooldown = 21
 	melee_accuracy_bonus = -15
 	throwforce = 10
