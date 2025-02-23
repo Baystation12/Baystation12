@@ -31,18 +31,19 @@
 		sentinel_check_index++
 
 /obj/structure/sentinel_spawner/proc/spawn_sentinel()
-	flick("spawner_active", src)
-	var/mob/living/simple_animal/hostile/sentinel/S = new(src.loc)
-	S.faction = sentinel_faction
-	all_sentinels.Add(S)
-	src.visible_message("\icon[src] <span class='warning'>[src] releases \the[S]!</span>")
-	reset_spawn_time()
+    flick("spawner_active", src)
+    playsound(src, 'code/modules/halo/sounds/sentinel_spawn.ogg', 50, 1)
+    var/mob/living/simple_animal/hostile/sentinel/S = new(src.loc)
+    S.faction = sentinel_faction
+    all_sentinels.Add(S)
+    src.visible_message("\icon[src] <span class='warning'>[src] releases \the[S]!</span>")
+    reset_spawn_time()
 
 /obj/structure/sentinel_spawner/proc/reset_spawn_time()
-	next_sentinel_spawn = world.time + sentinel_respawn_time
+    next_sentinel_spawn = world.time + sentinel_respawn_time
 
 /obj/structure/sentinel_spawner/respawn30sec
-	sentinel_respawn_time = 30 SECONDS
+    sentinel_respawn_time = 30 SECONDS
 
 /obj/structure/sentinel_spawner_inactive
 	name = "Sentinel Spawner"

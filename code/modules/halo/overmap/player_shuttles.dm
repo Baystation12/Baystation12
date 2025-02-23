@@ -275,7 +275,8 @@ allowing periodic long range transmission."
 /datum/spawner_choice/experimental_cov_combat,\
 /datum/spawner_choice/cov_slipspace_tender,\
 /datum/spawner_choice/cov_podcarrier,\
-/datum/spawner_choice/cov_trooptransport\
+/datum/spawner_choice/cov_trooptransport,\
+/datum/spawner_choice/cov_cannon_platform\
 )
 
 /datum/spawner_choice
