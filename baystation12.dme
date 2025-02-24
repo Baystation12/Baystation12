@@ -3386,7 +3386,6 @@
 #include "maps\_gamemodes\gamemode_overrides.dm"
 #include "maps\_gamemodes\randantag\randantag.dm"
 #include "maps\geminus_city\geminus_city.dm"
-#include "maps\npc_ships\req_console_ships\cov_cannon_platform.dmm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
