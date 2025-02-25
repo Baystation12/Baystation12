@@ -152,11 +152,9 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "huge air scrubber"
 	icon_state = "scrubber:0"
-	anchored = TRUE
 	volume = 50000
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
-	obj_flags = OBJ_FLAG_ANCHORABLE
 
 	uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
