@@ -350,7 +350,7 @@
 
 /obj/item/book/manual/rust_engine
 	name = "R-UST Operating Manual"
-	icon_state = "bookMagazine"
+	icon_state = "magazine1"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
 	url = "R-UST"

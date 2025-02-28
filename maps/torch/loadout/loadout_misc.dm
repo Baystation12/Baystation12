@@ -3,10 +3,12 @@
 	description = "A definable photograph. The only limit is your imagination."
 	path = /obj/item/phototrinket
 
+
 /datum/gear/trinket/photomaxim
 	display_name = "Maxim's photo"
 	description = "Token photograph from E-14b."
 	path = /obj/item/photomaxim
+
 
 /datum/gear/trinket/scg_challenge_coin
 	display_name = "sol challenge coin selection"
@@ -52,3 +54,17 @@
 /datum/gear/union_card/allowed_branches = list(
 	/datum/mil_branch/civilian
 )
+
+
+/datum/gear/trinket/book
+	display_name = "custom book"
+	description = "A book. The sky's your limit. Swap covers in-game. Custon name becomes the title in-game."
+	path = /obj/item/book/trinket
+
+
+/datum/gear/trinket/book/New()
+	..()
+	var/list/options = list()
+	options["book"] = /obj/item/book/trinket/bound
+	options["magazine"] = /obj/item/book/trinket/magazine
+	gear_tweaks += new /datum/gear_tweak/path (options)
