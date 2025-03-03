@@ -18,10 +18,10 @@
     attack_hand(mob/user)
         ..()
         if(ammo_count >= ammo_cap)
-            user << "<span class='warning'>[src] is already fully loaded at [ammo_count]/[ammo_cap]!</span>"
+            to_chat(user, "<span class='notice'>You load a plasma charge into [src].</span>")
             return
         ammo_count++
-        user << "<span class='notice'>You load a plasma charge into [src]. Ammo now: [ammo_count]/[ammo_cap].</span>"
+        to_chat(user, "<span class='notice'>You load a plasma charge into [src].</span>")
 
 /obj/machinery/overmap_weapon_console/mac/plasma_cannon
     name = "Plasma Cannon Fire Control"
