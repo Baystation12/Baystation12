@@ -170,6 +170,24 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_cov_combat
 	cooldown_apply = 9 MINUTES
 
+/datum/npc_ship/cov_cannon_platform
+	mapfile_links = list('maps/npc_ships/req_console_ships/cov_cannon_platform.dmm')
+	fore_dir = WEST
+	map_bounds = list(15,36,61,14)
+
+/obj/effect/overmap/ship/npc_ship/shuttlecraft/cov_cannon_platform
+	name = "Ship"
+	faction = "Covenant"
+	ship_datums = list(/datum/npc_ship/cov_cannon_platform)
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
+
+/datum/spawner_choice/cov_cannon_platform
+	choice_name = "Plasma Cannon Platform Ship"
+	choice_category = "Gunboats"
+	choice_desc = "A ship with stripped down armor, armed with a frontally mounted plasma cannon."
+	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov_cannon_platform
+	cooldown_apply = 9 MINUTES
+
 /datum/npc_ship/cov_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_tender.dmm')
 	fore_dir = WEST

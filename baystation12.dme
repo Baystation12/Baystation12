@@ -1992,6 +1992,7 @@
 #include "code\modules\halo\overmap\weapons\overmap_projectile.dm"
 #include "code\modules\halo\overmap\weapons\overmap_weapon.dm"
 #include "code\modules\halo\overmap\weapons\overmap_weapon_ammo.dm"
+#include "code\modules\halo\overmap\weapons\plasma_cannon.dm"
 #include "code\modules\halo\overmap\weapons\plasmatorpedoes.dm"
 #include "code\modules\halo\overmap\weapons\proj_deck_gun.dm"
 #include "code\modules\halo\overmap\weapons\flood\flood_projectiles.dm"

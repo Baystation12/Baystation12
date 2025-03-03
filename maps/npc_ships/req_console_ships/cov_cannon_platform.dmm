@@ -1,0 +1,149 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ac" = (/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
+"ad" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ae" = (/obj/docking_umbilical/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"af" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ag" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ah" = (/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
+"ai" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aj" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
+"ak" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"al" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"am" = (/obj/machinery/deck_gun/cov_pulse_turret{icon_state = "pulse_turret_2"; dir = 8},/turf/space,/area/space)
+"an" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ao" = (/obj/machinery/overmap_comms/receiver/battlenet,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"ap" = (/obj/structure/closet/secure_closet/freezer/kitchen{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aq" = (/obj/machinery/cooker/grill{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ar" = (/obj/machinery/cooker/fryer{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"as" = (/obj/machinery/cooker/oven{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"at" = (/obj/structure/reagent_dispensers/watertank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"au" = (/obj/structure/janitorialcart{color = "#ff99ff"},/obj/item/weapon/mop{color = "#ff99ff"},/obj/item/weapon/reagent_containers/glass/bucket{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"av" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aw" = (/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/weldingtool/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ax" = (/obj/item/weapon/screwdriver/covenant,/obj/item/weapon/screwdriver/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ay" = (/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/wirecutters/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"az" = (/obj/item/weapon/wrench/covenant,/obj/item/weapon/wrench/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aA" = (/obj/structure/closet/secure_closet/freezer/meat{color = "#ff99ff"},/obj/structure/sink/kitchen{color = "#ff99ff"; pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aB" = (/obj/structure/closet/secure_closet/freezer/fridge{color = "#ff99ff"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aC" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aD" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aE" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aF" = (/obj/machinery/mac_cannon/capacitor/plasma_cannon{pixel_x = 16},/turf/space,/area/space)
+"aG" = (/obj/machinery/mac_cannon/capacitor/plasma_cannon,/obj/structure/lattice,/turf/space,/area/space)
+"aH" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aI" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aJ" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aK" = (/obj/structure/stairs_decorative{icon_state = "stairs"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aL" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aM" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aN" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/table/marble,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aO" = (/obj/structure/closet/covenant{name = "Illuminator Storage Crate"},/obj/item/device/flashlight/covenant,/obj/item/device/flashlight/covenant,/obj/item/device/flashlight/covenant,/obj/item/device/flashlight/covenant,/obj/item/device/flashlight/covenant,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aP" = (/obj/machinery/vending/armory/covenant/general,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aQ" = (/obj/structure/closet/crate/covenant{name = "Vacuum Shields Crate"},/obj/item/energybarricade/vacuum_shield,/obj/item/energybarricade/vacuum_shield,/obj/item/energybarricade/vacuum_shield,/obj/item/energybarricade/vacuum_shield,/obj/item/energybarricade/vacuum_shield,/obj/item/energybarricade/vacuum_shield,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aR" = (/obj/structure/closet/crate/covenant{name = "Light Tube Storage Crate"},/obj/item/weapon/storage/box/lights/tubes,/obj/item/weapon/storage/box/lights/tubes,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aS" = (/obj/item/weapon/crowbar/covenant,/obj/item/weapon/crowbar/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aT" = (/obj/item/device/multitool/covenant,/obj/item/device/multitool/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aU" = (/obj/machinery/light/covenant/south,/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aV" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aW" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/glass/phoronrglass/ten,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aX" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aY" = (/obj/structure/lattice,/turf/space,/area/space)
+"aZ" = (/obj/structure/bed/chair/covenant_stool{dir = 8; icon_state = "coviechair2"; name = "Shipmaster's anti-grav chair"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ba" = (/obj/machinery/computer/helm/covenant,/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bb" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret,/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bc" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bd" = (/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"be" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bf" = (/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bg" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bh" = (/obj/structure/weapon_rack,/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bi" = (/obj/structure/closet/covenant,/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bl" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bm" = (/obj/machinery/mac_cannon/accelerator/plasma_cannon{dir = 8; icon_state = "plasma_cannon"; pixel_x = 0},/turf/space,/area/space)
+"bn" = (/obj/machinery/mac_cannon/capacitor/plasma_cannon{pixel_x = 16; pixel_y = 4},/turf/space,/area/space)
+"bo" = (/obj/machinery/mac_cannon/capacitor/plasma_cannon{pixel_y = 4},/obj/structure/lattice,/turf/space,/area/space)
+"bp" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bq" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"br" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bw" = (/obj/item/weapon/crowbar/covenant,/obj/item/weapon/crowbar/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bx" = (/obj/item/device/multitool/covenant,/obj/item/device/multitool/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"by" = (/obj/machinery/light/covenant/north,/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bz" = (/obj/machinery/photocopier/faxmachine/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bA" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bB" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bD" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bE" = (/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"bF" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
+"bG" = (/obj/machinery/vending/dinnerware{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bH" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bI" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bJ" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bK" = (/obj/structure/reagent_dispensers/fueltank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bL" = (/obj/structure/table/rack,/obj/item/clothing/head/welding/covenant,/obj/item/clothing/head/welding/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bM" = (/obj/machinery/overmap_comms/receiver/battlenet,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
+"bN" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bO" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bP" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bQ" = (/obj/machinery/overmap_weapon_console/mac/plasma_cannon,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bR" = (/obj/machinery/mac_cannon/ammo_loader/plasma_cannon,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bS" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bT" = (/obj/machinery/overmap_weapon_console/mac/orbital_bombard/plasma_cannon,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bU" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"bV" = (/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"bW" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"bX" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+"bY" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "techfloor_purple"},/area/om_ships/req_console_ship)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamaaacacacacaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacaaaaaaaaacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamaaacacacaaaaaaaaaaaaaaaaacacacacacacacadaeadacacacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaacacacacacadadadadadadadadadagadadacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacadadadadadadadadadadadadadacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacahadadaiadadadadadaiadadadadadadacacacacacacacacadadadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacahahajahahadadadahahahahajahahaiadakadacacacacacacaladadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabanahaoahajahahahahahahacacahapaqarasahahakahahatauavadadahahahahadawaxayazacacadadadacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacbEbUbVbWahadadadavadadadahaAadadadadaBahadadavadadadadadadakadadadadadadadadaCadaiaDaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaFaGbPbQadadbVahadaIaJaJaJaKadahaLaMaMaMaMadakadadaNadaOahaPadadahaSaTadaUadaVaWaXajakahahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaYaHbRaZadadakadbaaZaMbbadadakadbcbdbdbdbeahbfadbgadaQahaRadbeahahahakahakahahahahaLblaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaabmbnbobSbTadadbVahadbpbqbqbqaKadahaLaMaMaMaMadakadadbradbhahbiadadahbwbxadbyadaVaWaXajakahahahaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacbEbXbVbVahadadadaiadadadahbzadadadadbAahadadaiadadadadadadakadadadadadadadadbBadavaDaEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaafbDahbYahbFacacacacacacacacahbGbHbIbJahahakahahbKbLaiadadahahahahadawaxayazacacadadadacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaabMacacacacacacacacacacacacacahahajahahadadadahahahahajahahavadakadacacacacacacadadadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacahadadavadadadadadavadadadadadadacacacacacacacacaladadacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacadadadadadadadadadadadadadacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaacacacacacadadadadadadadadadbNadadacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamaaacacacaaaaaaaaaaaaaaaaacacacacacacacadbOadacacacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamaaacacacacaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacacaaaaaaaaacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacaaaaaaaaaaaaaaacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
