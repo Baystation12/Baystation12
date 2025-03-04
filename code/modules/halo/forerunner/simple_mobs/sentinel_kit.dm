@@ -2,7 +2,7 @@
 /obj/item/sentinel_kit
 	name = "Unknown Device"
 	desc = "The shape of this device suggests it is made to be placed against the head of... A human being? Looks like other species are supported however."
-	icon = 'code/modules/halo/Forerunner/sentinel_kit.dmi'
+	icon = 'code/modules/halo/forerunner/simple_mobs/sentinel_kit.dmi'
 	icon_state = "sentinel_kit"
 
 /obj/item/sentinel_kit/proc/convert_person(var/mob/living/carbon/M,var/mob/user)
