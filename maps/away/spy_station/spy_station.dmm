@@ -93,12 +93,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/spy_station/dock)
-"cf" = (
-/obj/structure/grille,
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/space,
-/area/space)
 "ct" = (
 /obj/machinery/optable,
 /obj/random/trash,
@@ -888,17 +882,6 @@
 /obj/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/techfloor,
 /area/spy_station/cent)
-"lT" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/airless,
-/area/spy_station/solar)
 "lW" = (
 /turf/simulated/wall,
 /area/spy_station/cent)
@@ -1379,10 +1362,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/spy_station/com)
-"rU" = (
-/obj/structure/lattice,
-/turf/space,
-/area/space)
 "rZ" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -1469,7 +1448,6 @@
 /area/spy_station/med)
 "tb" = (
 /obj/structure/lattice,
-/obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
@@ -1488,7 +1466,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/spy_station/barrack)
 "te" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -1847,12 +1824,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/spy_station/com)
-"zD" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/obj/structure/grille,
-/turf/space,
-/area/space)
 "zG" = (
 /obj/machinery/computer/modular{
 	dir = 8;
@@ -1879,7 +1850,7 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/reinforced,
-/area/space)
+/area/spy_station/com)
 "zX" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -1958,7 +1929,6 @@
 /turf/simulated/floor,
 /area/spy_station/med)
 "Bd" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /turf/space,
 /area/space)
@@ -2155,11 +2125,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/spy_station/barrack)
 "Dy" = (
-/obj/structure/grille,
-/obj/structure/grille,
-/obj/structure/lattice,
-/turf/space,
-/area/space)
+/turf/simulated/floor/reinforced,
+/area/spy_station/com)
 "DH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -2607,12 +2574,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/spy_station/engin)
-"IO" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/obj/structure/grille/broken,
-/turf/space,
-/area/space)
 "IR" = (
 /obj/machinery/light,
 /obj/floor_decal/borderfloorblack,
@@ -3095,7 +3056,7 @@
 "PJ" = (
 /obj/machinery/light,
 /turf/simulated/floor/reinforced,
-/area/space)
+/area/spy_station/com)
 "PR" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air/airlock,
@@ -3311,7 +3272,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/spy_station/barrack)
 "SB" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -3780,9 +3740,6 @@
 "Ye" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/light{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
@@ -7008,7 +6965,7 @@ dC
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -7017,7 +6974,7 @@ dC
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -7119,7 +7076,7 @@ dC
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -7212,8 +7169,8 @@ QZ
 fg
 QZ
 dC
-rU
-rU
+Bd
+Bd
 dC
 QZ
 QZ
@@ -7230,8 +7187,8 @@ QZ
 fg
 QZ
 CZ
-rU
-rU
+Bd
+Bd
 dC
 dC
 dC
@@ -7310,22 +7267,22 @@ dC
 dC
 dC
 QZ
-cf
-rU
+QZ
+Bd
 dC
 dC
-rU
-rU
-dC
-dC
-dC
-rU
+Bd
+Bd
 dC
 dC
 dC
+Bd
 dC
 dC
-rU
+dC
+dC
+dC
+Bd
 dC
 dC
 dC
@@ -7412,8 +7369,8 @@ dC
 dC
 dC
 QZ
-rU
-rU
+Bd
+Bd
 Uz
 Uz
 Uz
@@ -7440,7 +7397,7 @@ zu
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -7642,8 +7599,8 @@ dC
 dC
 dC
 nB
-rU
-rU
+Bd
+Bd
 QZ
 dC
 dC
@@ -7742,7 +7699,7 @@ ae
 ae
 dC
 dC
-rU
+Bd
 dC
 dC
 zu
@@ -7819,9 +7776,9 @@ dC
 dC
 dC
 dC
-cf
-rU
-rU
+QZ
+Bd
+Bd
 Ji
 Ji
 Ji
@@ -7950,9 +7907,9 @@ ct
 Tp
 dC
 dC
-rU
+Bd
 dC
-Dy
+QZ
 QZ
 dC
 dC
@@ -8025,7 +7982,7 @@ cY
 cY
 gU
 gb
-gb
+Dy
 UU
 XA
 zB
@@ -8052,13 +8009,13 @@ mM
 Tp
 dC
 dC
-rU
+Bd
 dC
 dC
-Dy
 QZ
-rU
-rU
+QZ
+Bd
+Bd
 gU
 dC
 dC
@@ -8127,7 +8084,7 @@ CZ
 gb
 gb
 gb
-gb
+Dy
 UU
 Fl
 Oy
@@ -8229,7 +8186,7 @@ cY
 gb
 gb
 gb
-gb
+Dy
 UU
 yS
 wA
@@ -8259,7 +8216,7 @@ qd
 NG
 Ei
 ZD
-rU
+Bd
 QZ
 dC
 dC
@@ -8535,7 +8492,7 @@ cY
 gb
 gb
 gb
-gb
+Dy
 UU
 kZ
 wA
@@ -8566,7 +8523,7 @@ la
 Ei
 dC
 dC
-rU
+Bd
 dC
 QZ
 dC
@@ -8637,7 +8594,7 @@ cY
 gb
 gb
 gb
-gb
+Dy
 UU
 Op
 mE
@@ -8739,7 +8696,7 @@ cY
 cY
 gU
 gb
-gb
+Dy
 UU
 Rz
 wA
@@ -8873,7 +8830,7 @@ bb
 wh
 fM
 JT
-rU
+Bd
 QZ
 dC
 dC
@@ -8942,8 +8899,8 @@ dC
 dC
 dC
 QZ
-rU
-rU
+Bd
+Bd
 Ji
 Ji
 Ji
@@ -9179,7 +9136,7 @@ HJ
 aX
 vj
 cc
-rU
+Bd
 QZ
 dC
 dC
@@ -9274,8 +9231,8 @@ jN
 pg
 TG
 JT
-rU
-rU
+Bd
+Bd
 cc
 Km
 RF
@@ -9283,8 +9240,8 @@ tU
 cc
 dC
 fg
-rU
-rU
+Bd
+Bd
 gU
 dC
 dC
@@ -9447,12 +9404,12 @@ dC
 dC
 dC
 gU
-rU
+Bd
 QZ
-rU
-rU
+Bd
+Bd
 te
-lT
+Ur
 kt
 zX
 kt
@@ -9471,7 +9428,7 @@ oE
 dC
 dC
 dC
-rU
+Bd
 dC
 JT
 JT
@@ -9573,7 +9530,7 @@ oE
 dC
 dC
 dC
-rU
+Bd
 dC
 JT
 tT
@@ -9675,7 +9632,7 @@ oE
 dC
 dC
 dC
-rU
+Bd
 dC
 JT
 PR
@@ -9777,7 +9734,7 @@ oE
 QZ
 QZ
 dC
-rU
+Bd
 dC
 JT
 PR
@@ -9785,13 +9742,13 @@ VQ
 nv
 JT
 Bd
-rU
+Bd
 cc
 cc
 cc
 cc
 cc
-rU
+Bd
 QZ
 dC
 dC
@@ -9871,7 +9828,7 @@ dC
 oE
 DJ
 wp
-rU
+Bd
 dC
 IN
 DJ
@@ -9879,7 +9836,7 @@ oE
 jY
 QZ
 dC
-rU
+Bd
 yh
 JT
 JT
@@ -9887,10 +9844,10 @@ SH
 JT
 JT
 dC
-rU
+Bd
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -9977,11 +9934,11 @@ dC
 dC
 DJ
 dC
-rU
+Bd
 dC
 QZ
 dC
-rU
+Bd
 dC
 dC
 JT
@@ -10071,7 +10028,7 @@ fO
 xr
 ku
 fO
-rU
+Bd
 oE
 gQ
 hd
@@ -10079,11 +10036,11 @@ DJ
 dC
 dC
 zu
-rU
-rU
-IO
+Bd
+Bd
+CZ
 dC
-zD
+cY
 dC
 dC
 JT
@@ -10091,7 +10048,7 @@ Pu
 lY
 JT
 qh
-rU
+Bd
 dC
 dC
 dC
@@ -10173,7 +10130,7 @@ fO
 xr
 ku
 fO
-rU
+Bd
 oE
 wS
 ZJ
@@ -10183,8 +10140,8 @@ VH
 dC
 dC
 VA
-rU
-rU
+Bd
+Bd
 CZ
 Yr
 dC
@@ -10265,7 +10222,7 @@ dC
 dC
 dC
 cY
-rU
+Bd
 xr
 ku
 fO
@@ -10275,12 +10232,12 @@ fO
 xr
 ku
 fO
-rU
+Bd
 oE
 oE
 oE
 oE
-rU
+Bd
 dC
 dC
 dC
@@ -10380,12 +10337,12 @@ fO
 dC
 dC
 dC
-rU
+Bd
 RW
 dC
 zu
 dC
-rU
+Bd
 dC
 dC
 CZ
@@ -10482,7 +10439,7 @@ fO
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 dC
@@ -10568,8 +10525,8 @@ dC
 dC
 dC
 gU
-rU
-rU
+Bd
+Bd
 QZ
 dC
 xr
@@ -10590,7 +10547,7 @@ oC
 Gj
 fg
 Gj
-rU
+Bd
 jb
 CZ
 dC
@@ -10673,8 +10630,8 @@ dC
 dC
 dC
 CZ
-rU
-rU
+Bd
+Bd
 tb
 Ur
 kt
@@ -10683,7 +10640,7 @@ fs
 SD
 Wz
 Bd
-rU
+Bd
 QZ
 dC
 dC
@@ -10778,7 +10735,7 @@ QZ
 dC
 dC
 dC
-rU
+Bd
 dC
 dC
 fV
@@ -10882,7 +10839,7 @@ cY
 cY
 CZ
 QZ
-rU
+Bd
 Bd
 Bd
 QZ
@@ -10989,7 +10946,7 @@ QZ
 CZ
 QZ
 dC
-rU
+Bd
 dC
 dC
 dC
