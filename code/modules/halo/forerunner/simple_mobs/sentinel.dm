@@ -12,7 +12,7 @@
 	icon_state = "impact_gold"
 
 
-//sentinel laser beam
+//Sentinel Beam
 
 /obj/item/projectile/beam/sentinel
 	name = "sentinel beam"
@@ -60,37 +60,81 @@
 	one_hand_penalty = 3
 
 
-// AI pathing landmark
+//AI Pathing Landmark
 
 /obj/effect/landmark/assault_target/sentinel
 	name = "sentinel assault target marker"
 
-// Mob
+//Mobs
 
 /mob/living/simple_animal/hostile/sentinel
-	name = "Sentinel"
-	desc = "An automated defence drone made of advanced alien technology."
-	faction = "Forerunner"
-	icon = 'code/modules/halo/Forerunner/Sentinel.dmi'
-	icon_state = "sentinel"
-	icon_living = "sentinel"
-	icon_dead = "sentinel_dead"
-	universal_speak = 1
-	universal_understand = 1
-	response_harm = "batters"
-	health = 150
-	maxHealth = 150
-	ranged = 1
-	move_to_delay = 5
-	resistance = 15
-	speak_chance = 1
-	speak = list()
-	emote_see = list("extends and retracts its manipulator arms","scans its body for damage","scans the environment")
-	emote_hear = list("buzzes")
-	var/obj/item/weapon/gun/energy/laser/sentinel_beam/sentinel_beam
-	assault_target_type = /obj/effect/landmark/assault_target/sentinel
+    name = "Sentinel"
+    desc = "An automated defence drone made of advanced alien technology."
+    faction = "Forerunner"
+    icon = 'code/modules/halo/forerunner/simple_mobs/sentinel.dmi'
+    icon_state = "sentinel"
+    icon_living = "sentinel"
+    icon_dead = "sentinel_dead"
+    universal_speak = 1
+    universal_understand = 1
+    response_harm = "batters"
+    health = 150
+    maxHealth = 150
+    ranged = 1
+    move_to_delay = 5
+    resistance = 15
+    speak_chance = 1
+    speak = list()
+    emote_see = list("extends and retracts its manipulator arms", "scans its body for damage", "scans the environment")
+    emote_hear = list("buzzes")
+    var/obj/item/weapon/gun/energy/laser/sentinel_beam/sentinel_beam
+    assault_target_type = /obj/effect/landmark/assault_target/sentinel
+    death_sounds = list('code/modules/halo/sounds/forerunner/sentDeath1.ogg', 'code/modules/halo/sounds/forerunner/sentDeath2.ogg', 'code/modules/halo/sounds/forerunner/sentDeath3.ogg', 'code/modules/halo/sounds/forerunner/sentDeath4.ogg')
+    // Shield Variables
+    var/shield_strength = 0
+    var/shield_max = 0
+    var/shield_timeout = 0
 
-	death_sounds = list('code/modules/halo/sounds/forerunner/sentDeath1.ogg','code/modules/halo/sounds/forerunner/sentDeath2.ogg','code/modules/halo/sounds/forerunner/sentDeath3.ogg','code/modules/halo/sounds/forerunner/sentDeath4.ogg')
+    New()
+        ..()
+        if(!sentinel_beam)
+            sentinel_beam = new /obj/item/weapon/gun/energy/laser/sentinel_beam(src)
+        update_icon()
+
+    Life()
+        ..()
+        if(stat != DEAD)
+            if(shield_strength > 0 && world.time > shield_timeout)
+                shield_strength = 0
+                shield_max = 0
+                shield_timeout = 0
+                update_icon()
+            overlays -= "shield_flicker"
+
+    update_icon()
+        overlays.Cut()
+        if(stat == DEAD)
+            icon_state = icon_dead
+        else
+            icon_state = icon_living
+        if(shield_strength > 0 && world.time <= shield_timeout)
+            overlays += "shield"
+
+    adjustBruteLoss(damage)
+        if(damage > 0 && shield_strength > 0 && world.time <= shield_timeout)
+            overlays |= "shield_flicker"
+            var/shield_absorbed = min(shield_strength, damage)
+            shield_strength -= shield_absorbed
+            damage -= shield_absorbed
+            if(shield_strength <= 0)
+                shield_strength = 0
+                update_icon()
+        return ..(damage)
+
+    bullet_act(obj/item/projectile/P)
+        if(P.damage > 0)
+            adjustBruteLoss(P.damage)
+        return ..()
 
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()

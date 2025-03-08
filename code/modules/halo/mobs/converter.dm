@@ -68,7 +68,7 @@
 	name = "Forerunner Designation Drone"
 	desc = "A drone designed to designate areas for construction. Usually seen alongside constructors."
 	faction = "Forerunner"
-	icon = 'code/modules/halo/Forerunner/Sentinel.dmi'
+	icon = 'code/modules/halo/forerunner/simple_mobs/sentinel.dmi'
 	icon_state = "sentinel"
 	icon_living = "sentinel"
 	icon_dead = "sentinel_dead"

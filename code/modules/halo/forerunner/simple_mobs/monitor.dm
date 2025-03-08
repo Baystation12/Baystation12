@@ -65,7 +65,7 @@
 	name = "Monitor"
 	desc = "An incredibly advanced AI made from ancient alien technology."
 	faction = "Forerunner"
-	icon = 'code/modules/halo/Forerunner/Monitor.dmi'
+	icon = 'code/modules/halo/forerunner/simple_mobs/monitor.dmi'
 	icon_state = "monitor"
 	icon_living = "monitor"
 	icon_dead = "monitor_dead"
