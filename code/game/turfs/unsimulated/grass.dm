@@ -50,3 +50,24 @@
 	name = "grass"
 	icon = 'icons/turf/jungle.dmi'
 	icon_state = "grass4"
+
+/turf/unsimulated/floor/grass10
+	name = "sandy grass"
+	icon = 'code/modules/halo/icons/turfs/grass.dmi'
+	icon_state = "grass0"
+
+/turf/unsimulated/floor/grass10/New()
+	. = ..()
+	icon_state = "grass[rand(0,4)]"
+
+/turf/unsimulated/floor/grass11
+	name = "sandy grass"
+	icon = 'code/modules/halo/icons/turfs/grass.dmi'
+	icon_state = "fullgrass0"
+
+/turf/unsimulated/floor/grass11/New()
+	. = ..()
+	icon_state = "fullgrass[rand(0,4)]"
+
+
+
