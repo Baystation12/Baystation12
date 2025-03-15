@@ -62,3 +62,8 @@
 	icon_state = "diona"
 	icon = 'code/modules/halo/covenant/turfs/biomass.dmi'
 	initial_flooring = /decl/flooring/drone
+
+// Techfloor
+
+/turf/simulated/floor/covenant/techfloor
+	icon_state = "techfloor_purple"

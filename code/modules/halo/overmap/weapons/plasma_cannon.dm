@@ -141,6 +141,12 @@
 	icon = 'code/modules/halo/overmap/weapons/plasma_cannon_2.dmi'
 	icon_state = "plasma_cannon"
 
+/obj/machinery/mac_cannon/accelerator/plasma_cannon/large
+	name = "Plasma Cannon"
+	desc = "A plasma cannon capable of firing high velocity plasma shells."
+	icon = 'code/modules/halo/overmap/weapons/plasma_cannon_3.dmi'
+	icon_state = "plasma_cannon_3"
+
 /obj/machinery/mac_cannon/capacitor/plasma_cannon
 	name = "Plasma Cannon Power Cell"
 	desc = "A power cell used to charged plasma shells for the cannon"
