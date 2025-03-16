@@ -1,7 +1,7 @@
 /obj/item/weapon/robot_module/huragok_lifeworker
 	name = "huragok lifeworker specialization"
 	sprites = list(
-					"Lifeworker" = "engineer",
+					"Lifeworker" = "lifeworker",
 					)
 	languages = list(
 		LANGUAGE_ENGLISH   = 0,
