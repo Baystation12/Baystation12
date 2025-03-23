@@ -1,7 +1,7 @@
 
 /datum/job/covenant/huragok
 	title = "Covenant Huragok"
-	total_positions = 1
+	total_positions = 2
 	spawn_positions = 1
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/huragok_cov
