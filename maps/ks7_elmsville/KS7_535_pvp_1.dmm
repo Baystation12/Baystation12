@@ -24,14 +24,14 @@
 "ax" = (/turf/simulated/floor/pavement/corner,/area/exo_ice_facility/exterior/autolight)
 "ay" = (/obj/structure/curtain,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/biodome/worker_station)
 "az" = (/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/obj/effect/landmark/artifact_spawn,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/biodome/worker_station)
-"aA" = (/obj/docking_umbilical/east{name = "NE Umbilical 1"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_east)
+"aA" = (/obj/docking_umbilical/west{name = "NE Umbilical 1"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_east)
 "aB" = (/turf/simulated/mineral,/area/exo_ice_facility/exterior/autolight)
 "aC" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (EAST)"; icon_state = "purple1"; dir = 4},/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "aD" = (/obj/machinery/light/colored{tag = "icon-yellow1 (NORTH)"; icon_state = "yellow1"; dir = 1},/obj/machinery/bookbinder,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "aE" = (/obj/machinery/papershredder,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "aF" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/museum_library)
 "aG" = (/obj/structure/table/standard,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; dir = 2; id = "barShutter"; layer = 3.1; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
-"aH" = (/obj/docking_umbilical/west{name = "NE Umbilical 2"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_east)
+"aH" = (/obj/docking_umbilical/east{name = "NE Umbilical 2"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_east)
 "aI" = (/turf/simulated/wall/tech,/area/exo_ice_facility/interior/housing)
 "aJ" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
 "aK" = (/obj/structure/curtain/black,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
@@ -442,7 +442,7 @@
 "iz" = (/turf/simulated/floor/exoplanet/snow{tag = "icon-snow12"; icon_state = "snow12"},/area/exo_ice_facility/exterior/autolight)
 "iA" = (/turf/simulated/mineral/random/high_chance/planet,/area/exo_ice_facility/exterior/caves)
 "iB" = (/turf/simulated/floor/exoplanet/scorched,/area/exo_ice_facility/interior/pirate_camp/left)
-"iC" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/obj/effect/floor_decal/corner_techfloor_grid{dir = 6; icon_state = "corner_techfloor_grid"; pixel_x = 8; pixel_y = 16},/obj/structure/stairs_decorative/dark/north,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"iC" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/obj/structure/stairs_decorative/dark/north,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "iD" = (/turf/simulated/floor/pavement/corner_invert{tag = "icon-pave_invert_corner (EAST)"; icon_state = "pave_invert_corner"; dir = 4},/area/exo_ice_facility/exterior/autolight)
 "iE" = (/obj/machinery/conveyor{dir = 9; id = "mining_internal"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/pirate_camp/right)
 "iF" = (/obj/structure/extinguisher_cabinet{pixel_y = 32},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 1},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
@@ -692,8 +692,8 @@
 "np" = (/turf/simulated/floor/pavement{tag = "icon-pavement (NORTH)"; icon_state = "pavement"; dir = 1},/area/exo_ice_facility/exterior/autolight)
 "nq" = (/mob/living/simple_animal/npc/colonist/nurse/paramedic,/turf/simulated/floor/pavement{tag = "icon-pavement (NORTH)"; icon_state = "pavement"; dir = 1},/area/exo_ice_facility/exterior/autolight)
 "nr" = (/obj/effect/landmark/start/colonist,/turf/simulated/floor/pavement{tag = "icon-pavement (NORTH)"; icon_state = "pavement"; dir = 1},/area/exo_ice_facility/exterior/autolight)
-"ns" = (/obj/docking_umbilical/east{name = "NW Umbilical 1"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_west)
-"nt" = (/obj/docking_umbilical/west{name = "NW Umbilical 2"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_west)
+"ns" = (/obj/docking_umbilical/west{name = "NW Umbilical 1"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_west)
+"nt" = (/obj/docking_umbilical/east{name = "NW Umbilical 2"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_west)
 "nu" = (/obj/structure/bed/chair{tag = "icon-chair_preview (WEST)"; icon_state = "chair_preview"; dir = 8},/obj/effect/landmark/start/hospital_worker,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "nv" = (/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (NORTH)"; icon_state = "pave_corner"; dir = 1},/area/exo_ice_facility/exterior/autolight)
 "nw" = (/turf/simulated/floor/pavement{dir = 8; icon_state = "pavement"; tag = "icon-pavement (EAST)"},/area/exo_ice_facility/exterior/autolight)
@@ -901,14 +901,14 @@
 "rq" = (/obj/item/crystal,/turf/simulated/floor/mineral_field/silver,/area/exo_ice_facility/exterior/caves)
 "rr" = (/obj/item/crystal/orange,/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/caves)
 "rs" = (/turf/simulated/wall/tech,/area/exo_ice_facility/interior/cryopods)
-"rt" = (/obj/machinery/computer/cryopod,/turf/simulated/wall/tech,/area/exo_ice_facility/interior/cryopods)
+"rt" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
 "ru" = (/obj/machinery/vending/hydronutrients,/turf/simulated/floor/exoplanet/grass,/area/exo_ice_facility/interior/biodome/right)
-"rv" = (/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"rw" = (/obj/machinery/cryopod/unsc{tag = "icon-off"; icon_state = "off"; dir = 2},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"rx" = (/obj/machinery/cryopod/unsc{icon_state = "off"; dir = 1},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"ry" = (/obj/machinery/cryopod/unsc{icon_state = "off"; dir = 4},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"rz" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"rA" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
+"rv" = (/obj/structure/window/framed,/turf/simulated/floor/planet,/area/exo_ice_facility/interior/cryopods)
+"rw" = (/obj/machinery/vending/wallmed1{pixel_x = 32},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"rx" = (/obj/structure/table/woodentable,/obj/structure/flora/pottedplant{icon_state = "plant-21"; pixel_y = 10; tag = "icon-plant-21"},/obj/machinery/light{dir = 8},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"ry" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/decor{icon_state = "rampbottom"; dir = 1},/area/exo_ice_facility/interior/cryopods)
+"rz" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "rampbottom"; dir = 1},/area/exo_ice_facility/interior/cryopods)
+"rA" = (/obj/structure/flora/pottedplant{icon_state = "plant-06"; pixel_y = 10; tag = "icon-plant-06"},/obj/structure/table/woodentable,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
 "rB" = (/obj/structure/closet/secure_closet/medical3{locked = 0},/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "rC" = (/obj/machinery/cell_charger,/obj/structure/table/standard,/turf/simulated/floor/decor{tag = "icon-techfloor_white"; icon_state = "techfloor_white"},/area/exo_ice_facility/interior/pirate_camp/right)
 "rD" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/exterior/autolight)
@@ -918,7 +918,7 @@
 "rH" = (/mob/living/simple_animal/npc/colonist/weapon_smuggler,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "rI" = (/mob/living/simple_animal/npc/colonist/weapon_smuggler,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
 "rJ" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/planet/dirt,/area/exo_ice_facility/interior/biodome/right)
-"rK" = (/mob/living/simple_animal/npc/colonist/weapon_smuggler,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
+"rK" = (/obj/machinery/computer/cryopod{pixel_y = 32},/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
 "rL" = (/obj/machinery/vending/hydronutrients,/turf/simulated/floor/planet/dirt,/area/exo_ice_facility/interior/biodome/right)
 "rM" = (/obj/structure/closet/secure_closet/hydroponics,/turf/simulated/floor/planet/dirt,/area/exo_ice_facility/interior/biodome/right)
 "rN" = (/turf/simulated/floor/tiled,/area/exo_ice_facility/exterior/autolight)
@@ -969,11 +969,11 @@
 "sG" = (/obj/structure/closet/crate/bin,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
 "sH" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/exterior/autolight)
 "sI" = (/obj/machinery/light/street,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/caves)
-"sJ" = (/obj/machinery/light/colored/red{icon_state = "red1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"sK" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"sL" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"sM" = (/obj/machinery/light/colored/red,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"sN" = (/obj/machinery/cryopod/unsc{tag = "icon-off"; icon_state = "off"; dir = 2},/obj/machinery/light/colored/red,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
+"sJ" = (/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"sK" = (/obj/structure/sofa/left,/mob/living/simple_animal/npc/colonist/weapon_smuggler,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"sL" = (/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
+"sM" = (/obj/structure/curtain{color = "#4C0000"; name = "burgandy curtain"; pixel_y = 32},/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/cryopods)
+"sN" = (/obj/structure/fence,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
 "sO" = (/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
 "sP" = (/obj/machinery/light/small,/turf/simulated/floor/wood,/area/exo_ice_facility/exterior/autolight)
 "sQ" = (/obj/machinery/light/spot,/turf/simulated/floor/wood,/area/exo_ice_facility/exterior/autolight)
@@ -1027,7 +1027,7 @@
 "tM" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "tN" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel,/obj/machinery/button/remote/blast_door{id = "pd4"; name = "Lobby Entrance Shutters"; pixel_y = 5},/obj/machinery/button/remote/blast_door{id = "pd3"; name = "Lobby Window Shutters"; pixel_x = 0; pixel_y = -3},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "tO" = (/obj/machinery/computer/station_alert/security,/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 4},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"tP" = (/obj/effect/floor_decal/corner_techfloor_grid{dir = 5; icon_state = "corner_techfloor_grid"; pixel_y = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"tP" = (/obj/structure/ladder/up,/obj/structure/catwalk{icon_state = "catwalk0-0"},/turf/simulated/floor/plating,/area/exo_ice_facility/exterior/autolight)
 "tQ" = (/obj/structure/table/woodentable,/obj/structure/flora/pottedplant,/obj/machinery/light{dir = 8},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 10},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "tR" = (/obj/effect/loot_marker/ks7_residential_console,/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "tS" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/item/toy/figure/detective,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
@@ -1043,18 +1043,18 @@
 "uc" = (/obj/structure/extinguisher_cabinet{dir = 1; icon_state = "extinguisher_closed"; pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ud" = (/obj/effect/floor_decal/corner/red/bordercorner{icon_state = "bordercolorcorner"; dir = 4},/obj/effect/floor_decal/corner/red/bordercorner{icon_state = "bordercolorcorner"; dir = 1},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ue" = (/obj/machinery/newscaster{pixel_y = -32},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 10},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uf" = (/obj/effect/floor_decal/corner/red/border,/obj/effect/floor_decal/corner_techfloor_grid{dir = 5; icon_state = "corner_techfloor_grid"; pixel_y = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"uf" = (/obj/machinery/firealarm{dir = 1; icon_state = "fire0"; pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ug" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 5},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uh" = (/obj/structure/flora/pottedplant{icon_state = "plant-21"; pixel_y = 0; tag = "icon-plant-21"},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ui" = (/obj/machinery/door/airlock/multi_tile/police{dir = 8; icon_state = "closed"; name = "Police Station"},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uj" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/obj/effect/floor_decal/corner_techfloor_grid{dir = 6; icon_state = "corner_techfloor_grid"; pixel_x = 8; pixel_y = 16},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"uj" = (/obj/structure/fence/corner{icon_state = "corner"; dir = 8},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
 "uk" = (/obj/structure/closet/wall_emergency{dir = 1; icon_state = "hydrant"; pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ul" = (/obj/machinery/light{active_power_usage = 0},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "um" = (/obj/effect/floor_decal/corner/red/bordercorner{icon_state = "bordercolorcorner"; dir = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "un" = (/obj/structure/table/steel,/obj/item/weapon/deck/cards,/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 1},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uo" = (/turf/simulated/open,/area/exo_ice_facility/interior/police)
 "up" = (/obj/structure/flora/grass/green,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
-"uq" = (/obj/effect/floor_decal/corner_techfloor_grid{dir = 6; icon_state = "corner_techfloor_grid"; pixel_x = 8; pixel_y = 16},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"uq" = (/obj/structure/fence{icon_state = "straight"; dir = 4},/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
 "ur" = (/obj/machinery/vending/coffee,/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 5},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "us" = (/obj/machinery/door/airlock{name = "Interrogation Room"},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 4},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "ut" = (/obj/machinery/door/airlock{name = "Break Room"},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 4},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
@@ -1072,16 +1072,37 @@
 "uF" = (/obj/machinery/newscaster{pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uG" = (/obj/machinery/vending/wallmed1{pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uH" = (/obj/structure/noticeboard{pixel_y = -32},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 6},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uI" = (/obj/effect/floor_decal/corner_techfloor_grid{dir = 6; icon_state = "corner_techfloor_grid"; pixel_x = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"uI" = (/obj/structure/fence{icon_state = "straight"; dir = 4},/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/autolight)
 "uJ" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 4},/obj/structure/stairs_decorative/dark/north,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uK" = (/obj/structure/table/steel,/obj/item/device/tape,/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 1},/obj/item/device/taperecorder,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uL" = (/obj/machinery/light,/obj/effect/floor_decal/corner/red/border,/obj/effect/floor_decal/corner_techfloor_grid{dir = 5; icon_state = "corner_techfloor_grid"; pixel_y = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uM" = (/obj/machinery/firealarm{dir = 1; icon_state = "fire0"; pixel_y = -32},/obj/effect/floor_decal/corner/red/border,/obj/effect/floor_decal/corner_techfloor_grid{dir = 5; icon_state = "corner_techfloor_grid"; pixel_y = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"uL" = (/obj/structure/fence/corner,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
+"uM" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/pavement,/area/exo_ice_facility/exterior/autolight)
 "uN" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uO" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "uP" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 1},/obj/structure/table/bench/steel,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
-"uQ" = (/turf/simulated/floor/plating,/obj/structure/ladder/up,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/tranquility/catwalk1{icon_state = "catwalk8"},/area/exo_ice_facility/interior/police)
+"uQ" = (/obj/structure/curtain{color = "#4C0000"; name = "burgandy curtain"; pixel_y = 32},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/cryopods)
+"uR" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/structure/closet,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/cryopods)
+"uS" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/decor{icon_state = "ramptop"},/area/exo_ice_facility/interior/cryopods)
+"uT" = (/obj/structure/sign/warning/caution{pixel_y = 32},/turf/simulated/floor/pavement/corner{tag = "icon-pave_corner (EAST)"; icon_state = "pave_corner"; dir = 4},/area/exo_ice_facility/exterior/autolight)
+"uU" = (/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"uV" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"uW" = (/turf/simulated/floor/wood,/area/exo_ice_facility/interior/cryopods)
+"uX" = (/obj/item/weapon/bedsheet/red,/obj/structure/bed/padded,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/cryopods)
+"uY" = (/obj/machinery/cryopod,/obj/machinery/cryopod,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
 "uZ" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 1},/obj/machinery/light/small,/obj/structure/catwalk{icon_state = "catwalk9-0"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/police)
+"va" = (/obj/structure/cryofeed,/obj/structure/cryofeed{icon_state = "cryo_rear"; dir = 1},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vb" = (/obj/structure/toilet,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vc" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"vd" = (/obj/machinery/vending/snack,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"ve" = (/obj/machinery/newscaster{pixel_x = 32},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vf" = (/obj/structure/cryofeed{tag = "icon-cryo_rear (EAST)"; icon_state = "cryo_rear"; dir = 4},/obj/structure/cryofeed{icon_state = "cryo_rear"; dir = 1},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vg" = (/obj/machinery/cryopod{tag = "icon-body_scanner_0 (EAST)"; icon_state = "body_scanner_0"; dir = 4},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vh" = (/obj/structure/sofa/right,/obj/machinery/light{dir = 8},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"vi" = (/obj/machinery/cryopod,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vj" = (/obj/structure/cryofeed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vk" = (/obj/structure/cryofeed{tag = "icon-cryo_rear (EAST)"; icon_state = "cryo_rear"; dir = 4},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vl" = (/obj/structure/cryofeed,/obj/structure/cryofeed{icon_state = "cryo_rear"; dir = 2},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
+"vm" = (/obj/structure/cryofeed{tag = "icon-cryo_rear (EAST)"; icon_state = "cryo_rear"; dir = 4},/obj/structure/cryofeed{icon_state = "cryo_rear"; dir = 2},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/cryopods)
 "vn" = (/obj/effect/floor_decal/corner/red/bordercorner,/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "vo" = (/obj/machinery/light{active_power_usage = 0},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 6},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "vp" = (/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 8},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
@@ -1092,6 +1113,17 @@
 "vu" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/corner/red/border{icon_state = "bordercolor"; dir = 1},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "vv" = (/obj/effect/floor_decal/corner/red/bordercorner{icon_state = "bordercolorcorner"; dir = 1},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
 "vw" = (/obj/effect/floor_decal/corner/red/bordercorner{icon_state = "bordercolorcorner"; dir = 4},/turf/simulated/floor/tiled/dark/dark,/area/exo_ice_facility/interior/police)
+"vx" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/cryopods)
+"vy" = (/obj/structure/table/glass,/obj/item/weapon/towel,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vz" = (/obj/item/weapon/soap/deluxe,/obj/structure/table/glass,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vA" = (/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vB" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vC" = (/obj/structure/closet/crate/bin{anchored = 1},/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/cryopods)
+"vD" = (/obj/structure/closet/crate/trashcart,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
+"vE" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/decor{icon_state = "ramptop"},/area/exo_ice_facility/interior/cryopods)
+"vF" = (/obj/structure/grille/smallfence,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
+"vG" = (/obj/structure/fence/door,/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/autolight)
+"vH" = (/turf/simulated/floor/plating,/obj/structure/ladder/up,/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/tranquility/catwalk1{icon_state = "catwalk8"},/area/exo_ice_facility/interior/police)
 
 (1,1,1) = {"
 aZaZaZdxaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZ
@@ -1168,28 +1200,28 @@ aZqjqjqjqjqjqjqjqjqjqjeFeFqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimimgagagagagagagaga
 aZdxdxdxqjqjqjqjqjadeFeFqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimimimgagagagagaqjqjgagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJhEnJqjqjhEhEhEhEhEqjqjqjbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcqjqjqjqjqjimimimimgagagagagagagagaejejejgagagagagagagagagagaqjqjadqjqjdxdxdxdxdxhfhfhfhfhfhfdxdxaZ
 aZdxdxdxqjqjqjadqjqjqjqjqjapqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimimimgagagaqjqjgagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJhInJhEhEhEhEhEhEqjqjqjqjqjqjbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcqjqjqjqjqjqjimimimgagagagagagagagaejejejejgagagagagagagagagagaqjqjqjqjdxdxdxdxdxdxhfhghhhihmhfdxdxaZ
 aZdxiAdxdxdxhbhjhbdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimimimimimgaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJbcnJhEhEhEhEqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimgagagagagagagagaejejejejgagagagagagagagagagaqjqjqjqjqjqjdxdxdxdxhbhnhnhnhohthfdxdxaZ
-aZdxiAdxdxhbhbhjhbhbdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimqjqjqjqjimimqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJbchEhEhEhEhEqjqjqjqjsyqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjsyqjqjimimgagagaejejejejejejejejgagagagagagagagagagaqjqjqjqjqjqjqjqjdxdxdxhbhfhuhvpBqLhfdxdxaZ
+aZdxiAdxdxhbhbhjhbhbdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimimqjqjqjqjimimqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJbchEhEhEhEhEqjqjqjqjsyqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcqjqjqjqjqjqjqjqjsyqjqjimimgagagaejejejejejejejejgagagagagagagagagagaqjqjqjqjqjqjqjqjdxdxdxhbhfhuhvpBqLhfdxdxaZ
 aZdxiAiAdxdxhbhjdxhbhbdxdxdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjimqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjnJhEhEhEhEhEqjqjqjqjqjqjqjqjadadbcadadadqjqjqjbcbcadadqjqjadadadadqjqjqjqjqjqjimgagaejejejejejejejejejgagagagagagagagagagagaqjqjqjqjqjqjqjqjdxdxdxhbhfhfhfhfhfhfdxdxaZ
 aZiAiAiAdxhbhbhjdxdxhbhbdxdxdxoSoSdxdxdxdxdxdxqjqjqjtvtvtvdxqjqjqjqjimqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhEhEhEqjqjqjqjqjadbcadqjqjadadbcbcbcadadadqjadbcbcbcadqjqjqjqjbcadadadbcbcejejejejejejejejejgagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjdxhbhbhbhbhbhbhbhbdxaZ
 aZdxiAdxhbhbdxhjdxhbhbhbdxoSoSoSoSoSoSoSdxtvtvtvtvtvtvtvdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhbhbqjhEhEhEbcqjqjqjadadbcadqjqjqjbcbcbcqjqjadqjqjqjqjbcadadadqjqjqjqjqjbcbcbcadqjqjejejejejejejgagagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxdxhbhbaZ
-aZdxiAdxhbhbhbhjhbhbhbdxdxoSoSoSoSoSoSoSgDgDixixtvtvtviBjidxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjhbhbqjqjbcadbcqjqjqjqjadqjadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjejejejejejgagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxqZqjdxdxdxdxhbaZ
-aZiAiAdxdxhbhbhbfyhbdxdxoSoSoSiAiAiAiAkrkrixixixixixixiBjidxdxdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxdxqjqjqjqjhbhbqjqjadbcadadqjqjdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjcPqjqjqjqjqjqjqjqjqjqjqjcPqjqjqjqjqjejejejejgagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxiraZ
-aZiAiAdxdxhbdxhbhjhbdxoSoSiAiAiAqTrgkrkrixixixixixixiBiBjioSoSoSdxdxdxqjqjqjqjdxdxqjqjqjqjqjqjdxdxdxdxdxdxdxdxdxdxdxhbhbhbhbqjqjqjadadbcqjqjhbdxdxqjqjqjqjqjqjqjqjqjqjjErsrsrsrsrsrsrsrtrsqjqjqjrsrsrsrsrsrsrsrsrskRqjadadejgagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxqjqjqjdxhbaZ
-aZiAiAdxhbhbdxdxhjhbdxoSiAiArhqTriiAkrixixixixixixiBiBixjidxoSoSoSoSdxdxdxqjqjdxdxdxqjqjqjdxdxdxdxdxoSoSoSoSoSoSdxdxhbhbhbhjqjqjadbcbcbcqjsIhbdxdxqjqjqjqjqjqjqjqjqjqjqjrsrvsJrvrvrvsJrvrsrvrvrvrsrvsJrvrvrvsJrvrsqjqjadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhTqjdxdxdxdxqjdxqjqjqjaZ
-aZiAiAdxhbhbdxdxhjhbdxoSiAiAiArgiAkrkrixixixixixixiBjijijijidxoSoSoSoSoSdxdxdxdxdxdxdxdxdxdxdxdxoSoSoSoSoSoSoSoSoSdxhbhbhjqjqjqjadadbcadqjhbhbdxdxdxqjqjqjqjqjqjqjqjqjqjrsrvrvrvrvrwrvrvrsrvrvrvrsrvrxrvrvrvrvrvrsqjqjadadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxqjqjaZ
-aZiAiAdxhbhbdxrjhbdxoSoSoSoSoSoSgDkrixixixixixixixiBiBiBiBjidxdxoSoSoSoSoSoSoSdxdxdxdxdxdxdxoSoSoSoSoSoSoSiAiAoSdxhbhbhbqjqjqjbcadbcbcqjqjdxdxdxiAdxdxqjqjqjqjqjqjqjqjqjrsryrvrvrvrvrvrvrzrvrvrvrzrvrvrvrvrvrArvrsqjqjqjadadadbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxqjqjaZ
-aZdxiAdxhbhbdxhjdxoSoSoSoSoSoSoSgDixixixixixixixixixixixiBiBjidxoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSiAiAiAiAoSdxhbhbhbqjqjqjadbcbcadqjdxdxdxiAiAiAdxqjqjqjqjqjqjqjqjqjrsrvrvrvrvrvrvrvrssKrKsLrsrvrvrvrvrvrvrvrsqjqjqjqjbcadadadbcqjsyqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxaZ
-aZiAiAiAdxhbdxhjdxoSoSoSoSoSdxiBiBixixixixixixixixixixixixiBjijidxoSoSiAiAoSoSoSoSoSoSoSoSoSoSoSoSiAiArkrlrkoSoSdxdxhbqjqjqjqjadbcadqjqjdxdxiAoWiAiAdxdxqjqjqjqjqjqjqjqjrsrvrvrvrvrvrvrvrzrvrvrvrzrvrvrvrvrvrvrvrsqjqjqjqjqjqjadadadqjihihqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
-aZiAiAiAdxhbhjhbdxdxdxdxdxqjqjqjqjiBixixixiBiBogiBiBiBixiBiBiBjioSoSoSoSiAiAiAiAiAiAiAiAoSoSoSoSiAiAqArmiAoVoSoSdxdxdxqjqjqjadadbcadqjdxdxiAorqsiAqtdxdxqjqjqjqjqjqjqjqjrsryrvrvrvrvrvrvrsrvrvrvrsrvrvrvrvrvrArvrsqjqjqjqjqjqjqjadadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxaZ
-aZiAiAiAdxhjhjhbdxqjqjqjqjimimimqjqjiBixiBiBiBiBopiBiBiBiBgDgDgDoSiAiAiAqBrnqCqCiAiAiAiAoSoSoSoSiAiAiAiAiAoSoSoSoSdxdxqjqjqjadadbcqjqjdxdxiAorqsqsqtqtdxqjqjqjqjqjqjqjqjrsrvsMrvrvrxsMrvrsrvrvrvrsrvsNrvrvrvsMrvrsqjqjqjqjqjqjqjbcadadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjihdxdxdxdxdxdxdxaZ
-aZdxiAdxdxhjqjqjqjqjqjqjqjimimimimimiBiBiBiBiBiBiBiBiBiBgDgDoSoSiAiAroqBqBrnqSiAoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAorqsqsqwqtdxdxqjqjqjqjqjqjjErsrsrsrsrsrsrsrsrsqjqjqjrsrsrsrsrsrsrsrsrskRqjqjqjqjqjqjbcbcadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
-aZdxiAdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimimqjhjhjoSoSoSoSoSiAqBrprqqSiAiAoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAororqtqtqtdxdxqjqjqjqjqjqjqjqjqjqjqjsjqjqjqjqjqjqjqjqjqjqjqjsjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxaZ
-aZdxiAdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimqjqjqjhjoSoSoSoSoSiAiAiAiAiAiAiAiAiAoSoSoSoSoSoSiAiAiAiAiAiAoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAororqtiAqwdxdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjgCqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxaZ
-aZdxdxdxhjqjqjqjqjqjqjimimimimimimimimimimimimqjqjqjqjqjqjfpfpbwbwbwbwbwbwbwbwbwbwbwbwoSoSoSiAiAiAiAiAiAiAiAoWoSoSoSdxqjsyqjadbcbcqjqjdxdxiAororqtqtqwiAdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjgCqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcqjqjiUiUiUqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
-aZdxdxhjhjqjqjqjqjqjqjimimimimimimimimimimimqjqjqjqjqjqjqjfpfpbwqqbMbObPbTcncnivcniEbwoSoSiAiAiAiAhbhbiAiAiAiAoSoSoSdxqjqjqjadadadqjqjqjdxdxiAororiAqwiAdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbciXiXiXiXiXiXiXqjqjqjqjqjqjqjqjqjqjqjqjqjadbcqjqjbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
-aZdxdxhjhjqjqjqjqjqjimimimimimimimimimimimimimqjqjqjqjqjqjqjqjbwbMjUbwbwbwbwbwbwoqqnbwoSoSiAiAhbhbhbhbhbhbiAiAiAoSoSdxqjqjqjqjadbcadqjqjdxdxiAiAiAiAiAiAdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjiWbcbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadqjqjqjbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
-aZdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimimqjqjqjqjqmqjqjqjbwbMbMoDoEoFoGoHrCoqoBbwdxdxiAhbhbhboYdxhbhbrriAiAoSoSdxdxqjqjqjadbcadqjqjqjdxiAiAqwqwiAiAiAdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcbcbcqjqjqjqjadqjqjqjqjqjqjqjqjqjqjqjbcadqjqjqjbcbcbcbcbcbcqjbcbciVqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
-aZdxhjhjqjqjqjqjqjejimimimimimimimimimimimimimejqjqjqjqjqjqjsObwbwqobMbMoMoIoIoNoqoObwdxdxiAhbhbhbhbdxdxhbhbiAoSoSoSdxdxdxqjqjqjbcadadqjqjdxdxiAiAiAiAiAiAdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcbcqjqjqjqjadqjqjqjqjqjqjqjqjqjsyqjbcadqjqjbcbcbcadadbcbcbcbcbciVqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxaZ
+aZdxiAdxhbhbhbhjhbhbhbdxdxoSoSoSoSoSoSoSgDgDixixtvtvtviBjidxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjhbhbqjqjbcadbcqjqjqjqjadqjadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcqjqjqjqjqjqjqjqjqjqjqjejejejejejgagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxqZqjdxdxdxdxhbaZ
+aZiAiAdxdxhbhbhbfyhbdxdxoSoSoSiAiAiAiAkrkrixixixixixixiBjidxdxdxdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxdxqjqjqjqjhbhbqjqjadbcadadqjqjdxqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjcPqjqjqjqjbcadbcqjqjqjqjcPqjqjqjqjqjejejejejgagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxiraZ
+aZiAiAdxdxhbdxhbhjhbdxoSoSiAiAiAqTrgkrkrixixixixixixiBiBjioSoSoSdxdxdxqjqjqjqjdxdxqjqjqjqjqjqjdxdxdxdxdxdxdxdxdxdxdxhbhbhbhbqjqjqjadadbcqjqjhbdxdxqjqjqjqjqjqjqjqjqjqjjErsrsrvrvrsrvrvrsrsnpnpnprsrsrvrsrsrvrvrsrskRqjadadejgagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxqjqjqjdxhbaZ
+aZiAiAdxhbhbdxdxhjhbdxoSiAiArhqTriiAkrixixixixixixiBiBixjidxoSoSoSoSdxdxdxqjqjdxdxdxqjqjqjdxdxdxdxdxoSoSoSoSoSoSdxdxhbhbhbhjqjqjadbcbcbcqjsIhbdxdxqjqjqjqjqjqjqjqjqjqjqjrsrtuUuUuUuUuUrKrsryrsrzrsvhsKrArssMuQuRrsqjqjadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhTqjdxdxdxdxqjdxqjqjqjaZ
+aZiAiAdxhbhbdxdxhjhbdxoSiAiAiArgiAkrkrixixixixixixiBjijijijidxoSoSoSoSoSdxdxdxdxdxdxdxdxdxdxdxdxoSoSoSoSoSoSoSoSoSdxhbhbhjqjqjqjadadbcadqjhbhbdxdxdxqjqjqjqjqjqjqjqjqjqjrssJsJsJsJsJsJsJrvsLsLsLrvsJsJsJuVuWuWuWrsqjqjadadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxqjqjaZ
+aZiAiAdxhbhbdxrjhbdxoSoSoSoSoSoSgDkrixixixixixixixiBiBiBiBjidxdxoSoSoSoSoSoSoSdxdxdxdxdxdxdxoSoSoSoSoSoSoSiAiAoSdxhbhbhbqjqjqjbcadbcbcqjqjdxdxdxiAdxdxqjqjqjqjqjqjqjqjqjrvsJuYvarsvfvgsJrssLsLsLrssJsJsJrsuWuWuXrsqjqjqjadadadbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxqjqjaZ
+aZdxiAdxhbhbdxhjdxoSoSoSoSoSoSoSgDixixixixixixixixixixixiBiBjidxoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSiAiAiAiAoSdxhbhbhbqjqjqjadbcbcadqjdxdxdxiAiAiAdxqjqjqjqjqjqjqjqjqjrvsJvivjrsvkvgsJuVsLsLsLuVsJsJversrsrsrsrsqjqjqjqjbcadadadbcqjsyqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxaZ
+aZiAiAiAdxhbdxhjdxoSoSoSoSoSdxiBiBixixixixixixixixixixixixiBjijidxoSoSiAiAoSoSoSoSoSoSoSoSoSoSoSoSiAiArkrlrkoSoSdxdxhbqjqjqjqjadbcadqjqjdxdxiAoWiAiAdxdxqjqjqjqjqjqjqjqjrvsJvivlrsvmvgsJrssLsLsLrssJsJrwrsvbvAvzrsqjqjqjqjqjqjadadadqjihihqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
+aZiAiAiAdxhbhjhbdxdxdxdxdxqjqjqjqjiBixixixiBiBogiBiBiBixiBiBiBjioSoSoSoSiAiAiAiAiAiAiAiAoSoSoSoSiAiAqArmiAoVoSoSdxdxdxqjqjqjadadbcadqjdxdxiAorqsiAqtdxdxqjqjqjqjqjqjqjqjrssJsJsJsJsJsJsJrvsLsLsLrvsJsJsJuVvAvAvyrsqjqjqjqjqjqjqjadadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxdxaZ
+aZiAiAiAdxhjhjhbdxqjqjqjqjimimimqjqjiBixiBiBiBiBopiBiBiBiBgDgDgDoSiAiAiAqBrnqCqCiAiAiAiAoSoSoSoSiAiAiAiAiAoSoSoSoSdxdxqjqjqjadadbcqjqjdxdxiAorqsqsqtqtdxqjqjqjqjqjqjqjqjrsrtuUuUuUuUuUvxrsuSrsvErsrxvcvdrsvBvAvCrsqjqjqjqjqjqjqjbcadadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjihdxdxdxdxdxdxdxaZ
+aZdxiAdxdxhjqjqjqjqjqjqjqjimimimimimiBiBiBiBiBiBiBiBiBiBgDgDoSoSiAiAroqBqBrnqSiAoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAorqsqsqwqtdxdxqjqjqjqjqjqjjErsrsrsrsrsrsrsrsrsououoursrsrvrsrsrsrsrsrskRqjqjqjqjqjqjbcbcadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
+aZdxiAdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimimqjhjhjoSoSoSoSoSiAqBrprqqSiAiAoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAororqtqtqtdxdxqjqjqjqjqjqjqjvDsNaxtPuMtPuTsNbcadadbcqjqjqjqjsjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxaZ
+aZdxiAdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimqjqjqjhjoSoSoSoSoSiAiAiAiAiAiAiAiAiAoSoSoSoSoSoSiAiAiAiAiAiAoSoSoSoSdxqjqjqjadbcadqjqjdxiAiAororqtiAqwdxdxdxqjqjqjqjqjqjvDsNqjbcbcadadsNqjbcadgCqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxaZ
+aZdxdxdxhjqjqjqjqjqjqjimimimimimimimimimimimimqjqjqjqjqjqjfpfpbwbwbwbwbwbwbwbwbwbwbwbwoSoSoSiAiAiAiAiAiAiAiAoWoSoSoSdxqjsyqjadbcbcqjqjdxdxiAororqtqtqwiAdxdxqjqjqjqjqjqjvFujuquququIvGuLbcadbcgCbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcqjqjiUiUiUqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
+aZdxdxhjhjqjqjqjqjqjqjimimimimimimimimimimimqjqjqjqjqjqjqjfpfpbwqqbMbObPbTcncnivcniEbwoSoSiAiAiAiAhbhbiAiAiAiAoSoSoSdxqjqjqjadadadqjqjqjdxdxiAororiAqwiAdxdxqjqjqjqjqjqjqjqjqjqjbcadbcbcbcbcbcbciXiXiXiXiXiXiXqjqjqjqjqjqjqjqjqjqjqjqjqjadbcqjqjbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
+aZdxdxhjhjqjqjqjqjqjimimimimimimimimimimimimimqjqjqjqjqjqjqjqjbwbMjUbwbwbwbwbwbwoqqnbwoSoSiAiAhbhbhbhbhbhbiAiAiAoSoSdxqjqjqjqjadbcadqjqjdxdxiAiAiAiAiAiAdxdxqjqjqjqjqjqjqjqjqjqjqjbcadbcadadadiWbcbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadqjqjqjbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
+aZdxhjhjqjqjqjqjqjqjimimimimimimimimimimimimimqjqjqjqjqmqjqjqjbwbMbMoDoEoFoGoHrCoqoBbwdxdxiAhbhbhboYdxhbhbrriAiAoSoSdxdxqjqjqjadbcadqjqjqjdxiAiAqwqwiAiAiAdxhbqjqjqjqjqjqjqjqjqjqjbcqjbcbcadbcqjqjbcbcbcqjqjqjqjadqjqjqjqjqjqjqjqjqjqjqjbcadqjqjqjbcbcbcbcbcbcqjbcbciVqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxdxaZ
+aZdxhjhjqjqjqjqjqjejimimimimimimimimimimimimimejqjqjqjqjqjqjsObwbwqobMbMoMoIoIoNoqoObwdxdxiAhbhbhbhbdxdxhbhbiAoSoSoSdxdxdxqjqjqjbcadadqjqjdxdxiAiAiAiAiAiAdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcqjqjqjqjbcbcqjqjqjqjadqjqjqjqjqjqjqjqjqjsyqjbcadqjqjbcbcbcadadbcbcbcbcbciVqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxaZ
 aZdxhjhjqjqjqjqjejejejejimimimimimimimimimimejejqjqjqjqjqjqjqjoToUbMbMbMoXoIoZoIpapbbwdxdxiAdxhbhbdxdxdxhbhbdxdxoSdxhbhbhbqjqjqjbcbcadqjihdxdxiAiAiAiAiAiAdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjiWqjqjqjqjlRqjqjqjadbcbciWqjqjqjqjqjqjqjqjbcadqjqjbcbcadadbcadbcbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxaZ
 aZdxhjhjhjqjqjqjqjejejejejejimimimimimimimejejejqjqjqjqjqjqjqjpcbMpdpebMpfpggFoIoqphbwdxiAiAdxhbhbdxdxhbhbhbdxdxhbhbhbhbhbqjqjqjqjbcadadqjqjdxdxiAiAiAiAiAdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjiWbcbcqjqjqjqjqjqjqjbcbciWbcbcqjqjqjqjqjqjbcbcqjqjbcbcbcadiYadadbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjdxaZ
 aZdxdxhjhjqjqjqjqjejejejejsPejejejejejejejejejejcPqjqjqjqjqjqjpibMbMbMqpoqoqoqpkoqqnbwdxiAiAiAhbhbhbdxdxhbhbhbdxhbhbhbdxdxdxqjqjqjbcadadqjqjqjdxdxiAiAiAiAdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjiWbcqjqjqjfWqjqjqjqjqjbciWbcqjqjqjfWqjqjqjadbcqjqjqjbcadadadbcbcqjqjqjqjqjqjqjqjqjlRqjqjqjqjqjqjqjqjqjqjqjdxaZ
@@ -1223,18 +1255,18 @@ aZoKoKlVhbhbhboKqjqjqjgaqjqjadbcbcoJgagagaqjqjoJbcadoJcmqjhMbsbtbtbtbtbshMqjadbc
 aZhbhbhbhbhjhjhjqjqjqjqjqjoJadadoJoJgagaqjqjadbcbcoJqjqjhMhMhLcpcpcpcphRhMhMhMgqhMhMqjqjqjqjieqjdefAdSfBfBdSfCdeqjdidUfDdUdldlfFdEfGfIdldlfLdEfMdUeediqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadactcacacktktktktktktktktktktkLmNmNmNmNmNmNmNmEmNmNmNmNmNmNmNkLktktktktktktktktktktlmkvqjdxaZ
 aZhbdxdxhbhbhjdxqjqjqjqjqjoJbcbcbcqjgaqjqjqjbcadadadhKqjhMhMhScpcpcpcphWhMhMhMiphMhMhMqjahqjqjqjdefOoafTfTfTfUdeqjdifVdEdEgbdldEdEdEdEghdEdEdEdEgidEdikRqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadadkvkvlnlnlnlnlnlnlnlnlnlnkvkvmNmNmFmNojlpmpodohmqokmNmrmNmNkvkvlnlnlnlnlnlnlnlnlnkvkvqjdxaZ
 aZdxdxdxhbhbqUdxdxqjqjqjqjadbcbcqjqjqjqjqjqjqjbcadqjqjqjhMhMhJcpcpcpcphJhMiyiFiOiShMhMqjqjqjqjqjdedededededededeqjdidldldldlnydldldldldldlgngwdldleudiqjqjqjqjqjhbhbdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadadkvktktktktktktktktktktktktkLmNmNmNmNmNmNmNmsmcmNmNmNmNmNmNkLktktktktktktktktktktktkvqjdxaZ
-aZdxhbhbhbhbhbdxqjqjqjqjqjbcadbcqjqjqjqjqjqjhPhQadbchZqjhMhMiGhVcpcpcpiNhMjQuIiPlvhMhMhMhMqjqjqjqjqjqjqjqjqjqjsjqjdigPdldldldldlgWdldldldldldldldljqrZqjqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvmNmNmNmNmNmtmumvmNmwmNmNmNmNmNkvktktktktktktktktktktktkvqjdxaZ
+aZdxhbhbhbhbhbdxqjqjqjqjqjbcadbcqjqjqjqjqjqjhPhQadbchZqjhMhMiGhVcpcpcpiNhMjQiPiPlvhMhMhMhMqjqjqjqjqjqjqjqjqjqjsjqjdigPdldldldldlgWdldldldldldldldljqrZqjqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvmNmNmNmNmNmtmumvmNmwmNmNmNmNmNkvktktktktktktktktktktktkvqjdxaZ
 aZdxhbhbhbhbhbdxdxqjqjqjqjbcoJbcqjqjqjqjqjhMhMhMhXiahMhMhMhMiZjcjdjgtTuZionhrUtjtphMhMhMhMhMqjqjqjqjqjahqjhZqjqjqjdigZdlhadldldldUdUgUdUdUdUdUdUdUhddireqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvkvmxmNmNmymNmNolmNmNmNmNmNmzkvkvktktktktktktktktktktktkvqjdxaZ
 aZdxqjqjqjhbhbhbdxdxqjqjqjbcbcadqjqjqjqjhMhMhMibvvvwikjjhMhMhMjLhMhMjLhMhMhMhMtxhMhMlxlzhMhMqjqjqjqjqjqjqjqjqjqjqjdihkdUiqhxhyhznmdEdEhDhDdEhFhGhFdEdididididiqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktsVktktktktktktktkvkvommNmNmNmNttmNmNmNmNonkvkvmCmCmCmCmCmCmDmCmCmCmCkvkvqjdxaZ
-aZqjqjqjqjqjqjhbhbdxdxqjqjbcbcadqjqjqjqjjMjRuavviPiPtPvrhMptiPtDtDtDtDtDtDtDtDudugsatityhMhMbgqjqjqjidqjqjqjqjidqjdidEdEdEdEdEdEiKdEhOdldldEhYdlifgZdligigijdiqjqjhbhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktkvkvovmNmNmNowmNmNmNmBkvkvmGmHqYtumCtemJmImImImImIkvqjfWdxaZ
-aZqjqjqjqjqjqjqjqjqjqjqjqjbcbcoJqjqjqjqjjMvpiPiPvnrUufuDhMtmiPrUufulumvnulufrUrUvohMtzvshMhMhMbcqjqjqjqjieqjqjqjtfdiitiudEiIiJdEhHdEdWqViLdEiMdldldldljpjpjqdiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktkvkvtgmNmNmNmNmNthkvkvmMmImImIpJmCmJmImOmPmQmImRkvqjqjdxaZ
+aZqjqjqjqjqjqjhbhbdxdxqjqjbcbcadqjqjqjqjjMjRuavviPiPiPvrhMptiPtDtDtDtDtDtDtDtDudugsatityhMhMbgqjqjqjidqjqjqjqjidqjdidEdEdEdEdEdEiKdEhOdldldEhYdlifgZdligigijdiqjqjhbhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktkvkvovmNmNmNowmNmNmNmBkvkvmGmHqYtumCtemJmImImImImIkvqjfWdxaZ
+aZqjqjqjqjqjqjqjqjqjqjqjqjbcbcoJqjqjqjqjjMvpiPiPvnrUrUuDhMtmiPrUrUulumvnulrUrUrUvohMtzvshMhMhMbcqjqjqjqjieqjqjqjtfdiitiudEiIiJdEhHdEdWqViLdEiMdldldldljpjpjqdiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktkvkvtgmNmNmNmNmNthkvkvmMmImImIpJmCmJmImOmPmQmImRkvqjqjdxaZ
 aZdxdxqjqjqjqjqjqjqjqjqjqjadbcoJqjqjqjhMhMjZtliPvrkmnenghMhMhMhMhMhMvpvqhMhMjmjKhMhMhMhMhMhMhMbcqjqjqjqjqjqjqjqjqjdijujvdEjyiKdEiKdEjCjIjJdEjVdldldldlklkAkEdiqjqjqjqjhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktkvkvmNmNmNmNmNkvkvmCmSmImImImImCmImImTmUmQmImIkvqjdxdxaZ
 aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcadqjqjqjjMtAvviPiPvrtFiPtBtCtEtDtDjNhMiCuJhMnktDtDvuugkultlwhMhMadbchZqjqjqjhZqjqjqjdikOjvkPiKiKkTiKdEdEdEdEdEkUdlkVkWkYlflrlsdiqjqjqjqjhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvkvktktktktktktktktktktktktktktkvkvkLkvkLrYkvrVmCmCmJmImImImCmImVmWmXmImRkvkvqjdxdxaZ
-aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcbcqjqjqjjMtGuqiPuqvrtNtMtOhMvpuIiPtdhMiPiPhMtHiPiPtSvrhMltnIhMuQoJadqjqjqjqjqjqjqjqjdidEdEdEdEdEdEiKdEluiJdEdEdEdidididididididiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktktktkvmImImImItemCmImImImImCmJmImImImImIkvqjqjdxdxaZ
+aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcbcqjqjqjjMtGiPiPiPvrtNtMtOhMvpiPiPtdhMiPiPhMtHiPiPtSvrhMltnIhMvHoJadqjqjqjqjqjqjqjqjdidEdEdEdEdEdEiKdEluiJdEdEdEdidididididididiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktktktkvmImImImItemCmImImImImCmJmImImImImIkvqjqjdxdxaZ
 aZdxdxqjqjqjqjqjqjqjqjqjqjadadbcbcqjqjhMhMjZtliPvrtUtVtWhMtJtKrUtLhMvpvrhMtQtKtRtXtYhMlttohMhMoJbcqjqjqjqjqjqjqjqjdiitiudEiIiJdEscdEjyiKdEitiudiqjqjqjqjqjsjqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktktkymImImImImImCmCmCmDmCmCmImImImImIkvkvqjqjdxdxaZ
-aZdxqjqjqjqjqjqjqjqjqjqjqjbcoJbcbcqjqjqjjMvpiPiPvwtDtDubhMhMtZhMhMhMujvqhMhMvthMhMhMhMhMhMhMhMadadqjqjqjqjqjqjqjtfdijujvdEjyiKdEiKlAiKiKlAjvjvdiqjqjqjqjqjqjqjqjqjqjhbdxdxdxdxhbhbhbqjqjqjqjqjqjqjqjdxqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktkymImImImImImCnamImImImCmCmImImIkvkvqjqjqjdxdxaZ
-aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJoJbcqjqjqjjMueulumiPiPtPvwtDuaudtDtDvuvvvwvutDudtDvutDuouohMhMhMadbcqjqjqjqjqjqjqjqjdikOjvlBiKiKlCiKdidididilDjvdikRqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhblUhbqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktkymImJmImImIncmImdmImImImCmImImIkvqjqjqjdxdxdxaZ
-aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJadadqjqjqjhMhMhMuEuhrUuLrUuirUtKucuMuktKrUrUufrUrUrUrUuouohMhMbcbcbcqjqjqjqjqjqjqjqjdididididididididireqjdidididiqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhbhbhbqjqjqjqjdxdxqjqjqjqjqjqjqjqjliqjqjqjkvkvtwktktktktktktktktktktktktktkymImImImImImCmImImImImImDmImIkvkvqjqjdxdxdxdxaZ
+aZdxqjqjqjqjqjqjqjqjqjqjqjbcoJbcbcqjqjqjjMvpiPiPvwtDtDubhMhMtZhMhMhMvpvqhMhMvthMhMhMhMhMhMhMhMadadqjqjqjqjqjqjqjtfdijujvdEjyiKdEiKlAiKiKlAjvjvdiqjqjqjqjqjqjqjqjqjqjhbdxdxdxdxhbhbhbqjqjqjqjqjqjqjqjdxqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktkymImImImImImCnamImImImCmCmImImIkvkvqjqjqjdxdxaZ
+aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJoJbcqjqjqjjMueulumiPiPiPvwtDuaudtDtDvuvvvwvutDudtDvutDuouohMhMhMadbcqjqjqjqjqjqjqjqjdikOjvlBiKiKlCiKdidididilDjvdikRqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhblUhbqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktkymImJmImImIncmImdmImImImCmImImIkvqjqjqjdxdxdxaZ
+aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJadadqjqjqjhMhMhMuEuhrUuyrUuirUtKucufuktKrUrUrUrUrUrUrUuouohMhMbcbcbcqjqjqjqjqjqjqjqjdididididididididireqjdidididiqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhbhbhbqjqjqjqjdxdxqjqjqjqjqjqjqjqjliqjqjqjkvkvtwktktktktktktktktktktktktktkymImImImImImCmImImImImImDmImIkvkvqjqjdxdxdxdxaZ
 aZdxqjqjqjqjqjqjqjsyqjbcadbcadbcadqjqjqjqjhMhMhMhMhMhMhMhMhMushMhMhMuthMuAuBuChMhMhMhMhMhMhMadqjqjqjqjqjqjqjqjqjqjqjqjjEqjqjqjqjjEqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhbhbhbhbdxdxdxdxdxhbhbhbqjqjqjdxiAdxdxqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktsVktktktkymImImIpKmImCmInfmImImImCmCkvkvqjqjdxdxdxdxdxaZ
 aZdxdxqjqjqjqjqjqjqjqjbcoJbcadbcbcqjqjbgqjuphMhMjStDtkuKtntDudtqhMtrudtIuPunuPtDurhMhMhMhMhMbcqjqjgjgjgkgjgjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhbhbhbhbhbhbdxdxdxdxdxiAqjiAiAiAiAiAqjqjqjqjfWqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktkymImImInimImCmImImImInjmIkvkvqjqjqjqjdxdxdxdxaZ
 aZdxdxdxqjqjqjqjqjqjqjbcoJoJadbcbcqjqjqjqjqjhMhMuuumuNuOiPiPvnuvhMuwumiPiPiPiPvnuxhMhMhMhMadbcqjqjgjglglqWgjqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjiAiAiAiAqjqjqjqjqjqjhbhbhbhbhbhbdxdxdxiAiAiAiAiAiAiAiAiAiAiAqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvkvktktktktktktktktktktkymImImInlmImCmImImImIkvkvkvqjfWqjqjqjdxdxdxdxaZ
