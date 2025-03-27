@@ -14,7 +14,7 @@
 	spawn_positions = 6
 	open_slot_on_death = 1
 	selection_color = "#ff0000"
-	access = list(access_innie,access_innie_prowler,access_innie_asteroid, access_soe)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_soe)
 	faction_whitelist = "Insurrection"
 	fallback_spawnpoint = "Innie Base Fallback Spawns"
 	whitelisted_species = list(/datum/species/human)
@@ -36,7 +36,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#ff0000"
-	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss, access_soe, access_soe_officer, access_innie_cargo)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss,access_soe,access_soe_officer,access_innie_cargo)
 	faction_whitelist = "Insurrection"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
@@ -56,7 +56,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#ff0000"
-	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss,access_soe, access_soe_officer, access_soe_captain, access_innie_cargo)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss,access_soe,access_soe_officer,access_soe_captain,access_innie_cargo)
 	faction_whitelist = "Insurrection"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE

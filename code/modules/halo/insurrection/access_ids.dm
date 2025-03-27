@@ -47,13 +47,11 @@
 	access_type = ACCESS_TYPE_SYNDICATE
 	desc = "Insurrectionist Ship Command"
 
-
 /var/const/access_soe = 856
 /datum/access/soe
 	id = access_soe
 	access_type = ACCESS_TYPE_SYNDICATE
 	desc = "Sons of Eridanus"
-
 
 /var/const/access_soe_officer = 857
 /datum/access/soe_officer

@@ -92,6 +92,7 @@
 /obj/machinery/vending/armory/light/innie
 	name = "Insurrectionist Light Equipment Rack"
 	desc = "A jury-rigged light equipment rack, many of its equipment options appear to be out of stock and replaced with more easily sourced ones."
+	req_access = list(access_innie)
 	products = list(
 					"Melee" = -1,
 					/obj/item/weapon/material/knife/combat_knife = 10,

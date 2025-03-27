@@ -114,7 +114,7 @@
 	jam_range = 30
 	jam_ignore_malfunction_chance = 0
 
-	ignore_freqs = list(RADIO_URFC)
+	ignore_freqs = list(RADIO_INNIE,RADIO_URFC)
 
 /obj/machinery/overmap_comms/jammer/insurrectionist/Initialize()
 	. = ..()
