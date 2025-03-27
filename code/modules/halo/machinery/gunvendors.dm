@@ -256,6 +256,7 @@
 /obj/machinery/pointbased_vending/armory/armor
 	name = "UNSC Misc Equipment Vendor"
 	desc = "A machine full of spare UNSC armor and equipment."
+	icon_state ="ironhammer-equipment"
 	req_access = list(access_unsc_armoury)
 	products = list(
 					"Undersuits" = -1,
