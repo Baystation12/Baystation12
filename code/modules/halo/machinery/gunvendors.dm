@@ -175,6 +175,7 @@
 /obj/machinery/pointbased_vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
 	desc = "Storage for advanced weapons and ammunition."
+	icon_state ="ironhammer-heavy"
 	req_access = list(access_unsc_armoury, access_unsc_specialist)
 	products = list(
 					"Guns" = -1,
