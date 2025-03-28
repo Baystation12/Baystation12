@@ -12,21 +12,27 @@
 	var/leaves_residue = 1
 	var/caliber = ""					//Which kind of guns it can be loaded into
 	var/projectile_type					//The bullet type to create when New() is called
-	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
 	var/fire_sound = null //Launcher weapons runtime if they have no fire_sound variable.
+	var/spent = 0
+	var/inscribe_label
 	var/spent_icon = "s-casing-spent"
 	var/in_pile = 1
-	var/max_in_pile = 15
-
-/obj/item/ammo_casing/New()
-	..()
-	if(ispath(projectile_type))
-		BB = new projectile_type(src)
+	var/max_in_pile = 30
 
 /obj/item/ammo_casing/proc/expend()
-	. = BB
-	BB = null
+	spent = 1
 	update_icon()
+
+//The two variables are used to 1: instruct the system to not mark the casing as spent when BB is called for and 2:ignore the spent state and return a new bb regardless.
+/obj/item/ammo_casing/proc/get_bb(var/do_not_spend = 0,var/ignore_spent = 0)
+	if(spent && !ignore_spent)
+		return null
+	if(!do_not_spend)
+		expend()
+	var/obj/item/projectile/p = new projectile_type (src)
+	if(inscribe_label)
+		p.name = "[initial(p.name)] (\"[inscribe_label]\")"
+	return p
 
 /obj/item/ammo_casing/proc/eject(var/turf/landing, var/dir_throw)
 	forceMove(landing)
@@ -54,24 +60,24 @@
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(W.sharp)
-		if(!BB)
+		if(spent)
 			to_chat(user, "<span class='notice'>There is no bullet in the casing to inscribe anything into.</span>")
 			return
 
 		var/tmp_label = ""
-		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
+		var/label_text = sanitizeSafe(input(user, "Inscribe some text into the projectile.","Inscription",tmp_label), MAX_NAME_LEN)
 		if(length(label_text) > 20)
 			to_chat(user, "<span class='warning'>The inscription can be at most 20 characters long.</span>")
 		else if(!label_text)
-			to_chat(user, "<span class='notice'>You scratch the inscription off of [initial(BB)].</span>")
-			BB.name = initial(BB.name)
+			to_chat(user, "<span class='notice'>You scratch the inscription off of the  projectile.</span>")
+			inscribe_label = null
 		else
-			to_chat(user, "<span class='notice'>You inscribe \"[label_text]\" into \the [initial(BB.name)].</span>")
-			BB.name = "[initial(BB.name)] (\"[label_text]\")"
+			to_chat(user, "<span class='notice'>You inscribe \"[label_text]\" into the projectile.</span>")
+			inscribe_label = "[label_text]"
 	else ..()
 
 /obj/item/ammo_casing/update_icon()
-	if(spent_icon && !BB)
+	if(spent_icon && spent)
 		icon_state = spent_icon
 	if(in_pile > 1)
 		if(overlays.len < in_pile-1)
@@ -86,7 +92,7 @@
 
 /obj/item/ammo_casing/examine(mob/user)
 	. = ..()
-	if (!BB)
+	if (spent)
 		to_chat(user, "This one is spent.")
 
 /obj/item/ammo_casing/attack_hand(var/mob/user)
@@ -107,7 +113,7 @@
 	return 1
 
 /obj/item/ammo_casing/Move(var/atom/A)
-	if(in_pile == 1 && !BB && !isnull(A))
+	if(in_pile == 1 && spent && !isnull(A))
 		var/list/casing_search = A.contents - src
 		var/obj/item/ammo_casing/here = 1
 		while(!isnull(here))
@@ -122,8 +128,6 @@
 /obj/item/ammo_casing/Destroy()
 	in_pile = 0
 	overlays.Cut()
-	if(BB)
-		qdel(BB)
 	. = ..()
 
 //Gun loading types

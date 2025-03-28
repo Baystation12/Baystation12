@@ -43,9 +43,7 @@
 		int_mag -= chambered
 		contents -= chambered
 	//finds the projectile from chambered
-	var/obj/item/projectile/proj = chambered.BB
-	//removes the projectile from chambered
-	chambered.BB = null
+	var/obj/item/projectile/proj = chambered.get_bb()
 	//puts the projectile at the user's loc
 	proj.forceMove(user.loc)
 	//launches the projectile

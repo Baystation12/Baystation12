@@ -62,7 +62,7 @@
 		if(mag_use.stored_ammo.len == 0)
 			return null
 		var/obj/item/ammo_casing/casing = mag_use.stored_ammo[1]
-		var/obj/item/projectile/proj = casing.expend()
+		var/obj/item/projectile/proj = casing.get_bb()
 		mag_use.stored_ammo -= casing
 		return proj
 
