@@ -262,7 +262,7 @@
 			Shoot(target, src.loc, src)
 			if(casingtype_use)
 				var/obj/item/ammo_casing/casing = new casingtype(get_turf(src))
-				if(!isnull(casing.BB))
+				if(!casing.spent)
 					casing.expend()
 			sleep(burstdelay_use)
 	var/fire_delay_use = ranged_fire_delay
