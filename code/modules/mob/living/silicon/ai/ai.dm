@@ -71,6 +71,7 @@ var/list/ai_verbs_default = list(
 	var/datum/announcement/priority/announcement
 	var/hologram_follow = 1
 	var/resist_carding = 1
+	var/last_routing_check //Holy fuuuuuuuuuck
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/carded
@@ -210,19 +211,22 @@ var/list/ai_verbs_default = list(
 		to_chat(src,"<span class = 'notice'>You need an eye object to do this!</span>")
 		return
 
-	var/list/viewed_nodes = view(7,eyeobj) & nodes_accessed
-
-	var/ctr = 0
-	for(var/n in viewed_nodes)
-		ctr++
-		var/obj/structure/ai_routing_node/node = n
-		var/area/node_area = node.loc.loc
-		for(var/turf/t in node_area)
-			var/image/image_send = image('code/modules/halo/icons/machinery/ai_area_displays.dmi',t,"area[ctr]")
-			image_to(src,image_send)
-			spawn(RANGECHECK_DELETE_DELAY)
-				qdel(image_send)
-
+	if((world.time - src.last_routing_check) <= 1 MINUTE) //Yeah, no thanks buddy. Also freaky (()) usage
+		to_chat(src, "You are attempting to use this too fast!")
+		return FALSE
+	else
+		var/list/viewed_nodes = view(7,eyeobj) & nodes_accessed
+		src.last_routing_check = world.time
+		var/ctr = 0
+		for(var/n in viewed_nodes)
+			ctr++
+			var/obj/structure/ai_routing_node/node = n
+			var/area/node_area = node.loc.loc
+			for(var/turf/t in node_area)
+				var/image/image_send = image('code/modules/halo/icons/machinery/ai_area_displays.dmi',t,"area[ctr]")
+				image_to(src,image_send)
+				spawn(RANGECHECK_DELETE_DELAY)
+					qdel(image_send)
 
 /mob/living/silicon/ai/proc/do_network_alert(var/message,var/severity = "danger")
 	message = "\[NETWORK ALERT\] \[[network]\] [message]"
