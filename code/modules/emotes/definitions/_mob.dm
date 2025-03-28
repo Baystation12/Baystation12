@@ -1,6 +1,7 @@
 /mob
 	var/list/default_emotes = list()
 	var/list/usable_emotes = list()
+	var/last_used_audible_emote //lol
 
 /mob/proc/update_emotes(var/skip_sort)
 	usable_emotes.Cut()
