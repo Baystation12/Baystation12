@@ -189,6 +189,7 @@
 #include "code\controllers\subsystems\lighting.dm"
 #include "code\controllers\subsystems\machines.dm"
 #include "code\controllers\subsystems\profiler.dm"
+#include "code\controllers\subsystems\projectiles.dm"
 #include "code\controllers\subsystems\sun.dm"
 #include "code\controllers\subsystems\trade.dm"
 #include "code\controllers\subsystems\processing\airflow.dm"

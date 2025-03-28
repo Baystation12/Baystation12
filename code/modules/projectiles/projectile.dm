@@ -9,6 +9,7 @@
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
+	glide_size = 1
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -55,12 +56,17 @@
 	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile
 	var/steps_between_delays = 2 //The amount of steps we can take between each application of step_delay
 
+	var/last_process
+	var/last_projectile_move
+	var/paused //Nonfunctional but included for later potential work
+
 	// effect types to be used
 	var/muzzle_type
 	var/tracer_type
 	var/impact_type
 
-	var/tracer_delay_time //If defined tracer effects will wait this time before being deleted.
+	var/tracer_delay_time //If defined tracer effects will wait this time before being deleted
+	var/kill_minus_grace = 0
 
 	var/fire_sound
 
@@ -78,6 +84,7 @@
 		animate_movement = SLIDE_STEPS
 	else
 		animate_movement = NO_STEPS
+	kill_minus_grace = initial(kill_count) - SUPPRESSION_GRACE_STEPS
 	. = ..()
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
@@ -153,7 +160,7 @@
 
 	spawn()
 		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
-		Process()
+		START_PROCESSING(SSprojectiles,src)
 
 	return 0
 
@@ -167,9 +174,9 @@
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
 		permutated += V
-		loc = pick(user.locs)
+		forceMove(pick(V.locs))
 	else
-		loc = get_turf(user) //move the projectile out into the world
+		forceMove(get_turf(user)) //move the projectile out into the world
 
 	firer = user
 	shot_from = launcher.name
@@ -245,6 +252,8 @@
 	return 1
 
 /obj/item/projectile/proc/do_suppression_aoe(var/turf/location)
+	if(!istype(location))
+		return
 	var/obj/effect/overmap/om = map_sectors["[location.z]"]
 	var/list/searchthrough
 	if(om)
@@ -336,8 +345,16 @@
 	return 1
 
 /obj/item/projectile/Process()
-	spawn while(src && src.loc)
-		if(kill_count < initial(kill_count) - SUPPRESSION_GRACE_STEPS)
+	last_process = world.time
+	if(!loc || !trajectory)
+		return PROCESS_KILL
+	if(paused || !isturf(loc))
+		last_projectile_move += world.time - last_process
+		return
+	var/elapsed_time_deciseconds = (world.time - last_projectile_move) //Lag compensation, I think.
+	var/required_moves = Floor(elapsed_time_deciseconds / step_delay, 1) * steps_between_delays
+	for(var/i = 1 to required_moves)
+		if(kill_count <  kill_minus_grace)
 			do_suppression_aoe(loc)
 
 		if(kill_count-- < 1)
@@ -362,6 +379,7 @@
 			return
 		before_move()
 		Move(location.return_turf())
+		last_projectile_move = world.time
 		steps_taken++
 		if(!bumped && original && !isturf(original))
 			if(loc == get_turf(original))
@@ -373,6 +391,7 @@
 			muzzle_effect(effect_transform)
 		else if(!bumped)
 			tracer_effect(effect_transform)
+
 
 		if(!hitscan || steps_between_delays == 1 || steps_taken % steps_between_delays == 0)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
