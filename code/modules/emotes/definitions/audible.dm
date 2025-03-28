@@ -3,10 +3,18 @@
 	emote_message_3p = "USER burps."
 	message_type = AUDIBLE_MESSAGE
 	var/emote_sound
+	var/emote_cooldown = 2 SECONDS
 
 /decl/emote/audible/do_extra(var/atom/user)
-	if(emote_sound)
-		playsound(user.loc, emote_sound, 50, 0)
+	var/mob/helduser = user
+	if((world.time - helduser.last_used_audible_emote) <= emote_cooldown)
+		to_chat(helduser, "You're attempting to use audible emotes too fast (anti-spam audio mute)!")
+		return FALSE
+	else
+		helduser.last_used_audible_emote = world.time //Ensure this uses world.time to prevent server lag from allowing server-crashing spam (timer failure)
+		if(emote_sound)
+			playsound(user.loc, emote_sound, 50, 0)
+
 
 /decl/emote/audible/species_sound
 	var/list/species_sounds = list() //Put typepaths = soundfile in here.
