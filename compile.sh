@@ -48,6 +48,7 @@ then
 	rm switchable_maps
 fi
 
+dos2unix .github/workflows/tests.yml
 # depends on # of spaces, which isn't the best, but hopefully that doesn't change much
 grep -P "\s{10}- " .github/workflows/tests.yml | while read -r line ; do
 
