@@ -400,11 +400,12 @@
 		else if(!bumped)
 			tracer_effect(effect_transform)
 
+
 		if(bumped)
 			break
 
-//		if(!hitscan || steps_between_delays == 1 || steps_taken % steps_between_delays == 0)
-		sleep(step_delay)	//Add delay between movement. We might not need the check above any more given how the rest of the code above is handling things.
+		if(!hitscan || steps_between_delays == 1 || steps_taken % steps_between_delays == 0)
+			sleep(step_delay)	//Add delay between movement.
 
 /obj/item/projectile/proc/before_move()
 	return 0
