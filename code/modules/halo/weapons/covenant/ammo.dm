@@ -3,7 +3,7 @@
 #define NEEDLER_SHRAPNEL_AP 50
 #define NEEDLER_SUPERCOMBINE_SHRAPNEL_DAMAGE_MULT 1.5
 #define FUEL_ROD_IRRADIATE_RANGE 2
-#define FUEL_ROD_IRRADIATE_AMOUNT 10
+#define FUEL_ROD_IRRADIATE_AMOUNT 3
 
  // need icons for all projectiles and magazines
 /obj/item/projectile/bullet/covenant
@@ -241,7 +241,7 @@
 	desc = "This projectile leaves a green trail in its wake."
 	damage = 25
 	shield_damage = 10
-	armor_penetration = 35 //A lot less rounds in a mag than the counterpart BR.
+	armor_penetration = 25 //A lot less rounds in a mag than the counterpart BR.
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
@@ -258,7 +258,8 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(1)
+	if(prob(30))
+		L.rad_act(1)
 	. = ..()
 
 /obj/effect/projectile/type51carbine

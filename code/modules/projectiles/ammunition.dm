@@ -17,7 +17,7 @@
 	var/inscribe_label
 	var/spent_icon = "s-casing-spent"
 	var/in_pile = 1
-	var/max_in_pile = 30
+	var/max_in_pile = 300
 
 /obj/item/ammo_casing/proc/expend()
 	spent = 1
@@ -94,6 +94,8 @@
 	. = ..()
 	if (spent)
 		to_chat(user, "This one is spent.")
+		if(in_pile > 1)
+			to_chat(user, "There are [in_pile] in the pile.")
 
 /obj/item/ammo_casing/attack_hand(var/mob/user)
 	if(in_pile > 1)
@@ -105,25 +107,29 @@
 	else
 		. = ..()
 
-/obj/item/ammo_casing/proc/add_to_pile(var/amt = 1)
-	if(in_pile + amt > max_in_pile)
+/obj/item/ammo_casing/proc/can_add_to_pile(var/amt = 1)
+	if(in_pile == -1 || in_pile + amt > max_in_pile)
 		return 0
-	in_pile += amt
-	update_icon()
 	return 1
 
-/obj/item/ammo_casing/Move(var/atom/A)
-	if(in_pile == 1 && spent && !isnull(A))
+/obj/item/ammo_casing/proc/add_to_pile(var/amt = 1)
+	in_pile += amt
+	update_icon()
+
+/obj/item/ammo_casing/throw_impact(var/atom/A)
+	. = ..()
+	if(spent && !isnull(A))
 		var/list/casing_search = A.contents - src
 		var/obj/item/ammo_casing/here = 1
 		while(!isnull(here))
 			here = locate(type) in casing_search
-			if(here && here.add_to_pile())
+			if(here && here.can_add_to_pile(in_pile))
+				here.add_to_pile(in_pile)
+				in_pile = -1
 				qdel(src)
 				return 0
 			casing_search -= here
 		atom_despawner.mark_for_despawn(src)
-	. = ..()
 
 /obj/item/ammo_casing/Destroy()
 	in_pile = 0

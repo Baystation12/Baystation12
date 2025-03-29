@@ -200,8 +200,21 @@ obj/structure/closet/crate/supply_drop/mass_ammo/odst/WillContain()
 			manifest.info += "[initial(p.name)] Ammunition x Not Available\n"
 			continue
 		manifest.info += "[initial(p.name)] Ammunition x [drop_amt]\n"
-		for(var/i = 1 to drop_amt)
-			c.contents += new p.magazine_type (c)
+		var/item_drop = p.magazine_type
+		if(isnull(item_drop))
+			switch(p.caliber)
+				if("shotgunhighpower")
+					item_drop = /obj/item/ammo_box/shotgun
+				if("railslug")
+					drop_amt /= 2
+					item_drop = /obj/item/ammo_box/railrifle
+				if("14.5mmtracerless")
+					item_drop = /obj/item/ammo_box/heavysniper
+				else
+					item_drop = null
+		if(!isnull(item_drop))
+			for(var/i = 1 to drop_amt)
+				c.contents += new item_drop (c)
 	return c
 
 

@@ -165,7 +165,10 @@ SUBSYSTEM_DEF(garbage)
 				var/type = D.type
 				var/datum/qdel_item/I = items[type]
 				if(!I.failures)
-					crash_with("GC: -- \ref[D] | [type] was unable to be GC'd --")
+					log_debug("GC: -- \ref[D] | [type] was unable to be GC'd --")
+					HardDelete(D)
+					if(MC_TICK_CHECK)
+						break
 				I.failures++
 			if (GC_QUEUE_HARDDELETE)
 				HardDelete(D)
