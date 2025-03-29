@@ -573,7 +573,7 @@
 	var/distance = get_dist(P.starting,P.loc)
 	var/miss_modifier = passive_tohit_boost
 	miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*P.accuracy) + miss_modifier, 0)
-	if(prob(round(miss_modifier * 1.3,1))) //We're mimicking normal hit chances, which have a 30% chance to hit a random limb when they miss. We don't have limbs, so we just improve the hit chance.
+	if(round(miss_modifier))
 		visible_message("<span class='notice'>\The [P] misses [src] narrowly!</span>")
 		return PROJECTILE_CONTINUE_NODAMAGE
 
