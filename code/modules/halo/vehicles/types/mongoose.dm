@@ -23,6 +23,8 @@
 
 	light_color = "#E1FDFF"
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL
+
 	can_smoke = 1
 	smoke_ammo = 3
 	smoke_ammo_max = 3

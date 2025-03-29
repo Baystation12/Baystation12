@@ -30,6 +30,8 @@
 
 	light_color = "#C1CEFF"
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL
+
 /obj/vehicles/prophet_throne/update_object_sprites()
 	overlays.Cut()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]

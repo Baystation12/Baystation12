@@ -6,6 +6,8 @@
 
 	light_color = "#E1FDFF"
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL
+
 /obj/vehicles/drop_pod/overmap/SOEIV
 	name = "SOEIV"
 	desc = "Single Occupant Exoatmospheric Insertion Vehice, also known as a drop pod."
@@ -13,3 +15,5 @@
 	icon_state = "SOEIV"
 
 	light_color = "#E1FDFF"
+
+	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL

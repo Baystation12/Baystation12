@@ -142,9 +142,10 @@
 #define ARMOR_BLOCK_CHANCE_MULT 1.0
 
 // Special return values from bullet_act(). Positive return values are already used to indicate the blocked level of the projectile.
-#define PROJECTILE_CONTINUE   -1 //if the projectile should continue flying after calling bullet_act()
-#define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
-#define PROJECTILE_ABSORB -3	 //if the projectile should not continue processing and silently delete
+#define PROJECTILE_CONTINUE   -1		//if the projectile should continue flying after calling bullet_act()
+#define PROJECTILE_FORCE_MISS -2		//if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
+#define PROJECTILE_ABSORB -3			//if the projectile should not continue processing and silently delete
+#define PROJECTILE_CONTINUE_NODAMAGE -4	//If the projectile should continue flying after calling bullet_act() and also do no damage.
 
 //Camera capture modes
 #define CAPTURE_MODE_REGULAR 0 //Regular polaroid camera mode

@@ -11,6 +11,7 @@
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 	var/can_traverse_zs = 0
+	var/passive_tohit_boost = VEHICLE_ACCBOOST_STANDARD//This is the boost people get to acc when hitting this vehicle.
 
 	var/next_move_input_at = 0//When can we send our next movement input?
 	var/moving_x = 0
@@ -569,6 +570,13 @@
 				playsound(loc,move_sound,75,0,4)
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	var/distance = get_dist(P.starting,P.loc)
+	var/miss_modifier = passive_tohit_boost
+	miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*P.accuracy) + miss_modifier, 0)
+	if(prob(round(miss_modifier * 1.3,1))) //We're mimicking normal hit chances, which have a 30% chance to hit a random limb when they miss. We don't have limbs, so we just improve the hit chance.
+		visible_message("<span class='notice'>\The [P] misses [src] narrowly!</span>")
+		return PROJECTILE_CONTINUE_NODAMAGE
+
 	var/pos_to_dam = should_damage_occ()
 	var/mob/mob_to_dam
 	if(movement_destroyed)

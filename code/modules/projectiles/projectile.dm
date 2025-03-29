@@ -302,7 +302,12 @@
 		else
 			passthrough = 1 //so ghosts don't stop bullets
 	else
-		passthrough = (A.bullet_act(src, def_zone) == PROJECTILE_CONTINUE) //backwards compatibility
+		var/bulRet = A.bullet_act(src, def_zone)
+		if(bulRet == PROJECTILE_CONTINUE_NODAMAGE)
+			permutated.Add(A)
+			return 0
+		else
+			passthrough = (bulRet == PROJECTILE_CONTINUE) //backwards compatibility
 		if(isturf(A))
 			for(var/obj/O in A)
 				O.bullet_act(src)

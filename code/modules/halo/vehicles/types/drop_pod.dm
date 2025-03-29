@@ -19,6 +19,8 @@
 
 	exposed_positions = list()
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL
+
 	can_smoke = 1
 	smoke_ammo = 1
 	smoke_ammo_max = 1
