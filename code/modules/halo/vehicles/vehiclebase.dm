@@ -593,7 +593,7 @@
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
 			return
-	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour,P.armor_penetration)
 	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
