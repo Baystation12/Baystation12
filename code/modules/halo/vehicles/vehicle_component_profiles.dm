@@ -38,7 +38,8 @@
 		else if(prob(100 - max_comp_coverage))
 			comp_to_dam = pick(vital_components)
 	var/comp_resistance = comp_to_dam.get_resistance_for(proj_damtype)/100
-	comp_to_dam.damage_integrity(proj_damage*(1 - comp_resistance))
+	//This is intentionally Floor() and not Round(). They're vehicles, we'll give them the upside here. Round down. always.
+	comp_to_dam.damage_integrity(Floor(proj_damage*(1 - comp_resistance)))
 
 /datum/component_profile/proc/take_comp_explosion_dam(var/ex_severity)
 	var/max_comp_coverage = get_coverage_sum()
