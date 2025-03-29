@@ -35,7 +35,7 @@
 
 /obj/item/vehicle_component/health_manager/sparrowhawk
 	integrity = 400
-	resistances = list("bullet"=60,"energy"=60,"emp"=40,"bomb"=65)
+	resistances = list("bullet"=70,"energy"=70,"emp"=40,"bomb"=65)
 
 /datum/component_profile/sparrowhawk
 	pos_to_check = "driver"

@@ -18,7 +18,7 @@
 
 /obj/item/vehicle_component/health_manager/drop_pod/reinforced
 	integrity = 300
-	resistances = list("bullet"= 50,"energy"= 50,"emp"= 25,"bomb" = 50)
+	resistances = list("bullet"= 60,"energy"= 60,"emp"= 25,"bomb" = 50)
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
 	//Enclosed, we don't need to care about the person-sprites.

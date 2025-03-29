@@ -251,7 +251,7 @@
 
 /obj/item/vehicle_component/health_manager/drop_pod
 	integrity = 200
-	resistances = list("bullet"= 25,"energy"= 25,"emp"= 25,"bomb" = 25)		//very little armour
+	resistances = list("bullet"= 35,"energy"= 35,"emp"= 25,"bomb" = 25)		//very little armour
 
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"

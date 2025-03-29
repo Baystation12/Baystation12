@@ -37,7 +37,7 @@
 
 /obj/item/vehicle_component/health_manager/banshee
 	integrity = 400
-	resistances = list("bullet"=60,"energy"=60,"emp"=40,"bomb"=65)
+	resistances = list("bullet"=70,"energy"=70,"emp"=40,"bomb"=65)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/banshee

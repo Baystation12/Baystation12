@@ -41,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("bullet"=85,"energy"=85,"emp"=40,"bomb"=40)
+	resistances = list("bullet"=95,"energy"=95,"emp"=40,"bomb"=40)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
