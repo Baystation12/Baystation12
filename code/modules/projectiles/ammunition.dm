@@ -17,7 +17,8 @@
 	var/inscribe_label
 	var/spent_icon = "s-casing-spent"
 	var/in_pile = 1
-	var/max_in_pile = 30
+	var/max_in_pile = 300
+	var/anim_time = 8
 
 /obj/item/ammo_casing/proc/expend()
 	spent = 1
@@ -37,7 +38,8 @@
 /obj/item/ammo_casing/proc/eject(var/turf/landing, var/dir_throw)
 	forceMove(landing)
 	throw_at(get_edge_target_turf(landing, dir_throw), rand(1,3), 1)
-	animate(src, pixel_x = rand(-16,16), pixel_y = rand(-16,16), transform = turn(matrix(), rand(120,300)), time  = rand(3,8))
+	anim_time = rand(3,8)
+	animate(src, pixel_x = rand(-16,16), pixel_y = rand(-16,16), transform = turn(matrix(), rand(120,300)), time  = anim_time)
 	// Aurora forensics port, gunpowder residue.
 	if(leaves_residue)
 		leave_residue()
@@ -94,6 +96,8 @@
 	. = ..()
 	if (spent)
 		to_chat(user, "This one is spent.")
+		if(in_pile > 1)
+			to_chat(user, "There are [in_pile] in the pile.")
 
 /obj/item/ammo_casing/attack_hand(var/mob/user)
 	if(in_pile > 1)
@@ -105,25 +109,32 @@
 	else
 		. = ..()
 
-/obj/item/ammo_casing/proc/add_to_pile(var/amt = 1)
-	if(in_pile + amt > max_in_pile)
+/obj/item/ammo_casing/proc/can_add_to_pile(var/amt = 1)
+	if(in_pile == -1 || in_pile + amt > max_in_pile)
 		return 0
-	in_pile += amt
-	update_icon()
 	return 1
 
-/obj/item/ammo_casing/Move(var/atom/A)
-	if(in_pile == 1 && spent && !isnull(A))
+/obj/item/ammo_casing/proc/add_to_pile(var/amt = 1,var/delay = 0)
+	if(delay > 0)
+		sleep(delay)
+	in_pile += amt
+	update_icon()
+
+/obj/item/ammo_casing/throw_impact(var/atom/A)
+	. = ..()
+	if(spent && !isnull(A))
 		var/list/casing_search = A.contents - src
 		var/obj/item/ammo_casing/here = 1
 		while(!isnull(here))
 			here = locate(type) in casing_search
-			if(here && here.add_to_pile())
+			if(here && here.can_add_to_pile(in_pile))
+				here.add_to_pile(in_pile, anim_time)
+				in_pile = -1
+				sleep(2+anim_time)
 				qdel(src)
 				return 0
 			casing_search -= here
 		atom_despawner.mark_for_despawn(src)
-	. = ..()
 
 /obj/item/ammo_casing/Destroy()
 	in_pile = 0

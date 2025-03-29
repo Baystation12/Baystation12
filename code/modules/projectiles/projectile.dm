@@ -85,6 +85,7 @@
 	else
 		animate_movement = NO_STEPS
 	kill_minus_grace = initial(kill_count) - SUPPRESSION_GRACE_STEPS
+	last_projectile_move = world.time
 	. = ..()
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
@@ -335,6 +336,7 @@
 	set_density(0)
 	invisibility = 101
 
+	STOP_PROCESSING(SSprojectiles,src)
 	qdel(src)
 	return 1
 
@@ -352,7 +354,12 @@
 		last_projectile_move += world.time - last_process
 		return
 	var/elapsed_time_deciseconds = (world.time - last_projectile_move) //Lag compensation, I think.
-	var/required_moves = Floor(elapsed_time_deciseconds / step_delay, 1) * steps_between_delays
+	var/required_moves = 1
+	if(hitscan || step_delay == 0)
+		required_moves = kill_count
+	else
+		required_moves = Floor(elapsed_time_deciseconds / step_delay, 1) * steps_between_delays
+
 	for(var/i = 1 to required_moves)
 		if(kill_count <  kill_minus_grace)
 			do_suppression_aoe(loc)
@@ -360,23 +367,24 @@
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
-			return
+			return PROCESS_KILL
 		if((!( current ) || loc == current))
 			current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 		if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
 			qdel(src)
-			return
+			return PROCESS_KILL
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
-			return
+			return PROCESS_KILL
 
 		if (is_below_sound_pressure(get_turf(src)) && !vacuum_traversal) //Deletes projectiles that aren't supposed to bein vacuum if they leave pressurised areas
 			qdel(src)
-			return
+			return PROCESS_KILL
+
 		before_move()
 		Move(location.return_turf())
 		last_projectile_move = world.time
@@ -385,16 +393,18 @@
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
-						return
+						return PROCESS_KILL
 
 		if(steps_taken == 1)
 			muzzle_effect(effect_transform)
 		else if(!bumped)
 			tracer_effect(effect_transform)
 
+		if(bumped)
+			break
 
-		if(!hitscan || steps_between_delays == 1 || steps_taken % steps_between_delays == 0)
-			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
+//		if(!hitscan || steps_between_delays == 1 || steps_taken % steps_between_delays == 0)
+		sleep(step_delay)	//Add delay between movement. We might not need the check above any more given how the rest of the code above is handling things.
 
 /obj/item/projectile/proc/before_move()
 	return 0
