@@ -351,7 +351,6 @@
 	for(var/mob/living/l in range(FUEL_ROD_IRRADIATE_RANGE,loc))
 		l.rad_act(FUEL_ROD_IRRADIATE_AMOUNT)
 	. = ..()
-	qdel(src)
 
 /obj/item/ammo_magazine/concussion_rifle
 	name = "Type-50 Directed Energy Rifle / Heavy Magazine"

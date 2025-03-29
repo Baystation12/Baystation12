@@ -1,4 +1,6 @@
 #define SUPPRESSION_GRACE_STEPS 2//How many steps can a bullet make before it actually starts suppressing people.
+#define PROJ_OFFSET_MAX 14
+#define PROJ_OFFSET_MIN 5
 
 /obj/item/projectile
 	name = "projectile"
@@ -9,7 +11,7 @@
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
-	glide_size = 1
+	glide_size = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -432,7 +434,16 @@
 	effect_transform.Scale(trajectory.return_hypotenuse(), 1)
 	effect_transform.Turn(-trajectory.return_angle())		//no idea why this has to be inverted, but it works
 
-	transform = turn(transform, -(trajectory.return_angle() + 90)) //no idea why 90 needs to be added, but it works
+	apply_transform()
+
+/obj/item/projectile/proc/apply_transform()
+	var/traj_angle = -(trajectory.return_angle() + 90)
+	var/matrix/transform_far = transform //Get a copy.
+	transform_far = transform_far.Translate(0,-PROJ_OFFSET_MAX)
+	transform_far = turn(transform_far, traj_angle)
+	transform = transform.Translate(0,rand(PROJ_OFFSET_MAX,PROJ_OFFSET_MIN)) //Shift it to the edge of the tile.
+	transform = turn(transform, traj_angle) //no idea why 90 needs to be added, but it works
+	animate(src,transform = transform_far, dir = dir, time = rand(4,10), loop = -1)
 
 /obj/item/projectile/proc/muzzle_effect(var/matrix/T)
 	if(silenced)
