@@ -28,4 +28,4 @@
 	w_class = ITEM_SIZE_LARGE
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	ammo_type = /obj/item/ammo_casing/railslug
-	slowdown_general = 0.5
+	slowdown_general = 0.4

@@ -14,7 +14,9 @@
 	charge_meter = 0
 	dispersion = list(0.2, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.3, 0.4, 0.4, 0.4, 0.5)
 	w_class = ITEM_SIZE_HUGE
-	slowdown_general = 0.5
+	slowdown_general = 0.3
+	move_delay_malus = 1.1
+	fire_delay = 5 //Slightly lower than normal.
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',

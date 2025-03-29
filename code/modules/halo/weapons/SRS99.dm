@@ -33,6 +33,7 @@
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
+	slowdown_general = 0.3
 
 /obj/item/weapon/gun/projectile/srs99_sniper/can_use_when_prone()
 	return 1

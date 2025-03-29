@@ -23,7 +23,9 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 	burst_delay = 1.5
-	slowdown_general = 0.5
+	slowdown_general = 0.3
+	move_delay_malus = 1.1
+	fire_delay = 5 //Slightly lower than normal.
 
 	burst = 12
 
