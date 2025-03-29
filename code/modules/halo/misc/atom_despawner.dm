@@ -48,11 +48,11 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 	//check if its time to despawn
 	if(world.time > spawn_time + atom_timeout)
 
+		cleanables -= target
 		//if we're being carried, dont bother cleaning us
 		var/mob/M = target.loc
 		if(!istype(M))
 			qdel(target)
-		cleanables -= target
 
 /datum/controller/process/atom_despawner/proc/mark_for_despawn(var/atom/movable/AM)
 	. = 0

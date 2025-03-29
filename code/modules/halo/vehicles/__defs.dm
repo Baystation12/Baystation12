@@ -5,7 +5,7 @@
 #define ITEM_SIZE_VEHICLE 8
 #define ITEM_SIZE_VEHICLE_LARGE 9
 
-#define VEHICLE_ACCBOOST_SMALL 0 //Small or nimble craft. eg Ghost. Mongoose
+#define VEHICLE_ACCBOOST_SMALL 1 //Small or nimble craft. Originally for mongeese but their single tile nature makes them pretty evasive already.
 #define VEHICLE_ACCBOOST_STANDARD 2 //Most vehicles. eg. Warthog
 #define VEHICLE_ACCBOOST_LARGE 4 //Slow and unevasive vehicles. eg. Scorpion. Dropships
 #define VEHICLE_ACCBOOST_VERY_LARGE 6

@@ -571,9 +571,10 @@
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/distance = get_dist(P.starting,P.loc)
-	var/miss_modifier = passive_tohit_boost
-	miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*P.accuracy) + miss_modifier, 0)
-	if(round(miss_modifier))
+	var/miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*(P.accuracy+passive_tohit_boost)), 0)
+	miss_modifier = round(miss_modifier * 0.7,1)
+	log_debug("Miss Mod:[miss_modifier]")
+	if(prob(miss_modifier))  //The x0.7 is replicating the 30% chance to hit a random limb in mob-targeting.
 		visible_message("<span class='notice'>\The [P] misses [src] narrowly!</span>")
 		return PROJECTILE_CONTINUE_NODAMAGE
 
