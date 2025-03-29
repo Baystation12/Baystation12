@@ -22,6 +22,7 @@
 
 /obj/item/projectile/bullet/hmg127_he
 	damage = 40
+	armor_penetration = 30
 
 //CHAINGUN AMMO DEFINES//
 /obj/item/ammo_magazine/chaingun_boxmag
@@ -40,6 +41,10 @@
 	multiple_sprites = 1
 
 //PLASTURRET AMMO DEFINES//
+
+/obj/item/projectile/bullet/covenant/plasmarepeater/plasturret
+	armor_penetration = 15
+
 /obj/item/ammo_magazine/plasturret_boxmag
 	name = "cell container (Type-52 Directed Energy Support Weapon)"
 	desc = "A container for cells, designed for use with the Type-52 Directed Energy Support Weapon"
@@ -60,4 +65,4 @@
 	desc = "A self-contained power cell for the Type-52 Directed Energy Support Weapon"
 	icon = 'code/modules/halo/weapons/turrets/turret_cov_casing.dmi'
 	caliber = "plas_turret_cells"
-	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarepeater/plasturret

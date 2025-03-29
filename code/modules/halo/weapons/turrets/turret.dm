@@ -22,9 +22,9 @@
 	var/obj/item/weapon/gun/projectile/turret_gun = /obj/item/weapon/gun/projectile/turret //The "gun" the turret uses to fire.
 	var/obj/stand = /obj/structure/bipod //The object reference to the object to replace with when the gun is removed.
 	var/remove_time = 5 //The time it takes to rip the gun off the stand, in seconds. Quarter this is pack-up time.
-	var/bullet_deflect_chance = 75
-	var/bullet_deflect_chance_max = 75 //The chance the gun has to reflect projectiles, from the sides
-	var/bullet_deflect_chance_min = 30
+	var/bullet_deflect_chance = 75 //The chance the gun has to deflect (cause-no-damage-to-user) projectiles.
+	var/bullet_deflect_chance_max = 75
+	var/bullet_deflect_chance_min = 35
 	var/armor_pen_divisor = 2 //Used when calculating how much armor pen is converted into extra damage to the deflect chance.
 	var/bullet_deflect_chance_reset_time = 4 SECONDS //How long it takes until the game fully resets the deflect chance.
 	var/bullet_deflect_reset_at = 0
