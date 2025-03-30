@@ -173,7 +173,7 @@
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(0.5)
-	M.add_chemical_effect_diminishing(CE_SLOWREMOVE, 1,dose,metabolism)
+	M.add_chemical_effect_diminishing(CE_SLOWREMOVE, 0.5,dose,metabolism)
 	M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/hyperzine_concentrated
