@@ -37,7 +37,9 @@
 			comp_to_dam = pick(components)
 		else if(prob(100 - max_comp_coverage))
 			comp_to_dam = pick(vital_components)
-	var/comp_resistance = (comp_to_dam.get_resistance_for(proj_damtype)-proj_ap)/100
+	var/comp_resistance = max(comp_to_dam.get_resistance_for(proj_damtype)-proj_ap,0)
+	if(comp_resistance > 0)
+		comp_resistance /= 100
 	//This is intentionally Floor() and not Round(). They're vehicles, we'll give them the upside here. Round down. always.
 	comp_to_dam.damage_integrity(Floor(proj_damage*(1 - comp_resistance)))
 
