@@ -33,6 +33,8 @@
 
 	scoped_accuracy = 7
 
+	slowdown_general = 0.3
+
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/forerunner_sprites_inhand_l.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/forerunner_sprites_inhand_r.dmi',

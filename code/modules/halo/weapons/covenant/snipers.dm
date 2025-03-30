@@ -93,6 +93,8 @@
 		)
 	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
+	slowdown_general = 0.3
+
 /obj/item/weapon/gun/energy/beam_rifle/can_use_when_prone()
 	return 1
 

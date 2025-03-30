@@ -18,15 +18,15 @@
 	caliber = "12.7mm"
 	magazine_type = /obj/item/ammo_magazine/HMG_boxmag
 
-	fire_delay = 5 //1 lower than normal
+	fire_delay = 4 //1 lower than normal
 	dispersion = list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45)
 
 	load_time = 7
 	//Chaingun dispersions on paced shots with worse dispersion on longburst. Higher damage, but faster firing on paced shots
 	//Than chaingun provides.
 	firemodes = list(\
-	list(mode_name="paced shots",  burst=30,burst_delay = 3,fire_delay = 5, accuracy = 0, dispersion=list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45)),
-	list(mode_name="long bursts",  burst=40,burst_delay = 2,fire_delay = 7, accuracy = -1,dispersion=list(0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.55,0.55,0.6,0.6))
+	list(mode_name="paced shots",  burst=30,burst_delay = 3,fire_delay = 4, accuracy = 0, dispersion=list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45)),
+	list(mode_name="long bursts",  burst=40,burst_delay = 2,fire_delay = 6, accuracy = -1,dispersion=list(0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.55,0.55,0.6,0.6))
 	)
 
 	burst = 30
@@ -40,12 +40,12 @@
 		)
 
 	move_delay_malus = 2
-	fire_delay = 8
+	fire_delay = 7
 	accuracy = -1
 
 	firemodes = list(\
-	list(mode_name="paced shots",  burst=20,burst_delay = 3,fire_delay = 8, accuracy = -1, dispersion=list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45)),
-	list(mode_name="long bursts",  burst=10,burst_delay = 2,fire_delay = 10, accuracy = -2,dispersion=list(0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.55,0.55,0.6,0.6))
+	list(mode_name="paced shots",  burst=20,burst_delay = 3,fire_delay = 7, accuracy = -1, dispersion=list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45)),
+	list(mode_name="long bursts",  burst=10,burst_delay = 2,fire_delay = 9, accuracy = -2,dispersion=list(0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.55,0.55,0.6,0.6))
 	)
 
 	burst = 20
