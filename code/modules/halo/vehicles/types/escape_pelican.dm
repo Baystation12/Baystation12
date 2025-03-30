@@ -8,6 +8,8 @@
 
 	occupants = list(2,0)
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_LARGE
+
 	bound_height = 128
 	bound_width = 128
 

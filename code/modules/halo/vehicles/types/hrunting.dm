@@ -42,7 +42,7 @@
 
 /obj/item/vehicle_component/health_manager/hrunting
 	integrity = 500
-	resistances = list("bullet"=65,"energy"=65,"emp"=25,"bomb"=45)
+	resistances = list("bullet"=75,"energy"=75,"emp"=25,"bomb"=45)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/hrunting

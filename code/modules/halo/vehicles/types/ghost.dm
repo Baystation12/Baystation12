@@ -54,7 +54,7 @@
 
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
-	resistances = list("bullet"=65,"energy"=65,"emp"=15,"bomb" = 0)
+	resistances = list("bullet"=75,"energy"=75,"emp"=15,"bomb" = 0)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/ghost
@@ -71,7 +71,7 @@
 
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	burst_delay = 2
-	fire_delay = 15
+	fire_delay = 7
 
 	burst = 8
 	dispersion = list(0.15,0.3,0.45,0.5,0.55)

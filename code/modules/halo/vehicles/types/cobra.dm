@@ -117,7 +117,7 @@
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
-	resistances = list("bullet"=75,"energy"=75,"emp"=25,"bomb"=70)
+	resistances = list("bullet"=85,"energy"=75,"emp"=25,"bomb"=70)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/cobra
@@ -129,18 +129,18 @@
 	name = "Cobra Cannon"
 	desc = "Twin linked railguns."
 
-	fire_delay = 2 SECONDS
+	fire_delay = 10
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 2
-	burst_delay = 0.5 SECONDS
+	burst_delay = 5
 	magazine_type = /obj/item/ammo_magazine/cobra_cannon
 
 /obj/item/weapon/gun/vehicle_turret/cobra_sniper
 	name = "Cobra Sniper Cannon"
 	desc = "Railgun single fire mode, heavy anti armour."
 
-	fire_delay = 35
+	fire_delay = 30
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 1

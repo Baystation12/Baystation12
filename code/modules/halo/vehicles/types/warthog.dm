@@ -43,7 +43,7 @@
 
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
-	resistances = list("bullet"=65,"energy"=65,"emp"=25,"bomb"=45)
+	resistances = list("bullet"=75,"energy"=75,"emp"=25,"bomb"=45)
 
 /datum/component_profile/warthog
 	pos_to_check = "gunner"
@@ -66,6 +66,7 @@
 
 	burst = 15
 	burst_delay = 1.75
+	fire_delay = 5
 
 	magazine_type = /obj/item/ammo_magazine/warthog_mag
 

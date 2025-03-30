@@ -27,6 +27,8 @@
 
 	light_color = "#E1FDFF"
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_LARGE
+
 	can_smoke = 1
 	smoke_ammo = 5
 	smoke_ammo_max = 5
@@ -39,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("bullet"=85,"energy"=85,"emp"=40,"bomb"=40)
+	resistances = list("bullet"=95,"energy"=95,"emp"=40,"bomb"=40)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
@@ -77,7 +79,7 @@
 	burst_size = 10
 	burst_delay = 1
 	dispersion = list(0.55)
-	fire_delay = 8
+	fire_delay = 7
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_coax
 

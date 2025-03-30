@@ -27,6 +27,8 @@
 
 	light_color = "#C1CEFF"
 
+	passive_tohit_boost = VEHICLE_ACCBOOST_LARGE
+
 	can_smoke = 1
 	smoke_ammo = 5
 	smoke_ammo_max = 5
@@ -39,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 750
-	resistances = list("bullet"=85,"energy"=85,"emp"=40,"bomb"=50)
+	resistances = list("bullet"=95,"energy"=95,"emp"=40,"bomb"=50)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/wraith
@@ -72,8 +74,8 @@
 	desc = "A short burst, mounted Plasma Rifle, used for anti-infantry purposes."
 	burst_size = 10
 	burst_delay = 1
+	fire_delay = 7
 	dispersion = list(0.55)
-	fire_delay = 8
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	mag_used = /obj/item/ammo_magazine/wraith_coax
 

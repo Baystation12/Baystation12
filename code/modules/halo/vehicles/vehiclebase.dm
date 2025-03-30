@@ -11,6 +11,7 @@
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 	var/can_traverse_zs = 0
+	var/passive_tohit_boost = VEHICLE_ACCBOOST_STANDARD//This is the boost people get to acc when hitting this vehicle.
 
 	var/next_move_input_at = 0//When can we send our next movement input?
 	var/moving_x = 0
@@ -569,6 +570,13 @@
 				playsound(loc,move_sound,75,0,4)
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	var/distance = get_dist(P.starting,loc)
+	var/miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*(P.accuracy+passive_tohit_boost)), 0)
+	miss_modifier = round(miss_modifier * 0.7,1) //The x0.7 is replicating the 30% chance to hit a random limb in mob-targeting.
+	if(prob(miss_modifier))
+		visible_message("<span class='notice'>\The [P] misses [src] narrowly!</span>")
+		return PROJECTILE_CONTINUE_NODAMAGE
+
 	var/pos_to_dam = should_damage_occ()
 	var/mob/mob_to_dam
 	if(movement_destroyed)
@@ -585,7 +593,7 @@
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
 			return
-	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour,P.armor_penetration)
 	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
