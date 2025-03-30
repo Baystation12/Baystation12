@@ -15,7 +15,11 @@
 	ai_access_level = 1
 
 /obj/Destroy()
-	STOP_PROCESSING(SSobj, src)
+	switch(is_processing)
+		if("SSobj")
+			STOP_PROCESSING(SSobj, src)
+		if("SSprojectiles")
+			STOP_PROCESSING(SSprojectiles, src)
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = GLOB.default_state)
