@@ -36,4 +36,5 @@
 		visible_message("<span class='notice'>[user] repairs [src]</span>")
 
 /obj/structure/track/ex_act(severity)
-	damaged = 1
+	if(severity != 3)
+		damaged = 1
