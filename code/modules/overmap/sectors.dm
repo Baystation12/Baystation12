@@ -162,16 +162,17 @@ var/list/points_of_interest = list()
 		targeting_locations["[located_area.name]"] = list(low_x,upper_y,upper_x,low_y)
 
 /obj/effect/overmap/proc/get_superstructure_strength() //Returns a decimal percentage calculated from currstrength/maxstrength
-	var/list/hull_strengths = list(0,0)
+	var/hull_str_max = 0
+	var/hull_str_current = 0
 	for(var/obj/effect/hull_segment/hull_segment in hull_segments)
+		hull_str_max += hull_segment.segment_strength
 		if(hull_segment.is_segment_destroyed() == 0)
-			hull_strengths[1] += hull_segment.segment_strength
-		hull_strengths[2] += hull_segment.segment_strength
+			hull_str_current += hull_segment.segment_strength
 
-	if(hull_strengths[2] == 0)
+	if(hull_str_max == 0)
 		return null
 
-	return (hull_strengths[1]/hull_strengths[2])
+	return (hull_str_current/hull_str_max)
 
 /obj/effect/overmap/proc/get_faction()
 	return faction
