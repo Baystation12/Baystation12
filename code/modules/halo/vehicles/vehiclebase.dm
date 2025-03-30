@@ -570,11 +570,10 @@
 				playsound(loc,move_sound,75,0,4)
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	var/distance = get_dist(P.starting,P.loc)
+	var/distance = get_dist(P.starting,loc)
 	var/miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*(P.accuracy+passive_tohit_boost)), 0)
-	miss_modifier = round(miss_modifier * 0.7,1)
-	log_debug("Miss Mod:[miss_modifier]")
-	if(prob(miss_modifier))  //The x0.7 is replicating the 30% chance to hit a random limb in mob-targeting.
+	miss_modifier = round(miss_modifier * 0.7,1) //The x0.7 is replicating the 30% chance to hit a random limb in mob-targeting.
+	if(prob(miss_modifier))
 		visible_message("<span class='notice'>\The [P] misses [src] narrowly!</span>")
 		return PROJECTILE_CONTINUE_NODAMAGE
 
