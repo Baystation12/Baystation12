@@ -1,5 +1,5 @@
 /datum/preferences
-	var/clientfps = 0
+	var/clientfps = 60
 	var/ooccolor = "#010000" //Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 
 	var/chat_on_map = 1
