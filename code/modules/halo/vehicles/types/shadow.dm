@@ -61,7 +61,7 @@
 	name = "Shadow Cannon"
 	desc = "A fast firing plasma weapon capable of inflicting heavy damage."
 
-	fire_delay = 8
+	fire_delay = 5
 	fire_sound = 'code/modules/halo/sounds/shadow_cannon_fire.ogg'
 
 	dispersion = list(0.15,0.3,0.45,0.5,0.55)

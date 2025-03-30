@@ -79,7 +79,7 @@
 	burst_size = 10
 	burst_delay = 1
 	dispersion = list(0.55)
-	fire_delay = 8
+	fire_delay = 7
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_coax
 

@@ -74,8 +74,8 @@
 	desc = "A short burst, mounted Plasma Rifle, used for anti-infantry purposes."
 	burst_size = 10
 	burst_delay = 1
+	fire_delay = 7
 	dispersion = list(0.55)
-	fire_delay = 8
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	mag_used = /obj/item/ammo_magazine/wraith_coax
 

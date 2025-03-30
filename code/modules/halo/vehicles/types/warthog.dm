@@ -66,6 +66,7 @@
 
 	burst = 15
 	burst_delay = 1.75
+	fire_delay = 5
 
 	magazine_type = /obj/item/ammo_magazine/warthog_mag
 

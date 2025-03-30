@@ -28,8 +28,6 @@
 
 	light_color = "#C1CEFF"
 
-	passive_tohit_boost = VEHICLE_ACCBOOST_SMALL
-
 	can_smoke = 1
 	smoke_ammo = 1
 	smoke_ammo_max = 1
@@ -73,7 +71,7 @@
 
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	burst_delay = 2
-	fire_delay = 15
+	fire_delay = 7
 
 	burst = 8
 	dispersion = list(0.15,0.3,0.45,0.5,0.55)
