@@ -82,10 +82,12 @@
 
 	if(CE_SLOWREMOVE in chem_effects) //Goes here because it checks the full tally first.
 		if(tally > 0)
-			tally = max(0, tally - SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED)
+			var/scalar = chem_effects[CE_SLOWREMOVE]
+			tally = max(0, tally - (SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED*scalar))
 
 	if(CE_SPEEDBOOST in chem_effects)
-		tally -= SPEEDBOOST_CHEM_SPEED_INCREASE
+		var/scalar = chem_effects[CE_SPEEDBOOST]
+		tally -= (SPEEDBOOST_CHEM_SPEED_INCREASE * scalar)
 
 	return (tally+config.human_delay)
 
