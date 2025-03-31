@@ -727,12 +727,13 @@
 		metab_adr = initial(metabolism) * ADRENAL_RUSH_TIME
 	if(volume > break_threshold)
 		metabolism = break_threshold*1.5
+		dose = 0 //Reset how much we've processed so far.
 		adrenal_break = 1
 	else
 		if(adrenal_break)
 			adrenal_break = 0
 			metabolism = initial(metabolism)
-	if(adrenal_break || dose < (metabolism * ADRENAL_RUSH_TIME))	//not that effective after initial rush
+	if(adrenal_break || dose < metab_adr)	//not that effective after initial rush
 		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
 		M.add_chemical_effect(CE_PULSE, 2)
 	else
