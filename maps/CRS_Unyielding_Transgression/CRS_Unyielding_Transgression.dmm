@@ -251,7 +251,7 @@
 "eQ" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/shuttle/black,/area/covenant_light_cruiser/Rearhallway)
 "eR" = (/obj/machinery/photocopier/faxmachine/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "eS" = (/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
-"eT" = (/obj/machinery/overmap_comms/receiver/battlenet,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
+"eT" = (/obj/machinery/overmap_comms/receiver/battlenet{pixel_x = 0},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "eU" = (/obj/machinery/door/airlock/multi_tile/covenant/three{covenant_secure = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "eV" = (/obj/effect/landmark/map_data{name = "CRS Unyielding Transgression"},/turf/space,/area/space)
 "eW" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Brig"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
@@ -564,7 +564,6 @@
 "kR" = (/obj/machinery/light/covenant/west,/obj/machinery/recharge_station,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/supplypods)
 "kS" = (/obj/machinery/vending/hydroseeds,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
 "kT" = (/obj/machinery/light/covenant/west,/obj/machinery/camera/autoname/invis/crs_transgression,/obj/structure/drop_pod_launchbay/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/escape_port)
-"kU" = (/obj/structure/rearm_repair_station/covenant{dir = 1; icon_state = "covenant"; pixel_y = -32},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/porthangar)
 "kV" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portgarage)
 "kW" = (/obj/machinery/light/covenant/north,/obj/machinery/camera/autoname/invis/crs_transgression,/obj/structure/rearm_repair_station/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "kX" = (/obj/machinery/seed_storage/xenobotany,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
@@ -957,7 +956,7 @@ aaaaaaaaaaaaaaaaDbDbDbDbDbDbpyhJovovovovhJoVDbjdjbhYbWZMkQiJiJiJiJefiJiJiJiJjniJ
 aaaaaaaaaaaaaaaaaaDbDbDbDbDbDbDbDbDbDbDbDbDbDbmimibWbWZMiHjaiHiHjaiHjaiHiHjaiHlHiJiJfYefiJiJiJjijijijijijijijijijikIkVlyjikIdCewdqdqdqdqdCdDdqdqdDcEdqdqdtdtdtdtdtdtdtdtdtdtdtdtdtnodqdtdtgldqgvdtdtdtkckckckckckcksmCvRZFwSwSmyvRsOsOlcldsOsOsOsOsOsOsOsOlblbnAnAnAnAnAnAnAnAnAnAaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaDbDbDbDbDbDbDbDbDbDbDbDbbWbWbWbWZMiHiJiqiqiJiHiJiqiqiJiHiJiJdJiJiJiJiJiJjvjijijijimkjijijiktiKlflflflflflflflglhlflflflflflflfdqdqdqdqdrdqgCdrdqdqdrdpdqdqdqdqdqdqdqdqdqdqdqdqdqdqdrdqdpdrdqkekevRFmSDSDmDvRlblkldldlklllmlnlmlblblblblblblblblbsOsOsOsOsOsOaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaDbDbDbDbDbDbDbDbDbDbDbbWbWbWbWZMiHjUiqiqfXiHjUiqiqfXiHjoiJiJiJiJiJiJkxiKlrjijijiiKlsjijijiiKlflflflflflflfltlhlulhlhlqlflflfdCdDcEdqdDdqdCdDdqcSdqdqdqdqdqdqewdqcEdqdqdqcSdqdqdqdqdqdqdDcSkemCvRmESDSDnnvRlblBldldldldldldldlblblblblblblblblbsOsOsOsOsOsOaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaDbDbDbDbDbDbDbDbDbbWbWbWbWZMiHjzmHiqiJiHiJmHiqjBiHiJkUiJiJiJiJiJiJjCjijijijiiKjijijijiiKlflfmFnOnilvlflhlhlDVwlDlhlflflflflflflplplplplplplpnplwlplplplplplplIlJlKlKlIQdQdQdlMQdkfkfkflNkevRvRsCSDvRvRlblbfTldldlPldldldldlkldldlkldlQlmlnsOsOoOsOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaDbDbDbDbDbDbDbDbDbbWbWbWbWZMiHjzmHiqiJiHiJmHiqjBiHiJiJiJiJiJiJiJiJjCjijijijiiKjijijijiiKlflfmFnOnilvlflhlhlDVwlDlhlflflflflflflplplplplplplpnplwlplplplplplplIlJlKlKlIQdQdQdlMQdkfkfkflNkevRvRsCSDvRvRlblbfTldldlPldldldldlkldldlkldlQlmlnsOsOoOsOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaakgkgaakkaaaaDbDbDbDbDbbWbWbWbWZMZMZMZMZMZMZMZMZMZMZMdKefiJiJiJlTiJiJefiKjijijijEiKjijijijEiKlflfnQlhlhlhlhlhlhlDVwlDlhlflflflflflflLlplLlplLlplplwlwlplplplplplplImalKmblIQdkTkYmeQdkfkfkfkekekemfkekPkfkflblblbmglUldldldldldldldldldldlmlmlmsOoXoYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabWbWZMZMZMZMZMZMZMZMZMocZMZMZMZMZMZMZMZMZMZMEYjimljimsiKmsmmjimsiKlflfJplhlhlhjMlhlhmplhlhmqlfobpbqbLnlflalplalplalplplelwlwlxlwlzlwlxlKlKmzlKmAQdkYkYmBQdkfkfkfkskekekekemCkfkflblblblblbloldlWldjNlYldjNldldldldldldjOoYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkaaaaZMZMZMZMZMZMZMZMZMZMZMZMZMZMZMZMZMZMEYoCEYiKiKiKiKiKiKiKiKlflfnqlhlhlhlflhlhlhlhlhlhlhlhlhlhRmlflElplElplElplplwlwlilwlZlClZlwjSlKlKmbrqQdlAkYmdQdkfkfkfmTkekfkflNkekfkfkfkfkfkflblblblblblblblblbldldldldldldjOoYaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
