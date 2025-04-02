@@ -11,6 +11,46 @@
 	icon_state = "carpet"
 	initial_flooring = /decl/flooring/carpet
 
+/turf/simulated/floor/carpet/browcarpet
+	name = "brown carpet"
+	icon_state = "browncarpet"
+
+/turf/simulated/floor/carpet/bcarpet
+	name = "black carpet"
+	icon_state = "bcarpet"
+
+/turf/simulated/floor/carpet/blucarpet
+	name = "blue carpet"
+	icon_state = "blucarpet"
+
+/turf/simulated/floor/carpet/turcarpet
+	name = "tur carpet"
+	icon_state = "turcarpet"
+
+/turf/simulated/floor/carpet/sblucarpet
+	name = "silver blue carpet"
+	icon_state = "sblucarpet"
+
+/turf/simulated/floor/carpet/gaycarpet
+	name = "pink carpet"
+	icon_state = "gaycarpet"
+
+/turf/simulated/floor/carpet/purcarpet
+	name = "purple carpet"
+	icon_state = "purcarpet"
+
+/turf/simulated/floor/carpet/oracarpet
+	name = "orange carpet"
+	icon_state = "oracarpet"
+
+/turf/simulated/floor/carpet/tealcarpet
+	name = "teal carpet"
+	icon_state = "tealcarpet"
+
+/turf/simulated/floor/carpet/blackcarpet
+	name = "black carpet"
+	icon_state = "blackcarpet"
+
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
