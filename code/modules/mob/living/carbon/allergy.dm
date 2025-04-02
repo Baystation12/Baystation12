@@ -1,13 +1,13 @@
 
 /* This file contains all the procs processing allergy onset, healing, and symptoms.
 For the file where the allergy trait is defined; check datum/traits/maluses/allergy.dm
-Mild allergies increase heart rate and give itch messages. Inaprovaline resolves these symptoms; but the allergy will keep running as long as a reagent is in the system.
+Mild allergies increase heart rate and give itch messages. Inaprovaline resolves mild allergies once chem_dose reaches 3.
 Severe allergies cause breathing problems and an even faster heart rate. Inaprovaline markedly stabilizes these symptoms; but only adrenaline can stop a severe allergy
 As long as you have inaprovaline in your system, an allergy cannot trigger. Key is to keep inaprov longer than the allergen exists above threshold after treatment */
 
 /*
 Checks if allergy will be triggered at a reagent level. Called by handle_allergy().
-If all offending reagent levels fall below threshold and no severe allergy is running; will stop allergies.
+Keeps the list of 'active allergies' updated. Even if an allergy is resolved with medications, a drug is removed off active_allergies only if it drops below trigger threshold
 Also checks if medications that stop allergies from triggering are in system. This is done after the list of active_allergies is updated.
 */
 /mob/living/carbon/proc/check_allergy(datum/reagent/reagent, current_level = 0)
@@ -30,7 +30,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		return
 	if ((trait_flags & MILD_ALLERGY) && allergy_severity <= TRAIT_LEVEL_MINOR)
 		return
-	if (chem_effects[CE_STABLE] || bloodstr.has_reagent(/datum/reagent/adrenaline))
+	if (chem_effects[CE_STABLE] || bloodstr.has_reagent(/datum/reagent/inaprovaline) || bloodstr.has_reagent(/datum/reagent/adrenaline))
 		return
 
 	switch (allergy_severity)
@@ -84,7 +84,8 @@ Also checks if medications that stop allergies from triggering are in system. Th
 			continue
 		check_allergy(reagent, metabolized.get_reagent_amount(reagent.type))
 
-	if ((trait_flags & MILD_ALLERGY) && (!length(active_allergies)))
+	//Not using CE_STABLE to completely remove allergy since that kicks in instantly, and we'd rather wait for levels to build up first.
+	if ((trait_flags & MILD_ALLERGY) && ((!length(active_allergies)) || metabolized.get_reagent_amount(/datum/reagent/inaprovaline) >= 3))
 		stop_allergy(MILD_ALLERGY)
 
 	if ((trait_flags & SEVERE_ALLERGY) && bloodstr.get_reagent_amount(/datum/reagent/adrenaline) >= 0.5)
@@ -105,7 +106,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		if (prob(50) && active_breathing())
 			add_chemical_effect(CE_VOICELOSS, 1)
 
-	if (!can_feel_pain() || world.time < next_allergy_time || chem_effects[CE_STABLE])
+	if (!can_feel_pain() || world.time < next_allergy_time)
 		return
 
 	to_chat(src, SPAN_WARNING("You feel uncontrollably itchy!"))

@@ -296,13 +296,15 @@
 
 	. = list()
 	if(is_bruised())
-		. += "[pick("wheezing", "gurgling")] sounds"
+		. += "[pick("wheezing", "crackling", "gurgling")] sounds"
 
 	var/list/breathtype = list()
 	if(get_oxygen_deprivation() > 50)
 		breathtype += pick("straining","labored")
+	if (owner.trait_flags & (MILD_ALLERGY|SEVERE_ALLERGY))
+		breathtype += "wheezing"
 	if(owner.shock_stage > 50)
-		breathtype += pick("shallow and rapid")
+		breathtype += "shallow and rapid"
 	if(!length(breathtype))
 		breathtype += "healthy"
 
