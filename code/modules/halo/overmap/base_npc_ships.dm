@@ -281,8 +281,7 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 		var/orig_range = light.light_range
 		light.set_light(LIGHTRANGE_LIKELY_UNUSED)
 		lights_reset[light] = "[orig_range]"
-	var/datum/controller/process/lighting_controller = processScheduler.nameToProcessMap["lighting"]
-	lighting_controller.doWork(0)
+	SSlighting.InitializeTurfs()
 	for(var/obj/machinery/light/l in lights_reset)
 		l.set_light(text2num(lights_reset[l]))
 
