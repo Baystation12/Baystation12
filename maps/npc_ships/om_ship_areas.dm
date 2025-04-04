@@ -3,6 +3,7 @@
 /////////////////
 
 #include "_om_ship_areas_definition.dm"
+#include "../faction_bases/Station_Peacemaker/Station_Peacemaker.dm"
 
 /area/om_ships/hauler
 	name = "Haul4U"
