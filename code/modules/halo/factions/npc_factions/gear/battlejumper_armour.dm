@@ -1,5 +1,5 @@
 
-/obj/item/clothing/under/gao_battlejumper
+/obj/item/clothing/under/gao_battlejumper_old
 	name = "Gao Battlejumper Uniform"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
@@ -9,7 +9,7 @@
 	worn_state = "Gao Battle Jumper Jumpsuit"
 	//item_state_slots = list(slot_l_hand_str = "commando_uniform", slot_r_hand_str = "commando_uniform")
 
-/obj/item/clothing/head/helmet/gao_battlejumper
+/obj/item/clothing/head/helmet/gao_battlejumper_old
 	name = "Gao Battlejumper Helmet"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
@@ -22,7 +22,7 @@
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
-/obj/item/clothing/suit/armor/special/gao_battlejumper
+/obj/item/clothing/suit/armor/special/gao_battlejumper_old
 	name = "Gao Battlejumper Armour"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
@@ -35,7 +35,7 @@
 	armor_thickness = 20
 	item_flags = THICKMATERIAL
 
-/obj/item/clothing/shoes/magboots/gao_battlejumper
+/obj/item/clothing/shoes/magboots/gao_battlejumper_old
 	name = "Gao Battlejumper Magboots"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
@@ -46,7 +46,7 @@
 	can_hold_knife = 1
 	force = 5
 
-/obj/item/clothing/gloves/gao_battlejumper
+/obj/item/clothing/gloves/gao_battlejumper_old
 	name = "Gao Battlejumper Gloves"
 	desc = "Feetfirst into hell, outer colonies style."
 	icon = 'code/modules/halo/factions/npc_factions/gear/gao.dmi'
