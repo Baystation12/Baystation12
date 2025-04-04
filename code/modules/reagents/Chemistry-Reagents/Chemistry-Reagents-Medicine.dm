@@ -265,52 +265,62 @@
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#cb68fc"
-	overdose = 30
+	overdose = 30 //Overdose for opiates handles effects unrelated to sedation but the chemical itself. Oversedation is handled under affect_blood by a different system
 	scannable = 1
 	metabolism = 0.05
 	ingest_met = 0.02
 	flags = IGNORE_MOB_SIZE
 	value = 3.1
-	var/pain_power = 80 //magnitide of painkilling effect
-	var/effective_dose = 0.5 //how many units it need to process to reach max power
+	var/pain_power = 10 //magnitide of painkilling effect
 
+///This runs once even if two kinds of opiates are in the body.
 /datum/reagent/tramadol/affect_blood(mob/living/carbon/M, removed)
-	var/effectiveness = 1
-	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
-		effectiveness = M.chem_doses[type]/effective_dose
-	else if(volume < effective_dose)
-		effectiveness = volume/effective_dose
-	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
-	if(M.chem_doses[type] > 0.5 * overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(1))
-			M.slurring = max(M.slurring, 10)
-	if(M.chem_doses[type] > 0.75 * overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(5))
-			M.slurring = max(M.slurring, 20)
-	if(M.chem_doses[type] > overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		M.slurring = max(M.slurring, 30)
-		if(prob(1))
-			M.Weaken(2)
-			M.drowsyness = max(M.drowsyness, 5)
+	if (CE_OPIATES in M.chem_effects) //Already processed opiates once this tick; will not do so again.
+		return
+	var/total_opiate_dose = 0
+	var/opiate_count = 0
+	var/maximum_opiate_dose = M.species.maximum_opiate_dose
+	for (var/datum/reagent/tramadol/opiate in M.chem_doses)
+		total_opiate_dose += (opiate.pain_power) * M.chem_doses[opiate] //Stronger opiates contribute more to effect or reaching OD.
+		opiate_count++  //Having more than one opiate amplifies their effects
+	if (opiate_count > 1)
+		total_opiate_dose *= max(1, 1 + ((opiate_count - 1)/10)) //Amplifying effect of multiple opiates
+
+	M.add_chemical_effect(CE_PAINKILLER, total_opiate_dose)
+
 	var/boozed = isboozed(M)
 	if(boozed)
 		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
-		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
+		maximum_opiate_dose *= max(0.05,(1 - (boozed * 0.1))) //Drinking decreases the threshold for opiates to cut off breathing
 	if(isfast(M))
-		M.add_chemical_effect(CE_BREATHLOSS, 0.5)
-		M.add_chemical_effect(CE_SLOWDOWN, 2) //hyperzine reacts negatively with opiates
+		M.add_chemical_effect(CE_SLOWDOWN, 2)
+		maximum_opiate_dose *= 0.5
+	if (opiate_count > 1) //Mixing multiple opiates has an amplifying effect
+		maximum_opiate_dose *= max(0.05, (1 - ((opiate_count-1)/10)))
 
+	if (total_opiate_dose)
+		M.add_chemical_effect(CE_OPIATES, 1)
+	if (total_opiate_dose > 0.25 * maximum_opiate_dose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+	if (total_opiate_dose > 0.5 * maximum_opiate_dose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if (prob(5))
+			M.slurring = max(M.slurring, 10)
+	if (total_opiate_dose > 0.75 * maximum_opiate_dose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		if (prob(10))
+			M.slurring = max(M.slurring, 20)
+	if (total_opiate_dose > maximum_opiate_dose)
+		M.add_chemical_effect(CE_SLOWDOWN, 1)
+		M.AdjustSleeping(5)
+		M.losebreath = max(10, M.losebreath + 1)
+
+
+///Class-effect overdose is handled under affect_blood; this proc handles overdose unique to having too much of the chemical in the body; not opiate breathing suppression.
 /datum/reagent/tramadol/overdose(mob/living/carbon/M)
 	..()
 	M.hallucination(120, 30)
 	M.druggy = max(M.druggy, 10)
-	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
-	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
-	if(isboozed(M))
-		M.add_chemical_effect(CE_BREATHLOSS, 0.2) //Don't drink and OD on opiates folks
 	if(isfast(M))
 		M.add_chemical_effect(CE_NOPULSE, 1)
 		var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART] //heart damage + arrest
@@ -345,8 +355,7 @@
 	color = "#800080"
 	scannable = 1
 	overdose = 20
-	pain_power = 200
-	effective_dose = 2
+	pain_power = 100
 
 /datum/reagent/deletrathol
 	name = "Deletrathol"

@@ -1166,3 +1166,8 @@
 		return
 
 	return !ai_holder
+
+/mob/living/carbon/proc/on_opiates()
+	if (CE_OPIATES in chem_effects)
+		return TRUE
+	else return FALSE

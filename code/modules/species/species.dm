@@ -131,6 +131,8 @@ GLOBAL_LIST_EMPTY(mob_ref_to_species_name)
 	var/halloss_message_self = "The pain is too severe for you to keep going..."
 
 	var/limbs_are_nonsolid
+	/// Pain_power adjusted maximum opiate effect a species can tolerate before it stops breathing. Is modified by alcohol/hyperzine use.
+	var/maximum_opiate_dose = 40
 	var/spawns_with_stack = 0
 	// Environment tolerance/life processes vars.
 	var/breath_pressure = 16                                    // Minimum partial pressure safe for breathing, kPa
