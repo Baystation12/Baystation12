@@ -20,4 +20,3 @@
 	density = 1
 	bound_width = 32
 	bound_height = 32
-	pixel_x = -16
