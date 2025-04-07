@@ -2,6 +2,7 @@
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_BLOOD)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
+	metabolized = new/datum/reagents/metabolism(500, src, CHEM_METABOLITES, TRUE)
 	reagents = bloodstr
 
 	if (!default_language && species_language)
@@ -25,6 +26,7 @@
 /mob/living/carbon/rejuvenate()
 	bloodstr.clear_reagents()
 	touching.clear_reagents()
+	metabolized.clear_reagents()
 	var/datum/reagents/R = get_ingested_reagents()
 	if(istype(R))
 		R.clear_reagents()
@@ -402,6 +404,25 @@
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(floor(stun_duration/2))
 	return TRUE
+
+///Proc handles metabolite effects, degradation, and overdoses. Even inactive metabolites have overdoses handled here.
+/mob/living/carbon/proc/handle_metabolites()
+	if (!metabolized || !metabolized.reagent_list)
+		return
+	for (var/datum/reagent/reagent as anything in metabolized.reagent_list)
+		reagent.affect_metabolites(src, reagent.volume)
+		var/overdose_amount = 0
+		if (reagent.active_metabolites)
+			overdose_amount = reagent.volume
+		else
+			overdose_amount = bloodstr.get_reagent_amount(reagent.type)
+
+		if (overdose_amount >= reagent.overdose)
+			reagent.overdose(src)
+
+		if (last_time_metabolite[reagent.type] + 3 SECONDS > world.time)
+			continue
+		metabolized.remove_reagent(reagent.type, reagent.metabolism * reagent.removal_multiplier)
 
 /mob/living/carbon/proc/add_chemical_effect(effect, magnitude = 1)
 	if(effect in chem_effects)

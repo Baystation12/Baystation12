@@ -290,7 +290,7 @@
 		"donor" = null,
 		"blood_DNA" = null,
 		"blood_type" = blood_type,
-		"trace_chem" = null,
+		"blood_chem" = null,
 		"blood_species" = blood_species,
 		"blood_colour" = species.blood_color
 	))

@@ -224,6 +224,6 @@
 		else
 			var/datum/reagent/ethanol/booze = locate() in container.reagents.reagent_list
 			if(istype(booze))
-				if(booze.strength <= 40)
+				if(booze.metabolite_potency >= 1.75)
 					return TRUE
 	return FALSE

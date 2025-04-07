@@ -152,7 +152,7 @@
 	icon_state = "pill3"
 /obj/item/reagent_containers/pill/tramadol/New()
 	..()
-	reagents.add_reagent(/datum/reagent/tramadol, 15)
+	reagents.add_reagent(/datum/reagent/opiate/tramadol, 15)
 	color = reagents.get_color()
 
 
@@ -306,7 +306,7 @@
 	icon_state = "pill4"
 /obj/item/reagent_containers/pill/citalopram/New()
 	..()
-	reagents.add_reagent(/datum/reagent/citalopram, 15)
+	reagents.add_reagent(/datum/reagent/antidepressant/citalopram, 15)
 	color = reagents.get_color()
 
 
@@ -316,7 +316,7 @@
 	icon_state = "pill4"
 /obj/item/reagent_containers/pill/paroxetine/New()
 	..()
-	reagents.add_reagent(/datum/reagent/paroxetine, 10)
+	reagents.add_reagent(/datum/reagent/antidepressant/paroxetine, 10)
 	color = reagents.get_color()
 
 

@@ -8,9 +8,16 @@
 	var/list/data = null
 	var/volume = 0
 	var/metabolism = REM // This would be 0.2 normally
-	var/ingest_met = 0
+	///Metabolism multiplied by number to determine how fast the drug is removed from metabolized reagent list. Can be changed to make drugs degrade faster/slower.
+	var/removal_multiplier = 2
+	///Determines what percentage of an ingested drug is actually absorbed.
+	var/bioavailability = 0.6
 	var/touch_met = 0
 	var/overdose = 0
+	///If set to a reagent path; reagents in the blood will break down into that reagen. This metabolite will then have some sort of effect and also contribute to reaching overdose threshold in addition to bloodstream levels.
+	var/active_metabolites = null
+	///Multiplier effect for reagents with active metabolites; where the higher the potency the more active metabolite it produces. For example, vodka having more potency than beer means more alcohol is added to metabolized per tick.
+	var/metabolite_potency = 1
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
 	var/color_weight = 1
@@ -107,50 +114,60 @@
 		return
 	if(!(flags & AFFECTS_DEAD) && M.stat == DEAD && (world.time - M.timeofdeath > 150))
 		return
-	if(overdose && (location != CHEM_TOUCH))
-		var/overdose_threshold = overdose * (flags & IGNORE_MOB_SIZE? 1 : MOB_MEDIUM/M.mob_size)
-		if(volume > overdose_threshold)
-			overdose(M)
 
 	//determine the metabolism rate
 	var/removed = metabolism
-	if(ingest_met && (location == CHEM_INGEST))
-		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
 		removed = touch_met
 	removed = M.get_adjusted_metabolism(removed)
 	removed = min(removed, volume)
 
-	//adjust effective amounts - removed, dose, and max_dose - for mob size
+	//adjust effective amounts for mob size
 	var/effective = removed
 	if(!(flags & IGNORE_MOB_SIZE) && location != CHEM_TOUCH)
 		effective *= (MOB_MEDIUM/M.mob_size)
 
-	M.chem_doses[type] = M.chem_doses[type] + effective
 	if(effective >= (metabolism * 0.1) || effective >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
 			if(CHEM_BLOOD)
 				affect_blood(M, effective)
+				if(QDELETED(src))
+					return
+				if (active_metabolites && active_metabolites != type)
+					M.metabolized.add_reagent(active_metabolites, removed * metabolite_potency)
+					M.last_time_metabolite[active_metabolites] = world.time
+					remove_self(removed)
+				else
+					holder.trans_reagent_to_holder(M.metabolized, src, removed, metabolite_potency)
+					M.last_time_metabolite[type] = world.time
 			if(CHEM_INGEST)
 				affect_ingest(M, effective)
+				if(QDELETED(src))
+					return
+				holder.trans_reagent_to_holder(M.bloodstr, src, removed, bioavailability)
 			if(CHEM_TOUCH)
 				affect_touch(M, effective)
-
-	if(volume)
+				if(QDELETED(src))
+					return
+				if (HAS_TRAIT(M, /singleton/trait/general/permeable_skin))
+					var/multiplier = GET_TRAIT_LEVEL(M, /singleton/trait/general/permeable_skin)
+					holder.trans_reagent_to_holder(M.bloodstr, src, removed, 0.2 * multiplier)
+				else
+					remove_self(removed)
+	else if(volume)
 		remove_self(removed)
 
 /datum/reagent/proc/affect_blood(mob/living/carbon/M, removed)
 	return
 
+///This proc handles the effect of accumulated metabolites for active metabolites only.
+///Dose supplied should be the total accumulated metabolites usually.
+///Is not called unless reagent has an active_metabolite path set.
+/datum/reagent/proc/affect_metabolites(mob/living/carbon/affected, dose)
+
 /datum/reagent/proc/affect_ingest(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-
-	if (protein_amount)
-		handle_protein(M, src)
-	if (sugar_amount)
-		handle_sugar(M, src)
-	affect_blood(M, removed * 0.5)
 
 /datum/reagent/proc/affect_touch(mob/living/carbon/M, removed)
 	return

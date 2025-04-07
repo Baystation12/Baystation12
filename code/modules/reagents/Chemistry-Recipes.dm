@@ -93,20 +93,20 @@
 
 /singleton/reaction/tramadol
 	name = "Tramadol"
-	result = /datum/reagent/tramadol
+	result = /datum/reagent/opiate/tramadol
 	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/ethanol = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 
 /singleton/reaction/paracetamol
 	name = "Paracetamol"
 	result = /datum/reagent/paracetamol
-	required_reagents = list(/datum/reagent/tramadol = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
+	required_reagents = list(/datum/reagent/opiate/tramadol = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
 	result_amount = 3
 
 /singleton/reaction/oxycodone
 	name = "Oxycodone"
-	result = /datum/reagent/tramadol/oxycodone
-	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/tramadol = 1)
+	result = /datum/reagent/opiate/oxycodone
+	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/opiate/tramadol = 1)
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 
@@ -441,13 +441,13 @@
 
 /singleton/reaction/citalopram
 	name = "Citalopram"
-	result = /datum/reagent/citalopram
+	result = /datum/reagent/antidepressant/citalopram
 	required_reagents = list(/datum/reagent/drugs/mindbreaker = 1, /datum/reagent/carbon = 1)
 	result_amount = 3
 
 /singleton/reaction/paroxetine
 	name = "Paroxetine"
-	result = /datum/reagent/paroxetine
+	result = /datum/reagent/antidepressant/paroxetine
 	required_reagents = list(/datum/reagent/drugs/mindbreaker = 1, /datum/reagent/acetone = 1, /datum/reagent/inaprovaline = 1)
 	result_amount = 3
 
@@ -461,7 +461,7 @@
 /singleton/reaction/noexcutite
 	name = "Noexcutite"
 	result = /datum/reagent/noexcutite
-	required_reagents = list(/datum/reagent/tramadol/oxycodone = 1, /datum/reagent/dylovene = 1)
+	required_reagents = list(/datum/reagent/opiate/oxycodone = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
 /singleton/reaction/methyl_bromide

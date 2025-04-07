@@ -160,9 +160,8 @@
 	M.visible_message(SPAN_NOTICE("\The [user] scans the wounds on [M]'s [S.name] with [src]"))
 
 	add_data(S)
-	for(var/T in M.chem_doses)
-		var/datum/reagent/R = T
-		chemtraces |= initial(R.name)
+	for (var/datum/reagent/reagent in M.metabolized.reagent_list)
+		chemtraces |= initial(reagent.name)
 
 	return 1
 
