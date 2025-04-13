@@ -3389,6 +3389,7 @@
 #include "maps\_gamemodes\gamemode_overrides.dm"
 #include "maps\_gamemodes\randantag\randantag.dm"
 #include "maps\geminus_city\geminus_city.dm"
+#include "maps\ks7_elmsville\includes_pvp.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
