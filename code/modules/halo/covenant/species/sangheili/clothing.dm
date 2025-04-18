@@ -549,7 +549,6 @@
 
 /obj/item/clothing/head/helmet/sangheili/specops/reach
 	name = "Ceremonial Sangheili Helmet (Spec-Ops)"
-	desc = "Head armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_specops_helm_obj"
 	item_state = "r_specops_helm"
 
@@ -560,20 +559,17 @@
 
 /obj/item/clothing/gloves/thick/sangheili/specops/infiltrator/reach
 	name = "Ceremonial Sanghelli Combat Gauntlets (Spec-Ops)"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_specops_gloves_obj"
 	item_state = "r_specops_gloves"
 
 /obj/item/clothing/shoes/sangheili/specops/reach
 	name = "Ceremonial Sanghelli Leg Armour (Spec-Ops)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_specops_legs_obj"
 	item_state = "r_specops_legs"
 	stepsound = 'code/modules/halo/sounds/walk_sounds/generic_walk.ogg'
 
 /obj/item/clothing/head/helmet/sangheili/ultra/reach
 	name = "Ceremonial Sangheili Helmet (Ultra)"
-	desc = "Head armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_ultra_helm_obj"
 	item_state = "r_ultra_helm"
 
@@ -584,19 +580,16 @@
 
 /obj/item/clothing/gloves/thick/sangheili/ultra/reach
 	name = "Ceremonial Sanghelli Combat Gauntlets (Ultra)"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_ultra_gloves_obj"
 	item_state = "r_ultra_gloves"
 
 /obj/item/clothing/shoes/sangheili/ultra/reach
 	name = "Ceremonial Sanghelli Leg Armour (Ultra)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_ultra_legs_obj"
 	item_state = "r_ultra_legs"
 
 /obj/item/clothing/head/helmet/sangheili/major/reach
 	name = "Ceremonial Sangheili Helmet (Officer)"
-	desc = "Head armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_major_helm_obj"
 	item_state = "r_major_helm"
 
@@ -607,14 +600,52 @@
 
 /obj/item/clothing/shoes/sangheili/major/reach
 	name = "Ceremonial Sanghelli Leg Armour (Officer)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_major_legs_obj"
 	item_state = "r_major_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/major/reach
 	name = "Ceremonial Sanghelli Combat Gauntlets (Officer)"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness. This one is in a ceremonial pattern."
 	icon_state = "r_major_gloves_obj"
 	item_state = "r_major_gloves"
+
+/obj/item/clothing/head/helmet/sangheili/zealot/reach
+	name = "Ceremonial Sangheili Helmet (Zealot)"
+	icon_state = "r_zealot_helm_obj"
+	item_state = "r_zealot_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/zealot/reach
+	name = "Ceremonial Sangheili Combat Harness (Zealot)"
+	icon_state = "r_zealot_chest_obj"
+	item_state = "r_zealot_chest"
+
+/obj/item/clothing/gloves/thick/sangheili/zealot/reach
+	name = "Ceremonial Sanghelli Combat Gauntlets (Zealot)"
+	icon_state = "r_zealot_gloves_obj"
+	item_state = "r_zealot_gloves"
+
+/obj/item/clothing/shoes/sangheili/zealot/reach
+	name = "Ceremonial Sanghelli Leg Armour (Zealot)"
+	icon_state = "r_zealot_legs_obj"
+	item_state = "r_zealot_legs"
+
+/obj/item/clothing/head/helmet/sangheili/zealot/fieldmarshal
+	name = "Ceremonial Sangheili Helmet (Field Marshal)"
+	icon_state = "r_fmarshal_helm_obj"
+	item_state = "r_fmarshal_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/zealot/fieldmarshal
+	name = "Ceremonial Sangheili Combat Harness (Field Marshal)"
+	icon_state = "r_fmarshal_chest_obj"
+	item_state = "r_fmarshal_chest"
+
+/obj/item/clothing/gloves/thick/sangheili/zealot/fieldmarshal
+	name = "Ceremonial Sanghelli Combat Gauntlets (Field Marshal)"
+	icon_state = "r_fmarshal_gloves_obj"
+	item_state = "r_fmarshal_gloves"
+
+/obj/item/clothing/shoes/sangheili/zealot/fieldmarshal
+	name = "Ceremonial Sanghelli Leg Armour (Field Marshal)"
+	icon_state = "r_fmarshal_legs_obj"
+	item_state = "r_fmarshal_legs"
 
 #undef SANGHEILI_ARMOUR_ICON
