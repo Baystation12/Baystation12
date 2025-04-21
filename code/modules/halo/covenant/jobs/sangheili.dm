@@ -11,7 +11,7 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	alt_titles = list(\
-		"Sangheili Zealot" = /decl/hierarchy/outfit/sangheili/zealot
+		"Sangheili Zealot" = /decl/hierarchy/outfit/sangheili/zealot,
 		"Sangheili Ceremonial Zealot" = /decl/hierarchy/outfit/sangheili/reach/zealot)
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 2.5
