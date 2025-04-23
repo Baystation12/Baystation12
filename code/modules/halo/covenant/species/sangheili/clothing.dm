@@ -648,4 +648,24 @@
 	icon_state = "r_fmarshal_legs_obj"
 	item_state = "r_fmarshal_legs"
 
+/obj/item/clothing/head/helmet/sangheili/shipmaster/reach
+	name = "Ceremonial Sangheili Helmet (Fleetmaster)"
+	icon_state = "r_fleetmaster_helm_obj"
+	item_state = "r_fmarshal_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/shipmaster/reach
+	name = "Ceremonial Sangheili Combat Harness (Fleetmaster)"
+	icon_state = "r_fleetmaster_chest_obj"
+	item_state = "r_fleetmaster_chest"
+
+/obj/item/clothing/gloves/thick/sangheili/shipmaster/reach
+	name = "Ceremonial Sanghelli Combat Gauntlets (Fleetmaster)"
+	icon_state = "r_fleetmaster_gloves_obj"
+	item_state = "r_fleetmaster_gloves"
+
+/obj/item/clothing/shoes/sangheili/shipmaster/reach
+	name = "Ceremonial Sanghelli Leg Armour (Fleetmaster)"
+	icon_state = "r_fleetmaster_legs_obj"
+	item_state = "r_fleetmaster_legs"
+
 #undef SANGHEILI_ARMOUR_ICON

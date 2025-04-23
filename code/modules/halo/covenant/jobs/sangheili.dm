@@ -128,8 +128,10 @@
 
 /datum/job/covenant/sangheili_leader
 	title = "Sangheili Fleetmaster"
+	department_flag = COM
 	total_positions = 0
 	spawn_positions = 0
+	is_whitelisted = TRUE
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	whitelisted_species = list(/datum/species/sangheili)
