@@ -651,7 +651,7 @@
 /obj/item/clothing/head/helmet/sangheili/shipmaster/reach
 	name = "Ceremonial Sangheili Helmet (Fleetmaster)"
 	icon_state = "r_fleetmaster_helm_obj"
-	item_state = "r_fmarshal_helm"
+	item_state = "r_fleetmaster_helm"
 
 /obj/item/clothing/suit/armor/special/combatharness/shipmaster/reach
 	name = "Ceremonial Sangheili Combat Harness (Fleetmaster)"
