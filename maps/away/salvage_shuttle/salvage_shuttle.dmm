@@ -558,10 +558,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/salvage_shuttle/cargo)
 "gR" = (
-/obj/structure/lattice,
-/obj/machinery/nav_light/starboard,
-/turf/space,
-/area/salvage_shuttle/lounge)
+/obj/paint/brown,
+/obj/machinery/nav_light/port{
+	pixel_x = -10;
+	pixel_y = 6
+	},
+/turf/simulated/wall/titanium,
+/area/salvage_shuttle/cockpit)
 "gY" = (
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
@@ -569,10 +572,12 @@
 /turf/simulated/floor/plating,
 /area/derelict_cargo_ship/quarters)
 "hc" = (
-/obj/structure/lattice,
-/obj/machinery/nav_light/dorsal,
-/turf/space,
-/area/salvage_shuttle/airlock)
+/obj/paint/brown,
+/obj/machinery/nav_light/starboard{
+	pixel_x = -10
+	},
+/turf/simulated/wall/titanium,
+/area/salvage_shuttle/lounge)
 "he" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -961,6 +966,7 @@
 "ms" = (
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/paint/brown,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/cargo)
 "mt" = (
@@ -1366,9 +1372,14 @@
 /turf/simulated/floor/tiled,
 /area/salvage_shuttle/cockpit)
 "sb" = (
-/obj/structure/lattice,
-/obj/machinery/nav_light/dorsal,
-/turf/space,
+/obj/paint/brown,
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	dir = 4
+	},
+/obj/machinery/nav_light/dorsal{
+	pixel_x = 10
+	},
+/turf/simulated/wall/titanium,
 /area/salvage_shuttle/maintenance)
 "se" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1582,10 +1593,13 @@
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/maintenance)
 "uE" = (
-/obj/structure/lattice,
-/obj/machinery/nav_light/port,
-/turf/space,
-/area/salvage_shuttle/cockpit)
+/obj/paint/brown,
+/obj/machinery/nav_light/dorsal{
+	pixel_x = 10;
+	pixel_y = 6
+	},
+/turf/simulated/wall/titanium,
+/area/salvage_shuttle/airlock)
 "uK" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/donkpocket_mixed{
@@ -1645,6 +1659,7 @@
 	opacity = 0;
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/cockpit)
 "wc" = (
@@ -2089,6 +2104,7 @@
 "Du" = (
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/paint/brown,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/cockpit)
 "Dy" = (
@@ -2323,6 +2339,7 @@
 	name = "Protective Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/cockpit)
 "EY" = (
@@ -2845,6 +2862,9 @@
 	id_tag = "crab_cargo_pump_out_external";
 	dir = 1
 	},
+/obj/machinery/nav_light/ventral{
+	pixel_x = 22
+	},
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/net)
 "NX" = (
@@ -3054,6 +3074,10 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	req_access = list()
+	},
+/obj/machinery/firealarm{
+	pixel_x = -14;
+	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/salvage_shuttle/cockpit)
@@ -3377,7 +3401,7 @@
 /obj/structure/sign/warning{
 	pixel_x = 24;
 	pixel_y = -4;
-	name = "\improper WARNING: HATCH OPENS TO VACUUM"
+	name = "\improper WARNING: HATCH OPENS TO EXTERIOR"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "crab_cargo_hatch";
@@ -7872,7 +7896,7 @@ Qr
 Qr
 Qr
 Qr
-gR
+Qr
 IE
 Ah
 Ah
@@ -7886,7 +7910,7 @@ ev
 vn
 vn
 ev
-uE
+Qr
 Qr
 Qr
 Qr
@@ -7974,7 +7998,7 @@ Qr
 Qr
 Qr
 Qr
-IE
+hc
 IE
 dY
 oh
@@ -7988,7 +8012,7 @@ ev
 QJ
 He
 ev
-ev
+gR
 Qr
 Qr
 Qr
@@ -9300,8 +9324,8 @@ Qr
 Qr
 Qr
 Qr
+Qr
 sb
-wm
 DT
 hg
 ly
@@ -9313,8 +9337,8 @@ qJ
 nQ
 Xz
 nQ
-nQ
-hc
+uE
+Qr
 Qr
 Qr
 Qr
