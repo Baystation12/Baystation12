@@ -259,24 +259,6 @@
 	uniform = /obj/item/clothing/under/covenant/sangheili/reach
 	l_ear = /obj/item/device/radio/headset/covenant
 
-/decl/hierarchy/outfit/sangheili/reach/fleetmaster
-	name = "Ceremonial Sangheili (Fleetmaster)"
-
-	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster/reach
-	suit_store = null
-	r_hand = /obj/item/weapon/melee/energy/elite_sword
-	l_hand = /obj/item/language_learner/unggoy_to_common
-	back = null
-	belt = null
-	gloves = /obj/item/clothing/gloves/thick/sangheili/shipmaster/reach
-	shoes = /obj/item/clothing/shoes/sangheili/shipmaster/reach
-	head = /obj/item/clothing/head/helmet/sangheili/shipmaster/reach
-	l_pocket = null
-	r_pocket = null
-	//
-	id_type = /obj/item/weapon/card/id/elite_zealot
-	id_slot = slot_wear_id
-
 /decl/hierarchy/outfit/sangheili/reach/fieldmarshal
 	name = "Ceremonial Sangheili (Field Marshal)"
 

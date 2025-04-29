@@ -125,19 +125,3 @@
 	pop_balance_mult = 2
 
 	radio_speech_size = RADIO_SPEECH_LEADER
-
-/datum/job/covenant/sangheili_leader
-	title = "Sangheili Fleetmaster"
-	department_flag = COM
-	total_positions = 0
-	spawn_positions = 0
-	is_whitelisted = TRUE
-	faction_whitelist = "Covenant"
-	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
-	whitelisted_species = list(/datum/species/sangheili)
-	alt_titles = list(\
-		"Sangheili Field Marshal" = /decl/hierarchy/outfit/sangheili/reach/fieldmarshal)
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
-	pop_balance_mult = 2
-
-	radio_speech_size = RADIO_SPEECH_COMMANDER
