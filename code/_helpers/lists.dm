@@ -889,3 +889,15 @@ Checks if a list has the same entries and values as an element of big.
 		map["[entry.name] [index]"] = entry
 	else
 		map[entry.name] = entry
+
+/// Random chance to add something to a list, or maybe several somethings.
+/proc/add_to_list_prob(typepath, list/listname, chance = 0, tries = 1)
+	if(tries)
+		var/successes = 0
+		for(var/attempt in 1 to tries)
+			if (prob(chance))
+				listname += new typepath
+				successes += 1
+		return successes
+	else
+		return 0

@@ -84,6 +84,29 @@
 		/obj/item/reagent_containers/ivbag
 	)
 
+/obj/machinery/smartfridge/secure/medbay/stocked
+
+/obj/machinery/smartfridge/secure/medbay/stocked/New()
+	..()
+	var/list/startwith = list()
+
+	//Roll for some standard loot.
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/bicaridine, startwith, 50, 3) //87% chance for at least one extra bottle
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/dexalinplus, startwith, 33, 4) //About 80%
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/keloderm, startwith, 20, 4) //About 60%
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/tramadol, startwith, 20, 3) //About 50%
+
+	//Now go gambling for some fancy stuff.
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/alkysine, startwith, 15, 1) //15%
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/clonexadone, startwith, 10, 1) //10%
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/oxycodone, startwith, 5, 1) //5%
+	add_to_list_prob(/obj/item/reagent_containers/glass/bottle/peridaxon, startwith, 3, 1) //3%
+
+	for (var/startitem as anything in startwith)
+		var/obj/item/stockme = startitem
+		stock_item(stockme)
+	return
+
 /obj/machinery/smartfridge/secure/virology
 	name = "\improper Refrigerated Virus Storage"
 	desc = "A refrigerated storage unit for storing viral material."

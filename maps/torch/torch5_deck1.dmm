@@ -639,7 +639,11 @@
 "abt" = (
 /obj/structure/table/standard,
 /obj/floor_decal/corner/beige/mono,
-/obj/machinery/reagent_temperature,
+/obj/machinery/reagent_temperature{
+	last_temperature = 193.15;
+	target_temperature = 193.15;
+	heating = 0
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abu" = (
@@ -820,7 +824,7 @@
 /area/medical/chemistry)
 "abH" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/smartfridge/secure/medbay{
+/obj/machinery/smartfridge/secure/medbay/stocked{
 	dir = 1;
 	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
 	},
