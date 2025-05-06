@@ -497,7 +497,7 @@
 /area/spy_station/lc)
 "hM" = (
 /obj/structure/sign/warning/vacuum{
-	step_y = 30
+	pixel_y = 30
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
