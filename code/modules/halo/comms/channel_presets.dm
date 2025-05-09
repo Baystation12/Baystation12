@@ -135,7 +135,7 @@ GLOBAL_LIST_INIT(random_channels, list(\
 /obj/item/device/channel_dongle/superior
 	channel_preset = RADIO_COVLEAD
 //
-/daumtum/channel_cipher/superior
+/datum/channel_cipher/superior
 	channel_name = RADIO_COVLEAD
 	chat_span_class = "secradio"
 	hotkey = "n"
