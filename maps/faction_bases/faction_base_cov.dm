@@ -26,6 +26,7 @@ GLOBAL_LIST_EMPTY(covenant_base_spawns)
 		/datum/job/covenant/sangheili_honour_guard,
 		/datum/job/covenant/sangheili_shipmaster,
 		/datum/job/covenant/lesser_prophet,
+		/datum/job/covenant/AI,
 		/datum/job/covenant/kigyarminor,
 		/datum/job/covenant/unggoy_minor,
 		/datum/job/covenant/unggoy_major)
@@ -48,6 +49,7 @@ GLOBAL_LIST_EMPTY(covenant_base_fallback_spawns)
 		/datum/job/covenant/sangheili_honour_guard,
 		/datum/job/covenant/sangheili_shipmaster,
 		/datum/job/covenant/lesser_prophet,
+		/datum/job/covenant/AI,
 		/datum/job/covenant/kigyarminor,
 		/datum/job/covenant/unggoy_minor,
 		/datum/job/covenant/unggoy_major)

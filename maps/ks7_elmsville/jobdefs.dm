@@ -23,12 +23,14 @@
 	/datum/job/unsc/odst/squad_leader,
 	/datum/job/unsc/commanding_officer,
 	/datum/job/unsc/executive_officer,
+	/datum/job/unsc_ai,
 	/datum/job/unsc/oni/field_agent,
 	/datum/job/unsc/oni/research,
 	/datum/job/unsc/oni/research/director,
 	/datum/job/covenant/huragok,
 	/datum/job/covenant/sangheili_minor,
 	/datum/job/covenant/sangheili_major,
+	/datum/job/covenant/sangheili_honour_guard,
 	/datum/job/covenant/sangheili_ultra,
 	/datum/job/covenant/sangheili_shipmaster,
 	/datum/job/covenant/sangheili_specops,
@@ -49,6 +51,8 @@
 	/datum/job/covenant/yanmee_major,
 	/datum/job/covenant/yanmee_ultra,
 	/datum/job/covenant/yanmee_leader,
+	/datum/job/covenant/lesser_prophet,
+	/datum/job/covenant/AI,
 	/datum/job/covenant/mgalekgolo,
 	/datum/job/soe_commando,\
 	/datum/job/soe_commando_officer,\
@@ -57,6 +61,8 @@
 	/datum/job/geminus_innie/officer,\
 	/datum/job/geminus_innie/commander,\
 	/datum/job/geminus_innie/orion_defector,\
+	/datum/job/geminus_x52/researcher,\
+	/datum/job/geminus_x52/research_director,\
 	/datum/job/insurrectionist_ai,\
 	)
 

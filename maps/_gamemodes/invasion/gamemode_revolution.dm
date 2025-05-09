@@ -15,6 +15,7 @@
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
+		/datum/job/covenant/sangheili_honour_guard,\
 		/datum/job/covenant/sangheili_ultra,\
 		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
@@ -33,6 +34,7 @@
 		/datum/job/covenant/yanmee_major,\
 		/datum/job/covenant/yanmee_ultra,\
 		/datum/job/covenant/yanmee_leader,\
+		/datum/job/covenant/lesser_prophet,\
 		/datum/job/covenant/mgalekgolo,\
 		/datum/job/unsc/spartan_two)
 
