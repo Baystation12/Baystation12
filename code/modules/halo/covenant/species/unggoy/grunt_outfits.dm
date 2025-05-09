@@ -112,6 +112,7 @@
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	mask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
+	l_ear = /obj/item/device/radio/headset/covenant/specops
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 	//
 	id_type = /obj/item/weapon/card/id/grunt_specops
@@ -154,6 +155,7 @@
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/honour_guard
 	mask = /obj/item/clothing/mask/rebreather/unggoy_honour_guard
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	back = /obj/item/weapon/tank/methane/unggoy_internal/red
 	//
 	id_type = /obj/item/weapon/card/id/grunt_honour_guard
