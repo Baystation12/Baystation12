@@ -134,6 +134,7 @@
 
 /* COVENANT */
 
+//standard covenant headset
 /obj/item/device/radio/headset/covenant
 	name = "Battlenet headset"
 	icon = 'code/modules/halo/comms/comms.dmi'
@@ -143,6 +144,21 @@
 
 /obj/item/device/radio/headset/covenant/attackby()
 	return
+
+//specops covenant headset
+/obj/item/device/radio/headset/covenant/specops
+	name = "Battlenet SWG headset"
+	dongles = list(/obj/item/device/channel_dongle/battlenet,\
+		/obj/item/device/channel_dongle/sequestrations,\
+		/obj/item/device/channel_dongle/specops)
+
+//leadership covenant headset
+/obj/item/device/radio/headset/covenant/superior
+	name = "Battlenet Leadership headset"
+	dongles = list(/obj/item/device/channel_dongle/battlenet,\
+		/obj/item/device/channel_dongle/sequestrations,\
+		/obj/item/device/channel_dongle/superior,\
+		/obj/item/device/channel_dongle/specops)
 
 /obj/item/device/radio/headset/brute_ramclan
 	name = "Ram Clan headset"
