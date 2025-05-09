@@ -78,7 +78,7 @@
 /decl/hierarchy/outfit/lesser_prophet
 	name = "Lesser Prophet"
 	suit = /obj/item/clothing/suit/armor/special/shielded_prophet_robe
-	l_ear = /obj/item/device/radio/headset/covenant
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	r_hand = /obj/item/weapon/gun/projectile/boltshot
 	l_pocket = /obj/item/ammo_magazine/boltshot
 	r_pocket =  /obj/item/ammo_magazine/boltshot_sg
