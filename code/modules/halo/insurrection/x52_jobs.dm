@@ -7,7 +7,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52
 	access = list(access_x52,access_innie)
 	selection_color = " #a01b01"
-	spawnpoint_override = "X52 Researcher"
+	spawnpoint_override = "X52"
 	alt_titles = null
 	whitelisted_species = list(/datum/species/human)
 	intro_blurb = "You are X-52! Working for a top secret military research project, one day you decided to go AWOL with your secrets and expertise. Now you're out for yourselves. Just remember the UNSC will always be looking for you..."
@@ -24,7 +24,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52_rd
 	access = list(access_x52_rd, access_x52,access_innie)
 	selection_color = " #a01b01"
-	spawnpoint_override = "X52 RD"
+	spawnpoint_override = "X52 Research Director"
 	alt_titles = null
 	whitelisted_species = list(/datum/species/human)
 	intro_blurb = "You are X-52! Working for a top secret military research project, one day you decided to go AWOL with your secrets and expertise. Now you're out for yourselves. Just remember the UNSC will always be looking for you..."
