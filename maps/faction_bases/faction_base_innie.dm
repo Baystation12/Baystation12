@@ -22,6 +22,9 @@ GLOBAL_LIST_EMPTY(innie_base_spawns)
 		/datum/job/geminus_innie/officer,
 		/datum/job/geminus_innie/commander,
 		/datum/job/geminus_innie/orion_defector,
+		/datum/job/geminus_x52/researcher,
+		/datum/job/geminus_x52/research_director,
+		/datum/job/insurrectionist_ai,
 		/datum/job/soe_commando,
 		/datum/job/soe_commando_officer)
 
@@ -38,6 +41,9 @@ GLOBAL_LIST_EMPTY(innie_base_fallback_spawns)
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
 		/datum/job/geminus_innie/orion_defector,\
+		/datum/job/geminus_x52/researcher,\
+		/datum/job/geminus_x52/research_director,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		)
