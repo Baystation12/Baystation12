@@ -48,24 +48,16 @@
 	w_class = ITEM_SIZE_TINY
 
 
-/obj/item/spy_station_disk2
-	name = "disk"
-	desc = "A dusty disk. Its label says: \"List of classified military radio frequencies.\". Its content is encrypted with quantum cryptography methods."
-	icon = 'icons/obj/datadisks.dmi'
-	icon_state = "nucleardisk"
-	item_state = "card-id"
-	w_class = ITEM_SIZE_TINY
-
 /obj/item/paper/spy_station1
 	name = "Signal Detected!"
 	info = {"
 	<center><b>Station #23 \"Everest\"</b></center>
 	<center><b><font color='red'><small>CONFIDENTIAL USE ONLY</small></font></b></center>
-	<i>Contact.... Signal located....</i>
+	<i>Contact established.... Signal locked....</i>
 	<i>Unable to write data to dr@$%......</i>
-	<i>Detection of medium-sized signature, return signal indicates presence of metals of unknown alien origin...</i>
-	<i>Additional bearing received by system..... 132*.... De%#$%ted....  unk?№:%--о Al:6Х*3hip%%:4000001000.....</i>
-	<i>Abnormal electromagnetic pulse detected........ Emergency system shu----0010001010......</i>
+	<i>Detecting medium-sized object. Return signal indicates presence of metallic composition of unknown alien origin...</i>
+	<i>Additional bearing acquired..... 132*.... De%#$%ted....  unk?№:%--о Al:6Х*3hip%%:4000001000.....</i>
+	<i>Extreme electromagnetic pulse detected........ Emergency system shu----0010001010......</i>
 	"}
 
 
@@ -74,13 +66,13 @@
 	info = {"
 	<center><img src=sollogo.png> <img src=fleetlogo.png></center>
 	<center><h3><u>Signal 234 monitoring report</u></h3></center><hr>
-	<b>Data recovered from the scanning:</b><br>
-	Large-sized vessel with a big compartment most likely intended for cargo shipping.<br>
-	Life Signs: <b>None</b>.<br>
-	<b>Transponder signal</b> was intercepted; however, its original readings were corrupted by interference. Sent the corrupted file to the IT specialist.
-	Engines heat trace is not present, but the vessel is moving.
-	<hr>Send drones for a recon mission?
-	<i>This is none of our interests. Transponder data indicates that it's a Free Trade Union vessel.</i>
+	<b>Data recovered from scan:</b><br>
+	Large vessel with expansive cargo bay. Likely a freighter.<br>
+	Life Signs: <b>None detected</b>.<br>
+	<b>Transponder signal</b> intercepted; however, the original data was corrupted by interference. The corrupted file has been forwarded to the IT specialist for analysis
+	No engine heat signature detected, yet the vessel is in motion.
+	<hr>Deploy drones for reconnassance mission?
+	<i>This is not within our jurisdiction. Transponder data identifies the vessel as belonging to the Free Trade Union</i>
 	"}
 
 
@@ -89,7 +81,7 @@
 	info = {"
 	<center><img src=sollogo.png> <img src=fleetlogo.png></center>
 	<center><h3><u>Signal 47 monitoring report</u></h3></center><hr>
-	<b>Data recovered from the scanning:</b><br>
-	Found a sector with a serious signal disturbance, I hasten to inform that this is an active jamming device, we're trying to overcome it.
-	<hr><i>Send report to the Command.</i>
+	<b>Data recovered from scan:</b><br>
+	We have detected a sector with a broad-range signal emission. It is likely a jamming beacon, we're working to get through it.<br>
+	<hr><i>Send a report to Command.</i>
 	"}
