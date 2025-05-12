@@ -213,9 +213,9 @@
 
 	//Shifted up for rank-check reasons.
 	var/datum/job/speaker_job
-	speaker_job = job_master.GetJob(speaker.mind.assigned_role)
 	if(rank_text)
 		speaker_name += " ([rank_text])"
+		speaker_job = job_master.GetJob("[rank_text]")
 
 	var/speech_size = 100
 	var/faction_speech = 1 //Does this speech-size only apply to our own faction?
