@@ -6,6 +6,7 @@
 		////////////////
 		//ADMIN THINGS//
 		////////////////
+	authenticate = FALSE //byond is down, allow signed in clients to auth via certificate
 	var/datum/admins/holder = null
 	var/datum/admins/deadmin_holder = null
 
