@@ -7,7 +7,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52
 	access = list(access_x52,access_innie)
 	selection_color = " #a01b01"
-	spawnpoint_override = "geminus_innie"
+	spawnpoint_override = "X52"
 	alt_titles = null
 	fallback_spawnpoint = "Innie Base Fallback Spawns"
 	whitelisted_species = list(/datum/species/human)
@@ -25,7 +25,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52_rd
 	access = list(access_x52_rd, access_x52,access_innie)
 	selection_color = " #a01b01"
-	spawnpoint_override = "geminus_innie"
+	spawnpoint_override = "X52 Research Director"
 	alt_titles = null
 	fallback_spawnpoint = "Innie Base Fallback Spawns"
 	whitelisted_species = list(/datum/species/human)
