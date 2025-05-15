@@ -66,7 +66,7 @@
 
 /decl/hierarchy/outfit/skirmisher_champion
 	name = "T\'Vaoan Skirmisher Champion"
-	l_ear = /obj/item/device/radio/headset/covenant
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/champion
 	belt = null

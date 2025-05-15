@@ -56,7 +56,7 @@
 /decl/hierarchy/outfit/kigyarcorvette/captain
 	name = "Kig-Yar Ship-captain"
 
-	l_ear = /obj/item/device/radio/headset/covenant
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/kigyar
 	suit_store = null

@@ -55,6 +55,7 @@
 /decl/hierarchy/outfit/yanmee/leader
 	name = "Yanmee Leader"
 
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	back = /obj/item/flight_item/yanmee/leader
 	suit = /obj/item/clothing/suit/armor/special/yanmee/leader
 	l_hand = /obj/item/language_learner/unggoy_to_common

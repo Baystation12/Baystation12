@@ -61,6 +61,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/honour_guard
 	shoes = /obj/item/clothing/shoes/sangheili/honour_guard
 	head = /obj/item/clothing/head/helmet/sangheili/honour_guard
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -86,6 +87,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra
 	shoes = /obj/item/clothing/shoes/sangheili/ultra
 	head = /obj/item/clothing/head/helmet/sangheili/ultra
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -111,6 +113,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/zealot
 	shoes = /obj/item/clothing/shoes/sangheili/zealot
 	head = /obj/item/clothing/head/helmet/sangheili/zealot
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -136,6 +139,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/shipmaster
 	shoes = /obj/item/clothing/shoes/sangheili/shipmaster
 	head = /obj/item/clothing/head/helmet/sangheili/shipmaster
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -152,6 +156,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/specops
 	shoes = /obj/item/clothing/shoes/sangheili/specops
 	head = /obj/item/clothing/head/helmet/sangheili/specops
+	l_ear = /obj/item/device/radio/headset/covenant/specops
 	l_pocket = null
 	r_pocket = null
 	//
@@ -201,6 +206,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/silentshadow
 	shoes = /obj/item/clothing/shoes/magboots/sangheili/silentshadow
 	head = /obj/item/clothing/head/helmet/sangheili/silentshadow
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	r_hand = /obj/item/weapon/melee/energy/elite_sword/zane
@@ -240,6 +246,7 @@
 	name = "Sangheili Ranger Ultra"
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/eva/ranger/ultra
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	//
 	id_type = /obj/item/weapon/card/id/elite_ultra
 	id_slot = slot_wear_id
@@ -271,6 +278,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/zealot/fieldmarshal
 	shoes = /obj/item/clothing/shoes/sangheili/zealot/fieldmarshal
 	head = /obj/item/clothing/head/helmet/sangheili/zealot/fieldmarshal
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -289,6 +297,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/zealot/reach
 	shoes = /obj/item/clothing/shoes/sangheili/zealot/reach
 	head = /obj/item/clothing/head/helmet/sangheili/zealot/reach
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -307,6 +316,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/reach
 	shoes = /obj/item/clothing/shoes/sangheili/ultra/reach
 	head = /obj/item/clothing/head/helmet/sangheili/ultra/reach
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -323,6 +333,7 @@
 	gloves = /obj/item/clothing/gloves/thick/sangheili/specops/infiltrator/reach
 	shoes = /obj/item/clothing/shoes/sangheili/specops/reach
 	head = /obj/item/clothing/head/helmet/sangheili/specops/reach
+	l_ear = /obj/item/device/radio/headset/covenant/specops
 	l_pocket = null
 	r_pocket = null
 	l_hand = /obj/item/weapon/gun/energy/plasmapistol/stealth

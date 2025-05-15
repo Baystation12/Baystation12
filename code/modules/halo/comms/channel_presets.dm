@@ -15,6 +15,8 @@
 #define RADIO_FLEET "FLEETCOM"
 #define RADIO_SHIP "SHIP"
 #define RADIO_COV "Battlenet"
+#define RADIO_COVLEAD "Superior"
+#define RADIO_COVSPEC "Spec Ops"
 #define RADIO_COVREQ "Sequestrations"
 #define RADIO_BOULDER "BoulderNet"
 #define RADIO_RAM "RamNet"
@@ -129,10 +131,26 @@ GLOBAL_LIST_INIT(random_channels, list(\
 	channel_name = RADIO_COV
 	chat_span_class = "sciradio"
 	hotkey = "c"
+
+/obj/item/device/channel_dongle/superior
+	channel_preset = RADIO_COVLEAD
 //
+/datum/channel_cipher/superior
+	channel_name = RADIO_COVLEAD
+	chat_span_class = "secradio"
+	hotkey = "n"
+
+/obj/item/device/channel_dongle/specops
+	channel_preset = RADIO_COVSPEC
+//
+/datum/channel_cipher/specops
+	channel_name = RADIO_COVSPEC
+	chat_span_class = "srvradio"
+	hotkey = "k"
+
 /obj/item/device/channel_dongle/sequestrations
 	channel_preset = RADIO_COVREQ
-
+//
 /datum/channel_cipher/sequestrations
 	channel_name = RADIO_COVREQ
 	chat_span_class = "airadio"

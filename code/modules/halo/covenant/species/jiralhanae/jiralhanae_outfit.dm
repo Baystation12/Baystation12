@@ -129,6 +129,7 @@
 	name = "Covenant Jiralhanae Captain"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain
 	l_hand = /obj/item/language_learner/unggoy_to_common
@@ -149,6 +150,7 @@
 	name = "Covenant Jiralhanae Chieftain"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/chieftain
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	suit = /obj/item/clothing/suit/armor/special/chieftain
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain/chieftain
 	l_hand = /obj/item/language_learner/unggoy_to_common
@@ -175,6 +177,7 @@
 	gloves = null
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/honour_guard
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/honour_guard
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	l_pocket = null
 	r_pocket = null
 	//
@@ -260,6 +263,7 @@
 	name = "Jiralhanae Ranger Captain"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA/captain
+	l_ear = /obj/item/device/radio/headset/covenant/superior
 	suit = /obj/item/clothing/suit/armor/special/jiralhanae/EVA/captain
 	l_hand = /obj/item/language_learner/unggoy_to_common
 	//
