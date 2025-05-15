@@ -8,6 +8,7 @@
 	access = list(access_x52,access_innie)
 	selection_color = " #a01b01"
 	alt_titles = null
+	fallback_spawnpoint = "Innie Base Fallback Spawns"
 	whitelisted_species = list(/datum/species/human)
 	intro_blurb = "You are X-52! Working for a top secret military research project, one day you decided to go AWOL with your secrets and expertise. Now you're out for yourselves. Just remember the UNSC will always be looking for you..."
 
@@ -24,6 +25,7 @@
 	access = list(access_x52_rd, access_x52,access_innie)
 	selection_color = " #a01b01"
 	alt_titles = null
+	fallback_spawnpoint = "Innie Base Fallback Spawns"
 	whitelisted_species = list(/datum/species/human)
 	intro_blurb = "You are X-52! Working for a top secret military research project, one day you decided to go AWOL with your secrets and expertise. Now you're out for yourselves. Just remember the UNSC will always be looking for you..."
 
