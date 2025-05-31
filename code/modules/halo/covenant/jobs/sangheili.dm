@@ -41,7 +41,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
-	is_whitelisted = TRUE
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
