@@ -15,6 +15,8 @@
 /turf/simulated/wall/r_wall/hull/vox
 	initial_gas = list("nitrogen" = 101.38)
 	color = COLOR_GREEN_GRAY
+	paint_color = COLOR_GREEN_GRAY
+	stripe_color = COLOR_GREEN_GRAY
 
 /turf/simulated/wall/prepainted
 	color = COLOR_WALL_GUNMETAL
