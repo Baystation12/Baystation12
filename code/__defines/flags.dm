@@ -1,12 +1,12 @@
 GLOBAL_LIST_INIT_STEP(index_to_flag, 0)
 	index_to_flag = new (MAX_FLAG_INDEX)
-	for (var/i in 1 to MAX_FLAG_INDEX)
+	for (var/i = 1 to MAX_FLAG_INDEX)
 		index_to_flag[i] = RFLAG(i)
 
 #if DM_VERSION >= 516
 GLOBAL_ALIST_INIT_STEP(flag_to_index, 0)
-	flag_to_index = new (MAX_FLAG_INDEX)
-	for (var/i in 1 to MAX_FLAG_INDEX)
+	flag_to_index = alist()
+	for (var/i = 1 to MAX_FLAG_INDEX)
 		flag_to_index[RFLAG(i)] = i
 #endif
 

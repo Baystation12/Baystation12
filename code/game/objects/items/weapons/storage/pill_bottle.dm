@@ -47,14 +47,20 @@
 			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
 			return TRUE
 
-		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
-		if (length(peelz))
-			var/obj/item/reagent_containers/pill/P = pick(peelz)
-			remove_from_storage(P)
-			P.use_after(target, user)
+		var/obj/item/reagent_containers/pill/pill = remove_random_pill()
+		if (pill)
+			pill.use_after(target, user)
 			return TRUE
+		return FALSE
 
-	else return FALSE
+
+/obj/item/storage/pill_bottle/proc/remove_random_pill()
+	var/list/peelz = filter_list(contents, /obj/item/reagent_containers/pill)
+	if (!length(peelz))
+		return
+	var/obj/item/reagent_containers/pill/pill = pick(peelz)
+	remove_from_storage(pill)
+	return pill
 
 
 /obj/item/storage/pill_bottle/attack_self(mob/living/user)
@@ -88,6 +94,34 @@
 		var/image/I = image(icon, "pillbottle_wrap")
 		I.color = wrapper_color
 		AddOverlays(I)
+
+
+/obj/item/storage/pill_bottle/verb/shake()
+	set name = "Shake Pill Bottle"
+	set category = "Object"
+	shake_bottle()
+
+
+/obj/item/storage/pill_bottle/CtrlClick()
+	if (!shake_bottle())
+		return ..()
+	return TRUE
+
+
+/obj/item/storage/pill_bottle/proc/shake_bottle()
+	if (!length(contents) || !(ismob(usr) && usr.IsHolding(src)) || usr.stat || usr.restrained())
+		return FALSE
+	var/list/bottle_contents = contents.Copy()
+	shuffle(bottle_contents, TRUE)
+	contents = bottle_contents
+	usr.visible_message(
+		SPAN_NOTICE("\The [usr] shakes \the [src]."),
+		SPAN_NOTICE("You shake \the [src]."),
+		SPAN_NOTICE("You hear the sound of pills shaking.")
+	)
+	playsound(src, 'sound/items/pill_bottle_shake.ogg', 50, TRUE)
+	prepare_ui()
+	return TRUE
 
 
 /obj/item/storage/pill_bottle/antitox

@@ -83,10 +83,10 @@ Scent intensity
 	..()
 	if(ispath(intensity))
 		intensity = GET_SINGLETON(intensity)
-	START_PROCESSING(SSprocessing, src)
+	START_PROCESSING(SSscents, src)
 
 /datum/extension/scent/Destroy()
-	STOP_PROCESSING(SSprocessing, src)
+	STOP_PROCESSING(SSscents, src)
 	. = ..()
 
 /datum/extension/scent/Process()

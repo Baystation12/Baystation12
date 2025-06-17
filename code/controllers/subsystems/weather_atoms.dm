@@ -34,14 +34,14 @@ SUBSYSTEM_DEF(weather_atoms)
 			weather_atoms -= atom
 			continue
 
-		// Not outside, or not on a turf with a Z- weather is not relevant.
-		if(!atom.z || !atom.is_outside())
-			continue
-
 		// If weather does not exist, we don't care.
 		weather = atom.get_affecting_weather()
 		weather_state = weather?.weather_system?.current_state
 		if(!istype(weather_state))
+			continue
+
+		// Not outside, or not on a turf with a Z- weather is not relevant.
+		if(!atom.z || !atom.is_outside())
 			continue
 
 		// Process the atom and return early if needed.

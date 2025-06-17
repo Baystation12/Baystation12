@@ -219,9 +219,12 @@
 				return
 			var/result = antag.can_become_antag_detailed(src, TRUE)
 			if(result)
-				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! [result]."))
+				if(alert("Are you sure you want to bypass most checks and make [src] a [antag.role_text]? Failure reason:\n[result]", "Antag restriction check failed", "Yes", "No") != "Yes")
+					return
+			// last chance to bail out
+			if(alert("Are you sure you want to make [src] a [antag.role_text]?", "Are you sure?", "Yes", "No") != "Yes")
 				return
-			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
+			if(antag.add_antagonist(src, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE)) // Ignore most checks for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
 				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]!"))

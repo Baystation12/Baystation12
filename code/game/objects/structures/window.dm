@@ -253,14 +253,29 @@
 			USE_FEEDBACK_FAILURE("\The [src] is already polarized.")
 			return TRUE
 		var/obj/item/stack/cable_coil/cable = tool
+		if (!cable.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire and polarize \the [src].")
+			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts wiring \the [src] with [cable.get_vague_name(1)]."),
+			SPAN_NOTICE("You start wiring \the [src] with [cable.get_exact_name(1)].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (polarized)
+			USE_FEEDBACK_FAILURE("\The [src] is already polarized.")
+			return TRUE
 		if (!cable.use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire and polarize \the [src].")
 			return TRUE
+
 		playsound(src, 'sound/effects/sparks1.ogg', 50, TRUE)
 		polarized = TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] wires and polarizes \the [src] with \a [tool]."),
-			SPAN_NOTICE("You wire and polarize \the [src] with \the [tool].")
+			SPAN_NOTICE("\The [user] wires and polarizes \the [src] with [cable.get_vague_name(1)]."),
+			SPAN_NOTICE("You wire and polarize \the [src] with [cable.get_exact_name(1)].")
 		)
 		return TRUE
 
@@ -275,14 +290,32 @@
 		if (!anchored)
 			USE_FEEDBACK_FAILURE("\The [src] isn't anchored and doesn't need to be pried.")
 			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts prying \the [src] [construction_state == CONSTRUCT_STATE_UNANCHORED ? "into" : "out of"] its frame with \a [tool]."),
+			SPAN_NOTICE("You start prying \the [src] [construction_state == CONSTRUCT_STATE_UNANCHORED ? "into" : "out of"] its frame with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (!reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] doesn't have a reinforced frame to pry out.")
+			return TRUE
+		if (construction_state == CONSTRUCT_STATE_COMPLETE)
+			USE_FEEDBACK_FAILURE("\The [src] needs to be unfastened from the frame before you can pry it out.")
+			return TRUE
+		if (!anchored)
+			USE_FEEDBACK_FAILURE("\The [src] isn't anchored and doesn't need to be pried.")
+			return TRUE
+
 		if (construction_state == CONSTRUCT_STATE_ANCHORED)
 			construction_state = CONSTRUCT_STATE_UNANCHORED
 		else
 			construction_state = CONSTRUCT_STATE_ANCHORED
 		playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] pries \the [src] [construction_state ? "into" : "out of"] its frame with \a [tool]."),
-			SPAN_NOTICE("You pry \the [src] [construction_state ? "into" : "out of"] its frame with \the [tool].")
+			SPAN_NOTICE("\The [user] pries \the [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "into" : "out of"] its frame with \a [tool]."),
+			SPAN_NOTICE("You pry \the [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "into" : "out of"] its frame with \the [tool].")
 		)
 		return TRUE
 
@@ -298,13 +331,34 @@
 		if (material != stack.material || reinf_material != stack.reinf_material)
 			USE_FEEDBACK_FAILURE("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of.")
 			return TRUE
-		if (!stack.use(1))
+		if (!stack.can_use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
 			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts replacing some of \the [src]'s damaged [material] with [stack.get_vague_name(1)]."),
+			SPAN_NOTICE("You start replacing some of \the [src]'s damaged [material] with \a [stack.get_exact_name(1)].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] doesn't need repairs.")
+			return TRUE
+		if ((repair_pending + get_current_health()) >= get_max_health())
+			USE_FEEDBACK_FAILURE("\The [src] already has enough new [material] applied.")
+			return TRUE
+		if (material != stack.material || reinf_material != stack.reinf_material)
+			USE_FEEDBACK_FAILURE("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of.")
+			return TRUE
+		if (!stack.can_use(1))
+			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
+			return TRUE
+
 		repair_pending += get_repaired_per_unit()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] replaces some of \the [src]'s damaged [material] with \a [tool]."),
-			SPAN_NOTICE("You replace some of \the [src]'s damaged [material] with \a [tool].")
+			SPAN_NOTICE("\The [user] replaces some of \the [src]'s damaged [material] with [stack.get_vague_name(1)]."),
+			SPAN_NOTICE("You replace some of \the [src]'s damaged [material] with [stack.get_exact_name(1)].")
 		)
 		if (repair_pending < get_damage_value())
 			user.show_message(SPAN_WARNING("It looks like it could use more sheets"), VISIBLE_MESSAGE)
@@ -317,8 +371,23 @@
 		if (!polarized)
 			USE_FEEDBACK_FAILURE("\The [src] is not wired and cannot be toggled.")
 			return TRUE
+
 		// Toggle Tinting
 		if (anchored)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts adjusting \the [src]'s tinting with \a [tool]."),
+				SPAN_NOTICE("You start adjusting \the [src]'s tinting with \the [tool].")
+			)
+			if (!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src) || !user.use_sanity_check(src, tool))
+				return TRUE
+
+			if (!anchored)
+				USE_FEEDBACK_FAILURE("\The [src] needs to remain secured to the floor to have its tinting toggled.")
+				return TRUE
+			if (!polarized)
+				USE_FEEDBACK_FAILURE("\The [src] is not wired and cannot be toggled.")
+				return TRUE
+
 			toggle()
 			playsound(src, 'sound/effects/pop.ogg', 50, TRUE)
 			user.visible_message(
@@ -326,11 +395,24 @@
 				SPAN_NOTICE("You toggle \the [src]'s tinting with \the [tool].")
 			)
 			return TRUE
+
 		// Set ID
 		var/input = input(user, "What ID would you like to set this window to?", "[src] - Polarization ID", id) as null|text
 		input = sanitizeSafe(input, MAX_NAME_LEN)
 		if (!input || input == id || !user.use_sanity_check(src, tool))
 			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts configuring \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start configuring \the [src] with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (!polarized)
+			USE_FEEDBACK_FAILURE("\The [src] is not wired and cannot be toggled.")
+			return TRUE
+
 		id = input
 		user.visible_message(
 			SPAN_NOTICE("\The [user] configures \the [src] with \a [tool]."),
@@ -362,10 +444,25 @@
 	if (isScrewdriver(tool))
 		// Reinforced Window
 		if (reinf_material)
+			var/new_state
 			switch(construction_state)
 				if (CONSTRUCT_STATE_UNANCHORED)
 					if (!can_install_here(user))
 						return TRUE
+
+					user.visible_message(
+						SPAN_NOTICE("\The [user] starts [anchored ? "un" : null]fastening \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+						SPAN_NOTICE("You start [anchored ? "un" : null]fastening \the [src] [anchored ? "from" : "to"] the floor with \a [tool].")
+					)
+					if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+						return TRUE
+
+					if (construction_state != CONSTRUCT_STATE_UNANCHORED)
+						USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+						return TRUE
+					if (!can_install_here(user))
+						return TRUE
+
 					set_anchored(!anchored)
 					playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 					user.visible_message(
@@ -373,10 +470,25 @@
 						SPAN_NOTICE("You [!anchored ? "un" : null]fasten \the [src] [!anchored ? "from" : "to"] the floor with \the [tool].")
 					)
 					return TRUE
+
 				if (CONSTRUCT_STATE_ANCHORED)
-					construction_state = CONSTRUCT_STATE_COMPLETE
+					new_state = CONSTRUCT_STATE_COMPLETE
+
 				if (CONSTRUCT_STATE_COMPLETE)
-					construction_state = CONSTRUCT_STATE_ANCHORED
+					new_state = CONSTRUCT_STATE_ANCHORED
+
+			var/current_state = construction_state
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts [construction_state == CONSTRUCT_STATE_COMPLETE ? "un" : null]fastening \the [src] [construction_state == CONSTRUCT_STATE_COMPLETE ? "from" : "to"] its frame with \a [tool]."),
+				SPAN_NOTICE("You start [construction_state == CONSTRUCT_STATE_COMPLETE ? "un" : null]fastening \the [src] [construction_state == CONSTRUCT_STATE_COMPLETE ? "from" : "to"] its frame with \the [tool].")
+			)
+			if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+				return TRUE
+			if (construction_state != current_state)
+				USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+				return TRUE
+
+			construction_state = new_state
 			update_nearby_icons()
 			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(
@@ -384,12 +496,27 @@
 				SPAN_NOTICE("You [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fasten \the [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with \the [tool].")
 			)
 			return TRUE
+
 		// Regular Windows
 		if (!anchored && !can_install_here(user))
 			return TRUE
+
+		var/current_state = construction_state
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts [anchored ? "un" : null]fastening \the [src] [anchored ? "from" : "to"] the floor with \a [tool]."),
+			SPAN_NOTICE("You start [anchored ? "un" : null]fastening \the [src] [anchored ? "from" : "to"] the floor with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (construction_state != current_state)
+			USE_FEEDBACK_FAILURE("\The [src]'s state has changed.")
+			return TRUE
+
 		if (anchored)
 			construction_state = CONSTRUCT_STATE_UNANCHORED
 		else
+			if (!can_install_here(user))
+				return TRUE
 			construction_state = CONSTRUCT_STATE_ANCHORED
 		set_anchored(!anchored)
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
@@ -404,6 +531,17 @@
 		if (!polarized)
 			USE_FEEDBACK_FAILURE("\The [src] has no wiring to remove.")
 			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts cutting \the [src]'s wiring with \a [tool]."),
+			SPAN_NOTICE("You start cut \the [src]'s wiring with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (!polarized)
+			USE_FEEDBACK_FAILURE("\The [src] has no wiring to remove.")
+			return TRUE
+
 		if (opacity)
 			toggle()
 		new /obj/item/stack/cable_coil(user.loc, 1)
@@ -424,6 +562,21 @@
 		if (polarized)
 			USE_FEEDBACK_FAILURE("\The [src]'s wiring must be removed before you can dismantle it.")
 			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts dismantling \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start dismantling \the [src] with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (anchored || construction_state)
+			USE_FEEDBACK_FAILURE("\The [src] must be detached from the floor[reinf_material ? " and its frame" : null] before you can dismantle it.")
+			return TRUE
+		if (polarized)
+			USE_FEEDBACK_FAILURE("\The [src]'s wiring must be removed before you can dismantle it.")
+			return TRUE
+
 		playsound(src, 'sound/items/Ratchet.ogg', 50, TRUE)
 		user.visible_message(
 			SPAN_NOTICE("\The [user] dismantles \the [src] with \a [tool]."),
@@ -441,8 +594,25 @@
 			USE_FEEDBACK_FAILURE("\The [src] needs some [get_material_display_name()] applied before you can weld it.")
 			return TRUE
 		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(1, user))
+			return TRUE
+
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts welding \the [src]'s [material] into place with \a [tool]."),
+			SPAN_NOTICE("You start welding \the [src]'s [material] into place with \the [tool].")
+		)
+		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool))
+			return TRUE
+
+		if (!health_damaged())
+			USE_FEEDBACK_FAILURE("\The [src] does not need repairs.")
+			return TRUE
+		if (!repair_pending)
+			USE_FEEDBACK_FAILURE("\The [src] needs some [get_material_display_name()] applied before you can weld it.")
+			return TRUE
 		if (!welder.remove_fuel(1, user))
 			return TRUE
+
 		restore_health(repair_pending)
 		repair_pending = 0
 		user.visible_message(

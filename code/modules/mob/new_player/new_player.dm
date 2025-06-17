@@ -100,6 +100,7 @@
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
+				var/stealthed = player.is_stealthed()
 				var/highjob
 				if (player.client)
 					var/show_ready = player.client.get_preference_value(/datum/client_preference/show_ready) == GLOB.PREF_SHOW
@@ -110,7 +111,7 @@
 							highjob = "as [slot.job_high]"
 					else if (prefs.job_high)
 						highjob = " as [prefs.job_high]"
-					if (!player.is_stealthed())
+					if (!stealthed)
 						var/can_see_hidden = check_rights(R_INVESTIGATE, 0)
 						var/datum/game_mode/mode = SSticker.pick_mode(SSticker.master_mode)
 						var/list/readied_antag_roles = list()
@@ -121,8 +122,9 @@
 
 						var/antag_role_text = "[length(readied_antag_roles) ? "Readied for ([english_list(readied_antag_roles)])" : ""]"
 						stat("[player.key]", (player.ready && (show_ready || can_see_hidden)?("(Playing[highjob]) [(can_see_hidden && !show_ready) ? "(Hidden)" : ""] [antag_role_text]"):(null)))
-				totalPlayers++
-				if(player.ready)totalPlayersReady++
+						totalPlayers++
+				if (player.ready && !stealthed)
+					totalPlayersReady++
 		else
 			stat("Next Continue Vote:", "[SSroundend.vote_cache] minutes")
 

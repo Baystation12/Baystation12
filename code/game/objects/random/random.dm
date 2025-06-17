@@ -1027,7 +1027,6 @@ something, make sure it's not in one of the other lists.*/
 				/obj/random/tank = 20,
 				/obj/random/soap = 5,
 				/obj/random/drinkbottle = 5,
-				/obj/random/loot = 1,
 				/obj/random/advdevice = 50,
 				/obj/random/smokes = 30,
 				/obj/random/masks = 10,

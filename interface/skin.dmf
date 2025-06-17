@@ -186,6 +186,9 @@ macro "borghotkeymode"
 		name = "Numpad8"
 		command = "body-toggle-head"
 	elem
+		name = "ESCAPE"
+		command = "Cancel-Current-Action"
+	elem
 		name = "F1"
 		command = "adminhelp"
 	elem
@@ -370,6 +373,9 @@ macro "macro"
 	elem
 		name = "CTRL+Subtract"
 		command = "move-down"
+	elem
+		name = "ESCAPE"
+		command = "Cancel-Current-Action"
 	elem
 		name = "F1"
 		command = "adminhelp"
@@ -607,6 +613,9 @@ macro "hotkeymode"
 		name = "Numpad8"
 		command = "body-toggle-head"
 	elem
+		name = "ESCAPE"
+		command = "Cancel-Current-Action"
+	elem
 		name = "F1"
 		command = "adminhelp"
 	elem
@@ -791,6 +800,9 @@ macro "borgmacro"
 	elem
 		name = "CTRL+Subtract"
 		command = "move-down"
+	elem
+		name = "ESCAPE"
+		command = "Cancel-Current-Action"
 	elem
 		name = "F1"
 		command = "adminhelp"

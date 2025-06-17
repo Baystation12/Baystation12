@@ -31,11 +31,12 @@ GLOBAL_LIST_AS(day_names, list(
 * The title-case 3-letter abbreviation of the english-language
 * name of each week day
 */
+/* re-use for get_weekday_index when config is folded into GLOB
 GLOBAL_LIST_AS(day_names_short, list(
 	"Mon", "Tue", "Wed",
 	"Thu","Fri", "Sat",
 	"Sun"
-))
+))*/
 
 
 /**
@@ -153,7 +154,13 @@ GLOBAL_VAR(round_start_time)
 
 
 /proc/get_weekday_index()
-	return GLOB.day_names_short.Find(time2text(world.timeofday, "DDD"))
+	// re-replace with GLOB.day_names_short when config is folded into GLOB
+	var/static/list/day_names_short = list(
+		"Mon", "Tue", "Wed",
+		"Thu","Fri", "Sat",
+		"Sun"
+	)
+	return day_names_short.Find(time2text(world.timeofday, "DDD"))
 
 
 /proc/current_month_and_day()

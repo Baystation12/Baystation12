@@ -98,6 +98,7 @@
 \tCtrl+2 = disarm-intent
 \tCtrl+3 = grab-intent
 \tCtrl+4 = harm-intent
+\tESC = cancel current timed action
 \tF1 = adminhelp
 \tF2 = ooc
 \tF3 = say
@@ -145,6 +146,7 @@
 \tCtrl+2 = activate module 2
 \tCtrl+3 = activate module 3
 \tCtrl+4 = toggle intents
+\tESC = cancel current timed action
 \tF1 = adminhelp
 \tF2 = ooc
 \tF3 = say

@@ -243,6 +243,28 @@ ribbons
 /obj/item/clothing/accessory/ribbon
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 
+/obj/item/clothing/accessory/ribbon/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if (parent)
+		var/order = 0
+		var/total = 0
+		var/found = FALSE
+		for(var/obj/item/clothing/accessory/ribbon/ribbon in parent.accessories)
+			if(ribbon == src)
+				found = TRUE
+			total += 1
+			if(!found)
+				order += 1
+			else if(total > 4)
+				break
+
+		var/per_row = total < 4 ? 1 : 2
+		var/row = floor(order / per_row)
+		var/column = (order - (row * per_row))
+		ret.pixel_x = column - (per_row - 1)
+		ret.pixel_y = (total > 1) - row
+	return ret
+
 /obj/item/clothing/accessory/ribbon/solgov
 	name = "ribbon"
 	desc = "A simple military decoration."

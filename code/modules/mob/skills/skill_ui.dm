@@ -24,7 +24,7 @@
 	if(!skillset)
 		return
 	var/list/data = skillset.get_nano_data(hide_unskilled)
-	data += get_data()
+	data += get_data(data)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -42,13 +42,15 @@
 		hide_unskilled = !hide_unskilled
 		return 1
 
-/datum/nano_module/skill_ui/proc/get_data()
+/// Gets extra data to be appended to the NanoUI `data` list, allowing `data` to optionally be modified in-place.
+/datum/nano_module/skill_ui/proc/get_data(data)
 	return list()
 
 /datum/skillset/proc/get_nano_data(hide_unskilled)
 	. = list()
 	.["name"] = owner.real_name
-	.["job"] = owner.mind && owner.mind.assigned_role
+	.["job"] = owner.mind?.assigned_role
+	.["special_role"] = owner.mind?.special_role
 	.["hide_unskilled"] = hide_unskilled
 
 	var/list/skill_data = list()
@@ -85,7 +87,7 @@
 		level["blank"] = 0
 		level["val"] = i
 		level["name"] = S.levels[i]
-		level["selected"] = (i == value)
+		level["selected"] = (i <= value) // levels that proceed the real "level selection" act like they're selected, like in the character setup menu
 		levels += list(level)
 	for(var/i in (length(levels) + 1) to SKILL_MAX)
 		levels += list(list("blank" = 1))
@@ -105,14 +107,28 @@
 The generic antag version.
 */
 /datum/nano_module/skill_ui/antag
+	/// A list of max available buffs per skill level. Example: `list(0, 0, 4, 2, 1)` -> 4 extra Trained, 2 extra Experienced, 1 extra Master.
 	var/list/max_choices = list(0, 0, 4, 2, 1)
 	var/list/currently_selected
 	var/buff_type = /datum/skill_buff/antag
 	template = "skill_ui_antag.tmpl"
 
-/datum/nano_module/skill_ui/antag/get_data()
+/datum/nano_module/skill_ui/antag/get_data(data)
 	. = ..()
-	.["can_choose"] = can_choose()
+	// data piece for rows appearing "marked" if you wish to use your choice for that level
+	// or if a limit is exceeded for a certain level
+	for(var/category in data["skills_by_cat"])
+		for(var/skill in category["skills"])
+			for(var/i in 1 to length(skill["levels"]))
+				var/level = skill["levels"][i]
+				var/selected = LAZYACCESS(currently_selected, i)
+				var/remaining = LAZYACCESS(max_choices, i)
+				if(length(selected) >= remaining)
+					level["limit_exceeded"] = 1
+				for(var/selected_skill in selected)
+					if (selected_skill == locate(skill["ref"]))
+						level["marked_for_selection"] = 1
+	// data piece for number of remaining level bonuses you can select
 	var/list/selection_data = list()
 	var/singleton/hierarchy/skill/skill = GET_SINGLETON(/singleton/hierarchy/skill)
 	for(var/i in 1 to length(max_choices))
@@ -123,13 +139,10 @@ The generic antag version.
 		level_data["name"] = skill.levels[i]
 		level_data["level"] = i
 		var/selected = LAZYACCESS(currently_selected, i)
-		level_data["selected"] = list()
-		for(var/skill_type in selected)
-			var/singleton/hierarchy/skill/S = skill_type // False type.
-			level_data["selected"] += list(list("name" = initial(S.name), "ref" = "\ref[skill_type]"))
 		level_data["remaining"] = choices - length(selected)
 		selection_data += list(level_data)
 	.["selection_data"] = selection_data
+	.["can_choose"] = can_choose()
 
 /datum/nano_module/skill_ui/antag/Topic(href, href_list)
 	if(..())
@@ -138,26 +151,16 @@ The generic antag version.
 		return 1 // This probably means that we are being deleted but fielding badly timed user input or similar.
 
 	if(href_list["add_skill"])
-		if(!can_choose())
-			return 1
+		var/singleton/hierarchy/skill/skill = locate(href_list["skill"])
 		var/level = text2num(href_list["add_skill"])
-		var/list/choices = list()
-		for(var/singleton/hierarchy/skill/S in GLOB.skills)
-			if(can_select(S.type, level))
-				choices[S.name] = S.type
-		var/choice = input(usr, "Which skill would you like to add?", "Add Skill") as null|anything in choices
-		if(!can_choose() || !choices[choice])
-			return 1
-		if(!can_select(choices[choice], level))
-			return 1
-		select(choices[choice], level)
+		if(!skill || !level || !can_choose() || !can_select(skill.type, level))
+			return
+		select(skill, level)
 		skillset.refresh_uis()
 		return 1
 	if(href_list["remove_skill"])
-		if(!can_choose())
-			return 1
-		var/skill_path = locate(href_list["remove_skill"])
-		deselect(skill_path)
+		var/singleton/hierarchy/skill/skill = locate(href_list["skill"])
+		deselect(skill)
 		skillset.refresh_uis()
 		return 1
 	if(href_list["submit"])
@@ -173,6 +176,7 @@ The generic antag version.
 		if(usr.client)
 			usr.client.adminhelp("I am requesting an antag skill selection reset.")
 		return 1
+	return 1
 
 /datum/nano_module/skill_ui/antag/proc/can_choose()
 	return !skillset.owner.too_many_buffs(buff_type)

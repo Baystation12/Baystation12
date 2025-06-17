@@ -1,58 +1,3 @@
-/datum/gear/accessory/solgov_award_military
-	display_name = "SolGov military award selection"
-	description = "A selection of military awards awarded by the Sol Central Government."
-	path = /obj/item/storage/medalbox/sol
-	cost = 6
-	allowed_branches = SOLGOV_BRANCHES
-	flags = GEAR_HAS_NO_CUSTOMIZATION | GEAR_HAS_EXTENDED_DESCRIPTION
-
-/datum/gear/accessory/solgov_award_military/New()
-	..()
-	var/solmilitary = list()
-	solmilitary["Bronze Heart"] = /obj/item/storage/medalbox/sol/bronze_heart
-	solmilitary["Home Guard medal"] = /obj/item/storage/medalbox/sol/home_guard
-	solmilitary["Iron Star"] = /obj/item/storage/medalbox/sol/iron_star
-	solmilitary["Combat Medical Award"] = /obj/item/storage/medalbox/sol/medical
-	solmilitary["Armed Forces medal"] = /obj/item/storage/medalbox/sol/armed_forces
-	solmilitary["Silver Sword"] = /obj/item/storage/medalbox/sol/silver_sword
-	solmilitary["Superior Service Cross"] = /obj/item/storage/medalbox/sol/service_cross
-	solmilitary["Medal of Honor"] = /obj/item/storage/medalbox/sol/medal_of_honor
-	gear_tweaks += new/datum/gear_tweak/path(solmilitary)
-
-/datum/gear/accessory/solgov_award_civilian
-	display_name = "SolGov civilian award selection"
-	description = "A selection of civilian awards awarded by the Sol Central Government."
-	path = /obj/item/storage/medalbox/sol
-	cost = 3
-	flags = GEAR_HAS_NO_CUSTOMIZATION | GEAR_HAS_EXTENDED_DESCRIPTION
-
-/datum/gear/accessory/solgov_award_civilian/New()
-	..()
-	var/solcivilian = list()
-	solcivilian["Expeditionary Medal"] = /obj/item/storage/medalbox/sol/expeditionary
-	solcivilian["Sapientarian Peace Award"] = /obj/item/storage/medalbox/sol/sapientarian
-	solcivilian["Distinguished Service Medal"] = /obj/item/storage/medalbox/sol/service
-	gear_tweaks += new/datum/gear_tweak/path(solcivilian)
-
-/datum/gear/accessory/solgov_award_ribbons
-	display_name = "SolGov ribbon selection"
-	description = "A selection of decorations and medal ribbons awarded by the Sol Central Government."
-	path = /obj/item/clothing/accessory/ribbon/solgov
-	cost = 3
-	allowed_branches = SOLGOV_BRANCHES
-	flags = GEAR_HAS_NO_CUSTOMIZATION
-
-/datum/gear/accessory/solgov_award_ribbons/New()
-	..()
-	var/solribbons = list()
-	solribbons["Marksmanship ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/marksman
-	solribbons["Peacekeeping ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/peace
-	solribbons["Frontier ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/frontier
-	solribbons["Instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
-	solribbons["Combat Action ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/combat
-	solribbons["Gaia Conflict ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/gaiaconflict
-	solribbons["Distinguished unit ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/distinguished_unit
-	gear_tweaks += new/datum/gear_tweak/path(solribbons)
 
 /datum/gear/accessory/tags
 	display_name = "dog tags"
@@ -150,9 +95,6 @@
 	flags = GEAR_HAS_NO_CUSTOMIZATION
 
 /datum/gear/accessory/armband_nt
-	allowed_branches = CIVILIAN_BRANCHES
-
-/datum/gear/accessory/ntaward
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/accessory/tie

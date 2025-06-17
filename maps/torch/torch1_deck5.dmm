@@ -7248,6 +7248,7 @@
 /obj/item/pickaxe,
 /obj/item/shovel,
 /obj/item/pickaxe,
+/obj/item/flatpack/ore_box,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/expedition)
 "qh" = (

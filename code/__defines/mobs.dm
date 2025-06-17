@@ -421,6 +421,8 @@
 #define MOB_FLAG_HOLY_BAD FLAG_01
 /// This mob cannot be pinned to walls by sharp objects
 #define MOB_FLAG_UNPINNABLE FLAG_02
+/// Any `do_after()` calls with this mob as the user should check `do_user_interrupted` and `do_user_interrupt()`.
+#define MOB_FLAG_DO_USER_INTERRUPT FLAG_03
 
 // More refined version of SA_* ""intelligence"" seperators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
@@ -467,11 +469,13 @@
 #define DO_MOVE_CHECKS_TURFS FLAG_11
 #define DO_FAIL_FEEDBACK     FLAG_12
 #define DO_BAR_OVER_USER     FLAG_13 // Forces the progress bar to appear over the user instead of the target
+/// Timer can be halted by user setting `/mob/var/do_user_interrupted` or overriding their `/atom/proc/do_user_interrupt()` proc.
+#define DO_USER_INTERRUPT    FLAG_14
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
-#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK | DO_USER_INTERRUPT)
 
 // Preset do_After flags
 #define DO_PUBLIC_UNIQUE     (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_BOTH_UNIQUE_ACT) // Common flags for actions that should be public and unique

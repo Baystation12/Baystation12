@@ -113,3 +113,6 @@
 
 /datum/fabricator_recipe/toolbox
 	path = /obj/item/storage/toolbox
+
+/datum/fabricator_recipe/flatpack_orebox
+	path = /obj/item/flatpack/ore_box

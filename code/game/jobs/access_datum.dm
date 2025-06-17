@@ -474,3 +474,10 @@ var/global/const/access_merchant = "ACCESS_MERCHANT" //301
 	id = access_merchant
 	desc = "Merchant"
 	access_type = ACCESS_TYPE_NONE
+
+var/global/const/access_skrellscoutship = "ACCESS_SKRELLSCOUT"
+
+/datum/access/skrellscoutship
+	id = access_skrellscoutship
+	desc = "SSV Crewman"
+	region = ACCESS_REGION_NONE

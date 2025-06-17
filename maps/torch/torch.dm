@@ -145,6 +145,7 @@
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
+	#include "loadout/loadout_awards.dm"
 	#include "loadout/loadout_ec_skillbadges.dm"
 	#include "loadout/loadout_eyes.dm"
 	#include "loadout/loadout_gloves.dm"
@@ -186,6 +187,7 @@
 	#include "../away/mininghome/mininghome.dm"
 	#include "../away/scavver/scavver_gantry.dm"
 	#include "../away/abandoned_hotel/abandoned_hotel.dm"
+	#include "../away/spy_station/spy_station.dm"
 
 	#include "../event/iccgn_ship/icgnv_hound.dm"
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"

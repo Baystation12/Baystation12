@@ -56,6 +56,13 @@
 	return ..()
 
 
+/mob/living/simple_animal/hostile/legion/bullet_act(obj/item/projectile/Proj)
+	if (istype(Proj, /obj/item/projectile/beam/legion))
+		return PROJECTILE_FORCE_MISS
+
+	. = ..()
+
+
 /mob/living/simple_animal/hostile/legion/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_METAL
 

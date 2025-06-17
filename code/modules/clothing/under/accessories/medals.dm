@@ -5,6 +5,27 @@
 	slot = ACCESSORY_SLOT_MEDAL
 	on_rolled_down = ACCESSORY_ROLLED_NONE
 
+/obj/item/clothing/accessory/medal/get_mob_overlay(mob/user_mob, slot)
+	var/image/ret = ..()
+	if (parent)
+		var/order = 0
+		var/total = 0
+		var/found = FALSE
+		for(var/obj/item/clothing/accessory/medal/medal in parent.accessories)
+			if(medal == src)
+				found = TRUE
+			total += 1
+			if(!found)
+				order += 1
+			else if(total > 4)
+				break
+
+		var/per_row = (total < 5 && total != 3) ? 2 : 3
+		var/row = floor(order / per_row)
+		var/column = (order - (row * per_row))
+		ret.pixel_x = column - (per_row % 2)
+		ret.pixel_y = -row
+	return ret
 
 /obj/item/clothing/accessory/medal/iron
 	name = "iron medal"

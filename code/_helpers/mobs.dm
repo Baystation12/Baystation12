@@ -155,6 +155,8 @@
 /mob/var/do_unique_user_handle = 0
 /// The mob currently interacting with the atom during a `do_after` timer. Used to validate `DO_TARGET_UNIQUE_ACT` flag checks.
 /atom/var/do_unique_target_user
+/// Integer. `world.time` of the last interrptuon this mob receives.
+/mob/var/do_user_interrupted = FALSE
 
 /proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
 	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
@@ -196,6 +198,10 @@
 			user_loc = get_turf(user)
 		if (target_loc)
 			target_loc = get_turf(target)
+
+	var/user_interruptable = FALSE
+	if (HAS_FLAGS(do_flags, DO_USER_INTERRUPT) || HAS_FLAGS(user.mob_flags, MOB_FLAG_DO_USER_INTERRUPT))
+		user_interruptable = TRUE
 
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
@@ -250,6 +256,9 @@
 		if (target_zone && user.zone_sel.selecting != target_zone)
 			. = DO_USER_SAME_ZONE
 			break
+		if (user_interruptable && (user.do_user_interrupted >= start_time || user.do_user_interrupt()))
+			. = DO_USER_INTERRUPT
+			break
 
 	if (. && do_feedback)
 		switch (.)
@@ -271,6 +280,8 @@
 				USE_FEEDBACK_FAILURE("You stop what you're doing with \the [target].")
 			if (DO_USER_SAME_ZONE)
 				USE_FEEDBACK_FAILURE("You must remain targeting the same zone to perform that action!")
+			if (DO_USER_INTERRUPT)
+				USE_FEEDBACK_FAILURE("You interrupted the action.")
 
 	if (bar)
 		qdel(bar)
@@ -278,6 +289,26 @@
 		user.do_unique_user_handle = 0
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
 		target.do_unique_target_user = null
+
+
+/**
+ * Logic for interrupting `do_after()` calls where this atom is passed as the `user` parameter.
+ *
+ * Only called if `DO_USER_INTERRUPT` is passed, or this mob has the `MOB_FLAG_DO_USER_INTERRUPT` `mob_flag` set.
+ *
+ * Returns boolean. If `TRUE`, halts the timer.
+ */
+/mob/proc/do_user_interrupt()
+	return FALSE
+
+
+/client/verb/cancel_current_action()
+	set name = "Cancel Current Action"
+	set category = "Object"
+	if (!mob)
+		return
+	mob.do_user_interrupted = world.time
+
 
 /proc/able_mobs_in_oview(origin)
 	RETURN_TYPE(/list)

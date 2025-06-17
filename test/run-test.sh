@@ -225,7 +225,8 @@ function run_byond_tests {
     cp config/example/* config/
     if [[ "$CI" == "true" ]]; then
         msg "installing BYOND"
-        ./install-byond.sh || exit 1
+        chmod +x ./test/install-byond.sh || exit 1
+        ./test/install-byond.sh || exit 1
         source ~/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"

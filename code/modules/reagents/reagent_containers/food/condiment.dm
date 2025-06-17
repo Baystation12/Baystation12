@@ -132,6 +132,7 @@
 	starting_reagents = list(/datum/reagent/nutriment/flour = 50)
 
 /obj/item/reagent_containers/food/condiment/mint
+	name = "mint essential oil"
 	starting_reagents = list(/datum/reagent/nutriment/mint = 15)
 
 /obj/item/reagent_containers/food/condiment/soysauce

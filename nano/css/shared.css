@@ -30,7 +30,7 @@ hr {
     height: 1px;
 }
 
-.link, .linkOn, .linkOff, .selected, .disabled, .yellowButton, .redButton {
+.link, .linkOn, .linkOff, .selected, .warning, .disabled, .yellowButton, .redButton {
     float: left;
     min-width: 15px;
     height: 16px;
@@ -80,6 +80,16 @@ a.white:hover {
 .linkOn, a.linkOn:link, a.linkOn:visited, a.linkOn:active, a.linkOn:hover, .selected, a.selected:link, a.selected:visited, a.selected:active, a.selected:hover {
     color: #ffffff;
     background: #2f943c;
+}
+
+.linkWarning, a.linkWarning:link, a.linkWarning:visited, a.linkWarning:active, a.linkWarning:hover, .warning, a.warning:link, a.warning:visited, a.warning:active, a.warning:hover {
+    color: #ffffff;
+    background: #ff5805;
+}
+
+.warning:hover {
+    color: #ffffff !important;
+    background: #cc7f58 !important;
 }
 
 .linkOff, a.linkOff:link, a.linkOff:visited, a.linkOff:active, a.linkOff:hover, .disabled, a.disabled:link, a.disabled:visited, a.disabled:active, a.disabled:hover {

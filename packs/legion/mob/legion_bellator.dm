@@ -9,8 +9,8 @@
 	pixel_x = -16
 	pixel_y = -16
 
-	maxHealth = 200
-	health = 200
+	maxHealth = 300
+	health = 300
 	armor_type = /datum/extension/armor
 	natural_armor = list(
 		"melee" = ARMOR_MELEE_RESISTANT,

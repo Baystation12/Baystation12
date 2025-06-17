@@ -1,6 +1,3 @@
-
-/**********************Ore box**************************/
-
 /obj/structure/ore_box
 	icon = 'icons/obj/ore_boxes.dmi'
 	icon_state = "orebox0"
@@ -110,3 +107,16 @@
 			O.dropInto(loc)
 			O.ex_act(severity++)
 		qdel(src)
+
+
+/obj/structure/ore_box/flatpack
+	icon_state = "orebox2"
+
+
+/obj/item/flatpack/ore_box
+	name = "packed ore box"
+	w_class = ITEM_SIZE_NORMAL
+	icon = 'icons/obj/ore_boxes.dmi'
+	icon_state = "orebox2stored"
+	deploy_path = /obj/structure/ore_box/flatpack
+	matter = list(MATERIAL_STEEL = 15000)
