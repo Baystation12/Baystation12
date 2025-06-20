@@ -217,11 +217,13 @@
 		speaker_name += " ([rank_text])"
 		speaker_job = job_master.GetJob("[rank_text]")
 
+	var/datum/job/speaker_role
+	speaker_role = job_master.GetJob(speaker.mind.assigned_role)
 	var/speech_size = 100
 	var/faction_speech = 1 //Does this speech-size only apply to our own faction?
-	if(speaker_job)
-		speech_size = speaker_job.radio_speech_size
-		faction_speech =  speaker_job.radio_speech_faction
+	if (speaker_role)
+		speech_size = speaker_role.radio_speech_size
+		faction_speech =  speaker_role.radio_speech_faction
 
 	var/speech_size_modify = 0 //Should we modify the speech size?
 	if(!faction_speech)//Only bother with radio speech size if they're our faction. (Or we're not checking that.)
