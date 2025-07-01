@@ -497,6 +497,30 @@
 	connected player. Using more than one account at a time is not allowed. If this is your \
 	first time seeing this message, please contact staff by using the AdminHelp command."
 
+	/**
+	* An optional map (/mob/living/... = number, ...) of the current spawn availability
+	* of specific living mob types with behavior moderated by living_limit_flags
+	*/
+	var/static/alist/living_limit
+
+	/**
+	* An optional field of MOB_LIMIT_* flags that affect the behavior of mob_limit
+	* and create_living
+	*/
+	var/static/living_limit_flags = FLAGS_OFF
+
+	/**
+	* When living_limit_flags has LIVING_LIMIT_LOUD, debug messages are sent when
+	* create_living creates less instances than requested
+	*/
+	var/const/LIVING_LIMIT_LOUD = FLAG_01
+
+	/**
+	* When living_limit_flags has LIVING_LIMIT_SOFT, mobs increase their living_limit
+	* on death instead of Destroy
+	*/
+	var/const/LIVING_LIMIT_SOFT = FLAG_02
+
 
 /datum/configuration/New()
 	load_config()
@@ -955,6 +979,29 @@
 				skip_conn_warn_client = TRUE
 			if ("conn_warn_client_message")
 				conn_warn_client_message = value
+			if ("living_limit")
+				living_limit = alist()
+				if (!islist(value))
+					value = list(value)
+				var/regex/split_space = regex(@"/\s+/")
+				for (var/entry in value)
+					var/list/pair = splittext(entry, split_space)
+					if (length(pair) != 2)
+						log_debug("Bad entry '[entry]' in living_limit - should be like '/mob/living/foo 15'")
+						continue
+					var/mob/living/path = text2path(pair[1])
+					if (!ispath(path, /mob/living) || is_abstract(path))
+						log_debug("Bad entry '[entry]' in living_limit - path invalid or abstract")
+						continue
+					var/count = text2num(pair[2])
+					if (!isnum(count) || count < 0 || floor(count) != count)
+						log_debug("Bad entry '[entry]' in living_limit - must supply a positive integer or 0")
+						continue
+					living_limit[path] = count
+			if ("living_limit_loud")
+				living_limit_flags |= LIVING_LIMIT_LOUD
+			if ("living_limit_soft")
+				living_limit_flags |= LIVING_LIMIT_SOFT
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 

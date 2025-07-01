@@ -511,3 +511,22 @@ RADIATION_LOWER_LIMIT 0.15
 ## a time is not allowed. If this is your first time seeing this message, please contact staff by
 ## using the AdminHelp command."
 #CONN_WARN_CLIENT_MESSAGE It looks like you're multi-keying. Please stop that!
+
+## LIVING_LIMIT
+## List of type number pairs. Default: Not Set
+## Sets the at-boot number of living mobs of a given type allowed to be spawned using
+## create_living.
+#LIVING_LIMIT /mob/living/simple_animal/hostile/carp 30
+#LIVING_LIMIT /mob/living/simple_animal/hostile/giant_spider/nurse 2
+
+## LIVING_LIMIT_SOFT
+## Bool. Default: Off
+## If enabled, LIVING_LIMIT entries will be freed when the mob dies.
+## Otherwise, entries will be freed only when a mob of the type is Destroyed.
+#LIVING_LIMIT_SOFT
+
+## LIVING_LIMIT_LOUD
+## Bool. Default: Off
+## If enabled, create_living will emit a debug log if it cannot create as many
+## instances as requested because of LIVING_LIMIT.
+#LIVING_LIMIT_LOUD

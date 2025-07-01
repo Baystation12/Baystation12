@@ -57,7 +57,9 @@
 		var/mob_to_spawn = pickweight(mobs_to_spawn)
 		if (!mob_to_spawn)
 			continue
-		var/mob/spawned_mob = new mob_to_spawn()
+		var/mob/spawned_mob = create_living(1, mob_to_spawn)
+		if (!spawned_mob)
+			break
 		if (delete_on_end)
 			GLOB.destroyed_event.register(spawned_mob, src, PROC_REF(mob_destroyed))
 			LAZYADD(mobs, spawned_mob)

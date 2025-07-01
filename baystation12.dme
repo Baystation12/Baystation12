@@ -2235,6 +2235,7 @@
 #include "code\modules\mob\living\living_defines.dm"
 #include "code\modules\mob\living\living_health.dm"
 #include "code\modules\mob\living\living_maneuvers.dm"
+#include "code\modules\mob\living\living_misc.dm"
 #include "code\modules\mob\living\living_powers.dm"
 #include "code\modules\mob\living\login.dm"
 #include "code\modules\mob\living\logout.dm"
