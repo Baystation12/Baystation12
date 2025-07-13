@@ -87,7 +87,8 @@ GLOBAL_VAR_AS(arrest_security_status, "Arrest")
 
 	if(H)
 		if (H.HasTrait(/singleton/trait/malus/allergy))
-			var/list/allergies = H.GetMetaOptions(/singleton/trait/malus/allergy)
+			var/list/allergies = H.GetMetaOptions(/singleton/trait/malus/allergy/food)
+			LAZYMERGELIST(allergies, H.GetMetaOptions(/singleton/trait/malus/allergy/drug))
 			var/list/allergy_data = list()
 			var/severity
 			for (var/datum/reagent/picked as anything in allergies)

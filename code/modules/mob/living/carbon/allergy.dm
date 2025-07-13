@@ -76,7 +76,8 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		return
 	if (!HAS_TRAIT(src, /singleton/trait/malus/allergy))
 		return
-	var/list/allergy_list = traits[/singleton/trait/malus/allergy]
+	var/list/allergy_list = traits[/singleton/trait/malus/allergy/drug]
+	LAZYMERGELIST(allergy_list, traits[/singleton/trait/malus/allergy/food])
 
 	for (var/picked as anything in allergy_list)
 		var/datum/reagent/reagent = picked

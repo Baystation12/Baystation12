@@ -322,7 +322,10 @@
 	display_name = "Allergy Autoinjector"
 	path = /obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy
 	cost = 1
-	allowed_traits = list(/singleton/trait/malus/allergy)
+	allowed_traits = list(
+		/singleton/trait/malus/allergy/food,
+		/singleton/trait/malus/allergy/drug
+	)
 
 /datum/gear/rosary
 	display_name = "rosary"

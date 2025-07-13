@@ -2,23 +2,39 @@
 /mob/living/proc/HasTrait(trait_type)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	return (trait_type in GetTraits())
+	if (!is_abstract(trait_type))
+		return (trait_type in GetTraits())
+	var/list/children_traits = GET_SINGLETON_SUBTYPE_LIST(trait_type)
+	for (var/singleton/trait/trait in children_traits)
+		if (trait.type in GetTraits())
+			return TRUE
+	return FALSE
 
+///Can only feed abstract types into this proc if it's associated with a meta_option that is unique to one of the children
 /mob/living/proc/GetTraitLevel(trait_type, meta_option)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	var/singleton/trait/trait = GET_SINGLETON(trait_type)
 	var/traits = GetTraits()
 	if(!traits)
 		return null
 
-	if (length(trait.metaoptions))
+	if (is_abstract(trait_type))
 		if (!meta_option)
-			return
-		var/list/interim = traits[trait_type]
-		return interim[meta_option]
+			return null
+		var/list/children_traits = GET_SINGLETON_SUBTYPE_LIST(trait_type)
+		for (var/singleton/trait/possible_trait in children_traits)
+			if (possible_trait.metaoptions && LAZYISIN(possible_trait.metaoptions, meta_option))
+				var/list/interim = traits[possible_trait.type]
+				return interim[meta_option]
+	else
+		var/singleton/trait/trait = GET_SINGLETON(trait_type)
+		if (length(trait.metaoptions))
+			if (!meta_option)
+				return
+			var/list/interim = traits[trait_type]
+			return interim[meta_option]
 
-	else return traits[trait_type]
+		else return traits[trait_type]
 
 /mob/living/proc/GetTraits()
 	SHOULD_NOT_SLEEP(TRUE)
@@ -121,6 +137,8 @@
 
 	for (var/trait in preferences)
 		var/trait_type = istext(trait) ? text2path(trait) : trait
+		if (is_abstract(trait_type))
+			continue
 		var/singleton/trait/selected = GET_SINGLETON(trait_type)
 		var/severity
 		if (!selected)
