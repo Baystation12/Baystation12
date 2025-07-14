@@ -17,7 +17,7 @@
 		"Aquila" = list("nav_hangar_aquila"),
 		"Skrellian Scout" = list("nav_skrellscout_dock"), //restricts Skrell Scoutship specific docking waypoint on deck 4 portside
 		"Skrellian Shuttle" = list("nav_skrellscoutsh_altdock"),
-		"Rescue" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
+		"SFV Rook" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
 		"ITV The Reclaimer" = list("nav_hangar_gantry_torch"), //gantry shuttles
 		"ITV Vulcan" = list("nav_hangar_gantry_torch_two"),
 		"ITV Spiritus" = list("nav_hangar_gantry_torch_three"),
@@ -32,7 +32,6 @@
 		"nav_merc_deck5",
 		"nav_ninja_deck5",
 		"nav_skipjack_deck5",
-		"nav_ert_deck5",
 		"nav_bridge_charon",
 		"nav_bridge_guppy",
 		"nav_bridge_aquila",
@@ -41,7 +40,6 @@
 		"nav_merc_deck1",
 		"nav_ninja_deck1",
 		"nav_skipjack_deck1",
-		"nav_ert_deck4",
 		"nav_deck4_charon",
 		"nav_deck4_guppy",
 		"nav_deck4_aquila",
@@ -50,7 +48,6 @@
 		"nav_merc_deck2",
 		"nav_ninja_deck2",
 		"nav_skipjack_deck2",
-		"nav_ert_deck3",
 		"nav_deck3_charon",
 		"nav_deck3_guppy",
 		"nav_deck3_aquila",
@@ -59,7 +56,6 @@
 		"nav_merc_deck3",
 		"nav_ninja_deck3",
 		"nav_skipjack_deck3",
-		"nav_ert_deck2",
 		"nav_deck2_charon",
 		"nav_deck2_guppy",
 		"nav_deck2_aquila",
@@ -68,7 +64,6 @@
 		"nav_merc_deck4",
 		"nav_ninja_deck4",
 		"nav_skipjack_deck4",
-		"nav_ert_deck1",
 		"nav_deck1_charon",
 		"nav_deck1_guppy",
 		"nav_deck1_aquila",
@@ -77,8 +72,7 @@
 		//start Hanger Deck
 		"nav_merc_hanger",
 		"nav_ninja_hanger",
-		"nav_skipjack_hanger",
-		"nav_ert_hanger",
+		"nav_skipjack_hanger"
 	)
 
 /obj/overmap/visitable/ship/landable/exploration_shuttle

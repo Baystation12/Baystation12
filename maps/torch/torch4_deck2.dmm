@@ -14008,8 +14008,8 @@
 /turf/simulated/floor/plating,
 /area/synth/borg_upload)
 "Kb" = (
-/obj/shuttle_landmark/ert/deck3{
-	name = "2nd Deck, Fore Starboard"
+/obj/shuttle_landmark/ert/deck2{
+	name = "Deck 2, Starboard"
 	},
 /turf/space,
 /area/space)
@@ -28358,7 +28358,7 @@ aa
 aa
 aa
 aa
-Kb
+aa
 aa
 aa
 aa
@@ -32584,7 +32584,7 @@ aa
 aa
 aa
 aa
-aa
+Kb
 aa
 aa
 aa

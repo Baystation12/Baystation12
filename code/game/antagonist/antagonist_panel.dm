@@ -17,7 +17,7 @@
 /datum/antagonist/proc/get_extra_panel_options()
 	return
 
-/datum/antagonist/proc/get_check_antag_output(datum/admins/caller)
+/datum/antagonist/proc/get_check_antag_output(datum/admins/calling_admin)
 
 	if(!current_antagonists || !length(current_antagonists))
 		return ""
@@ -31,16 +31,16 @@
 			if(!M.client)      dat += " <i>(logged out)</i>"
 			if(M.stat == DEAD) dat += " <b>[SPAN_COLOR("red", "(DEAD)")]</b>"
 			dat += "</td>"
-			dat += "<td>\[<A href='byond://?src=\ref[caller];priv_msg=\ref[M]'>PM</A>\]\[<A href='byond://?src=\ref[caller];traitor=\ref[M]'>TP</A>\]</td>"
+			dat += "<td>\[<A href='byond://?src=\ref[calling_admin];priv_msg=\ref[M]'>PM</A>\]\[<A href='byond://?src=\ref[calling_admin];traitor=\ref[M]'>TP</A>\]</td>"
 		else
 			dat += "<td><i>Mob not found/([player.key])!</i></td>"
 		dat += "</tr>"
 	dat += "</table>"
 
-	dat += get_additional_check_antag_output(caller)
+	dat += get_additional_check_antag_output(calling_admin)
 	dat += "<hr>"
 	return dat
 
 //Overridden elsewhere.
-/datum/antagonist/proc/get_additional_check_antag_output(datum/admins/caller)
+/datum/antagonist/proc/get_additional_check_antag_output(datum/admins/calling_admin)
 	return ""

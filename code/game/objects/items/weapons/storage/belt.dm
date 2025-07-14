@@ -237,7 +237,7 @@
 		/obj/item/device/flashlight,
 		/obj/item/modular_computer/tablet,
 		/obj/item/modular_computer/pda,
-		/obj/item/device/radio/headset,
+		/obj/item/device/radio,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
 		/obj/item/melee,
@@ -247,7 +247,7 @@
 		/obj/item/device/binoculars,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife
 		)
 
 /obj/item/storage/belt/holster/security/full/Initialize()
@@ -290,8 +290,30 @@
 		/obj/item/device/binoculars,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding
+		/obj/item/material/knife
 		)
+
+/obj/item/storage/belt/holster/security/tactical
+	name = "combat belt"
+	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
+	icon_state = "swatbelt"
+	item_state = "swatbelt"
+	storage_slots = 12
+
+/obj/item/storage/belt/holster/security/tactical/ert
+	desc = "Can hold security gear and tactical equipment like handcuffs, grenades and ammo with 12 pouches for more storage and a holster."
+
+/obj/item/storage/belt/holster/security/tactical/ert/Initialize()
+	. = ..()
+	new /obj/item/device/radio(src)
+	new /obj/item/crowbar/emergency_forcing_tool(src)
+	new /obj/item/melee/baton/loaded(src)
+	new /obj/item/reagent_containers/spray/pepper(src)
+	new /obj/item/handcuffs(src)
+	new /obj/item/handcuffs(src)
+	new /obj/item/ammo_magazine/pistol/double(src)
+	new /obj/item/ammo_magazine/pistol/double(src)
+	queue_icon_update()
 
 /obj/item/storage/belt/general
 	name = "equipment belt"
@@ -554,14 +576,6 @@
 	storage_slots = null
 	max_storage_space = ITEM_SIZE_SMALL
 	contents_allowed = list(/obj/item/clothing/mask/luchador)
-
-/obj/item/storage/belt/holster/security/tactical
-	name = "combat belt"
-	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
-	icon_state = "swatbelt"
-	item_state = "swatbelt"
-	storage_slots = 10
-
 
 /obj/item/storage/belt/waistpack
 	name = "waist pack"

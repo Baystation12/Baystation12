@@ -168,6 +168,15 @@
 	for (var/name in GLOB.species_by_name)
 		if (name in deny)
 			continue
+		if (is_special_character(src.mind))
+			var/species_invalid = FALSE
+			for (var/datum/antagonist/antag) // Identify which antag type it is and fetch which species are allowed for this antagonist
+				if (antag.is_antagonist(src.mind) && length(antag.valid_species))
+					if (!(name in antag.valid_species))
+						species_invalid = TRUE
+						break
+			if (species_invalid)
+				continue
 		if (!appearance_flags)
 			result += name
 			continue

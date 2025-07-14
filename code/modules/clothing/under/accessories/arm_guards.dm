@@ -51,13 +51,40 @@
 	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
 	icon_state = "armguards_merc"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
+		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 	)
 
+/obj/item/clothing/accessory/arm_guards/heavy
+	name = "heavy arm guards"
+	desc = "A pair of black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
+	icon_state = "armguards"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED
+	)
+
+/obj/item/clothing/accessory/arm_guards/heavy/blue
+	desc = "A pair of blue arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_blue"
+
+/obj/item/clothing/accessory/arm_guards/heavy/navy
+	desc = "A pair of navy blue arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_navy"
+
+/obj/item/clothing/accessory/arm_guards/heavy/green
+	desc = "A pair of green pads reinforced with heavy armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_green"
+
+/obj/item/clothing/accessory/arm_guards/heavy/tan
+	desc = "A pair of tan arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_tan"
 
 /obj/item/clothing/accessory/arm_guards/riot
 	name = "riot arm guards"

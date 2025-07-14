@@ -1,6 +1,6 @@
 /**
-* SpacemanDMM dreamchecker extensions for suite 1.9
-* <https://github.com/SpaceManiac/SpacemanDMM/tree/suite-1.9/crates/dreamchecker>
+* SpacemanDMM dreamchecker extensions for suite 1.10
+* <https://github.com/SpaceManiac/SpacemanDMM/tree/suite-1.10/crates/dreamchecker>
 */
 
 #ifdef SPACEMAN_DMM

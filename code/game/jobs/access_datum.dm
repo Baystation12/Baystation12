@@ -445,6 +445,18 @@ var/global/const/access_cent_captain = "ACCESS_CENT_CAPTAIN" //109
 	desc = "Code Gold"
 	access_type = ACCESS_TYPE_CENTCOM
 
+var/global/const/access_ert_responder = "ACCESS_ERT_RESPONDER"
+/datum/access/access_ert_responder
+	id = access_ert_responder
+	desc = "ERT"
+	access_type = ACCESS_TYPE_CENTCOM
+
+var/global/const/access_ert_leader = "ACCESS_ERT_LEADER"
+/datum/access/access_ert_leader
+	id = access_ert_leader
+	desc = "ERT Leader"
+	access_type = ACCESS_TYPE_CENTCOM
+
 /***************
 * Antag access *
 ***************/

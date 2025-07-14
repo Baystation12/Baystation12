@@ -109,13 +109,13 @@
 				if(BP_L_HAND)
 					usr.put_in_l_hand(src)
 
-/obj/item/storage/AltClick(mob/usr)
+/obj/item/storage/AltClick(mob/user)
 	if(!canremove)
 		return FALSE
 
-	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
-		src.add_fingerprint(usr)
-		src.open(usr)
+	if ((ishuman(user) || isrobot(user) || issmall(user)) && !user.incapacitated() && Adjacent(user))
+		src.add_fingerprint(user)
+		src.open(user)
 		return TRUE
 	return FALSE
 

@@ -15,7 +15,15 @@
 	var/list/linked_mobs = list()
 
 	/// List (Type paths of `/mob/living/simple_animal/hostile/legion`). Type paths that this beacon can spawn.
-	var/list/spawn_types = list()
+	var/list/spawn_types = list(
+		/mob/living/simple_animal/hostile/hivebot/strong = 8,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/basic = 3,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/laser = 3,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong = 2,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/dot = 1,
+		/mob/living/simple_animal/hostile/legion/bellator = 4,
+		/mob/living/simple_animal/hostile/legion/speculator = 2
+	)
 
 	/// Integer. Max range, in tiles, the beacon can spawn a legion in.
 	var/spawn_range = 7
@@ -62,9 +70,6 @@
 		legion_warp_effect()
 		visible_message(SPAN_WARNING("\A [src] warps in!"))
 
-	if (!length(spawn_types))
-		spawn_types = typesof(/mob/living/simple_animal/hostile/legion)
-
 	START_PROCESSING(SSobj, src)
 
 
@@ -88,7 +93,6 @@
 
 		if (BEACON_STATE_ON)
 			if (world.time < last_spawn_time + spawn_rate)
-				last_spawn_time = world.time
 				return
 			if (length(linked_mobs) >= max_active_bots)
 				return
@@ -156,19 +160,25 @@
 
 /obj/structure/legion/beacon/proc/spawn_legion(spawntype)
 	if (!spawntype)
-		spawntype = pick(spawn_types)
+		spawntype = pickweight(spawn_types)
 
 	var/turf/target_turf = pick_turf_in_range(get_turf(src), spawn_range, list(
 		GLOBAL_PROC_REF(is_not_space_turf),
 		GLOBAL_PROC_REF(is_not_open_space),
 		GLOBAL_PROC_REF(not_turf_contains_dense_objects)
 	))
+	if (!target_turf)
+		return
 
-	if (target_turf)
-		legion_warp_effect(target_turf)
-		var/mob/living/simple_animal/hostile/legion/legion = new spawntype(target_turf, src)
-		last_spawn_time = world.time
-		return legion
+	legion_warp_effect(target_turf)
+	var/mob/living/simple_animal/hostile/legion/legion = new spawntype(target_turf, src)
+	last_spawn_time = world.time
+
+	if (istype(legion, /mob/living/simple_animal/hostile/hivebot))
+		var/mob/living/simple_animal/hostile/hivebot/hivebot = legion
+		hivebot.legionify(src)
+
+	return legion
 
 
 /**
@@ -236,24 +246,11 @@
 
 
 /* Hivebot Variant */
-/obj/structure/legion/beacon/hivebot/Initialize()
+/obj/structure/legion/beacon/hivebot
 	spawn_types = list(
-		/mob/living/simple_animal/hostile/hivebot,
-		/mob/living/simple_animal/hostile/hivebot/rapid,
-		/mob/living/simple_animal/hostile/hivebot/strong,
-		/mob/living/simple_animal/hostile/hivebot/ranged_damage/basic,
-		/mob/living/simple_animal/hostile/hivebot/ranged_damage/rapid,
-		/mob/living/simple_animal/hostile/hivebot/ranged_damage/laser,
-		/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong,
-		/mob/living/simple_animal/hostile/hivebot/ranged_damage/dot
+		/mob/living/simple_animal/hostile/hivebot/strong = 8,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/basic = 3,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/laser = 3,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/strong = 2,
+		/mob/living/simple_animal/hostile/hivebot/ranged_damage/dot = 1
 	)
-
-	return ..()
-
-
-/obj/structure/legion/beacon/hivebot/spawn_legion(spawntype)
-	var/mob/living/simple_animal/hostile/hivebot/hivebot = ..()
-	if (!hivebot)
-		return
-	hivebot.legionify(src)
-	return hivebot

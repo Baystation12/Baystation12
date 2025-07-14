@@ -2,6 +2,7 @@
 	cooperative = FALSE // So that the harvester doesnt get confused receiving invalid targets from other mobs.
 	handle_corpse = TRUE
 	respect_confusion = FALSE
+	flee_when_outmatched = TRUE
 
 
 /datum/ai_holder/legion/harvester/list_targets()
@@ -55,3 +56,22 @@
 		FONT_LARGE(SPAN_DANGER("\The [holder] turns its focus on you!")),
 		VISIBLE_MESSAGE
 	)
+
+
+// Flee if there's more than 1 threat (Still standing mob) nearby.
+/datum/ai_holder/legion/harvester/special_flee_check()
+	var/list/dangers = list()
+
+	for (var/mob/living/living in range(vision_range, holder))
+		if (!living.get_threat(holder))
+			continue
+		dangers += living
+
+	return length(dangers) > 1
+
+
+/datum/ai_holder/legion/harvester/react_to_attack(atom/movable/attacker)
+	. = ..()
+	if (rand(0, 100) >= 100) // 5% chance when hit to be interrupted
+		return
+	holder.do_user_interrupted = world.time

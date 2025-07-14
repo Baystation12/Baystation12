@@ -1,15 +1,20 @@
 #!/bin/sh
 set -e
-if [ -f ~/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/DreamMaker ];
-then
+BYOND_VERSION="${BYOND_MAJOR}.${BYOND_MINOR}"
+if [ -f ~/BYOND-${BYOND_VERSION}/byond/bin/DreamMaker ]; then
   echo "Using cached directory."
 else
-  echo "Setting up BYOND."
-  mkdir -p ~/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-  cd ~/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-  echo "Installing DreamMaker to $PWD"
-  curl "https://indm.dev/byond/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -o byond.zip
+  echo "-- preparing directory"
+  mkdir -p ~/BYOND-${BYOND_VERSION}
+  cd ~/BYOND-${BYOND_VERSION}
+  echo "-- installing ${BYOND_VERSION} to ${PWD} from ${BYOND_SOURCE}"
+  curl -o byond.zip "${BYOND_SOURCE}/${BYOND_MAJOR}/${BYOND_VERSION}_byond_linux.zip"
+  echo "-- checking received file"
+  file byond.zip
+  head -c 100 byond.zip
+  echo "-- attempting unzip"
   unzip -o byond.zip
   cd byond
+  echo "-- attempting make"
   make here
 fi

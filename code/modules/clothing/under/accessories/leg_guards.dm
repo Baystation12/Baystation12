@@ -48,13 +48,43 @@
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
 	icon_state = "legguards_merc"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
+		melee = ARMOR_MELEE_MAJOR,
 		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
 		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_PADDED
 	)
 
+/obj/item/clothing/accessory/leg_guards/heavy
+	name = "heavy leg guards"
+	desc = "A pair of heavily armored leg pads in black. Attaches to a plate carrier."
+	icon_state = "legguards"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED
+	)
+
+/obj/item/clothing/accessory/leg_guards/heavy/blue
+	desc = "A pair of heavily armored leg pads in blue. Attaches to a plate carrier."
+	icon_state = "legguards_blue"
+
+
+/obj/item/clothing/accessory/leg_guards/heavy/navy
+	desc = "A pair of heavily armored leg pads in navy blue. Attaches to a plate carrier."
+	icon_state = "legguards_navy"
+
+
+/obj/item/clothing/accessory/leg_guards/heavy/green
+	desc = "A pair of heavily armored leg pads in green. Attaches to a plate carrier."
+	icon_state = "legguards_green"
+
+
+/obj/item/clothing/accessory/leg_guards/heavy/tan
+	desc = "A pair of heavily armored leg pads in tan. Attaches to a plate carrier."
+	icon_state = "legguards_tan"
 
 /obj/item/clothing/accessory/leg_guards/riot
 	name = "riot leg guards"

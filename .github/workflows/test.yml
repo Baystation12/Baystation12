@@ -1,5 +1,11 @@
 name: Run Tests
 
+env:
+  BYOND_MAJOR: "516"
+  BYOND_MINOR: "1664"
+  BYOND_SOURCE: "https://indm.dev/byond" # Canonical: https://www.byond.com/download/build
+  SPACEMAN_DMM_VERSION: suite-1.10
+
 permissions:
   contents: read
 
@@ -8,33 +14,35 @@ on:
     branches: [ "dev" ]
   pull_request:
     branches: [ "dev" ]
-  workflow_dispatch: # allows this workflow to be manually triggered
-env:
-  BYOND_MAJOR: "515"
-  BYOND_MINOR: "1647"
-  SPACEMAN_DMM_VERSION: suite-1.9
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
-  PreFlight:
+  preflight:
+    name: Check Test Requirements
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: paths-filter
-        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
         id: filter
         with:
           filters: .github/workflow-config/preflight-filters.yml
     outputs:
       dm: ${{ steps.filter.outputs.dm }}
-  DreamChecker:
+
+  dreamchecker:
+    name: Dreamchecker
     runs-on: ubuntu-22.04
-    needs: PreFlight
-    if: needs.PreFlight.outputs.dm == 'true'
+    needs:
+    - preflight
+    if: needs.preflight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Setup Cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ~/spaceman_dmm/${{ env.SPACEMAN_DMM_VERSION }}
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -42,130 +50,179 @@ jobs:
         run:  scripts/install-spaceman-dmm.sh dreamchecker
       - name: Run Dreamchecker
         run: ~/dreamchecker
-      - name: Run Failure Webhook
+      - name: Report Failure
+        if: ${{ failure() }}
         env:
           JOB_STATUS: ${{ job.status }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
-  Code:
+
+  install_byond:
+    name: Install BYOND
     runs-on: ubuntu-22.04
     needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
+    - preflight
+    if: needs.preflight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Setup Cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      - name: Check Cache
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
+        id: check
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install Byond
+        if: ${{ !steps.check.outputs.cache-hit }}
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install file unzip
+          chmod +x test/install-byond.sh
+          test/install-byond.sh
+      - name: Save Cache
+        if: ${{ !steps.check.outputs.cache-hit && success() }}
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
+          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+
+  code_health:
+    name: Code Health & Style
+    runs-on: ubuntu-22.04
+    needs:
+    - preflight
+    - dreamchecker
+    - install_byond
+    if: needs.preflight.outputs.dm == 'true'
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Install Dependencies
-        run: sudo apt-get install -y uchardet
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y uchardet
       - name: Run Tests
         env:
           TEST: CODE
         run: test/run-test.sh
-      - name: Run Failure Webhook
+      - name: Report Failure
+        if: ${{ failure() }}
         env:
           JOB_STATUS: ${{ job.status }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
-  ExampleMap:
+
+  map_example:
+    name: Unit Tests - Example Map
     runs-on: ubuntu-22.04
     needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
+    - preflight
+    - dreamchecker
+    - install_byond
+    if: needs.preflight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Setup Cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      - uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install Dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libcurl4:i386
       - name: Run Tests
         env:
           TEST: MAP
           MAP_PATH: example
         run: test/run-test.sh
-      - name: Run Failure Webhook
+      - name: Report Failure
+        if: ${{ failure() }}
         env:
           JOB_STATUS: ${{ job.status }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
-  TorchMap:
+
+  map_torch:
+    name: Unit Tests - Torch Map
     runs-on: ubuntu-22.04
     needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
+    - preflight
+    - dreamchecker
+    - install_byond
+    if: needs.preflight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Setup Cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      - uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install Dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libcurl4:i386
       - name: Run Tests
         env:
           TEST: MAP
           MAP_PATH: torch
         run: test/run-test.sh
-      - name: Run Failure Webhook
+      - name: Report Failure
+        if: ${{ failure() }}
         env:
           JOB_STATUS: ${{ job.status }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
           ./send.sh failure $WEBHOOK_URL
-  AwaySites:
+
+  map_dynamic:
+    name: Unit Tests - Sites & Ruins
     runs-on: ubuntu-22.04
     needs:
-    - PreFlight
-    - DreamChecker
-    if: needs.PreFlight.outputs.dm == 'true'
+    - preflight
+    - dreamchecker
+    - install_byond
+    if: needs.preflight.outputs.dm == 'true'
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-      - name: Setup Cache
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+      - uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
+      - name: Install Dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y libcurl4:i386
       - name: Run Tests
         env:
           TEST: MAP
           MAP_PATH: away_sites_testing
         run: test/run-test.sh
-      - name: Run Failure Webhook
+      - name: Report Failure
+        if: ${{ failure() }}
         env:
           JOB_STATUS: ${{ job.status }}
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
-        if: ${{ failure() }}
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh

@@ -9,6 +9,7 @@
 	#include "../../packs/factions/iccgn/_pack.dm"
 	#include "../../packs/factions/scga/_pack.dm"
 	#include "../../packs/factions/scgec/_pack.dm"
+	#include "../../packs/factions/scgf/_pack.dm"
 
 	#include "torch_announcements.dm"
 	#include "torch_antagonism.dm"

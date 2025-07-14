@@ -568,6 +568,8 @@
 		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 		R.receive_signal(signal)
+	for(var/obj/machinery/telecomms/allinone/R in telecomms_list)
+		R.receive_signal(signal)
 
 	sleep(rand(10,25)) // wait a little...
 
@@ -937,6 +939,9 @@
 
 /obj/item/device/radio/announcer/subspace
 	subspace_transmission = 1
+
+/obj/item/device/radio/announcer/ert
+	channels = list("ERT" = 1, "Special Ops" = 1, "Hailing" = 1)
 
 /obj/item/device/radio/phone
 	broadcasting = 0

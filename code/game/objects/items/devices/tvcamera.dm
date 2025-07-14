@@ -7,7 +7,7 @@
 	slot_flags = SLOT_BELT
 	var/channel = "General News Feed"
 	var/obj/machinery/camera/network/thunder/camera
-	var/obj/item/device/radio/radio
+	var/obj/item/device/radio/infinite/radio
 
 /obj/item/device/camera/tvcamera/New()
 	..()
@@ -26,7 +26,6 @@
 	radio = new(src)
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
-	radio.power_usage = 0
 	. = ..()
 
 /obj/item/device/camera/tvcamera/examine(mob/user)

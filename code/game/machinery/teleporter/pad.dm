@@ -43,27 +43,38 @@
 	GLOB.destroyed_event.register(computer, src, PROC_REF(lost_computer))
 
 
-/obj/machinery/tele_pad/Bumped(atom/movable/AM)
+/obj/machinery/tele_pad/proc/try_teleport(atom/movable/teleportee)
 	if (!computer?.active)
-		return
-	var/turf/T = get_turf(computer.target)
-	if (!T)
-		return
-	use_power_oneoff(5000)
+		return FALSE
+	var/turf/target_turf = get_turf(computer.target)
+	if (!target_turf)
+		return FALSE
+	use_power_oneoff(5 KILOWATTS)
 	if (istype(computer.target, /obj/machinery/tele_beacon))
 		var/obj/machinery/tele_beacon = computer.target
 		tele_beacon.use_power_oneoff(1 KILOWATTS)
 
 	if (prob(interlude_chance))
-		GLOB.using_map.do_interlude_teleport(AM, T, rand(30, 120))
+		GLOB.using_map.do_interlude_teleport(teleportee, target_turf, rand(30, 120))
 		computer.set_timer()
-		return
+		return TRUE
 
 	if (interference && prob(75))
-		do_unstable_teleport_safe(AM)
+		do_unstable_teleport_safe(teleportee)
 	else
-		do_teleport(AM, T)
+		do_teleport(teleportee, target_turf)
 	computer.set_timer()
+	return TRUE
+
+
+/obj/machinery/tele_pad/Bumped(atom/movable/AM)
+	try_teleport(AM)
+
+
+/obj/machinery/tele_pad/hitby(atom/movable/AM, datum/thrownthing/TT)
+	if (try_teleport(AM))
+		return
+	..()
 
 
 /obj/machinery/tele_pad/attack_ghost(mob/user)

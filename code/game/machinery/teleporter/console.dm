@@ -30,6 +30,10 @@
 	id = "[random_id(/obj/machinery/computer/teleporter, 1000, 9999)]"
 	update_refs()
 
+/obj/machinery/computer/teleporter/examine(mob/user, distance)
+	. = ..()
+	if(id && distance <= 2 && !GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
+		to_chat(user, SPAN_NOTICE("The console screen displays:") + "\nID: [id]")
 
 /obj/machinery/computer/teleporter/proc/update_refs()
 	for (var/dir in GLOB.cardinal)

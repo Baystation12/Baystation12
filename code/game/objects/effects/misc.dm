@@ -61,6 +61,9 @@
 /obj/paint/brown
 	color = COLOR_DARK_BROWN
 
+/obj/paint/fleet
+	color = COLOR_DARK_BLUE_GRAY
+
 //Stripes the wall it spawns on, then dies
 /obj/paint_stripe
 	name = "stripe of paint"

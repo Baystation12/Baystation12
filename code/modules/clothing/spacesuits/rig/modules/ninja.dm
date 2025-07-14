@@ -403,7 +403,7 @@
 
 /obj/item/rig_module/personal_shield/Initialize()
 	. = ..()
-	if (holder.cell)
+	if (holder?.cell)
 		currently_stored_power = holder.cell.use(max_stored_power)
 
 /obj/item/rig_module/personal_shield/activate()

@@ -225,9 +225,9 @@
 
 	return FALSE
 
-/datum/job/proc/get_join_link(client/caller, href_string, show_invalid_jobs)
-	if(is_available(caller))
-		if(is_restricted(caller.prefs))
+/datum/job/proc/get_join_link(client/user, href_string, show_invalid_jobs)
+	if(is_available(user))
+		if(is_restricted(user.prefs))
 			if(show_invalid_jobs)
 				return "<tr><td><a style='text-decoration: line-through' href='[href_string]'>[title]</a></td><td>[current_positions]</td><td>(Active: [get_active_count()])</td></tr>"
 		else
@@ -364,27 +364,27 @@
 		SSjobs.job_icons[title] = preview_icon
 	return SSjobs.job_icons[title]
 
-/datum/job/proc/get_unavailable_reasons(client/caller)
+/datum/job/proc/get_unavailable_reasons(client/user)
 	var/list/reasons = list()
-	if(jobban_isbanned(caller, title))
+	if(jobban_isbanned(user, title))
 		reasons["You are jobbanned."] = TRUE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && jobban_isbanned(user, MODE_MISC_AGITATOR))
 		reasons["You are semi-antagonist banned."] = TRUE
-	if(!player_old_enough(caller))
+	if(!player_old_enough(user))
 		reasons["Your player age is too low."] = TRUE
 	if(!is_position_available())
 		reasons["There are no positions left."] = TRUE
-	if(!isnull(allowed_branches) && (!caller.prefs.branches[title] || !is_branch_allowed(caller.prefs.branches[title])))
+	if(!isnull(allowed_branches) && (!user.prefs.branches[title] || !is_branch_allowed(user.prefs.branches[title])))
 		reasons["Your branch of service does not allow it."] = TRUE
-	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
+	else if(!isnull(allowed_ranks) && (!user.prefs.ranks[title] || !is_rank_allowed(user.prefs.branches[title], user.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
-	if (!is_species_whitelist_allowed(caller))
+	if (!is_species_whitelist_allowed(user))
 		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
-	var/singleton/species/S = GLOB.species_by_name[caller.prefs.species]
+	var/singleton/species/S = GLOB.species_by_name[user.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
-		if(!S.check_background(src, caller.prefs))
+		if(!S.check_background(src, user.prefs))
 			reasons["Your background choices do not allow it."] = TRUE
 	if(LAZYLEN(reasons))
 		. = reasons
@@ -393,14 +393,14 @@
 	mannequin.delete_inventory(TRUE)
 	equip_preview(mannequin, additional_skips = OUTFIT_ADJUSTMENT_SKIP_BACKPACK)
 
-/datum/job/proc/is_available(client/caller)
+/datum/job/proc/is_available(client/user)
 	if(!is_position_available())
 		return FALSE
-	if(jobban_isbanned(caller, title))
+	if(jobban_isbanned(user, title))
 		return FALSE
-	if(is_semi_antagonist && jobban_isbanned(caller, MODE_MISC_AGITATOR))
+	if(is_semi_antagonist && jobban_isbanned(user, MODE_MISC_AGITATOR))
 		return FALSE
-	if(!player_old_enough(caller))
+	if(!player_old_enough(user))
 		return FALSE
 	return TRUE
 

@@ -258,53 +258,36 @@ TORCH_ESCAPE_POD(17)
 	name = "South of Bridge"
 	landmark_tag = "nav_skipjack_deck5"
 
-//NT Rescue Shuttle
+// ERT
 
-/datum/shuttle/autodock/multi/antag/rescue
-	destination_tags = list(
-		"nav_ert_deck1",
-		"nav_ert_deck2",
-		"nav_ert_deck3",
-		"nav_ert_deck4",
-		"nav_ert_deck5",
-		"nav_ert_hanger",
-		"nav_away_4",
-		"nav_derelict_4",
-		"nav_cluster_4",
-		"nav_ert_dock",
-		"nav_ert_start",
-		"nav_lost_supply_base_antag",
-		"nav_marooned_antag",
-		"nav_smugglers_antag",
-		"nav_magshield_antag",
-		"nav_casino_antag",
-		"nav_yacht_antag",
-		"nav_slavers_base_antag",
-		)
+/obj/shuttle_landmark/ert/dock
+	name =  "Deck 4, Port Dock C"
+	landmark_tag = "nav_ert_dock"
+	docking_controller = "rescue_shuttle_dock_airlock"
 
-/obj/shuttle_landmark/ert/hanger
-	name =  "Southeast of Hanger deck"
-	landmark_tag = "nav_ert_hanger"
-
-/obj/shuttle_landmark/ert/deck1
-	name =  "Southwest of Fourth deck"
-	landmark_tag = "nav_ert_deck1"
-
-/obj/shuttle_landmark/ert/deck2
-	name = "Northwest of Third deck"
-	landmark_tag = "nav_ert_deck2"
+/obj/shuttle_landmark/ert/dock/secondary
+	name =  "Deck 4, Port Dock A"
+	landmark_tag = "nav_ert_dock_2"
+	docking_controller = "skipjack_shuttle_dock_airlock"
 
 /obj/shuttle_landmark/ert/deck3
-	name = "Northwest of Second deck"
+	name = "Deck 3"
 	landmark_tag = "nav_ert_deck3"
 
-/obj/shuttle_landmark/ert/deck4
-	name = "Southwest of First Deck"
-	landmark_tag = "nav_ert_deck4"
+/obj/shuttle_landmark/ert/deck2
+	name = "Deck 2"
+	landmark_tag = "nav_ert_deck2"
 
-/obj/shuttle_landmark/ert/deck5
-	name = "West of Bridge"
-	landmark_tag = "nav_ert_deck5"
+/obj/shuttle_landmark/ert/deck1
+	name = "Deck 1"
+	landmark_tag = "nav_ert_deck1"
+
+/obj/shuttle_landmark/ert/bridge
+	name = "B-Deck"
+	landmark_tag = "nav_ert_bridge"
+
+/obj/shuttle_landmark/ert/bridge/secondary
+	landmark_tag = "nav_ert_bridge_2"
 
 //SCGMC Assault Pod
 

@@ -147,14 +147,19 @@
 
 /obj/machinery/computer/modular/preset/full/ert
 	default_software = list(
-		/datum/computer_file/program/nttransfer,
-		/datum/computer_file/program/camera_monitor/ert,
-		/datum/computer_file/program/email_client,
-		/datum/computer_file/program/alarm_monitor,
 		/datum/computer_file/program/comm,
-		/datum/computer_file/program/aidiag,
+		/datum/computer_file/program/camera_monitor/ert,
+		/datum/computer_file/program/alarm_monitor,
+		/datum/computer_file/program/docking,
+		/datum/computer_file/program/suit_sensors,
+		/datum/computer_file/program/forceauthorization,
+		/datum/computer_file/program/digitalwarrant,
 		/datum/computer_file/program/records,
-		/datum/computer_file/program/wordprocessor
+		/datum/computer_file/program/atmos_control,
+		/datum/computer_file/program/rcon_console,
+		/datum/computer_file/program/shields_monitor,
+		/datum/computer_file/program/ntnetmonitor,
+		/datum/computer_file/program/card_mod
 	)
 
 /obj/machinery/computer/modular/preset/full/merc

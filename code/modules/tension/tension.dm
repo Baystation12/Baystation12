@@ -25,7 +25,7 @@
 
 	var/potential_damage = 0
 	if(!projectiletype || ( ( get_dist(src, threatened) >= 1) && !will_point_blank ) ) // Melee damage.
-		potential_damage = (natural_weapon.force) / 2
+		potential_damage = (natural_weapon?.force) / 2
 
 		// Treat potential_damage as estimated DPS. If the enemy attacks twice as fast as usual, it will double the number.
 		potential_damage *= 1 SECOND / (base_attack_cooldown + melee_attack_delay)

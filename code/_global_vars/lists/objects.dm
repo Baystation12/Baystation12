@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY(global_map)
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it. Also headset, for things that should be affected by comms outages.
 GLOBAL_TYPED_NEW(global_announcer, /obj/item/device/radio/announcer)
 GLOBAL_TYPED_NEW(global_headset, /obj/item/device/radio/announcer/subspace)
+GLOBAL_TYPED_NEW(ert_announcer, /obj/item/device/radio/announcer/ert)
 
 GLOBAL_TYPED_NEW(universe, /datum/universal_state)
 

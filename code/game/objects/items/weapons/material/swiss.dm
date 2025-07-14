@@ -167,6 +167,13 @@
 
 	tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_CSCREW)
 
+/obj/item/material/knife/folding/swiss/tactical
+	name = "tactical combi-knife"
+	desc = "A compact multi-purpose folding knife. This one adds a pry bar, wire cutters, wood saw and glass cutter."
+	color = COLOR_DARK_BLUE_GRAY
+
+	tools = list(SWISSKNF_LBLADE, SWISSKNF_CROWBAR, SWISSKNF_WCUTTER, SWISSKNF_CLIFTER, SWISSKNF_COPENER, SWISSKNF_WBLADE, SWISSKNF_GBLADE)
+
 #undef SWISSKNF_CLOSED
 #undef SWISSKNF_LBLADE
 #undef SWISSKNF_SBLADE

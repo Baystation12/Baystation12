@@ -13,6 +13,7 @@
 #include "mob/legion_harvester.dm"
 #include "mob/legion_hivebot.dm"
 #include "mob/legion_mob.dm"
+#include "mob/legion_scavenger.dm"
 #include "mob/legion_speculator.dm"
 
 #include "object/legion_beacon.dm"

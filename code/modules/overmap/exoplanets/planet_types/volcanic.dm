@@ -144,8 +144,8 @@
 	if(!LAZYLEN(victims))
 		return PROCESS_KILL
 
-/turf/simulated/floor/exoplanet/lava/get_footstep_sound(mob/caller)
-	return get_footstep(/singleton/footsteps/lava, caller)
+/turf/simulated/floor/exoplanet/lava/get_footstep_sound(mob/user)
+	return get_footstep(/singleton/footsteps/lava, user)
 
 /turf/simulated/mineral/volcanic
 	name = "volcanic rock"

@@ -144,12 +144,12 @@
 	toggle_off_message = "You push the lenses up out of your face."
 	action_button_name = "Toggle welding lenses"
 
-/obj/item/clothing/accessory/glassesmod/vision/welding/activate(mob/usr)
+/obj/item/clothing/accessory/glassesmod/vision/welding/activate(mob/user)
 	. = ..()
 	flags_inv |= HIDEEYES
 	body_parts_covered |= EYES
 
-/obj/item/clothing/accessory/glassesmod/vision/welding/deactivate(mob/usr)
+/obj/item/clothing/accessory/glassesmod/vision/welding/deactivate(mob/user)
 	. = ..()
 	flags_inv &= ~HIDEEYES
 	body_parts_covered &= ~EYES

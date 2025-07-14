@@ -102,6 +102,7 @@
 	name = "code red"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
+	alarm_sound = 'sound/obj/machinery/rotating_alarm/alert_red.ogg'
 
 	light_range = 4
 	light_power = 2
@@ -129,6 +130,7 @@
 	name = "code delta"
 	icon = 'icons/misc/security_state.dmi'
 	alarm_level = "on"
+	alarm_sound = 'sound/obj/machinery/rotating_alarm/alert_red.ogg'
 
 	light_range = 4
 	light_power = 2

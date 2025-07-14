@@ -1064,6 +1064,10 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
+"dF" = (
+/obj/shuttle_landmark/ert/dock,
+/turf/space,
+/area/space)
 "dH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -6691,6 +6695,13 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
+"xq" = (
+/obj/shuttle_landmark/ert/dock/secondary{
+	name = "Deck 4, Fore Port";
+	docking_controller = null
+	},
+/turf/space,
+/area/space)
 "xr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -10234,14 +10245,7 @@
 /turf/space,
 /area/space)
 "Ko" = (
-/obj/shuttle_landmark/ert/dock,
 /obj/shuttle_landmark/skrellscout/dock,
-/turf/space,
-/area/space)
-"Kp" = (
-/obj/shuttle_landmark/ert/deck5{
-	name = "4th Deck, Fore Port"
-	},
 /turf/space,
 /area/space)
 "Kq" = (
@@ -24095,7 +24099,7 @@ aa
 aa
 aa
 aa
-Kp
+aa
 aa
 aa
 aa
@@ -24684,7 +24688,7 @@ aa
 aa
 aa
 aa
-aa
+xq
 aa
 aa
 aa
@@ -40246,7 +40250,7 @@ mR
 Tb
 TN
 Ko
-aa
+dF
 aa
 aa
 aa

@@ -1,0 +1,4 @@
+author: Sbotkin
+changes:
+  - {bugfix: Fixes the press camera drone not transmitting audio.}
+delete-after: true

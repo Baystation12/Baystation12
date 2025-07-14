@@ -4,47 +4,41 @@ GLOBAL_TYPED_NEW(ert, /datum/antagonist/ert)
 	id = MODE_ERT
 	role_text = "Emergency Responder"
 	role_text_plural = "Emergency Responders"
-	antag_text = "You are an <b>anti</b>-antagonist! Within the rules, try to save the ship and its crew from the ongoing crisis. \
-				 Try to make sure the other players have <i>fun</i>, and if you are confused or at a loss, always adminhelp. \
-				 You should also contact the staff before taking any extreme actions. \
-				 <b>Remember that all rules outside of those with explicit exceptions apply to the ERT!</b>"
-	welcome_text = "You shouldn't see this"
-	leader_welcome_text = "You shouldn't see this"
+	antag_text = "Think through your actions and make the roleplay immersive! If you are confused or at a loss, always adminhelp, \
+		and before taking extreme actions, please try to also contact the administration! <b>Please remember all \
+		rules aside from those without explicit exceptions apply to you.</b>"
 	landmark_id = "Response Team"
-	id_type = /obj/item/card/id/centcom/ERT
+	id_type = /obj/item/card/id/centcom/station/ert
 
+	valid_species = list(SPECIES_HUMAN,SPECIES_VATGROWN,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_TRITONIAN,SPECIES_IPC) // https://baystation.xyz/index.php?title=Sol_Central_Government_Fleet#Recruitment
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudloyalist"
 
 	hard_cap = 5
-	hard_cap_round = 7
+	hard_cap_round = 5
 	initial_spawn_req = 5
-	initial_spawn_target = 7
+	initial_spawn_target = 5
 	show_objectives_on_creation = 0 //we are not antagonists, we do not need the antagonist shpiel/objectives
+	skill_setter = /datum/antag_skill_setter/ert
 
 	faction = "emergency"
 	no_prior_faction = TRUE
 
 	base_to_load = /datum/map_template/ruin/antag_spawn/ert
-
+	/// If set to `TRUE` will prevent shuttle announcements and identifiable overmap icons.
+	var/is_secret = FALSE
+	var/arrived = FALSE
 	var/reason = ""
 
-/datum/antagonist/ert/create_default(mob/source)
-	var/mob/living/carbon/human/M = ..()
-	if(istype(M)) M.age = rand(25,45)
-
 /datum/antagonist/ert/Initialize()
-	..()
-	leader_welcome_text = SPAN_BOLD("You are the leader of the Emergency Response Team. ") + "As the leader, you answer only to [GLOB.using_map.company_name] officials. You have authorization to override the Commanding Officer where it is necessary to achieve your goals. However, it is recommended that you work with them to achieve your goals if possible."
-	welcome_text =        SPAN_BOLD("You are a member of the Emergency Response Team.") + "As a member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
+	. = ..()
+	default_access |= get_all_station_access() + get_all_centcom_access() - access_cent_captain
 
 /datum/antagonist/ert/greet(datum/mind/player)
 	if(!..())
 		return
-	to_chat(player.current, "You are part of a Fifth Fleet Quick Reaction Force. There is a severe emergency on \the [GLOB.using_map.station_name] and you are tasked to fix the problem.")
-	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, so don't move out before you're all ready. You might receive further instruction from a superior in person or through holocomms soon.")
 
 	if(reason)
-		to_chat(player.current, SPAN_BOLD(FONT_LARGE("You have been summoned to \the [GLOB.using_map.station_name] for the following reason: " + SPAN_NOTICE(reason))))
+		to_chat(player.current, SPAN_BOLD(FONT_LARGE("You have been summoned to the [station_name()] for the following reason: " + SPAN_NOTICE(reason))))
 
 //Equip proc has been moved to the map specific folders.

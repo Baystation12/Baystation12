@@ -11,6 +11,7 @@
 
 	mob_size = MOB_LARGE
 	ai_holder = /datum/ai_holder/legion/harvester
+	mob_flags = MOB_FLAG_UNPINNABLE | MOB_FLAG_DO_USER_INTERRUPT
 
 	special_attack_min_range = 0
 	special_attack_max_range = 1
@@ -100,6 +101,20 @@
 
 /mob/living/simple_animal/hostile/legion/harvester/do_special_attack(atom/A)
 	return harvest_brain(A)
+
+
+/mob/living/simple_animal/hostile/legion/harvester/get_tension()
+	var/list/potential_threats = list()
+
+	for (var/thing in view(src))
+		if (!isliving(thing))
+			continue
+		var/mob/living/carbon/human/human = thing
+		if (human.incapacitated())
+			continue
+		potential_threats += human
+
+	return length(potential_threats)
 
 
 /**

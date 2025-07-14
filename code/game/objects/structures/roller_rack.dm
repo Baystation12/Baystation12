@@ -66,6 +66,11 @@
 	update_icon()
 
 
+/obj/structure/roller_rack/get_interactions_info()
+	. = ..()
+	.["Welding Tool"] = "<p>Dismantles \the [initial(name)]. Any beds must be removed before it can be dismantled. If your Construction skill is below Trained, you lose half of the materials.</p>"
+
+
 /obj/structure/roller_rack/use_tool(obj/item/tool, mob/user, list/click_params)
 	if (istype(tool, /obj/item/roller_bed))
 		if (length(beds) >= max_beds)
@@ -76,12 +81,39 @@
 		to_chat(user, SPAN_NOTICE("You place \the [tool] on the rack."))
 		update_icon()
 		return TRUE
+	if (isWelder(tool))
+		if (length(beds))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be dismantled while it's holding beds.")
+			return TRUE
+		var/obj/item/weldingtool/welder = tool
+		if (!welder.can_use(1, user))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts to dismantle \the [src] with \a [tool]."),
+			SPAN_NOTICE("You start to dismantle \the [src] with \the [tool].")
+		)
+		if (!do_after(user, 2 SECONDS, src, DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
+			return TRUE
+		if (length(beds))
+			USE_FEEDBACK_FAILURE("\The [src] cannot be dismantled while it's holding beds.")
+			return TRUE
+		if (!welder.remove_fuel(1, user))
+			return TRUE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] cleanly dismantles \the [src] with \a [tool]."),
+			SPAN_NOTICE("You cleanly dismantle \the [src] with \the [tool].")
+		)
+		var/obj/item/stack = new /obj/item/stack/material/steel(loc, 2)
+		transfer_fingerprints_to(stack)
+		qdel(src)
+		return TRUE
 	return ..()
 
 
 /obj/structure/roller_rack/random/Initialize()
 	beds = rand(0, max_beds)
 	return ..()
+
 
 /obj/structure/roller_rack/full/Initialize()
 	beds = max_beds

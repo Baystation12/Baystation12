@@ -59,8 +59,8 @@
 	reagent_type = /datum/reagent/toxin/tar
 	dirt_color = "#3e3960"
 
-/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(mob/caller)
-	return get_footstep(/singleton/footsteps/water, caller)
+/turf/simulated/floor/exoplanet/water/shallow/tar/get_footstep_sound(mob/user)
+	return get_footstep(/singleton/footsteps/water, user)
 
 
 /turf/simulated/floor/exoplanet/shrouded

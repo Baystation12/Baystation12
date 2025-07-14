@@ -334,6 +334,18 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/specops
 
+/obj/item/device/radio/headset/ert
+	name = "ert radio headset"
+	desc = "A robust and reliable headset allowing the wearer hear the commander's yells while blasting."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/headset/ert/alt
+	name = "ert bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
+	max_keys = 3
 
 /obj/item/device/radio/headset/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Encryption Key - Install key

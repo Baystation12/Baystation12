@@ -1,5 +1,8 @@
 name: Generate Documentation
 
+env:
+  SPACEMAN_DMM_VERSION: suite-1.10
+
 permissions:
   contents: read
 
@@ -7,13 +10,11 @@ on:
   push:
     branches:
     - dev
-  workflow_dispatch: # allows this workflow to be manually triggered
+  workflow_dispatch:
 
-env:
-  SPACEMAN_DMM_VERSION: suite-1.9
 
 jobs:
-  PreFlight:
+  preflight:
     runs-on: ubuntu-22.04
     steps:
       - name: checkout
@@ -25,13 +26,14 @@ jobs:
           filters: .github/workflow-config/preflight-filters.yml
     outputs:
       dm: ${{ steps.filter.outputs.dm }}
+
   generate_documentation:
     permissions:
       contents: write # required to push the doc commit
     runs-on: ubuntu-22.04
-    needs: PreFlight
+    needs: preflight
     if: |
-      (needs.PreFlight.outputs.dm == 'true') &&
+      (needs.preflight.outputs.dm == 'true') &&
       !contains(github.event.head_commit.message, '[ci skip]')
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}

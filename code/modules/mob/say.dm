@@ -17,6 +17,8 @@
 	set name = "Me"
 	set category = "IC"
 	message = sanitize(message)
+	if (!message)
+		return
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
 	else

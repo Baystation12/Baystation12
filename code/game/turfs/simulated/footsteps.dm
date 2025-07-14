@@ -1,30 +1,30 @@
-/proc/get_footstep(footstep_type, mob/caller)
-	. = caller && caller.get_footstep(footstep_type)
+/proc/get_footstep(footstep_type, mob/user)
+	. = user && user.get_footstep(footstep_type)
 	if(!.)
 		var/singleton/footsteps/FS = GET_SINGLETON(footstep_type)
 		. = pick(FS.footstep_sounds)
 
-/turf/simulated/proc/get_footstep_sound(mob/caller)
+/turf/simulated/proc/get_footstep_sound(mob/user)
 	for(var/obj/structure/S in contents)
 		if(S.footstep_type)
-			return get_footstep(S.footstep_type, caller)
+			return get_footstep(S.footstep_type, user)
 
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
-		return get_footstep(/singleton/footsteps/water, caller)
+		return get_footstep(/singleton/footsteps/water, user)
 
 	if(footstep_type)
-		return get_footstep(footstep_type, caller)
+		return get_footstep(footstep_type, user)
 
 	if(is_plating())
-		return get_footstep(/singleton/footsteps/plating, caller)
+		return get_footstep(/singleton/footsteps/plating, user)
 
-/turf/simulated/floor/get_footstep_sound(mob/caller)
+/turf/simulated/floor/get_footstep_sound(mob/user)
 	. = ..()
 	if(!.)
 		if(!flooring || !flooring.footstep_type)
-			return get_footstep(/singleton/footsteps/blank, caller)
+			return get_footstep(/singleton/footsteps/blank, user)
 		else
-			return get_footstep(flooring.footstep_type, caller)
+			return get_footstep(flooring.footstep_type, user)
 
 /turf/simulated/Entered(mob/living/carbon/human/H)
 	..()

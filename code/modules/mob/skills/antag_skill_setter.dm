@@ -3,7 +3,7 @@
 /datum/antag_skill_setter
 	var/nm_type                        //A nano_module with custom ui, if any.
 	var/list/base_skill_list = list()  //Format: list(path = value).
-	var/default_value = SKILL_DEFAULT  //If not in base_skill_list or added in another way, skill value will be this.
+	var/default_value = SKILL_TRAINED  //If not in base_skill_list or added in another way, skill value will be this.
 
 /datum/antag_skill_setter/proc/initialize_skills(datum/skillset/skillset)
 	skillset.skill_list = base_skill_list.Copy()
@@ -43,5 +43,16 @@
 /datum/antag_skill_setter/station/offstation
 	nm_type = /datum/nano_module/skill_ui/antag/station/offstation
 
+/datum/antag_skill_setter/ert
+	nm_type = /datum/nano_module/skill_ui/antag/ert
+	// More default skills and less picker options for faster character customization
+	// ERT is given 1 EXP and 1 MASTER skill pick due to specializations
+	base_skill_list = list(
+		SKILL_HAULING = SKILL_MASTER,
+		SKILL_EVA = SKILL_EXPERIENCED,
+		SKILL_WEAPONS = SKILL_EXPERIENCED
+	)
+
 //Placeholder for ai; defaults to experienced in everything like usual.
 /datum/antag_skill_setter/ai
+	default_value = SKILL_DEFAULT

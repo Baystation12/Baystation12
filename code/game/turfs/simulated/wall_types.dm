@@ -28,6 +28,16 @@
 	paint_color = COLOR_WALL_GUNMETAL
 	stripe_color = COLOR_GUNMETAL
 
+/turf/simulated/wall/prepainted/fleet
+	color = COLOR_DARK_BLUE_GRAY
+	paint_color = COLOR_DARK_BLUE_GRAY
+	stripe_color = COLOR_WALL_GUNMETAL
+
+/turf/simulated/wall/r_wall/prepainted/fleet
+	color = COLOR_DARK_BLUE_GRAY
+	paint_color = COLOR_DARK_BLUE_GRAY
+	stripe_color = COLOR_WALL_GUNMETAL
+
 /turf/simulated/wall/r_wall/hull/Initialize()
 	. = ..()
 	if(prob(40))

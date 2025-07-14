@@ -254,19 +254,36 @@
 
 /obj/item/rig_module/chem_dispenser/combat
 
-	name = "combat chemical injector"
+	name = "combat chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
+	max_reagent_volume = 60 // Equivalent to a bottle, a bit less than the injector since this is tailored for individual usage
 
 	charges = list(
-		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,       30),
-		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,         30),
-		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone,         30),
-		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose, 80),
+		list("synaptizine", "synaptizine", /datum/reagent/synaptizine,        30),
+		list("hyperzine",   "hyperzine",   /datum/reagent/hyperzine,          30),
+		list("oxycodone",   "oxycodone",   /datum/reagent/tramadol/oxycodone, 30),
+		list("glucose",     "glucose",     /datum/reagent/nutriment/glucose,  80)
 		)
 
 	interface_name = "combat chem dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
 
+/obj/item/rig_module/chem_dispenser/combat/ert
+	name = "\improper ERT combat chemical auto-injector"
+	desc = "A complex web of tubing and needles suitable for hardsuit use."
+	max_reagent_volume = 45 // ERT has access to most chems in large quantities, so prevent them from going too crazy
+
+	charges = list(
+		list("synaptizine",   "synaptizine",   /datum/reagent/synaptizine,        30),
+		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,       30),
+		list("oxycodone",     "oxycodone",     /datum/reagent/tramadol/oxycodone, 30),
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,      30),
+		list("coagulant",     "coagulant",     /datum/reagent/coagulant,          30),
+		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,           30),
+		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose,  45)
+		)
+
+	interface_name = "combat chemical auto-injector"
 
 /obj/item/rig_module/chem_dispenser/injector
 
@@ -280,6 +297,21 @@
 
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
+
+/obj/item/rig_module/chem_dispenser/injector/ert
+	name = "\improper ERT mounted chemical injector"
+
+	charges = list(
+		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,           80),
+		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,       80),
+		list("dermaline",     "dermaline",     /datum/reagent/dermaline,          60),
+		list("bicaridine",    "bicaridine",    /datum/reagent/bicaridine,         60),
+		list("oxycodone",     "oxycodone",     /datum/reagent/tramadol/oxycodone, 40),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,           60),
+		list("dylovene",      "dylovene",      /datum/reagent/dylovene,           60)
+		)
+
+	interface_name = "mounted chemical injector"
 
 /obj/item/rig_module/voice
 

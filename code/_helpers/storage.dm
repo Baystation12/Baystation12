@@ -49,6 +49,6 @@
 			CRASH("Invalid probability. Expected null or a number greater than 0, was [log_info_line(probability)]")
 	src.paths = paths
 
-/datum/atom_creator/weighted/create(loc)
+/datum/atom_creator/weighted/create(location)
 	var/path = call(selection_method)(paths)
-	create_objects_in_loc(loc, path)
+	create_objects_in_loc(location, path)

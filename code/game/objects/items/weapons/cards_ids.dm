@@ -528,20 +528,35 @@ var/global/const/NO_EMAG_ACT = -50
 	extra_details = list("goldstripe")
 
 /obj/item/card/id/centcom/New()
-	access = get_all_centcom_access()
 	..()
+	access = list(access_cent_general,access_cent_living,access_cent_creed,access_cent_thunder)
 
-/obj/item/card/id/centcom/station/New()
+/obj/item/card/id/centcom/all/New()
+	..()
+	access = get_all_centcom_access()
+
+/obj/item/card/id/centcom/all/station/New() // All centcom access and all station access
 	..()
 	access |= get_all_station_access()
 
-/obj/item/card/id/centcom/ERT
-	name = "\improper Emergency Response Team ID"
+/obj/item/card/id/centcom/station/New() // Default centcom access + all station access
+	..()
+	access |= get_all_station_access() + access_cent_teleporter
+
+/obj/item/card/id/centcom/station/ert
+	name = "\improper ERT ID"
 	assignment = "Emergency Response Team"
 
-/obj/item/card/id/centcom/ERT/New()
+/obj/item/card/id/centcom/station/ert/New()
 	..()
-	access |= get_all_station_access()
+	access = GLOB.ert.default_access - access_ert_leader
+
+/obj/item/card/id/centcom/station/ert/leader
+	assignment = "Emergency Response Team Leader"
+
+/obj/item/card/id/centcom/station/ert/leader/New()
+	..()
+	access |= access_ert_leader
 
 /obj/item/card/id/foundation_civilian
 	name = "operant registration card"

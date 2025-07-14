@@ -139,6 +139,7 @@
 	var/icon
 	var/name
 	var/alarm_level = "off"
+	var/alarm_sound
 
 	// These values are primarily for station alarms and status displays, and which light colors and overlays to use
 	var/light_range
@@ -198,7 +199,7 @@
 			FA.update_icon()
 	for (var/obj/machinery/rotating_alarm/security_alarm/SA in SSmachines.machinery)
 		if (SA.z in GLOB.using_map.contact_levels)
-			SA.set_alert(name, alarm_level, light_color_alarm)
+			SA.set_alert(name, alarm_level, light_color_alarm, alarm_sound)
 	post_status("alert")
 
 /singleton/security_level/default/code_green
@@ -237,6 +238,7 @@
 /singleton/security_level/default/code_red
 	name = "code red"
 	alarm_level = "on"
+	alarm_sound = 'sound/obj/machinery/rotating_alarm/alert_red.ogg'
 
 	light_range = 4
 	light_power = 2
@@ -255,6 +257,7 @@
 /singleton/security_level/default/code_delta
 	name = "code delta"
 	alarm_level = "on"
+	alarm_sound = 'sound/obj/machinery/rotating_alarm/alert_red.ogg'
 
 	light_range = 4
 	light_power = 2

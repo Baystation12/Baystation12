@@ -15550,8 +15550,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "Mb" = (
-/obj/shuttle_landmark/ert/deck4{
-	name = "3rd Deck, Starboard"
+/obj/shuttle_landmark/ert/deck3{
+	name = "Deck 3, Fore"
 	},
 /turf/space,
 /area/space)
@@ -27435,7 +27435,7 @@ aa
 aa
 aa
 aa
-aa
+Mb
 aa
 aa
 aa
@@ -35852,7 +35852,7 @@ aa
 aa
 aa
 aa
-Mb
+aa
 aa
 aa
 aa
