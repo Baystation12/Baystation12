@@ -45,7 +45,7 @@ aside.declaration, aside.parent {
     margin-right: -100px;
     right: 105px;
 }
-aside.declaration {
+aside.declaration, span.as {
     font-style: italic;
 }
 table.summary tr:first-child > td > :first-child {
