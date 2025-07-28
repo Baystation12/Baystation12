@@ -12,7 +12,7 @@ var/global/const/NETWORK_FIFTH_DECK  = "Fifth Deck"
 		if(NETWORK_AQUILA)
 			return access_aquila
 		if(NETWORK_BRIDGE)
-			return access_heads
+			return list(list(access_torch_helm,access_heads))
 		if(NETWORK_CHARON)
 			return access_expedition_shuttle
 		if(NETWORK_HELMETS)
