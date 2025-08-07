@@ -23,6 +23,7 @@
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 	fire_delay = 12
+	client_recoil_animation_information = null
 
 /obj/item/gun/projectile/heavysniper/on_update_icon()
 	..()
@@ -115,6 +116,12 @@
 	scoped_accuracy = 0
 	wielded_item_state = "boltaction-wielded"
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
+
+/obj/item/gun/projectile/sniper
+	client_recoil_animation_information = list(
+		"strength" = 1,
+		"duration" = 1,
+	)
 
 /obj/item/gun/projectile/sniper/panther //semi-automatic only
 	name = "marksman rifle"

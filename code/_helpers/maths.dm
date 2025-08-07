@@ -62,6 +62,11 @@
 /// The cotangent of degrees
 #define Cot(degrees) (1 / tan(degrees))
 
+#define MODULUS_FLOAT(X, Y) ( (X) - (Y) * round((X) / (Y)) )
+
+// Will filter out extra rotations and negative rotations
+// E.g: 540 becomes 180. -180 becomes 180.
+#define SIMPLIFY_DEGREES(degrees) (MODULUS_FLOAT((degrees), 360))
 
 /// The 2-argument arctangent of x and y
 /proc/Atan2(x, y)

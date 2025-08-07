@@ -6,7 +6,10 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = ITEM_SIZE_NORMAL
 	matter = list(MATERIAL_STEEL = 1000)
-	screen_shake = 1
+	client_recoil_animation_information = list(
+		"strength" = 0.35,
+		"duration" = 2,
+	)
 	space_recoil = 1
 	combustion = 1
 

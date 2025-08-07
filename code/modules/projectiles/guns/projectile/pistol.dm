@@ -51,7 +51,6 @@
 	force = 9
 	caliber = CALIBER_PISTOL_MAGNUM
 	fire_delay = 12
-	screen_shake = 2
 	magazine_type = /obj/item/ammo_magazine/magnum
 	allowed_magazines = /obj/item/ammo_magazine/magnum
 	mag_insert_sound = 'sound/weapons/guns/interaction/hpistol_magin.ogg'
@@ -61,6 +60,10 @@
 	one_hand_penalty = 2
 	bulk = 3
 	ammo_indicator = TRUE
+	client_recoil_animation_information = list(
+		"strength" = 0.5,
+		"duration" = 2,
+	)
 
 /obj/item/gun/projectile/pistol/throwback
 	name = "pistol"

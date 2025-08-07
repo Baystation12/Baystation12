@@ -76,6 +76,14 @@
 	var/fire_anim = null
 	/// The amount your screen shakes when firing. Shouldn't be greater than 2 unless zoomed.
 	var/screen_shake = 0
+	/**
+	 * If this gun has client recoil, this stores info such as amount and duration.
+	 *
+	 * - "strength": How far to move the screen
+	 * - "duration": The length of the animation
+	 * - "easing": special type of easing to be used, can be null
+	 */
+	var/list/client_recoil_animation_information = null
 	/// Whether or not this weapon moves the shooter backwards when fired in space.
 	var/space_recoil = 0
 	var/silenced = FALSE
@@ -375,6 +383,20 @@
 		if(screen_shake)
 			spawn()
 				shake_camera(user, screen_shake+1, screen_shake)
+
+		if(LAZYLEN(client_recoil_animation_information))
+			var/skill_modifier = user.get_skill_value(SKILL_WEAPONS) * 0.1
+			var/duration = client_recoil_animation_information["duration"]
+			if (isnull(duration))
+				duration = 1
+			duration = max(duration - skill_modifier, 1)
+			var/strength = client_recoil_animation_information["strength"]
+			if (isnull(strength))
+				strength = 0.5
+			strength = max(strength - skill_modifier, 0.1)
+			var/easing = client_recoil_animation_information["easing"] || CUBIC_EASING|EASE_OUT
+			var/recoil_angle = SIMPLIFY_DEGREES(Get_Angle(target, user) + 90)
+			recoil_camera(user, duration, recoil_angle, strength, easing)
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)

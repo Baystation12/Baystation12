@@ -17,6 +17,10 @@
 	accuracy_power = 8
 	one_hand_penalty = 2
 	bulk = 3
+	client_recoil_animation_information = list(
+		"strength" = 0.5,
+		"duration" = 2.5,
+	)
 
 /obj/item/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))

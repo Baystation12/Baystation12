@@ -52,7 +52,7 @@
 	caliber = CALIBER_DART
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic click"
-	screen_shake = 0
+	client_recoil_animation_information = null
 	silenced = TRUE
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/chemdart

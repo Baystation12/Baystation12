@@ -25,6 +25,10 @@
 		list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.0, 0.0, 0.5, 0.6)),
 		list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
 		)
+	client_recoil_animation_information = list(
+		"strength" = 0.7,
+		"duration" = 2,
+	)
 
 /obj/item/gun/projectile/automatic/machine_pistol
 	name = "machine pistol"
@@ -125,6 +129,10 @@
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    one_hand_penalty=9, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
 		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=11, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
 		)
+	client_recoil_animation_information = list(
+		"strength" = 0.2,
+		"duration" = 2,
+	)
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
 	..()

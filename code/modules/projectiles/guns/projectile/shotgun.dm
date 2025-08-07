@@ -3,6 +3,10 @@
 	name = "master shotgun object"
 	desc = "You should not see this."
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	client_recoil_animation_information = list(
+		"strength" = 1.5,
+		"duration" = 3.5,
+	)
 
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"

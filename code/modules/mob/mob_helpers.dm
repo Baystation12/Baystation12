@@ -323,6 +323,17 @@ var/global/list/organ_rel_size = list(
 		M.client.eye=oldeye
 		M.shakecamera = 0
 
+/proc/recoil_camera(mob/camera_mob, duration = 1, angle = 180, strength = 1, easing = CUBIC_EASING|EASE_OUT)
+	if(!camera_mob?.client || duration < 1 || !easing)
+		return
+	var/client/camera_client = camera_mob.client
+
+	angle = clamp(angle, 0, 360)
+	var/hypotenuse = strength*world.icon_size
+	var/offset_y = round(hypotenuse*sin(angle), 0.1)
+	var/offset_x = round(hypotenuse*-cos(angle), 0.1)
+	animate(camera_client, pixel_x = offset_x, pixel_y = offset_y, time = duration, easing = easing, flags = ANIMATION_RELATIVE)
+	animate(pixel_x = -offset_x, pixel_y = -offset_y, time = duration, easing = easing, flags = ANIMATION_RELATIVE)
 
 /mob/proc/abiotic(full_body = FALSE)
 	var/holding_simulated_item = FALSE
