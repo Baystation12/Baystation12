@@ -4,6 +4,8 @@
 #define LIGHTING_Z_FACTOR       10 // Z diff is multiplied by this and LIGHTING_HEIGHT to get the final height of a light source. Affects how much darker A Z light gets with each level transitioned.
 #define LIGHTING_ROUND_VALUE    (1 / 200) //Value used to round lumcounts, values smaller than 1/255 don't matter (if they do, thanks sinking points), greater values will make lighting less precise, but in turn increase performance, VERY SLIGHTLY.
 
+#define LIGHTING_LIGHTSPEED     2 // How fast to animate light overlays
+
 #define LIGHTING_ICON 'icons/effects/lighting_overlay.dmi' // icon used for lighting shading effects
 #define LIGHTING_BASE_ICON_STATE "matrix"	// icon_state used for normal color-matrix based lighting overlays.
 #define LIGHTING_STATION_ICON_STATE "tubedefault"	// icon_state used for lighting overlays that are just displaying standard station lighting.
@@ -35,6 +37,16 @@
 		1, 1, 1, 0, \
 		1, 1, 1, 0, \
 		1, 1, 1, 0, \
+		0, 0, 0, 1  \
+	)               \
+
+#define BLACKNESS_MATRIX \
+	list            \
+	(               \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
 		0, 0, 0, 1  \
 	)               \
 

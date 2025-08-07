@@ -13,6 +13,7 @@
 
 	var/needs_update = FALSE
 	var/safe_to_delete = FALSE
+	var/new_lum = 0
 
 	#if WORLD_ICON_SIZE != 32
 	transform = matrix(WORLD_ICON_SIZE / 32, 0, (WORLD_ICON_SIZE - 32) / 2, 0, WORLD_ICON_SIZE / 32, (WORLD_ICON_SIZE - 32) / 2)
@@ -79,7 +80,7 @@
 		ca = corners[1] || dummy_lighting_corner
 
 	var/max = max(cr.cache_mx, cg.cache_mx, cb.cache_mx, ca.cache_mx)
-	luminosity = max > 0
+	new_lum = max > 0
 
 	var/rr = cr.cache_r
 	var/rg = cr.cache_g
@@ -97,17 +98,24 @@
 	var/ag = ca.cache_g
 	var/ab = ca.cache_b
 
+	var/new_color
+
 	if(rr + rg + rb + gr + gg + gb + br + bg + bb + ar + ag + ab >= 12)
 		icon_state = LIGHTING_TRANSPARENT_ICON_STATE
-		color = null
-	else if (!luminosity)
-		icon_state = LIGHTING_DARKNESS_ICON_STATE
 		color = null
 	else if (rr == LIGHTING_DEFAULT_TUBE_R && rg == LIGHTING_DEFAULT_TUBE_G && rb == LIGHTING_DEFAULT_TUBE_B && ALL_EQUAL)
 		icon_state = LIGHTING_STATION_ICON_STATE
 		color = null
 	else
 		icon_state = LIGHTING_BASE_ICON_STATE
+
+		// can't animate from null
+		if(isnull(color))
+			color = BLACKNESS_MATRIX
+			// if we animate from blackness we wanna set luminosity now
+			// so you can see the light overlay in the first place <3
+			luminosity = new_lum
+
 		if (islist(color))
 			// Does this even save a list alloc?
 			var/list/c_list = color
@@ -123,9 +131,9 @@
 			c_list[CL_MATRIX_AR] = ar
 			c_list[CL_MATRIX_AG] = ag
 			c_list[CL_MATRIX_AB] = ab
-			color = c_list
+			new_color = c_list
 		else
-			color = list(
+			new_color = list(
 				rr, rg, rb, 0,
 				gr, gg, gb, 0,
 				br, bg, bb, 0,
@@ -133,12 +141,23 @@
 				0, 0, 0, 1
 			)
 
+	if(color != BLACKNESS_MATRIX)
+		addtimer(new Callback(src, PROC_REF(update_luminosity)), LIGHTING_LIGHTSPEED)
+	animate(src, color = new_color, time = LIGHTING_LIGHTSPEED)
+
 	// If there's a Z-turf above us, update its shadower.
 	if (T.above)
 		if (T.above.shadower)
 			T.above.shadower.copy_lighting(src)
 		else
 			T.above.update_mimic()
+
+/atom/movable/lighting_overlay/proc/update_luminosity()
+	luminosity = new_lum
+
+	if (!luminosity)
+		icon_state = LIGHTING_DARKNESS_ICON_STATE
+		color = null
 
 #undef ALL_EQUAL
 
