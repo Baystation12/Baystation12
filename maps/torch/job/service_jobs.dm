@@ -79,7 +79,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the Chief Steward"
-	minimum_character_age = list(SPECIES_HUMAN = 20)
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	alt_titles = list(
 		"Custodian",
@@ -114,7 +114,7 @@
 	department_flag = SRV
 	total_positions = 2
 	spawn_positions = 2
-	minimum_character_age = list(SPECIES_HUMAN = 20)
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	supervisors = "the Chief Steward"
 	alt_titles = list(
 		"Bartender",
@@ -158,7 +158,7 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the Chief Steward"
-	minimum_character_age = list(SPECIES_HUMAN = 20)
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(

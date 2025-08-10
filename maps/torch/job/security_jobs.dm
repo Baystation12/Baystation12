@@ -100,7 +100,7 @@
 	supervisors = "the Chief of Security"
 	economic_power = 4
 	minimal_player_age = 7
-	minimum_character_age = list(SPECIES_HUMAN = 18)
+	minimum_character_age = list(SPECIES_HUMAN = 19) //we don't have trainee MA, so the regular MA title is tied to the "regular" titles of other departments.
 	ideal_character_age = 25
 	alt_titles = list() // This is a hack. Overriding a list var with null does not actually override it due to the particulars of dm list init. Do not "clean up" without testing.
 	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/security/maa
