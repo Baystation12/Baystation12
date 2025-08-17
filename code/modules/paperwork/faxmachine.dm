@@ -14,6 +14,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	idle_power_usage = 30
 	active_power_usage = 200
+	construct_state = /singleton/machine_construction/default/panel_closed
+	maximum_component_parts = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc = 1
+	)
+	uncreated_component_parts = null
 
 	var/obj/item/card/id/scan = null // identification
 	var/authenticated = 0
@@ -341,3 +348,15 @@ GLOBAL_LIST_EMPTY(admin_departments)
 			success = TRUE
 			fax.recievefax(copyitem, origin)
 	return success
+
+
+/obj/item/stock_parts/circuitboard/faxmachine
+	name = "circuit board (fax machine)"
+	build_path = /obj/machinery/photocopier/faxmachine
+	board_type = "machine"
+	req_components = list()
+	additional_spawn_components = list(
+		/obj/item/stock_parts/console_screen = 1,
+		/obj/item/stock_parts/keyboard = 1,
+		/obj/item/stock_parts/power/apc/buildable = 1
+	)

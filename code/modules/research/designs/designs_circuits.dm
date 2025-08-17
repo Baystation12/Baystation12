@@ -854,6 +854,12 @@
 	build_path = /obj/item/stock_parts/circuitboard/radio_beacon
 	sort_string = "XAAAI"
 
+/datum/design/circuit/fax_machine
+	name = "fax machine"
+	id = "fax_machine"
+	build_path = /obj/item/stock_parts/circuitboard/faxmachine
+	sort_string = "XAAAJ"
+
 /datum/design/circuit/shipmap
 	name = "ship holomap"
 	id = "shipmap"
