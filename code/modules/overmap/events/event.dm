@@ -259,66 +259,11 @@ var/global/singleton/overmap_event_handler/overmap_event_handler = new()
 	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE | OVERMAP_WEAKNESS_FIRE
 	colors = list("#a960dd", "#cd60d3", "#ea50f2", "#f67efc")
 
-	// did you know? 33% of all carp live an active lifestyle
-	var/const/movement_chance = 33
-	/// Chance to turn in either direction on updating movement
-	var/turn_chance = 50
-	/// Chance for the carp to stay still instead of moving
-	var/stop_move_chance = 10
-	/// How often to update movement
-	var/movement_update_rate = 1 MINUTES
-	var/next_update = INFINITY
-
-	/// Slowest speed the carp can go
-	var/migration_speed_min = 1 / (1.9 MINUTES)
-	/// Fastest the carp can go
-	var/migration_speed_max = 1 / (1.5 MINUTES)
-	var/migration_speed = 0
-
-/obj/overmap/event/carp/Initialize(_, seed)
-	. = ..(seed)
-
-	if (rng.chance(movement_chance))
-		make_movable()
-		dir = rng.random_dir()
-		// Give the crew some time to get set up before carp begin to move (game time)
-		addtimer(new Callback(src, PROC_REF(do_movement)), 18 MINUTES + rng.random(0, 4 MINUTES))
-
-/obj/overmap/event/carp/Process()
-	..()
-	if (world.time > next_update)
-		do_movement()
-
-/obj/overmap/event/carp/proc/do_movement()
-	next_update = world.time + movement_update_rate
-	update_movement()
-
-/// Turn up to 45 degrees and change speeds
-/obj/overmap/event/carp/proc/update_movement()
-	adjust_speed(-speed[1], -speed[2])
-
-	if (rng.chance(turn_chance))
-		dir = turn(dir, (rng.chance(50) * -1) * 45)
-
-	if (rng.chance(stop_move_chance))
-		return
-
-	var/dir_x = SIGN((dir & EAST) * 1 + (dir & WEST) * -1)
-	var/dir_y = SIGN((dir & NORTH) * 1 + (dir & SOUTH) * -1)
-	if (dir_x == dir_y && dir_x == 0)
-		return
-
-	// pick a new speed
-	migration_speed = migration_speed_min + (rng.random() * (migration_speed_max - migration_speed_min))
-	adjust_speed(dir_x * migration_speed, dir_y * migration_speed)
-
 /obj/overmap/event/carp/major
 	name = "carp school"
 	difficulty = EVENT_LEVEL_MAJOR
 	event_icon_states = list("carp3", "carp4")
 	colors = list("#a709db", "#c228c7", "#c444e4")
-
-	stop_move_chance = 5
 
 /obj/overmap/event/gravity
 	name = "dark matter influx"
