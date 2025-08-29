@@ -78,6 +78,8 @@ SUBSYSTEM_DEF(vote)
 	if(!new_vote.setup(creator, automatic))
 		return FALSE
 
+	addtimer(new Callback(src, TYPE_PROC_REF(/datum/controller/subsystem/vote, remind_vote)), 45 SECONDS)
+
 	active_vote = new_vote
 	last_started_time = world.time
 	return TRUE
@@ -133,6 +135,16 @@ SUBSYSTEM_DEF(vote)
 	active_vote.report_result() // Will not make announcement, but do any override failure reporting tasks.
 	QDEL_NULL(active_vote)
 	reset()
+
+/datum/controller/subsystem/vote/proc/remind_vote()
+	if (!active_vote)
+		return
+	for (var/mob/mob as anything in SSmobs.mob_list)
+		if (istype(active_vote, /datum/vote/transfer) && (isghost(mob) || isnewplayer(mob)))
+			continue // ghosts and new players cannot vote in a transfer vote
+		if (mob.ckey && !(mob.ckey in active_vote.votes))
+			sound_to(world, sound('sound/ui/vote-notify.ogg', repeat = 0, wait = 0, volume = 40, channel = GLOB.vote_sound_channel))
+			to_chat(mob, "[SPAN_COLOR("purple", "[SPAN_STYLE("font-size: 200%", "You have not voted yet. Type <b>vote</b> or click <a href='byond://?src=\ref[SSvote];vote_panel=1'>here</a> to place your votes.")]")]\n")
 
 /datum/controller/subsystem/vote/Topic(href,href_list[],hsrc)
 	if(!usr || !usr.client)
