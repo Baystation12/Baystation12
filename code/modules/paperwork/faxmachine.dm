@@ -49,6 +49,8 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	if (department && !(("[department]" in GLOB.alldepartments) || ("[department]" in GLOB.admin_departments)))
 		GLOB.alldepartments |= department
 
+	queue_icon_update()
+
 
 /obj/machinery/photocopier/faxmachine/Destroy()
 	if (LAZYLEN(linked_pdas))
@@ -130,11 +132,12 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	return TRUE
 
 /obj/machinery/photocopier/faxmachine/on_update_icon()
-	if (MACHINE_IS_BROKEN(src))
+	ClearOverlays()
 	if (inoperable())
 		icon_state = "fax_off"
 		return
 	icon_state = "fax"
+	AddOverlays(emissive_appearance(icon, "fax_emissive"))
 
 /obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
 	interact(user)
