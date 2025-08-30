@@ -129,6 +129,13 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	emagged = TRUE
 	return TRUE
 
+/obj/machinery/photocopier/faxmachine/on_update_icon()
+	if (MACHINE_IS_BROKEN(src))
+	if (inoperable())
+		icon_state = "fax_off"
+		return
+	icon_state = "fax"
+
 /obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
 	interact(user)
 	return TRUE
