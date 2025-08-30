@@ -128,17 +128,48 @@
 		to_chat(user, SPAN_NOTICE("You refuel \the [tank]."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
-
+	/// Allows player to light a flammable mob with lit welding tool.
 	if(welding)
 		var/turf/location = get_turf(user)
-		if(isliving(O))
-			var/mob/living/L = O
+		var/mob/living/L = O
+		if(isliving(O) && L.fire_stacks > 0)
+			user.visible_message(
+				SPAN_WARNING("\The [user] sets \the [O] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [O] on fire!")
+			)
 			L.IgniteMob()
+			/// admin logs
+			if(ismob(user))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(user, O, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(O, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
 		else if(istype(O))
 			O.HandleObjectHeating(src, user, 700)
 		if (isturf(location))
 			location.hotspot_expose(700)
 	return
+/// Ignites flammable mobs if you throw a toggled welding tool at them
+/obj/item/weldingtool/throw_impact(atom/hit_atom, datum/thrownthing/igniter)
+	..()
+	if(welding)
+		var/mob/living/victim = hit_atom
+		if(isliving(victim) && victim.fire_stacks > 0)
+			igniter.thrower.visible_message(
+				SPAN_WARNING("\The [igniter.thrower] sets \the [victim] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [victim] on fire!")
+			)
+			victim.IgniteMob()
+			/// admin logs
+			if(ismob(igniter.thrower))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(igniter.thrower, victim, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(victim, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
 
 /obj/item/weldingtool/attack_self(mob/user as mob)
 	setWelding(!welding, usr)

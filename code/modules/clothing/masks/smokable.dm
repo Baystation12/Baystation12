@@ -3,6 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
 	waterproof = FALSE
+	throwforce = 1
 
 	var/lit = 0
 	var/icon_on
@@ -161,13 +162,53 @@
 		light(text)
 	return ..()
 
-/obj/item/clothing/mask/smokable/use_before(mob/living/M, mob/living/user)
+/obj/item/clothing/mask/smokable/use_before(mob/living/fiery, mob/living/user)
 	. = FALSE
-	if (istype(M) && M.on_fire)
-		user.do_attack_animation(M)
-		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
+	if (istype(fiery) && fiery.on_fire)
+		user.do_attack_animation(fiery)
+		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [fiery]."))
 		return TRUE
+	/// Allows player to light a flammable mob with lit cigarette.
+	if(lit)
+		var/turf/location = get_turf(user)
+		var/mob/living/burn = fiery
+		if(isliving(fiery) && burn.fire_stacks > 0)
+			user.visible_message(
+				SPAN_WARNING("\The [user] sets \the [fiery] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [fiery] on fire!")
+			)
+			burn.IgniteMob()
+			/// admin logs
+			if(ismob(user))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
 
+				admin_attack_log(user, fiery, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(fiery, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+		if (isturf(location))
+			location.hotspot_expose(700)
+	return
+/// Ignites flammable mobs if you throw a lit cigarette at them
+/obj/item/clothing/mask/smokable/throw_impact(atom/hit_atom, datum/thrownthing/igniter)
+	..()
+	if(lit)
+		var/mob/living/victim = hit_atom
+		if(isliving(victim) && victim.fire_stacks > 0)
+			igniter.thrower.visible_message(
+				SPAN_WARNING("\The [igniter.thrower] sets \the [victim] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [victim] on fire!")
+			)
+			victim.IgniteMob()
+			/// admin logs
+			if(ismob(igniter.thrower))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(igniter.thrower, victim, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(victim, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
 
 /obj/item/clothing/mask/smokable/IsFlameSource()
 	return lit

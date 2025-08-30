@@ -30,6 +30,7 @@
 	if (fail_light(user))
 		return
 	lit = 1
+	src.damtype = DAMAGE_BURN /// So hitting a target with a lit lighter sets them on fire
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)
@@ -90,20 +91,57 @@
 	else
 		AddOverlays(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
 
-/obj/item/flame/lighter/use_before(mob/living/M, mob/living/carbon/user)
+/// Allows player to light a flammable mob with lit lighter.
+/obj/item/flame/lighter/use_before(mob/living/fiery, mob/living/carbon/user)
 	. = FALSE
-	if (!istype(M))
+	if (!istype(fiery))
 		return FALSE
-
 	if (lit)
-		M.IgniteMob()
-		if (istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
-			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
-			if (M == user)
-				cig.use_tool(src, user)
+		var/turf/location = get_turf(user)
+		var/mob/living/burn = fiery
+		if(isliving(fiery) && burn.fire_stacks > 0)
+			user.visible_message(
+				SPAN_WARNING("\The [user] sets \the [fiery] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [fiery] on fire!")
+			)
+			fiery.IgniteMob()
+			/// admin logs
+			if(ismob(user))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(user, fiery, attacker_message, victim_message, admin_message)
 			else
-				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
-			return TRUE
+				admin_victim_log(fiery, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+			if (istype(fiery.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
+				var/obj/item/clothing/mask/smokable/cigarette/cig = fiery.wear_mask
+				if (fiery == user)
+					cig.use_tool(src, user)
+				else
+					cig.light(SPAN_NOTICE("[user] holds the [name] out for [fiery], and lights the [cig.name]."))
+				return TRUE
+		if(isturf(location))
+			location.hotspot_expose(700)
+	return
+/// Ignites flammable mobs if you throw a lit lighter at them
+/obj/item/flame/lighter/throw_impact(atom/hit_atom, datum/thrownthing/igniter)
+	..()
+	if(lit)
+		var/mob/living/victim = hit_atom
+		if(isliving(victim) && victim.fire_stacks > 0)
+			igniter.thrower.visible_message(
+				SPAN_WARNING("\The [igniter.thrower] sets \the [victim] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [victim] on fire!")
+			)
+			victim.IgniteMob()
+			/// admin logs
+			if(ismob(igniter.thrower))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(igniter.thrower, victim, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(victim, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))

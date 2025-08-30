@@ -74,3 +74,29 @@
 	if(burnt)
 		icon_state = "match_burnt"
 		item_state = "cigoff"
+
+/obj/item/flame/match/use_before(mob/living/fiery, mob/living/carbon/user)
+	. = FALSE
+	if (!istype(fiery))
+		return FALSE
+
+	if (lit)
+		var/turf/location = get_turf(user)
+		var/mob/living/burn = fiery
+		if(isliving(fiery) && burn.fire_stacks > 0)
+			user.visible_message(
+				SPAN_WARNING("\The [user] sets \the [fiery] on fire with \a [src]!"),
+				SPAN_WARNING("You set \the [fiery] on fire!")
+			)
+			fiery.IgniteMob()
+			/// admin logs
+			if(ismob(user))
+				var/attacker_message = "Ignited using \a [src] (lit)"
+				var/victim_message = "Was ignited with \a [src] (lit)"
+				var/admin_message = "used \a [src] (lit) to ignite"
+				admin_attack_log(user, fiery, attacker_message, victim_message, admin_message)
+			else
+				admin_victim_log(fiery, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+		if(isturf(location))
+			location.hotspot_expose(700)
+	return
