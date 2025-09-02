@@ -153,23 +153,51 @@
 	return
 /// Ignites flammable mobs if you throw a toggled welding tool at them
 /obj/item/weldingtool/throw_impact(atom/hit_atom, datum/thrownthing/igniter)
-	..()
-	if(welding)
+	if (isliving(hit_atom))
 		var/mob/living/victim = hit_atom
-		if(isliving(victim) && victim.fire_stacks > 0)
+		var/miss_chance = max(15*(igniter.dist_travelled-2),0)
+		if (!welding)
+			return ..()
+		/// Overwrites the hitby miss outcome, when it's lit.
+		if (prob(miss_chance))
+			visible_message(
+				SPAN_NOTICE("\The [src] misses [victim] narrowly!")
+			)
+			/// admin log when there is intention, but a miss happens
+			if (ismob(igniter.thrower))
+				var/attacker_attempt = "Attempted to ignite using \a [src] (lit)"
+				var/victim_attempt = "Was almost ignited with \a [src] (lit)"
+				var/admin_attempt = "tried to use \a [src] (lit) to ignite"
+				admin_attack_log(igniter.thrower, victim, attacker_attempt, victim_attempt, admin_attempt)
+			else
+				admin_victim_log(victim, "was almost ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+		else
+			/// make it deal burn damage based on throwforce and speed
+			var/dtype = DAMAGE_BURN
+			var/throw_damage = src.throwforce*(src.throw_speed/THROWFORCE_SPEED_DIVISOR)
 			igniter.thrower.visible_message(
-				SPAN_WARNING("\The [igniter.thrower] sets \the [victim] on fire with \a [src]!"),
-				SPAN_WARNING("You set \the [victim] on fire!")
+				SPAN_WARNING("\The [igniter.thrower] throws \a lit [src] at \the [victim]!"),
+				SPAN_WARNING("You throw \a lit [src] at \the [victim]!")
 			)
 			victim.IgniteMob()
-			/// admin logs
-			if(ismob(igniter.thrower))
-				var/attacker_message = "Ignited using \a [src] (lit)"
-				var/victim_message = "Was ignited with \a [src] (lit)"
-				var/admin_message = "used \a [src] (lit) to ignite"
-				admin_attack_log(igniter.thrower, victim, attacker_message, victim_message, admin_message)
+			victim.apply_damage(damage = throw_damage, damagetype = dtype, used_weapon = igniter)
+			/** admin logs
+			* If victim is flammable, they'll be set on fire */
+			if (victim.on_fire)
+				if (ismob(igniter.thrower))
+					var/attacker_ignited = "Ignited using \a [src] (lit)"
+					var/victim_ignited = "Was ignited with \a [src] (lit)"
+					var/admin_ignited = "used \a [src] (lit) to ignite"
+					admin_attack_log(igniter.thrower, victim, attacker_ignited, victim_ignited, admin_ignited)
+				else
+					admin_victim_log(victim, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+			/// But what if it fails/victim isn't flammable?
 			else
-				admin_victim_log(victim, "was ignited by an <b> UNKNOWN SUBJECT (No longer exists)</b> using \a [src]")
+				if (ismob(igniter.thrower))
+					var/attacker_unblazed = "Failed to be ignited with \a [src] (lit)"
+					var/victim_unblazed = "Was hit with \a [src] (lit) but didn't ignite"
+					var/admin_unblazed = "used \a [src] (lit) to ignite"
+					admin_attack_log(igniter.thrower, victim, attacker_unblazed, victim_unblazed, admin_unblazed)
 
 /obj/item/weldingtool/attack_self(mob/user as mob)
 	setWelding(!welding, usr)
