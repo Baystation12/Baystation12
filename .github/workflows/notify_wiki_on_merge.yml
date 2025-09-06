@@ -17,7 +17,7 @@ jobs:
           webhook-url: ${{ secrets.DISCORD_WIKI_WEBHOOK_URL }}
           username: GitHub
           avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-          embed-author-name: ${{ github.event.pull_request.user }}
+          embed-author-name: ${{ github.event.pull_request.user.login }}
           embed-title: ${{ github.event.pull_request.title }}
           embed-url: ${{ github.event.pull_request.url }}
           embed-description: |
