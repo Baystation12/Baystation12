@@ -963,6 +963,11 @@
 	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
 */
 
+/mob/living/carbon/human/proc/brain_health_state()
+	if (any_brain_critical())
+		return "hudcritical[7 - brain_status(7)]"
+	else
+		return "hudhealthy[7 - brain_status(7)]"
 
 /mob/living/carbon/human/proc/handle_hud_list()
 	if (GET_BIT(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
@@ -980,7 +985,7 @@
 		if(is_dead())
 			holder.icon_state = "huddead"
 		else
-			holder.icon_state = "hudhealthy"
+			holder.icon_state = "hudblank"
 		hud_list[LIFE_HUD] = holder
 
 	if (GET_BIT(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
@@ -993,9 +998,9 @@
 			if(B.controlling)
 				holder.icon_state = "hudbrainworm"
 			else
-				holder.icon_state = "hudhealthy"
+				holder.icon_state = brain_health_state()
 		else
-			holder.icon_state = "hudhealthy"
+			holder.icon_state = brain_health_state()
 
 		var/image/holder2 = hud_list[STATUS_HUD_OOC]
 		if(is_real_dead())
@@ -1003,7 +1008,7 @@
 		else if(has_brain_worms())
 			holder2.icon_state = "hudbrainworm"
 		else
-			holder2.icon_state = "hudhealthy"
+			holder2.icon_state = brain_health_state()
 
 		hud_list[STATUS_HUD] = holder
 		hud_list[STATUS_HUD_OOC] = holder2

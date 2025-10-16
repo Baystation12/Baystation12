@@ -1640,6 +1640,16 @@
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	return H ? H.pulse : PULSE_NONE
 
+/mob/living/carbon/human/proc/any_brain_critical()
+	var/obj/item/organ/internal/brain/B = internal_organs_by_name[BP_BRAIN]
+
+	return B ? (B.is_broken() || !B.oxygen_reserve) : 0
+
+/mob/living/carbon/human/proc/brain_status(out_of)
+	var/obj/item/organ/internal/brain/B = internal_organs_by_name[BP_BRAIN]
+
+	return B ? clamp(floor(out_of - (out_of / B.damage_threshold_count) * B.get_current_damage_threshold()), 0, out_of-1) : 0
+
 /mob/living/carbon/human/can_devour(atom/movable/victim, silent = FALSE)
 
 	if(!should_have_organ(BP_STOMACH))

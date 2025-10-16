@@ -159,8 +159,10 @@
 			if(blood_volume < BLOOD_VOLUME_SURVIVE)
 				if(!owner.chem_effects[CE_STABLE] || prob(60))
 					oxygen_reserve = max(0, oxygen_reserve-1)
+					SET_BIT(owner.hud_updateflag, STATUS_HUD)
 			else
 				oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
+				SET_BIT(owner.hud_updateflag, STATUS_HUD)
 			if(!oxygen_reserve) //(hardcrit)
 				owner.Paralyse(3)
 			var/can_heal = damage && damage < max_damage && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
@@ -205,6 +207,8 @@
 /obj/item/organ/internal/brain/take_internal_damage(damageTaken, silent)
 	set waitfor = 0
 	..()
+	if (owner)
+		SET_BIT(owner.hud_updateflag, STATUS_HUD)
 	if(damageTaken >= 20 && damage >= (max_damage * 0.5)) //This probably won't be triggered by oxyloss or mercury. Probably.
 		var/damage_secondary = damageTaken * 0.20
 		if (owner)
