@@ -128,6 +128,14 @@
 	var/gun_skill = SKILL_WEAPONS
 	/// What skill level is needed in the gun's skill to completely negate the chance of an accident.
 	var/safety_skill = SKILL_EXPERIENCED
+	/// Whether the gun has a foldable stock.
+	var/foldable = FALSE
+	/// Whether the gun's stock is folded or not.
+	var/folded = FALSE
+	/// Fold-in sound.
+	var/foldin = 'sound/weapons/guns/interaction/stock_in.ogg'
+	/// Fold-out sound.
+	var/foldout = 'sound/weapons/guns/interaction/stock_out.ogg'
 
 /obj/item/gun/Initialize()
 	. = ..()
@@ -144,6 +152,9 @@
 		var/datum/firemode/mode = firemodes[sel_mode]
 		mode.apply_to(src)
 
+	if (foldable)
+		verbs += /obj/item/gun/proc/stock
+
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	ClearOverlays()
@@ -159,6 +170,14 @@
 			AddOverlays(image('icons/obj/guns/gui.dmi',"safety[safety()]"))
 	if(safety_icon)
 		AddOverlays(image(icon,"[safety_icon][safety()]"))
+
+	if (!foldable)
+		return
+
+	if (folded)
+		icon_state = "[initial(icon_state)]-folded"
+	else
+		icon_state = "[initial(icon_state)]"
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -607,6 +626,19 @@
 		to_chat(user, "The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
+/obj/item/gun/proc/toggle_stock(mob/user)
+	if (!foldable)
+		return
+	user.visible_message(
+		SPAN_NOTICE("\The [user] [folded ? "unfolds" : "folds"] \the [src]'s stock."),
+		SPAN_NOTICE("You [folded ? "unfold" : "fold"] \the [src]'s stock.")
+	)
+
+	playsound(src, folded ? foldout : foldin, 40)
+	folded = !folded
+
+	update_icon()
+
 /obj/item/gun/proc/switch_firemodes()
 
 	var/next_mode = get_next_firemode()
@@ -648,6 +680,14 @@
 		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
 
+/obj/item/gun/proc/stock()
+	set name = "Toggle Stock"
+	set desc = "Fold (or unfold) the gun's stock."
+	set category = "Object"
+	set popup_menu = TRUE
+	set src in usr
+
+	toggle_stock(usr)
 
 /obj/item/gun/verb/toggle_safety_verb()
 	set name = "Toggle Gun Safety"

@@ -49,6 +49,9 @@
 
 /obj/item/gun/projectile/Initialize()
 	. = ..()
+	if (silencer)
+		verbs += /obj/item/gun/projectile/proc/silencer
+
 	if (starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
 			for(var/i in 1 to max_shells)
@@ -344,6 +347,7 @@
 				range = 2
 			)
 			fire_sound = new_silencer.silenced_sound
+			verbs += /obj/item/gun/projectile/proc/silencer
 			return TRUE
 		else
 			USE_FEEDBACK_FAILURE("\The [src] and \the [tool] are not in the same caliber.")
@@ -419,7 +423,7 @@
 			chamberlist += chamber
 		return chamberlist
 
-/obj/item/gun/projectile/verb/silencer()
+/obj/item/gun/projectile/proc/silencer()
 	set category = "Object"
 	set name = "Remove Silencer"
 	set popup_menu = TRUE
@@ -431,7 +435,7 @@
 /obj/item/gun/projectile/proc/removeSilencer(mob/user)
 	if (!user.use_sanity_check(src))
 		return
-	if (!silenced)
+	if (!silencer)
 		to_chat(user, SPAN_WARNING("There is no silencer attached to \the [src]!"))
 		return
 	if (!user.IsHolding(src))
@@ -446,4 +450,5 @@
 	w_class -= 1
 	silenced = FALSE
 	fire_sound = initial(fire_sound)
+	verbs -= /obj/item/gun/projectile/proc/silencer
 	update_icon()

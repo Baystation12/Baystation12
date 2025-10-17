@@ -116,40 +116,6 @@
 	wielded_item_state = "boltaction-wielded"
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 
-/obj/item/gun/projectile/sniper/panther //semi-automatic only
-	name = "marksman rifle"
-	desc = "An SD-Panther. It is a simple and durable rifle made of stamped steel manufactured by Novaya Zemlya Arms for the Confederation Navy. \
-	While it lacks the burst fire of other military rifles, it's exceptionally accurate and has a powerful optic."
-	icon = 'icons/obj/guns/terran_rifle.dmi'
-	icon_state = "dmr"
-	item_state = "dmr"
-	fire_delay = 8
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_ESOTERIC = 5)
-	w_class = ITEM_SIZE_HUGE
-	force = 10
-	caliber = CALIBER_RIFLE
-	slot_flags = SLOT_BACK
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/rifle
-	allowed_magazines = /obj/item/ammo_magazine/rifle
-	one_hand_penalty = 8
-	scoped_accuracy = 8
-	scope_zoom = 1
-	accuracy_power = 8
-	accuracy = 4
-	bulk = GUN_BULK_RIFLE
-	wielded_item_state = "dmr-wielded"
-	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
-	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
-	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
-
-/obj/item/gun/projectile/sniper/panther/on_update_icon()
-	if(ammo_magazine)
-		icon_state = "dmr"
-	else
-		icon_state = "dmr-empty"
-	..()
-
 /obj/item/gun/projectile/sniper/garand
 	name = "garand rifle"
 	desc = "The rugged garand is a old semi-automatic weapon popular on the frontier worlds. PING!"
