@@ -6,6 +6,7 @@
 	var/recharge_rate = 10
 	var/last_damage = 0
 	var/recharging = 0
+	var/flickering = 0
 
 /mob/living/simple_animal/hostile/covenant/grunt/adjustBruteLoss(damage)
 	last_damage = world.time
@@ -15,7 +16,9 @@
 
 	//take damage from shield first
 	if(shield_left > 0)
-		overlays |= "shield_overlay_damage"
+		if(!flickering)
+			overlays |= "shield_overlay_damage"
+			flickering = 1
 		var/shield_absorbed = min(shield_left, damage)
 		shield_left -= shield_absorbed
 		damage -= shield_absorbed
@@ -26,10 +29,12 @@
 	. = ..()
 
 	//dont need to display damage any more
-	overlays -= "shield_overlay_damage"
+	if(flickering)
+		overlays -= "shield_overlay_damage"
+		flickering = 0
 
 	if(stat == DEAD)
-		overlays -= "shield_overlay_recharge"
+		overlays.Cut()
 	else
 		//are we currently recharging?
 		if(recharging)

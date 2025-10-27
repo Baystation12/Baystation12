@@ -79,6 +79,7 @@
 	var/recharge_rate = 30
 	var/last_damage = 0
 	var/recharging = 0
+	var/fickering = 0
 
 /obj/item/weapon/gun/energy/spartanlaser/npc
 	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
@@ -91,7 +92,9 @@
 
 	//take damage from shield first
 	if(shield_left > 0)
-		overlays |= "shield_flicker"
+		if(!flickering)
+			overlays |= "shield_flicker"
+			flickering = 1
 		var/shield_absorbed = min(shield_left, damage)
 		shield_left -= shield_absorbed
 		damage -= shield_absorbed
@@ -102,10 +105,12 @@
 	. = ..()
 
 	//dont need to display damage any more
-	overlays -= "shield_flicker"
+	if(flickering)
+		overlays -= "shield_flicker"
+		flickering = 0
 
 	if(stat == DEAD)
-		overlays -= "shield_recharge"
+		overlays.Cut()
 	else
 		//are we currently recharging?
 		if(recharging)
