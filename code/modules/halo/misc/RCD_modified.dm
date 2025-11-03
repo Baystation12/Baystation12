@@ -184,6 +184,11 @@
 			continue
 		if(!rcdm.can_handle_work(rcd, target))
 			continue
+		if(isturf(target))
+			for(var/obj/vehicles/V in world)
+				if(V.locs && (target in V.locs))
+					to_chat(user, "<span class='warning'>An RCD won't work here, a vehicle is blocking the area!</span>")
+					return FALSE
 		if(!rcd.useResource(rcdm.cost, user))
 			to_chat(user, "<span class='warning'>Insufficient resources.</span>")
 			return FALSE
