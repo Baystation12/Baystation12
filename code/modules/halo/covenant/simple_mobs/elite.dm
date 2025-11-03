@@ -18,6 +18,7 @@
 	var/recharge_rate = 10
 	var/last_damage = 0
 	var/recharging = 0
+	var/flickering = 0
 
 /mob/living/simple_animal/hostile/covenant/elite/major
 	name = "Elite Major (NPC)"
