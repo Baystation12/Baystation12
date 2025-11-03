@@ -79,7 +79,7 @@
 	var/recharge_rate = 30
 	var/last_damage = 0
 	var/recharging = 0
-	var/fickering = 0
+	var/flickering = 0
 
 /obj/item/weapon/gun/energy/spartanlaser/npc
 	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
