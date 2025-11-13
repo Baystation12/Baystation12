@@ -119,6 +119,11 @@
 		return TRUE
 	return FALSE
 
+/obj/item/storage/use_in_world(mob/user)
+	if ((ishuman(user) || isrobot(user) || issmall(user)) && !user.incapacitated() && Adjacent(user))
+		add_fingerprint(user)
+		open(user)
+
 /obj/item/storage/proc/return_inv()
 
 	var/list/L = list(  )

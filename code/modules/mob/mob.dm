@@ -384,6 +384,17 @@
 		else
 			attack_empty_hand(BP_R_HAND)
 
+/mob/verb/activate_world_object()
+	set name = "Activate Object In World"
+	set category = "Object"
+
+	var/datum/click_handler/click_handler = usr.GetClickHandler()
+	var/atom/hovered = click_handler.hovered_atom
+	if (!hovered)
+		return
+
+	usr.ClickOn(hovered, "", TRUE)
+
 /mob/proc/update_flavor_text(key)
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
 	if(!CanInteract(usr, GLOB.self_state))
