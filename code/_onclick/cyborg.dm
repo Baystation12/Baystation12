@@ -107,9 +107,6 @@
 	cycle_modules()
 	return TRUE
 
-/mob/living/silicon/robot/CtrlAltClickOn(atom/A)
-	return pointed(A)
-
 /atom/proc/BorgMiddleClick(mob/living/silicon/robot/user)
 	return FALSE
 
