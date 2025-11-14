@@ -55,7 +55,7 @@ var/global/list/additional_antag_types = list()
 	else if(!round_autoantag && length(latejoin_antag_tags))
 		round_autoantag = TRUE
 
-/datum/game_mode/Topic(href, href_list[])
+/datum/game_mode/Topic(href, list/href_list)
 	if(..())
 		return
 	if(href_list["toggle"])
@@ -389,7 +389,7 @@ var/global/list/additional_antag_types = list()
 		if(P.client && P.ready)
 			. ++
 
-/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+/datum/game_mode/proc/check_antagonists_topic(href, list/href_list)
 	return 0
 
 /datum/game_mode/proc/create_antagonists()

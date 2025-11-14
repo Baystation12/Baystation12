@@ -43,7 +43,7 @@
 
 	return dat.Join()
 
-/datum/managed_browser/changelingevolution/Topic(href, href_list[])
+/datum/managed_browser/changelingevolution/Topic(href, list/href_list)
 	if(!my_client)
 		return FALSE
 

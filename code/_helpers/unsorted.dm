@@ -54,7 +54,7 @@
 	RETURN_TYPE(/list)
 	var/px=M.x		//starting x
 	var/py=M.y
-	var/line[] = list(locate(px,py,M.z))
+	var/line = list(locate(px,py,M.z))
 	var/dx=N.x-px	//x distance
 	var/dy=N.y-py
 	var/dxabs=abs(dx)//Absolute value of x distance

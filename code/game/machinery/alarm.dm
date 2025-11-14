@@ -428,7 +428,6 @@
 	signal.data["status"] = TRUE
 
 	radio_connection.post_signal(src, signal, RADIO_FROM_AIRALARM)
-//			log_debug(text("Signal [] Broadcasted to []", command, target))
 
 	return 1
 
