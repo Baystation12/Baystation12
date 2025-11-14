@@ -29,7 +29,7 @@
 	next_turf:
 		for(var/turf/T)
 			for(var/dir in GLOB.cardinal)
-				var/list/connect_types = list(1 = 0, 2 = 0, 3 = 0)
+				var/list/connect_types = alist(1 = 0, 2 = 0, 3 = 0)
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)
 						for(var/connect_type in pipe.connect_types)
