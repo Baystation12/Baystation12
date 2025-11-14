@@ -385,6 +385,13 @@
 	. = ..()
 	to_chat(user, "The service hatch is [panel_open ? "open" : "closed"].")
 
+	if (Adjacent(user))
+		if (num_terminals)
+			to_chat(user, SPAN_INFO("It has [num_terminals] wire terminal\s connected to it."))
+		else
+			to_chat(user, SPAN_DANGER("It seems to be missing a wire terminal."))
+
+
 /obj/machinery/power/smes/examine_damage_state(mob/user)
 	var/damage_percentage = get_damage_percentage()
 	switch(damage_percentage)
