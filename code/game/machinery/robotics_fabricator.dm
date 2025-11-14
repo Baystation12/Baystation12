@@ -79,7 +79,7 @@
 	return TRUE
 
 /obj/machinery/robotics_fabricator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	var/datum/design/current = length(queue) ? queue[1] : null
 	if(current)

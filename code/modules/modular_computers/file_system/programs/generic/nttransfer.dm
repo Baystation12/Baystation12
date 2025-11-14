@@ -120,7 +120,7 @@ var/global/nttransfer_uid = 0
 		data["upload_haspassword"] = PRG.server_password ? TRUE : FALSE
 		data["upload_filename"] = "[PRG.provided_file.filename].[PRG.provided_file.filetype]"
 	else if (PRG.upload_menu)
-		var/list/all_files[0]
+		var/list/all_files = list()
 		for(var/datum/computer_file/F in PRG.computer.get_all_files())
 			all_files.Add(list(list(
 				"uid" = F.uid,
@@ -129,7 +129,7 @@ var/global/nttransfer_uid = 0
 			)))
 		data["upload_filelist"] = all_files
 	else
-		var/list/all_servers[0]
+		var/list/all_servers = list()
 		for(var/datum/computer_file/program/nttransfer/P in ntnet_global.fileservers)
 			if(!P.provided_file)
 				continue

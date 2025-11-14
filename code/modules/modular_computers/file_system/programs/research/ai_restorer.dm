@@ -112,7 +112,7 @@
 		data["ai_isdamaged"] = (A.hardware_integrity() < 100) || (A.backup_capacitor() < 100)
 		data["ai_isdead"] = (A.is_dead())
 
-		var/list/all_laws[0]
+		var/list/all_laws = list()
 		for(var/datum/ai_law/L in A.laws.all_laws())
 			all_laws.Add(list(list(
 			"index" = L.index,

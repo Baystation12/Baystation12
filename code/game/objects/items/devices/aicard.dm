@@ -15,7 +15,7 @@
 	ui_interact(user)
 
 /obj/item/aicard/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.inventory_state)
-	var/data[0]
+	var/data = list()
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
 		data["name"] = carded_ai.name
@@ -26,7 +26,7 @@
 		data["operational"] = !carded_ai.is_dead()
 		data["flushing"] = flush
 
-		var/laws[0]
+		var/laws = list()
 		for(var/datum/ai_law/AL in carded_ai.laws.all_laws())
 			laws[LIST_PRE_INC(laws)] = list("index" = AL.get_index(), "law" = sanitize(AL.law))
 		data["laws"] = laws

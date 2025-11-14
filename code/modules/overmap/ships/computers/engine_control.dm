@@ -13,15 +13,15 @@
 		display_reconnect_dialog(user, "ship control systems")
 		return
 
-	var/data[0]
+	var/data = list()
 	data["state"] = display_state
 	data["global_state"] = linked.engines_state
 	data["global_limit"] = round(linked.thrust_limit*100)
 	var/total_thrust = 0
 
-	var/list/enginfo[0]
+	var/list/enginfo = list()
 	for(var/datum/ship_engine/E in linked.engines)
-		var/list/rdata[0]
+		var/list/rdata = list()
 		rdata["eng_type"] = E.name
 		rdata["eng_on"] = E.is_on()
 		rdata["eng_thrust"] = E.get_thrust()

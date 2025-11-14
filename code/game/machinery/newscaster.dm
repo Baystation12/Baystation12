@@ -272,13 +272,13 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 						else
 							dat+="<B><A href='byond://?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR></B>"
 				dat+="<BR><HR><A href='byond://?src=\ref[src];refresh=1'>Refresh</A>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Back</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Back</A>"
 			if(2)
 				dat+="Creating new Feed Channel..."
 				dat+="<HR><B><A href='byond://?src=\ref[src];set_channel_name=1'>Channel Name</A>:</B> [src.channel_name]<BR>"
 				dat+="<B>Channel Author:</B> [SPAN_COLOR("green", src.scanned_user)]<BR>"
 				dat+="<B><A href='byond://?src=\ref[src];set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.c_locked) ? ("NO") : ("YES")]<BR><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];submit_new_channel=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];submit_new_channel=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];setScreen=0'>Cancel</A><BR>"
 			if(3)
 				dat+="Creating new Feed Message..."
 				dat+="<HR><B><A href='byond://?src=\ref[src];set_channel_receiving=1'>Receiving Channel</A>:</B> [src.channel_name]<BR>" //MARK
@@ -291,13 +291,13 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="<BR><B><A href='byond://?src=\ref[src];set_attachment=1'>Delete Photo</A></B></BR>"
 				else
 					dat+="<A href='byond://?src=\ref[src];set_attachment=1'>Attach Photo</A>"
-				dat+="<BR><BR><A href='byond://?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
+				dat+="<BR><BR><A href='byond://?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];setScreen=0'>Cancel</A><BR>"
 			if(4)
 				dat+="Feed story successfully submitted to [src.channel_name].<BR><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(5)
 				dat+="Feed Channel [src.channel_name] created successfully.<BR><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(6)
 				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Could not submit Feed story to Network.</B>")]<HR><BR>"
 				if(src.channel_name=="")
@@ -341,8 +341,8 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 						active_num--
 				dat+="Network currently serves a total of [total_num] Feed channels, [active_num] of which are active, and a total of [message_num] Feed Stories." //TODO: CONTINUE
 				dat+="<BR><BR><B>Liquid Paper remaining:</B> [(src.paper_remaining) *100 ] cm^3"
-				dat+="<BR><BR><A href='byond://?src=\ref[src];print_paper=[0]'>Print Paper</A>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Cancel</A>"
+				dat+="<BR><BR><A href='byond://?src=\ref[src];print_paper=0'>Print Paper</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Cancel</A>"
 			if(9)
 				dat+="<B>[src.viewing_channel.channel_name]: </B>[FONT_SMALL("\[created by: [SPAN_COLOR("maroon", src.viewing_channel.author)]\] \[views: [SPAN_COLOR("maroon", ++src.viewing_channel.views)]\]")]<HR>"
 				if(src.viewing_channel.censored)
@@ -376,7 +376,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				else
 					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='byond://?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Cancel</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Cancel</A>"
 			if(11)
 				dat+="<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>"
 				dat+="[FONT_SMALL("A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s \
@@ -388,7 +388,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='byond://?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Back</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Back</A>"
 			if(12)
 				dat+="<B>[src.viewing_channel.channel_name]: </B>[FONT_SMALL("\[ created by: [SPAN_COLOR("maroon", src.viewing_channel.author)] \]")]<BR>"
 				dat+="[FONT_NORMAL("<A href='byond://?src=\ref[src];censor_channel_author=\ref[src.viewing_channel]'>[(src.viewing_channel.author=="\[REDACTED\]") ? ("Undo Author censorship") : ("Censor channel Author")]</A>")]<HR>"
@@ -442,10 +442,10 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 				dat+="<BR><A href='byond://?src=\ref[src];submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
 				if(wanted_already)
 					dat+="<BR><A href='byond://?src=\ref[src];cancel_wanted=1'>Take down Issue</A>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Cancel</A>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Cancel</A>"
 			if(15)
 				dat+="[SPAN_COLOR("green", "Wanted issue for [src.channel_name] is now in Network Circulation.")]<BR><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(16)
 				dat+="[SPAN_COLOR("maroon", "<B>ERROR: Wanted Issue rejected by Network.</B>")]<HR><BR>"
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
@@ -454,10 +454,10 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="[SPAN_COLOR("maroon", "Issue author unverified.")]<BR>"
 				if(src.msg == "" || src.msg == "\[REDACTED\]")
 					dat+="[SPAN_COLOR("maroon", "Invalid description.")]<BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(17)
 				dat+="<B>Wanted Issue successfully deleted from Circulation</B><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(18)
 				dat+="[SPAN_COLOR("maroon", "<B>-- STATIONWIDE WANTED ISSUE --</B>")]<BR>[FONT_NORMAL("\[Submitted by: [SPAN_COLOR("green", connected_group.wanted_issue.backup_author)]\]")]<HR>"
 				dat+="<B>Criminal</B>: [connected_group.wanted_issue.author]<BR>"
@@ -468,16 +468,16 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 					dat+="<BR><img src='tmp_photow.png' width = '180'>"
 				else
 					dat+="None"
-				dat+="<BR><BR><A href='byond://?src=\ref[src];setScreen=[0]'>Back</A><BR>"
+				dat+="<BR><BR><A href='byond://?src=\ref[src];setScreen=0'>Back</A><BR>"
 			if(19)
 				dat+="[SPAN_COLOR("green", "Wanted issue for [src.channel_name] successfully edited.")]<BR><BR>"
-				dat+="<BR><A href='byond://?src=\ref[src];setScreen=[0]'>Return</A><BR>"
+				dat+="<BR><A href='byond://?src=\ref[src];setScreen=0'>Return</A><BR>"
 			if(20)
 				dat+="[SPAN_COLOR("green", "Printing successful. Please receive your newspaper from the bottom of the machine.")]<BR><BR>"
-				dat+="<A href='byond://?src=\ref[src];setScreen=[0]'>Return</A>"
+				dat+="<A href='byond://?src=\ref[src];setScreen=0'>Return</A>"
 			if(21)
 				dat+="[SPAN_COLOR("maroon", "Unable to print newspaper. Insufficient paper. Please notify maintenance personnel to refill machine storage.")]<BR><BR>"
-				dat+="<A href='byond://?src=\ref[src];setScreen=[0]'>Return</A>"
+				dat+="<A href='byond://?src=\ref[src];setScreen=0'>Return</A>"
 			else
 				dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 

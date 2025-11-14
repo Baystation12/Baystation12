@@ -51,7 +51,7 @@
 /obj/machinery/computer/account_database/ui_interact(mob/user, ui_key="main", datum/nanoui/ui = null, force_open = 1)
 	user.set_machine(src)
 
-	var/data[0]
+	var/data = list()
 	data["src"] = "\ref[src]"
 	data["id_inserted"] = !!held_card
 	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
@@ -69,7 +69,7 @@
 		data["money"] = detailed_account_view.money
 		data["suspended"] = detailed_account_view.suspended
 
-		var/list/trx[0]
+		var/list/trx = list()
 		for (var/datum/transaction/T in detailed_account_view.transaction_log)
 			trx.Add(list(list(\
 				"date" = T.date, \
@@ -82,7 +82,7 @@
 		if (length(trx) > 0)
 			data["transactions"] = trx
 
-	var/list/accounts[0]
+	var/list/accounts = list()
 	for(var/i=1, i<=length(all_money_accounts), i++)
 		var/datum/money_account/D = all_money_accounts[i]
 		accounts.Add(list(list(\

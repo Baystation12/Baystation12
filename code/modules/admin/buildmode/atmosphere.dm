@@ -31,7 +31,7 @@
 /datum/build_mode/atmosphere/ui_interact(mob/user, ui_key = "atmosphere_editor", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 
-	var/data[0]
+	var/data = list()
 	data["total_moles"] = enviroment.total_moles
 	data["temperature"] = enviroment.temperature
 	data["volume_total"] = enviroment.volume

@@ -97,7 +97,7 @@
 	return TRUE
 
 /obj/machinery/sleeper/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.outside_state)
-	var/data[0]
+	var/data = list()
 
 	data["power"] = inoperable() ? 0 : 1
 

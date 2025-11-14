@@ -65,7 +65,7 @@
 	if(inoperable())
 		return
 
-	var/data[0]
+	var/data = list()
 
 	data = list(
 		"on" = use_power,

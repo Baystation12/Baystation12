@@ -66,7 +66,7 @@ GLOBAL_LIST_EMPTY(mob_spawners)
 			ui.close()
 		return
 
-	var/data[0]
+	var/data = list()
 	data["area"] = current_area
 	data["area_name"] = current_area.name
 	data["mobs"] = spawner.mobs

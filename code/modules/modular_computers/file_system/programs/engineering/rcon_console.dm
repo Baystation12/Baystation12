@@ -28,7 +28,7 @@
 	var/list/data = host.initial_data()
 
 	// SMES DATA (simplified view)
-	var/list/smeslist[0]
+	var/list/smeslist = list()
 	for(var/obj/machinery/power/smes/buildable/SMES in known_SMESs)
 		smeslist.Add(list(list(
 		"charge" = round(SMES.Percentage()),
@@ -44,7 +44,7 @@
 	data["smes_info"] = sortByKey(smeslist, "RCON_tag")
 
 	// BREAKER DATA (simplified view)
-	var/list/breakerlist[0]
+	var/list/breakerlist = list()
 	for(var/obj/machinery/power/breakerbox/BR in known_breakers)
 		breakerlist.Add(list(list(
 		"RCON_tag" = BR.RCon_tag,

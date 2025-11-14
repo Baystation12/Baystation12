@@ -15,7 +15,7 @@
 	if(!holder)
 		to_chat(src, SPAN_WARNING("Error: Admin-PM-Panel: Only administrators may use this command."))
 		return
-	var/list/client/targets[0]
+	var/list/client/targets = list()
 	for(var/client/T)
 		if(T.mob)
 			if(isnewplayer(T.mob))

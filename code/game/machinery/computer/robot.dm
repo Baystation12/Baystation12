@@ -14,7 +14,7 @@
 	return TRUE
 
 /obj/machinery/computer/robotics/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 	data["robots"] = get_cyborgs(user)
 	data["is_ai"] = issilicon(user)
 

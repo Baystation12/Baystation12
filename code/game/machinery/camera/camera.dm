@@ -432,7 +432,7 @@
 		update_coverage(1)
 
 /obj/machinery/camera/proc/nano_structure()
-	var/cam[0]
+	var/cam = list()
 	cam["name"] = sanitize(c_tag)
 	cam["deact"] = !can_use()
 	cam["camera"] = "\ref[src]"

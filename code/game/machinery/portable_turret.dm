@@ -196,7 +196,7 @@ var/global/list/turret_icons
 	return TRUE
 
 /obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 	data["access"] = !isLocked(user)
 	data["locked"] = locked
 	data["enabled"] = enabled
@@ -204,7 +204,7 @@ var/global/list/turret_icons
 	data["lethal"] = lethal
 
 	if(data["access"])
-		var/settings[0]
+		var/settings = list()
 		settings[LIST_PRE_INC(settings)] = list("category" = "Neutralize All Non-Synthetics", "setting" = "check_synth", "value" = check_synth)
 		settings[LIST_PRE_INC(settings)] = list("category" = "Check Weapon Authorization", "setting" = "check_weapons", "value" = check_weapons)
 		settings[LIST_PRE_INC(settings)] = list("category" = "Check Security Records", "setting" = "check_records", "value" = check_records)

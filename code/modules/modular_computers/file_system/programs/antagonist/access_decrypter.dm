@@ -128,7 +128,7 @@
 
 		// Stolen from DOS traffic generator, generates strings of 1s and 0s
 		var/percentage = (PRG.progress / PRG.target_progress) * 100
-		var/list/strings[0]
+		var/list/strings = list()
 		for(var/j, j<10, j++)
 			var/string = ""
 			for(var/i, i<20, i++)

@@ -120,7 +120,7 @@ Thus, the two variables affect pump operation are set in New():
 		return
 
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/data = list()
 
 	data = list(
 		"on" = use_power,

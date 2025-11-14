@@ -263,7 +263,7 @@
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/data = list()
 	data["nameTag"] = name_tag
 	data["storedCapacity"] = Percentage()
 	data["storedCapacityAbs"] = round(charge/1000, 0.1)

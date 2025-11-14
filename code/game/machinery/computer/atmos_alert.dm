@@ -26,9 +26,9 @@ var/global/list/minor_air_alarms = list()
 	return TRUE
 
 /obj/machinery/computer/atmos_alert/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
-	var/major_alarms[0]
-	var/minor_alarms[0]
+	var/data = list()
+	var/major_alarms = list()
+	var/minor_alarms = list()
 
 	for(var/datum/alarm/alarm in GLOB.atmosphere_alarm.major_alarms(get_z(src)))
 		major_alarms[LIST_PRE_INC(major_alarms)] = list("name" = sanitize(alarm.alarm_name()), "ref" = "\ref[alarm]")

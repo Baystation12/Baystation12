@@ -243,7 +243,7 @@
 		spinup_counter = round(spinup_delay / idle_multiplier)
 
 /obj/machinery/power/shield_generator/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	data["running"] = running
 	data["modes"] = get_flag_descriptions()

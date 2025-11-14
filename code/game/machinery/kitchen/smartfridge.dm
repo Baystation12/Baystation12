@@ -373,14 +373,14 @@
 /obj/machinery/smartfridge/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	user.set_machine(src)
 
-	var/data[0]
+	var/data = list()
 	data["contents"] = null
 	data["electrified"] = seconds_electrified > 0
 	data["shoot_inventory"] = shoot_inventory
 	data["locked"] = locked
 	data["secure"] = is_secure
 
-	var/list/items[0]
+	var/list/items = list()
 	for (var/i=1 to length(item_records))
 		var/datum/stored_items/I = item_records[i]
 		var/count = I.get_amount()

@@ -260,7 +260,7 @@ var/global/list/tank_gauge_cache = list()
 			using_internal = 1
 
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/data = list()
 	data["tankPressure"] = round(air_contents && air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 	data["releasePressure"] = round(distribute_pressure ? distribute_pressure : 0)
 	data["defaultReleasePressure"] = round(initial(distribute_pressure))

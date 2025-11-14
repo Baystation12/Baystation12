@@ -3,7 +3,7 @@
 #define TRACKING_TERMINATE 2
 
 /mob/living/silicon/ai/var/max_locations = 10
-/mob/living/silicon/ai/var/stored_locations[0]
+/mob/living/silicon/ai/var/stored_locations = list()
 
 /proc/InvalidPlayerTurf(turf/T as turf)
 	return !(T && (T.z in GLOB.using_map.player_levels))

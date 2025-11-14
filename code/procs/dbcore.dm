@@ -88,7 +88,7 @@
 	var/default_cursor
 	var/list/columns //list of DB Columns populated by Columns()
 	var/list/conversions
-	var/list/item[0]  //list of data values populated by NextRow()
+	var/list/item = list()  //list of data values populated by NextRow()
 
 	var/DBConnection/db_connection
 	var/_db_query

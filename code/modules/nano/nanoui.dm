@@ -32,7 +32,7 @@ nanoui is used to open and update nano browser uis
 	// the list of javascript scripts to use for this ui
 	var/list/scripts = list()
 	// a list of templates which can be used with this ui
-	var/templates[0]
+	var/templates = list()
 	// the layout key for this ui (this is used on the frontend, leave it as "default" unless you know what you're doing)
 	var/layout_key = "default"
 	// optional layout key for additional ui header content to include
@@ -48,7 +48,7 @@ nanoui is used to open and update nano browser uis
 	// the map z level to display
 	var/map_z_level = 1
 	// initial data, containing the full data structure, must be sent to the ui (the data structure cannot be extended later on)
-	var/list/initial_data[0]
+	var/list/initial_data = list()
 	// set to 1 to update the ui automatically every master_controller tick
 	var/is_auto_updating = 0
 	// the current status/visibility of the ui

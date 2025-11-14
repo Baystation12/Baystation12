@@ -35,7 +35,7 @@
 	name = "advanced airlock controller"
 
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 
 	data = list(
 		"chamber_pressure" = round(program.memory["chamber_sensor_pressure"]),
@@ -59,7 +59,7 @@
 	tag_secure = 1
 
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 
 	data = list(
 		"chamber_pressure" = round(program.memory["chamber_sensor_pressure"]),
@@ -82,7 +82,7 @@
 	tag_secure = 1
 
 /obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 
 	data = list(
 		"exterior_status" = program.memory["exterior_status"],

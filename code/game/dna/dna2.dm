@@ -49,7 +49,7 @@ var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
 // Used to determine what each block means
 var/global/list/assigned_blocks[DNA_SE_LENGTH]
 
-var/global/list/datum/dna/gene/dna_genes[0]
+var/global/list/datum/dna/gene/dna_genes = list()
 
 /////////////////
 // GENE DEFINES

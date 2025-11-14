@@ -61,8 +61,8 @@
 /obj/machinery/atmospherics/unary/gas_extractor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(inoperable())
 		return
-		
-	var/data[0]
+
+	var/data = list()
 
 	data = list(
 		"on" = use_power,
@@ -86,17 +86,17 @@
 	if(href_list["power"])
 		update_use_power(!use_power)
 		. = 1
-		
+
 	if(href_list["settag"])
 		var/t = sanitizeSafe(input(usr, "Enter the ID tag for [src.name]", src.name, id), MAX_NAME_LEN)
 		id = t
 		. = 1
-		
+
 	if(href_list["toggle_mode"])
 		external_mode = !external_mode
 		update_use_power(POWER_USE_OFF)  // Stop when switching modes without new pressure data
 		. = 1
-		
+
 	if(href_list["setfreq"])
 		var/freq = input(usr, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
 		set_frequency(freq)
@@ -113,7 +113,7 @@
 
 	if(.)
 		src.update_icon()
-		
+
 /obj/machinery/atmospherics/unary/gas_extractor/interface_interact(mob/user)
 	ui_interact(user)
 	return TRUE

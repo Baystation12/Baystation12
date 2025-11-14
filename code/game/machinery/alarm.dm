@@ -502,7 +502,7 @@
 	return TRUE
 
 /obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 	var/remote_connection = 0
 	var/remote_access = 0
 	if(state)
@@ -563,7 +563,7 @@
 		if(AALARM_SCREEN_MAIN)
 			data["mode"] = mode
 		if(AALARM_SCREEN_VENT)
-			var/vents[0]
+			var/vents = list()
 			for(var/id_tag in alarm_area.air_vent_names)
 				var/long_name = alarm_area.air_vent_names[id_tag]
 				var/list/info = alarm_area.air_vent_info[id_tag]
@@ -579,7 +579,7 @@
 					)
 			data["vents"] = vents
 		if(AALARM_SCREEN_SCRUB)
-			var/scrubbers[0]
+			var/scrubbers = list()
 			for(var/id_tag in alarm_area.air_scrub_names)
 				var/long_name = alarm_area.air_scrub_names[id_tag]
 				var/list/info = alarm_area.air_scrub_info[id_tag]
@@ -605,7 +605,7 @@
 
 			data["scrubbers"] = scrubbers
 		if(AALARM_SCREEN_MODE)
-			var/modes[0]
+			var/modes = list()
 			modes[LIST_PRE_INC(modes)] = list("name" = "Filtering - Scrubs out contaminants", 			"mode" = AALARM_MODE_SCRUBBING,		"selected" = mode == AALARM_MODE_SCRUBBING, 	"danger" = 0)
 			modes[LIST_PRE_INC(modes)] = list("name" = "Replace Air - Siphons out air while replacing", "mode" = AALARM_MODE_REPLACEMENT,	"selected" = mode == AALARM_MODE_REPLACEMENT,	"danger" = 0)
 			modes[LIST_PRE_INC(modes)] = list("name" = "Panic - Siphons air out of the room", 			"mode" = AALARM_MODE_PANIC,			"selected" = mode == AALARM_MODE_PANIC, 		"danger" = 1)
@@ -616,7 +616,7 @@
 			data["mode"] = mode
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
-			var/thresholds[0]
+			var/thresholds = list()
 
 			var/breach_data = list("selected" = breach_pressure)
 			data["breach_data"] = breach_data

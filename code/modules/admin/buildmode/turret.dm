@@ -30,7 +30,7 @@
 /datum/build_mode/turret/ui_interact(mob/user, ui_key = "turret_editor", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 
-	var/data[0]
+	var/data = list()
 	data["health"] = settings["health"]
 	data["repair"] = settings["repair"]
 	data["weapon"] = settings["weapon"]

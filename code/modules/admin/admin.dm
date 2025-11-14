@@ -451,7 +451,7 @@ var/global/floorIsLava = 0
 					else
 						dat+="<B><A href='byond://?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR></B>"
 			dat+={"<BR><HR><A href='byond://?src=\ref[src];ac_refresh=1'>Refresh</A>
-				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Back</A>
 			"}
 
 		if(2)
@@ -460,7 +460,7 @@ var/global/floorIsLava = 0
 				<HR><B><A href='byond://?src=\ref[src];ac_set_channel_name=1'>Channel Name</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>
 				<B><A href='byond://?src=\ref[src];ac_set_signature=1'>Channel Author</A>:</B> [SPAN_COLOR("green", src.admincaster_signature)]<BR>
 				<B><A href='byond://?src=\ref[src];ac_set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.admincaster_feed_channel.locked) ? ("NO") : ("YES")]<BR><BR>
-				<BR><A href='byond://?src=\ref[src];ac_submit_new_channel=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_submit_new_channel=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Cancel</A><BR>
 			"}
 		if(3)
 			dat+={"
@@ -468,17 +468,17 @@ var/global/floorIsLava = 0
 				<HR><B><A href='byond://?src=\ref[src];ac_set_channel_receiving=1'>Receiving Channel</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>" //MARK
 				<B>Message Author:</B> [SPAN_COLOR("green", src.admincaster_signature)]<BR>
 				<B><A href='byond://?src=\ref[src];ac_set_new_message=1'>Message Body</A>:</B> [src.admincaster_feed_message.body] <BR>
-				<BR><A href='byond://?src=\ref[src];ac_submit_new_message=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_submit_new_message=1'>Submit</A><BR><BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Cancel</A><BR>
 			"}
 		if(4)
 			dat+={"
 					Feed story successfully submitted to [src.admincaster_feed_channel.channel_name].<BR><BR>
-					<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+					<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>
 				"}
 		if(5)
 			dat+={"
 				Feed Channel [src.admincaster_feed_channel.channel_name] created successfully.<BR><BR>
-				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>
 			"}
 		if(6)
 			dat+="<B>[SPAN_COLOR("maroon", "ERROR: Could not submit Feed story to Network.</B>")]<HR><BR>"
@@ -534,7 +534,7 @@ var/global/floorIsLava = 0
 			else
 				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='byond://?src=\ref[src];ac_pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
-			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Cancel</A>"
 		if(11)
 			dat+={"
 				<B>[GLOB.using_map.company_name] D-Notice Handler</B><HR>
@@ -548,7 +548,7 @@ var/global/floorIsLava = 0
 				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='byond://?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? (SPAN_COLOR("red", "***")) : null ]<BR>"
 
-			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Back</A>"
 		if(12)
 			dat+={"
 				<B>[src.admincaster_feed_channel.channel_name]: </B>[FONT_SMALL("\[ created by: [SPAN_COLOR("maroon", src.admincaster_feed_channel.author)] \]")]<BR>
@@ -602,11 +602,11 @@ var/global/floorIsLava = 0
 			dat+="<BR><A href='byond://?src=\ref[src];ac_submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
 			if(wanted_already)
 				dat+="<BR><A href='byond://?src=\ref[src];ac_cancel_wanted=1'>Take down Issue</A>"
-			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Cancel</A>"
 		if(15)
 			dat+={"
 				[SPAN_COLOR("green", "Wanted issue for [src.admincaster_feed_message.author] is now in Network Circulation.")]<BR><BR>
-				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>
 			"}
 		if(16)
 			dat+="<B>[SPAN_COLOR("maroon", "ERROR: Wanted Issue rejected by Network.</B>")]<HR><BR>"
@@ -614,11 +614,11 @@ var/global/floorIsLava = 0
 				dat+="[SPAN_COLOR("maroon", "Invalid name for person wanted.")]<BR>"
 			if(src.admincaster_feed_message.body == "" || src.admincaster_feed_message.body == "\[REDACTED\]")
 				dat+="[SPAN_COLOR("maroon", "Invalid description.")]<BR>"
-			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>"
 		if(17)
 			dat+={"
 				<B>Wanted Issue successfully deleted from Circulation</B><BR>
-				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>
 			"}
 		if(18)
 			dat+={"
@@ -632,11 +632,11 @@ var/global/floorIsLava = 0
 				dat+="<BR><img src='tmp_photow.png' width = '180'>"
 			else
 				dat+="None"
-			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Back</A><BR>"
+			dat+="<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Back</A><BR>"
 		if(19)
 			dat+={"
 				[SPAN_COLOR("green", "Wanted issue for [src.admincaster_feed_message.author] successfully edited.")]<BR><BR>
-				<BR><A href='byond://?src=\ref[src];ac_setScreen=[0]'>Return</A><BR>
+				<BR><A href='byond://?src=\ref[src];ac_setScreen=0'>Return</A><BR>
 			"}
 		else
 			dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"

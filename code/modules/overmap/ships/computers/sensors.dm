@@ -104,7 +104,7 @@
 		display_reconnect_dialog(user, "sensors")
 		return
 
-	var/data[0]
+	var/data = list()
 
 	var/obj/machinery/shipsensors/sensors = get_sensors()
 	data["viewing"] = viewing_overmap(user)

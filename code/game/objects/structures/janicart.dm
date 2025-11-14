@@ -145,7 +145,7 @@
 	return
 
 /obj/structure/janitorialcart/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 	data["name"] = capitalize(name)
 	data["bag"] = mybag ? capitalize(mybag.name) : null
 	data["mop"] = mymop ? capitalize(mymop.name) : null

@@ -153,7 +153,7 @@ GLOBAL_LIST_AS(filter_mode_to_gas_id, list(
 	data["power"] = use_power
 	data["config"] = configuring
 
-	var/portData[0]
+	var/portData = list()
 	for(var/datum/omni_port/P in ports)
 		if(!configuring && P.mode == 0)
 			continue

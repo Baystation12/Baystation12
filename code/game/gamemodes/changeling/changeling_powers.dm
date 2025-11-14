@@ -211,7 +211,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		/mob
 	)
 
-	var/L[] = new()
+	var/list/L = list()
 	for(var/turf/simulated/t in oview(src,1))
 		var/add = 1
 		if(t.density)
