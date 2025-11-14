@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(event)
 	if(!all_events)
 		all_events = subtypesof(/datum/event)
 	if(!event_containers)
-		event_containers = list(
+		event_containers = alist(
 				EVENT_LEVEL_MUNDANE 	= new/datum/event_container/mundane,
 				EVENT_LEVEL_MODERATE	= new/datum/event_container/moderate,
 				EVENT_LEVEL_MAJOR 		= new/datum/event_container/major,
