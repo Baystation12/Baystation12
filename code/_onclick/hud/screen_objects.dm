@@ -381,3 +381,16 @@
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 	return 1
+
+/obj/screen/inventory/Adjacent(atom/neighbor)
+	return neighbor == usr
+
+/obj/screen/inventory/MouseDrop_T(atom/dropped, mob/living/user)
+	// Hands - Transfer items to between hands with drag+drop.
+	if (name == BP_R_HAND && user.l_hand == dropped)
+		return user.put_in_r_hand(dropped)
+
+	if (name == BP_L_HAND && user.r_hand == dropped)
+		return user.put_in_l_hand(dropped)
+
+	return ..()
