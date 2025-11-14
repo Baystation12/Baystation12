@@ -524,7 +524,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	if(destination)//If there is a destination.
 		if(errorx||errory)//If errorx or y were specified.
-			var/destination_list = list() = list()//To add turfs to list.
+			var/list/destination_list = list()//To add turfs to list.
 			//destination_list = new()
 			/*This will draw a block around the target turf, given what the error is.
 			Specifying the values above will basically draw a different sort of block.

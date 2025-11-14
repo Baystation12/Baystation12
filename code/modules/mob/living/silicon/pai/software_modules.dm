@@ -198,7 +198,7 @@
 
 
 /datum/pai_software/atmosphere_sensor/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data = list()
+	var/list/data = list()
 	var/turf/T = get_turf(user.loc)
 	if (!T)
 		data["reading"] = 0
@@ -214,9 +214,9 @@
 		data["temperature"] = round(env.temperature)
 		data["temperatureC"] = round(env.temperature-T0C)
 		var/t_moles = env.total_moles
-		var/gases = list()
+		var/list/gases = list()
 		for (var/g in env.gas)
-			var/gas = list()
+			var/list/gas = list()
 			gas["name"] = gas_data.name[g]
 			gas["percent"] = round((env.gas[g] / t_moles) * 100)
 			gases[LIST_PRE_INC(gases)] = gas

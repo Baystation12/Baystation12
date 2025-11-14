@@ -174,13 +174,13 @@
 
 /obj/item/device/uplink/proc/update_nano_data()
 	if(nanoui_menu == 0)
-		var/categories = list()
+		var/list/categories = list()
 		for(var/datum/uplink_category/category in uplink.categories)
 			if(category.can_view(src))
 				categories[LIST_PRE_INC(categories)] = list("name" = category.name, "ref" = "\ref[category]")
 		nanoui_data["categories"] = categories
 	else if(nanoui_menu == 1)
-		var/items = list()
+		var/list/items = list()
 		for(var/datum/uplink_item/item in category.items)
 			if(item.can_view(src))
 				var/cost = item.cost(uses, src)
@@ -188,7 +188,7 @@
 				items[LIST_PRE_INC(items)] = list("name" = item.name(), "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
-		var/permanentData = list()
+		var/list/permanentData = list()
 		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
 			permanentData[LIST_PRE_INC(permanentData)] = list(Name = L.get_name(),"id" = L.uid, "exploit" = length(L.get_antagRecord()))
 		nanoui_data["exploit_records"] = permanentData

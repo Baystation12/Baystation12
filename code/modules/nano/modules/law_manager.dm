@@ -148,7 +148,7 @@
 	return 0
 
 /datum/nano_module/law_manager/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/data = list()
+	var/list/data = list()
 	owner.lawsync()
 
 	data["ion_law_nr"] = ionnum()
@@ -169,7 +169,7 @@
 	data["isAdmin"] = isadmin(user)
 	data["view"] = current_view
 
-	var/channels = list()
+	var/list/channels = list()
 	for (var/ch_name in owner.law_channels())
 		channels[LIST_PRE_INC(channels)] = list("channel" = ch_name)
 	data["channel"] = owner.lawchannel
@@ -184,14 +184,14 @@
 		ui.set_auto_update(1)
 
 /datum/nano_module/law_manager/proc/package_laws(list/data, field, list/datum/ai_law/laws)
-	var/packaged_laws = list()
+	var/list/packaged_laws = list()
 	for(var/datum/ai_law/AL in laws)
 		packaged_laws[LIST_PRE_INC(packaged_laws)] = list("law" = AL.law, "index" = AL.get_index(), "state" = owner.laws.get_state_law(AL), "ref" = "\ref[AL]")
 	data[field] = packaged_laws
 	data["has_[field]"] = length(packaged_laws)
 
 /datum/nano_module/law_manager/proc/package_multiple_laws(list/datum/ai_laws/laws)
-	var/law_sets = list()
+	var/list/law_sets = list()
 	for(var/datum/ai_laws/ALs in laws)
 		var/packaged_laws = list()
 		package_laws(packaged_laws, "zeroth_laws", list(ALs.zeroth_law, ALs.zeroth_law_borg))

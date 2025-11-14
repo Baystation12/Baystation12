@@ -106,13 +106,13 @@
 /datum/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
-	var/categories = list()
+	var/list/categories = list()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		categories[LIST_PRE_INC(categories)] = list("category" = AH.category, "alarms" = list())
 		for(var/datum/alarm/A in AH.major_alarms(get_host_z()))
 
-			var/cameras = list()
-			var/lost_sources = list()
+			var/list/cameras = list()
+			var/list/lost_sources = list()
 
 			if(isAI(user))
 				for(var/obj/machinery/camera/C in A.cameras())

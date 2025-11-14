@@ -562,7 +562,7 @@
 		if(AALARM_SCREEN_MAIN)
 			data["mode"] = mode
 		if(AALARM_SCREEN_VENT)
-			var/vents = list()
+			var/list/vents = list()
 			for(var/id_tag in alarm_area.air_vent_names)
 				var/long_name = alarm_area.air_vent_names[id_tag]
 				var/list/info = alarm_area.air_vent_info[id_tag]
@@ -578,7 +578,7 @@
 					)
 			data["vents"] = vents
 		if(AALARM_SCREEN_SCRUB)
-			var/scrubbers = list()
+			var/list/scrubbers = list()
 			for(var/id_tag in alarm_area.air_scrub_names)
 				var/long_name = alarm_area.air_scrub_names[id_tag]
 				var/list/info = alarm_area.air_scrub_info[id_tag]
@@ -604,7 +604,7 @@
 
 			data["scrubbers"] = scrubbers
 		if(AALARM_SCREEN_MODE)
-			var/modes = list()
+			var/list/modes = list()
 			modes[LIST_PRE_INC(modes)] = list("name" = "Filtering - Scrubs out contaminants", 			"mode" = AALARM_MODE_SCRUBBING,		"selected" = mode == AALARM_MODE_SCRUBBING, 	"danger" = 0)
 			modes[LIST_PRE_INC(modes)] = list("name" = "Replace Air - Siphons out air while replacing", "mode" = AALARM_MODE_REPLACEMENT,	"selected" = mode == AALARM_MODE_REPLACEMENT,	"danger" = 0)
 			modes[LIST_PRE_INC(modes)] = list("name" = "Panic - Siphons air out of the room", 			"mode" = AALARM_MODE_PANIC,			"selected" = mode == AALARM_MODE_PANIC, 		"danger" = 1)
@@ -615,7 +615,7 @@
 			data["mode"] = mode
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
-			var/thresholds = list()
+			var/list/thresholds = list()
 
 			var/breach_data = list("selected" = breach_pressure)
 			data["breach_data"] = breach_data

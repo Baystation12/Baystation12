@@ -151,7 +151,7 @@
 	return list_internal_channels(user)
 
 /obj/item/device/radio/proc/list_secure_channels(mob/user)
-	var/dat = list()
+	var/list/dat = list()
 
 	for(var/ch_name in channels)
 		var/chan_stat = channels[ch_name]
@@ -162,7 +162,7 @@
 	return dat
 
 /obj/item/device/radio/proc/list_internal_channels(mob/user)
-	var/dat = list()
+	var/list/dat = list()
 	for(var/internal_chan in internal_channels)
 		if (!syndie && (text2num(internal_chan) == SYND_FREQ)) //Only traitor shortwaves should be able to see the traitor frequency
 			continue

@@ -146,12 +146,12 @@
 		ui.open()
 
 /obj/machinery/atmospherics/omni/mixer/proc/build_uidata()
-	var/list/data = new()
+	var/list/data = list()
 
 	data["power"] = use_power
 	data["config"] = configuring
 
-	var/portData = list()
+	var/list/portData = list()
 	for(var/datum/omni_port/P in ports)
 		if(!configuring && P.mode == 0)
 			continue

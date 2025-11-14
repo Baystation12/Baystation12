@@ -50,9 +50,9 @@
 
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/alarms = list()
-	var/alarmsAlert = list()
-	var/alarmsDanger = list()
+	var/list/alarms = list()
+	var/list/alarmsAlert = list()
+	var/list/alarmsDanger = list()
 
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (length(monitored_alarms) ? monitored_alarms : SSmachines.machinery))
