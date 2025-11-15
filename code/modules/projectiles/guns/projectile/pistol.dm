@@ -161,20 +161,20 @@
 
 	firemodes = list(
 		list(
-			mode_name="semi auto",
-			burst=1,
-			fire_delay=5,
-			move_delay=null,
-			one_hand_penalty=3,
-			burst_accuracy=null,
-			dispersion=null
-			),
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = 5,
+			"move_delay" = null,
+			"one_hand_penalty" = 3,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
 		list(
-			mode_name="scratched out option",
-			burst=10,
-			fire_delay=1,
-			one_hand_penalty=8,
-			burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4),
-			dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)
-			)
+			"mode_name" = "scratched out option",
+			"burst" = 10,
+			"fire_delay" = 1,
+			"one_hand_penalty" = 8,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -4, -4, -4, -4),
+			"dispersion" = list(1.0, 1.0, 1.0, 1.0, 1.2)
 		)
+	)

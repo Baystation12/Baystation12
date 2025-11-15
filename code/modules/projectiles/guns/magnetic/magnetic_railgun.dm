@@ -145,9 +145,25 @@
 	power_cost = 100
 
 	firemodes = list(
-		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		list(
+			"mode_name" = "semiauto",
+			"burst" = 1,
+			"fire_delay" = 0,
+			"move_delay" = null,
+			"one_hand_penalty" = 1,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 5,
+			"one_hand_penalty" = 2,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
 		)
+	)
 
 
 /obj/item/gun/magnetic/railgun/flechette/out_of_ammo()
@@ -176,8 +192,7 @@
 	slowdown_held = 1
 	power_cost = 100
 
-	firemodes = list(
-		mode_name="fire")
+	firemodes = list()
 
 
 /obj/item/gun/magnetic/railgun/automatic // Adminspawn only, this shit is absurd.
@@ -196,21 +211,43 @@
 	fire_delay =  8
 
 	firemodes = list(
-		list(mode_name="semiauto",    burst=1, fire_delay=0,    move_delay=null, one_hand_penalty=1, burst_accuracy=null, dispersion=null),
-		list(mode_name="short bursts", burst=3, fire_delay=null, move_delay=5,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="long bursts",  burst=6, fire_delay=null, move_delay=10,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semiauto",
+			"burst" = 1,
+			"fire_delay" = 0,
+			"move_delay" = null,
+			"one_hand_penalty" = 1,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 5,
+			"one_hand_penalty" = 2,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "long bursts",
+			"burst" = 6,
+			"fire_delay" = null,
+			"move_delay" = 10,
+			"one_hand_penalty" = 2,
+			"burst_accuracy" = list(0, -1, -1, -1, -2),
+			"dispersion" = list(0.6, 0.6, 1.0, 1.0, 1.2)
 		)
-	var/verse = "Ultima Ratio Regnum"
-
-	var/verse_list = list(
-		"Ultima Ratio Regnum",
-		"Ad Finem Amarum",
-		"Unum Ultimum Proelium"
 	)
+	var/verse
 
 /obj/item/gun/magnetic/railgun/automatic/Initialize()
 	. = ..()
-	verse = verse_list[rand(1, length(verse_list))]
+	verse = pick(list(
+		"Ultima Ratio Regnum",
+		"Ad Finem Amarum",
+		"Unum Ultimum Proelium"
+	))
 
 /obj/item/gun/magnetic/railgun/automatic/examine(mob/user, distance)
 	. = ..()
@@ -222,8 +259,12 @@
 	name = "\improper RHR accelerator"
 	desc = "The Hephaestus Industries RG-3 'Halberd'. A vehicle-mounted turret weapon for anti-armour targets. \
 			Originally, a Terran Commonwealth design. The fact that it was made man-portable is mindboggling in itself."
-	verse = "For Those Who Fell Before Us"
-	verse_list = list(
+	icon = 'icons/obj/guns/railgun_old_heavy.dmi'
+	icon_state = "old_heavy_railgun"
+
+/obj/item/gun/magnetic/railgun/automatic/halberd/Initialize()
+	. = ..()
+	verse = pick(list(
 		"For Those Who Fell Before Us",
 		"Peace on Earth + Mars",
 		"Death From Below",
@@ -231,13 +272,6 @@
 		"NAME_HERE FROM HELLSHEN",
 		"NAME_HERE FROM GIDEONSBURG",
 		"Thor's Hammer"
-	)
-
-/obj/item/gun/magnetic/railgun/automatic/halberd/Initialize()
-	. = ..()
-	//neuter and plural names contained in MALE list for some reason. I don't know why but at least we're not excluding anyone.
-	verse = replacetext(verse, "NAME_HERE", prob(50) ? uppertext(random_name(MALE, SPECIES_HUMAN)) : uppertext(random_name(FEMALE, SPECIES_HUMAN)))
-
-
-	icon = 'icons/obj/guns/railgun_old_heavy.dmi'
-	icon_state = "old_heavy_railgun"
+	))
+	var/name = random_name(prob(50) ? MALE : FEMALE, SPECIES_HUMAN)
+	verse = replacetext(verse, "NAME_HERE", uppertext(name))
