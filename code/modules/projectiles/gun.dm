@@ -40,6 +40,7 @@
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
 /obj/item/gun
+	abstract_type = /obj/item/gun
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'icons/obj/guns/gui.dmi'

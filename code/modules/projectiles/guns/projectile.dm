@@ -420,7 +420,8 @@
 /obj/item/gun/projectile/verb/silencer()
 	set category = "Object"
 	set name = "Remove Silencer"
-	set popup_menu = 1
+	set popup_menu = TRUE
+	set src in usr
 
 	removeSilencer(usr)
 
@@ -428,34 +429,19 @@
 /obj/item/gun/projectile/proc/removeSilencer(mob/user)
 	if (!user.use_sanity_check(src))
 		return
-	if (user.get_inactive_hand() && user.get_active_hand())
-		to_chat(user, SPAN_WARNING("You need a free hand to remove \the [src]'s silencer!"))
-		return
-	if(silenced)
-		if (!user.IsHolding(src))
-			to_chat(user, SPAN_WARNING("You need to hold \the [src] in your hand to remove its silencer!"))
-			return
-		if (silencer)
-			to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
-			user.put_in_hands(silencer)
-			silencer = null
-			w_class -= 1
-			silenced = FALSE
-			fire_sound = initial(fire_sound)
-		update_icon()
-		return
-	else
+	if (!silenced)
 		to_chat(user, SPAN_WARNING("There is no silencer attached to \the [src]!"))
 		return
-
-/* Unneeded -- so far.
-//in case the weapon has firemodes and can't unload using attack_hand()
-/obj/item/gun/projectile/verb/unload_gun()
-	set name = "Unload Ammo"
-	set category = "Object"
-	set src in usr
-
-	if(usr.stat || usr.restrained()) return
-
-	unload_ammo(usr)
-*/
+	if (!user.IsHolding(src))
+		to_chat(user, SPAN_WARNING("You need to hold \the [src] in your hand to remove its silencer!"))
+		return
+	if (!user.HasFreeHand())
+		to_chat(user, SPAN_WARNING("You need a free hand to remove \the [src]'s silencer!"))
+		return
+	to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+	user.put_in_hands(silencer)
+	silencer = null
+	w_class -= 1
+	silenced = FALSE
+	fire_sound = initial(fire_sound)
+	update_icon()
