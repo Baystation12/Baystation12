@@ -1105,12 +1105,7 @@ GLOBAL_VAR_AS(skip_allow_lists, FALSE)
 
 	if(!check_rights(R_SPAWN))	return
 
-	var/list/types = typesof(/atom)
-	var/list/matches = new()
-
-	for(var/path in types)
-		if(findtext("[path]", object))
-			matches += path
+	var/list/matches = typesof_filtered(/atom, object)
 
 	if(length(matches)==0)
 		return
