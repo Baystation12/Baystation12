@@ -1,0 +1,9 @@
+author: Mucker, SilentAutumn
+changes:
+  - {maptweak: Added a direct fuel line from the H2 store to the cold/hot loops.}
+  - {maptweak: Moved the engine room APC into the main airlock.}
+  - {maptweak: Changed the pumps from hot/cold loop to wasteline to regulators.}
+  - {maptweak: Named all of the various pumps and regulators in the engine room.}
+  - {maptweak: Removed the CO2 cans from the engine room and 2 of the H2 cans 
+      (no longer need 4 of them).}
+delete-after: true
