@@ -1,0 +1,4 @@
+author: Cakey
+changes:
+  - {bugfix: Escape pods can now be armed and force launched as intended.}
+delete-after: true
