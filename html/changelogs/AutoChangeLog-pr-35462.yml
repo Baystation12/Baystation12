@@ -1,0 +1,6 @@
+author: SierraKomodo
+changes:
+  - {tweak: 'SMES units now use standardized health systems, which means they can
+      be damaged by more than the previously hardcoded shooting or hitting. Beware
+      EMPs near substations.'}
+delete-after: true
