@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {bugfix: 'Borgs can now use Ctrl+Alt+Click interactions, such as opening computer
-      terminals, quick-ejecting beakers, etc.'}
-delete-after: true

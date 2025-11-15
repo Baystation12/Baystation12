@@ -1,5 +1,0 @@
-author: sowelipililimute
-changes:
-  - {rscadd: A new verb has been added to activate an item in the world! Bound 
-      to F and Ctrl+F by default.}
-delete-after: true
