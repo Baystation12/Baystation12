@@ -103,16 +103,10 @@ macro "borghotkeymode"
 		command = ".moveright"
 	elem
 		name = "F"
-		command = "a-intent left"
+		command = "activate-object-in-world"
 	elem
 		name = "CTRL+F"
-		command = "a-intent left"
-	elem
-		name = "G"
-		command = "a-intent right"
-	elem
-		name = "CTRL+G"
-		command = "a-intent right"
+		command = "activate-object-in-world"
 	elem
 		name = "J"
 		command = "toggle-gun-mode"

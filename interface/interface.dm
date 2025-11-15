@@ -122,8 +122,7 @@
 \tt = say
 \tx = cycle active modules
 \tz = activate held object (or y)
-\tf = cycle-intents-left
-\tg = cycle-intents-right
+\tf = activate object in world
 \t1 = activate module 1
 \t2 = activate module 2
 \t3 = activate module 3
@@ -138,8 +137,7 @@
 \tCtrl+q = unequip active module
 \tCtrl+x = cycle active modules
 \tCtrl+z = activate held object (or Ctrl+y)
-\tCtrl+f = cycle-intents-left
-\tCtrl+g = cycle-intents-right
+\tCtrl+f = activate object in world
 \tCtrl+1 = activate module 1
 \tCtrl+2 = activate module 2
 \tCtrl+3 = activate module 3
