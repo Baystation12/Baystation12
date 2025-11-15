@@ -38,3 +38,19 @@
 			return list()
 		thing = thing.type
 	return typesof_real(thing) - thing
+
+
+/// Returns a reason if path is something that should not be spawned, build moded, etc.
+/proc/prevent_spawn_reason(path) as text
+	if (!ispath(path, /atom/movable) && !ispath(path, /turf))
+		return "not a turf or movable"
+	var/list/base_types = list(
+		/atom/movable,
+		/turf,
+		/obj,
+		/mob
+	)
+	if (path in base_types)
+		return "is a base type"
+	if (is_abstract(path))
+		return "is abstract"
