@@ -88,8 +88,8 @@
 <div class="item" style="padding-top: 10px">
 	<div class="item">
 		<div class="itemContent" style="padding-top: 2px; width: 100%">
-		{{:helper.link('ARM', 'alert', {'command' : 'manual_arm'}, data.is_armed ? 'disabled' : null, data.is_armed ? 'redButton' : 'yellowButton')}}
-		{{:helper.link('MANUAL EJECT', 'alert', {'command' : 'force_launch'}, data.can_force ? null : 'disabled', data.can_force ? 'yellowButton' : null)}}
+		{{:helper.link('ARM', 'alert', {'manual_arm' : 1}, data.is_armed ? 'disabled' : null, data.is_armed ? 'redButton' : 'yellowButton')}}
+		{{:helper.link('MANUAL EJECT', 'alert', {'force_launch' : 1}, data.can_force ? null : 'disabled', data.can_force ? 'yellowButton' : null)}}
 		</div>
 	</div>
 </div>
