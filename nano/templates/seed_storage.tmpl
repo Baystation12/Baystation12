@@ -1,0 +1,72 @@
+<!--
+	Interface for seed storages
+	See: code/modules/hydroponics/seed_storage.dm
+-->
+
+<table style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Variety</th>
+		{{if data.scanner.includes("stats") }}
+		<th>End.</th>
+		<th>Yld.</th>
+		<th>Mat.</th>
+		<th>Prod.</th>
+		<th>Pot.</th>
+		<th>Hvst.</th>
+		{{/if}}
+		{{if data.scanner.includes("temperature") }}
+		<th>Temp.</th>
+		{{/if}}
+		{{if data.scanner.includes("light") }}
+		<th>Light</th>
+		{{/if}}
+		{{if data.scanner.includes("soil") }}
+		<th>Nutr.</th>
+		<th>Water</th>
+		{{/if}}
+		<th>Notes</th>
+		<th>Amount</th>
+		<th></th>
+	</tr>
+	{{for data.seeds}}
+		<tr class="candystripe">
+			<td>{{:value.name}}</td>
+			<td>{{:value.variety}}</td>
+			{{if data.scanner.includes("stats") }}
+			<td>{{:value.traits.endurance}}</td>
+			<td>{{:value.traits.yield}}</td>
+			<td>{{:value.traits.maturation}}</td>
+			<td>{{:value.traits.production}}</td>
+			<td>{{:value.traits.potency}}</td>
+			<td>
+				{{if value.traits.harvest}}
+				Multiple
+				{{else}}
+				Single
+				{{/if}}
+			</td>
+			{{/if}}
+			{{if data.scanner.includes("temperature") }}
+			<td>{{:value.traits.ideal_heat}}K</td>
+			{{/if}}
+			{{if data.scanner.includes("light") }}
+			<td>{{:value.traits.ideal_light}}L</td>
+			{{/if}}
+			{{if data.scanner.includes("soil") }}
+			<td>{{:value.traits.nutrient_consumption}}</td>
+			<td>{{:value.traits.water_consumption}}</td>
+			{{/if}}
+			<td style="display: flex; gap: 1rem">
+				{{:value.binary_traits}}
+			</td>
+			<td>{{:value.amount}}</td>
+			<td>
+				{{:helper.link('Vend', 'circle-arrow-s', { "vend" : value.id }, value.amount > 0 ? null : 'disabled')}}
+				{{:helper.link('Purge', 'trash', { "purge" : value.id }, value.amount > 0 ? null : 'disabled')}}
+			</td>
+		</tr>
+	{{empty}}
+		No seeds available!
+	{{/for}}
+</table>
