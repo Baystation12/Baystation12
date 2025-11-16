@@ -1,0 +1,5 @@
+author: SierraKomodo
+changes:
+  - {bugfix: Borgs can now press `F` to use things in world. For those of you 
+      that used `F`/`G` to cycle borg intents - `4` can also do that.}
+delete-after: true
