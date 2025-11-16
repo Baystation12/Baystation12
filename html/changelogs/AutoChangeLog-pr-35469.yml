@@ -1,0 +1,5 @@
+author: Spookerton
+changes:
+  - {admin: 'Build Mode, Spawn, and Game Panel - Create, no longer allow base and
+      abstract types to be instantiated.'}
+delete-after: true
