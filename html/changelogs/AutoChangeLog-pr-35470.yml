@@ -1,0 +1,7 @@
+author: sowelipililimute
+changes:
+  - {rscadd: Desk lamps can now be toggled with use-in-world (F)}
+  - {rscadd: 'Modular computers (PDAs, tablets, laptops) can now be activated with
+      use-in-world (F)'}
+  - {rscadd: Boomboxes can now have their UI opened with use-in-world (F)}
+delete-after: true
