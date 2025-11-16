@@ -12,10 +12,22 @@
 	modifystate = "energystun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="energystun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun,
+			"modifystate" = "energystun"
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock,
+			"modifystate" = "energyshock"
+		),
+		list(
+			"mode_name" = "kill",
+			"projectile_type" = /obj/item/projectile/beam,
+			"modifystate" = "energykill"
 		)
+	)
 
 /obj/item/gun/energy/gun/skrell
 	name = "skrellian handgun"
@@ -34,10 +46,22 @@
 	modifystate = "skrell_pistol_stun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="skrell_pistol_stun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="skrell_pistol_shock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="skrell_pistol_kill"),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun,
+			"modifystate" = "skrell_pistol_stun"
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock,
+			"modifystate" = "skrell_pistol_shock"
+		),
+		list(
+			"mode_name" = "kill",
+			"projectile_type" = /obj/item/projectile/beam,
+			"modifystate" = "skrell_pistol_kill"
 		)
+	)
 
 /obj/item/gun/energy/gun/small
 	name = "small energy gun"
@@ -50,10 +74,22 @@
 	modifystate = "smallgunstun"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/smalllaser, modifystate="smallgunstun"),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/smalllaser, modifystate="smallgunshock"),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill"),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun/smalllaser,
+			"modifystate" = "smallgunstun"
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock/smalllaser,
+			"modifystate" = "smallgunshock"
+		),
+		list(
+			"mode_name" = "kill",
+			"projectile_type" = /obj/item/projectile/beam/smalllaser,
+			"modifystate" = "smallgunkill"
 		)
+	)
 
 /obj/item/gun/energy/gun/mounted
 	name = "mounted energy gun"
@@ -76,10 +112,19 @@
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
-		list(mode_name="kill", projectile_type=/obj/item/projectile/beam),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock
+		),
+		list(
+			"mode_name" = "kill",
+			"projectile_type" = /obj/item/projectile/beam
 		)
+	)
 
 	var/fail_counter = 0
 

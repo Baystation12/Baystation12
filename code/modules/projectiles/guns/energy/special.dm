@@ -69,10 +69,22 @@
 	combustion = 0
 
 	firemodes = list(
-		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),
-		list(mode_name="increase yield", projectile_type=/obj/item/projectile/energy/florayield, modifystate="florayield"),
-		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
+		list(
+			"mode_name" = "induce mutations",
+			"projectile_type" = /obj/item/projectile/energy/floramut,
+			"modifystate" = "floramut"
+		),
+		list(
+			"mode_name" = "increase yield",
+			"projectile_type" = /obj/item/projectile/energy/florayield,
+			"modifystate" = "florayield"
+		),
+		list(
+			"mode_name" = "induce specific mutations",
+			"projectile_type" = /obj/item/projectile/energy/floramut/gene,
+			"modifystate" = "floramut"
 		)
+	)
 
 /obj/item/gun/energy/floragun/use_before(atom/target, mob/living/user, click_parameters)
 	if (!istype(target, /obj/machinery/portable_atmospherics/hydroponics))

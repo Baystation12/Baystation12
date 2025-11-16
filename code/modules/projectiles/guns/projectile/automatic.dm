@@ -21,10 +21,34 @@
 
 	//machine pistol, easier to one-hand with
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
-		list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.0, 0.0, 0.5, 0.6)),
-		list(mode_name="long bursts",   burst=8, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,0,-1,-1,-1,-1,-2,-2), dispersion=list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 0,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "4-round bursts",
+			"burst" = 4,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 1,
+			"burst_accuracy" = list(0, 0, -1, -1),
+			"dispersion" = list(0.0, 0.0, 0.5, 0.6)
+		),
+		list(
+			"mode_name" = "long bursts",
+			"burst" = 8,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 2,
+			"burst_accuracy" = list(0, 0, -1, -1, -1, -1, -2, -2),
+			"dispersion" = list(0.0, 0.0, 0.5, 0.6, 0.8, 1.0, 1.0, 1.2)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/machine_pistol
 	name = "machine pistol"
@@ -42,10 +66,34 @@
 	one_hand_penalty = 2
 
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=1, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 0,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "3-round bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 1,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 5,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 2,
+			"burst_accuracy" = list(0, -1, -1, -1, -2),
+			"dispersion" = list(0.6, 0.6, 1.0, 1.0, 1.2)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/machine_pistol/on_update_icon()
 	..()
@@ -84,10 +132,34 @@
 
 	//SMG
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=4, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=6, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 4,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "3-round bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 5,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 5,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 6,
+			"burst_accuracy" = list(0, -1, -1, -1, -2),
+			"dispersion" = list(0.6, 0.6, 1.0, 1.0, 1.2)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/merc_smg/on_update_icon()
 	..()
@@ -121,10 +193,34 @@
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    one_hand_penalty=9, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=6,    one_hand_penalty=11, burst_accuracy=list(0,-1,-2,-3,-3), dispersion=list(0.6, 1.0, 1.2, 1.2, 1.5)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 8,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "3-round bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 6,
+			"one_hand_penalty" = 9,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 5,
+			"fire_delay" = null,
+			"move_delay" = 6,
+			"one_hand_penalty" = 11,
+			"burst_accuracy" = list(0, -1, -2, -3, -3),
+			"dispersion" = list(0.6, 1.0, 1.2, 1.2, 1.5)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/assault_rifle/on_update_icon()
 	..()
@@ -158,10 +254,34 @@
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=3, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    one_hand_penalty=4, burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    one_hand_penalty=5, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 3,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "3-round bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 4,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "short bursts",
+			"burst" = 5,
+			"fire_delay" = null,
+			"move_delay" = 4,
+			"one_hand_penalty" = 5,
+			"burst_accuracy" = list(0, -1, -1, -1, -2),
+			"dispersion" = list(0.6, 0.6, 1.0, 1.0, 1.2)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/sec_smg/on_update_icon()
 	..()
@@ -201,10 +321,37 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=9, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="fire grenades",  burst=null, fire_delay=null, move_delay=null, use_launcher=1,    one_hand_penalty=10, burst_accuracy=null, dispersion=null)
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"use_launcher" = null,
+			"one_hand_penalty" = 8,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "3-round bursts",
+			"burst" = 3,
+			"fire_delay" = null,
+			"move_delay" = 6,
+			"use_launcher" = null,
+			"one_hand_penalty" = 9,
+			"burst_accuracy" = list(0, -1, -1),
+			"dispersion" = list(0.0, 0.6, 1.0)
+		),
+		list(
+			"mode_name" = "fire grenades",
+			"burst" = null,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"use_launcher" = 1,
+			"one_hand_penalty" = 10,
+			"burst_accuracy" = null,
+			"dispersion" = null
 		)
+	)
 
 	var/use_launcher = 0
 
@@ -275,9 +422,27 @@
 	has_launcher = FALSE
 	wielded_item_state = "z9carbine-wielded"
 	firemodes = list( //Two round bursts. More accurate than the Z8 due to less maximum dispersion. More delay between shots, however, so slower.
-		list(mode_name="semi auto",       burst=1,    fire_delay=null,    move_delay=null, use_launcher=null, one_hand_penalty=6, burst_accuracy=null, dispersion=null),
-		list(mode_name="2-round bursts", burst=2,    fire_delay=null, move_delay=6,    use_launcher=null, one_hand_penalty=7, burst_accuracy=list(0,-1), dispersion=list(0.0, 0.6))
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"use_launcher" = null,
+			"one_hand_penalty" = 6,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "2-round bursts",
+			"burst" = 2,
+			"fire_delay" = null,
+			"move_delay" = 6,
+			"use_launcher" = null,
+			"one_hand_penalty" = 7,
+			"burst_accuracy" = list(0, -1),
+			"dispersion" = list(0.0, 0.6)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
@@ -307,10 +472,35 @@
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
 	//No single-shot or 3-round-burst modes since using this weapon should come at a cost to flexibility.
 	firemodes = list(
-		list(mode_name="short bursts",	can_autofire=0, burst=5, fire_delay=5, move_delay=12, one_hand_penalty=8, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		list(mode_name="long bursts",	can_autofire=0, burst=8, fire_delay=5, one_hand_penalty=12, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, one_hand_penalty=12, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "short bursts",
+			"can_autofire" = 0,
+			"burst" = 5,
+			"fire_delay" = 5,
+			"move_delay" = 12,
+			"one_hand_penalty" = 8,
+			"burst_accuracy" = list(0, -1, -1, -2, -2),
+			"dispersion" = list(0.6, 1.0, 1.0, 1.0, 1.2)
+		),
+		list(
+			"mode_name" = "long bursts",
+			"can_autofire" = 0,
+			"burst" = 8,
+			"fire_delay" = 5,
+			"one_hand_penalty" = 12,
+			"burst_accuracy" = list(0, -1, -1, -2, -2, -2, -3, -3),
+			"dispersion" = list(1.0, 1.0, 1.0, 1.0, 1.2)
+		),
+		list(
+			"mode_name" = "full auto",
+			"can_autofire" = 1,
+			"burst" = 1,
+			"fire_delay" = 1,
+			"one_hand_penalty" = 12,
+			"burst_accuracy" = list(0, -1, -1, -2, -2, -2, -3, -3),
+			"dispersion" = list(1.0, 1.0, 1.0, 1.0, 1.2)
 		)
+	)
 
 	var/cover_open = 0
 
@@ -402,9 +592,25 @@
 
 	//Battle Rifle is only accurate in semi-automatic fire.
 	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null),
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, one_hand_penalty=12, burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
+		list(
+			"mode_name" = "semi auto",
+			"burst" = 1,
+			"fire_delay" = null,
+			"move_delay" = null,
+			"one_hand_penalty" = 8,
+			"burst_accuracy" = null,
+			"dispersion" = null
+		),
+		list(
+			"mode_name" = "full auto",
+			"can_autofire" = 1,
+			"burst" = 1,
+			"fire_delay" = 1,
+			"one_hand_penalty" = 12,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -4, -4, -4, -4),
+			"dispersion" = list(1.0, 1.0, 1.0, 1.0, 1.2)
 		)
+	)
 
 /obj/item/gun/projectile/automatic/battlerifle/on_update_icon()
 	..()
@@ -437,9 +643,26 @@
 	can_special_reload = FALSE
 
 	firemodes = list(
-		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=0.4, move_delay=1, burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4), dispersion = list(1.0, 1.0, 2.0, 2.0, 2.5), burst_delay = 1),
-		list(mode_name="long bursts",	can_autofire=0, burst=10, fire_delay=0.2, burst_accuracy = list(0,-1,-2,-3,-4,-8,-8,-16,-16), dispersion = list(1.0, 2.0, 3.0, 3.0, 4.0), burst_delay = 1)
+		list(
+			"mode_name" = "full auto",
+			"can_autofire" = 1,
+			"burst" = 1,
+			"fire_delay" = 0.4,
+			"move_delay" = 1,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -4, -4, -4, -4),
+			"dispersion" = list(1.0, 1.0, 2.0, 2.0, 2.5),
+			"burst_delay" = 1
+		),
+		list(
+			"mode_name" = "long bursts",
+			"can_autofire" = 0,
+			"burst" = 10,
+			"fire_delay" = 0.2,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -8, -8, -16, -16),
+			"dispersion" = list(1.0, 2.0, 3.0, 3.0, 4.0),
+			"burst_delay" = 1
 		)
+	)
 
 /obj/item/gun/projectile/automatic/minigun/mounted
 	name = "mounted minigun"
@@ -450,9 +673,25 @@
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 	firemodes = list(
-		list(mode_name="long bursts",			can_autofire=0, burst=5, fire_delay=0.2, burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4), dispersion = list(1.0, 1.0, 2.0, 2.0, 2.5), burst_delay = 1),
-		list(mode_name="longer bursts",		can_autofire=0, burst=10, fire_delay=0.2, burst_accuracy = list(0,-1,-2,-3,-4,-8,-8,-16,-16), dispersion = list(1.0, 2.0, 3.0, 3.0, 4.0), burst_delay = 1)
+		list(
+			"mode_name" = "long bursts",
+			"can_autofire" = 0,
+			"burst" = 5,
+			"fire_delay" = 0.2,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -4, -4, -4, -4),
+			"dispersion" = list(1.0, 1.0, 2.0, 2.0, 2.5),
+			"burst_delay" = 1
+		),
+		list(
+			"mode_name" = "longer bursts",
+			"can_autofire" = 0,
+			"burst" = 10,
+			"fire_delay" = 0.2,
+			"burst_accuracy" = list(0, -1, -2, -3, -4, -8, -8, -16, -16),
+			"dispersion" = list(1.0, 2.0, 3.0, 3.0, 4.0),
+			"burst_delay" = 1
 		)
+	)
 
 /obj/item/gun/projectile/automatic/minigun/mounted/load_ammo(obj/item/A, mob/user)
 	var/obj/item/rig/rig = get_rig()

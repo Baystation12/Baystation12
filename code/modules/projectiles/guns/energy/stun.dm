@@ -9,9 +9,15 @@
 	combustion = 0
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock
 		)
+	)
 
 /obj/item/gun/energy/taser/disposable
 	name = "disposable electrolaser"
@@ -35,9 +41,15 @@
 	wielded_item_state = "tasercarbine-wielded"
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/heavy),
-		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock/heavy),
+		list(
+			"mode_name" = "stun",
+			"projectile_type" = /obj/item/projectile/beam/stun/heavy
+		),
+		list(
+			"mode_name" = "shock",
+			"projectile_type" = /obj/item/projectile/beam/stun/shock/heavy
 		)
+	)
 
 /obj/item/gun/energy/taser/mounted
 	name = "mounted electrolaser"
