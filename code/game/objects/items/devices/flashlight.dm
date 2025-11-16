@@ -61,6 +61,9 @@
 	user.update_action_buttons()
 	return 1
 
+/obj/item/device/flashlight/use_in_world(mob/user)
+	attack_self(user)
+
 /obj/item/device/flashlight/proc/set_flashlight()
 	if(light_wedge)
 		set_dir(pick(NORTH, SOUTH, EAST, WEST))
