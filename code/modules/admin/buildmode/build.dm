@@ -18,7 +18,15 @@
 	to_chat(user, help_text)
 
 /datum/build_mode/build/Configurate()
-	build_type = select_subpath(build_type || /obj/item/latexballon)
+	var/selected = select_subpath(build_type || /obj/item/latexballon)
+	if (!selected)
+		return
+	var/reason = prevent_spawn_reason(selected)
+	if (reason)
+		to_chat(user, SPAN_WARNING("Cannot create a [selected] - [reason]"))
+		build_type = null
+		return
+	build_type = selected
 	to_chat(user, "Selected Type [build_type]")
 
 /datum/build_mode/build/OnClick(atom/target, list/parameters)
@@ -50,14 +58,11 @@
 			return
 		if (!location)
 			return
-		else if (ispath(build_type, /turf))
+		if (ispath(build_type, /turf))
 			location.ChangeTurf(build_type)
-		else if (ispath(build_type, /area))
-			to_chat(user, SPAN_WARNING("Do not use this to create or modify areas. Use the Area build mode category instead."))
 			return
-		else
-			var/atom/instance = new build_type (location)
-			instance.set_dir(host.dir)
+		var/atom/instance = new build_type (location)
+		instance.set_dir(host.dir)
 
 /datum/build_mode/build/CanUseTopic(mob/user)
 	if (!isadmin(user))

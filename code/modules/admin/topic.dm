@@ -1672,25 +1672,10 @@
 
 		for(var/dirty_path in dirty_paths)
 			var/path = text2path(dirty_path)
-			if(!path)
+			if (prevent_spawn_reason(path))
 				removed_paths += dirty_path
-				continue
-			else if(!ispath(path, /obj) && !ispath(path, /turf) && !ispath(path, /mob))
-				removed_paths += dirty_path
-				continue
-			else if(ispath(path, /obj/item/gun/energy/pulse_rifle))
-				if(!check_rights(R_FUN,0))
-					removed_paths += dirty_path
-					continue
-			else if(ispath(path, /obj/item/melee/energy/blade))//Not an item one should be able to spawn./N
-				if(!check_rights(R_FUN,0))
-					removed_paths += dirty_path
-					continue
-			else if(ispath(path, /obj/bhole))
-				if(!check_rights(R_FUN,0))
-					removed_paths += dirty_path
-					continue
-			paths += path
+			else
+				paths += path
 
 		if(!paths)
 			alert("The path list you sent is empty")
