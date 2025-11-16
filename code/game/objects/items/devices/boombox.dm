@@ -39,6 +39,8 @@
 /obj/item/boombox/MouseDrop(mob/user)
 	jukebox.ui_interact(user)
 
+/obj/item/boombox/use_in_world(mob/user)
+	jukebox.ui_interact(user)
 
 /obj/item/boombox/emp_act(severity)
 	if (GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))

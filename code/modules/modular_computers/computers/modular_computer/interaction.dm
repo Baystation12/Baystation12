@@ -233,6 +233,9 @@
 	if(scanner)
 		scanner.do_on_afterattack(user, target, proximity)
 
+/obj/item/modular_computer/use_in_world(mob/user)
+	attack_self(user)
+
 /obj/item/modular_computer/CtrlAltClick(mob/user)
 	if(!CanPhysicallyInteract(user))
 		return FALSE
