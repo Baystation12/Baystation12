@@ -1,5 +1,0 @@
-author: SierraKomodo
-changes:
-  - {rscadd: Examining a SMES or battery rack while next to it now warns you if 
-      there's no connected wire terminal.}
-delete-after: true
