@@ -1,0 +1,5 @@
+author: Banditoz
+changes:
+  - {admin: 'The Delete-All verb has been improved to accept a filter, like the Spawn
+      verb does.'}
+delete-after: true
