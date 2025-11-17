@@ -95,20 +95,33 @@
 	else
 		alert("Invalid mob")
 
-//TODO: merge the vievars version into this or something maybe mayhaps
-/client/proc/cmd_debug_del_all()
+/client/proc/cmd_debug_del_all(path as text)
 	set category = "Debug"
-	set name = "Del-All"
+	set name = "Delete All"
+	set desc = "(type path) Delete all instances of a type and its subtypes, globally"
 
 	// to prevent REALLY stupid deletions
 	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human, /mob/observer, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
-	var/hsbitem = input(usr, "Choose an object to delete.", "Delete:") as null|anything in typesof(/obj) + typesof(/mob) - blocked
-	if(hsbitem)
-		for(var/atom/O in world)
-			if(istype(O, hsbitem))
-				qdel(O)
-		log_admin("[key_name(src)] has deleted all instances of [hsbitem].")
-		message_admins("[key_name_admin(src)] has deleted all instances of [hsbitem].", 0)
+	var/filtered_list = typesof_filtered(list(/obj, /mob), path) - blocked
+	if (!filtered_list)
+		return
+	var/candidate_type
+	if (length(filtered_list) == 1)
+		candidate_type = filtered_list[1]
+	else
+		candidate_type = input(usr, "Choose a type (this INCLUDES all subtypes!) to delete GLOBALLY.", "Delete:") as null|anything in filtered_list
+	if (!candidate_type)
+		return
+	// one last chance to bail out
+	var/response = alert("Are you sure you want to delete [candidate_type] and ALL of its subtypes?", null, "No", "Yes")
+	if (response != "Yes")
+		return
+	var/count = 0
+	for (var/atom/O in world)
+		if (istype(O, candidate_type))
+			qdel(O)
+			count++
+	log_and_message_admins("has deleted [count] instance\s of [candidate_type] and all of its subtypes.")
 
 /client/proc/cmd_debug_make_powernets()
 	set category = "Debug"
