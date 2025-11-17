@@ -91,7 +91,7 @@
 
 /obj/rune/proc/get_cultists()
 	. = list()
-	for(var/mob/living/M in range(1))
+	for(var/mob/living/M in range(1, src))
 		if(iscultist(M))
 			. += M
 
