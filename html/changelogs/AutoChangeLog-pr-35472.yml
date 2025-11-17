@@ -1,0 +1,5 @@
+author: Builder13
+changes:
+  - {bugfix: 'Fixed an issue where group activation cult runes counted the number
+      of cultists around the initiator, and not around the rune itself.'}
+delete-after: true
