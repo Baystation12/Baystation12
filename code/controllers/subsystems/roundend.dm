@@ -70,12 +70,8 @@ SUBSYSTEM_DEF(roundend)
 		vote_cache = round(max(vote_check - time, 0), 0.1)
 		if (vote_cache > 0)
 			return
+		SSvote.initiate_vote(/datum/vote/transfer, null, TRUE)
 		if (config.vote_autotransfer_interval)
 			vote_check += config.vote_autotransfer_interval
 		else
 			vote_check = 0
-		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
-		if (security_state.current_security_level_is_same_or_higher_than(security_state.high_security_level))
-			log_and_message_admins("Current alert level of [security_state.current_security_level.name] has blocked the scheduled transfer vote. Retrying in [config.vote_autotransfer_interval] minutes.")
-			return
-		SSvote.initiate_vote(/datum/vote/transfer, null, TRUE)
