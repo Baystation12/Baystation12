@@ -119,11 +119,11 @@
 
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null, force_open = 1)
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/list/data = list()
 	data["amount"] = amount
 	data["isBeakerLoaded"] = container ? 1 : 0
 	data["glass"] = accept_drinking
-	var beakerD[0]
+	var/list/beakerD = list()
 	if(container && container.reagents && length(container.reagents.reagent_list))
 		for(var/datum/reagent/R in container.reagents.reagent_list)
 			beakerD[LIST_PRE_INC(beakerD)] = list("name" = R.name, "volume" = R.volume)
@@ -136,7 +136,7 @@
 		data["beakerCurrentVolume"] = null
 		data["beakerMaxVolume"] = null
 
-	var chemicals[0]
+	var/list/chemicals = list()
 	for(var/label in cartridges)
 		var/obj/item/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 		chemicals[LIST_PRE_INC(chemicals)] = list("label" = label, "amount" = C.reagents.total_volume)

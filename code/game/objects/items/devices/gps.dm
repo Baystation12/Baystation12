@@ -237,7 +237,7 @@ var/global/list/all_gps_units = list()
 		if(G == src || !can_track(G, z_level_detection))
 			continue
 
-		var/gps_data[0]
+		var/gps_data = list()
 		var/gps_ref = "\ref[G]"
 		gps_data["gps_ref"] = gps_ref
 		gps_data["gps_tag"] = G.gps_tag

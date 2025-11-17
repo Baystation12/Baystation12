@@ -20,7 +20,7 @@
 	var/download_completion = 0
 	var/download_netspeed = 0
 	var/downloaderror = ""
-	var/list/downloads_queue[0]
+	var/list/downloads_queue = list()
 	/// For logging, can be faked by antags.
 	var/file_info
 	var/server
@@ -155,9 +155,9 @@
 
 	data["disk_size"] = program.computer.max_disk_capacity()
 	data["disk_used"] = program.computer.used_disk_capacity()
-	var/list/all_entries[0]
+	var/list/all_entries = list()
 	for(var/category in ntnet_global.available_software_by_category)
-		var/list/category_list[0]
+		var/list/category_list = list()
 		for(var/datum/computer_file/program/P in ntnet_global.available_software_by_category[category])
 			// Only those programs our user can run will show in the list
 			if(!P.can_run(user) && P.requires_access_to_download)
@@ -176,7 +176,7 @@
 
 	data["hackedavailable"] = FALSE
 	if(prog.computer.emagged()) // If we are running on emagged computer we have access to some "bonus" software
-		var/list/hacked_programs[0]
+		var/list/hacked_programs = list()
 		for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
 			data["hackedavailable"] = TRUE
 			hacked_programs.Add(list(list(

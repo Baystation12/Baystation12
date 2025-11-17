@@ -32,7 +32,7 @@
 
 	var/static/list/eye_overlays
 	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
+	var/module_sprites = list() 		//Used to store the associations between sprite names and sprite index.
 	var/icon_selected = 1		//If icon selection has been completed yet
 	var/icon_selection_tries = 0//Remaining attempts to select icon before a selection is forced
 

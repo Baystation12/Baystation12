@@ -18,13 +18,13 @@ var/global/list/landmarks_list = list()				//list of all landmarks created
 //Languages/species/whitelist.
 
 var/global/list/datum/language/all_languages = list()
-var/global/list/language_keys[0]					// Table of say codes for all languages
+var/global/list/language_keys = list()					// Table of say codes for all languages
 
 GLOBAL_LIST_EMPTY(all_particles)
 
 // Grabs
-var/global/list/all_grabstates[0]
-var/global/list/all_grabobjects[0]
+var/global/list/all_grabstates = list()
+var/global/list/all_grabobjects = list()
 
 // Uplinks
 var/global/list/obj/item/device/uplink/world_uplinks = list()

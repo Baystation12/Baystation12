@@ -54,7 +54,7 @@
 		// Probability of 1 is equal of completion percentage of DoS attack on this relay.
 		// Combined with UI updates this adds quite nice effect to the UI
 		var/percentage = PRG.target.dos_overload * 100 / PRG.target.dos_capacity
-		var/list/strings[0]
+		var/list/strings = list()
 		for(var/j, j<10, j++)
 			var/string = ""
 			for(var/i, i<20, i++)
@@ -62,7 +62,7 @@
 			strings.Add(string)
 		data["dos_strings"] = strings
 	else
-		var/list/relays[0]
+		var/list/relays = list()
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 			relays.Add(R.uid)
 		data["relays"] = relays

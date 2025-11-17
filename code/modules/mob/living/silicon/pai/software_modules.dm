@@ -40,7 +40,7 @@
 
 
 /datum/pai_software/directives/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data[0]
+	var/data = list()
 	data["master"] = user.master
 	data["dna"] = user.master_dna
 	data["prime"] = user.pai_law0
@@ -103,7 +103,7 @@
 
 
 /datum/pai_software/crew_manifest/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data[0]
+	var/data = list()
 	data["crew_manifest"] = html_crew_manifest()
 	ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 	if (!ui)
@@ -121,7 +121,7 @@
 
 
 /datum/pai_software/door_jack/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data[0]
+	var/data = list()
 	data["cable"] = user.cable != null
 	data["machine"] = user.cable && (user.cable.machine != null)
 	data["inprogress"] = user.hackdoor != null
@@ -198,7 +198,7 @@
 
 
 /datum/pai_software/atmosphere_sensor/on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui, force_open = TRUE)
-	var/data[0]
+	var/list/data = list()
 	var/turf/T = get_turf(user.loc)
 	if (!T)
 		data["reading"] = 0
@@ -214,9 +214,9 @@
 		data["temperature"] = round(env.temperature)
 		data["temperatureC"] = round(env.temperature-T0C)
 		var/t_moles = env.total_moles
-		var/gases[0]
+		var/list/gases = list()
 		for (var/g in env.gas)
-			var/gas[0]
+			var/list/gas = list()
 			gas["name"] = gas_data.name[g]
 			gas["percent"] = round((env.gas[g] / t_moles) * 100)
 			gases[LIST_PRE_INC(gases)] = gas

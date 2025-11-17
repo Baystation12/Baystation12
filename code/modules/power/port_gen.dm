@@ -325,7 +325,7 @@
 	if(IsBroken())
 		return
 
-	var/data[0]
+	var/data = list()
 	data["active"] = active
 	if(istype(user, /mob/living/silicon/ai))
 		data["is_ai"] = 1

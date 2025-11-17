@@ -486,7 +486,7 @@
 
 // This is purely informational UI that may be accessed by AIs or robots
 /obj/machinery/power/supermatter/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	data["integrity_percentage"] = round(get_integrity())
 	var/datum/gas_mixture/env = null

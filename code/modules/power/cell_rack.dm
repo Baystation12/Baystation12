@@ -197,7 +197,7 @@
 		least.give(most.use(celldiff))
 
 /obj/machinery/power/smes/batteryrack/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	data["mode"] = mode
 	data["transfer_max"] = max_transfer_rate
@@ -210,14 +210,14 @@
 	var/list/cells = list()
 	var/cell_index = 1
 	for(var/obj/item/cell/C in internal_cells)
-		var/list/cell[0]
+		var/list/cell = list()
 		cell["slot"] = cell_index
 		cell["used"] = 1
 		cell["percentage"] = round(C.percent(), 0.01)
 		cell_index++
 		cells += list(cell)
 	while(cell_index <= PSU_MAXCELLS)
-		var/list/cell[0]
+		var/list/cell = list()
 		cell["slot"] = cell_index
 		cell["used"] = 0
 		cell_index++

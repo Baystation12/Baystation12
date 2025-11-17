@@ -100,7 +100,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 	return TRUE
 
 /obj/machinery/requests_console/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	data["department"] = department
 	data["screen"] = screen

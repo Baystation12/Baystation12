@@ -43,8 +43,8 @@
 		..()
 
 /obj/item/card/id/syndicate/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
-	var/entries[0]
+	var/list/data = list()
+	var/list/entries = list()
 	entries[LIST_PRE_INC(entries)] = list("name" = "Age", 				"value" = age)
 	entries[LIST_PRE_INC(entries)] = list("name" = "Prefix", 			"value" = formal_name_prefix)
 	entries[LIST_PRE_INC(entries)] = list("name" = "Suffix", 			"value" = formal_name_suffix)

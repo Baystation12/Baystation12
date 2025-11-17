@@ -5,7 +5,7 @@
 	var/tag_door
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 	var/datum/computer/file/embedded_program/docking/simple/docking_program = program
 
 	data = list(

@@ -153,7 +153,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 		return n
 
 	else if (copytext(T,1,7) == "status")
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		var/list/s = list()
 		s["version"] = config.game_version
 		s["mode"] = PUBLIC_GAME_MODE
@@ -234,7 +234,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 	* * * * * * * */
 
 	if(copytext(T,1,14) == "placepermaban")
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(!config.ban_comms_password)
 			SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
 			return "Not Enabled"
@@ -270,7 +270,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -317,7 +317,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 			return list2params(ret)
 
 	else if(copytext(T,1,5) == "info")
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -377,7 +377,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 		*/
 
 
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
@@ -418,14 +418,14 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 				1. notes = ckey of person the notes lookup is for
 				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
 		*/
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
-		var/input[] = params2list(T)
+		var/input = params2list(T)
 		if(input["key"] != config.comms_password)
 			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"

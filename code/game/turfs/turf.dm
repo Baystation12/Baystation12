@@ -304,7 +304,7 @@ var/global/const/enterloopsanity = 100
 		return get_dist(src,t)
 
 /turf/proc/AdjacentTurfsSpace()
-	var/L[] = new()
+	var/list/L = list()
 	for(var/turf/t in oview(src,1))
 		if(!t.density)
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))

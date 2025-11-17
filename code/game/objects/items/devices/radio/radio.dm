@@ -117,7 +117,7 @@
 		ui_interact(user)
 
 /obj/item/device/radio/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/data[0]
+	var/data = list()
 
 	if (power_usage > 0)
 		data["power"] = on
@@ -151,7 +151,7 @@
 	return list_internal_channels(user)
 
 /obj/item/device/radio/proc/list_secure_channels(mob/user)
-	var/dat[0]
+	var/list/dat = list()
 
 	for(var/ch_name in channels)
 		var/chan_stat = channels[ch_name]
@@ -162,7 +162,7 @@
 	return dat
 
 /obj/item/device/radio/proc/list_internal_channels(mob/user)
-	var/dat[0]
+	var/list/dat = list()
 	for(var/internal_chan in internal_channels)
 		if (!syndie && (text2num(internal_chan) == SYND_FREQ)) //Only traitor shortwaves should be able to see the traitor frequency
 			continue
@@ -853,7 +853,7 @@
 	. = ..()
 
 /obj/item/device/radio/borg/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	data["mic_status"] = broadcasting
 	data["speaker"] = listening

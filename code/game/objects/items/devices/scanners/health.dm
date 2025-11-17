@@ -249,7 +249,7 @@
 	var/print_reagent_default_message = TRUE
 	if(H.reagents.total_volume)
 		var/unknown = 0
-		var/reagentdata[0]
+		var/reagentdata = list()
 		for(var/A in H.reagents.reagent_list)
 			var/datum/reagent/R = A
 			if(R.scannable)

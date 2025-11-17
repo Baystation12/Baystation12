@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
 var/global/jobban_runonce			// Updates legacy bans with new info
-var/global/jobban_keylist[0]		//to store the keys & ranks
+var/global/list/jobban_keylist = list()		//to store the keys & ranks
 
 /proc/jobban_fullban(mob/M, rank, reason)
 	if(!M)
@@ -46,7 +46,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 /proc/jobban_loadbanfile()
 	if(config.ban_legacy_system)
 		var/savefile/S=new("data/job_full.ban")
-		from_save(S["keys[0]"],  jobban_keylist)
+		from_save(S["keys0"],  jobban_keylist)
 		log_admin("Loading jobban_rank")
 		from_save(S["runonce"], jobban_runonce)
 
@@ -83,7 +83,7 @@ var/global/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_savebanfile()
 	var/savefile/S=new("data/job_full.ban")
-	to_save(S["keys[0]"], jobban_keylist)
+	to_save(S["keys0"], jobban_keylist)
 
 /proc/jobban_unban(mob/M, rank)
 	jobban_remove("[M.ckey] - [rank]")

@@ -104,7 +104,7 @@
 	return ..()
 
 /datum/shuttle/autodock/ferry/specops/proc/sleep_until_launch()
-	var/message_tracker[] = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
+	var/list/message_tracker = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
 
 	var/launch_time = world.time + specops_countdown_time
 	var/time_until_launch
@@ -151,7 +151,7 @@
 
 		sleep(10)
 
-		var/spawn_marauder[] = new()
+		var/list/spawn_marauder = list()
 		for(var/obj/landmark/L in world)
 			if(L.name == "Marauder Entry")
 				spawn_marauder.Add(L)

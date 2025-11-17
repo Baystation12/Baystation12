@@ -200,7 +200,7 @@
 
 //GUI Tank Setup
 /obj/machinery/oxygen_pump/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 	if(!tank)
 		to_chat(usr, SPAN_WARNING("It is missing a tank!"))
 		data["tankPressure"] = 0

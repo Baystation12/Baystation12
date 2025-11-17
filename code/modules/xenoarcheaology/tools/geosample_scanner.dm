@@ -131,7 +131,7 @@
 		return
 
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/data = list()
 	data["scanned_item"] = (scanned_item ? scanned_item.name : "")
 	data["scanned_item_desc"] = (scanned_item ? (scanned_item.desc ? scanned_item.desc : "No information on record.") : "")
 	data["last_scan_data"] = last_scan_data

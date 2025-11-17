@@ -246,7 +246,7 @@
 			ui.close()
 		return 0
 
-	var/list/data[0]
+	var/list/data = list()
 	data["state"] = state
 	if(state == 1)
 		data["devtype"] = devtype

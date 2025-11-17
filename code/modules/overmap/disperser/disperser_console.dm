@@ -154,7 +154,7 @@
 		display_reconnect_dialog(user, "disperser synchronization")
 		return
 
-	var/data[0]
+	var/data = list()
 
 	if (!link_parts())
 		data["faillink"] = TRUE

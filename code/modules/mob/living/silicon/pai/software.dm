@@ -50,16 +50,16 @@ var/global/list/default_pai_software = list()
 			if(ui) ui.set_status(STATUS_CLOSE, 0)
 		return
 
-	var/data[0]
+	var/list/data = list()
 
 	// Software we have bought
-	var/bought_software[0]
+	var/list/bought_software = list()
 	// Software we have not bought
-	var/not_bought_software[0]
+	var/list/not_bought_software = list()
 
 	for(var/key in pai_software_by_key)
 		var/datum/pai_software/S = pai_software_by_key[key]
-		var/software_data[0]
+		var/list/software_data = list()
 		software_data["name"] = S.name
 		software_data["id"] = S.id
 		if(key in software)
@@ -74,9 +74,9 @@ var/global/list/default_pai_software = list()
 	data["available_ram"] = ram
 
 	// Emotions
-	var/emotions[0]
+	var/list/emotions = list()
 	for(var/name in pai_emotions)
-		var/emote[0]
+		var/list/emote = list()
 		emote["name"] = name
 		emote["id"] = pai_emotions[name]
 		emotions[LIST_PRE_INC(emotions)] = emote

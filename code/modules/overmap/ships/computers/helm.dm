@@ -92,7 +92,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		return 1
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 
 	if(!linked)
 		display_reconnect_dialog(user, "helm")
@@ -131,10 +131,10 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		else
 			data["ETAnext"] = "N/A"
 
-		var/list/locations[0]
+		var/list/locations = list()
 		for (var/key in known_sectors)
 			var/datum/computer_file/data/waypoint/R = known_sectors[key]
-			var/list/rdata[0]
+			var/list/rdata = list()
 			rdata["name"] = R.fields["name"]
 			rdata["x"] = R.fields["x"]
 			rdata["y"] = R.fields["y"]
@@ -340,7 +340,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		display_reconnect_dialog(user, "Navigation")
 		return
 
-	var/data[0]
+	var/data = list()
 
 
 	var/turf/T = get_turf(linked)

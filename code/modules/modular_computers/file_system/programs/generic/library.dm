@@ -34,7 +34,7 @@ The answer was five and a half years -ZeroBits
 	else if(current_book)
 		data["current_book"] = current_book
 	else
-		var/list/all_entries[0]
+		var/list/all_entries = list()
 		establish_old_db_connection()
 		if(!dbcon_old.IsConnected())
 			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."

@@ -264,7 +264,7 @@
 			var/list/embedlist = wound.embedded_objects
 			if(LAZYLEN(embedlist))
 				shown_objects += embedlist
-				var/parsedembed[0]
+				var/list/parsedembed = list()
 				for(var/obj/embedded in embedlist)
 					if(!length(parsedembed) || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)

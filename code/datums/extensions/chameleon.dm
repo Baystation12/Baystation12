@@ -321,8 +321,8 @@
 	)
 
 /datum/extension/chameleon/emag/GetItemDisguiseType(singleton/hierarchy/outfit/outfit)
-	if (length(outfit.id_types) > 0)
-		var/id_path = outfit.id_types[0]
+	if (length(outfit.id_types))
+		var/id_path = outfit.id_types[1]
 		if (ispath(id_path, expected_type))
 			return id_path
 

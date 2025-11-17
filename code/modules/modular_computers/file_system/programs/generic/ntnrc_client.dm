@@ -229,13 +229,13 @@
 	data["adminmode"] = C.netadmin_mode
 	if(C.channel)
 		data["title"] = C.channel.title
-		var/list/messages[0]
+		var/list/messages = list()
 		for(var/M in C.channel.messages)
 			messages.Add(list(list(
 				"msg" = M
 			)))
 		data["messages"] = messages
-		var/list/clients[0]
+		var/list/clients = list()
 		for(var/datum/computer_file/program/chatclient/cl in C.channel.clients)
 			clients.Add(list(list(
 				"name" = cl.username
@@ -245,7 +245,7 @@
 		data["is_operator"] = C.operator_mode || C.netadmin_mode
 
 	else // Channel selection screen
-		var/list/all_channels[0]
+		var/list/all_channels = list()
 		var/turf/turf = get_turf(C.computer.get_physical_host())
 		var/list/connected_zs = GetConnectedZlevels(turf.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)

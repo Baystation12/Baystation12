@@ -27,7 +27,7 @@ var/global/datum/paiController/paiController			// Global handler for pAI candida
 
 	var/askDelay = 10 * 60 * 1	// One minute [ms * sec * min]
 
-/datum/paiController/Topic(href, href_list[])
+/datum/paiController/Topic(href, list/href_list)
 	if(href_list["download"])
 		var/datum/paiCandidate/candidate = locate(href_list["candidate"])
 		var/obj/item/device/paicard/card = locate(href_list["device"])

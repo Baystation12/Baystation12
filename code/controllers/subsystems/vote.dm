@@ -178,7 +178,7 @@ SUBSYSTEM_DEF(vote)
 		to_chat(mob, notify_message)
 
 
-/datum/controller/subsystem/vote/Topic(href,href_list[],hsrc)
+/datum/controller/subsystem/vote/Topic(href, list/href_list, hsrc)
 	if(!usr || !usr.client)
 		return	//not necessary but meh...just in-case somebody does something stupid
 

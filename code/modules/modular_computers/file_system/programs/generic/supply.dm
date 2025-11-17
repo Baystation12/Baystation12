@@ -95,9 +95,9 @@
 
 		if(4)// Order processing
 			if(is_admin) // No bother sending all of this if the user can't see it.
-				var/list/cart[0]
-				var/list/requests[0]
-				var/list/done[0]
+				var/list/cart = list()
+				var/list/requests = list()
+				var/list/done = list()
 				for(var/datum/supply_order/SO in SSsupply.shoppinglist)
 					cart.Add(order_to_nanoui(SO, SUPPLY_LIST_ID_CART))
 				for(var/datum/supply_order/SO in SSsupply.requestlist)
@@ -320,7 +320,7 @@
 		if(!sp.is_category())
 			continue // No children
 		category_names.Add(sp.name)
-		var/list/category[0]
+		var/list/category = list()
 		for(var/singleton/hierarchy/supply_pack/spc in sp.get_descendents())
 			if((spc.hidden || spc.contraband || !spc.sec_available()) && !emagged)
 				continue

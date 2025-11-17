@@ -185,7 +185,7 @@ var/global/bomb_set
 		return TRUE
 
 /obj/machinery/nuclearbomb/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
-	var/data[0]
+	var/data = list()
 	data["evacuate"] = evacuate
 	data["hacking"] = 0
 	data["auth"] = is_auth(user)

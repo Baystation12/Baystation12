@@ -121,7 +121,7 @@
 		return
 
 	// this is the data which will be sent to the ui
-	var/data[0]
+	var/data = list()
 	data["isOperating"] = on
 	data["hasOccupant"] = occupant ? 1 : 0
 

@@ -23,7 +23,7 @@
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text(SPAN_WARNING("[user] has analyzed the floor's vitals!")), 1)
 		user.show_message(text(SPAN_NOTICE("Analyzing Results for The floor:\n\t Overall Status: Healthy")), 1)
-		user.show_message(text(SPAN_NOTICE("\t Damage Specifics: [0]-[0]-[0]-[0]")), 1)
+		user.show_message(text(SPAN_NOTICE("\t Damage Specifics: \[0\]-\[0\]-\[0\]-\[0\]")), 1)
 		user.show_message(SPAN_NOTICE("Key: Suffocation/Toxin/Burns/Brute"), 1)
 		user.show_message(SPAN_NOTICE("Body Temperature: ???"), 1)
 		return

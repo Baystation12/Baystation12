@@ -597,7 +597,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 // Simple log entry datum
 
 /datum/comm_log_entry
-	var/parameters = list() // carbon-copy to signal.data[]
+	var/parameters = list() // carbon-copy to signal.data
 	var/name = "data packet (#)"
 	var/garbage_collector = 1 // if set to 0, will not be garbage collected
 	var/input_type = "Speech File"

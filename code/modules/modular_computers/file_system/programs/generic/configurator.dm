@@ -40,7 +40,7 @@
 	var/obj/item/stock_parts/computer/nano_printer/nano_printer = program.computer.get_component(/obj/item/stock_parts/computer/nano_printer)
 	data["print_language"] = nano_printer ? nano_printer.print_language : null
 
-	var/list/all_entries[0]
+	var/list/all_entries = list()
 	var/list/hardware = program.computer.get_all_components()
 	for(var/obj/item/stock_parts/computer/H in hardware)
 		all_entries.Add(list(list(

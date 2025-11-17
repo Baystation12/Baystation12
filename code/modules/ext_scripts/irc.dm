@@ -21,7 +21,7 @@
 
 /proc/adminmsg2adminirc(client/source, client/target, msg)
 	if(config.admin_irc)
-		var/list/params[0]
+		var/list/params = list()
 
 		params["pwd"] = config.comms_password
 		params["chan"] = config.admin_irc
@@ -51,7 +51,7 @@
 
 /proc/send_to_admin_discord(type, message)
 	if(config.admin_discord && config.excom_address)
-		var/list/params[0]
+		var/list/params = list()
 
 		params["pwd"] = config.comms_password
 		params["chan"] = config.admin_discord

@@ -178,7 +178,7 @@
 	if (dir == NORTH || dir == SOUTH)
 		vertical = 1
 
-	var/data[0]
+	var/data = list()
 	data["totalOutput"] = effective_gen/1000
 	data["maxTotalOutput"] = max_power/1000
 	data["thermalOutput"] = last_thermal_gen/1000
