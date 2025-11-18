@@ -16,7 +16,7 @@ jobs:
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
         with:
           fetch-depth: 25
       - name: Python setup
