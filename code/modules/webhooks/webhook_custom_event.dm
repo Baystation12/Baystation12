@@ -6,6 +6,6 @@
 	. = ..()
 	.["embeds"] = list(list(
 		"title" = "An event is beginning.",
-		"description" = (data && data["text"]) || "undefined",
+		"description" = (data && html_decode(data["text"])) || "undefined",
 		"color" = COLOR_WEBHOOK_DEFAULT
 	))
