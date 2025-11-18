@@ -201,19 +201,26 @@
 	alt_titles = list(
 		"Chemist"
 	)
-	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	outfit_type = /singleton/hierarchy/outfit/job/torch/crew/medical/chemist
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /singleton/hierarchy/outfit/job/torch/crew/medical/chemist/fleet,
+		/datum/mil_branch/civilian = /singleton/hierarchy/outfit/job/torch/crew/medical/chemist/contractor
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/civ/contractor
+		)
+
 	skill_points = 21
 	min_skill = list( // 12 points
 		SKILL_MEDICAL = SKILL_BASIC, // 4 points
 		SKILL_CHEMISTRY = SKILL_TRAINED // 8 points
 	)
-
 	max_skill = list(   SKILL_MEDICAL     = SKILL_BASIC,
 						SKILL_ANATOMY	  = SKILL_BASIC,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
-
 	access = list(
 		access_medical, access_maint_tunnels, access_emergency_storage,
 		access_medical_equip, access_solgov_crew, access_chemistry,
