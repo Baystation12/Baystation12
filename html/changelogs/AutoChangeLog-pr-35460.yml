@@ -1,0 +1,7 @@
+author: SierraKomodo
+changes:
+  - {rscadd: Things in your hands can be swapped to your other hand by 
+      drag+dropping the item from one hand to the other. Only works if the 
+      target hand is empty. Why? Try clicking a loaded handgun with your empty 
+      hand.}
+delete-after: true
