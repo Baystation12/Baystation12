@@ -1,0 +1,5 @@
+author: Banditoz
+changes:
+  - {admin: Custom events are less HTML-y when modifying existing and their 
+      webhooks render in Discord correctly.}
+delete-after: true
