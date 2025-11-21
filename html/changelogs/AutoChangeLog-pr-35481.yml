@@ -1,0 +1,5 @@
+author: Banditoz
+changes:
+  - {bugfix: Certain AIs should no longer crash the server while their target is
+      in space.}
+delete-after: true
