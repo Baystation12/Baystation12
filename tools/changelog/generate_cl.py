@@ -86,6 +86,7 @@ for k, v in cl_list:
 if write_cl['changes']:
     with io.StringIO() as cl_contents:
         yaml.indent(sequence=4, offset=2)
+        yaml.default_flow_style = False
         yaml.dump(write_cl, cl_contents)
         cl_contents.seek(0)
 
