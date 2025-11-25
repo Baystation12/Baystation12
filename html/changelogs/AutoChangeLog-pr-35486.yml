@@ -1,0 +1,4 @@
+author: Banditoz
+changes:
+  - rscadd: Added an "All Items" category to the uplink.
+delete-after: true
