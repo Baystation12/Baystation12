@@ -37,12 +37,10 @@
 		"Virologist" = /singleton/hierarchy/outfit/job/medical/doctor/virologist)
 	outfit_type = /singleton/hierarchy/outfit/job/medical/doctor
 
-//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
 /datum/job/chemist
 	title = "Pharmacist"
 	department = "Medical"
 	department_flag = MED
-
 	minimal_player_age = 7
 	total_positions = 2
 	spawn_positions = 2

@@ -44,6 +44,9 @@
 /obj/item/card/id/torch/crew/medical/senior
 	job_access_type = /datum/job/senior_doctor
 
+/obj/item/card/id/torch/crew/medical/chemist
+	job_access_type = /datum/job/chemist
+
 /obj/item/card/id/torch/contractor/medical
 	job_access_type = /datum/job/doctor
 	detail_color = COLOR_PALE_BLUE_GRAY
