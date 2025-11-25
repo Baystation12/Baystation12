@@ -11,20 +11,30 @@ var/global/datum/uplink/uplink = new()
 	categories = init_subtypes(/datum/uplink_category)
 	categories = dd_sortedObjectList(categories)
 
-	for(var/datum/uplink_item/item in items)
-		if(!item.name)
+	for (var/datum/uplink_item/item in items)
+		if (!item.name)
 			items -= item
 			continue
 
 		items_assoc[item.type] = item
 
-		for(var/datum/uplink_category/category in categories)
-			if(item.category == category.type)
+		for (var/datum/uplink_category/category in categories)
+			if (item.category == category.type)
 				category.items += item
 				item.category = category
 
-	for(var/datum/uplink_category/category in categories)
+	// looks kinda weird, but we need to pull out the "all" uplink category to init it,
+	// so we'll do it in this loop, as well. it's already init'd for us in the `init_subtypes` call above.
+	var/datum/uplink_category/all_items/all_items_category
+	for (var/datum/uplink_category/category in categories)
 		category.items = dd_sortedObjectList(category.items)
+		if (istype(category, /datum/uplink_category/all_items))
+			all_items_category = category
+
+	for (var/datum/uplink_item/item in items)
+		if (item.item_cost)
+			all_items_category.items += item
+	all_items_category.items = dd_sortedObjectList(all_items_category.items)
 
 /datum/uplink_item
 	var/name
