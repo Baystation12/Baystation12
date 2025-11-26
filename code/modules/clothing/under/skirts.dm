@@ -97,22 +97,25 @@
 	color = "#dcffed"
 
 /obj/item/clothing/under/skirt_c/dress_elegant
-		name = "elegant dress"
-		desc = "A maxi length dress with side slits in the skirt and a fashionable view of the shoulders."
-		icon_state = "dress_e"
-		worn_state = "dress_e"
-		body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	name = "elegant dress"
+	desc = "A maxi length dress with side slits in the skirt and a fashionable view of the shoulders."
+	icon_state = "dress_e"
+	worn_state = "dress_e"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	flags_inv = HIDETAIL
 
 /obj/item/clothing/under/skirt_c/dress_stripes
-		name = "striped dress"
-		desc = "A maxi length dress with side slits in the skirt, with stripes on the top."
-		icon_state = "dress_stripes"
-		worn_state = "dress_stripes"
-		body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	name = "striped dress"
+	desc = "A maxi length dress with side slits in the skirt, with stripes on the top."
+	icon_state = "dress_stripes"
+	worn_state = "dress_stripes"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	flags_inv = HIDETAIL
 
 /obj/item/clothing/under/skirt_c/dress_flowers
-		name = "flowery turtledress"
-		desc = "A maxi length dress with side slits in the skirt, and a turtleneck top. It's covered in flowers."
-		icon_state = "dress_flowers"
-		worn_state = "dress_flowers"
-		body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	name = "flowery turtledress"
+	desc = "A maxi length dress with side slits in the skirt, and a turtleneck top. It's covered in flowers."
+	icon_state = "dress_flowers"
+	worn_state = "dress_flowers"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	flags_inv = HIDETAIL

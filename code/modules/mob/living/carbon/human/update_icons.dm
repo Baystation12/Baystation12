@@ -681,7 +681,7 @@ var/global/list/damage_icon_parts = list()
 
 	var/species_tail = species.get_tail(src)
 
-	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+	if(species_tail && !(wear_suit?.flags_inv & HIDETAIL) && !(w_uniform?.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
 		overlays_standing[HO_TAIL_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
 		animate_tail_reset(0)
