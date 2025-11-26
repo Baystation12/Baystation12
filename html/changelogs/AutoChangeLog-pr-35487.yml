@@ -1,5 +1,0 @@
-author: Banditoz
-changes:
-  - bugfix: Fixes some cases where a mob is phantom buckled to something, making
-      unbuckling near impossible.
-delete-after: true
