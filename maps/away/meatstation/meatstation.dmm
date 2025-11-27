@@ -3743,7 +3743,7 @@
 /turf/simulated/floor/ceiling,
 /area/meatstation/kitchen)
 "iD" = (
-/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/obj/item/reagent_containers/food/snacks/slice/pizza/meat,
 /turf/space,
 /area/space)
 "iE" = (
@@ -3771,7 +3771,7 @@
 /turf/simulated/floor/ceiling,
 /area/meatstation/kitchen)
 "iI" = (
-/obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza,
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/meat,
 /turf/space,
 /area/space)
 "iJ" = (
@@ -4592,7 +4592,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza,
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/meat,
 /turf/simulated/floor/lino,
 /area/meatstation/mess)
 "kJ" = (

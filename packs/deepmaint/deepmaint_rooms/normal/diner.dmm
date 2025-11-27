@@ -146,10 +146,10 @@
 /area/map_template/deepmaint)
 "ud" = (
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/item/reagent_containers/food/snacks/slice/meatpizza,
-/obj/item/reagent_containers/food/snacks/slice/meatpizza,
-/obj/item/reagent_containers/food/snacks/slice/meatpizza,
-/obj/item/reagent_containers/food/snacks/slice/meatpizza,
+/obj/item/reagent_containers/food/snacks/slice/pizza/meat,
+/obj/item/reagent_containers/food/snacks/slice/pizza/meat,
+/obj/item/reagent_containers/food/snacks/slice/pizza/meat,
+/obj/item/reagent_containers/food/snacks/slice/pizza/meat,
 /turf/simulated/floor/wood/walnut,
 /area/map_template/deepmaint)
 "uK" = (
