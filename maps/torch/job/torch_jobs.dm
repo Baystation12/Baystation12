@@ -13,7 +13,7 @@
 	species_to_job_blacklist = list(
 		/singleton/species/unathi  = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden), //Other jobs unavailable via branch restrictions,
 		/singleton/species/unathi/yeosa = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/warden),
-		/singleton/species/skrell  = list(HUMAN_ONLY_JOBS),
+		/singleton/species/skrell  = list(/datum/job/captain, /datum/job/representative, /datum/job/sea, /datum/job/pathfinder, /datum/job/rd),
 		/singleton/species/machine = list(HUMAN_ONLY_JOBS, /datum/job/liaison, /datum/job/psychiatrist, /datum/job/bridgeofficer, /datum/job/senior_engineer, /datum/job/warden, /datum/job/qm, /datum/job/senior_scientist, /datum/job/chief_steward),
 		/singleton/species/diona   = list(HUMAN_ONLY_JOBS, /datum/job/officer, /datum/job/liaison, /datum/job/warden, /datum/job/doctor, /datum/job/medical_trainee),	//Other jobs unavailable via branch restrictions,
 	)
