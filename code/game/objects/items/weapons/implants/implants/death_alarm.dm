@@ -1,11 +1,11 @@
-/obj/item/implant/death_alarm
+/obj/item/implant/processing/death_alarm
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 1)
 	known = 1
 	var/mobname = "John Doe"
 
-/obj/item/implant/death_alarm/get_data()
+/obj/item/implant/processing/death_alarm/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
 	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
@@ -17,11 +17,13 @@
 	<b>Special Features:</b> Alerts crew to crewmember death.<BR>
 	<b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 
-/obj/item/implant/death_alarm/islegal()
+/obj/item/implant/processing/death_alarm/islegal()
 	return TRUE
 
-/obj/item/implant/death_alarm/Process()
-	if (!implanted) return
+/obj/item/implant/processing/death_alarm/Process()
+	. = ..()
+	if (. == PROCESS_KILL)
+		return .
 	var/mob/M = imp_in
 
 	if(isnull(M)) // If the mob got gibbed
@@ -29,7 +31,7 @@
 	else if(M.is_dead())
 		activate("death")
 
-/obj/item/implant/death_alarm/activate(cause = "emp")
+/obj/item/implant/processing/death_alarm/activate(cause = "emp")
 	if(malfunction) return
 	var/mob/M = imp_in
 	var/area/t = get_area(M)
@@ -47,29 +49,10 @@
 	for(var/channel in list("Security", "Medical", "Command"))
 		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
-/obj/item/implant/death_alarm/disable()
+/obj/item/implant/processing/death_alarm/implanted(mob/source)
 	. = ..()
-	if(.)
-		STOP_PROCESSING(SSobj, src)
-
-/obj/item/implant/death_alarm/restore()
-	. = ..()
-	if(.)
-		START_PROCESSING(SSobj, src)
-
-/obj/item/implant/death_alarm/meltdown()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
-
-/obj/item/implant/death_alarm/implanted(mob/source as mob)
 	mobname = source.real_name
-	START_PROCESSING(SSobj, src)
-	return TRUE
-
-/obj/item/implant/death_alarm/removed()
-	..()
-	STOP_PROCESSING(SSobj, src)
 
 /obj/item/implantcase/death_alarm
 	name = "glass case - 'death alarm'"
-	imp = /obj/item/implant/death_alarm
+	imp = /obj/item/implant/processing/death_alarm
