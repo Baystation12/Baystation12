@@ -2705,6 +2705,10 @@
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 	reagents.add_reagent(/datum/reagent/sodiumchloride, 3)
 
+/obj/item/reagent_containers/food/snacks/cutlet/ham/printed
+	name = "synthetic hamm block"
+	desc = "Unlike regular hamm, this block was extruded by a machine from protein soup- ... Wait a minute."
+
 /obj/item/reagent_containers/food/snacks/bacon/ham
 	name = "hamm slice"
 	desc = "Ham, Maybe. A thin slice from an unholy meat obelisk. Allegedly ready cooked."

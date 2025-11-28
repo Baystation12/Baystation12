@@ -32,6 +32,8 @@
 			/obj/item/reagent_containers/food/drinks/small_milk = 30,
 			/obj/item/reagent_containers/food/drinks/milk = 50,
 			/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 50,
+			/obj/item/reagent_containers/food/snacks/meat/chicken/printed = 60,
+			/obj/item/reagent_containers/food/snacks/cutlet/ham/printed = 40,
 			/obj/item/storage/fancy/egg_box/full = 300),
 		"Nutrients" = list(
 			/obj/item/reagent_containers/glass/bottle/eznutrient = 60,
