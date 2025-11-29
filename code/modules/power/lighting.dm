@@ -177,6 +177,8 @@
 	var/on = TRUE
 	/// Whether or not the light is currently flickering.
 	var/flickering = FALSE
+	/// Whether this light should spawn in a broken state
+	var/spawn_broken = FALSE
 	/// Type path of the light bulb item. Used for initialization and to determine what bulbs fit.
 	var/light_type = /obj/item/light/tube
 	/// Type path for the machine to create when dismantled. Should be `/obj/machinery/light_construct` or a subtype.
@@ -233,7 +235,7 @@
 	else
 		var/light_color = get_color_from_area()
 		lightbulb = new light_type(src, light_color)
-		if(prob(lightbulb.broken_chance))
+		if(prob(lightbulb.broken_chance) || spawn_broken)
 			broken(TRUE)
 
 	on = powered()
