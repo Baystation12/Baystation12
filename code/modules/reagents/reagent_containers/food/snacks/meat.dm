@@ -42,6 +42,9 @@
 	desc = "It tastes like you'd expect."
 	icon_state = "birdmeat"
 
+/obj/item/reagent_containers/food/snacks/meat/chicken/printed
+	name = "synthetic chicken piece"
+
 /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	name = "game bird piece"
 	desc = "Fresh game meat, harvested from some wild bird."

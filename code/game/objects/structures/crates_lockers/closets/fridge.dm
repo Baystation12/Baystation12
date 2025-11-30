@@ -26,7 +26,9 @@
 
 /obj/structure/closet/fridge/meat/WillContain()
 	return list(
-		/obj/item/reagent_containers/food/snacks/meat/beef = 5,
-		/obj/random/fish = 5,
-		/obj/item/storage/fancy/bugmeat = 6
+		/obj/item/storage/fancy/bugmeat = 4,
+		/obj/item/reagent_containers/food/snacks/meat/chicken = 2,
+		/obj/item/reagent_containers/food/snacks/meat/beef = 2,
+		/obj/item/reagent_containers/food/snacks/cutlet/ham = 2,
+		/obj/random/fish = 4
 	)

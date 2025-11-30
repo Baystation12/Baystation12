@@ -48,6 +48,13 @@
 	containername = "cow meat crate"
 	cost = 20
 
+/singleton/hierarchy/supply_pack/galley/ham
+	name = "Perishables - Hamm"
+	contains = list(/obj/item/reagent_containers/food/snacks/cutlet/ham = 4)
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "hamm crate"
+	cost = 20
+
 /singleton/hierarchy/supply_pack/galley/goat
 	name = "Perishables - Goat meat"
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/goat = 6)
@@ -102,7 +109,11 @@
 		/obj/item/pizzabox/mushroom,
 		/obj/item/pizzabox/meat,
 		/obj/item/pizzabox/vegetable,
-		/obj/item/pizzabox/fruit
+		/obj/item/pizzabox/fruit,
+		/obj/item/pizzabox/choco,
+		/obj/item/pizzabox/ham,
+		/obj/item/pizzabox/hawaiian,
+		/obj/item/pizzabox/capricciosa
 	)
 	cost = 15
 	containertype = /obj/structure/closet/crate/freezer

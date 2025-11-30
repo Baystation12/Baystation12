@@ -3045,6 +3045,7 @@
 #include "code\modules\reagents\reagent_containers\food\drinks.dm"
 #include "code\modules\reagents\reagent_containers\food\fish.dm"
 #include "code\modules\reagents\reagent_containers\food\lunch.dm"
+#include "code\modules\reagents\reagent_containers\food\pizza.dm"
 #include "code\modules\reagents\reagent_containers\food\sandwich.dm"
 #include "code\modules\reagents\reagent_containers\food\servingbowl.dm"
 #include "code\modules\reagents\reagent_containers\food\shaker.dm"

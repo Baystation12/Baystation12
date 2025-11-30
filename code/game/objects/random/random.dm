@@ -734,6 +734,10 @@
 				/obj/item/pizzabox/margherita,
 				/obj/item/pizzabox/mushroom,
 				/obj/item/pizzabox/fruit,
+				/obj/item/pizzabox/choco,
+				/obj/item/pizzabox/ham,
+				/obj/item/pizzabox/hawaiian,
+				/obj/item/pizzabox/capricciosa,
 				/obj/item/reagent_containers/food/snacks/plumphelmetbiscuit,
 				/obj/item/reagent_containers/food/snacks/skrellsnacks)
 
