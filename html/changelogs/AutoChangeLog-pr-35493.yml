@@ -1,0 +1,9 @@
+author: spookerton & Azlan
+changes:
+  - rscadd: Added chocolate, ham, hawaiian, and capricciosa(ish) pizzas, as well
+      as the hamm® required to make the last three.
+  - tweak: The galley meat fridges have less bug meat and more high sodium 
+      mechanically reclaimed pork. Some chicken might also have slipped in! 
+      Rejoice.
+  - tweak: The hydroponics biogenerator can produce synthetic chicken and hamm.
+delete-after: true
