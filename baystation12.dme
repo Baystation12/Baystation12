@@ -37,6 +37,7 @@
 #include "code\__defines\changeling.dm"
 #include "code\__defines\chemistry.dm"
 #include "code\__defines\client.dm"
+#include "code\__defines\codex.dm"
 #include "code\__defines\colors.dm"
 #include "code\__defines\culture.dm"
 #include "code\__defines\damage_organs.dm"

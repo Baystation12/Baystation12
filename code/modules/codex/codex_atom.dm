@@ -54,35 +54,6 @@
 	return list()
 
 
-// Constants for use to describe special handlers in `get_interactions_info()`. These allow for consistant key names for overriding and stacking purposes.
-// Click handlers
-/atom/var/const/CODEX_INTERACTION_ALT_CLICK = "ALT+CLICK"
-/atom/var/const/CODEX_INTERACTION_ALT_SHIFT_CLICK = "ALT+SHIFT+CLICK"
-/atom/var/const/CODEX_INTERACTION_CTRL_CLICK = "CTRL+CLICK"
-/atom/var/const/CODEX_INTERACTION_CTRL_ALT_CLICK = "CTRL+ALT+CLICK"
-/atom/var/const/CODEX_INTERACTION_CTRL_ALT_SHIFT_CLICK = "CTRL+ALT+SHIFT+CLICK"
-/atom/var/const/CODEX_INTERACTION_CTRL_SHIFT_CLICK = "CTRL+SHIFT+CLICK"
-/atom/var/const/CODEX_INTERACTION_SHIFT_CLICK = "SHIFT+CLICK"
-
-// Use handlers
-/atom/var/const/CODEX_INTERACTION_USE_SELF = "Use On Self"
-/atom/var/const/CODEX_INTERACTION_HAND = "Empty Hand"
-
-// Common Tools/Items
-/atom/var/const/CODEX_INTERACTION_ID_CARD = "ID Card (And Scannable ID Holders)"
-/atom/var/const/CODEX_INTERACTION_SCREWDRIVER = "Screwdriver"
-/atom/var/const/CODEX_INTERACTION_WELDER = "Welding Tool"
-
-// Grabs
-/atom/var/const/CODEX_INTERACTION_GRAB = "Grabbed Mob"
-/atom/var/const/CODEX_INTERACTION_GRAB_PASSIVE = "Grabbed Mob (Passive - Yellow)"
-/atom/var/const/CODEX_INTERACTION_GRAB_AGGRESSIVE = "Grabbed Mob (Aggressive - Blue)"
-/atom/var/const/CODEX_INTERACTION_GRAB_NECK = "Grabbed Mob (Neck - Red)"
-
-// Other cases
-/atom/var/const/CODEX_INTERACTION_EMAG = "Cryptographic Sequencer (EMAG)"
-/atom/var/const/CODEX_INTERACTION_EMP = "EMP"
-
 /**
  * Handler for displaying information on tool interations in the Mechanics section of the atom's codex entry.
  *
