@@ -1,0 +1,7 @@
+author: thatdanguy23
+changes:
+  - bugfix: Removed a stray pixel from unathi iPatch side states.
+  - tweak: Re-shaded Expeditionary Corps undershirts.
+  - tweak: Added tail-hiding behavior to the elegant dress, striped dress, and 
+      flowery turtledress.
+delete-after: true
