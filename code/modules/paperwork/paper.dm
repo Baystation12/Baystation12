@@ -581,6 +581,8 @@
 	desc = "A flimsy piece of laminated cardboard issued by the Sol Central Government."
 	icon_state = "workvisa"
 	info = "<center><b><large>Work Visa of the Sol Central Government</large></b></center><br><center><img src = sollogo.png><br><br><i><small>Issued on behalf of the Secretary-General.</small></i></center><hr><BR>This paper hereby permits the carrier to travel unhindered through Sol territories, colonies, and space for the purpose of work and labor."
+	body_parts_covered = FLAGS_OFF
+	slot_flags = FLAGS_OFF
 
 
 /obj/item/paper/workvisa/on_update_icon()
@@ -592,6 +594,8 @@
 	desc = "A flimsy piece of laminated cardboard issued by the Sol Central Government."
 	icon_state = "travelvisa"
 	info = "<center><b><large>Travel Visa of the Sol Central Government</large></b></center><br><center><img src = sollogo.png><br><br><i><small>Issued on behalf of the Secretary-General.</small></i></center><hr><BR>This paper hereby permits the carrier to travel unhindered through Sol territories, colonies, and space for the purpose of pleasure and recreation."
+	body_parts_covered = FLAGS_OFF
+	slot_flags = FLAGS_OFF
 
 
 /obj/item/paper/travelvisa/on_update_icon()
