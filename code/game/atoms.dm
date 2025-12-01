@@ -95,7 +95,10 @@
 			T.recalc_atom_opacity()
 
 	if (health_max)
-		health_current = health_max
+		if (initial_health_percent < 100)
+			set_health(health_max * (initial_health_percent/100))
+		else
+			health_current = health_max
 
 	return INITIALIZE_HINT_NORMAL
 

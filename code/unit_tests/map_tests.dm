@@ -841,6 +841,9 @@
 			bad_doors++
 			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
 		else
+			if(LAZYISIN(D.test_exemptions, D.TEST_EXEMPT_DOOR_ON_APPROPRIATE_TURF))
+				continue
+
 			var/is_bad_door = FALSE
 			for(var/L in D.locs)
 				if(istype(L, /turf/simulated/open) || isspaceturf(L))
