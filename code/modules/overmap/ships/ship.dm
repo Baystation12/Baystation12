@@ -176,11 +176,13 @@
 
 /obj/overmap/visitable/ship/populate_sector_objects()
 	..()
-	for(var/obj/machinery/computer/ship/S in SSmachines.machinery)
-		S.attempt_hook_up(src)
-	for(var/datum/ship_engine/E in ship_engines)
-		if(check_ownership(E.holder))
-			engines |= E
+	for(var/obj/machinery/computer/ship/ship_computer in SSmachines.machinery)
+		ship_computer.sync_linked()
+	for(var/obj/machinery/payload_interface/payload_interface in SSmachines.machinery)
+		payload_interface.sync_linked()
+	for(var/datum/ship_engine/ship_engine in ship_engines)
+		if(check_ownership(ship_engine.holder))
+			engines |= ship_engine
 
 /obj/overmap/visitable/ship/proc/get_landed_info()
 	return "This ship cannot land."

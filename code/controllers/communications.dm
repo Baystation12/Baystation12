@@ -149,6 +149,7 @@ var/global/const/AIRLOCK_FREQ      = 1305 // Used by airlocks and buttons contro
 var/global/const/SHUTTLE_AIR_FREQ  = 1331 // Used by shuttles and shuttle-related atmos systems.
 var/global/const/AIRLOCK_AIR_FREQ  = 1379 // Used by some airlocks for atmos devices.
 var/global/const/EXTERNAL_AIR_FREQ = 1380 // Used by some external airlocks.
+var/global/const/CONVEYOR_FREQ     = 1390 // Used by conveyor belts.
 
 var/global/list/radiochannels = list(
 	"Common"		= PUB_FREQ,

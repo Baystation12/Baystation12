@@ -11,11 +11,14 @@
 // Use handlers
 #define CODEX_INTERACTION_USE_SELF "Use On Self"
 #define CODEX_INTERACTION_HAND "Empty Hand"
+#define CODEX_INTERACTION_CLICKDRAG "Click And Drag On Self"
 
 // Common Tools/Items
 #define CODEX_INTERACTION_ID_CARD "ID Card (And Scannable ID Holders)"
 #define CODEX_INTERACTION_SCREWDRIVER "Screwdriver"
 #define CODEX_INTERACTION_WELDER "Welding Tool"
+#define CODEX_INTERACTION_CROWBAR "Crowbar"
+#define CODEX_INTERACTION_MULTITOOL "Multitool"
 
 // Grabs
 #define CODEX_INTERACTION_GRAB "Grabbed Mob"

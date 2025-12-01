@@ -91,7 +91,13 @@
 		/datum/computer_file/program/docking,
 		/datum/computer_file/program/wordprocessor,
 		/datum/computer_file/program/digitalwarrant,
-		/datum/computer_file/program/forceauthorization
+		/datum/computer_file/program/forceauthorization,
+		/datum/computer_file/program/munitions
+	)
+
+/obj/machinery/computer/modular/preset/munitions
+	default_software = list(
+		/datum/computer_file/program/munitions
 	)
 
 /obj/machinery/computer/modular/preset/cardslot/command_eng

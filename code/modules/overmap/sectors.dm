@@ -241,3 +241,15 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 	var/datum/gas_mixture/gas = new
 	gas.copy_from(exterior_atmosphere)
 	return gas
+
+/proc/get_owning_sector_recursive(atom/query_atom, obj/overmap/visitable/parent_sector)
+	var/obj/overmap/visitable/sector = parent_sector
+	if (!sector)
+		sector = map_sectors["[get_z(query_atom)]"]
+	if (!sector)
+		return null
+	if (sector.check_ownership(query_atom))
+		return sector
+	for (var/obj/overmap/visitable/candidate in sector)
+		if ((. = .(query_atom, candidate)))
+			return .

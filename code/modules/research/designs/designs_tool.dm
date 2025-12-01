@@ -128,3 +128,47 @@
 	materials = list(MATERIAL_STEEL = 25000, MATERIAL_PHORON = 4000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
 	build_path = /obj/item/rcd
 	sort_string = "VAGAN"
+
+/datum/design/item/tool/missile_payload/AssembleDesignName()
+	..()
+	name = "Missile payload prototype ([item_name])"
+
+/datum/design/item/tool/missile_payload/probe
+	id = "sensor probe"
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_SILVER = 150, MATERIAL_GOLD = 150, MATERIAL_GLASS = 3000)
+	build_path = /obj/item/missile_equipment/payload/sensor
+	sort_string = "VDAAA"
+
+/datum/design/item/tool/missile_payload/cargo
+	id = "cargo pod"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_STEEL = 5000)
+	build_path = /obj/item/missile_equipment/payload/cargo
+	sort_string = "VDBAA"
+
+/datum/design/item/tool/missile_thruster/AssembleDesignName()
+	..()
+	name = "Missile thruster prototype ([item_name])"
+	sort_string = "VEAAA"
+
+/datum/design/item/tool/missile_thruster/planetary
+	id = "planetary"
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_PHORON = 4000)
+	build_path = /obj/item/missile_equipment/thruster/planet
+	sort_string = "VEBAA"
+
+/datum/design/item/tool/missile_thruster/point
+	id = "pointman"
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_PHORON = 4000)
+	build_path = /obj/item/missile_equipment/thruster/point
+	sort_string = "VECAA"
+
+/datum/design/item/tool/missile_thruster/standard
+	id = "standard"
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_PHORON = 4000)
+	build_path = /obj/item/missile_equipment/thruster
+	sort_string = "VECAA"

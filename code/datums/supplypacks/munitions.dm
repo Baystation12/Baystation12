@@ -32,3 +32,16 @@
 	name = "Ammunition - disperser-XP4-INDARRA charge"
 	contains = list(/obj/structure/ship_munition/disperser_charge/explosive)
 	cost = 40
+
+/singleton/hierarchy/supply_pack/munition/probes
+	name = "Ammunition - sensor probe parts"
+	containername = "sensor probe parts crate"
+	contains = list(
+		/obj/item/missile_equipment/payload/sensor,
+		/obj/item/missile_equipment/payload/sensor,
+		/obj/item/missile_equipment/payload/sensor,
+		/obj/item/missile_equipment/thruster/point/preset,
+		/obj/item/missile_equipment/thruster/point/preset,
+		/obj/item/missile_equipment/thruster/point/preset
+	)
+	cost = 40
