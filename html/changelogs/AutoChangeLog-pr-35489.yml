@@ -1,0 +1,8 @@
+author: Atebite
+changes:
+  - rscadd: Added the active salvage site away site
+  - rscadd: Added the ISV Crab salvage shuttle, with 2 playable crew slots. The 
+      Crab starts at the active salvage site
+  - rscadd: Shuttles now support space tiles, which change to the destination 
+      tile whenever the shuttle changes locations
+delete-after: true
