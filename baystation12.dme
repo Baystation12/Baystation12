@@ -2004,6 +2004,7 @@
 #include "code\modules\games\cards.dm"
 #include "code\modules\games\spaceball_cards.dm"
 #include "code\modules\games\tarot.dm"
+#include "code\modules\games\hanafuda.dm"
 #include "code\modules\genetics\side_effects.dm"
 #include "code\modules\ghosttrap\trap.dm"
 #include "code\modules\goals\_goal.dm"
