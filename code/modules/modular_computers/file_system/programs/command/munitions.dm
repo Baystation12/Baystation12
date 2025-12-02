@@ -13,11 +13,19 @@
 	requires_ntnet_feature = NTNET_SYSTEMCONTROL
 	required_access = access_bridge
 
+/datum/computer_file/program/munitions/syndicate
+	nanomodule_path = /datum/nano_module/program/munitions/syndicate
+	required_access = access_syndicate
+	available_on_ntnet = FALSE
+
 /datum/nano_module/program/munitions
 	name = "Munitions Control Program"
 	var/access_req = list(access_bridge)
 	var/list/monitored_munitions = list()
 	var/obj/overmap/visitable/linked = null
+
+/datum/nano_module/program/munitions/syndicate
+	access_req = list(access_syndicate)
 
 /datum/nano_module/program/munitions/New()
 	..()
