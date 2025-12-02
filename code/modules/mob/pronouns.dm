@@ -78,6 +78,20 @@
 	s    = "s"
 	es   = "es"
 
+/datum/pronouns/she_it
+	key  = PRONOUNS_SHE_IT
+	formal_term = "She/It"
+	types = list(PRONOUNS_SHE_HER, PRONOUNS_IT_ITS)
+
+/datum/pronouns/they_it
+	key  = PRONOUNS_THEY_IT
+	formal_term = "They/It"
+	types = list(PRONOUNS_THEY_THEM, PRONOUNS_IT_ITS)
+
+/datum/pronouns/he_it
+	key  = PRONOUNS_HE_IT
+	formal_term = "He/It"
+	types = list(PRONOUNS_HE_HIM, PRONOUNS_IT_ITS)
 
 /datum/pronouns_manager
 	var/static/list/datum/pronouns/instances = list()

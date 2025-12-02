@@ -1,0 +1,4 @@
+author: KatTheFox
+delete-after: True
+changes:
+  - rscadd: "Added three new pronoun sets: she/it, they/it, and he/it. They function exactly the same as the other combination pronoun sets like she/they."
