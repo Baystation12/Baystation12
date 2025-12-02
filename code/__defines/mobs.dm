@@ -496,8 +496,11 @@
 #define PRONOUNS_IT_ITS		"it/its"
 #define PRONOUNS_HE_THEY	"he/they"
 #define PRONOUNS_SHE_THEY	"she/they"
+#define PRONOUNS_SHE_IT	"she/it"
+#define PRONOUNS_THEY_IT	"they/it"
+#define PRONOUNS_HE_IT	"he/it"
 
-#define PRONOUNS_ALL list(PRONOUNS_THEY_THEM, PRONOUNS_HE_HIM, PRONOUNS_SHE_HER, PRONOUNS_HE_THEY, PRONOUNS_SHE_THEY, PRONOUNS_IT_ITS)
+#define PRONOUNS_ALL list(PRONOUNS_THEY_THEM, PRONOUNS_HE_HIM, PRONOUNS_SHE_HER, PRONOUNS_HE_THEY, PRONOUNS_SHE_THEY, PRONOUNS_IT_ITS, PRONOUNS_SHE_IT, PRONOUNS_THEY_IT, PRONOUNS_HE_IT)
 
 /// Integer (~ticks * SSMobs/wait fire rate). The default maximum value a mob's confused var can be set to.
 #define CONFUSED_MAX 15
