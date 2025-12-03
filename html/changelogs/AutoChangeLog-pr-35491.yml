@@ -1,5 +1,0 @@
-author: Banditoz
-changes:
-  - rscadd: Adds the spider beacon implant! It's a 45 TC uplink item that spawns
-      a random spider near the implantee every minute or so, until it's removed.
-delete-after: true
