@@ -9125,6 +9125,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"vv" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/deck/hanafuda,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/observation)
 "vw" = (
 /obj/structure/bed/chair/padded/green{
 	dir = 8
@@ -17200,10 +17205,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/habcheck)
-"QG" = (
-/obj/structure/table/woodentable/walnut,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/observation)
 "QH" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
@@ -28823,7 +28824,7 @@ aa
 Di
 Di
 BQ
-QG
+vv
 YB
 nw
 Xq

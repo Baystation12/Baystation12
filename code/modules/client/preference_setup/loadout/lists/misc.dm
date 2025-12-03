@@ -53,6 +53,10 @@
 	display_name = "deck of tarot cards"
 	path = /obj/item/deck/tarot
 
+/datum/gear/hanafuda
+	display_name = "deck of hanafuda cards"
+	path = /obj/item/deck/hanafuda
+
 /datum/gear/holder
 	display_name = "card holder"
 	path = /obj/item/deck/holder
