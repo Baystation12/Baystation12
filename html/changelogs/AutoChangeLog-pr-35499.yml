@@ -1,0 +1,6 @@
+author: Qlonever
+changes:
+  - rscadd: Hanafuda cards are now available in character loadouts and game 
+      vendors.
+  - spellcheck: Major arcana tarot cards use the correct articles now.
+delete-after: true
