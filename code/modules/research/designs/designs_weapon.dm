@@ -219,7 +219,7 @@
 
 /datum/design/item/weapon/missile_payload/explosive
 	id = "high explosive"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_ESOTERIC = 4)
 	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_PHORON = 3000)
 	build_path = /obj/item/missile_equipment/payload/explosive
 	sort_string = "TCDAA"
