@@ -33,7 +33,7 @@ jobs:
         - javascript-typescript
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6.0.0
+      uses: actions/checkout@v6.0.1
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v4
       with:
