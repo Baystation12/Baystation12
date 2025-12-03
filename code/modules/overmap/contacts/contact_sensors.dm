@@ -10,6 +10,7 @@
 	var/obj/overmap/visitable/ship/linked
 	var/list/linked_consoles = list() // To
 
+	var/list/external_sources = list()
 	var/list/objects_in_view = list() // Associative list of objects in view -> identification progress
 	var/list/memorized_objects = list() // Like objects in view, but for storing data
 	var/list/contact_datums = list()
@@ -39,6 +40,21 @@
 		var/datum/overmap_contact/record = new(src, linked)
 		contact_datums[linked] = record
 		record.marker.alpha = 255
+
+/obj/machinery/shipsensors/proc/link_external_source(obj/overmap/external_source, source_range)
+	if (!isnull(external_source) && !istype(external_source))
+		return
+	external_sources[external_source] = source_range
+
+	if (!contact_datums[external_source])
+		var/datum/overmap_contact/record = new(src, external_source)
+		contact_datums[external_source] = record
+		record.marker.alpha = 255
+
+/obj/machinery/shipsensors/proc/remove_external_source(obj/overmap/external_source)
+	if (!isnull(external_source) && !istype(external_source))
+		return
+	external_sources -= external_source
 
 /obj/machinery/shipsensors/proc/reveal_contacts(mob/user)
 	if (user && user.client)
@@ -89,7 +105,7 @@
 
 		for (var/key in contact_datums)
 			var/datum/overmap_contact/record = contact_datums[key]
-			if (record.effect == linked)
+			if (record.effect == linked || (record.effect in external_sources))
 				continue
 			qdel(record) // Immediately cut records if power is lost.
 
@@ -111,7 +127,14 @@
 	if (istype(linked.loc, /obj/overmap/visitable))
 		overmap_obj = linked.loc
 
-	for (var/obj/overmap/contact in view(sensor_range, overmap_obj))
+	var/list/sensors_view = view(sensor_range, overmap_obj)
+	for (var/external_source in external_sources)
+		var/datum/overmap_contact/external_source_record = contact_datums[external_source]
+		external_source_record.update_marker_icon(external_sources[external_source])
+		external_source_record.show()
+		sensors_view |= view(external_sources[external_source], external_source)
+
+	for (var/obj/overmap/contact in sensors_view)
 		if (contact == linked)
 			continue
 		if (!contact.requires_contact)	// Only some effects require contact for visibility.
@@ -119,12 +142,22 @@
 
 		// Made like in proc/circlerangeturfs()
 		// Makes the view round
+		var/not_circled = FALSE
 		if (overmap_obj.z == contact.z)
 			var/dx = contact.x - overmap_obj.x
 			var/dy = contact.y - overmap_obj.y
 			var/rsq = sensor_range * (sensor_range+1)
 			if (dx**2 + dy**2 > rsq)
-				continue
+				not_circled = TRUE
+				for (var/obj/overmap/external_source in external_sources)
+					var/odx = contact.x - external_source.x
+					var/ody = contact.y - external_source.y
+					var/orsq = external_sources[external_source] * (external_sources[external_source]+1)
+					if (odx**2 + ody**2 <= orsq)
+						not_circled = FALSE
+						break
+		if (not_circled)
+			continue
 
 		objects_in_current_view.Add(contact)
 

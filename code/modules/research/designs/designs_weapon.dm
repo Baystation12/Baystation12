@@ -191,3 +191,47 @@
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	build_path = /obj/item/ammo_casing/shotgun/emp
 	sort_string = "TBAAG"
+
+/datum/design/item/weapon/missile/AssembleDesignName()
+	..()
+	name = "Missile payload prototype ([item_name])"
+
+/datum/design/item/weapon/missile_payload/antimissile
+	id = "anti-missile"
+	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_PHORON = 3000)
+	build_path = /obj/item/missile_equipment/payload/antimissile
+	sort_string = "TCBAA"
+
+/datum/design/item/weapon/missile_payload/diffuser
+	id = "shield diffuser"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_DIAMOND = 500)
+	build_path = /obj/item/missile_equipment/payload/diffuser
+	sort_string = "TCCAA"
+
+/datum/design/item/weapon/missile_payload/emp
+	id = "EMP"
+	req_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_URANIUM = 3000)
+	build_path = /obj/item/missile_equipment/payload/emp
+	sort_string = "TCCAA"
+
+/datum/design/item/weapon/missile_payload/explosive
+	id = "high explosive"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_PHORON = 3000)
+	build_path = /obj/item/missile_equipment/payload/explosive
+	sort_string = "TCDAA"
+
+/datum/design/item/weapon/missile_thruster/AssembleDesignName()
+	..()
+	name = "Missile thruster prototype ([item_name])"
+	sort_string = "TCEAA"
+
+/datum/design/item/weapon/missile_thruster/hunter
+	id = "missile-hunter"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	materials = list(MATERIAL_ALUMINIUM = 5000, MATERIAL_GOLD = 2000, MATERIAL_PHORON = 4000)
+	build_path = /obj/item/missile_equipment/thruster/hunter
+	sort_string = "TCFAA"

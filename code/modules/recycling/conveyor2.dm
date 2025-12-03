@@ -17,6 +17,18 @@
 
 	var/id = ""			// the control ID	- must match controller ID
 
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/receiver
+	)
+
+	public_methods = list(
+		/singleton/public_access/public_method/toggle_conveyor,
+		/singleton/public_access/public_method/toggle_conveyor_forwards,
+		/singleton/public_access/public_method/toggle_conveyor_backwards
+	)
+	stock_part_presets = list(/singleton/stock_part_preset/radio/receiver/conveyor = 1)
+
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
 
@@ -38,6 +50,23 @@
 		setmove()
 
 
+/obj/machinery/conveyor/proc/toggle()
+	switch (operating)
+		if (0)
+			operating = 1
+		if (1)
+			operating = -1
+		else
+			operating = 0
+	setmove()
+
+/obj/machinery/conveyor/proc/toggle_forwards()
+	operating = operating == 0 ? 1 : 0
+	setmove()
+
+/obj/machinery/conveyor/proc/toggle_backwards()
+	operating = operating == 0 ? -1 : 0
+	setmove()
 
 /obj/machinery/conveyor/proc/setmove()
 	if(operating == 1)
@@ -156,6 +185,29 @@
 	var/obj/machinery/conveyor/C = locate() in get_step(src, stepdir)
 	if(C)
 		C.set_operable(stepdir, id, op)
+
+/singleton/public_access/public_method/toggle_conveyor
+	name = "conveyor toggle"
+	desc = "Toggle the conveyor's active state."
+	call_proc = TYPE_PROC_REF(/obj/machinery/conveyor, toggle)
+
+/singleton/public_access/public_method/toggle_conveyor_forwards
+	name = "conveyor forward toggle"
+	desc = "Toggle the conveyor's forward movement."
+	call_proc = TYPE_PROC_REF(/obj/machinery/conveyor, toggle_forwards)
+
+/singleton/public_access/public_method/toggle_conveyor_backwards
+	name = "conveyor backward toggle"
+	desc = "Toggle the conveyor's reverse movement."
+	call_proc = TYPE_PROC_REF(/obj/machinery/conveyor, toggle_backwards)
+
+/singleton/stock_part_preset/radio/receiver/conveyor
+	frequency = CONVEYOR_FREQ
+	receive_and_call = list(
+		"toggle_conveyor" = /singleton/public_access/public_method/toggle_conveyor,
+		"toggle_conveyor_forwards" = /singleton/public_access/public_method/toggle_conveyor_forwards,
+		"toggle_conveyor_backwards" = /singleton/public_access/public_method/toggle_conveyor_backwards,
+	)
 
 // the conveyor control switch
 

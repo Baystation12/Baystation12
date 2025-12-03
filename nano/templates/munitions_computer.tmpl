@@ -1,0 +1,49 @@
+
+{{if data.authenticated}}
+    {{if !data.armers && !data.loaders}}
+        <div class='item' align="center">
+            <h2>No bays detected!</h2>
+        </div>
+    {{/if}}
+    {{if data.armers}}
+        <div class='item' align="center">
+            <h2>Firing Bays</h2>
+        </div>
+        {{for data.armers}}
+            <div align="center">
+                <table class='block' style="width:80%">
+                    <tr>
+                        <td colspan='4'><div class="itemLabelWidest" align="center">{{:value.display_name}}</div></td>
+                    </tr>
+                    <tr>
+                        <td style="width:30%"><div class="item" align="right"><b>Payload - </b></div></td>
+                        <td style="width:50%"><div class="item">{{:helper.link(value.has_payload ? value.payload_data : "Empty", null, {'action' : 'configure', 'target' : value.ref}, value.arming || !value.has_payload ? 'disabled' : null)}}</div></td>
+                        <td style="width:10%"><div class="item">{{:helper.link("Load", null, {'action' : 'load', 'target' : value.ref}, null, value.loading ? 'yellowButton' : null)}}</div></td>
+                        <td style="width:10%"><div class="item">{{:helper.link(value.arming ? "FIRE" : "ARM", null, {'action' : value.arming ? 'fire' : 'arm', 'target' : value.ref}, (value.firing || !value.has_payload) ? 'disabled' : null, (value.arming && !value.firing) ? 'redButton' : null)}}</div></td>
+                    </tr>
+                </table><br>
+            </div>
+        {{/for}}
+        <hr>
+    {{/if}}
+    {{if data.loaders}}
+        <div class='item' align="center">
+            <h2>Loading Bays</h2>
+        </div>
+        <div align="center">
+            <table class='block' style="width:80%">
+                {{for data.loaders}}
+                    <tr class="candystripe">
+                        <td style="width:30%"><div class="itemLabelWidest" align="right">{{:value.display_name}} - </div></td>
+                        <td style="width:50%"><div class="item">{{:helper.link(value.has_payload ? value.payload_data : "Empty", null, {'action' : 'configure', 'target' : value.ref}, value.arming || !value.has_payload ? 'disabled' : null)}}</div></td>
+                        <td style="width:20%"><div class="item">{{:helper.link("Load", null, {'action' : 'load', 'target' : value.ref}, null, value.loading ? 'yellowButton' : null)}}</div></td>
+                    </tr>
+                {{/for}}
+            </table><br>
+        </div>
+    {{/if}}
+{{else}}
+    <div class='item' align="center">
+        <h1>ACCESS DENIED</h1>
+    </div>
+{{/if}}

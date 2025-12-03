@@ -229,3 +229,24 @@
 	item_cost = 50
 	path = /obj/item/gun/energy/sniperrifle
 	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/item/visible_weapons/missile_he
+	name = "DIY High Explosive Missile"
+	desc = "A high explosive missile payload and thrust system. Must be installed onto a missile frame upon delivery."
+	item_cost = 50
+	path = /obj/item/storage/box/syndie_kit/missile_he
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/item/visible_weapons/missile_emp
+	name = "DIY EMP Missile"
+	desc = "An EMP missile payload and thrust system. Must be installed onto a missile frame upon delivery."
+	item_cost = 25
+	path = /obj/item/storage/box/syndie_kit/missile_emp
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/item/visible_weapons/missile_diffuser
+	name = "DIY Shield-Diffuser Missile"
+	desc = "A shield-diffusing missile payload and thrust system. Must be installed onto a missile frame upon delivery."
+	item_cost = 25
+	path = /obj/item/storage/box/syndie_kit/missile_diffuser
+	antag_roles = list(MODE_MERCENARY)

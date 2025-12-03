@@ -26,15 +26,33 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
 "aaf" = (
-/obj/machinery/atmospherics/unary/tank/hydrogen,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aag" = (
-/obj/floor_decal/industrial/warning{
-	dir = 8
+/obj/machinery/conveyor{
+	dir = 1;
+	id = null;
+	id_tag = "probe_bay_1"
+	},
+/obj/structure/missile/probe{
+	dir = 1
+	},
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_1";
+	name = "Probe Bay 1"
 	},
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
+"aag" = (
+/obj/machinery/conveyor{
+	id = null;
+	id_tag = "probe_bay_5"
+	},
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_5";
+	name = "Probe Bay 5"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "aah" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -71,11 +89,12 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/deck1)
 "aak" = (
-/obj/machinery/light/spot{
-	dir = 1
+/obj/floor_decal/corner/blue{
+	dir = 5
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/item/stack/material/steel/ten,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "aal" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -85,42 +104,43 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aam" = (
-/obj/floor_decal/industrial/warning{
+/obj/floor_decal/industrial/loading,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/button/blast_door{
-	id_tag = "auxfuelvent";
-	name = "Auxiliary Fuel Storage Vent Control";
-	pixel_y = 32;
-	req_access = list("ACCESS_CONSTRUCTION")
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "aan" = (
-/obj/machinery/atmospherics/unary/tank/hydrogen{
-	dir = 4
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aao" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aap" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaq" = (
-/obj/machinery/atmospherics/valve{
-	dir = 4
-	},
 /obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/machinery/camera/network/bridge{
+	dir = 4;
+	c_tag = "Probe Bay - Fore"
+	},
+/obj/machinery/computer/modular/preset/munitions{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
+"aao" = (
+/obj/floor_decal/industrial/warning,
+/obj/structure/bed/chair/comfy/black{
 	dir = 8
 	},
-/obj/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
+"aap" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/command/probe_bay)
+"aaq" = (
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_5"
+	},
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "aar" = (
 /obj/shuttle_landmark/skipjack/deck2{
 	name = "1st Deck, Fore"
@@ -128,65 +148,78 @@
 /turf/space,
 /area/space)
 "aas" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 1
+/obj/floor_decal/corner/blue/three_quarters{
+	dir = 4
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/item/missile_equipment/thruster/point,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "aat" = (
-/obj/machinery/atmospherics/valve{
-	dir = 4
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_4"
 	},
-/obj/floor_decal/industrial/warning{
-	dir = 4
-	},
-/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "aau" = (
-/obj/machinery/atmospherics/unary/tank/hydrogen{
+/obj/structure/table/rack,
+/obj/item/cell/standard,
+/obj/item/cell/standard,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
+"aav" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aav" = (
-/obj/machinery/atmospherics/unary/tank/hydrogen{
+/obj/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
+"aaw" = (
+/obj/floor_decal/industrial/loading{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaw" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "aax" = (
-/obj/floor_decal/industrial/warning{
-	dir = 4
+/obj/machinery/conveyor{
+	id = null;
+	id_tag = "probe_bay_4"
+	},
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_4";
+	name = "Probe Bay 4"
 	},
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "aay" = (
-/obj/structure/sign/warning/compressed_gas{
-	dir = 8
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/engineering/fuelbay/aux)
-"aaz" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 8
-	},
-/obj/machinery/light/spot{
-	dir = 8
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaA" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+/obj/machinery/door/blast/regular{
+	name = "probe launch tube";
+	id_tag = "probe_bay";
 	dir = 4
 	},
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/turf/simulated/floor/airless,
+/area/command/probe_bay)
+"aaz" = (
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay";
+	allow_arming = 1;
+	name = "Probe Launcher"
+	},
+/turf/simulated/floor/airless,
+/area/command/probe_bay)
+"aaA" = (
+/obj/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
 "aaB" = (
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -198,83 +231,101 @@
 /turf/space,
 /area/space)
 "aaC" = (
-/obj/machinery/atmospherics/valve{
-	dir = 4
+/obj/machinery/conveyor{
+	dir = 8;
+	id = null;
+	id_tag = "probe_bay"
 	},
-/obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "aaD" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_access";
 	dir = 4
 	},
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "aaE" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
+/obj/machinery/conveyor{
+	dir = 1;
+	id = null;
+	id_tag = "probe_bay_2"
 	},
-/obj/floor_decal/industrial/warning{
-	dir = 8
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_2";
+	name = "Probe Bay 2"
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaF" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/obj/floor_decal/industrial/warning{
-	dir = 4
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaG" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 4
-	},
-/obj/machinery/light/spot{
-	dir = 4
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaH" = (
-/obj/structure/sign/warning/compressed_gas{
-	dir = 4
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/engineering/fuelbay/aux)
-"aaI" = (
-/obj/machinery/light/spot,
-/obj/machinery/atmospherics/unary/tank/hydrogen{
+/obj/structure/missile/probe{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaJ" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
+/area/command/probe_bay)
+"aaF" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/floor_decal/corner/blue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
+"aaG" = (
+/obj/floor_decal/corner/blue{
 	dir = 6
 	},
-/obj/floor_decal/industrial/warning{
-	dir = 8
+/obj/machinery/camera/network/bridge{
+	dir = 8;
+	c_tag = "Probe Bay - Aft"
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaK" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1379;
-	master_tag = "auxfuel_airlock";
-	name = "exterior access button";
-	pixel_x = 24;
-	pixel_y = -24;
-	req_access = list("ACCESS_CONSTRUCTION")
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
+"aaH" = (
+/obj/structure/closet/crate/internals/fuel,
+/obj/floor_decal/industrial/outline{
+	color = "#55007f";
+	name = "purple outline"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible{
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
+"aaI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/atmospherics/binary/pump/high_power,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_4";
+	name = "Probe Bay 4";
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
+"aaJ" = (
+/obj/floor_decal/industrial/loading{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
+"aaK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_3";
+	name = "Probe Bay 3";
+	pixel_y = 25
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "aaL" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -282,46 +333,36 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/deck1)
 "aaM" = (
-/obj/machinery/portable_atmospherics/canister/air/airlock,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 8
+/obj/floor_decal/industrial/loading{
+	dir = 1
 	},
-/obj/floor_decal/industrial/warning{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "aaN" = (
-/obj/machinery/shield_diffuser,
-/obj/machinery/door/blast/regular{
-	id_tag = "auxfuelvent";
-	name = "Auxiliary Fuel Storage Vent"
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "aaO" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "auxfuel_outer";
-	locked = 1;
-	name = "Aux Fuel Storage Exterior Access"
+/obj/machinery/door/airlock/highsecurity{
+	name = "Probe Bay"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/command/probe_bay)
 "aaP" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "auxfuel_outer";
-	locked = 1;
-	name = "Aux Fuel Storage Exterior Access"
+/obj/machinery/door/airlock/highsecurity{
+	name = "Probe Bay"
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/command/probe_bay)
 "aaQ" = (
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
@@ -329,46 +370,44 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 4;
-	id_tag = "auxfuel_pump"
+/obj/floor_decal/industrial/warning{
+	dir = 9
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaR" = (
-/obj/machinery/atmospherics/pipe/manifold4w/visible,
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
-"aaS" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
+"aaR" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
+"aaS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaT" = (
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	dir = 8;
-	id_tag = "auxfuel_airlock";
-	pixel_x = 25;
-	req_access = list("ACCESS_CONSTRUCTION");
-	tag_airpump = "auxfuel_pump";
-	tag_chamber_sensor = "auxfuel_sensor";
-	tag_exterior_door = "auxfuel_outer";
-	tag_interior_door = "auxfuel_inner"
+/obj/floor_decal/industrial/warning{
+	dir = 5;
+	icon_state = "warning"
 	},
-/obj/machinery/airlock_sensor{
-	id_tag = "auxfuel_sensor";
-	pixel_x = 25;
-	pixel_y = 12
+/obj/machinery/light/small{
+	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 8;
-	id_tag = "auxfuel_pump"
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaU" = (
 /obj/structure/cable/green{
 	d2 = 4;
@@ -379,61 +418,61 @@
 	name = "west bump";
 	pixel_x = -24
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/floor_decal/industrial/warning{
+	dir = 10
+	},
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaV" = (
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 1;
-	target_pressure = 200
-	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaW" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/meter,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaX" = (
-/obj/machinery/button/blast_door{
-	id_tag = "auxfuelvent";
-	name = "Auxiliary Fuel Storage Vent Control";
-	pixel_x = 32;
-	req_access = list("ACCESS_CONSTRUCTION")
+/obj/floor_decal/industrial/warning{
+	dir = 6;
+	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "aaY" = (
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "auxfuel_inner";
-	locked = 1;
-	name = "Auxiliary Fuel Storage Interior Access"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/highsecurity{
+	name = "Probe Bay"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/command/probe_bay)
 "aaZ" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel,
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "auxfuel_inner";
-	locked = 1;
-	name = "Auxiliary Fuel Storage Interior Access"
+/obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
 	},
-/turf/simulated/floor/reinforced,
-/area/engineering/fuelbay/aux)
+/obj/structure/bed/chair/comfy/black{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "aba" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -442,32 +481,23 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "abb" = (
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1379;
-	master_tag = "auxfuel_airlock";
-	name = "interior access button";
-	pixel_x = 24;
-	pixel_y = 24;
-	req_access = list("ACCESS_CONSTRUCTION")
+/obj/structure/plasticflaps/airtight,
+/obj/machinery/conveyor{
+	dir = 8;
+	id = null;
+	id_tag = "probe_bay"
 	},
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 5
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "abc" = (
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
 	},
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -476,6 +506,7 @@
 	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "abd" = (
@@ -1025,7 +1056,6 @@
 "acc" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridgestarboard_outer";
 	locked = 1;
 	name = "Engineering External Access"
@@ -1289,9 +1319,6 @@
 "acC" = (
 /obj/structure/closet/firecloset,
 /obj/floor_decal/industrial/outline/grey,
-/obj/structure/sign/warning/compressed_gas{
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "acD" = (
@@ -1360,15 +1387,10 @@
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/development)
 "acH" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 10
-	},
-/obj/structure/catwalk,
-/obj/structure/sign/warning/airlock{
-	pixel_y = 32
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/steel_grid,
+/area/command/probe_bay)
 "acI" = (
 /obj/machinery/door/airlock/civilian{
 	autoset_access = 0;
@@ -1717,24 +1739,17 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "adt" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/machinery/conveyor{
+	id = null;
+	id_tag = "probe_bay_6"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_6";
+	name = "Probe Bay 6"
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/decal/cleanable/dirt,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 5
-	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "adu" = (
 /obj/floor_decal/corner/paleblue{
 	dir = 10
@@ -1753,23 +1768,9 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "adv" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
+/obj/structure/sign/warning/secure_area,
+/turf/simulated/wall/r_wall/hull,
+/area/command/probe_bay)
 "adw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1784,9 +1785,6 @@
 	},
 /obj/decal/cleanable/dirt,
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "adx" = (
@@ -1811,9 +1809,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
@@ -1837,9 +1832,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "adA" = (
@@ -2047,7 +2040,6 @@
 "adT" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridgestarboard_inner";
 	locked = 1;
 	name = "Engineering External Access"
@@ -2791,7 +2783,6 @@
 "aeT" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_12_hatch";
 	locked = 1;
 	name = "Escape Pod Seven Hatch"
@@ -2805,7 +2796,6 @@
 "aeV" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_13_hatch";
 	locked = 1;
 	name = "Escape Pod Eight Hatch"
@@ -3077,7 +3067,7 @@
 /area/medical/foyer)
 "afq" = (
 /turf/simulated/wall/r_wall/hull,
-/area/engineering/fuelbay/aux)
+/area/command/probe_bay)
 "afr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -3428,7 +3418,6 @@
 /area/maintenance/firstdeck/centralstarboard)
 "afV" = (
 /obj/machinery/door/airlock/external/escapepod{
-	icon_state = "closed";
 	id_tag = "escape_pod_12_berth_hatch";
 	name = "Escape Pod Seven"
 	},
@@ -3437,7 +3426,6 @@
 /area/maintenance/firstdeck/centralstarboard)
 "afW" = (
 /obj/machinery/door/airlock/external/escapepod{
-	icon_state = "closed";
 	id_tag = "escape_pod_13_berth_hatch";
 	name = "Escape Pod Eight"
 	},
@@ -3445,12 +3433,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "afX" = (
-/obj/floor_decal/industrial/shutoff,
-/obj/machinery/atmospherics/valve/shutoff/fuel{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/firstdeck/aftstarboard)
+/obj/wallframe_spawn/reinforced/no_grille,
+/turf/simulated/floor/plating,
+/area/command/probe_bay)
 "afY" = (
 /obj/machinery/vending/medical/torch{
 	dir = 1
@@ -7193,6 +7178,10 @@
 /obj/structure/closet/secure_closet/personal/patient,
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
+"avm" = (
+/obj/structure/missile,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "avo" = (
 /obj/floor_decal/corner/paleblue{
 	dir = 10
@@ -11963,7 +11952,6 @@
 /area/maintenance/firstdeck/centralport)
 "aQI" = (
 /obj/machinery/door/airlock/external/escapepod{
-	icon_state = "closed";
 	id_tag = "escape_pod_15_berth_hatch";
 	name = "Escape Pod Ten"
 	},
@@ -11972,7 +11960,6 @@
 /area/maintenance/firstdeck/centralport)
 "aQJ" = (
 /obj/machinery/door/airlock/external/escapepod{
-	icon_state = "closed";
 	id_tag = "escape_pod_16_berth_hatch";
 	name = "Escape Pod Eleven"
 	},
@@ -11981,7 +11968,6 @@
 /area/maintenance/firstdeck/centralport)
 "aQK" = (
 /obj/machinery/door/airlock/external/escapepod{
-	icon_state = "closed";
 	id_tag = "escape_pod_17_berth_hatch";
 	name = "Escape Pod Twelve"
 	},
@@ -12312,7 +12298,6 @@
 "aRC" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_15_hatch";
 	locked = 1;
 	name = "Escape Pod Ten Hatch"
@@ -12328,7 +12313,6 @@
 "aRE" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_16_hatch";
 	locked = 1;
 	name = "Escape Pod Eleven Hatch"
@@ -12344,7 +12328,6 @@
 "aRG" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	icon_state = "closed";
 	id_tag = "escape_pod_17_hatch";
 	locked = 1;
 	name = "Escape Pod Twelve Hatch"
@@ -12563,7 +12546,6 @@
 "aSq" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridgeport_inner";
 	locked = 1;
 	name = "Engineering External Access"
@@ -13124,7 +13106,6 @@
 "aUa" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "closed";
 	id_tag = "bridgeport_outer";
 	locked = 1;
 	name = "Engineering External Access"
@@ -14035,6 +14016,13 @@
 /obj/random_multi/single_item/punitelli,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
+"aYh" = (
+/obj/floor_decal/corner/blue/three_quarters{
+	dir = 1
+	},
+/obj/item/storage/toolbox/electrical,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "aYj" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14060,6 +14048,21 @@
 	},
 /turf/simulated/wall/ocp_wall,
 /area/thruster/d1starboard)
+"bbq" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_1";
+	name = "Probe Bay 1";
+	pixel_y = 24
+	},
+/obj/floor_decal/corner/blue/border{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "bdb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/machinery/door/airlock/external,
@@ -14548,9 +14551,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 4
-	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "bGh" = (
@@ -14654,6 +14654,15 @@
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medpaperworkoffice)
+"bLQ" = (
+/obj/item/device/radio/intercom{
+	pixel_y = 23
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "bMb" = (
 /turf/simulated/wall/prepainted,
 /area/engineering/hardstorage/aux)
@@ -15378,7 +15387,6 @@
 	},
 /obj/machinery/atmospherics/unary/freezer{
 	dir = 4;
-	icon_state = "freezer";
 	set_temperature = 80;
 	use_power = 1
 	},
@@ -15734,6 +15742,23 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/medical)
+"dcx" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_6";
+	name = "Probe Bay 6";
+	pixel_y = -25
+	},
+/obj/floor_decal/corner/blue/border{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "ddP" = (
 /obj/structure/lattice,
 /obj/structure/lattice,
@@ -15819,6 +15844,16 @@
 /obj/structure/lattice,
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1port)
+"diS" = (
+/obj/structure/railing/mapped,
+/obj/floor_decal/industrial/warning{
+	icon_state = "warning"
+	},
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/turf/simulated/floor/airless,
+/area/command/probe_bay)
 "dkb" = (
 /obj/machinery/optable,
 /obj/floor_decal/floordetail/edgedrain{
@@ -15960,6 +15995,13 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
 /area/thruster/d1port)
+"dsS" = (
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_3"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "dtb" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -16765,7 +16807,6 @@
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "d1sh_in";
 	use_power = 1
 	},
@@ -16815,6 +16856,11 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/medical/washroom)
+"eIA" = (
+/obj/structure/table/rack,
+/obj/item/missile_equipment/payload/sensor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
 "eJb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -17025,6 +17071,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/brig)
+"fdv" = (
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_6"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "fdQ" = (
 /obj/floor_decal/industrial/outline/grey,
 /obj/machinery/space_heater,
@@ -17034,6 +17087,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
+"ffy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "fkb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -17069,6 +17131,16 @@
 /obj/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
+"fnb" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/steel_grid,
+/area/command/probe_bay)
 "fnu" = (
 /obj/floor_decal/corner/green{
 	dir = 8
@@ -17156,6 +17228,14 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/sleeper)
+"fvg" = (
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/floor_decal/industrial/outline{
+	color = "#55007f";
+	name = "purple outline"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "fxb" = (
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/hidden,
@@ -18050,6 +18130,17 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/center)
+"hdT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_5";
+	name = "Probe Bay 5";
+	pixel_y = -25
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "heb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -18477,6 +18568,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
+"hyI" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/highsecurity{
+	name = "Probe Bay"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/command/probe_bay)
 "hzb" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -18802,6 +18900,15 @@
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
+"hVQ" = (
+/obj/floor_decal/industrial/warning{
+	icon_state = "warning"
+	},
+/obj/machinery/computer/modular/preset/munitions{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "hWb" = (
 /obj/structure/cable/green{
 	d2 = 8;
@@ -18925,6 +19032,19 @@
 	},
 /turf/simulated/wall/prepainted,
 /area/medical/staging)
+"iiF" = (
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_1"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
+"iiQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "ikj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -18986,6 +19106,17 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/questioning)
+"ilU" = (
+/obj/machinery/light/small/red{
+	dir = 1
+	},
+/obj/machinery/conveyor{
+	dir = 8;
+	id = null;
+	id_tag = "probe_bay"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "imb" = (
 /obj/floor_decal/torchltdlogo,
 /turf/simulated/floor/tiled,
@@ -19952,6 +20083,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
+"jup" = (
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
 "jvb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -20085,6 +20220,17 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/questioning)
+"jBl" = (
+/obj/structure/railing/mapped{
+	dir = 1;
+	icon_state = "railing0-1"
+	},
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/light/small/red,
+/turf/simulated/floor/airless,
+/area/command/probe_bay)
 "jBW" = (
 /obj/floor_decal/corner/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -21352,6 +21498,21 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
+"lhD" = (
+/obj/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_access";
+	name = "Probe Bay Access";
+	pixel_x = -25
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/command/probe_bay)
 "lib" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -21708,6 +21869,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/firstdeck)
+"lAR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "lBb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -22980,6 +23154,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
+"npK" = (
+/obj/machinery/camera/network/bridge{
+	c_tag = "Probe Bay - Chamber"
+	},
+/obj/machinery/conveyor{
+	dir = 8;
+	id = null;
+	id_tag = "probe_bay"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "nqb" = (
 /obj/machinery/hologram/holopad,
 /obj/floor_decal/industrial/outline/yellow,
@@ -23015,6 +23200,16 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
+"ntx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "nub" = (
 /obj/structure/table/standard,
 /obj/machinery/power/apc{
@@ -23308,6 +23503,14 @@
 /obj/item/storage/mre/menu7,
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
+"nPz" = (
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/steel_grid,
+/area/command/probe_bay)
 "nPT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -23373,6 +23576,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/rnd/entry)
+"nSm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/steel_grid,
+/area/command/probe_bay)
 "nUp" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -24991,6 +25198,21 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
+"pTR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "probe_bay_2";
+	name = "Probe Bay 2";
+	pixel_y = 25
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/command/probe_bay)
 "pUb" = (
 /obj/structure/closet/toolcloset,
 /obj/floor_decal/industrial/outline/grey,
@@ -25122,7 +25344,6 @@
 "qab" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "xenobot_in";
 	use_power = 1
 	},
@@ -25331,6 +25552,22 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/misc_lab)
+"qmH" = (
+/obj/machinery/conveyor{
+	dir = 1;
+	id = null;
+	id_tag = "probe_bay_3"
+	},
+/obj/structure/missile/probe{
+	dir = 1
+	},
+/obj/floor_decal/industrial/hatch/red,
+/obj/machinery/payload_interface{
+	id_tag = "probe_bay_3";
+	name = "Probe Bay 3"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "qnb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 10
@@ -26138,8 +26375,7 @@
 /area/rnd/xenobiology/xenoflora)
 "rlb" = (
 /obj/machinery/atmospherics/unary/freezer{
-	dir = 1;
-	icon_state = "freezer"
+	dir = 1
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 8;
@@ -26372,7 +26608,6 @@
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "test_in";
 	use_power = 1
 	},
@@ -27428,8 +27663,7 @@
 /area/security/questioning)
 "syb" = (
 /obj/machinery/atmospherics/unary/freezer{
-	dir = 1;
-	icon_state = "freezer"
+	dir = 1
 	},
 /obj/machinery/light,
 /obj/floor_decal/corner/research/mono,
@@ -27754,6 +27988,13 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology)
+"sRB" = (
+/obj/machinery/light/small,
+/obj/floor_decal/corner/blue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "sRV" = (
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/xenobiology)
@@ -28469,7 +28710,6 @@
 "tIF" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	frequency = 1441;
-	icon_state = "map_injector";
 	id = "d1ph_in";
 	use_power = 1
 	},
@@ -29125,6 +29365,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
+"uYG" = (
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -28
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "uZi" = (
 /obj/floor_decal/corner/paleblue{
 	dir = 8
@@ -29481,6 +29731,11 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
+"vSq" = (
+/obj/structure/table/rack,
+/obj/item/tank/hydrogen,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/command/probe_bay)
 "vTH" = (
 /obj/wallframe_spawn/reinforced/polarized{
 	id = "forensicswindow"
@@ -30213,6 +30468,12 @@
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/misc_lab)
+"xMU" = (
+/obj/structure/sign/warning/hot_exhaust{
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/command/probe_bay)
 "xPU" = (
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
@@ -30273,6 +30534,13 @@
 "xYM" = (
 /turf/simulated/wall/prepainted,
 /area/medical/medpaperworkoffice)
+"xZY" = (
+/obj/machinery/door/blast/regular{
+	name = "loading bay";
+	id_tag = "probe_bay_2"
+	},
+/turf/simulated/floor/reinforced,
+/area/command/probe_bay)
 "ybv" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -30300,6 +30568,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
+"yek" = (
+/obj/floor_decal/corner/blue{
+	dir = 10
+	},
+/obj/item/crowbar,
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "yeI" = (
 /obj/structure/bed/chair/office/comfy/red,
 /obj/structure/disposalpipe/segment{
@@ -49823,10 +50098,10 @@ aaa
 aaa
 aaa
 afq
-aaf
+diS
 aaz
-aav
-afq
+jBl
+xMU
 aaa
 aaa
 aaa
@@ -50025,9 +50300,9 @@ aaa
 aaa
 afq
 afq
-aaf
-aao
-aav
+afq
+abb
+afq
 afq
 afq
 aaa
@@ -50226,10 +50501,10 @@ aaa
 aaa
 afq
 afq
-aan
-aaf
-aao
-aav
+hVQ
+afX
+aaC
+afX
 aan
 afq
 afq
@@ -50427,15 +50702,15 @@ aaa
 aaa
 aaa
 afq
-aaf
+bLQ
 aao
-aav
-aaA
-aaf
-aao
-aav
-aaN
-abM
+afX
+aaC
+afX
+aaZ
+uYG
+afq
+aaa
 abP
 abP
 abP
@@ -50629,15 +50904,15 @@ aaa
 aaa
 aaa
 afq
-aaf
-aao
-aav
-aaC
-aaf
-aao
-aav
-aaN
-adA
+dcx
+aap
+aap
+ilU
+aap
+aap
+bbq
+afq
+aaa
 abP
 abP
 abP
@@ -50831,13 +51106,13 @@ aaa
 aaa
 aaa
 afq
+aam
+fdv
+adt
+aaC
 aaf
-aao
-aav
-aaD
-aaf
-aao
-aav
+iiF
+aaw
 afq
 afq
 afq
@@ -51033,17 +51308,17 @@ aaa
 aaa
 aaa
 afq
-aaf
+hdT
 aap
-aav
-aaD
-aaf
 aap
-aaI
-afq
+npK
+aap
+aap
+pTR
+adv
 aaQ
 aaU
-afq
+adv
 uXe
 ckb
 poS
@@ -51235,12 +51510,12 @@ aaa
 aaa
 aaa
 afq
-aag
+aam
 aaq
 aag
+aaC
 aaE
-aag
-aaq
+xZY
 aaJ
 aaO
 aaR
@@ -51437,18 +51712,18 @@ aaa
 aaa
 aaa
 afq
-aak
-aas
-aaw
-aao
-aaw
+aaI
+aap
+aap
+ilU
+aap
 aap
 aaK
-aaP
+hyI
 aaS
 aaW
-aaZ
-abb
+aaP
+pZE
 ckb
 poS
 agg
@@ -51642,15 +51917,15 @@ afq
 aam
 aat
 aax
-aaF
-aax
-aat
+aaC
+qmH
+dsS
 aaM
-afq
+adv
 aaT
 aaX
-afq
-afX
+adv
+uXe
 ckb
 poS
 poS
@@ -51841,19 +52116,19 @@ aaa
 aaa
 aaa
 afq
-aaf
+ffy
 aap
-aav
+aap
 aaD
-aaf
 aap
-aav
+aap
+ntx
 afq
 afq
 afq
 afq
-acH
-adt
+uXe
+adw
 uXe
 laQ
 uXe
@@ -52043,15 +52318,15 @@ aaa
 aaa
 aaa
 afq
-aaf
-aao
-aav
-aaC
-aaf
-aao
-aav
-aaN
-adA
+iiQ
+nSm
+fnb
+nPz
+lhD
+acH
+lAR
+afq
+aaa
 mpy
 mpy
 uXe
@@ -52245,15 +52520,15 @@ aaa
 aaa
 aaa
 afq
-aaf
-aao
+fvg
+aau
 aav
 aaA
-aaf
-aao
 aav
-aaN
-abM
+eIA
+aaH
+afq
+aaa
 mpy
 mpy
 acJ
@@ -52448,11 +52723,11 @@ aaa
 aaa
 afq
 afq
-aau
-aaf
-aao
-aav
-aau
+vSq
+aak
+aaN
+yek
+jup
 afq
 afq
 aaa
@@ -52651,9 +52926,9 @@ aaa
 aaa
 afq
 afq
-aaf
-aao
-aav
+aaF
+avm
+sRB
 afq
 afq
 aaa
@@ -52661,7 +52936,7 @@ aaa
 mpy
 mpy
 xTT
-adv
+ady
 sde
 sde
 sde
@@ -52853,9 +53128,9 @@ aaa
 aaa
 aaa
 afq
-aaf
+aYh
 aaG
-aav
+aas
 afq
 aaa
 aaa
@@ -52863,7 +53138,7 @@ aaa
 mpy
 mpy
 acM
-adv
+ady
 kZb
 kZb
 bdL
@@ -53056,7 +53331,7 @@ aaa
 aaa
 afq
 afq
-aaH
+afq
 afq
 afq
 aaa
@@ -53671,7 +53946,7 @@ mpy
 mpy
 acQ
 uXe
-adv
+ady
 kZb
 alo
 xuW
@@ -54681,7 +54956,7 @@ mpy
 mpy
 mpy
 cqb
-adv
+ady
 pZE
 jCM
 dab

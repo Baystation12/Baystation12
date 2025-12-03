@@ -33,9 +33,9 @@
 	print_language = LANGUAGE_SPACER
 
 
-/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/overmap/visitable/ship/sector)
+/obj/machinery/computer/ship/sensors/sync_linked()
 	if (!(. = ..()))
-		return
+		return .
 	find_sensors()
 
 
@@ -93,7 +93,7 @@
 		return
 	for (var/obj/machinery/shipsensors/S in SSmachines.machinery)
 		if (linked.check_ownership(S))
-			LAZYADD(S.linked_consoles, src)
+			LAZYDISTINCTADD(S.linked_consoles, src)
 			S.link_ship(linked)
 			sensor_ref = weakref(S)
 			break

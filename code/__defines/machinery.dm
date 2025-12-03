@@ -178,3 +178,6 @@ var/global/const/NETWORK_HELMETS       = "Helmet Cameras"
 #define  PART_SCANNER  	/obj/item/stock_parts/computer/scanner							// One of several optional scanner attachments.
 
 #define CLICKSOUND_INTERVAL (5 SECONDS)
+
+#define MISSILE_PART_PAYLOAD "payload"
+#define MISSILE_PART_THRUSTER "thruster"

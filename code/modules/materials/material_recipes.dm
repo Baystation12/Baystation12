@@ -182,6 +182,7 @@
 	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)
+	. += new/datum/stack_recipe/missile_frame(src)
 
 /material/leather/generate_recipes(reinforce_material)
 	. = ..()
