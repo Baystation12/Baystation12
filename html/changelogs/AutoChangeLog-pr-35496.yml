@@ -1,0 +1,14 @@
+author: Cakey, Atebite
+changes:
+  - rscadd: Added overmap-based missile framework, along with a variety of 
+      payloads and thrusters. Missile frames can be constructed out of aluminium
+      sheets, and can have various attachments provided by Supply, RnD, and 
+      antag uplinks.
+  - rscadd: Added missile interface machinery, used to remotely trigger 
+      conveyors, blast doors, and configure and arm missiles/probes.
+  - rscadd: Added a munitions control program to the NTNet, which collects all 
+      available missile interface machinery into a neat program, allowing you to
+      remotely handle set-ups such as the probe launcher on the Torch.
+  - maptweak: Added a probe launcher to the Deck 1 Starboard Nacelle, replacing 
+      the auxiliary fuel store.
+delete-after: true
