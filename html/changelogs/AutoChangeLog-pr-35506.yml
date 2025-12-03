@@ -1,0 +1,6 @@
+author: Spacemanspark
+changes:
+  - bugfix: pAIs will no longer be stealth cloaked when picked up while resting.
+  - bugfix: pAIs will no longer be permanently slowed down in certain 
+      situations.
+delete-after: true
