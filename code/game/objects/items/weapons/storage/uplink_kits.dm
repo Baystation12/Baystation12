@@ -36,6 +36,9 @@
 		/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 		)
 
+/obj/item/storage/box/syndie_kit/imp_spider
+	startswith = list(/obj/item/implanter/mobspawner/spider)
+
 /obj/item/storage/box/syndie_kit/shuriken
 	startswith = list(
 		/obj/item/material/star/ninja,

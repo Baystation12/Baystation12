@@ -100,28 +100,12 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
-	var/castes = list(
-		/mob/living/simple_animal/hostile/giant_spider/lurker = 0.1,
-		/mob/living/simple_animal/hostile/giant_spider/tunneler = 0.2,
-		/mob/living/simple_animal/hostile/giant_spider/pepper = 0.5,
-		/mob/living/simple_animal/hostile/giant_spider/webslinger = 1,
-		/mob/living/simple_animal/hostile/giant_spider/electric = 0.5,
-		/mob/living/simple_animal/hostile/giant_spider/thermic = 0.5,
-		/mob/living/simple_animal/hostile/giant_spider/frost = 0.5,
-		/mob/living/simple_animal/hostile/giant_spider/carrier = 2,
-		/mob/living/simple_animal/hostile/giant_spider = 2,
-		/mob/living/simple_animal/hostile/giant_spider/guard = 2,
-		/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-		/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-		/mob/living/simple_animal/hostile/giant_spider/hunter = 1
-	)
 
-
-/obj/spider/spiderling/frost
-	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
+/obj/spider/spiderling/proc/pick_from_caste()
+	return pickweight(GLOB.spider_castes)
 
 /obj/spider/spiderling/Initialize(mapload, atom/parent)
-	greater_form = pickweight(castes)
+	greater_form = pick_from_caste()
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
 
@@ -136,6 +120,11 @@
 
 	copy_light_and_color(parent)
 	. = ..()
+
+/obj/spider/spiderling/frost
+
+/obj/spider/spiderling/frost/pick_from_caste()
+	return /mob/living/simple_animal/hostile/giant_spider/frost
 
 /obj/spider/spiderling/mundane
 	growth_chance = 0 // Just a simple, non-mutant spider
