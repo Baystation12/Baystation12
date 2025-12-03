@@ -4,6 +4,7 @@
 	missile_name_override = "emp missile"
 	desc = "Emits a strong electromagnetic pulse when the detonation mechanism of the missile it's fitted in is triggered."
 	icon_state = "ion"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_ALUMINIUM = 4000, MATERIAL_GOLD = 1000, MATERIAL_URANIUM = 500)
 
 /obj/item/missile_equipment/payload/emp/on_trigger(armed)

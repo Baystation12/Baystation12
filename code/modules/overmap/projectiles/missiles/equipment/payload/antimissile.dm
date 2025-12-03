@@ -4,6 +4,7 @@
 	desc = "An advanced concotion of technology intended to detect and detonate in close proximity of another projectile in order to disable it."
 	icon_state = "antimissile"
 	missile_name_override = "countermeasure missile"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_ALUMINIUM = 4000, MATERIAL_GOLD = 500, MATERIAL_PHORON = 2000)
 	enters_zs = FALSE
 	cooldown = 3

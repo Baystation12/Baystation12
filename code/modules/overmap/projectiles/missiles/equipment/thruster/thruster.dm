@@ -3,6 +3,7 @@
 	name = "missile booster"
 	desc = "A simple but powerful and modular booster that can be fitted in most missiles. This one comes with an embedded targeting computer."
 	icon_state = "target"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_ALUMINIUM = 4000, MATERIAL_PHORON = 3000)
 	cooldown = 5
 	slot = MISSILE_PART_THRUSTER

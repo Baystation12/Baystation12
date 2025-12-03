@@ -3,6 +3,7 @@
 	name = "planetary missile booster"
 	desc = "The standard fare missile booster, but with planetary flight capabilities."
 	icon_state = "planet"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_ALUMINIUM = 4000, MATERIAL_PHORON = 3000)
 
 	var/turf/planetary_target
