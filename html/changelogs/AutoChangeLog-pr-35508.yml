@@ -1,0 +1,5 @@
+author: Spacemanspark
+changes:
+  - tweak: You now use non-help intents to fold a pAI back into card mode. Help 
+      intent will instead pet them.
+delete-after: true
