@@ -1,0 +1,16 @@
+author: XanderDox
+changes:
+  - rscadd: "Adds a box of Christianity Supplies full of new items to the Chaplain
+      Locker, which includes: Aspergillum, two Holy Icons, a cassock, a clergy collar,
+      silver crucifix necklaces, a scapular, rosary, and nun's habit and hood."
+  - rscadd: Ports a rosary. Add functionality to it so that it can be interacted
+      with to count beads in prayer for fluff.
+  - rscadd: Ports a Jewish tallit/prayer shawl.
+  - rscadd: Adds generic prayer beads and puts them in the loadout.
+  - imageadd: Ports sprites from Aurora for gold and silver crucifixes, 
+      scapulars, rosaries, aspergillum, and cassock.
+  - soundadd: Ports the jingle sound from Aurora for the aspergillum.
+  - imageadd: Adds a sprite of a Holy Icon of Mary.
+  - imageadd: Adds a sprite for a large box of Christianity Supplies.
+  - imageadd: Adds greyscale sprites for prayerbeads, courtesy of Azlan.
+delete-after: true
