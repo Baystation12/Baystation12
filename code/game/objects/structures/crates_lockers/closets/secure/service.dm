@@ -17,5 +17,6 @@
 		/obj/item/storage/bible,
 		/obj/item/storage/belt/general,
 		/obj/item/material/urn,
-		/obj/item/glass_jar
+		/obj/item/glass_jar,
+		/obj/item/storage/box/large/christianity
 	)

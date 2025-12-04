@@ -214,3 +214,27 @@
 	description = "A long, colourful liturgical vestment used by Christian clergy."
 	path = /obj/item/clothing/accessory/stole
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/accessory/crucifix
+	display_name = "crucifix necklace selection"
+	path = /obj/item/clothing/accessory/crucifix
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+/datum/gear/accessory/crucifix/New()
+	..()
+	var/options = list()
+	options["golden crucifix"] = /obj/item/clothing/accessory/crucifix/gold
+	options["golden saint peter crucifix"] = /obj/item/clothing/accessory/crucifix/gold/saint_peter
+	options["silver crucifix"] = /obj/item/clothing/accessory/crucifix/silver
+	options["silver saint peter crucifix"] = /obj/item/clothing/accessory/crucifix/silver/saint_peter
+	gear_tweaks += new/datum/gear_tweak/path (options)
+
+/datum/gear/accessory/scapular
+	display_name = "scapular"
+	path = /obj/item/clothing/accessory/scapular
+	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+/datum/gear/accessory/tallit
+	display_name = "tallit"
+	path = /obj/item/clothing/accessory/tallit
+	flags = GEAR_HAS_NO_CUSTOMIZATION

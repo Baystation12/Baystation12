@@ -154,3 +154,15 @@
 
 /obj/item/material/cross/gold
 	default_material = MATERIAL_GOLD
+
+/obj/item/icon_christ
+	name = "icon of Christ"
+	desc = "It's an Icon of Jesus Christ, commonly used as a holy image by Christians."
+	icon = 'icons/obj/weapons/other.dmi'
+	icon_state = "icon_christ"
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/icon_christ/icon_mary
+	name = "icon of Mary"
+	desc = "It's an Icon of the Blessed Virgin Mary, commonly used as a holy image by Christians."
+	icon_state = "icon_mary"
