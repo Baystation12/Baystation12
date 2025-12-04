@@ -7,10 +7,10 @@
 	var/base_mob_type = /mob
 
 	// adminbus vars
-	/// Average wait time, in deciseocnds, to spawn a mob.
-	var/wait_ds = 600
-	/// Variation added or subtracted to wait_ds on when to spwan a mob.
-	var/wait_variation_ds = 150
+	/// Average wait time to spawn a mob.
+	var/wait_time = 60 SECONDS
+	/// Variation added or subtracted to wait_time on when to spawn a mob.
+	var/wait_variation = 15 SECONDS
 	/// Limit of mobs nearby the implantee.
 	var/mob_limit = 10
 
@@ -18,7 +18,7 @@
 	return {"
 	<b>Implant Specifications:</b><br>
 	This implant will materialize creatures near the implantee.
-	First creature will materialize on average every [wait_ds / 10] seconds, varied by [wait_variation_ds / 10] seconds.<br>
+	First creature will materialize on average every [wait_time / 10] seconds, varied by [wait_variation / 10] seconds.<br>
 	"}
 
 /// Returns an exact mob type to spawn. Be sure to override this.
@@ -55,7 +55,7 @@
 	set_next_process_time()
 
 /obj/item/implant/processing/mobspawner/proc/set_next_process_time()
-	process_next_ds = world.time + (wait_ds + rand(wait_variation_ds * -1, wait_variation_ds))
+	process_next_ds = world.time + (wait_time + rand(wait_variation * -1, wait_variation))
 
 /obj/item/implant/processing/mobspawner/proc/phase_in_anim(mob/mob)
 	return
