@@ -1,0 +1,9 @@
+author: XanderDox
+changes:
+  - rscadd: Adds Eucharist wafers, which can be consecrated from crackers by 
+      Christian Chaplains.
+  - rscadd: Adds pyx for transporting Eucharist wafers to people.
+  - imageadd: Adds a sprite for pyx, including open, closed, and filled, 
+      courtesy of Keekenox/Slimex.
+  - imageadd: Adds a sprite for Eucharist wafers.
+delete-after: true
