@@ -69,7 +69,7 @@
 	. = FALSE
 	if (user == M || !ishuman(user) || !ishuman(M))
 		return FALSE
-	if (user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if (user.mind)
 		user.visible_message(SPAN_NOTICE("\The [user] places \the [src] on \the [M]'s forehead, reciting a prayer..."))
 		if (do_after(user, 5 SECONDS, M, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user.Adjacent(M))
 			var/datum/pronouns/pronouns = user.choose_from_pronouns()
@@ -81,7 +81,7 @@
 		return TRUE
 
 /obj/item/storage/bible/use_after(atom/A, mob/living/user, click_parameters)
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if(user.mind)
 		if(A.reagents && A.reagents.has_reagent(/datum/reagent/water))
 			to_chat(user, SPAN_NOTICE("You bless \the [A]."))
 			var/water2holy = A.reagents.get_reagent_amount(/datum/reagent/water)
@@ -97,7 +97,7 @@
 /obj/item/storage/bible/attack_self(mob/living/carbon/human/user)
 	if(!ishuman(user))
 		return
-	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))
+	if(user.mind)
 		user.visible_message("\The [user] begins to read a passage from \the [src]...", "You begin to read a passage from \the [src]...")
 		if(do_after(user, 5 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE))
 			user.visible_message("\The [user] reads a passage from \the [src].", "You read a passage from \the [src].")

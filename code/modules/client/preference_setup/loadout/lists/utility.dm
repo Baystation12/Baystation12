@@ -122,6 +122,12 @@ Pouches and kits
 	path = /obj/item/storage/fancy/pencilcase
 	cost = 2
 
+/datum/gear/utility/pyx
+	display_name = "pyx"
+	path = /obj/item/storage/fancy/pyx
+	cost = 2
+	allowed_roles = list(/datum/job/chaplain)
+
 /****************
 Instruments
 ****************/
