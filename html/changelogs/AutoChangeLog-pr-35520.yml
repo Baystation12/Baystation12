@@ -1,0 +1,5 @@
+author: Spacemanspark
+changes:
+  - tweak: pAI radio system broadcast range reduced to the tile they're standing
+      on.
+delete-after: true
