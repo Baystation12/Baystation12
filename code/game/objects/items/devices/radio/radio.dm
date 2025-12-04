@@ -50,6 +50,8 @@
 	on = TRUE
 	power_usage = 0
 
+/obj/item/device/radio/infinite/pai
+	canhear_range = 0
 
 /obj/item/device/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)

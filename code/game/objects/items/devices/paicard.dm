@@ -6,7 +6,7 @@
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_DATA = 2)
-	var/radio = /obj/item/device/radio/infinite
+	var/radio = /obj/item/device/radio/infinite/pai
 	var/looking_for_personality = FALSE
 	var/mob/living/silicon/pai/pai
 
