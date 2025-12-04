@@ -1,0 +1,5 @@
+author: Cakey
+changes:
+  - maptweak: The Torch now starts with two countermeasure missiles, to counter 
+      missiles with.
+delete-after: true
