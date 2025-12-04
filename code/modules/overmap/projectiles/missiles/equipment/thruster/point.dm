@@ -3,6 +3,7 @@
 	name = "pointman missile booster"
 	desc = "A missile booster designed to travel to and rest at a given point. Steers away from structures."
 	icon_state = "dumbfire"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	matter = list(MATERIAL_ALUMINIUM = 4000, MATERIAL_PHORON = 3000)
 
 /obj/item/missile_equipment/thruster/point/preset/Initialize()
