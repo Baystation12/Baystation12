@@ -141,7 +141,7 @@
 		to_chat(user, SPAN_NOTICE("The targeting computer display indicates that there are no valid targets."))
 		return TRUE
 
-	var/selected_target = input("Select a target") as null|obj in possible_targets
+	var/selected_target = input("Select a target") as null|anything in possible_targets
 	if (!selected_target)
 		return TRUE
 
