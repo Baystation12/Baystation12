@@ -317,3 +317,18 @@
 	path = /obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy
 	cost = 1
 	allowed_traits = list(/singleton/trait/malus/allergy)
+
+/datum/gear/rosary
+	display_name = "rosary"
+	path = /obj/item/clothing/accessory/prayer_beads/rosary
+
+/datum/gear/prayer_beads
+	display_name = "prayer beads"
+	path = /obj/item/clothing/accessory/prayer_beads
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/icon_christ
+	display_name = "icon of Christ"
+	path = /obj/item/icon_christ
+	cost = 2
+	flags = GEAR_HAS_TYPE_SELECTION

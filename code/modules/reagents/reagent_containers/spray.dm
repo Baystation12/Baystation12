@@ -18,6 +18,7 @@
 	var/list/spray_sizes = list(1,3)
 	var/step_delay = 10 // lower is faster
 	volume = 250
+	var/spray_sound = 'sound/effects/spray2.ogg'
 
 /obj/item/reagent_containers/spray/New()
 	..()
@@ -44,7 +45,7 @@
 	return
 
 /obj/item/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
-	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
+	playsound(src.loc, spray_sound, 50, 1, -6)
 	if (reagents.should_admin_log())
 		var/contained = reagents.get_reagents()
 		if (ismob(A))
@@ -240,3 +241,15 @@
 	icon = 'icons/obj/lavatory.dmi'
 	icon_state = "deodorant"
 	item_state = "deodorant"
+
+/obj/item/reagent_containers/spray/aspergillum
+	name = "aspergillum"
+	desc = "A ceremonial item used in Christianity for sprinkling holy water, or other liquids, on a subject."
+	icon = 'icons/obj/weapons/other.dmi'
+	icon_state = "aspergillum"
+	item_state = "aspergillum"
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = null
+	spray_size = 1
+	volume = 10
+	spray_sound = 'sound/effects/jingle.ogg'
