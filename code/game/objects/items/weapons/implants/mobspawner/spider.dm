@@ -2,6 +2,9 @@
 	name = "spider beacon implant"
 	desc = "An implant with small spiders etched along the metal."
 	base_mob_type = /mob/living/simple_animal/hostile/giant_spider
+	wait_time = 180 SECONDS
+	wait_variation = 60 SECONDS
+	mob_limit = 2
 
 /obj/item/implant/processing/mobspawner/get_mob_type()
 	return pickweight(GLOB.spider_castes)
