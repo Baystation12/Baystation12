@@ -204,6 +204,7 @@
 /turf/simulated/floor/reinforced,
 /area/command/probe_bay)
 "aay" = (
+/obj/machinery/shield_diffuser,
 /obj/machinery/door/blast/regular{
 	name = "probe launch tube";
 	id_tag = "probe_bay";
