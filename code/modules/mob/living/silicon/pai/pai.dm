@@ -303,8 +303,12 @@ GLOBAL_LIST_AS(possible_say_verbs, list(
 
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
-	fold()
+	if (user.a_intent == I_HELP)
+		visible_message(SPAN_NOTICE("[user] gently pets [src]."))
+		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+	else
+		visible_message(SPAN_DANGER("[user] boops [src] on the head."))
+		fold()
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()
