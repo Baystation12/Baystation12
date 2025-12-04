@@ -1,6 +1,0 @@
-author: Cakey
-changes:
-  - balance: High explosive missile warheads are now locked behind esoteric tech
-      4.
-  - rscadd: Added destructive tech origin values for missile parts.
-delete-after: true

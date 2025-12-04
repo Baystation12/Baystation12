@@ -1,5 +1,0 @@
-author: Cakey
-changes:
-  - admin: Missiles can now be spawned and fired at targets using the new 
-      missile build-mode.
-delete-after: true
