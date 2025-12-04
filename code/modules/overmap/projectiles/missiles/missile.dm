@@ -243,19 +243,17 @@
 			to_chat(user, "\The [src] doesn't have a [MISSILE_PART_THRUSTER] installed!")
 		return FALSE
 
-	var/obj/overmap/start_object = waypoint_sector(src)
-	if (!start_object)
-		return FALSE
-
 	visible_message(SPAN_WARNING("\The [src] beeps. It's armed!"))
 	playsound(src, 'sound/effects/alert.ogg', 50, 0, 0)
 
 	anchored = TRUE
 	armed = TRUE
 
-	overmap_missile = new /obj/overmap/projectile(start_object)
-	overmap_missile.set_missile(src)
-	overmap_missile.SetName(overmap_name)
+	var/obj/overmap/start_object = waypoint_sector(src)
+	if (start_object)
+		overmap_missile = new /obj/overmap/projectile(start_object)
+		overmap_missile.set_missile(src)
+		overmap_missile.SetName(overmap_name)
 
 	for (var/slot in equipment)
 		var/obj/item/missile_equipment/part = equipment[slot]
@@ -353,3 +351,8 @@
 	if (thruster)
 		return thruster.target
 	return null
+
+/obj/structure/missile/proc/set_target(atom/new_target)
+	var/obj/item/missile_equipment/thruster/thruster = equipment[MISSILE_PART_THRUSTER]
+	if (thruster)
+		thruster.target = new_target
