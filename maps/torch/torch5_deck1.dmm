@@ -51,6 +51,9 @@
 	id_tag = "probe_bay_5";
 	name = "Probe Bay 5"
 	},
+/obj/structure/missile/antispace{
+	dir = 2
+	},
 /turf/simulated/floor/reinforced,
 /area/command/probe_bay)
 "aah" = (
@@ -194,6 +197,9 @@
 /obj/machinery/payload_interface{
 	id_tag = "probe_bay_4";
 	name = "Probe Bay 4"
+	},
+/obj/structure/missile/antispace{
+	dir = 2
 	},
 /turf/simulated/floor/reinforced,
 /area/command/probe_bay)
@@ -14654,15 +14660,6 @@
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medpaperworkoffice)
-"bLQ" = (
-/obj/item/device/radio/intercom{
-	pixel_y = 23
-	},
-/obj/machinery/computer/ship/navigation/telescreen{
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/command/probe_bay)
 "bMb" = (
 /turf/simulated/wall/prepainted,
 /area/engineering/hardstorage/aux)
@@ -21646,6 +21643,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
+"lpM" = (
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -28
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "lqb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -22057,6 +22064,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/firstdeck)
+"mao" = (
+/obj/item/device/radio/intercom{
+	pixel_y = 23
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/command/probe_bay)
 "mav" = (
 /turf/simulated/wall/prepainted,
 /area/rnd/office)
@@ -29365,16 +29381,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/security/detectives_office)
-"uYG" = (
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
-/obj/machinery/computer/ship/navigation/telescreen{
-	pixel_x = -32
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/command/probe_bay)
 "uZi" = (
 /obj/floor_decal/corner/paleblue{
 	dir = 8
@@ -50702,13 +50708,13 @@ aaa
 aaa
 aaa
 afq
-bLQ
+mao
 aao
 afX
 aaC
 afX
 aaZ
-uYG
+lpM
 afq
 aaa
 abP
