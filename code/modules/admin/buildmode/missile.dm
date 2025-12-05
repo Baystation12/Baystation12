@@ -48,6 +48,7 @@ Missiles can be spawned on the overmap or in the world, but its target MUST be a
 	if (istype(spawn_turf, /turf/unsimulated/map))
 		var/obj/overmap/projectile/overmap_missile = new(spawn_turf)
 		overmap_missile.set_missile(new_missile)
+		overmap_missile.SetName(new_missile.overmap_name)
 		new_missile.overmap_missile = overmap_missile
 		new_missile.arm()
 		new_missile.touch_map_edge()
