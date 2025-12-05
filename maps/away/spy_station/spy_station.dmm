@@ -883,7 +883,6 @@
 /area/spy_station/cent)
 "lT" = (
 /obj/structure/lattice,
-/obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
@@ -1460,7 +1459,6 @@
 /area/spy_station/med)
 "tb" = (
 /obj/structure/lattice,
-/obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
@@ -1479,7 +1477,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/spy_station/barrack)
 "te" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -1840,7 +1837,6 @@
 /area/spy_station/com)
 "zD" = (
 /obj/structure/lattice,
-/obj/structure/lattice,
 /obj/structure/grille,
 /turf/space,
 /area/space)
@@ -1949,7 +1945,6 @@
 /turf/simulated/floor,
 /area/spy_station/med)
 "Bd" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /turf/space,
 /area/space)
@@ -3294,7 +3289,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/spy_station/barrack)
 "SB" = (
-/obj/structure/lattice,
 /obj/structure/lattice,
 /obj/structure/cable/yellow{
 	d1 = 4;
