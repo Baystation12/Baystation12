@@ -7599,7 +7599,7 @@
 /obj/floor_decal/techfloor{
 	dir = 1
 	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1380;
 	id_tag = "eva_airlock";
 	pixel_y = 20;

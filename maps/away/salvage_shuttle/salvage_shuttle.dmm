@@ -52,7 +52,6 @@
 	},
 /obj/item/device/radio/intercom/map_preset/salvage_shuttle{
 	dir = 8;
-	name = "Intercom (Crab)";
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -123,7 +122,6 @@
 /obj/paint/brown,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0
@@ -146,7 +144,7 @@
 	pixel_x = 24;
 	pixel_y = -8
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "bX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -416,8 +414,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/hologram/holopad/longrange,
-/obj/floor_decal/industrial/outline/yellow,
 /obj/submap_landmark/spawnpoint/independent_salvager,
 /turf/simulated/floor/lino,
 /area/salvage_shuttle/lounge)
@@ -505,6 +501,9 @@
 /area/salvage_shuttle/cargo)
 "fX" = (
 /obj/floor_decal/industrial/outline/orange,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 7498
+	},
 /turf/simulated/floor/plating,
 /area/derelict_cargo_ship/maintenance)
 "gb" = (
@@ -926,7 +925,7 @@
 	pixel_x = 24;
 	pixel_y = -10
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "ma" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
@@ -992,7 +991,15 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 8
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	master_tag = "crab_cargo";
+	name = "exterior access button";
+	pixel_x = 22;
+	pixel_y = 38;
+	frequency = 1331
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "nm" = (
 /obj/structure/closet/emcloset,
@@ -1024,7 +1031,7 @@
 /area/derelict_cargo_ship/maintenance)
 "nv" = (
 /obj/floor_decal/industrial/warning,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "nw" = (
 /obj/shuttle_landmark/nav_salvage_shuttle/nav1,
@@ -1068,8 +1075,7 @@
 	dir = 1
 	},
 /obj/item/device/radio/intercom/map_preset/salvage_shuttle{
-	pixel_y = 23;
-	name = "Intercom (Crab)"
+	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/salvage_shuttle/airlock)
@@ -1201,7 +1207,7 @@
 	pixel_y = 24
 	},
 /obj/structure/handrail,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "qi" = (
 /obj/machinery/computer/ship/sensors{
@@ -1306,7 +1312,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 2;
-	icon_state = "pdoor0";
 	id_tag = "crab_cargo_hatch";
 	name = "Storage Hatch"
 	},
@@ -1653,7 +1658,6 @@
 /obj/paint/brown,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;
@@ -1898,7 +1902,6 @@
 /obj/paint/brown,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;
@@ -1985,7 +1988,7 @@
 /obj/structure/handrail{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "Bm" = (
 /obj/structure/bed/chair/padded/black{
@@ -2124,8 +2127,7 @@
 "DD" = (
 /obj/item/device/radio/intercom/map_preset/salvage_shuttle{
 	dir = 1;
-	pixel_y = -32;
-	name = "Intercom (Crab)"
+	pixel_y = -32
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2334,7 +2336,6 @@
 /obj/paint/brown,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0
@@ -2741,6 +2742,8 @@
 	dir = 1;
 	pixel_y = -26
 	},
+/obj/item/tank/jetpack/carbondioxide,
+/obj/item/tank/jetpack/carbondioxide,
 /turf/simulated/floor/plating,
 /area/derelict_cargo_ship/cargo)
 "LG" = (
@@ -2802,6 +2805,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/salvage_shuttle/maintenance)
 "Nk" = (
@@ -2816,8 +2822,8 @@
 	command = "cycle_interior";
 	master_tag = "crab_cargo";
 	name = "interior access button";
-	pixel_x = 24;
-	pixel_y = 6;
+	pixel_x = 23;
+	pixel_y = 3;
 	frequency = 1331
 	},
 /obj/floor_decal/techfloor{
@@ -2825,6 +2831,14 @@
 	},
 /obj/floor_decal/techfloor/corner{
 	dir = 1
+	},
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	master_tag = "crab_cargo";
+	name = "exterior cycle button";
+	pixel_x = 23;
+	pixel_y = 11;
+	frequency = 1331
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/cargo)
@@ -2865,7 +2879,7 @@
 /obj/machinery/nav_light/ventral{
 	pixel_x = 22
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "NX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3029,7 +3043,7 @@
 	dir = 4;
 	id_tag = "crab_airlock_pump_out_external"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "Qr" = (
 /turf/space,
@@ -3085,7 +3099,6 @@
 /obj/structure/grille,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;
@@ -3100,7 +3113,6 @@
 "Rb" = (
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;
@@ -3140,7 +3152,7 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "RJ" = (
 /obj/paint/green,
@@ -3159,6 +3171,7 @@
 /obj/item/storage/belt/utility/full,
 /obj/item/clothing/glasses/welding,
 /obj/item/clothing/gloves/insulated,
+/obj/item/tape_roll,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/salvage_shuttle/cargo)
 "Sh" = (
@@ -3442,6 +3455,8 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/hologram/holopad/longrange,
 /turf/simulated/floor/tiled,
 /area/salvage_shuttle/cockpit)
 "VC" = (
@@ -3487,8 +3502,7 @@
 "WD" = (
 /obj/item/device/radio/intercom/map_preset/salvage_shuttle{
 	dir = 1;
-	pixel_y = -32;
-	name = "Intercom (Crab)"
+	pixel_y = -32
 	},
 /obj/floor_decal/industrial/outline/yellow,
 /obj/floor_decal/industrial/warning{
@@ -3499,6 +3513,7 @@
 /obj/item/storage/belt/utility/full,
 /obj/item/clothing/glasses/welding,
 /obj/item/clothing/gloves/insulated,
+/obj/item/tape_roll,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/salvage_shuttle/cargo)
 "WI" = (
@@ -3728,7 +3743,6 @@
 "YK" = (
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "crab_shutters";
 	name = "Protective Shutters";
 	opacity = 0;

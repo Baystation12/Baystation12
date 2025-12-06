@@ -58,6 +58,7 @@
 /obj/shuttle_landmark/nav_salvage_shuttle/torch/d4
 	name = "SEV Torch ISV Crab EVA Dock"
 	landmark_tag = "nav_salvage_shuttle_torch_eva_dock"
+	docking_controller = "eva_airlock"
 
 /obj/machinery/computer/shuttle_control/explore/crab
 	name = "crab control console"
