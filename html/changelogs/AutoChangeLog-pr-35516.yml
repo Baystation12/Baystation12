@@ -1,0 +1,4 @@
+author: Banditoz
+changes:
+  - bugfix: Cryo no longer accepts things it can't heal.
+delete-after: true
