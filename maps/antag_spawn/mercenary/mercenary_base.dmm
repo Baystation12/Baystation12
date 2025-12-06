@@ -264,12 +264,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
-"cH" = (
-/obj/machinery/door/blast/regular{
-	id_tag = "merc_bsa"
-	},
-/turf/simulated/floor/plating,
-/area/map_template/merc_shuttle)
 "cI" = (
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
@@ -278,7 +272,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_external"
 	},
 /obj/paint/merc,
@@ -301,14 +294,8 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
-"cO" = (
-/obj/machinery/disperser/front{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/map_template/merc_shuttle)
 "cQ" = (
-/obj/machinery/computer/ship/disperser,
+/obj/machinery/computer/modular/preset/munitions/syndicate,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "cS" = (
@@ -349,10 +336,10 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_spawn)
 "dn" = (
-/obj/machinery/disperser/middle{
-	dir = 1
+/obj/machinery/door/blast/regular{
+	id_tag = "merc_pod"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/map_template/merc_shuttle)
 "dq" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -405,15 +392,15 @@
 "em" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
-	id_tag = "merc_bsa";
-	name = "OFD Firing Blast Doors";
+	id_tag = "merc_pod_access";
+	name = "Missile Pod Access";
 	pixel_x = -5;
 	pixel_y = 6;
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_bsa_shutters";
-	name = "OFD Viewing Shutters";
+	name = "Missile Pod Viewing Shutters";
 	pixel_x = -5;
 	pixel_y = -3;
 	req_access = list("ACCESS_SYNDICATE")
@@ -464,10 +451,12 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "eG" = (
-/obj/machinery/disperser/back{
-	dir = 1
+/obj/machinery/payload_interface{
+	name = "Missile Pod";
+	id_tag = "merc_pod";
+	allow_arming = 1
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/map_template/merc_shuttle)
 "eR" = (
 /obj/machinery/cryopod{
@@ -495,7 +484,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_bsa_shutters"
 	},
 /obj/paint/merc,
@@ -585,16 +573,17 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "gr" = (
-/obj/machinery/door/blast/regular/open{
-	density = 0;
-	icon_state = "pdoor0";
-	id_tag = "merc_bsa"
-	},
 /obj/floor_decal/industrial/warning{
 	dir = 8
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/machinery/door/blast/regular{
+	id_tag = "merc_pod_access";
+	name = "missile pod";
+	density = 0;
+	icon_state = "pdoor0"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
@@ -1084,7 +1073,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_airlock"
 	},
 /obj/paint/merc,
@@ -1122,7 +1110,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_external"
 	},
 /obj/paint/merc,
@@ -1428,7 +1415,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_airlock"
 	},
 /obj/paint/merc,
@@ -1486,7 +1472,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_external"
 	},
 /obj/paint/merc,
@@ -1725,6 +1710,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "tO" = (
@@ -2302,8 +2288,7 @@
 /area/map_template/merc_spawn)
 "Bo" = (
 /obj/machinery/atmospherics/unary/freezer{
-	dir = 1;
-	icon_state = "freezer"
+	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/merc_shuttle)
@@ -2656,7 +2641,6 @@
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
-	icon_state = "pdoor0";
 	id_tag = "merc_external"
 	},
 /obj/paint/merc,
@@ -2958,7 +2942,6 @@
 /obj/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
-	icon_state = "pdoor0";
 	id_tag = "merc_external"
 	},
 /obj/paint/merc,
@@ -3111,7 +3094,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "XL" = (
-/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/structure/missile,
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "XQ" = (
@@ -5734,7 +5717,7 @@ aa
 AF
 AF
 fa
-fa
+AF
 fa
 AF
 hL
@@ -5834,8 +5817,8 @@ aa
 aa
 aa
 aa
-cH
-cO
+aa
+aa
 dn
 eG
 gr
@@ -5938,7 +5921,7 @@ aa
 AF
 AF
 fa
-fa
+AF
 fa
 AF
 hU

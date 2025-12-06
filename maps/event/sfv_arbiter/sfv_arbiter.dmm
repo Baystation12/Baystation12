@@ -2,8 +2,7 @@
 "al" = (
 /obj/machinery/alarm{
 	dir = 4;
-	pixel_x = -23;
-	pixel_y = 0
+	pixel_x = -23
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -17,11 +16,6 @@
 "au" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /obj/floor_decal/corner/grey{
 	dir = 1
@@ -77,13 +71,11 @@
 	dir = 4
 	},
 /obj/floor_decal/corner/red{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -135,21 +127,9 @@
 "dv" = (
 /obj/structure/closet/secure_closet/chemical,
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 2;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
-/area/map_template/sfv_arbiter)
-"dR" = (
-/obj/structure/bed/chair/shuttle/black{
-	dir = 8
-	},
-/obj/floor_decal/corner/grey/mono,
-/obj/item/clothing/head/helmet,
-/obj/machinery/computer/ship/navigation/telescreen{
-	pixel_x = 32
-	},
-/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "et" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -173,10 +153,7 @@
 	dir = 4
 	},
 /obj/structure/table/glass,
-/obj/item/reagent_containers/glass/beaker/cryoxadone{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "gS" = (
@@ -209,8 +186,7 @@
 /area/map_template/sfv_arbiter)
 "it" = (
 /obj/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "stripe"
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -226,8 +202,7 @@
 /obj/structure/closet/crate/radiation,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "stripe"
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
@@ -243,15 +218,13 @@
 /area/map_template/sfv_arbiter)
 "jM" = (
 /obj/floor_decal/corner/red{
-	dir = 4;
-	icon_state = "corner_white"
+	dir = 4
 	},
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
 /obj/floor_decal/corner/red{
-	dir = 9;
-	icon_state = "corner_white"
+	dir = 9
 	},
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -303,11 +276,6 @@
 	},
 /obj/floor_decal/industrial/warning{
 	dir = 8
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -441,8 +409,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
@@ -461,11 +428,6 @@
 "od" = (
 /obj/floor_decal/corner/grey{
 	dir = 5
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -515,15 +477,13 @@
 /area/map_template/sfv_arbiter)
 "qn" = (
 /obj/machinery/bodyscanner{
-	dir = 4;
-	icon_state = "body_scanner_0"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "qq" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuebridge";
 	name = "Window Shutters Control";
 	pixel_x = 4
@@ -577,17 +537,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "qP" = (
-/obj/structure/bed/chair/shuttle/black{
-	dir = 4
-	},
 /obj/floor_decal/corner/grey/mono,
-/obj/item/clothing/head/helmet,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = -32
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/structure/bed/chair/shuttle/black,
+/obj/item/clothing/head/helmet,
+/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "sH" = (
 /obj/structure/catwalk,
@@ -628,8 +584,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/floor_decal/corner/yellow/full,
 /obj/machinery/door/airlock/centcom{
-	name = "Armory";
-	opacity = 1
+	name = "Armory"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -773,8 +728,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/floor_decal/corner/yellow{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
@@ -917,8 +871,7 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -961,11 +914,6 @@
 /obj/floor_decal/industrial/warning/corner{
 	dir = 8
 	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Cj" = (
@@ -983,8 +931,7 @@
 	},
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/techfloor,
@@ -1011,23 +958,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/map_template/sfv_arbiter)
-"DI" = (
-/obj/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "rescuedock";
-	name = "External Blast Shield"
-	},
-/obj/paint/iccgn,
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "DK" = (
 /obj/floor_decal/corner/blue{
@@ -1058,8 +988,7 @@
 /area/map_template/sfv_arbiter)
 "Eh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/sfv_arbiter)
@@ -1128,27 +1057,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
-"EU" = (
-/obj/structure/bed/chair/shuttle/black{
-	dir = 4
-	},
-/obj/floor_decal/corner/grey/mono,
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
-	},
-/obj/item/clothing/head/helmet,
-/obj/machinery/computer/ship/navigation/telescreen{
-	pixel_x = -32
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/sfv_arbiter)
 "EW" = (
 /obj/machinery/vitals_monitor,
 /turf/simulated/floor/tiled/white,
@@ -1208,15 +1116,13 @@
 	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 9;
-	icon_state = "intact"
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/sfv_arbiter)
 "HR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /obj/shuttle_landmark/sfv_arbiter/start,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1254,8 +1160,7 @@
 "Is" = (
 /obj/floor_decal/corner/b_green/full,
 /obj/machinery/door/airlock/centcom{
-	name = "EVA";
-	opacity = 1
+	name = "EVA"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1274,8 +1179,7 @@
 "IH" = (
 /obj/machinery/light{
 	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	icon_state = "tube1"
 	},
 /obj/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -1366,24 +1270,6 @@
 /obj/structure/window/boron_reinforced{
 	dir = 1
 	},
-/turf/simulated/floor/plating,
-/area/map_template/sfv_arbiter)
-"KK" = (
-/obj/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "rescuedock";
-	name = "External Blast Shield"
-	},
-/obj/paint/iccgn,
-/obj/paint/iccgn,
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "KO" = (
@@ -1535,8 +1421,7 @@
 	dir = 10
 	},
 /obj/floor_decal/corner/b_green{
-	dir = 5;
-	icon_state = "corner_white"
+	dir = 5
 	},
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -1548,8 +1433,7 @@
 "Mx" = (
 /obj/paint/black,
 /obj/structure/sign/warning/high_voltage{
-	dir = 8;
-	icon_state = "shock"
+	dir = 8
 	},
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
@@ -1571,16 +1455,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Nf" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
-	id_tag = "rescuebridge";
-	name = "Window Shutters Control";
-	pixel_x = -4;
-	pixel_y = 4
-	},
 /obj/floor_decal/corner/blue/mono,
-/obj/item/device/radio/headset/sfv_arbiter,
+/obj/machinery/computer/modular/preset/munitions/syndicate{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "Nh" = (
@@ -1644,17 +1522,10 @@
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
 "NO" = (
-/obj/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/machinery/door/blast/regular{
+	id_tag = "arbiter_pod_3"
 	},
-/obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "rescuedock";
-	name = "External Blast Shield"
-	},
-/obj/paint/iccgn,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "NV" = (
 /obj/structure/cable/cyan{
@@ -1717,8 +1588,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/centcom{
-	name = "Shields & Power";
-	opacity = 1
+	name = "Shields & Power"
 	},
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -1755,8 +1625,7 @@
 	},
 /obj/item/device/radio/intercom/specops{
 	dir = 8;
-	pixel_x = 22;
-	pixel_y = 0
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -1782,8 +1651,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/centcom{
-	name = "Holding Area";
-	opacity = 1
+	name = "Holding Area"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -1792,8 +1660,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/floor_decal/corner/white/full,
 /obj/machinery/door/airlock/centcom{
-	name = "Medical";
-	opacity = 1
+	name = "Medical"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
@@ -1841,21 +1708,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "QF" = (
-/obj/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/machinery/door/blast/regular{
+	id_tag = "arbiter_pod_2"
 	},
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/door/blast/regular/escape_pod{
-	id_tag = "rescuedock";
-	name = "External Blast Shield"
-	},
-/obj/paint/iccgn,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "QG" = (
 /obj/structure/catwalk,
@@ -1876,8 +1732,7 @@
 /area/map_template/sfv_arbiter)
 "QQ" = (
 /obj/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "stripe"
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1921,12 +1776,19 @@
 "RK" = (
 /obj/floor_decal/corner/blue/mono,
 /obj/machinery/light/spot,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "rescuebridge";
+	name = "Window Shutters Control";
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/device/radio/headset/sfv_arbiter,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/sfv_arbiter)
 "RM" = (
 /obj/floor_decal/corner/blue{
-	dir = 8;
-	icon_state = "corner_white"
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -1987,8 +1849,7 @@
 /area/map_template/sfv_arbiter)
 "Sy" = (
 /obj/floor_decal/corner/red{
-	dir = 1;
-	icon_state = "corner_white"
+	dir = 1
 	},
 /obj/floor_decal/corner/red{
 	dir = 6
@@ -2051,22 +1912,10 @@
 /obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
-"TZ" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/floor_decal/corner/grey{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark,
-/area/map_template/sfv_arbiter)
 "Ue" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/floor_decal/corner/yellow{
-	dir = 10;
-	icon_state = "corner_white"
+	dir = 10
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -2084,7 +1933,6 @@
 /obj/structure/iv_stand,
 /obj/structure/closet/secure_closet/medical_wall{
 	name = "IV Equipment Cabinet";
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/item/reagent_containers/ivbag/nanoblood,
@@ -2228,17 +2076,6 @@
 	map_airless = 1
 	},
 /area/map_template/sfv_arbiter)
-"VT" = (
-/obj/floor_decal/corner/grey{
-	dir = 5
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/map_template/sfv_arbiter)
 "VU" = (
 /obj/floor_decal/industrial/warning/corner,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2275,7 +2112,6 @@
 	id_tag = "sfv_arbiter_shuttle_pump"
 	},
 /obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
 	id_tag = "rescuedock";
 	name = "Window Shutters Control";
 	pixel_x = 24;
@@ -2324,10 +2160,15 @@
 /turf/simulated/wall/titanium,
 /area/map_template/sfv_arbiter)
 "WW" = (
-/obj/floor_decal/corner/grey{
-	dir = 9
+/obj/machinery/payload_interface{
+	name = "Missile Pod 2";
+	id_tag = "arbiter_pod_2";
+	allow_arming = 1
 	},
-/turf/simulated/floor/tiled/dark,
+/obj/structure/missile/he{
+	dir = 1
+	},
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "Xa" = (
 /obj/structure/catwalk,
@@ -2337,12 +2178,6 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/plating,
-/area/map_template/sfv_arbiter)
-"Xd" = (
-/obj/floor_decal/corner/grey{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Xl" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2437,28 +2272,34 @@
 /area/map_template/sfv_arbiter)
 "XU" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/sfv_arbiter)
 "Yb" = (
-/obj/floor_decal/corner/grey/three_quarters,
-/turf/simulated/floor/tiled/dark,
+/obj/machinery/door/blast/regular{
+	id_tag = "arbiter_pod_1"
+	},
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "Yl" = (
-/obj/floor_decal/corner/grey/three_quarters{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
+/obj/floor_decal/corner/grey/mono,
+/obj/structure/bed/chair/shuttle/black,
+/obj/item/clothing/head/helmet,
+/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "Yn" = (
-/obj/structure/bed/chair/shuttle/black{
-	dir = 8
-	},
 /obj/floor_decal/corner/grey/mono,
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_x = 32
+	},
+/obj/structure/bed/chair/shuttle/black,
 /obj/item/clothing/head/helmet,
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/item/flame/lighter/zippo/gunmetal{
+	pixel_x = 5
+	},
+/obj/item/storage/fancy/smokable/transstellar,
+/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "YA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -2495,28 +2336,18 @@
 /area/map_template/sfv_arbiter)
 "YN" = (
 /obj/floor_decal/corner/grey/mono,
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "YR" = (
 /obj/floor_decal/corner/grey/mono,
-/obj/structure/reagent_dispensers/water_cooler{
-	dir = 8;
-	icon_state = "water_cooler"
-	},
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/plating,
 /area/map_template/sfv_arbiter)
 "YT" = (
 /obj/floor_decal/corner/white{
-	dir = 4;
-	icon_state = "corner_white"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
@@ -2527,7 +2358,6 @@
 	icon_state = "1-2"
 	},
 /obj/floor_decal/industrial/warning/corner{
-	dir = 2;
 	icon_state = "warningcorner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -2536,25 +2366,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zf" = (
-/obj/machinery/button/blast_door{
-	icon_state = "doorctrl0";
-	id_tag = "rescuedock";
-	name = "Window Shutters Control";
-	pixel_x = -24;
-	pixel_y = -4
+/obj/machinery/payload_interface{
+	name = "Missile Pod 3";
+	id_tag = "arbiter_pod_3";
+	allow_arming = 1
 	},
-/obj/floor_decal/corner/grey/mono,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/structure/missile/antispace{
+	dir = 1
 	},
-/obj/structure/table/steel_reinforced,
-/obj/item/flame/lighter/zippo/gunmetal{
-	pixel_x = 5
-	},
-/obj/item/storage/fancy/smokable/transstellar,
-/turf/simulated/floor/tiled/dark/monotile,
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "Zj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2562,17 +2382,11 @@
 /obj/floor_decal/corner/white{
 	dir = 5
 	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zk" = (
 /obj/floor_decal/corner/white{
-	dir = 1;
-	icon_state = "corner_white"
+	dir = 1
 	},
 /obj/structure/sign/warning/nosmoking_1{
 	pixel_y = 23
@@ -2593,15 +2407,20 @@
 	},
 /obj/floor_decal/corner/blue/full,
 /obj/machinery/door/airlock/centcom{
-	name = "Bridge";
-	opacity = 1
+	name = "Bridge"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/sfv_arbiter)
 "Zu" = (
-/obj/paint/black,
-/obj/paint/iccgn,
-/turf/simulated/wall/r_titanium,
+/obj/machinery/payload_interface{
+	name = "Missile Pod 1";
+	id_tag = "arbiter_pod_1";
+	allow_arming = 1
+	},
+/obj/structure/missile/he{
+	dir = 1
+	},
+/turf/simulated/floor/airless,
 /area/map_template/sfv_arbiter)
 "Zv" = (
 /obj/floor_decal/corner/yellow{
@@ -2799,12 +2618,12 @@ VG
 et
 XO
 aq
-XH
+sS
 XH
 "}
 (10,1,1) = {"
 XH
-XH
+aq
 aq
 aq
 LU
@@ -2818,12 +2637,12 @@ VJ
 BE
 WV
 aq
-sS
+aq
 XH
 "}
 (11,1,1) = {"
 XH
-aq
+Yb
 Zu
 WV
 WV
@@ -2836,18 +2655,18 @@ WV
 WV
 WV
 WV
-aq
+WV
 aq
 gS
 "}
 (12,1,1) = {"
 XH
-DI
-Zf
-EU
+aq
+aq
+WV
 qP
-qP
-VT
+YN
+od
 IU
 SK
 al
@@ -2863,8 +2682,8 @@ XH
 XH
 QF
 WW
-WW
-Yb
+WV
+Yl
 YN
 od
 VU
@@ -2880,12 +2699,12 @@ XH
 "}
 (14,1,1) = {"
 Pp
-KK
-Xd
-Xd
+aq
+aq
+WV
 Yl
 YN
-TZ
+od
 FJ
 yb
 it
@@ -2900,11 +2719,11 @@ XH
 (15,1,1) = {"
 XH
 NO
-Yn
-dR
+Zf
+WV
 Yn
 YR
-TZ
+od
 Nh
 NV
 QS
