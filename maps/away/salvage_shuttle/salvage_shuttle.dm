@@ -30,10 +30,18 @@
 	name =  "Salvage Shuttle"
 	archetype = /singleton/submap_archetype/salvage_ship
 
+#define WEBHOOK_SUBMAP_LOADED_SALVAGE_SHIP "webhook_submap_salvage_ship"
+
+/singleton/webhook/submap_loaded/salvage_ship
+	id = WEBHOOK_SUBMAP_LOADED_SALVAGE_SHIP
+
 /singleton/submap_archetype/salvage_ship
 	descriptor = "Independent Salvage Shuttle"
 	map = "Salvage Shuttle"
 	crew_jobs = list(/datum/job/submap/independent_salvager)
+	call_webhook = WEBHOOK_SUBMAP_LOADED_SALVAGE_SHIP
+
+#undef WEBHOOK_SUBMAP_LOADED_SALVAGE_SHIP
 
 /obj/overmap/visitable/sector/salvage_site
 	name = "Active Salvage Site"
