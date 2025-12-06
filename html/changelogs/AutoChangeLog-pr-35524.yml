@@ -1,0 +1,4 @@
+author: Qlonever
+changes:
+  - tweak: Carving graffiti into the floor now requires disarm intent.
+delete-after: true
