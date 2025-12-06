@@ -373,7 +373,7 @@
 	return ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(mob/target, mob/user)
-	if (!CanMouseDrop(target, user) || !ismob(target))
+	if (!CanMouseDrop(target, user) || !ishuman(target))
 		return
 	if (!user_can_move_target_inside(target, user))
 		return
