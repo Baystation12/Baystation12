@@ -234,6 +234,7 @@ GLOBAL_LIST_AS(possible_say_verbs, list(
 	stop_pulling()
 	resting = FALSE
 	anchored = FALSE
+	buckled?.unbuckle_mob()
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/holder/H = loc
