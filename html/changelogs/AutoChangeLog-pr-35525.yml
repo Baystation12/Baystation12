@@ -1,0 +1,5 @@
+author: Spacemanspark
+changes:
+  - bugfix: pAIs will now automatically unbuckle whenever they fold into card 
+      mode.
+delete-after: true
