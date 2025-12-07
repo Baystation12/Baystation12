@@ -274,6 +274,27 @@
 	/singleton/emote/audible/synth/security/halt
 )
 
+/mob/living/silicon/pai/default_emotes = list(
+	/singleton/emote/audible/synth,
+	/singleton/emote/audible/synth/ping,
+	/singleton/emote/audible/synth/buzz,
+	/singleton/emote/audible/synth/confirm,
+	/singleton/emote/audible/synth/deny,
+	/singleton/emote/audible/clap,
+	/singleton/emote/visible/bow,
+	/singleton/emote/visible/salute,
+	/singleton/emote/visible/rsalute,
+	/singleton/emote/visible/flap,
+	/singleton/emote/visible/aflap,
+	/singleton/emote/visible/twitch,
+	/singleton/emote/visible/twitch_v,
+	/singleton/emote/visible/nod,
+	/singleton/emote/visible/shake,
+	/singleton/emote/visible/glare,
+	/singleton/emote/visible/look,
+	/singleton/emote/visible/stare
+)
+
 /mob/living/carbon/slime/default_emotes = list(
 	/singleton/emote/audible/moan,
 	/singleton/emote/visible/twitch,
