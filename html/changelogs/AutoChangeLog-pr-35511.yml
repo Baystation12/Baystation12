@@ -1,6 +1,0 @@
-author: Cakey
-changes:
-  - maptweak: Mercenaries now start with a missile pod, which they can fill with
-      missiles constructed from uplink parts.
-  - maptweak: The Hound and Arbiter now have missile pods.
-delete-after: true
