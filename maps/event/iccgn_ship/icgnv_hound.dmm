@@ -79,7 +79,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)
 "cJ" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/modular/preset/helm,
 /obj/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/icgnv_hound)

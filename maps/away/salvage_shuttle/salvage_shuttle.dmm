@@ -2294,7 +2294,7 @@
 /turf/simulated/floor/tiled/white,
 /area/derelict_cargo_ship/medbay)
 "Ew" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 1;
 	initial_health_percent = 10
 	},
@@ -3505,7 +3505,7 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{

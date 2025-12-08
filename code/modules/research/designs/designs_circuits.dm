@@ -555,13 +555,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/sensors
 	sort_string = "JFAAE"
 
-/datum/design/circuit/engine
-	name = "ship engine control console"
-	id = "shipengine"
-	req_tech = list(TECH_DATA = 2, TECH_POWER = 2, TECH_ENGINEERING = 2)
-	build_path = /obj/item/stock_parts/circuitboard/engine
-	sort_string = "JFAAF"
-
 /datum/design/circuit/shuttle
 	name = "basic shuttle console"
 	id = "shuttle"

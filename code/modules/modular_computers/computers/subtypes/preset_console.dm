@@ -199,3 +199,11 @@
 		/datum/computer_file/program/wordprocessor
 	)
 	autorun_program = /datum/computer_file/program/filemanager
+
+/obj/machinery/computer/modular/preset/helm
+	default_software = list(
+		/datum/computer_file/program/ship/engine_control
+	)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/computer/ship_interface
+	)

@@ -24,7 +24,7 @@
 "ri" = (/obj/item/stack/material/rods,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "rV" = (/obj/structure/largecrate,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
 "sj" = (/obj/random/toolbox,/turf/simulated/floor/exoplanet/barren,/area/map_template/crashed_shuttle/crash)
-"sx" = (/obj/machinery/constructable_frame/computerframe{dir = 4},/obj/item/stock_parts/circuitboard/engine,/obj/item/material/shard,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"sx" = (/obj/machinery/constructable_frame/computerframe{dir = 4},/obj/item/stock_parts/circuitboard/modular_computer,/obj/item/stock_parts/computer/hard_drive/super/helm,/obj/item/stock_parts/computer/ship_interface,/obj/item/material/shard,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "tl" = (/obj/structure/closet/crate,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
 "ts" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 10; icon_state = "intact"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/access_button/airlock_exterior{frequency = 1380; master_tag = "graysontug_shuttle"; pixel_x = -25; pixel_y = 30},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "tv" = (/obj/item/material/shard/shrapnel/titanium,/turf/template_noop,/area/map_template/crashed_shuttle/crash)
