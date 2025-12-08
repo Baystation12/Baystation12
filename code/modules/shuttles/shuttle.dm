@@ -53,7 +53,7 @@
 			CRASH("Shuttle \"[name]\" couldn't locate area [area_type].")
 		areas += located_area
 
-		for (var/turf/area_turf in area_type)
+		for (var/turf/area_turf in located_area.contents)
 			if (should_inherit_turf(area_turf))
 				var/relative_x = area_turf.x - current_location.x
 				var/relative_y = area_turf.y - current_location.y
