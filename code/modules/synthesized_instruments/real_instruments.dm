@@ -44,7 +44,7 @@
 		if ("import")
 			var/t = ""
 			do
-				t = html_encode(input(user, "Please paste the entire song, formatted:", text("[]", owner.name), t)  as message)
+				t = html_encode(input(user, "Please paste the entire song, formatted:", "[owner.name]", t)  as message)
 				if(!CanInteractWith(user, owner, GLOB.physical_state))
 					return
 

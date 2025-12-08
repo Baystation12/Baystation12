@@ -206,9 +206,9 @@
 /proc/log_ability_use(mob/living/silicon/ai/A, ability_name, atom/target = null, notify_admins = 1)
 	var/message
 	if(target)
-		message = text("used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])")
+		message = "used malf ability/function: [ability_name] on [target] ([target.x], [target.y], [target.z])"
 	else
-		message = text("used malf ability/function: [ability_name].")
+		message = "used malf ability/function: [ability_name]."
 	admin_attack_log(A, null, message, null, message)
 
 /proc/check_for_interception()

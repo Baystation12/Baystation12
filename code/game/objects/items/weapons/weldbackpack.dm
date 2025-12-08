@@ -73,4 +73,4 @@
 
 /obj/item/storage/backpack/weldpack/examine(mob/user)
 	. = ..()
-	to_chat(user, text("[icon2html(src, user)] [] units of fuel left!", src.reagents.total_volume))
+	to_chat(user, "[icon2html(src, user)] [reagents.total_volume] units of fuel left!")

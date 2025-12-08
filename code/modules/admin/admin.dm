@@ -412,8 +412,7 @@ var/global/floorIsLava = 0
 
 	var/datum/feed_network/torch_network = news_network[1] //temp change until the UI can be updated to support switching networks.
 
-	var/dat
-	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
+	var/dat = "<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>"
 
 	switch(admincaster_screen)
 		if(0)
@@ -657,7 +656,7 @@ var/global/floorIsLava = 0
 		var/r = t
 		if( findtext(r,"##") )
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
-		dat += text("<tr><td>[t] (<A href='byond://?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
+		dat += "<tr><td>[t] (<A href='byond://?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>"
 	dat += "</table>"
 	show_browser(usr, dat, "window=ban;size=400x400")
 

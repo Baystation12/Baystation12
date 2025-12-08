@@ -413,7 +413,7 @@
 
 	var/dat = display_medical_data(H.get_raw_medical_data(mutations = TRUE), SKILL_MAX)
 
-	dat += text("<A href='byond://?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
+	dat += "<A href='byond://?src=\ref[usr];mach_close=scanconsole'>Close</A>"
 	send_rsc(usr, 'html/browser/common.css', "common.css")
 	show_browser(usr, html_page_common("Health Data: [H]", dat), "window=scanconsole;size=600x900")
 

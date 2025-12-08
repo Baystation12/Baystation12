@@ -74,7 +74,12 @@
 		return 0
 	var/second = time % 60
 	var/minute = (time - second) / 60
-	var/dat = text("<TT><B>Timing Unit</B>\n[] []:[]\n<A href='byond://?src=\ref[];tp=-30'>-</A> <A href='byond://?src=\ref[];tp=-1'>-</A> <A href='byond://?src=\ref[];tp=1'>+</A> <A href='byond://?src=\ref[];tp=30'>+</A>\n</TT>", (timing ? text("<A href='byond://?src=\ref[];time=0'>Timing</A>", src) : text("<A href='byond://?src=\ref[];time=1'>Not Timing</A>", src)), minute, second, src, src, src, src)
+	var/dat
+	if (timing)
+		dat = "<A href='byond://?src=\ref[src];time=0'>Timing</A>"
+	else
+		dat = "<A href='byond://?src=\ref[src];time=1'>Not Timing</A>"
+	dat = "<TT><B>Timing Unit</B>\n[dat] [minute]:[second]\n<A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>\n</TT>"
 	dat += "<BR><BR><A href='byond://?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><BR><A href='byond://?src=\ref[src];close=1'>Close</A>"
 	show_browser(user, dat, "window=timer")

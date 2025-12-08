@@ -96,7 +96,7 @@ var/global/photo_count = 0
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
 		return
-	SetName("[(n_name ? text("[n_name]") : "photo")]")
+	SetName("[n_name ? "[n_name]" : "photo"]")
 	add_fingerprint(usr)
 	return
 

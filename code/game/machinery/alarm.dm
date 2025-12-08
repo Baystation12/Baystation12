@@ -1102,29 +1102,29 @@ FIRE ALARM
 		A = A.loc
 
 		if (A.fire)
-			d1 = text("<A href='byond://?src=\ref[];reset=1'>Reset - Lockdown</A>", src)
+			d1 = "<A href='byond://?src=\ref[src];reset=1'>Reset - Lockdown</A>"
 		else
-			d1 = text("<A href='byond://?src=\ref[];alarm=1'>Alarm - Lockdown</A>", src)
+			d1 = "<A href='byond://?src=\ref[src];alarm=1'>Alarm - Lockdown</A>"
 		if (src.timing)
-			d2 = text("<A href='byond://?src=\ref[];time=0'>Stop Time Lock</A>", src)
+			d2 = "<A href='byond://?src=\ref[src];time=0'>Stop Time Lock</A>"
 		else
-			d2 = text("<A href='byond://?src=\ref[];time=1'>Initiate Time Lock</A>", src)
+			d2 = "<A href='byond://?src=\ref[src];time=1'>Initiate Time Lock</A>"
 		var/second = round(src.time) % 60
 		var/minute = (round(src.time) - second) / 60
 		popup.set_content("[d1]\n<HR>The current alert level is <b>[security_state.current_security_level.name]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>")
 	else
 		A = A.loc
 		if (A.fire)
-			d1 = text("<A href='byond://?src=\ref[];reset=1'>[]</A>", src, stars("Reset - Lockdown"))
+			d1 = "<A href='byond://?src=\ref[src];reset=1'>[stars("Reset - Lockdown")]</A>"
 		else
-			d1 = text("<A href='byond://?src=\ref[];alarm=1'>[]</A>", src, stars("Alarm - Lockdown"))
+			d1 = "<A href='byond://?src=\ref[src];alarm=1'>[stars("Alarm - Lockdown")]</A>"
 		if (src.timing)
-			d2 = text("<A href='byond://?src=\ref[];time=0'>[]</A>", src, stars("Stop Time Lock"))
+			d2 = "<A href='byond://?src=\ref[src];time=0'>[stars("Stop Time Lock")]</A>"
 		else
-			d2 = text("<A href='byond://?src=\ref[];time=1'>[]</A>", src, stars("Initiate Time Lock"))
+			d2 = "<A href='byond://?src=\ref[src];time=1'>[stars("Initiate Time Lock")]</A>"
 		var/second = round(src.time) % 60
 		var/minute = (round(src.time) - second) / 60
-		popup.set_content("[d1]\n<HR>The current security level is <b>[security_state.current_security_level.name]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? text("[]:", minute) : null)][second] <A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>\n")
+		popup.set_content("[d1]\n<HR>The current security level is <b>[security_state.current_security_level.name]</b><br><br>\nTimer System: [d2]<BR>\nTime Left: [(minute ? "[minute]:" : null)][second] <A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>\n")
 	popup.open()
 	return
 
@@ -1234,28 +1234,28 @@ Just a object used in constructing fire alarms
 	if (istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
 
 		if (A.party)
-			d1 = text("<A href='byond://?src=\ref[];reset=1'>No Party :(</A>", src)
+			d1 = "<A href='byond://?src=\ref[src];reset=1'>No Party :(</A>"
 		else
-			d1 = text("<A href='byond://?src=\ref[];alarm=1'>PARTY!!!</A>", src)
+			d1 = "<A href='byond://?src=\ref[src];alarm=1'>PARTY!!!</A>"
 		if (timing)
-			d2 = text("<A href='byond://?src=\ref[];time=0'>Stop Time Lock</A>", src)
+			d2 = "<A href='byond://?src=\ref[src];time=0'>Stop Time Lock</A>"
 		else
-			d2 = text("<A href='byond://?src=\ref[];time=1'>Initiate Time Lock</A>", src)
+			d2 = "<A href='byond://?src=\ref[src];time=1'>Initiate Time Lock</A>"
 		var/second = time % 60
 		var/minute = (time - second) / 60
-		popup.set_content(text("<TT><B>Party Button</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='byond://?src=\ref[];tp=-30'>-</A> <A href='byond://?src=\ref[];tp=-1'>-</A> <A href='byond://?src=\ref[];tp=1'>+</A> <A href='byond://?src=\ref[];tp=30'>+</A>\n</TT>", d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src))
+		popup.set_content("<TT><B>Party Button</B> [d1]\n<HR>\nTimer System: [d2]<BR>\nTime Left: [minute ? "[minute]:" : null][second] <A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>\n</TT>")
 	else
 		if (A.fire)
-			d1 = text("<A href='byond://?src=\ref[];reset=1'>[]</A>", src, stars("No Party :("))
+			d1 = "<A href='byond://?src=\ref[src];reset=1'>[stars("No Party :(")]</A>"
 		else
-			d1 = text("<A href='byond://?src=\ref[];alarm=1'>[]</A>", src, stars("PARTY!!!"))
+			d1 = "<A href='byond://?src=\ref[src];alarm=1'>[stars("PARTY!!!")]</A>"
 		if (timing)
-			d2 = text("<A href='byond://?src=\ref[];time=0'>[]</A>", src, stars("Stop Time Lock"))
+			d2 = "<A href='byond://?src=\ref[src];time=0'>[stars("Stop Time Lock")]</A>"
 		else
-			d2 = text("<A href='byond://?src=\ref[];time=1'>[]</A>", src, stars("Initiate Time Lock"))
+			d2 = "<A href='byond://?src=\ref[src];time=1'>[stars("Initiate Time Lock")]</A>"
 		var/second = time % 60
 		var/minute = (time - second) / 60
-		popup.set_content(text("<TT><B>[]</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='byond://?src=\ref[];tp=-30'>-</A> <A href='byond://?src=\ref[];tp=-1'>-</A> <A href='byond://?src=\ref[];tp=1'>+</A> <A href='byond://?src=\ref[];tp=30'>+</A>\n</TT>", stars("Party Button"), d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src))
+		popup.set_content("<TT><B>[stars("Party Button")]</B> [d1]\n<HR>\nTimer System: [d2]<BR>\nTime Left: [minute ? "[minute]:" : null][second] <A href='byond://?src=\ref[src];tp=-30'>-</A> <A href='byond://?src=\ref[src];tp=-1'>-</A> <A href='byond://?src=\ref[src];tp=1'>+</A> <A href='byond://?src=\ref[src];tp=30'>+</A>\n</TT>")
 	popup.open()
 	return
 
