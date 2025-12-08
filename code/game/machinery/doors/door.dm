@@ -141,7 +141,7 @@
 			if(wheel.pulling && (src.allowed(wheel.pulling)))
 				open()
 			else
-				do_animate("deny")
+				deny()
 		return
 	return
 
@@ -162,7 +162,7 @@
 		if(allowed(user))
 			open()
 		else
-			do_animate("deny")
+			deny()
 	return
 
 /obj/machinery/door/attack_hand(mob/user)
@@ -183,8 +183,7 @@
 			return TRUE
 
 		if (density)
-			do_animate("deny")
-		update_icon()
+			deny()
 		return TRUE
 
 /obj/machinery/door/use_tool(obj/item/I, mob/living/user, list/click_params)
@@ -257,7 +256,7 @@
 			return TRUE
 
 		if (density)
-			do_animate("deny")
+			deny()
 		update_icon()
 		return TRUE
 
@@ -356,6 +355,9 @@
 		close_door_at = next_close_time()
 
 	return 1
+
+/obj/machinery/door/proc/deny()
+	do_animate("deny")
 
 /obj/machinery/door/proc/next_close_time()
 	return world.time + (normalspeed ? 150 : 5)
