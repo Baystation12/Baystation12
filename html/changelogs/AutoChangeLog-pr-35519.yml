@@ -1,0 +1,12 @@
+author: Cakey
+changes:
+  - bugfix: The ISV Crab will no longer land with space tiles on planets.
+  - maptweak: The deck 4 EVA airlock is now a docking controller and can dock 
+      with several ships.
+  - maptweak: Added tape rolls to the ISV Crab.
+  - maptweak: Added starting jetpacks for the ISV crab Crab crew to salvage from
+      their starting sector.
+  - maptweak: Moved the ISV Crab's holopad to the cockpit.
+  - maptweak: The ISV Crab now has additional buttons for cycling the cargo bay 
+      out and in.
+delete-after: true
