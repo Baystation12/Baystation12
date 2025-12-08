@@ -372,16 +372,16 @@
 
 	user.set_machine(src)
 
-	var/dat = text("<b>[name]</b><br>")
+	var/dat = "<b>[name]</b><br>"
 	if (active)
-		dat += text("Generator: <A href='byond://?src=\ref[src];action=disable'>On</A><br>")
+		dat += "Generator: <A href='byond://?src=\ref[src];action=disable'>On</A><br>"
 	else
-		dat += text("Generator: <A href='byond://?src=\ref[src];action=enable'>Off</A><br>")
-	dat += text("[capitalize(sheet_name)]: [sheets] - <A href='byond://?src=\ref[src];action=eject'>Eject</A><br>")
+		dat += "Generator: <A href='byond://?src=\ref[src];action=enable'>Off</A><br>"
+	dat += "[capitalize(sheet_name)]: [sheets] - <A href='byond://?src=\ref[src];action=eject'>Eject</A><br>"
 	var/stack_percent = round(sheet_left * 100, 1)
-	dat += text("Current stack: [stack_percent]% <br>")
-	dat += text("Power output: <A href='byond://?src=\ref[src];action=lower_power'>-</A> [power_gen * power_output] Watts<A href='byond://?src=\ref[src];action=higher_power'>+</A><br>")
-	dat += text("Power current: [(isnull(powernet) ? "Unconnected" : "[avail()]")]<br>")
+	dat += "Current stack: [stack_percent]% <br>"
+	dat += "Power output: <A href='byond://?src=\ref[src];action=lower_power'>-</A> [power_gen * power_output] Watts<A href='byond://?src=\ref[src];action=higher_power'>+</A><br>"
+	dat += "Power current: [(isnull(powernet) ? "Unconnected" : "[avail()]")]<br>"
 
 	var/tempstr = "Temperature: [temperature]&deg;C<br>"
 	dat += (overheating)? SPAN_DANGER("[tempstr]") : tempstr

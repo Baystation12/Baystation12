@@ -262,16 +262,16 @@ var/global/list/organ_rel_size = list(
 		var/n_letter = copytext_char(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
 		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
 			if (prob(10))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
+				n_letter = "[n_letter]-[n_letter]-[n_letter]-[n_letter]" //replaces the current letter with this instead.
 			else
 				if (prob(20))
-					n_letter = text("[n_letter]-[n_letter]-[n_letter]")
+					n_letter = "[n_letter]-[n_letter]-[n_letter]"
 				else
 					if (prob(5))
 						n_letter = null
 					else
-						n_letter = text("[n_letter]-[n_letter]")
-		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
+						n_letter = "[n_letter]-[n_letter]"
+		t = "[t][n_letter]" //since the above is ran through for each letter, the text just adds up back to the original word.
 		p++//for each letter p is increased to find where the next letter will be.
 	return sanitize(t)
 

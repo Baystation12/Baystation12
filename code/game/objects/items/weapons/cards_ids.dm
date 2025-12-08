@@ -368,19 +368,19 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
-	dat += text("Name: []</A><BR>", "[formal_name_prefix][registered_name][formal_name_suffix]")
-	dat += text("Pronouns: []</A><BR>\n", sex)
-	dat += text("Age: []</A><BR>\n", age)
+	dat += "Name: [formal_name_prefix][registered_name][formal_name_suffix]</A><BR>"
+	dat += "Pronouns: [sex]</A><BR>\n"
+	dat += "Age: [age]</A><BR>\n"
 
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-		dat += text("Branch: []</A><BR>\n", military_branch ? military_branch.name : "\[UNSET\]")
+		dat += "Branch: [military_branch ? military_branch.name : "\[UNSET\]"]</A><BR>\n"
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		dat += text("Rank: []</A><BR>\n", military_rank ? military_rank.name : "\[UNSET\]")
+		dat += "Rank: [military_rank ? military_rank.name : "\[UNSET\]"]</A><BR>\n"
 
-	dat += text("Assignment: []</A><BR>\n", assignment)
-	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
-	dat += text("Blood Type: []<BR>\n", blood_type)
-	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
+	dat += "Assignment: [assignment]</A><BR>\n"
+	dat += "Fingerprint: [fingerprint_hash]</A><BR>\n"
+	dat += "Blood Type: [blood_type]<BR>\n"
+	dat += "DNA Hash: [dna_hash]<BR><BR>\n"
 	if(front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
@@ -404,7 +404,7 @@ var/global/const/NO_EMAG_ACT = -50
 	set category = "Object"
 	set src in usr
 
-	to_chat(usr, text("[icon2html(src, usr)] []: The current assignment on the card is [].", src.name, src.assignment))
+	to_chat(usr, "[icon2html(src, usr)] [name]: The current assignment on the card is [assignment].")
 	to_chat(usr, "The blood type on the card is [blood_type].")
 	to_chat(usr, "The DNA hash on the card is [dna_hash].")
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")

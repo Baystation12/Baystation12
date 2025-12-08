@@ -64,11 +64,21 @@
 		return
 
 	user.set_machine(src)
-	var/dat = list()
-	dat += text("<TT><B>Infrared Laser</B>\n<B>Status</B>: []<BR>\n<B>Visibility</B>: []<BR>\n</TT>", (on ? text("<A href='byond://?src=\ref[];state=0'>On</A>", src) : text("<A href='byond://?src=\ref[];state=1'>Off</A>", src)), (src.visible ? text("<A href='byond://?src=\ref[];visible=0'>Visible</A>", src) : text("<A href='byond://?src=\ref[];visible=1'>Invisible</A>", src)))
+	var/dat
+	var/onoff
+	if (on)
+		onoff = "<A href='byond://?src=\ref[src];state=0'>On</A>"
+	else
+		onoff = "<A href='byond://?src=\ref[src];state=1'>Off</A>"
+	var/visibility
+	if (visible)
+		visibility = "<A href='byond://?src=\ref[src];visible=0'>Visible</A>"
+	else
+		visibility = "<A href='byond://?src=\ref[src];visible=1'>Invisible</A>"
+	dat = "<TT><B>Infrared Laser</B>\n<B>Status</B>: [onoff]<BR>\n<B>Visibility</B>: [visibility]<BR>\n</TT>"
 	dat += "<BR><BR><A href='byond://?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><BR><A href='byond://?src=\ref[src];close=1'>Close</A>"
-	show_browser(user, jointext(dat,null), "window=infra")
+	show_browser(user, dat, "window=infra")
 	onclose(user, "infra")
 
 /obj/item/device/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)

@@ -151,7 +151,7 @@
 	else
 		dat +=	"<br><b>Headset:</b> <a href='byond://?src=\ref[src];add_inv=ears'>Nothing</a>"
 
-	show_browser(user, dat, text("window=mob[];size=325x500", name))
+	show_browser(user, dat, "window=mob[name];size=325x500")
 	onclose(user, "mob[real_name]")
 	return
 

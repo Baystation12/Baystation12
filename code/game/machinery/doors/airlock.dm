@@ -551,21 +551,21 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/electrify(duration, feedback = 0)
 	var/message = ""
 	if(src.isWireCut(AIRLOCK_WIRE_ELECTRIFY) && arePowerSystemsOn())
-		message = text("The electrification wire is cut - Door permanently electrified.")
+		message = "The electrification wire is cut - Door permanently electrified."
 		src.electrified_until = -1
 		. = 1
 	else if(duration && !arePowerSystemsOn())
-		message = text("The door is unpowered - Cannot electrify the door.")
+		message = "The door is unpowered - Cannot electrify the door."
 		src.electrified_until = 0
 	else if(!duration && electrified_until != 0)
 		message = "The door is now un-electrified."
 		src.electrified_until = 0
 	else if(duration)	//electrify door for the given duration seconds
 		if(usr)
-			shockedby += text("\[[time_stamp()]\] - [key_name(usr)]")
+			shockedby += "\[[time_stamp()]\] - [key_name(usr)]"
 			admin_attacker_log(usr, "electrified \the [name] [duration == -1 ? "permanently" : "for [duration] second\s"]")
 		else
-			shockedby += text("\[[time_stamp()]\] - EMP)")
+			shockedby += "\[[time_stamp()]\] - EMP)"
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
 		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
 		. = 1
@@ -593,7 +593,7 @@ About the new airlock wires panel:
 	var/message = ""
 	// Safeties!  We don't need no stinking safeties!
 	if (src.isWireCut(AIRLOCK_WIRE_SAFETY))
-		message = text("The safety wire is cut - Cannot enable safeties.")
+		message = "The safety wire is cut - Cannot enable safeties."
 	else if (!activate && src.safe)
 		safe = FALSE
 	else if (activate && !src.safe)
@@ -887,9 +887,9 @@ About the new airlock wires panel:
 			electrify(-1 * activate, 1)
 		if("open")
 			if(src.welded)
-				to_chat(usr, text("The airlock has been welded shut!"))
+				to_chat(usr, "The airlock has been welded shut!")
 			else if(src.locked)
-				to_chat(usr, text("The door bolts are down!"))
+				to_chat(usr, "The door bolts are down!")
 			else if(activate && density)
 				open()
 			else if(!activate && !density)
@@ -899,7 +899,7 @@ About the new airlock wires panel:
 		if("timing")
 			// Door speed control
 			if(src.isWireCut(AIRLOCK_WIRE_SPEED))
-				to_chat(usr, text("The timing wire is cut - Cannot alter timing."))
+				to_chat(usr, "The timing wire is cut - Cannot alter timing.")
 			else if (activate && src.normalspeed)
 				normalspeed = FALSE
 			else if (!activate && !src.normalspeed)

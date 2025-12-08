@@ -182,7 +182,7 @@
 			close()
 
 	else if (density)
-		flick(text("[]deny", base_state), src)
+		flick("[base_state]deny", src)
 		return TRUE
 
 	return ..()

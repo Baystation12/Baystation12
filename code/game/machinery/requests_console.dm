@@ -165,7 +165,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 				screen = RCS_SENTPASS
 				message_log += "<B>Message sent to [recipient]</B><BR>[message]"
 		else
-			audible_message(text("[icon2html(src, viewers(get_turf(src)))] *The Requests Console beeps: 'NOTICE: No server detected!'"),,4)
+			audible_message("[icon2html(src, viewers(get_turf(src)))] *The Requests Console beeps: 'NOTICE: No server detected!'",,4)
 		return TOPIC_REFRESH
 
 	//Handle screen switching
@@ -194,7 +194,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return FALSE
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/card/id/T = O
-			msgVerified = text(SPAN_COLOR("green", "<b>Verified by [T.registered_name] ([T.assignment])</b>"))
+			msgVerified = SPAN_COLOR("green", "<b>Verified by [T.registered_name] ([T.assignment])</b>")
 			SSnano.update_uis(src)
 		if(screen == RCS_ANNOUNCE)
 			var/obj/item/card/id/ID = O
@@ -211,7 +211,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 		if(inoperable() || GET_FLAGS(stat, MACHINE_STAT_MAINT)) return FALSE
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
-			msgStamped = text(SPAN_COLOR("blue", "<b>Stamped with the [T.name]</b>"))
+			msgStamped = SPAN_COLOR("blue", "<b>Stamped with the [T.name]</b>")
 			SSnano.update_uis(src)
 		return TRUE
 

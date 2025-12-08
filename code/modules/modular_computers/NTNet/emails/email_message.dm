@@ -21,7 +21,7 @@
 
 // Turns /email_message/ file into regular /data/ file.
 /datum/computer_file/data/email_message/proc/export()
-	var/datum/computer_file/data/dat = new/datum/computer_file/data/text()
+	var/datum/computer_file/data/dat = new/datum/computer_file/data/text
 	dat.stored_data =  "Received from [source] at [timestamp]."
 	dat.stored_data += "\[b\][title]\[/b\]"
 	dat.stored_data += stored_data

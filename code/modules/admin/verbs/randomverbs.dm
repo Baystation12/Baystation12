@@ -151,7 +151,7 @@
 			return
 
 	if (!message)
-		message = input("Message:", text("Enter the text you wish to appear to your target:")) as null|text
+		message = input("Message:", "Enter the text you wish to appear to your target:") as null|text
 		if (style != "unsafe")
 			message = sanitize(message)
 	if (!message)
@@ -702,9 +702,9 @@ Ccomp's first proc.
 
 	if(!check_rights(R_DEBUG|R_FUN))	return
 
-	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
+	var/heavy = input("Range of heavy pulse.", "Input")  as num|null
 	if(isnull(heavy)) return
-	var/light = input("Range of light pulse.", text("Input"))  as num|null
+	var/light = input("Range of light pulse.", "Input")  as num|null
 	if(isnull(light)) return
 
 	if (heavy || light)

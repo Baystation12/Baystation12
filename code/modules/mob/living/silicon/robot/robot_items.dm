@@ -89,7 +89,7 @@
 	I.forceMove(src)
 	loaded_item = I
 	for(var/mob/M in viewers())
-		M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
+		M.show_message(SPAN_NOTICE("[user] adds the [I] to the [src]."), 1)
 	desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 	flick("portable_analyzer_load", src)
 	icon_state = "portable_analyzer_full"
@@ -242,7 +242,7 @@
 
 	//n_name = copytext(n_name, 1, 32)
 	if(( get_dist(user,paper) <= 1  && user.stat == 0))
-		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
+		paper.SetName("paper[(n_name ? "- '[n_name]'" : null)]")
 		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)
 	return

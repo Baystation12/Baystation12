@@ -458,7 +458,7 @@
 /mob/proc/OnSelfTopic(href_list, topic_status)
 	if (topic_status == STATUS_INTERACTIVE)
 		if(href_list["mach_close"])
-			var/t1 = text("window=[href_list["mach_close"]]")
+			var/t1 = "window=[href_list["mach_close"]]"
 			unset_machine()
 			show_browser(src, null, t1)
 			return TOPIC_HANDLED

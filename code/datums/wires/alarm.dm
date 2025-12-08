@@ -25,12 +25,12 @@ var/global/const/AALARM_WIRE_AALARM = 16
 /datum/wires/alarm/GetInteractWindow(mob/user)
 	var/obj/machinery/alarm/A = holder
 	. += ..()
-	. += text({"
+	. += {"
 		<br>
 		[(A.locked ? "The Air Alarm is locked." : "The Air Alarm is unlocked.")]<br>
 		[((A.shorted || A.inoperable()) ? "The Air Alarm is offline." : "The Air Alarm is working properly!")]<br>
 		[(A.aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]
-	"})
+	"}
 
 /datum/wires/alarm/UpdateCut(index, mended)
 	var/obj/machinery/alarm/A = holder

@@ -16,7 +16,7 @@
 	for (var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if (length(tempnetwork))
-			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
+			T["[C.c_tag][C.can_use() ? null : " (Deactivated)"]"] = C
 
 	track = new()
 	track.cameras = T
@@ -113,7 +113,7 @@
 		var/name = M.name
 		if (name in TB.names)
 			TB.namecounts[name]++
-			name = text("[] ([])", name, TB.namecounts[name])
+			name = "[name] ([TB.namecounts[name]])"
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1

@@ -134,7 +134,7 @@
 	if (src.operating)
 		return 0
 	operating = DOOR_OPERATING_YES
-	flick(text("[]closing", src.base_state), src)
+	flick("[base_state]closing", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	set_density(1)
 	update_icon()
@@ -233,7 +233,7 @@
 		return TRUE
 
 	else if (density)
-		flick(text("[]deny", src.base_state), src)
+		flick("[base_state]deny", src)
 		return TRUE
 
 /obj/machinery/door/window/create_electronics(electronics_type = /obj/item/airlock_electronics)

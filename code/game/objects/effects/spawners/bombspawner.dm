@@ -63,7 +63,7 @@
 
 			if(src.active)
 				R.part1.secured = 1
-				R.part1.icon_state = text("motion[]", 1)
+				R.part1.icon_state = "motion1"
 				R.c_state(1, src)
 
 		// timer

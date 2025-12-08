@@ -54,7 +54,7 @@
 	var/data = list()
 	data["src"] = "\ref[src]"
 	data["id_inserted"] = !!held_card
-	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
+	data["id_card"] = held_card ? "[held_card.registered_name], [held_card.assignment]" : "-----"
 	data["access_level"] = has_access(needed_access, held_card && held_card.GetAccess())
 	data["machine_id"] = machine_id
 	data["creating_new_account"] = creating_new_account
