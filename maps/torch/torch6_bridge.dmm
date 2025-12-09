@@ -3412,7 +3412,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/structure/closet/emcloset,
 /obj/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 4;
@@ -3421,6 +3420,9 @@
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -26
+	},
+/obj/machinery/computer/modular/preset/munitions{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/cockpit)
@@ -3484,6 +3486,7 @@
 	},
 /obj/item/device/radio,
 /obj/machinery/recharger,
+/obj/structure/closet/walllocker/emerglocker/north,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/cockpit)
 "gv" = (
@@ -4091,16 +4094,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc/shuttle/aquila{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
 /obj/floor_decal/techfloor/corner,
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/suits)
 "iv" = (
@@ -4143,7 +4141,9 @@
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "iA" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "iB" = (
@@ -4316,6 +4316,15 @@
 /area/crew_quarters/heads/cobed)
 "je" = (
 /obj/machinery/suit_storage_unit/standard_unit,
+/obj/machinery/power/apc/shuttle/aquila{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/suits)
 "jf" = (
@@ -4329,24 +4338,27 @@
 /obj/structure/handrail{
 	dir = 1
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/suits)
 "jg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
 	},
 /obj/machinery/light/small,
 /obj/floor_decal/techfloor{
 	dir = 4
 	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/suits)
 "jk" = (
@@ -4631,11 +4643,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/aquila/crew)
 "ki" = (
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -21
+/obj/machinery/light{
+	dir = 8
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "kv" = (
@@ -4839,12 +4850,7 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "kW" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 5
-	},
-/obj/machinery/light{
-	dir = 8
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "kX" = (
@@ -5209,8 +5215,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/aquila/air)
@@ -5605,6 +5611,15 @@
 	dir = 4
 	},
 /obj/structure/handrail,
+/obj/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "aquila_pod_1_access";
+	name = "Missile Pod Access";
+	pixel_y = 25;
+	pixel_x = 6
+	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/suits)
 "np" = (
@@ -5618,6 +5633,9 @@
 	dir = 1;
 	pixel_y = -26
 	},
+/obj/structure/handrail{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/air)
 "nq" = (
@@ -5625,8 +5643,6 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/table/rack,
-/obj/random/toolbox,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/air)
 "nr" = (
@@ -5766,6 +5782,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"nP" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "aquila_pod_2_access";
+	name = "Missile Pod Access"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/aquila/air)
 "nU" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7062,7 +7086,10 @@
 /turf/simulated/floor/plating,
 /area/aquila/power)
 "rx" = (
-/obj/machinery/atmospherics/binary/pump,
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "ry" = (
@@ -7355,6 +7382,13 @@
 	map_airless = 1
 	},
 /area/bridge/storage)
+"sn" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "aquila_pod_2";
+	name = "Missile Pod"
+	},
+/turf/simulated/floor/plating,
+/area/aquila/cockpit)
 "so" = (
 /obj/structure/table/standard,
 /obj/item/reagent_containers/syringe/antiviral,
@@ -7632,12 +7666,11 @@
 	pixel_x = -24
 	},
 /obj/structure/cable/cyan,
-/obj/structure/handrail{
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/structure/table/rack,
+/obj/random/toolbox,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/air)
 "tm" = (
@@ -10441,6 +10474,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"BZ" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "aquila_pod_1_access";
+	name = "Missile Pod Access"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/aquila/suits)
 "Cb" = (
 /obj/shuttle_landmark/torch/deck1/aquila{
 	name = "B-Deck, Fore Starboard"
@@ -10982,6 +11023,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
+"Ew" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "aquila_pod_2_access";
+	name = "Missile Pod Access";
+	pixel_x = 25
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/plating,
+/area/aquila/air)
 "Ey" = (
 /obj/machinery/light,
 /obj/machinery/disposal,
@@ -11444,6 +11497,15 @@
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
+"GR" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/aquila/suits)
 "GU" = (
 /obj/structure/displaycase,
 /obj/item/gun/projectile/revolver/medium/captain{
@@ -12320,13 +12382,18 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/forestarboard)
 "JV" = (
-/obj/machinery/atmospherics/portables_connector,
-/obj/floor_decal/industrial/outline,
-/obj/machinery/portable_atmospherics/canister/air/airlock{
-	start_pressure = 1900
+/obj/floor_decal/industrial/outline/red,
+/obj/machinery/payload_interface{
+	id_tag = "aquila_pod_1";
+	name = "Missile Pod 1";
+	allow_arming = 1
 	},
+/obj/structure/missile/antispace{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/plating,
-/area/aquila/air)
+/area/aquila/cockpit)
 "Ka" = (
 /obj/structure/cable/green,
 /obj/wallframe_spawn/reinforced/polarized{
@@ -12356,6 +12423,13 @@
 "Kd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
+	},
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/floor_decal/industrial/outline,
+/obj/machinery/portable_atmospherics/canister/air/airlock{
+	start_pressure = 1900
 	},
 /turf/simulated/floor/plating,
 /area/aquila/air)
@@ -13534,8 +13608,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/bridge)
 "PC" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/cyan,
-/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /turf/simulated/floor/plating,
 /area/aquila/air)
 "PP" = (
@@ -14795,6 +14868,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/foreport)
+"UJ" = (
+/obj/floor_decal/industrial/outline/red,
+/obj/machinery/payload_interface{
+	id_tag = "aquila_pod_2";
+	name = "Missile Pod 2";
+	allow_arming = 1
+	},
+/obj/structure/missile/antispace{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/plating,
+/area/aquila/cockpit)
 "UL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14991,8 +15077,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "VC" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 9
+/obj/machinery/atmospherics/binary/pump{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/aquila/air)
@@ -15393,6 +15479,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
+"XU" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "aquila_pod_1";
+	name = "Missile Pod"
+	},
+/turf/simulated/floor/plating,
+/area/aquila/cockpit)
 "XW" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -33313,8 +33406,8 @@ ad
 ad
 ad
 ad
-ad
-gY
+fj
+fk
 QF
 QF
 QF
@@ -33514,12 +33607,12 @@ ad
 ad
 ad
 ad
-ad
-ad
-gY
+fj
+fk
+gZ
 QF
 je
-je
+GR
 Zj
 Kc
 Hg
@@ -33716,9 +33809,9 @@ ad
 ad
 ad
 ad
-ad
-fj
-fk
+gY
+ec
+ec
 QF
 no
 jf
@@ -33918,10 +34011,10 @@ ad
 ad
 ad
 fj
-eb
 fk
-gZ
-QF
+XU
+JV
+BZ
 iu
 jg
 QF
@@ -35535,11 +35628,11 @@ ad
 ad
 fp
 eg
-nr
-hc
-MK
-MK
-So
+sn
+UJ
+nP
+Ew
+kW
 ki
 kW
 mb
@@ -35737,11 +35830,11 @@ ad
 ad
 ad
 ad
-fp
-nr
-OX
-iz
-JV
+ec
+ec
+MK
+MK
+So
 rx
 PC
 wr
@@ -35940,9 +36033,9 @@ ad
 ad
 ad
 ad
-gY
-MK
-MK
+hc
+OX
+iz
 So
 iA
 VC
