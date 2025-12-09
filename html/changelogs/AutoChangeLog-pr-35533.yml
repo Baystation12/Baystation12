@@ -1,0 +1,6 @@
+author: Banditoz
+changes:
+  - bugfix: Fixed airlock lights! They'll light up when they're opening, 
+      closing, and when you're denied. This should also fix cases where lighting
+      "stacks" on bolted doors.
+delete-after: true
