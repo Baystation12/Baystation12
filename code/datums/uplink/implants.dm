@@ -42,7 +42,7 @@
 	path = /obj/item/storage/box/syndie_kit/imp_imprinting
 	antag_roles = list(MODE_TRAITOR)
 
-/datum/uplink_item/item/implants/imp_imprinting
+/datum/uplink_item/item/implants/imp_spider
 	name = "Spider Beacon Implant"
 	desc = "An implant that will materialize spiders from bluespace near the victim, every minute on average."
 	item_cost = 45
