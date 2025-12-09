@@ -621,7 +621,7 @@ About the new airlock wires panel:
 		return 0
 
 
-/obj/machinery/door/airlock/on_update_icon(state = 0)
+/obj/machinery/door/airlock/on_update_icon(state = 0, should_update_overlays = TRUE)
 	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
 		if(connections in list(WEST, EAST, EAST|WEST))
 			set_dir(SOUTH)
@@ -645,7 +645,8 @@ About the new airlock wires panel:
 		if(AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG, AIRLOCK_DENY)
 			icon_state = "blank"
 
-	set_airlock_overlays(state)
+	if (should_update_overlays)
+		set_airlock_overlays(state)
 
 
 /obj/machinery/door/airlock/on_broken()
@@ -671,8 +672,9 @@ About the new airlock wires panel:
 	qdel_self()
 
 
+/// Sets an airlock's overlays _and_ lighting, per the airlock state.set_airlock_overlays(state)
+/// Note that this is the only use of the state variable.
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
-	set_light(0)
 	var/list/new_overlays = list()
 	if(door_color && door_color != "none")
 		var/ikey = "[airlock_type]-[door_color]-color"
@@ -727,15 +729,18 @@ About the new airlock wires panel:
 			if (stripe_filling_overlay)
 				new_overlays += stripe_filling_overlay
 	if(arePowerSystemsOn())
+		set_light(0, no_update = TRUE) // clear lights
 		switch(state)
 			if(AIRLOCK_CLOSED)
 				if(lights && locked)
 					new_overlays += overlay_image(bolts_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(2, 0.75, COLOR_RED_LIGHT)
+				else if(lights) // closed airlocks that are not bolted do not have lights
+					set_light(0)
 			if(AIRLOCK_DENY)
 				if(lights)
 					new_overlays += overlay_image(deny_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
-					set_light(2, 0.75, COLOR_RED_LIGHT)
+					set_light(2, (locked ? 1 : 0.75), COLOR_RED_LIGHT)
 			if(AIRLOCK_EMAG)
 				new_overlays += overlay_image(emag_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 			if(AIRLOCK_CLOSING)
@@ -746,10 +751,14 @@ About the new airlock wires panel:
 				if(lights)
 					new_overlays += overlay_image(lights_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 					set_light(2, 0.75, COLOR_LIME)
+			if(AIRLOCK_OPEN)
+				set_light(0)
 		if(MACHINE_IS_BROKEN(src))
 			new_overlays += overlay_image(sparks_broken_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 		else if (get_damage_percentage() >= 25)
 			new_overlays += overlay_image(sparks_damaged_file, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	else
+		set_light(0)
 	if(welded)
 		new_overlays += welded_file
 	if(p_open)
@@ -760,17 +769,23 @@ About the new airlock wires panel:
 	SetOverlays(new_overlays)
 	ImmediateOverlayUpdate()
 
+/obj/machinery/door/airlock/deny()
+	set waitfor = FALSE
+	if (operating || !density)
+		return
+	do_animate("deny")
+	addtimer(new Callback(src, TYPE_PROC_REF(/atom, update_icon)), 6)
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
 		if("opening")
 			set_airlock_overlays(AIRLOCK_OPENING)
 			flick("opening", src)//[stat ? "_stat":]
-			update_icon(AIRLOCK_OPEN)
+			update_icon(AIRLOCK_OPEN, FALSE)
 		if("closing")
 			set_airlock_overlays(AIRLOCK_CLOSING)
 			flick("closing", src)
-			update_icon(AIRLOCK_CLOSED)
+			update_icon(AIRLOCK_CLOSED, FALSE)
 		if("deny")
 			set_airlock_overlays(AIRLOCK_DENY)
 			if(density && arePowerSystemsOn())
@@ -778,7 +793,6 @@ About the new airlock wires panel:
 				if(world.time > next_clicksound)
 					next_clicksound = world.time + CLICKSOUND_INTERVAL
 					playsound(src, open_failure_access_denied, 40)
-			update_icon(AIRLOCK_CLOSED)
 		if("emag")
 			set_airlock_overlays(AIRLOCK_EMAG)
 			if(density && arePowerSystemsOn())
