@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - bugfix: All food items now have at least 1 unit of nutriment when spawned in
+      by means other than cooking.
+delete-after: true
