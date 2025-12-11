@@ -9,7 +9,7 @@
 	var/slices_num
 	var/dried_type = null
 	var/dry = 0
-	var/nutriment_amt = 0
+	var/nutriment_amt = 1
 	var/list/nutriment_desc = list("food" = 1)
 	var/list/eat_sound = 'sound/items/eatfood.ogg'
 	var/obj/item/trash
