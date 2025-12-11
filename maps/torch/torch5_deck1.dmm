@@ -4024,25 +4024,32 @@
 /turf/simulated/floor/plating,
 /area/medical/counselor/therapy)
 "ahf" = (
-/obj/floor_decal/corner/paleblue/mono,
-/obj/machinery/light_switch{
-	pixel_x = 6;
-	pixel_y = 24
+/obj/structure/filingcabinet/chestdrawer{
+	dir = 1
 	},
-/obj/machinery/button/windowtint{
-	id = "counselor_office";
-	pixel_x = -2;
-	pixel_y = 24
+/obj/item/material/folder/blue,
+/obj/item/material/folder/red,
+/obj/item/material/folder,
+/obj/item/material/folder/nt,
+/obj/item/material/folder/yellow,
+/obj/item/material/folder/white,
+/obj/item/material/folder/white,
+/obj/item/material/folder/white,
+/obj/item/material/folder/envelope,
+/obj/item/material/folder/envelope,
+/obj/floor_decal/corner/paleblue{
+	dir = 9
 	},
-/obj/machinery/photocopier/faxmachine{
-	department = "Torch - Counselor"
+/obj/structure/sign/poster/torch{
+	pixel_x = -32
 	},
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/white/monotile,
+/turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ahg" = (
 /obj/machinery/computer/modular/preset/medical,
-/obj/floor_decal/corner/paleblue/mono,
+/obj/floor_decal/corner/paleblue{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/counselor)
 "ahh" = (
@@ -4069,11 +4076,6 @@
 /obj/floor_decal/corner/paleblue{
 	dir = 6
 	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
@@ -4083,7 +4085,14 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/cable/green,
+/obj/machinery/light_switch{
+	pixel_x = 22;
+	pixel_y = 24
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ahk" = (
@@ -4138,27 +4147,11 @@
 /area/medical/counselor/therapy)
 "ahq" = (
 /obj/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/floor_decal/corner/paleblue{
-	dir = 10
+	dir = 9
 	},
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/filingcabinet/chestdrawer{
-	dir = 1
-	},
-/obj/item/material/folder/blue,
-/obj/item/material/folder/red,
-/obj/item/material/folder,
-/obj/item/material/folder/nt,
-/obj/item/material/folder/yellow,
-/obj/item/material/folder/white,
-/obj/item/material/folder/white,
-/obj/item/material/folder/white,
-/obj/item/material/folder/envelope,
-/obj/item/material/folder/envelope,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ahr" = (
@@ -4166,10 +4159,7 @@
 	dir = 4
 	},
 /obj/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/floor_decal/corner/paleblue{
-	dir = 10
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
@@ -4470,23 +4460,31 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "ahU" = (
-/obj/floor_decal/corner/paleblue/mono,
+/obj/structure/table/standard,
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Counselor"
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
 /obj/machinery/button/alternate/door{
 	id_tag = "counselor";
 	name = "Counselor's Hallway Door";
-	pixel_x = -24;
-	pixel_y = 5
+	pixel_x = -33;
+	pixel_y = 6
 	},
 /obj/machinery/button/alternate/door{
 	id_tag = "counselortherapy";
 	name = "Counselor's Therapy Door";
-	pixel_x = -24;
-	pixel_y = -5
+	pixel_x = -33;
+	pixel_y = -3
 	},
-/obj/structure/bookcase,
-/obj/item/book/manual/medical_diagnostics_manual,
-/obj/item/book/manual/military_law,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/machinery/button/windowtint{
+	id = "counselor_office";
+	pixel_x = -24;
+	pixel_y = 1
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ahV" = (
 /obj/structure/cable/green{
@@ -4552,10 +4550,7 @@
 /area/maintenance/firstdeck/centralstarboard)
 "ahZ" = (
 /obj/floor_decal/corner/paleblue{
-	dir = 5
-	},
-/obj/floor_decal/corner/paleblue{
-	dir = 10
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
@@ -4606,6 +4601,11 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
@@ -4658,19 +4658,20 @@
 /area/medical/counselor/therapy)
 "aii" = (
 /obj/structure/closet/secure_closet/counselor,
-/obj/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/item/book/manual/military_law,
+/obj/item/book/manual/medical_diagnostics_manual,
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "aij" = (
-/obj/floor_decal/corner/paleblue{
-	dir = 10
-	},
-/obj/floor_decal/corner/paleblue{
-	dir = 5
-	},
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
@@ -4699,10 +4700,11 @@
 /obj/floor_decal/corner/paleblue{
 	dir = 6
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -26
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_y = -28
 	},
+/obj/structure/cable/green,
 /turf/simulated/floor/tiled/white,
 /area/medical/counselor)
 "ain" = (
