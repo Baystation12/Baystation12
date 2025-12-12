@@ -52,6 +52,9 @@
 	else
 		return ((H && H.isSynthetic()) ? "displaying a blue screen on their monitor indicating total system failure" : show_coma)
 
+/singleton/species/proc/get_vr(mob/living/carbon/human/H)
+	return ((H && H.isSynthetic()) ? "flashing a 'system occupied' glyph on their monitor" : show_vr)
+
 /singleton/species/proc/get_blood_colour(mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
 

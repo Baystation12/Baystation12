@@ -1,4 +1,7 @@
 /mob/living/carbon/human/gib()
+	if (has_extension(src, /datum/extension/virtual_surrogate)) // Virtual mobs don't gib
+		return death()
+
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(!QDELETED(I) && isturf(loc))

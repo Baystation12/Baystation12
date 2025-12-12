@@ -2104,6 +2104,13 @@
 "aqa" = (
 /turf/unsimulated/beach/water,
 /area/beach)
+"ara" = (
+/obj/floor_decal/corner/green{
+	dir = 6
+	},
+/obj/item/storage/firstaid/adv,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/source_basketball)
 "asP" = (
 /turf/unsimulated/wall,
 /area/centcom)
@@ -45361,7 +45368,7 @@ afq
 afq
 agY
 ahy
-ahY
+ara
 ahY
 ahY
 ajc

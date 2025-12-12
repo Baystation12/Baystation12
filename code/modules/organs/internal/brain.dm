@@ -96,7 +96,13 @@
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	transfer_identity(owner)
+	if (!has_extension(owner, /datum/extension/virtual_surrogate)) // do digital brains dream of electric sheep?
+		transfer_identity(owner)
+	else
+		owner.death()
+		..()
+		qdel(src)
+		return
 
 	..()
 
@@ -127,6 +133,8 @@
 /obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
 	set waitfor = FALSE
 	healed_threshold = 0
+	if (owner && has_extension(owner, /datum/extension/virtual_surrogate)) // Virtual mobs don't get memory loss from brain damage
+		return
 	to_chat(owner, SPAN_NOTICE(FONT_GIANT("<B>Where am I...?</B>")))
 	sleep(5 SECONDS)
 	if (!owner || owner.is_real_dead() || (status & ORGAN_DEAD))

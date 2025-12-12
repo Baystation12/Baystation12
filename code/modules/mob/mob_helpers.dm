@@ -696,3 +696,29 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	result[2] = ainvis
 
 	return result
+
+/mob/living/carbon/human/proc/apply_job_equipment()
+	var/datum/job/role = SSjobs.get_by_title(job)
+	var/list/spawn_in_storage
+
+	var/alt_title = null
+	if(mind)
+		alt_title = mind.role_alt_title
+
+	delete_inventory(TRUE)
+
+	for (var/obj/item/organ/internal/augment/custom_augment in contents)
+		custom_augment.removed(src)
+		qdel(custom_augment)
+
+	role.equip(src, mind ? mind.role_alt_title : "", char_branch, char_rank)
+	spawn_in_storage = SSjobs.equip_custom_loadout(src, role)
+
+	var/mob/other_mob = role.handle_variant_join(src, alt_title)
+	if(other_mob)
+		role.post_equip_rank(other_mob, alt_title)
+		return other_mob
+
+	if (spawn_in_storage)
+		for(var/datum/gear/G in spawn_in_storage)
+			G.spawn_in_storage_or_drop(src, client.prefs.Gear()[G.display_name])

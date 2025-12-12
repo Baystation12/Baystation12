@@ -1060,6 +1060,16 @@
 	name = "\improper Computer Lab"
 	icon_state = "conference"
 
+/area/crew_quarters/virtual_reality_control
+	name = "\improper VR Control"
+	icon_state = "vr_control"
+
+/area/crew_quarters/virtual_reality
+	name = "\improper VR Suites"
+	icon_state = "vr_suites"
+	sound_env = SMALL_SOFTFLOOR
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED // don't want to fry people who are in VR!
+
 /area/holocontrol
 	name = "\improper Holodeck Control"
 	icon_state = "Holodeck"
@@ -1430,6 +1440,7 @@
 /area/storage/tools
 	name = "Auxiliary Tool Storage"
 	icon_state = "auxstorage"
+
 
 // Holodecks
 
