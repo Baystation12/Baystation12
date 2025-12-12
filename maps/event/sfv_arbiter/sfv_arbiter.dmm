@@ -102,7 +102,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	color = "#4c535b"
 	},
 /obj/paint/iccgn,
@@ -632,7 +632,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	color = "#4c535b"
 	},
 /obj/paint/iccgn,
@@ -718,7 +718,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	color = "#4c535b"
 	},
 /obj/paint/iccgn,
@@ -1036,7 +1036,7 @@
 	dir = 1;
 	icon_state = "0-2"
 	},
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	color = "#4c535b"
 	},
 /obj/paint/iccgn,
