@@ -1332,7 +1332,7 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/firstdeck/centralstarboard)
 "acE" = (
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	id = "roboticlab_window"
 	},
 /obj/machinery/door/blast/shutters{
@@ -18050,7 +18050,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/chargebay)
 "gXb" = (
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "exam_windows"
 	},
 /obj/machinery/door/blast/shutters{
@@ -25615,7 +25615,7 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "qqb" = (
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	id = "sci_office"
 	},
 /turf/simulated/floor/plating,

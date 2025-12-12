@@ -156,10 +156,6 @@
 	name = "polarized reinforced wall frame window spawner (no grille)"
 	grille_path = null
 
-/obj/wallframe_spawn/reinforced/polarized/full//wtf it's the same as the other one, not gonna touch this cause I don't wanna remap a million things
-	name = "polarized reinforced wall frame window spawner - full tile"
-	win_path = /obj/structure/window/reinforced/polarized/full
-
 /obj/wallframe_spawn/reinforced/polarized/no_grille/regular
 	name = "polarized wall frame window spawner (no grille) (non reinforced)"
 	win_path = /obj/structure/window/basic/full/polarized

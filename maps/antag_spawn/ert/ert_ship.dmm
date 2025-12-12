@@ -870,7 +870,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/ert/ship/hangar)
 "fA" = (
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	id = "ert_co_windows"
 	},
 /obj/paint/fleet,
@@ -1619,7 +1619,7 @@
 "kg" = (
 /obj/paint/fleet,
 /obj/machinery/door/firedoor/ert,
-/obj/wallframe_spawn/reinforced/polarized/full{
+/obj/wallframe_spawn/reinforced/polarized{
 	id = "ert_co_windows"
 	},
 /obj/machinery/door/blast/regular/open{
