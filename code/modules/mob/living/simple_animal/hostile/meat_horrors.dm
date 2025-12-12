@@ -111,7 +111,7 @@
 
 /mob/living/simple_animal/hostile/meat/strippedhuman
 	name = "turned human"
-	desc = "What's left of a human. Their body's chest cavity is ripped open, their organs spilling out. It twitches, ready for it's next victim..."
+	desc = "What's left of a human. Their body's chest cavity is ripped open, their organs spilling out. It twitches, ready for its next victim..."
 	icon = 'icons/mob/simple_animal/nightmaremonsters.dmi'
 	icon_state = "horror_alt"
 	icon_living = "horror_alt"
