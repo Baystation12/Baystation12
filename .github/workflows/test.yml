@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Check dreamchecker cache
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        uses: actions/cache/restore@a7833574556fa59680c1b7cb190c1735db73ebf0
         id: check-cache
         with:
           path: ~/spaceman_dmm/${{ env.SDMM_TARGET }}
@@ -63,7 +63,7 @@ jobs:
           chmod +x ~/dreamchecker
       - name: Cache dreamchecker
         if: ${{ !steps.check-cache.outputs.cache-hit && success() }}
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        uses: actions/cache/save@a7833574556fa59680c1b7cb190c1735db73ebf0
         with:
           path: ~/spaceman_dmm/${{ env.SDMM_TARGET }}
           key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-spacemandmm-${{ env.SDMM_TARGET }}
@@ -79,7 +79,7 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
       - name: Check Cached BYOND
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+        uses: actions/cache/restore@a7833574556fa59680c1b7cb190c1735db73ebf0
         id: check-cache
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
@@ -93,7 +93,7 @@ jobs:
           test/install-byond.sh
       - name: Save BYOND Cache
         if: ${{ !steps.check-cache.outputs.cache-hit && success() }}
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830
+        uses: actions/cache/save@a7833574556fa59680c1b7cb190c1735db73ebf0
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -127,7 +127,7 @@ jobs:
     if: needs.preflight.outputs.byond == 'true'
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+      - uses: actions/cache/restore@a7833574556fa59680c1b7cb190c1735db73ebf0
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -152,7 +152,7 @@ jobs:
     if: needs.preflight.outputs.byond == 'true'
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+      - uses: actions/cache/restore@a7833574556fa59680c1b7cb190c1735db73ebf0
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
@@ -177,7 +177,7 @@ jobs:
     if: needs.preflight.outputs.byond == 'true'
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830
+      - uses: actions/cache/restore@a7833574556fa59680c1b7cb190c1735db73ebf0
         with:
           path: ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
