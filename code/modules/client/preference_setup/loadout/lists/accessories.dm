@@ -238,3 +238,8 @@
 	display_name = "tallit"
 	path = /obj/item/clothing/accessory/tallit
 	flags = GEAR_HAS_NO_CUSTOMIZATION
+
+/datum/gear/accessory/saya
+	display_name = "kirpan saya"
+	description = "A sheath for a kirpan."
+	path = /obj/item/clothing/accessory/storage/holster/kirpan

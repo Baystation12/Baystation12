@@ -90,3 +90,12 @@
 	desc = "A rigid polymer sheath which you can strap on your leg."
 	icon_state = "sheath_polymer"
 	body_location = LEGS
+
+/obj/item/clothing/accessory/storage/holster/kirpan
+	name = "kirpan saya"
+	desc = "A simple yet elegant saya for a kirpan, worn by practicing Sikhs."
+	icon_state = "holster_kirpan"
+	can_holster = list(/obj/item/material/knife/kirpan)
+	sound_in = 'sound/effects/holster/sheathin.ogg'
+	sound_out = 'sound/effects/holster/sheathout.ogg'
+	body_location = LOWER_TORSO

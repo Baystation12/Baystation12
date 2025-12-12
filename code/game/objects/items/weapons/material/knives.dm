@@ -91,3 +91,9 @@
 	name = "lightweight utility knife"
 	desc = "A lightweight utility knife made out of a steel alloy."
 	icon_state = "titanium"
+
+/obj/item/material/knife/kirpan
+	name = "kirpan"
+	desc = "A small ceremonial sword carried by practicing Sikhs. It is a symbol of courage and self-defense."
+	icon_state = "kirpan"
+	w_class = ITEM_SIZE_SMALL
