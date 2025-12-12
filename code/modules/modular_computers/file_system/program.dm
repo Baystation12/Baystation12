@@ -41,6 +41,8 @@
 	var/requires_ntnet = FALSE
 	/// Optional, if above is set to TRUE, checks for specific function of NTNet (One of NTNET_*).
 	var/requires_ntnet_feature = 0
+	/// Optional, required additional parts for this program to even function on the host machine.
+	var/list/required_parts = list()
 	/// Optional string that describes what NTNet server/system this program connects to. Used in default logging.
 	var/network_destination = null
 
@@ -71,6 +73,7 @@
 	temp.program_icon_state = program_icon_state
 	temp.requires_ntnet = requires_ntnet
 	temp.requires_ntnet_feature = requires_ntnet_feature
+	temp.required_parts = required_parts
 	temp.usage_flags = usage_flags
 	return temp
 

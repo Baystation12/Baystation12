@@ -912,7 +912,7 @@
 	},
 /area/voxship/thrusters)
 "cs" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	req_access = list("ACCESS_VOXSHIP")
 	},
 /turf/simulated/floor/plating/vox,
@@ -1256,7 +1256,7 @@
 	pixel_x = -26;
 	pixel_y = -8
 	},
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	req_access = list("ACCESS_VOXSHIP")
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
@@ -3002,7 +3002,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/shuttle)
 "gU" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 4;
 	req_access = list("ACCESS_VOXSHIP")
 	},

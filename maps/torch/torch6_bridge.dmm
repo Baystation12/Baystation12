@@ -3116,7 +3116,7 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/modular/preset/helm,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/cockpit)
 "fK" = (
@@ -13933,7 +13933,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
 "QW" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 4
 	},
 /obj/floor_decal/corner/blue/mono,

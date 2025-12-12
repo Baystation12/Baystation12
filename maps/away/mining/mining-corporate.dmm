@@ -3633,7 +3633,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "hz" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 1
 	},
 /obj/floor_decal/techfloor{

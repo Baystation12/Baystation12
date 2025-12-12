@@ -331,3 +331,13 @@
 	chemicals = list(/datum/reagent/acid = 20)
 	build_path = /obj/item/stock_parts/computer/processor_unit/photonic/small
 	sort_string = "VBAFD"
+
+/datum/design/item/modularcomponent/ship_interface
+	name = "ship-linked control interface"
+	id = "ship_interface"
+	req_tech = list(TECH_DATA = 2, TECH_POWER = 2, TECH_ENGINEERING = 2)
+	build_type = IMPRINTER
+	materials = list(MATERIAL_PLASTIC = 1000, MATERIAL_ALUMINIUM = 1000)
+	chemicals = list(/datum/reagent/acid = 20)
+	build_path = /obj/item/stock_parts/computer/ship_interface
+	sort_string = "VBAGA"

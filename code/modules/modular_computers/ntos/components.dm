@@ -67,6 +67,12 @@
 		return TRUE
 	return FALSE
 
+/datum/extension/interactive/ntos/proc/meets_part_requirements(list/required_parts)
+	for (var/required_part in required_parts)
+		if (!get_component(required_part))
+			return FALSE
+	return TRUE
+
 /// Returns the current network speed in GQ/s for the specified connection quality
 /datum/extension/interactive/ntos/proc/get_ntnet_speed(status)
 	. = 0

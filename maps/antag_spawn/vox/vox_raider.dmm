@@ -354,7 +354,7 @@
 /turf/simulated/floor/shuttle_ceiling/vox,
 /area/map_template/vox_raider)
 "ez" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/light/vox{

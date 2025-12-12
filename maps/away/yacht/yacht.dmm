@@ -50,7 +50,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "al" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
@@ -646,7 +646,7 @@
 /obj/item/book/manual/engineering_guide,
 /obj/item/rcd,
 /obj/decal/cleanable/dirt,
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/modular/preset/helm,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bU" = (

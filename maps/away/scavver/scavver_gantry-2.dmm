@@ -1856,7 +1856,7 @@
 	},
 /area/scavver/lifepod)
 "pq" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 8
 	},
 /obj/floor_decal/techfloor/orange{
@@ -2507,7 +2507,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 4
 	},
 /obj/machinery/firealarm{
@@ -3957,7 +3957,9 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/closet/crate/plastic,
-/obj/item/stock_parts/circuitboard/engine,
+/obj/item/stock_parts/circuitboard/modular_computer,
+/obj/item/stock_parts/computer/hard_drive/super/helm,
+/obj/item/stock_parts/computer/ship_interface,
 /obj/item/stock_parts/circuitboard/shuttle_console/explore,
 /obj/item/stock_parts/circuitboard/solar_control,
 /obj/random/storage,

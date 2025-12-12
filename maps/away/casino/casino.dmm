@@ -116,7 +116,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aq" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/modular/preset/helm,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "ar" = (
@@ -4410,7 +4410,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "mk" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 4
 	},
 /turf/simulated/floor/plating,

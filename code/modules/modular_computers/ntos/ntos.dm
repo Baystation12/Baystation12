@@ -58,6 +58,8 @@
 	for(var/datum/computer_file/program/P in running_programs)
 		if((P.requires_ntnet && !get_ntnet_status()) || (P.requires_ntnet_feature && !get_ntnet_capability(P.requires_ntnet_feature)))
 			P.event_networkfailure(P != active_program)
+		else if (LAZYLEN(P.required_parts) && !meets_part_requirements(P.required_parts))
+			P.event_hardwarecrash(P != active_program)
 		else
 			P.process_tick()
 	regular_ui_update()
@@ -150,6 +152,9 @@
 		return
 	if (P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
 		loud && show_error(user, "Unable to establish a working network connection. Please try again later. If problem persists, please contact your system administrator.")
+		return
+	if (P.required_parts && !meets_part_requirements(P.required_parts))
+		loud && show_error(user, "Hardware Error - device is missing necessary components. Please verify installed parts.")
 		return
 
 	if (P in running_programs)

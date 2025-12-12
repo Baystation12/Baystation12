@@ -94,7 +94,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ar" = (
-/obj/machinery/computer/ship/engines,
+/obj/machinery/computer/modular/preset/helm,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "as" = (

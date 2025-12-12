@@ -56,7 +56,7 @@ Just place it anywhere on the ship.
 *************************************************************
 # Engines control console
 *************************************************************
-/obj/machinery/computer/ship/engines
+/obj/machinery/computer/modular/preset/helm
 ### WHAT IT DOES
 Lets use set thrust limits for engines of your ship.
 Lets you shutdown/restart the engines.

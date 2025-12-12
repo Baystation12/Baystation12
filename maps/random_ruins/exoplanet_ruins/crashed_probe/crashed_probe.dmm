@@ -237,7 +237,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/ecprobe/engineering)
 "mJ" = (
-/obj/machinery/computer/ship/engines{
+/obj/machinery/computer/modular/preset/helm{
 	dir = 8
 	},
 /obj/floor_decal/corner/blue/border{

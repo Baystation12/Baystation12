@@ -290,7 +290,7 @@
 "UL" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/plating,/area/map_template/transshipment/airstrip)
 "UZ" = (/obj/paint/brown,/turf/simulated/wall,/area/map_template/transshipment/airstrip)
 "Vx" = (/obj/decal/cleanable/dirt,/obj/item/gun/projectile/shotgun/doublebarrel/sawn/empty,/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
-"VX" = (/obj/machinery/computer/ship/engines{dir = 1},/obj/machinery/light,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel_grid,/area/map_template/transshipment/old_snz)
+"VX" = (/obj/machinery/computer/modular/preset/helm{dir = 1},/obj/machinery/light,/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel_grid,/area/map_template/transshipment/old_snz)
 "Wm" = (/obj/machinery/door/blast/shutters/open{dir = 4; name = "Container Flaps"},/obj/item/slugegg,/turf/simulated/floor/plating,/area/map_template/transshipment/cabin_crate)
 "Wr" = (/obj/floor_decal/industrial/warning/dust,/obj/structure/barricade/spike{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
 "Wv" = (/obj/item/ammo_casing/rifle/used,/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)

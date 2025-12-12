@@ -17,3 +17,13 @@
 	else
 		computer.visible_error("FATAL NETWORK ERROR - NTNet connection lost. Please try again later. If problem persists, please contact your system administrator.")
 		computer.update_host_icon()
+
+/datum/computer_file/program/proc/event_hardwarecrash(background)
+	if (!computer)
+		return
+	computer.kill_program_remote(src, TRUE)
+	if (background)
+		computer.visible_error("Hardware failure - process [filename].[filetype] (PID [rand(100,999)]) terminated.")
+	else
+		computer.visible_error("FATAL NETWORK ERROR - A device or hardware was forcibly removed. Please reconnect disconnected devices. If problem persists, please contact your system administrator.")
+		computer.update_host_icon()
