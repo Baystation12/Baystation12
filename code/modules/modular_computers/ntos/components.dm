@@ -50,7 +50,11 @@
 	if(!on) // No signal if the computer isn't on.
 		return 0
 
-	if (isAdminLevel(get_z(holder)))
+	var/z_level = get_z(holder)
+	if (isAdminLevel(z_level))
+		return 3
+
+	if (z_level in GLOB.using_map.vr_levels)
 		return 3
 
 	if(isnull(ntnet_status))
