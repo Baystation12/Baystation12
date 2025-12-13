@@ -1,0 +1,4 @@
+author: Spookerton
+changes:
+  - bugfix: Merchant guest IDs have sprites again.
+delete-after: true
