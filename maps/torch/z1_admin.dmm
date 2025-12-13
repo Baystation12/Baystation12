@@ -8922,24 +8922,9 @@
 "aQo" = (
 /obj/structure/table/rack,
 /obj/floor_decal/industrial/outline/grey,
-/obj/item/card/id{
-	access = list(301);
-	desc = "A visitor's access card, this one is for the Merchant's Station.";
-	icon_state = "guest";
-	name = "Visitor's Card - Merchant's Station"
-	},
-/obj/item/card/id{
-	access = list(301);
-	desc = "A visitor's access card, this one is for the Merchant's Station.";
-	icon_state = "guest";
-	name = "Visitor's Card - Merchant's Station"
-	},
-/obj/item/card/id{
-	access = list(301);
-	desc = "A visitor's access card, this one is for the Merchant's Station.";
-	icon_state = "guest";
-	name = "Visitor's Card - Merchant's Station"
-	},
+/obj/item/card/id/merchant/guest,
+/obj/item/card/id/merchant/guest,
+/obj/item/card/id/merchant/guest,
 /turf/simulated/floor/tiled/dark,
 /area/merchant_station)
 "aQp" = (
