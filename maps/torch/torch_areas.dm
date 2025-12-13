@@ -1070,10 +1070,6 @@
 	sound_env = SMALL_SOFTFLOOR
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED // don't want to fry people who are in VR!
 
-/area/holocontrol
-	name = "\improper Holodeck Control"
-	icon_state = "Holodeck"
-
 // Borg Upload
 
 /area/synth/borg_upload

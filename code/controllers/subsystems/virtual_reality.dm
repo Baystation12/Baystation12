@@ -15,7 +15,8 @@ GLOBAL_LIST_AS(vr_areas, list(
 	"Snowy Field" = /area/virtual_reality/snowfield,
 	"Picnic Area" = /area/virtual_reality/picnic_area,
 	"Desert" = /area/virtual_reality/desert,
-	"Space" = /area/virtual_reality/space
+	"Space" = /area/virtual_reality/space,
+	"Infirmary" = /area/virtual_reality/infirmary
 ))
 GLOBAL_LIST_AS(emagged_vr_areas, list(
 	"Shady Room" = /area/virtual_reality/shady_room
