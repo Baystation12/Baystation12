@@ -736,3 +736,8 @@ var/global/const/NO_EMAG_ACT = -50
 	access = list(access_merchant)
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE
+
+/obj/item/card/id/merchant/guest
+	name = "guest card"
+	desc = "A card providing guest access to the facilities of a merchant station."
+	detail_color = COLOR_GREEN_GRAY
