@@ -661,6 +661,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		if(pref.organ_data[BP_CHEST] == "cyborg")
 			organ_choices -= "Normal"
+			organ_choices -= "Assisted"
 			organ_choices += "Synthetic"
 
 		var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in organ_choices
@@ -781,8 +782,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/physical/body/proc/sanitize_organs()
 	var/singleton/species/mob_species = GLOB.species_by_name[pref.species]
-	if(mob_species && mob_species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
-		for(var/name in pref.organ_data)
+	// Prevent speices that can't have robotic organs from having them
+	if (mob_species?.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+		for (var/name in pref.organ_data)
 			var/status = pref.organ_data[name]
-			if(status in list("assisted","mechanical"))
+			if (status in list("assisted", "mechanical"))
 				pref.organ_data[name] = null
+	// Prevent FBPs from having assisted organs, some saved characters may have them
+	if (pref.organ_data[BP_CHEST] == "cyborg" && pref.organ_data[BP_EYES] == "assisted")
+		for (var/name in pref.organ_data)
+			if (name in list("heart", "eyes", "lungs", "liver", "kidneys"))
+				pref.organ_data[name] = "mechanical"
