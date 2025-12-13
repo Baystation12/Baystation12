@@ -258,6 +258,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/virtual_reality/infirmary
 	name = "\improper Virtual Reality - Infirmary"
+	requires_power = FALSE
+	dynamic_lighting = FALSE
 
 /area/virtual_reality/shady_room
 	name = "\improper Virtual Reality - Shady Room"

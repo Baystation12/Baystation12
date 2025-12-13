@@ -7,6 +7,15 @@
 	},
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/cafe)
+"av" = (
+/obj/structure/closet/secure_closet/medical_wall{
+	name = "Pill Cabinet";
+	pixel_y = 32
+	},
+/obj/floor_decal/corner/beige/mono,
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "bf" = (
 /obj/structure/sign{
 	desc = "It reads: \"Howdy neighbor! This giant box is where VR templates are cloned to. VR bodies spawn inside the cloned area to do VR things. Try and avoid messing with the inside, since things will just get deleted. If you're a VR mob and you see this, you escaped the simulation! Please report that to a coder or an admin, because that's a problem and you should never see this. Have a great day!\"";
@@ -58,6 +67,20 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/boxing_ring)
+"bN" = (
+/obj/floor_decal/floordetail/edgedrain,
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/structure/closet/crate/freezer,
+/obj/item/device/mmi,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "bU" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/effect/vr_spawn,
@@ -75,6 +98,26 @@
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/theatre)
+"cd" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/closet/crate/freezer,
+/obj/item/device/mmi,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "cK" = (
 /obj/floor_decal/corner/green{
 	dir = 6
@@ -145,6 +188,24 @@
 "dr" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/meeting_hall)
+"du" = (
+/obj/structure/table/standard,
+/obj/item/reagent_containers/spray/cleaner{
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/machinery/vending/wallmed1{
+	pixel_y = 32
+	},
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 8
+	},
+/obj/item/reagent_containers/dropper/peridaxon,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "dz" = (
 /obj/structure/bed/chair/wood{
 	dir = 8;
@@ -167,6 +228,16 @@
 	icon_state = "wood_broken3"
 	},
 /area/virtual_reality/temple)
+"dZ" = (
+/obj/floor_decal/corner/beige/mono,
+/obj/machinery/chem_master,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"ei" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "ew" = (
 /turf/unsimulated/wall{
 	desc = "This is as far as the simulated area goes out."
@@ -216,6 +287,25 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/boxing_ring)
+"eW" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 1
+	},
+/obj/machinery/button/windowtint{
+	id = "or1";
+	pixel_x = -6;
+	pixel_y = -24
+	},
+/obj/machinery/button/holosign{
+	id_tag = "or1";
+	pixel_x = 6;
+	pixel_y = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "eX" = (
 /obj/structure/table/standard,
 /obj/item/reagent_containers/food/drinks/bottle/small/beer,
@@ -227,6 +317,18 @@
 /obj/item/reagent_containers/food/drinks/bottle/small/beer,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"eY" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/table/standard,
+/obj/item/storage/box/bloodpacks,
+/obj/item/storage/box/glucose,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "fb" = (
 /obj/item/stool/padded,
 /turf/simulated/floor/holofloor/tiled,
@@ -310,6 +412,19 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"gr" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/machinery/light_switch{
+	pixel_y = -22
+	},
+/obj/structure/table/standard,
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "gu" = (
 /obj/floor_decal/corner/red{
 	dir = 9
@@ -333,6 +448,10 @@
 /obj/item/beach_ball,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"gH" = (
+/obj/floor_decal/sign/or1,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "gL" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/space,
@@ -412,6 +531,9 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/courtroom)
+"iu" = (
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "iM" = (
 /obj/random_multi/single_item/boombox,
 /turf/simulated/floor/holofloor/beach/sand,
@@ -448,6 +570,13 @@
 	desc = "This is as far as the simulated area goes out."
 	},
 /area/virtual_reality/cafe)
+"jh" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "jl" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/simulated/floor/holofloor/desert,
@@ -571,6 +700,15 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"kX" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "kY" = (
 /obj/item/stool/padded,
 /obj/floor_decal/carpet{
@@ -612,9 +750,29 @@
 	desc = "This is as far as the simulated area goes out."
 	},
 /area/virtual_reality/boxing_ring)
+"lZ" = (
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/adv,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "mh" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/cafe)
+"mv" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/machinery/atmospherics/unary/cryo_cell,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "mx" = (
 /obj/floor_decal/beach{
 	dir = 1;
@@ -622,6 +780,10 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/volleyball_court)
+"my" = (
+/obj/floor_decal/corner/paleblue/three_quarters,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "mz" = (
 /obj/structure/flora/pottedplant{
 	icon_state = "plant-06"
@@ -648,6 +810,12 @@
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/virtual_reality/boxing_ring)
+"mL" = (
+/obj/wallframe_spawn/reinforced/polarized/no_grille/regular{
+	id = "or1"
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "mS" = (
 /obj/floor_decal/carpet{
 	dir = 8
@@ -695,6 +863,22 @@
 	icon_state = "desert2"
 	},
 /area/virtual_reality/volleyball_court)
+"nD" = (
+/obj/machinery/smartfridge/secure/medbay/ert/shuttle,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"nI" = (
+/obj/floor_decal/industrial/hatch/yellow,
+/obj/structure/disposalpipe/trunk,
+/obj/machinery/disposal,
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "nO" = (
 /obj/structure/window/reinforced/holowindow{
 	dir = 8
@@ -759,6 +943,13 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/courtroom)
+"oD" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/effect/vr_spawn,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "oQ" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "beach"
@@ -799,6 +990,18 @@
 "pL" = (
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/shady_room)
+"pP" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/table/standard,
+/obj/item/scalpel/ims,
+/obj/item/scalpel/ims,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "pX" = (
 /obj/floor_decal/corner/green/three_quarters,
 /turf/simulated/floor/holofloor/tiled,
@@ -825,6 +1028,15 @@
 /obj/floor_decal/corner/red/three_quarters,
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"qp" = (
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "qy" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	dir = 6;
@@ -944,6 +1156,17 @@
 /obj/overlay/coconut,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"sA" = (
+/obj/floor_decal/spline/plain/blue{
+	dir = 4
+	},
+/obj/structure/roller_bed,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "sB" = (
 /obj/structure/flora/grass/green,
 /obj/effect/vr_spawn,
@@ -975,6 +1198,28 @@
 /obj/overlay/palmtree_r,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"sM" = (
+/obj/floor_decal/corner/beige/mono,
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/device/scanner/spectrometer,
+/obj/item/storage/box/freezer,
+/obj/item/storage/box/beakers/insulated,
+/obj/item/reagent_containers/dropper,
+/obj/item/storage/box/beakers,
+/obj/item/hand_labeler,
+/obj/item/stack/package_wrap/cargo_wrap,
+/obj/item/reagent_containers/spray/cleaner{
+	desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'";
+	name = "Chemistry Cleaner"
+	},
+/obj/item/storage/box/autoinjectors,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "sO" = (
 /obj/floor_decal/corner/red{
 	dir = 9
@@ -1007,6 +1252,13 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/theatre)
+"tw" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/effect/vr_spawn,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "tF" = (
 /obj/structure/bed/chair/wood{
 	holographic = 1
@@ -1023,6 +1275,12 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/cafe)
+"tX" = (
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "ub" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -1040,6 +1298,10 @@
 	},
 /turf/simulated/floor/holofloor/wood,
 /area/virtual_reality/cafe)
+"up" = (
+/obj/floor_decal/sign/or2,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "uq" = (
 /obj/structure/flora/grass/green,
 /turf/simulated/floor/holofloor/snow,
@@ -1074,12 +1336,32 @@
 	},
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"vr" = (
+/obj/machinery/door/airlock/medical{
+	name = "Operating Room 1"
+	},
+/obj/machinery/holosign/surgery{
+	dir = 4;
+	id_tag = "or1"
+	},
+/obj/floor_decal/industrial/hatch/blue,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "vz" = (
 /obj/floor_decal/corner/green{
 	dir = 6
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/empty_court)
+"vM" = (
+/obj/floor_decal/corner/beige{
+	dir = 6
+	},
+/obj/floor_decal/corner/beige{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "vR" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -1090,6 +1372,13 @@
 	},
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/plaza)
+"vW" = (
+/obj/machinery/button/medical_dummy_creator{
+	pixel_y = -25
+	},
+/obj/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "vX" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -1211,6 +1500,14 @@
 	icon_state = "desert2"
 	},
 /area/virtual_reality/beach)
+"yh" = (
+/obj/floor_decal/floordetail/edgedrain,
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/light,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "yk" = (
 /obj/floor_decal/carpet{
 	dir = 1
@@ -1244,6 +1541,13 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"yG" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "yH" = (
 /obj/item/stool/padded,
 /turf/simulated/floor/holofloor/carpet,
@@ -1277,6 +1581,16 @@
 	desc = "This is as far as the simulated area goes out."
 	},
 /area/virtual_reality/desert)
+"zg" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/structure/table/standard,
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "zh" = (
 /obj/structure/flora/tree/dead,
 /turf/simulated/floor/holofloor/snow,
@@ -1290,6 +1604,24 @@
 /obj/structure/flora/ausbushes/palebush,
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/picnic_area)
+"zu" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "zw" = (
 /obj/floor_decal/carpet{
 	dir = 5
@@ -1313,6 +1645,25 @@
 /obj/structure/flora/ausbushes/genericbush,
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/picnic_area)
+"zN" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"zX" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/table/standard,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "zZ" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/snow,
@@ -1322,6 +1673,13 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/plaza)
+"Aq" = (
+/obj/floor_decal/corner/pink/mono,
+/obj/machinery/body_scanconsole{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Au" = (
 /obj/overlay/palmtree_r,
 /turf/simulated/floor/holofloor/beach/sand,
@@ -1332,6 +1690,23 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/plaza)
+"AB" = (
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/obj/structure/hygiene/sink{
+	icon_state = "sink_alt";
+	pixel_y = 26;
+	desc = "A laboratory sink used for washing one's hands and equipment."
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "AF" = (
 /obj/item/stool/padded,
 /obj/floor_decal/carpet,
@@ -1430,6 +1805,13 @@
 "Ci" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/snowfield)
+"Cn" = (
+/obj/machinery/bodyscanner{
+	dir = 1
+	},
+/obj/floor_decal/corner/pink/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Cy" = (
 /obj/floor_decal/corner/red{
 	dir = 6
@@ -1475,6 +1857,13 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/meeting_hall)
+"Dc" = (
+/obj/floor_decal/corner/paleblue/mono,
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Dd" = (
 /obj/structure/curtain{
 	color = "#68ccab"
@@ -1508,6 +1897,33 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/cafe)
+"Dj" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/human/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/skrell/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/item/reagent_containers/ivbag/blood/unathi/oneg,
+/obj/structure/closet/secure_closet/medical_wall{
+	name = "IV Blood Cabinet";
+	pixel_y = 32
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"Dy" = (
+/obj/floor_decal/corner/paleblue,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "DB" = (
 /turf/unsimulated/wall{
 	desc = "This is as far as the simulated area goes out."
@@ -1585,11 +2001,28 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/plaza)
+"EM" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/button/alternate/door{
+	id_tag = "ETC_hall";
+	name = "Treatment Center Exit";
+	pixel_x = 7;
+	pixel_y = 24
+	},
+/obj/effect/vr_spawn,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "EN" = (
 /turf/unsimulated/wall{
 	desc = "This is as far as the simulated area goes out."
 	},
 /area/virtual_reality/shady_room)
+"EU" = (
+/obj/floor_decal/corner/beige/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Fe" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/desert,
@@ -1621,6 +2054,24 @@
 "FI" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/theatre)
+"FM" = (
+/obj/item/modular_computer/telescreen/preset/medical{
+	pixel_y = -32
+	},
+/obj/structure/table/standard,
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/item/auto_cpr,
+/obj/item/auto_cpr,
+/obj/item/defibrillator/loaded,
+/obj/item/bodybag/rescue/loaded,
+/obj/item/bodybag/rescue/loaded,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "FU" = (
 /obj/structure/bed/chair/wood{
 	dir = 4;
@@ -1655,6 +2106,24 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/plaza)
+"Gl" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"Gt" = (
+/obj/floor_decal/corner/beige/mono,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/obj/structure/closet/secure_closet/chemical,
+/obj/item/storage/box/pillbottles,
+/obj/item/book/manual/chemistry_recipes,
+/obj/item/device/radio/headset/headset_med,
+/obj/item/clothing/glasses/science,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Gx" = (
 /obj/structure/table/rack,
 /turf/simulated/floor/holofloor/wood{
@@ -1671,6 +2140,13 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"GV" = (
+/obj/machinery/vending/medical/torch{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Ha" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	dir = 10;
@@ -1695,6 +2171,13 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/boxing_ring)
+"Ic" = (
+/obj/floor_decal/spline/plain/blue{
+	dir = 9
+	},
+/obj/structure/roller_bed,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Id" = (
 /turf/unsimulated/wall{
 	desc = "This is as far as the simulated area goes out."
@@ -1735,6 +2218,21 @@
 "Ix" = (
 /turf/simulated/wall/wood,
 /area/virtual_reality/cafe)
+"Iz" = (
+/obj/floor_decal/corner/paleblue/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"IE" = (
+/obj/floor_decal/corner/paleblue/three_quarters{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "IF" = (
 /obj/floor_decal/stoneborder/corner{
 	dir = 8;
@@ -1742,6 +2240,17 @@
 	},
 /turf/simulated/floor/holofloor/beach/water,
 /area/virtual_reality/temple)
+"IL" = (
+/obj/structure/roller_bed,
+/obj/floor_decal/spline/plain/blue{
+	dir = 5
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "IT" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert2"
@@ -1766,6 +2275,12 @@
 "Jb" = (
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/courtroom)
+"Jc" = (
+/obj/wallframe_spawn/reinforced/polarized/no_grille/regular{
+	id = "or2"
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Jk" = (
 /obj/structure/fountain{
 	alpha = 204;
@@ -1789,10 +2304,42 @@
 /obj/floor_decal/beach/corner,
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/volleyball_court)
+"JE" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/structure/iv_stand,
+/obj/machinery/rotating_alarm/security_alarm,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "JK" = (
 /obj/floor_decal/spline/plain,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/volleyball_court)
+"JL" = (
+/obj/structure/table/standard,
+/obj/floor_decal/corner/beige/mono,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"JP" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Kb" = (
 /obj/structure/flora/tree/dead,
 /obj/effect/vr_spawn,
@@ -1840,17 +2387,50 @@
 "KK" = (
 /turf/unsimulated/floor/plating,
 /area/virtual_reality/zone2)
+"KV" = (
+/obj/machinery/optable,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/oxygen_pump{
+	pixel_x = -32;
+	pixel_y = 32
+	},
+/obj/machinery/body_scan_display{
+	pixel_y = 24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "KY" = (
 /obj/floor_decal/corner/red{
 	dir = 6
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/basketball_court)
+"La" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/floor_decal/sign/or1,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Ld" = (
 /obj/item/stool/padded,
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/tiled/stone,
 /area/virtual_reality/temple)
+"Le" = (
+/obj/floor_decal/corner/paleblue/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Lj" = (
 /obj/structure/window/reinforced/holowindow{
 	dir = 1
@@ -1890,6 +2470,18 @@
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/meeting_hall)
+"Mg" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = 32
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Mh" = (
 /obj/floor_decal/corner/red/three_quarters{
 	dir = 4
@@ -1902,6 +2494,11 @@
 "Mm" = (
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/virtual_reality/basketball_court)
+"Mo" = (
+/obj/structure/closet/wardrobe/chemistry_white,
+/obj/floor_decal/corner/beige/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "My" = (
 /obj/machinery/door/window/holowindoor{
 	base_state = "right";
@@ -1928,6 +2525,19 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
+"MZ" = (
+/obj/floor_decal/spline/plain/blue{
+	dir = 5
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/machinery/camera/network/medbay{
+	c_tag = "Medical - Treament Center";
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Na" = (
 /obj/floor_decal/stoneborder{
 	dir = 8;
@@ -1961,6 +2571,11 @@
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/meeting_hall)
+"ND" = (
+/turf/unsimulated/wall{
+	desc = "This is as far as the simulated area goes out."
+	},
+/area/virtual_reality/infirmary)
 "NF" = (
 /obj/structure/table/standard,
 /obj/item/clothing/head/helmet/thunderdome,
@@ -2049,6 +2664,14 @@
 	},
 /turf/simulated/floor/holofloor/tiled/stone,
 /area/virtual_reality/temple)
+"OH" = (
+/obj/structure/sign/directions/infm{
+	pixel_y = 32
+	},
+/turf/unsimulated/wall{
+	desc = "This is as far as the simulated area goes out."
+	},
+/area/virtual_reality/infirmary)
 "OQ" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert4"
@@ -2069,6 +2692,16 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/cafe)
+"Pd" = (
+/obj/machinery/atmospherics/unary/freezer,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"Pe" = (
+/obj/floor_decal/corner/paleblue/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Pm" = (
 /obj/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -2082,6 +2715,12 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/empty_court)
+"Py" = (
+/obj/floor_decal/spline/plain/blue{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "PG" = (
 /turf/unsimulated/wall{
 	desc = "This is as far as the simulated area goes out."
@@ -2128,6 +2767,15 @@
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/virtual_reality/thunderdome)
+"PY" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 4
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Qc" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert3"
@@ -2145,6 +2793,14 @@
 /obj/item/stool/padded,
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/theatre)
+"Qx" = (
+/obj/floor_decal/floordetail/edgedrain,
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/structure/closet/crate/secure/biohazard/alt,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Qy" = (
 /obj/structure/table/rack,
 /turf/simulated/floor/holofloor/wood{
@@ -2166,10 +2822,72 @@
 /obj/structure/flora/ausbushes/sunnybush,
 /turf/simulated/floor/holofloor/grass,
 /area/virtual_reality/picnic_area)
+"QD" = (
+/obj/machinery/door/airlock/glass/medical{
+	name = "Chemistry"
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"QH" = (
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	pixel_y = 24
+	},
+/obj/floor_decal/corner/beige/mono,
+/obj/machinery/chemical_dispenser/full,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"QO" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 4
+	},
+/obj/machinery/organ_printer/robot/mapped,
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
+"QQ" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/item/auto_cpr,
+/obj/item/bodybag/rescue/loaded,
+/obj/item/reagent_containers/glass/beaker/cryoxadone{
+	pixel_x = 7;
+	pixel_y = 1
+	},
+/obj/item/reagent_containers/glass/beaker/cryoxadone{
+	pixel_x = 7;
+	pixel_y = 1
+	},
+/obj/structure/table/standard,
+/obj/machinery/body_scan_display{
+	pixel_y = 24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "QX" = (
 /obj/structure/bed/chair,
 /turf/simulated/floor/holofloor/wood,
 /area/virtual_reality/courtroom)
+"QZ" = (
+/obj/machinery/button/medical_dummy_disintigrator{
+	pixel_y = -25
+	},
+/obj/floor_decal/industrial/outline/red,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Rp" = (
 /obj/structure/table/standard,
 /obj/item/toy/ringbell,
@@ -2197,6 +2915,29 @@
 	icon_state = "beach"
 	},
 /area/virtual_reality/beach)
+"RU" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker/insulated/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/dropper,
+/obj/item/stack/material/phoron{
+	amount = 6
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "RV" = (
 /obj/floor_decal/corner/red,
 /obj/floor_decal/corner/green{
@@ -2288,6 +3029,11 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/theatre)
+"SF" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/obj/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "SM" = (
 /turf/simulated/floor/holofloor/wood,
 /area/virtual_reality/cafe)
@@ -2333,6 +3079,12 @@
 /obj/item/clothing/head/collectable/paper,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/virtual_reality/beach)
+"TW" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Ub" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/beach/sand,
@@ -2362,6 +3114,17 @@
 "UR" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/basketball_court)
+"UV" = (
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/surgery,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 1
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "UW" = (
 /obj/machinery/door/window/holowindoor{
 	dir = 4;
@@ -2381,6 +3144,17 @@
 	icon_state = "desert4"
 	},
 /area/virtual_reality/volleyball_court)
+"Vv" = (
+/obj/machinery/door/airlock/medical{
+	name = "Operating Room 2"
+	},
+/obj/machinery/holosign/surgery{
+	dir = 4;
+	id_tag = "or2"
+	},
+/obj/floor_decal/industrial/hatch/blue,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Vz" = (
 /obj/structure/table/standard,
 /obj/machinery/readybutton{
@@ -2407,6 +3181,18 @@
 /obj/floor_decal/spline/fancy/wood,
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/plaza)
+"VM" = (
+/obj/machinery/vitals_monitor,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 9
+	},
+/obj/floor_decal/corner/paleblue,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -21
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "VN" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/concrete,
@@ -2448,6 +3234,45 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/courtroom)
+"Wj" = (
+/obj/item/storage/box/syringes{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/random/soap,
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/item/defibrillator/loaded,
+/obj/structure/closet/secure_closet/medical_wall{
+	name = "Medical Equipment Cabinet";
+	pixel_y = 32
+	},
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/syringe/antiviral,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/obj/item/reagent_containers/glass/bottle/dylovene,
+/obj/item/reagent_containers/glass/bottle/dylovene,
+/obj/item/reagent_containers/glass/bottle/dylovene,
+/obj/item/reagent_containers/glass/bottle/inaprovaline,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Wm" = (
 /obj/item/stool/padded,
 /obj/floor_decal/carpet{
@@ -2480,6 +3305,26 @@
 	icon_state = "desert_dug"
 	},
 /area/virtual_reality/beach)
+"WF" = (
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 6
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 1
+	},
+/obj/floor_decal/sign/or2,
+/obj/machinery/button/holosign{
+	id_tag = "or2";
+	pixel_x = 6;
+	pixel_y = -24
+	},
+/obj/machinery/button/windowtint{
+	id = "or2";
+	pixel_x = -6;
+	pixel_y = -24
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "WH" = (
 /obj/item/stool/padded,
 /turf/simulated/floor/holofloor/wood{
@@ -2517,6 +3362,16 @@
 	icon_state = "desert2"
 	},
 /area/virtual_reality/temple)
+"Xm" = (
+/obj/structure/iv_stand,
+/obj/floor_decal/floordetail/edgedrain{
+	dir = 8
+	},
+/obj/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Xp" = (
 /obj/effect/vr_spawn,
 /turf/simulated/floor/holofloor/tiled,
@@ -2563,6 +3418,12 @@
 "XZ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/boxing_ring)
+"Yb" = (
+/obj/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Ye" = (
 /turf/simulated/floor/holofloor/beach/water,
 /area/virtual_reality/beach)
@@ -2582,6 +3443,16 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/virtual_reality/meeting_hall)
+"Yj" = (
+/obj/floor_decal/corner/beige{
+	dir = 10
+	},
+/obj/floor_decal/corner/beige{
+	dir = 5
+	},
+/obj/structure/bed/chair/comfy/blue,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "Yl" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert1"
@@ -2615,6 +3486,16 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/virtual_reality/plaza)
+"YE" = (
+/obj/floor_decal/corner/beige{
+	dir = 6
+	},
+/obj/structure/bed/chair/padded/blue,
+/obj/floor_decal/corner/beige{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "YF" = (
 /turf/simulated/wall/r_wall/hull,
 /area/virtual_reality/plaza)
@@ -2647,6 +3528,13 @@
 "Zq" = (
 /turf/simulated/floor/holofloor/tiled/stone,
 /area/virtual_reality/temple)
+"ZK" = (
+/obj/structure/table/standard,
+/obj/floor_decal/corner/beige/mono,
+/obj/item/reagent_containers/chem_disp_cartridge/carbon,
+/obj/item/reagent_containers/chem_disp_cartridge/acetone,
+/turf/simulated/floor/holofloor/tiled/white,
+/area/virtual_reality/infirmary)
 "ZO" = (
 /obj/floor_decal/spline/fancy/wood{
 	dir = 1;
@@ -8965,17 +9853,17 @@ pK
 pK
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+ND
+ND
+ND
+ND
+ND
+ND
+ND
+ND
+ND
 Ws
 Ws
 Ws
@@ -9167,17 +10055,17 @@ kh
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+VM
+Xm
+zu
+cd
+ND
+VM
+Xm
+zu
+QO
+ND
 Ws
 Ws
 Ws
@@ -9369,17 +10257,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+KV
+iu
+iu
+Qx
+ND
+KV
+iu
+iu
+Qx
+ND
 Ws
 Ws
 Ws
@@ -9571,17 +10459,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+UV
+iu
+iu
+yh
+ND
+UV
+iu
+iu
+bN
+ND
 Ws
 Ws
 Ws
@@ -9773,17 +10661,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+du
+lZ
+PY
+WF
+ND
+du
+lZ
+La
+eW
+ND
 Ws
 Ws
 Ws
@@ -9975,17 +10863,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+Jc
+Jc
+Vv
+ND
+ND
+mL
+vr
+mL
+ND
 Ws
 Ws
 Ws
@@ -10177,17 +11065,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+eY
+zN
+up
+MZ
+sA
+Py
+gH
+iu
+ND
 Ws
 Ws
 Ws
@@ -10380,16 +11268,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+Dj
+zN
+iu
+iu
+iu
+Dy
+Yb
+QZ
+ND
 Ws
 Ws
 Ws
@@ -10582,16 +11470,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+Wj
+zN
+iu
+Cn
+Aq
+Gl
+Pe
+vW
+ND
 Ws
 Ws
 Ws
@@ -10783,17 +11671,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ei
+JE
+Iz
+Yb
+Yb
+Yb
+Le
+zN
+Ic
+ND
 Ws
 Ws
 Ws
@@ -10985,17 +11873,17 @@ Ye
 kh
 pK
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+Pd
+JP
+IE
+TW
+TW
+TW
+my
+zN
+IL
+ND
 Ws
 Ws
 Ws
@@ -11188,16 +12076,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+SF
+yG
+iu
+jh
+Dc
+Gl
+zN
+FM
+ND
 Ws
 Ws
 Ws
@@ -11390,16 +12278,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+QQ
+kX
+iu
+iu
+iu
+tw
+oD
+pP
+ND
 Ws
 Ws
 Ws
@@ -11592,16 +12480,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+mv
+Mg
+iu
+iu
+iu
+tw
+oD
+zX
+ND
 Ws
 Ws
 Ws
@@ -11794,16 +12682,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+ND
+QD
+nD
+ND
+EM
+oD
+GV
+ND
 Ws
 Ws
 Ws
@@ -11996,16 +12884,16 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+QH
+dZ
+tX
+gr
+ND
+OH
+ND
+ND
+ND
 Ws
 Ws
 Ws
@@ -12198,12 +13086,12 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+RU
+Yj
+tX
+nI
+ND
 Ws
 Ws
 Ws
@@ -12400,12 +13288,12 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+av
+JL
+qp
+zg
+ND
 Ws
 Ws
 Ws
@@ -12602,12 +13490,12 @@ kh
 pK
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+ZK
+vM
+YE
+ND
 Ws
 Ws
 Ws
@@ -12805,11 +13693,11 @@ pK
 Ws
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+AB
+EU
+Gt
+ND
 Ws
 Ws
 Ws
@@ -13007,11 +13895,11 @@ pK
 Ws
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+Mo
+sM
+ND
+ND
 Ws
 Ws
 Ws
@@ -13209,11 +14097,11 @@ pK
 Ws
 Ws
 Ws
-Ws
-Ws
-Ws
-Ws
-Ws
+ND
+ND
+ND
+ND
+ND
 Ws
 Ws
 Ws
