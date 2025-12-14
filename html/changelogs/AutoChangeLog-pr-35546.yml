@@ -1,4 +1,0 @@
-author: Banditoz
-changes:
-  - bugfix: FBPs may no longer take assisted eyeballs, only mechanical ones.
-delete-after: true
