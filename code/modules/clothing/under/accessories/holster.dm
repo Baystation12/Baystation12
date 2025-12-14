@@ -90,3 +90,20 @@
 	desc = "A rigid polymer sheath which you can strap on your leg."
 	icon_state = "sheath_polymer"
 	body_location = LEGS
+
+/obj/item/clothing/accessory/storage/holster/kirpan
+	name = "kirpan gatra"
+	desc = "A simple yet elegant gatra for a kirpan, worn by practicing Sikhs."
+	can_holster = list(/obj/item/material/knife/kirpan)
+	sound_in = 'sound/effects/holster/sheathin.ogg'
+	sound_out = 'sound/effects/holster/sheathout.ogg'
+	body_location = LOWER_TORSO
+	icon_state = "gatra"
+
+/obj/item/clothing/accessory/storage/holster/kirpan/on_update_icon()
+	var/datum/extension/holster/holster = get_extension(src, /datum/extension/holster)
+	if (holster.holstered)
+		icon_state = "gatra_full"
+	else
+		icon_state = "gatra"
+	update_clothing_icon()
