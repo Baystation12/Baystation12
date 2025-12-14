@@ -181,6 +181,23 @@
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
 
+// Unathi Rings
+
+/datum/gear/unathi_ring
+	display_name = "unathi ring selection"
+	path = /obj/item/clothing/ring/seal/lhossekskull
+	sort_category = "Xenowear"
+	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	cost = 2
+
+/datum/gear/unathi_ring/New()
+	..()
+	var/ringtype = list()
+	ringtype["grand stratagem ring"] = /obj/item/clothing/ring/seal/lhossekskull
+	ringtype["fruitful lights ring"] = /obj/item/clothing/ring/seal/lhossekskull/fruitfullights
+	gear_tweaks += new/datum/gear_tweak/path(ringtype)
+
+
 // Vox clothing
 /datum/gear/vox_mask
 	display_name = "vox breathing mask"
