@@ -176,6 +176,8 @@
 	var/list/options = list()
 	options["Material Goggles"] = /obj/item/clothing/glasses/material
 	options["Material Goggles, corrective"] = /obj/item/clothing/glasses/material/prescription
+	options["Material Aviators"] = /obj/item/clothing/glasses/material/aviators
+	options["Material Aviators, corrective"] = /obj/item/clothing/glasses/material/aviators/prescription
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 

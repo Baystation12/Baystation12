@@ -233,6 +233,16 @@
 	desc = "Very confusing goggles. This set has corrective lenses."
 	prescription = 5
 
+/obj/item/clothing/glasses/material/aviators
+	name = "HUD aviators"
+	desc = "A material HUD integrated into a pair of aviator sunglasses. It does little to protect against the sun, but it sure looks cool."
+	icon_state = "material_avi_on"
+	off_state = "avi_off"
+	item_state = "material_avi_on"
+
+/obj/item/clothing/glasses/material/aviators/prescription
+	prescription = 5
+	desc = "A material HUD integrated into a pair of aviator sunglasses. These ones have eyesight-correcting lenses."
 
 /obj/item/clothing/glasses/threedglasses
 	name = "3D glasses"
