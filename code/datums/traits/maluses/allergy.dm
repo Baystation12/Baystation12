@@ -49,7 +49,8 @@
 		/datum/reagent/nutriment/protein/egg,
 		/datum/reagent/nutriment/protein/shellfish,
 		/datum/reagent/nutriment/protein/fish,
-		/datum/reagent/nutriment/protein/cheese
+		/datum/reagent/nutriment/protein/cheese,
+		/datum/reagent/nutriment/peanut
 	)
 	addprompt = "Select food to make mob allergic to."
 	remprompt = "Select food to remove allergy to."

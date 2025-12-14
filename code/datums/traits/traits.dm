@@ -16,21 +16,21 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	var/traits = GetTraits()
 	if(!traits)
-		return null
+		return FALSE
 
 	if (is_abstract(trait_type))
 		if (!meta_option)
-			return null
+			return FALSE
 		var/list/children_traits = GET_SINGLETON_SUBTYPE_LIST(trait_type)
 		for (var/singleton/trait/possible_trait in children_traits)
-			if (possible_trait.metaoptions && LAZYISIN(possible_trait.metaoptions, meta_option))
+			if (possible_trait.metaoptions && (meta_option in possible_trait.metaoptions))
 				var/list/interim = traits[possible_trait.type]
 				return interim[meta_option]
 	else
 		var/singleton/trait/trait = GET_SINGLETON(trait_type)
 		if (length(trait.metaoptions))
 			if (!meta_option)
-				return
+				return FALSE
 			var/list/interim = traits[trait_type]
 			return interim[meta_option]
 
@@ -55,6 +55,12 @@
 		return
 
 	return traits[trait_type]
+
+///Currently only used to update allergy masterlist in carbons whenever traits are modified
+/mob/living/carbon/proc/UpdateAllergyTraits()
+	allergy_list = list()
+	LAZYMERGELIST(allergy_list, traits[/singleton/trait/malus/allergy/drug])
+	LAZYMERGELIST(allergy_list, traits[/singleton/trait/malus/allergy/food])
 
 /mob/living/proc/SetTrait(trait_type, trait_level, meta_option)
 	SHOULD_NOT_SLEEP(TRUE)
@@ -82,17 +88,17 @@
 	return TRUE
 
 /mob/living/carbon/human/SetTrait(trait_type, trait_level, additional_option)
-	var/singleton/trait/T = GET_SINGLETON(trait_type)
-	if(!T.Validate(trait_level, additional_option))
-		return FALSE
-
 	if(!traits) // If traits haven't been setup before, check if we need to do so now
 		var/species_level = species.traits[trait_type]
 		if(species_level == trait_level) // Matched the default species trait level, ignore
 			return TRUE
 		traits = species.traits.Copy() // The setup is to simply copy the species list of traits
 
-	return ..(trait_type, trait_level, additional_option)
+	if (..(trait_type, trait_level, additional_option))
+		UpdateAllergyTraits()
+		return TRUE
+	else
+		return FALSE
 
 /mob/living/proc/RemoveTrait(trait_type, additional_option)
 	if (additional_option)
@@ -108,6 +114,7 @@
 		traits = species.traits.Copy()
 
 	..(trait_type, additional_option) // Could go through the trouble of nulling the traits list if it's again equal to the species list but eh
+	UpdateAllergyTraits()
 	traits = traits || list() // But we do ensure that humans don't null their traits list, to avoid copying from species again
 
 /proc/LetterizeSeverity(severity)
@@ -192,7 +199,6 @@
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
 	SHOULD_BE_PURE(TRUE)
-
 	if (length(metaoptions))
 		return (level in levels) && (meta_option in metaoptions)
 	else

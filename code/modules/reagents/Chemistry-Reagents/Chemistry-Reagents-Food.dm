@@ -621,7 +621,11 @@
 	condiment_name = "mayonnaise"
 	condiment_desc = "Mayonnaise, used for centuries to make things edible."
 
-/datum/reagent/nutriment/groundpeanuts
+/datum/reagent/nutriment/peanut
+	name = "Peanuts"
+	description = "Raw peanuts."
+
+/datum/reagent/nutriment/peanut/groundpeanuts
 	name = "Ground Peanuts"
 	description = "Roughly ground peanuts."
 	taste_description = "peanut"
@@ -633,7 +637,7 @@
 	condiment_name = "sack of ground peanuts"
 	condiment_desc = "A sack full of crunchy ground peanuts."
 
-/datum/reagent/nutriment/peanutbutter
+/datum/reagent/nutriment/peanut/peanutbutter
 	name = "Peanut Butter"
 	description = "Clearer the better spread, exception for those who are deathly allergic."
 	taste_description = "peanut butter"

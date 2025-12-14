@@ -1663,8 +1663,8 @@
 
 /singleton/reaction/peanutbutter
 	name = "Peanut Butter"
-	result = /datum/reagent/nutriment/peanutbutter
-	required_reagents = list(/datum/reagent/nutriment/groundpeanuts = 5, /datum/reagent/sugar = 1, /datum/reagent/sodiumchloride = 1)
+	result = /datum/reagent/nutriment/peanut/peanutbutter
+	required_reagents = list(/datum/reagent/nutriment/peanut/groundpeanuts = 5, /datum/reagent/sugar = 1, /datum/reagent/sodiumchloride = 1)
 	result_amount = 5
 	mix_message = "The solution thickens into a creamy, nutty spread."
 

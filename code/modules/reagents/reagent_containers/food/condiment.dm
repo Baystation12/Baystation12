@@ -142,7 +142,7 @@
 	starting_reagents = list(/datum/reagent/oliveoil = 50)
 
 /obj/item/reagent_containers/food/condiment/peanutbutter
-	starting_reagents = list(/datum/reagent/nutriment/peanutbutter = 50)
+	starting_reagents = list(/datum/reagent/nutriment/peanut/peanutbutter = 50)
 
 /obj/item/reagent_containers/food/condiment/choconutspread
 	starting_reagents = list(/datum/reagent/nutriment/choconutspread = 50)
@@ -233,7 +233,7 @@
 	name = "peanut butter packet"
 	desc = "Contains 10u of peanut butter."
 	icon_state = "packet_medium"
-	starting_reagents = list(/datum/reagent/nutriment/peanutbutter = 10)
+	starting_reagents = list(/datum/reagent/nutriment/peanut/peanutbutter = 10)
 
 /obj/item/reagent_containers/food/condiment/small/packet/choconutspread
 	name = "NTella packet"

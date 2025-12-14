@@ -39,7 +39,7 @@ GLOBAL_LIST_AS(proteinbar_flavors, list(
 	),
 	"mixed berry" = /datum/reagent/drink/juice/berry,
 	"peanut crunch" = list(
-		/datum/reagent/nutriment/peanutbutter,
-		/datum/reagent/nutriment/groundpeanuts
+		/datum/reagent/nutriment/peanut/peanutbutter,
+		/datum/reagent/nutriment/peanut/groundpeanuts
 	)
 ))

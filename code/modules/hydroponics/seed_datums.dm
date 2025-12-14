@@ -648,7 +648,7 @@
 	name = "peanut"
 	seed_name = "peanut"
 	display_name = "peanut plant"
-	chems = list(/datum/reagent/nutriment/groundpeanuts = list(3,5))
+	chems = list(/datum/reagent/nutriment/peanut/groundpeanuts = list(3,5))
 	kitchen_tag = "peanut"
 
 /datum/seed/peanuts/New()

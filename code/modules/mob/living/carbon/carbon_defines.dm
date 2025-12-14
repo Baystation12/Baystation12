@@ -45,5 +45,7 @@
 	var/stasis_value
 
 	var/player_triggered_sleeping = 0
+	///List with all food and drug allergies mob has; updated by UpdateAllergyTraits() whenever traits are modified.
+	var/list/allergy_list = list()
 	///Reagents towards which there is an active allergy.
 	var/list/active_allergies = list()
