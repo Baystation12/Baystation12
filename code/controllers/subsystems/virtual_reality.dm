@@ -35,6 +35,7 @@ SUBSYSTEM_DEF(virtual_reality)
 	var/list/virtual_occupants_to_mobs = list()		// Reverse of previous list, in case one is missing but not the other.
 	var/list/virtual_clients = list()				// Associative list of /client => /mob/living. Each client is linked to its virtual mob.
 	var/list/was_warned = list()					// A list of clients that have already received the disclaimer message when entering VR.
+	var/list/simulated_objects = list()				// A list of all objects created inside of VR, for easy cleanup.
 
 /datum/controller/subsystem/virtual_reality/Initialize(start_timeofday)
 	GLOB.active_vr_areas["Zone 1"] = locate(/area/virtual_reality/zone1)
@@ -209,3 +210,71 @@ SUBSYSTEM_DEF(virtual_reality)
 		if (H.shock_stage > 15) // if a human is in severe pain, intercept
 			return FALSE
 	return target.getBrainLoss() < 25 // otherwise, check for moderate brain damage
+
+/datum/controller/subsystem/virtual_reality/proc/load_template(datum/nano_module/program/vr_control/vr_program, user, zone, template_area)
+	if (!zone)
+		to_chat(user, SPAN_WARNING("No VR zone selected. Cannot load template."))
+		return TRUE
+
+	var/area/zone_area = GLOB.active_vr_areas[zone]
+	if (!zone_area)
+		to_chat(user, SPAN_WARNING("The system could not find the specified VR zone: [zone]"))
+		return TRUE
+
+	var/list/the_matrix = SSvirtual_reality.virtual_occupants_to_mobs
+	var/P = GLOB.vr_areas[template_area]
+	var/area/A = locate(P)
+	if (!A)
+		P = GLOB.emagged_vr_areas[template_area]
+		A = locate(P)
+		if (!A) // if we still don't have our area after checking for emagged ones, throw an error
+			to_chat(user, SPAN_WARNING("The system could not find the specified template: [template_area]"))
+			return TRUE
+	if (zone_area == A)
+		return TRUE
+	if (the_matrix.len)
+		if (alert(user, "Switching the VR area will eject [the_matrix.len] users from the simulation. Continue?", "Change Area", "Yes", "No") != "Yes")
+			return TRUE
+		log_and_message_admins("changed the VR area to [A.name], ejecting [the_matrix.len] occupants.", user)
+	else
+		log_and_message_admins("changed the VR area to [A.name].", user)
+
+	var/loaded_normally = TRUE
+	if (!vr_program.emagged || prob(75))
+		for (var/atom/SO in simulated_objects[zone]) // Clear the entire previous template before we place another one
+			if (length(SO.contents))
+				for (var/atom/sub_SO in SO.contents)
+					qdel(sub_SO)
+			qdel(SO)
+		for (var/turf/T in zone_area)
+			if (!istype(T, /turf/unsimulated/floor/plating))
+				T.ChangeTurf(/turf/unsimulated/floor/plating)
+	else // we're emagged, just fuck our shit up a quarter of the time
+		loaded_normally = FALSE
+		var/atom/comp_holder = vr_program.program.computer.holder
+		comp_holder.audible_message(SPAN_DANGER("\The [comp_holder] buzzes oddly!"))
+		to_chat(user, SPAN_WARNING("updatevr.dm:[rand(10000, 20000)]:warning: Previous loaded template did not fully unload. Virtual space may be affected."))
+		playsound(vr_program.program.computer.holder, 'sound/machines/buzz-sigh.ogg', 50)
+
+	var/list/mobs_in_zone = mobs_in_area(zone_area)
+	for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
+		if (L in mobs_in_zone)
+			to_chat(L, SPAN_DANGER(FONT_LARGE("ALERT: Loaded VR template reconfiguring. Terminating connection.")))
+			SSvirtual_reality.remove_virtual_mob(L, TRUE)
+
+	// in this way, we use the selected area as a template. we copy all of its contents to the actual area,
+	// allowing users to "reset" the template by refreshing it
+	var/area/active_area = zone_area
+	simulated_objects[zone] = A.copy_contents_to(active_area)
+	active_area.forced_ambience = A.forced_ambience
+	active_area.dynamic_lighting = A.dynamic_lighting
+	active_area.sound_env = A.sound_env
+	GLOB.vr_spawns[zone] = list()
+	for (var/obj/effect/vr_spawn/V in active_area)
+		GLOB.vr_spawns[zone] += V
+
+	to_chat(user, SPAN_NOTICE("Successfully loaded new area: [A.name]!"))
+	if (loaded_normally)
+		playsound(vr_program.program.computer.holder, 'sound/machines/ping.ogg', 50)
+	vr_program.area_cooldown = world.time + 30 SECONDS
+	return TRUE
