@@ -105,10 +105,6 @@
 /obj/floor_decal/corner/paleblue{
 	dir = 4
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /obj/structure/closet/crate/freezer,
 /obj/item/device/mmi,
 /obj/item/reagent_containers/ivbag/nanoblood,
@@ -295,12 +291,12 @@
 	dir = 1
 	},
 /obj/machinery/button/windowtint{
-	id = "or1";
+	id = "or1_v2";
 	pixel_x = -6;
 	pixel_y = -24
 	},
 /obj/machinery/button/holosign{
-	id_tag = "or1";
+	id_tag = "or1_vr";
 	pixel_x = 6;
 	pixel_y = -24
 	},
@@ -412,19 +408,6 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/virtual_reality/thunderdome)
-"gr" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/obj/machinery/light_switch{
-	pixel_y = -22
-	},
-/obj/structure/table/standard,
-/obj/floor_decal/corner/beige{
-	dir = 10
-	},
-/turf/simulated/floor/holofloor/tiled/white,
-/area/virtual_reality/infirmary)
 "gu" = (
 /obj/floor_decal/corner/red{
 	dir = 9
@@ -812,7 +795,7 @@
 /area/virtual_reality/boxing_ring)
 "mL" = (
 /obj/wallframe_spawn/reinforced/polarized/no_grille/regular{
-	id = "or1"
+	id = "or1_vr"
 	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
@@ -1342,7 +1325,7 @@
 	},
 /obj/machinery/holosign/surgery{
 	dir = 4;
-	id_tag = "or1"
+	id_tag = "or1_vr"
 	},
 /obj/floor_decal/industrial/hatch/blue,
 /turf/simulated/floor/holofloor/tiled/white,
@@ -1615,10 +1598,6 @@
 	dir = 8;
 	pixel_x = -12;
 	pixel_y = 2
-	},
-/obj/item/device/radio/intercom/department/medbay{
-	dir = 4;
-	pixel_x = -24
 	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
@@ -2114,9 +2093,6 @@
 /area/virtual_reality/infirmary)
 "Gt" = (
 /obj/floor_decal/corner/beige/mono,
-/obj/structure/extinguisher_cabinet{
-	pixel_x = 32
-	},
 /obj/structure/closet/secure_closet/chemical,
 /obj/item/storage/box/pillbottles,
 /obj/item/book/manual/chemistry_recipes,
@@ -2245,10 +2221,6 @@
 /obj/floor_decal/spline/plain/blue{
 	dir = 5
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
-	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
 "IT" = (
@@ -2277,7 +2249,7 @@
 /area/virtual_reality/courtroom)
 "Jc" = (
 /obj/wallframe_spawn/reinforced/polarized/no_grille/regular{
-	id = "or2"
+	id = "or2_vr"
 	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
@@ -2848,10 +2820,6 @@
 	dir = 4
 	},
 /obj/machinery/organ_printer/robot/mapped,
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
 "QQ" = (
@@ -2932,9 +2900,6 @@
 /obj/item/reagent_containers/dropper,
 /obj/item/stack/material/phoron{
 	amount = 6
-	},
-/obj/machinery/alarm{
-	pixel_y = 24
 	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
@@ -3150,7 +3115,7 @@
 	},
 /obj/machinery/holosign/surgery{
 	dir = 4;
-	id_tag = "or2"
+	id_tag = "or2_v2"
 	},
 /obj/floor_decal/industrial/hatch/blue,
 /turf/simulated/floor/holofloor/tiled/white,
@@ -3187,10 +3152,6 @@
 	dir = 9
 	},
 /obj/floor_decal/corner/paleblue,
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -21
-	},
 /turf/simulated/floor/holofloor/tiled/white,
 /area/virtual_reality/infirmary)
 "VN" = (
@@ -3314,12 +3275,12 @@
 	},
 /obj/floor_decal/sign/or2,
 /obj/machinery/button/holosign{
-	id_tag = "or2";
+	id_tag = "or2_v2";
 	pixel_x = 6;
 	pixel_y = -24
 	},
 /obj/machinery/button/windowtint{
-	id = "or2";
+	id = "or2_vr";
 	pixel_x = -6;
 	pixel_y = -24
 	},
@@ -12888,7 +12849,7 @@ ND
 QH
 dZ
 tX
-gr
+zg
 ND
 OH
 ND

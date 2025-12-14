@@ -1,6 +1,6 @@
 {{for data.active_templates}}
     <h3><u>{{:value.name}}</u></h3>
-    <b>Loaded template:</b> {{:helper.link(value.template, null, {'select_zone': value.name}, data.on_cooldown ? 'disabled' : null)}}
+    {{:helper.link(value.template, null, {'select_zone': value.name}, data.selected ? 'disabled' : null)}}
 {{empty}}
     <span class='average'><i>No VR template loaded.</i></span>
 {{/for}}

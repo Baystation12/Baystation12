@@ -33,6 +33,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
 	var/list/escape_levels = list()  // Z-levels that when a player is in, are considered to have 'escaped' after evacuations.
+	var/list/vr_levels = list()      // Z-levels used for VR simulations.
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
