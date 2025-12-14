@@ -5,9 +5,9 @@
 	icon_state = "guitar"
 	item_state = "guitar"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar/clean_crisis
-
 
 /obj/item/device/synthesized_instrument/guitar/multi_v
 	name = "Polyguitar Flying V"
@@ -16,6 +16,7 @@
 	icon_state = "eguitar_v"
 	item_state = "eguitar_v"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
 
@@ -26,6 +27,7 @@
 	icon_state = "eguitar_strato_black"
 	item_state = "eguitar_strato_black"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
 
@@ -36,6 +38,7 @@
 	icon_state = "eguitar_strato_gradient"
 	item_state = "eguitar_strato_gradient"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
 
@@ -46,6 +49,7 @@
 	icon_state = "eguitar_strato_red"
 	item_state = "eguitar_strato_red"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
 
@@ -56,5 +60,6 @@
 	icon_state = "eguitar_strato_purple"
 	item_state = "eguitar_strato_purple"
 	slot_flags = SLOT_BACK
+	w_class = ITEM_SIZE_HUGE
 	sound_player = /datum/sound_player/synthesizer
 	path = /datum/instrument/guitar
