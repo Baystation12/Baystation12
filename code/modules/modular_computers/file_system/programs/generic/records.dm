@@ -7,17 +7,17 @@
 	size = 14
 	requires_ntnet = TRUE
 	available_on_ntnet = TRUE
-	nanomodule_path = /datum/nano_module/records
+	nanomodule_path = /datum/nano_module/program/records
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
-/datum/nano_module/records
+/datum/nano_module/program/records
 	name = "Crew Records"
 	var/datum/computer_file/report/crew_record/active_record
 	var/message = null
 
-/datum/nano_module/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/records/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 	var/list/user_access = get_record_access(user)
 
 	data["message"] = message
@@ -49,7 +49,7 @@
 		ui.open()
 
 
-/datum/nano_module/records/proc/get_record_access(mob/user)
+/datum/nano_module/program/records/proc/get_record_access(mob/user)
 	var/list/user_access = using_access || user.GetAccess()
 
 	var/obj/PC = nano_host()
@@ -60,7 +60,7 @@
 
 	return user_access
 
-/datum/nano_module/records/proc/edit_field(mob/user, field_ID)
+/datum/nano_module/program/records/proc/edit_field(mob/user, field_ID)
 	var/datum/computer_file/report/crew_record/R = active_record
 	if(!R)
 		return
@@ -72,7 +72,7 @@
 		return
 	F.ask_value(user)
 
-/datum/nano_module/records/Topic(href, href_list)
+/datum/nano_module/program/records/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["clear_active"])
@@ -130,7 +130,7 @@
 		edit_field(usr, text2num(href_list["edit_field"]))
 		return 1
 
-/datum/nano_module/records/proc/get_photo(mob/user)
+/datum/nano_module/program/records/proc/get_photo(mob/user)
 	if(istype(user.get_active_hand(), /obj/item/photo))
 		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img

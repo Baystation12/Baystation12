@@ -461,5 +461,5 @@ TORCH_ESCAPE_POD(17)
 	landmark_tag = "nav_transit_aquila"
 
 //Makes the deck management program use hangar access
-/datum/nano_module/deck_management
+/datum/nano_module/program/deck_management
 	default_access = list(access_hangar, access_cargo, access_heads)

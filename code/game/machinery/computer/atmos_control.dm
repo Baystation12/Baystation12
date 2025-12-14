@@ -12,7 +12,7 @@
 	anchored = TRUE
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
-	var/datum/nano_module/atmos_control/atmos_control
+	var/datum/nano_module/program/atmos_control/atmos_control
 	base_type = /obj/machinery/computer/atmoscontrol
 
 /obj/machinery/computer/atmoscontrol/laptop

@@ -20,7 +20,7 @@
 /datum/nano_module/program/computer_ntnetmonitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
 		return
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 
 	data += "skill_fail"
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))

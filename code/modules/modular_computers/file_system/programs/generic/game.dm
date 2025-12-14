@@ -11,7 +11,7 @@
 	size = 5								// Size in GQ. Integers only. Smaller sizes should be used for utility/low use programs (like this one), while large sizes are for important programs.
 	requires_ntnet = FALSE						// This particular program does not require NTNet network conectivity...
 	available_on_ntnet = TRUE					// ... but we want it to be available for download.
-	nanomodule_path = /datum/nano_module/arcade_classic // Path of relevant nano module. The nano module is defined further in the file.
+	nanomodule_path = /datum/nano_module/program/arcade_classic // Path of relevant nano module. The nano module is defined further in the file.
 	var/picked_enemy_name
 	usage_flags = PROGRAM_ALL
 
@@ -37,14 +37,14 @@
 /datum/computer_file/program/game/on_startup()
 	. = ..()
 	if(. && NM)
-		var/datum/nano_module/arcade_classic/NMC = NM
+		var/datum/nano_module/program/arcade_classic/NMC = NM
 		NMC.enemy_name = picked_enemy_name
 
 
 // Nano module the program uses.
 // This can be either /datum/nano_module/ or /datum/nano_module/program. The latter is intended for nano modules that are suposed to be exclusively used with modular computers,
 // and should generally not be used, as such nano modules are hard to use on other places.
-/datum/nano_module/arcade_classic
+/datum/nano_module/program/arcade_classic
 	name = "Classic Arcade"
 	var/player_mana			// Various variables specific to the nano module. In this case, the nano module is a simple arcade game, so the variables store health and other stats.
 	var/player_health
@@ -54,14 +54,14 @@
 	var/gameover
 	var/information
 
-/datum/nano_module/arcade_classic/New()
+/datum/nano_module/program/arcade_classic/New()
 	..()
 	new_game()
 
 // ui_interact handles transfer of data to NanoUI. Keep in mind that data you pass from here is actually sent to the client. In other words, don't send anything you don't want a client
 // to see, and don't send unnecessarily large amounts of data (due to laginess).
-/datum/nano_module/arcade_classic/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/arcade_classic/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	data["player_health"] = player_health
 	data["player_mana"] = player_mana
@@ -80,7 +80,7 @@
 		ui.open()
 
 // Three helper procs i've created. These are unique to this particular nano module. If you are creating your own nano module, you'll most likely create similar procs too.
-/datum/nano_module/arcade_classic/proc/enemy_play()
+/datum/nano_module/program/arcade_classic/proc/enemy_play()
 	if((enemy_mana < 5) && prob(60))
 		var/steal = rand(2, 3)
 		player_mana -= steal
@@ -96,7 +96,7 @@
 		player_health -= dam
 		information += "[enemy_name] attacks for [dam] damage!"
 
-/datum/nano_module/arcade_classic/proc/check_gameover()
+/datum/nano_module/program/arcade_classic/proc/check_gameover()
 	if((player_health <= 0) || player_mana <= 0)
 		if(enemy_health <= 0)
 			information += "You have defeated [enemy_name], but you have died in the fight!"
@@ -110,7 +110,7 @@
 		return TRUE
 	return FALSE
 
-/datum/nano_module/arcade_classic/proc/new_game()
+/datum/nano_module/program/arcade_classic/proc/new_game()
 	player_mana = 10
 	player_health = 30
 	enemy_mana = 20
@@ -120,7 +120,7 @@
 
 
 
-/datum/nano_module/arcade_classic/Topic(href, href_list)
+/datum/nano_module/program/arcade_classic/Topic(href, href_list)
 	if(..())		// Always begin your Topic() calls with a parent call!
 		return 1
 	if(href_list["new_game"])

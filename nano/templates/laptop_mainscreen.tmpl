@@ -8,9 +8,12 @@
 <i>No program loaded. Please select program from list below.</i>
 <table>
 {{for data.programs}}
-	<tr><td>{{:helper.link(value.desc, value.icon, {'PC_runprogram' : value.name})}}
-	<td>{{:helper.link('X', null, {'PC_killprogram' : value.name}, (value.running ? null : 'disabled'))}} 
-	<td>{{:helper.link('AR', null, {'PC_setautorun' : value.name}, null, (value.autorun ? 'yellowButton' : null))}} 
+	<tr><td>{{:helper.link(value.desc, value.icon, {'PC_runprogram' : value.name})}}</td>
+	<td style="float: left">{{:helper.link('X', null, {'PC_killprogram' : value.name}, (value.running ? null : 'disabled'))}}</td>
+	{{if data.allow_multiple_windows}}
+		<td style="float: left">{{:helper.link('', 'newwin', {'PC_runprogram_newwindow' : value.name}, (value.extra_window ? 'selected' : null))}}</td>
+	{{/if}}
+	<td style="float: left">{{:helper.link('AR', null, {'PC_setautorun' : value.name}, null, (value.autorun ? 'yellowButton' : null))}}</td></tr>
 {{/for}}
 </table>
 {{/if}}

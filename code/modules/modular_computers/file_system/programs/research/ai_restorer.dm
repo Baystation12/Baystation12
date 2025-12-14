@@ -89,7 +89,7 @@
 	name = "AI Maintenance Utility"
 
 /datum/nano_module/program/computer_aidiag/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 
 	data += "skill_fail"
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_TRAINED))

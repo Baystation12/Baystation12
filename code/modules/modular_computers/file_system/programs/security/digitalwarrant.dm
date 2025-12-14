@@ -21,7 +21,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	var/datum/computer_file/data/warrant/activewarrant
 
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 
 	if(activewarrant)
 		data["warrantname"] = activewarrant.fields["namewarrant"]

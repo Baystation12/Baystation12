@@ -6,7 +6,7 @@
 		NETWORK_SECURITY
 	)
 	subsystems = list(
-		/datum/nano_module/crew_monitor,
+		/datum/nano_module/program/crew_monitor,
 		/datum/nano_module/program/digitalwarrant
 	)
 	can_be_pushed = FALSE

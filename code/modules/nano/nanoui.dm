@@ -95,6 +95,8 @@ nanoui is used to open and update nano browser uis
 		height = nheight
 	if (nref)
 		ref = nref
+	else
+		ref = nsrc_object
 
 	add_common_assets()
 	var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)

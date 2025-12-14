@@ -59,6 +59,10 @@
 	if(!istype(F) || F.undeletable)
 		return FALSE
 
+	var/datum/computer_file/program/program = F
+	if (istype(program) && program.program_state != PROGRAM_STATE_KILLED)
+		kill_program(program, TRUE)
+
 	return disk.remove_file(F)
 
 /// Attempts to rename the specified file. Returns TRUE on success, otherwise FALSE.

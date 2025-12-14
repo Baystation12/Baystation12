@@ -4,11 +4,15 @@
 		if(ui)
 			ui.close()
 		return 0
+
+	for (var/datum/computer_file/program/extra_program in running_program_windows)
+		extra_program.ui_interact(user, ui_key, null, force_open)
+
 	// If we have an active program switch to it now.
 	if(active_program)
 		if(ui) // This is the main laptop screen. Since we are switching to program's UI close it for now.
 			ui.close()
-		active_program.ui_interact(user)
+		active_program.ui_interact(user, ui_key, null, force_open)
 		return
 
 	// We are still here, that means there is no program loaded. Load the BIOS/ROM/OS/whatever you want to call it.
@@ -30,6 +34,8 @@
 		program["autorun"] = (istype(autorun) && (autorun.stored_data == P.filename)) ? 1 : 0
 		if(P in running_programs)
 			program["running"] = 1
+		if (P in running_program_windows)
+			program["extra_window"] = 1
 		programs.Add(list(program))
 
 	data["programs"] = programs
@@ -37,6 +43,7 @@
 	data["updating"] = updating
 	data["update_progress"] = update_progress
 	data["updates"] = updates
+	data["allow_multiple_windows"] = allow_multiple_windows
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -61,7 +68,8 @@
 /// Handles user's GUI input
 /datum/extension/interactive/ntos/extension_act(href, href_list, user)
 	if( href_list["PC_exit"] )
-		kill_program(active_program)
+		var/datum/computer_file/program/program_to_exit = get_file(href_list["PC_exit"])
+		kill_program(program_to_exit)
 		return TOPIC_HANDLED
 	if(href_list["PC_enable_component"] )
 		var/obj/item/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
@@ -85,7 +93,10 @@
 		system_shutdown()
 		return TOPIC_HANDLED
 	if( href_list["PC_minimize"] )
-		minimize_program(usr)
+		var/datum/computer_file/program/program_to_minimize = get_file(href_list["PC_minimize"])
+		if(!istype(program_to_minimize) || program_to_minimize.program_state == PROGRAM_STATE_KILLED)
+			return TOPIC_HANDLED
+		minimize_program(program_to_minimize, usr)
 		return TOPIC_HANDLED
 
 	if( href_list["PC_killprogram"] )
@@ -100,7 +111,15 @@
 		return TOPIC_HANDLED
 
 	if( href_list["PC_runprogram"] )
-		run_program(href_list["PC_runprogram"])
+		run_program(href_list["PC_runprogram"], user)
+		return TOPIC_HANDLED
+
+	if( href_list["PC_runprogram_newwindow"] )
+		var/datum/computer_file/program/program_to_run = get_file(href_list["PC_runprogram_newwindow"])
+		if(istype(program_to_run) && program_to_run.program_state == PROGRAM_STATE_ACTIVE && (program_to_run in running_program_windows))
+			minimize_program(program_to_run)
+		else
+			run_program_new_window(href_list["PC_runprogram_newwindow"], user)
 		return TOPIC_HANDLED
 
 	if( href_list["PC_setautorun"] )
@@ -155,9 +174,13 @@
 		SSnano.update_uis(active_program)
 		if(active_program.NM)
 			SSnano.update_uis(active_program.NM)
+	for (var/datum/computer_file/program/extra_program in running_program_windows)
+		SSnano.update_uis(extra_program)
+		if(extra_program.NM)
+			SSnano.update_uis(extra_program.NM)
 
 /// Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
-/datum/extension/interactive/ntos/proc/get_header_data()
+/datum/extension/interactive/ntos/proc/get_header_data(datum/computer_file/program/program)
 	var/list/data = list()
 
 	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
@@ -208,14 +231,16 @@
 			"icon" = P.ui_header
 		)))
 	data["PC_programheaders"] = program_headers
+	data["PC_activeprogram"] = program?.filename
 
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = !updating
-	data["PC_showexitprogram"] = active_program ? TRUE : FALSE // Hides "Exit Program" button on mainscreen
+	data["PC_showshutdown"] = (program && active_program != program) ? FALSE : TRUE // Hides "Shutdown" button on extra screens
+	data["PC_showexitprogram"] = program ? TRUE : FALSE // Hides "Exit Program" button on mainscreen
 	return data
 
-/datum/extension/interactive/ntos/initial_data()
-	return get_header_data()
+/datum/extension/interactive/ntos/initial_data(datum/computer_file/program/program)
+	return get_header_data(program)
 
 /datum/extension/interactive/ntos/update_layout()
 	return TRUE

@@ -8,17 +8,17 @@
 	base_type = /obj/machinery/computer/station_alert
 	machine_name = "alert console"
 	machine_desc = "A compact monitoring system that displays a readout of all active atmosphere, camera, and fire alarms on the network."
-	var/datum/nano_module/alarm_monitor/alarm_monitor
-	var/monitor_type = /datum/nano_module/alarm_monitor
+	var/datum/nano_module/program/alarm_monitor/alarm_monitor
+	var/monitor_type = /datum/nano_module/program/alarm_monitor
 
 /obj/machinery/computer/station_alert/engineering
-	monitor_type = /datum/nano_module/alarm_monitor/engineering
+	monitor_type = /datum/nano_module/program/alarm_monitor/engineering
 
 /obj/machinery/computer/station_alert/security
-	monitor_type = /datum/nano_module/alarm_monitor/security
+	monitor_type = /datum/nano_module/program/alarm_monitor/security
 
 /obj/machinery/computer/station_alert/all
-	monitor_type = /datum/nano_module/alarm_monitor/all
+	monitor_type = /datum/nano_module/program/alarm_monitor/all
 
 /obj/machinery/computer/station_alert/Initialize()
 	alarm_monitor = new monitor_type(src)
@@ -31,7 +31,7 @@
 	. = ..()
 	unregister_monitor()
 
-/obj/machinery/computer/station_alert/proc/register_monitor(datum/nano_module/alarm_monitor/monitor)
+/obj/machinery/computer/station_alert/proc/register_monitor(datum/nano_module/program/alarm_monitor/monitor)
 	if(monitor.host != src)
 		return
 

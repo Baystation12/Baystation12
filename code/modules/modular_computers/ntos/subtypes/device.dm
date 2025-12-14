@@ -16,7 +16,7 @@
 /datum/extension/interactive/ntos/device/recalc_power_usage()
 	var/obj/item/modular_computer/C = holder
 	C.handle_power()
-	
+
 /datum/extension/interactive/ntos/device/emagged()
 	var/obj/item/modular_computer/C = holder
 	return C.computer_emagged
@@ -39,15 +39,15 @@
 
 // Hack to make status bar work
 
-/obj/item/modular_computer/initial_data()
+/obj/item/modular_computer/initial_data(datum/computer_file/program/program)
 	. = ..()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
-		. += os.get_header_data()
+		. += os.get_header_data(program)
 
 /obj/item/modular_computer/check_eye()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		return os.check_eye()
-	else 
+	else
 		return ..()

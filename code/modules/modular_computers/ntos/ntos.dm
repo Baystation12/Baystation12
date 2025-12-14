@@ -7,8 +7,12 @@
 	var/on = FALSE
 	/// A currently active program running on the computer.
 	var/datum/computer_file/program/active_program = null
+	/// Purely for screen visuals. Tracks the last program that was interacted with.
+	var/datum/computer_file/program/last_interacted_program = null
 	/// All programs currently running, background or active, including small programs.
 	var/list/running_programs = list()
+	/// Extra programs currently ative in secondary windows.
+	var/list/running_program_windows = list()
 	/// The processing size being used by all programs.
 	var/processing_size = 0
 
@@ -34,6 +38,9 @@
 	var/updates = 0
 	var/update_progress = 0
 	var/update_postshutdown
+
+	/// Whether the OS can handle multiple windows open
+	var/allow_multiple_windows = FALSE
 
 	var/list/terminals
 
@@ -105,9 +112,9 @@
 
 	var/datum/computer_file/data/autorun = get_file("autorun")
 	if(istype(autorun))
-		run_program(autorun.stored_data)
+		run_program(autorun.stored_data, usr)
 
-	update_host_icon()
+	update_host_icon(active_program)
 
 /// Attempts to kill a program. Assumes that usr is directly accessing the device.
 /datum/extension/interactive/ntos/proc/kill_program(datum/computer_file/program/P, forced = FALSE)
@@ -119,26 +126,52 @@
 		return
 
 	if (!forced && GET_FLAGS(P.usage_flags, PROGRAM_NO_KILL))
-		minimize_program(user)
+		minimize_program(P, user)
 		return
 
 	P.on_shutdown(forced)
 	running_programs -= P
+	close_extra_window(P)
 	if(active_program == P)
 		active_program = null
 		if(ismob(user))
 			ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
-	update_host_icon()
+		update_host_icon()
+	else if (LAZYLEN(running_program_windows))
+		update_host_icon(running_program_windows[1])
+
+/datum/extension/interactive/ntos/proc/window_closed(datum/computer_file/program/program, mob/user = null)
+	if(!program)
+		return
+	if ((program in running_program_windows) && CanUseTopic(user) > STATUS_CLOSE)
+		minimize_program(program, user)
+
+/datum/extension/interactive/ntos/proc/close_extra_window(datum/computer_file/program/program)
+	SSnano.close_uis(program.NM ? program.NM : program)
+	running_program_windows.Remove(program)
+
+/datum/extension/interactive/ntos/proc/close_extra_windows()
+	for (var/datum/computer_file/program/program in running_program_windows)
+		SSnano.close_uis(program.NM ? program.NM : program)
+	running_program_windows = list()
 
 /// Attempts to start the named program in the foreground. Assumes that usr is directly accessing the device. Returns the program on success, otherwise null.
-/datum/extension/interactive/ntos/proc/run_program(filename)
-	var/mob/user = usr
+/datum/extension/interactive/ntos/proc/run_program(filename, mob/user)
 	var/datum/computer_file/program/P = run_program_remote(filename, user, 1)
 	if(!istype(P))
 		return
 
 	activate_program(P, user)
 	return P
+
+/// Attempts to start the named program in an extra window. Assumes that usr is directly accessing the device. Returns the program on success, otherwise null.
+/datum/extension/interactive/ntos/proc/run_program_new_window(filename, mob/user)
+	if (!allow_multiple_windows)
+		return
+	var/datum/computer_file/program/program = run_program_remote(filename, user, 1)
+	if (!istype(program))
+		return
+	return activate_program_new_window(program, user)
 
 /// Attempts to start the named program in the background. Returns the program on success, otherwise null.
 /datum/extension/interactive/ntos/proc/run_program_remote(filename, mob/user = null, loud = 0)
@@ -174,24 +207,37 @@
 	return P
 
 /// Make a program the currently active one if it is running. Returns the program on success, otherwise null.
-/datum/extension/interactive/ntos/proc/activate_program(datum/computer_file/program/P, mob/user = null)
-	if(!istype(P))
+/datum/extension/interactive/ntos/proc/activate_program(datum/computer_file/program/program, mob/user = null)
+	if(!istype(program))
 		return
-	if((P in running_programs) && P != active_program && P.program_state != PROGRAM_STATE_KILLED)
-		minimize_program(user)
-		P.program_state = PROGRAM_STATE_ACTIVE
-		active_program = P
-		update_host_icon()
-		return P
+	if((program in running_programs) && program != active_program && program.program_state != PROGRAM_STATE_KILLED)
+		minimize_program(program, user)
+		program.program_state = PROGRAM_STATE_ACTIVE
+		active_program = program
+		update_host_icon(program)
+		return program
+
+/// Create a new window for the program if it is running. Returns the program on success, otherwise null.
+/datum/extension/interactive/ntos/proc/activate_program_new_window(datum/computer_file/program/program, mob/user = null)
+	if(!istype(program))
+		return
+	if((program in running_programs) && !(program in running_program_windows) && program.program_state != PROGRAM_STATE_KILLED)
+		minimize_program(program, user)
+		program.program_state = PROGRAM_STATE_ACTIVE
+		running_program_windows |= program
+		update_host_icon(program)
+		return program
 
 /// Minimize the currently active program.
-/datum/extension/interactive/ntos/proc/minimize_program(mob/user = null)
-	if(!active_program)
+/datum/extension/interactive/ntos/proc/minimize_program(datum/computer_file/program/program_to_minimize, mob/user = null)
+	if(active_program != program_to_minimize && !(program_to_minimize in running_program_windows))
 		return
-	active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
-	SSnano.close_uis(active_program.NM ? active_program.NM : active_program)
-	active_program = null
-	update_host_icon()
+	program_to_minimize.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
+	SSnano.close_uis(program_to_minimize.NM ? program_to_minimize.NM : program_to_minimize)
+	if (active_program == program_to_minimize)
+		active_program = null
+		update_host_icon()
+	close_extra_window(program_to_minimize)
 	if(istype(user))
 		ui_interact(user) // Re-open the UI on this computer. It should show the main screen now.
 
@@ -236,7 +282,7 @@
 
 	//It's done.
 	updating = FALSE
-	update_host_icon()
+	update_host_icon(last_interacted_program, FALSE)
 	updates = 0
 	update_progress = 0
 

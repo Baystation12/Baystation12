@@ -43,7 +43,7 @@
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 	var/authenticated = check_access(user, admin_access)
 
 	if(program && program.computer)

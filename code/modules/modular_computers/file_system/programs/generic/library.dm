@@ -17,17 +17,17 @@ The answer was five and a half years -ZeroBits
 	requires_ntnet = TRUE
 	available_on_ntnet = TRUE
 
-	nanomodule_path = /datum/nano_module/library
+	nanomodule_path = /datum/nano_module/program/library
 
-/datum/nano_module/library
+/datum/nano_module/program/library
 	name = "Library"
 	var/error_message = ""
 	var/current_book
 	var/obj/machinery/libraryscanner/scanner
 	var/sort_by = "id"
 
-/datum/nano_module/library/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/library/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	if(error_message)
 		data["error"] = error_message
@@ -59,7 +59,7 @@ The answer was five and a half years -ZeroBits
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/library/Topic(href, href_list)
+/datum/nano_module/program/library/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["viewbook"])
@@ -167,7 +167,7 @@ The answer was five and a half years -ZeroBits
 			error_message = ""
 		return 1
 
-/datum/nano_module/library/proc/view_book(id)
+/datum/nano_module/program/library/proc/view_book(id)
 	if(current_book || !id)
 		return 0
 

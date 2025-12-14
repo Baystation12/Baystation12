@@ -3,34 +3,36 @@
 		<div class='item'>
 			<table><tr>
 			{{if data.PC_batteryicon && data.PC_showbatteryicon}}
-				<td><img width='40px' height='22px' src='{{:data.PC_batteryicon}}'>
+				<td><img width='40px' height='22px' src='{{:data.PC_batteryicon}}'></td>
 			{{/if}}
 			{{if data.PC_batterypercent && data.PC_showbatteryicon}}
-				<td><b>{{:data.PC_batterypercent}}</b>
+				<td><b>{{:data.PC_batterypercent}}</b></td>
 			{{/if}}
 			{{if data.PC_ntneticon}}
-				<td><img width='40px' height='22px' src='{{:data.PC_ntneticon}}'>
+				<td><img width='40px' height='22px' src='{{:data.PC_ntneticon}}'></td>
 			{{/if}}
 			{{if data.PC_apclinkicon}}
-				<td><img width='40px' height='22px' src='{{:data.PC_apclinkicon}}'>
+				<td><img width='40px' height='22px' src='{{:data.PC_apclinkicon}}'></td>
 			{{/if}}
 			{{if data.PC_stationtime}}
-				<td><b>{{:data.PC_stationtime}}<b>
+				<td><b>{{:data.PC_stationtime}}<b></td>
 			{{/if}}
 			{{for data.PC_programheaders}}
-				<td><img src='{{:value.icon}}'>
+				<td><img src='{{:value.icon}}'></td>
 			{{/for}}
-			</table>
+			</tr></table>
 		</div>
 	</div>
 	<div style="float: right">
 		<table><tr>
-			<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}
-			{{if data.PC_showexitprogram}}
-				<td>{{:helper.link('Exit Program', null, {'PC_exit' : 1})}}
-				<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : 1})}}
+			{{if data.PC_showshutdown}}
+				<td>{{:helper.link('Shutdown', null, {'PC_shutdown' : 1})}}</td>
 			{{/if}}
-		</table>
+			{{if data.PC_showexitprogram}}
+				<td>{{:helper.link('Exit Program', null, {'PC_exit' : data.PC_activeprogram})}}</td>
+				<td>{{:helper.link('Minimize Program', null, {'PC_minimize' : data.PC_activeprogram})}}</td>
+			{{/if}}
+		</tr></table>
 	</div>
 	<div style="clear: both">
 {{/if}}

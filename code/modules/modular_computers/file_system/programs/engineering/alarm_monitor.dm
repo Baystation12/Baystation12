@@ -1,7 +1,7 @@
 /datum/computer_file/program/alarm_monitor
 	filename = "alarmmonitor"
 	filedesc = "Alarm Monitoring"
-	nanomodule_path = /datum/nano_module/alarm_monitor/engineering
+	nanomodule_path = /datum/nano_module/program/alarm_monitor/engineering
 	ui_header = "alarm_green.gif"
 	program_icon_state = "alert-green"
 	program_key_state = "atmos_key"
@@ -15,62 +15,62 @@
 
 /datum/computer_file/program/alarm_monitor/process_tick()
 	..()
-	var/datum/nano_module/alarm_monitor/NMA = NM
+	var/datum/nano_module/program/alarm_monitor/NMA = NM
 	if(istype(NMA) && NMA.has_major_alarms())
 		if(!has_alert)
 			program_icon_state = "alert-red"
 			ui_header = "alarm_red.gif"
-			update_computer_icon()
+			update_computer_icon(FALSE)
 			has_alert = 1
 	else
 		if(has_alert)
 			program_icon_state = "alert-green"
 			ui_header = "alarm_green.gif"
-			update_computer_icon()
+			update_computer_icon(FALSE)
 			has_alert = 0
 	return 1
 
-/datum/nano_module/alarm_monitor
+/datum/nano_module/program/alarm_monitor
 	name = "Alarm monitor"
 	var/list_cameras = 0						// Whether or not to list camera references. A future goal would be to merge this with the enginering/security camera console. Currently really only for AI-use.
 	var/list/datum/alarm_handler/alarm_handlers // The particular list of alarm handlers this alarm monitor should present to the user.
 	available_to_ai = FALSE
 
-/datum/nano_module/alarm_monitor/New()
+/datum/nano_module/program/alarm_monitor/New()
 	..()
 	alarm_handlers = list()
 
-/datum/nano_module/alarm_monitor/all
+/datum/nano_module/program/alarm_monitor/all
 	available_to_ai = TRUE
 
-/datum/nano_module/alarm_monitor/all/New()
+/datum/nano_module/program/alarm_monitor/all/New()
 	..()
 	alarm_handlers = SSalarm.alarm_handlers
 
-/datum/nano_module/alarm_monitor/engineering/New()
+/datum/nano_module/program/alarm_monitor/engineering/New()
 	..()
 	alarm_handlers = list(GLOB.atmosphere_alarm, GLOB.camera_alarm, GLOB.fire_alarm, GLOB.power_alarm)
 
-/datum/nano_module/alarm_monitor/security/New()
+/datum/nano_module/program/alarm_monitor/security/New()
 	..()
 	alarm_handlers = list(GLOB.camera_alarm, GLOB.motion_alarm)
 
-/datum/nano_module/alarm_monitor/proc/register_alarm(object, procName)
+/datum/nano_module/program/alarm_monitor/proc/register_alarm(object, procName)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		AH.register_alarm(object, procName)
 
-/datum/nano_module/alarm_monitor/proc/unregister_alarm(object)
+/datum/nano_module/program/alarm_monitor/proc/unregister_alarm(object)
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		AH.unregister_alarm(object)
 
-/datum/nano_module/alarm_monitor/proc/all_alarms()
+/datum/nano_module/program/alarm_monitor/proc/all_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.alarms(get_host_z())
 
 	return all_alarms
 
-/datum/nano_module/alarm_monitor/proc/major_alarms()
+/datum/nano_module/program/alarm_monitor/proc/major_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.major_alarms(get_host_z())
@@ -78,21 +78,21 @@
 	return all_alarms
 
 // Modified version of above proc that uses slightly less resources, returns 1 if there is a major alarm, 0 otherwise.
-/datum/nano_module/alarm_monitor/proc/has_major_alarms()
+/datum/nano_module/program/alarm_monitor/proc/has_major_alarms()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		if(AH.has_major_alarms(get_host_z()))
 			return 1
 
 	return 0
 
-/datum/nano_module/alarm_monitor/proc/minor_alarms()
+/datum/nano_module/program/alarm_monitor/proc/minor_alarms()
 	var/list/all_alarms = new()
 	for(var/datum/alarm_handler/AH in alarm_handlers)
 		all_alarms += AH.minor_alarms(get_host_z())
 
 	return all_alarms
 
-/datum/nano_module/alarm_monitor/Topic(ref, href_list)
+/datum/nano_module/program/alarm_monitor/Topic(ref, href_list)
 	if(..())
 		return 1
 	if(href_list["switchTo"])
@@ -103,8 +103,8 @@
 		usr.switch_to_camera(C)
 		return 1
 
-/datum/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/alarm_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	var/list/categories = list()
 	for(var/datum/alarm_handler/AH in alarm_handlers)

@@ -1,7 +1,7 @@
 /datum/computer_file/program/suit_sensors
 	filename = "sensormonitor"
 	filedesc = "Suit Sensors Monitoring"
-	nanomodule_path = /datum/nano_module/crew_monitor
+	nanomodule_path = /datum/nano_module/program/crew_monitor
 	ui_header = "crew_green.gif"
 	program_icon_state = "crew"
 	program_key_state = "med_key"
@@ -18,7 +18,7 @@
 /datum/computer_file/program/suit_sensors/process_tick()
 	..()
 
-	var/datum/nano_module/crew_monitor/NMC = NM
+	var/datum/nano_module/program/crew_monitor/NMC = NM
 	if(istype(NMC) && (NMC.has_alerts() != has_alert))
 		if(!has_alert)
 			program_icon_state = "crew-red"
@@ -31,21 +31,21 @@
 			program_icon_state = "crew"
 			ui_header = "crew_green.gif"
 			beeping = FALSE
-		update_computer_icon()
+		update_computer_icon(FALSE)
 		has_alert = !has_alert
 
 	return 1
 
-/datum/nano_module/crew_monitor
+/datum/nano_module/program/crew_monitor
 	name = "Crew monitor"
 
-/datum/nano_module/crew_monitor/proc/has_alerts()
+/datum/nano_module/program/crew_monitor/proc/has_alerts()
 	for(var/z_level in GLOB.using_map.map_levels)
 		if (crew_repository.has_health_alert(z_level))
 			return TRUE
 	return FALSE
 
-/datum/nano_module/crew_monitor/Topic(href, href_list)
+/datum/nano_module/program/crew_monitor/Topic(href, href_list)
 	if(..()) return 1
 
 	if(href_list["track"])
@@ -56,8 +56,8 @@
 				AI.ai_actual_track(H)
 		return 1
 
-/datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/crew_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	data["isAI"] = isAI(user)
 	var/Z = get_host_z()

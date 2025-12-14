@@ -30,7 +30,7 @@
 	return GLOB.traders[trader_type]
 
 /datum/nano_module/program/merchant/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 	var/show_trade = 0
 	var/hailed = 0
 	var/datum/trader/T

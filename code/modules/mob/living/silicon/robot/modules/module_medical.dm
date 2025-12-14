@@ -7,7 +7,7 @@
 		NETWORK_MEDICAL
 	)
 	subsystems = list(
-		/datum/nano_module/crew_monitor
+		/datum/nano_module/program/crew_monitor
 	)
 	can_be_pushed = 0
 	emag_gear = list(

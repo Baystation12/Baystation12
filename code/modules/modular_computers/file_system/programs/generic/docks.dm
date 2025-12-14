@@ -2,7 +2,7 @@
 	filename = "docking"
 	filedesc = "Docking Control"
 	required_access = access_bridge
-	nanomodule_path = /datum/nano_module/docking
+	nanomodule_path = /datum/nano_module/program/docking
 	program_icon_state = "supply"
 	program_key_state = "rd_key"
 	program_menu_icon = "triangle-2-e-w"
@@ -16,18 +16,18 @@
 /datum/computer_file/program/docking/on_startup()
 	. = ..()
 	if(NM)
-		var/datum/nano_module/docking/NMD = NM
+		var/datum/nano_module/program/docking/NMD = NM
 		NMD.refresh_docks()
 
-/datum/nano_module/docking
+/datum/nano_module/program/docking
 	name = "Docking Control program"
 	var/list/docking_controllers = list() //list of tags
 
-/datum/nano_module/docking/New(datum/host, topic_manager)
+/datum/nano_module/program/docking/New(datum/host, topic_manager)
 	..()
 	refresh_docks()
 
-/datum/nano_module/docking/proc/refresh_docks()
+/datum/nano_module/program/docking/proc/refresh_docks()
 	docking_controllers.Cut()
 	var/list/zlevels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
@@ -43,8 +43,8 @@
 				continue
 			docking_controllers += D.program.id_tag
 
-/datum/nano_module/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/docking/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 	var/list/docks = list()
 	for(var/docktag in docking_controllers)
 		var/datum/computer/file/embedded_program/docking/P = SSshuttle.docking_registry[docktag]
@@ -67,7 +67,7 @@
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/docking/Topic(href, href_list, state)
+/datum/nano_module/program/docking/Topic(href, href_list, state)
 	if(..())
 		return 1
 	if(istext(href_list["edit_code"]))

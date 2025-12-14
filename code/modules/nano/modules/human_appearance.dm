@@ -1,4 +1,4 @@
-/datum/nano_module/appearance_changer
+/datum/nano_module/program/appearance_changer
 	name = "Appearance Editor"
 	available_to_ai = FALSE
 	var/flags
@@ -9,7 +9,7 @@
 	var/list/langs
 
 
-/datum/nano_module/appearance_changer/Destroy()
+/datum/nano_module/program/appearance_changer/Destroy()
 	owner = null
 	races = null
 	heads = null
@@ -18,7 +18,7 @@
 	. = ..()
 
 
-/datum/nano_module/appearance_changer/New(mob/living/carbon/human/owner, flags)
+/datum/nano_module/program/appearance_changer/New(mob/living/carbon/human/owner, flags)
 	..(owner, null)
 	src.owner = owner
 	src.flags = flags
@@ -27,14 +27,14 @@
 	generate_data()
 
 
-/datum/nano_module/appearance_changer/proc/generate_data()
+/datum/nano_module/program/appearance_changer/proc/generate_data()
 	heads = owner.generate_valid_hairstyles()
 	faces = owner.generate_valid_facial_hairstyles()
 	if (~flags & APPEARANCE_LANG_ANY_ORIGIN)
 		langs = owner.generate_valid_languages()
 
 
-/datum/nano_module/appearance_changer/Topic(href, list/href_list, datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/appearance_changer/Topic(href, list/href_list, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 	if (.)
 		return
@@ -140,11 +140,11 @@
 			return TRUE
 
 
-/datum/nano_module/appearance_changer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE, datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/appearance_changer/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui, force_open = TRUE, datum/topic_state/state = GLOB.default_state)
 	if (QDELETED(owner) || !owner.species)
 		return
 
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 
 	data["specimen"] = owner.species.name
 	data["gender"] = owner.gender
