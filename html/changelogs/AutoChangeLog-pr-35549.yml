@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - admin: Added "Allow Respawn 2" to the special verbs menu. This allows admins
-      to allow people to skip the lobby timer while they are in the lobby.
-delete-after: true
