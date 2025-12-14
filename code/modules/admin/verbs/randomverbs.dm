@@ -441,7 +441,7 @@ Ccomp's first proc.
 
 /client/proc/allow_respawn()
 	set category = "Special Verbs"
-	set name = "Allow Respawn"
+	set name = "Allow Respawn 2"
 	set desc = "Allows a ghost or lobby player to bypass respawn timers."
 	if(!check_rights(R_ADMIN))
 		return
