@@ -30,7 +30,7 @@
 		return TRUE
 
 	if (href_list["msg_all_occupants"])
-		var/our_msg = input(usr, "Enter a message to send to all connected users.", "Message All") as null|text
+		var/our_msg = sanitize(input(usr, "Enter a message to send to all connected users.", "Message All") as null|text)
 		if (!our_msg)
 			return TRUE
 		for (var/mob/living/L in SSvirtual_reality.virtual_mobs_to_occupants)
@@ -43,7 +43,7 @@
 		if (!L)
 			to_chat(usr, SPAN_WARNING("The system could not find the specified user: [href_list["msg_occupant"]]"))
 			return TRUE
-		var/our_msg = input(usr, "Enter a message to send to [L].", "Message User") as null|text
+		var/our_msg = sanitize(input(usr, "Enter a message to send to [L].", "Message User") as null|text)
 		if (!our_msg)
 			return TRUE
 		to_chat(L, SPAN_NOTICE(FONT_LARGE("<b><i>A holographic message appears in front of you:</i></b> \"[our_msg]\"")))
@@ -51,69 +51,8 @@
 		return TRUE
 
 	if (href_list["load_template"])
-		if (!selected_zone)
-			to_chat(usr, SPAN_WARNING("No VR zone selected. Cannot load template."))
-			return TRUE
-
-		var/area/selected_zone_area = GLOB.active_vr_areas[selected_zone]
-		if (!selected_zone_area)
-			to_chat(usr, SPAN_WARNING("The system could not find the specified VR zone: [selected_zone]"))
-			return TRUE
-
-		var/list/the_matrix = SSvirtual_reality.virtual_occupants_to_mobs
-		var/P = GLOB.vr_areas[href_list["load_template"]]
-		var/area/A = locate(P)
-		if (!A)
-			P = GLOB.emagged_vr_areas[href_list["load_template"]]
-			A = locate(P)
-			if (!A) // if we still don't have our area after checking for emagged ones, throw an error
-				to_chat(usr, SPAN_WARNING("The system could not find the specified template: [href_list["load_template"]]"))
-				return TRUE
-		if (selected_zone_area == A)
-			return TRUE
-		if (the_matrix.len)
-			if (alert(usr, "Switching the VR area will eject [the_matrix.len] users from the simulation. Continue?", "Change Area", "Yes", "No") != "Yes")
-				return TRUE
-			log_and_message_admins("changed the VR area to [A.name], ejecting [the_matrix.len] occupants.", usr)
-		else
-			log_and_message_admins("changed the VR area to [A.name].", usr)
-
-		var/loaded_normally = TRUE
-		if (!emagged || prob(75))
-			for (var/SO in simulated_objects) // Clear the entire previous template before we place another one
-				qdel(SO)
-			for (var/turf/T in selected_zone_area)
-				if (!istype(T, /turf/unsimulated/floor/plating))
-					T.ChangeTurf(/turf/unsimulated/floor/plating)
-		else // we're emagged, just fuck our shit up a quarter of the time
-			loaded_normally = FALSE
-			var/atom/comp_holder = program.computer.holder
-			comp_holder.audible_message(SPAN_DANGER("\The [comp_holder] buzzes oddly!"))
-			to_chat(usr, SPAN_WARNING("updatevr.dm:[rand(10000, 20000)]:warning: Previous loaded template did not fully unload. Virtual space may be affected."))
-			playsound(program.computer.holder, 'sound/machines/buzz-sigh.ogg', 50)
-
-		var/list/mobs_in_zone = mobs_in_area(selected_zone_area)
-		for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
-			if (L in mobs_in_zone)
-				to_chat(L, SPAN_DANGER(FONT_LARGE("ALERT: Loaded VR template reconfiguring. Terminating connection.")))
-				SSvirtual_reality.remove_virtual_mob(L, TRUE)
-
-		// in this way, we use the selected area as a template. we copy all of its contents to the actual area,
-		// allowing users to "reset" the template by refreshing it
-		var/area/active_area = selected_zone_area
-		simulated_objects = A.copy_contents_to(active_area)
-		active_area.forced_ambience = A.forced_ambience
-		active_area.dynamic_lighting = A.dynamic_lighting
-		active_area.sound_env = A.sound_env
-		GLOB.vr_spawns[selected_zone] = list()
-		for (var/obj/effect/vr_spawn/V in active_area)
-			GLOB.vr_spawns[selected_zone] += V
-
-		to_chat(usr, SPAN_NOTICE("Successfully loaded new area: [A.name]!"))
-		if (loaded_normally)
-			playsound(program.computer.holder, 'sound/machines/ping.ogg', 50)
-		area_cooldown = world.time + 30 SECONDS
-		return TRUE
+		spawn(0)
+			SSvirtual_reality.load_template(src, usr, selected_zone, href_list["load_template"])
 	if (href_list["select_zone"])
 		selected_zone = href_list["select_zone"]
 		if (!selected_zone || !GLOB.active_vr_areas[selected_zone])
@@ -142,6 +81,7 @@
 		template_data["name"] = zone
 		var/area/active_area = GLOB.active_vr_areas[zone]
 		template_data["template"] = active_area.name
+		template_data["selected"] = selected_zone
 		data["active_templates"] += list(template_data)
 	data["templates"] = list()
 	for (var/V in GLOB.vr_areas)
