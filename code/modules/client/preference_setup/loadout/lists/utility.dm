@@ -150,3 +150,8 @@ Instruments
 	musical_instruments["trumpet"] = /obj/item/device/synthesized_instrument/trumpet
 	musical_instruments["violin"] = /obj/item/device/synthesized_instrument/violin
 	gear_tweaks += new/datum/gear_tweak/path(musical_instruments)
+
+/datum/gear/utility/stellascope
+	display_name = "stellascope"
+	path = /obj/item/holosign_creator/stellascope
+	cost = 4

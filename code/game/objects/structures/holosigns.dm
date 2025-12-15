@@ -2,7 +2,7 @@
 	name = "wet floor sign"
 	desc = "The words flicker as if they mean nothing."
 	anchored = TRUE
-	icon = 'icons/obj/janitor_tools.dmi' // move these into their own dmi if we ever add more than 1 of these
+	icon = 'icons/obj/hologram_projections.dmi'
 	var/obj/item/holosign_creator/projector
 	icon_state = "holosign"
 
@@ -50,3 +50,9 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	qdel(src)
+
+/obj/structure/holosign/constellation
+	name = "starry projection"
+	desc = "A holographic projection of a star system."
+	icon_state = "starprojection"
+	layer = ABOVE_HUMAN_LAYER
