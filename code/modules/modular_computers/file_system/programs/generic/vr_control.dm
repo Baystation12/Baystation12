@@ -82,6 +82,7 @@
 		var/area/active_area = GLOB.active_vr_areas[zone]
 		template_data["template"] = active_area.name
 		template_data["selected"] = selected_zone
+		template_data["zone"] = zone
 		data["active_templates"] += list(template_data)
 	data["templates"] = list()
 	for (var/V in GLOB.vr_areas)

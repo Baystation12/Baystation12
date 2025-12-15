@@ -1,6 +1,10 @@
 {{for data.active_templates}}
     <h3><u>{{:value.name}}</u></h3>
-    {{:helper.link(value.template, null, {'select_zone': value.name}, data.selected ? 'disabled' : null)}}
+    {{if value.zone == value.selected}}
+        {{:helper.link(value.template, null, {'select_zone': value.name}, 'disabled')}}
+    {{else}}
+        {{:helper.link(value.template, null, {'select_zone': value.name}, null)}}
+    {{/if}}
 {{empty}}
     <span class='average'><i>No VR template loaded.</i></span>
 {{/for}}
