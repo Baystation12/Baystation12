@@ -1,0 +1,7 @@
+author: XanderDox
+changes:
+  - rscadd: Adds the Stellascope as a hologram projector item, selectable in 
+      loadout under utility.
+  - imageadd: Ports the Stellascope and projection sprites from Aurora.
+  - soundadd: Ports the 'Jingle.ogg' from Aurora
+delete-after: true
