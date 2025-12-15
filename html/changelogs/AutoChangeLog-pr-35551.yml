@@ -1,0 +1,5 @@
+author: limelier
+changes:
+  - tweak: Change guitars to a bigger item size class so that they don't fit in 
+      backpacks anymore.
+delete-after: true
