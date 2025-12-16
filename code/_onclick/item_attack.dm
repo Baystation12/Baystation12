@@ -373,9 +373,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			switch (zone)
 				if (BP_HEAD, BP_L_ARM, BP_L_HAND)
 					return FALSE
-		switch (zone)
-			if (BP_HEAD, BP_R_ARM, BP_R_HAND)
-				return FALSE
+		else
+			switch (zone)
+				if (BP_HEAD, BP_R_ARM, BP_R_HAND)
+					return FALSE
 	var/turf/target_turf = get_turf(target)
 	if (locate(/obj/machinery/optable, target_turf))
 		return TRUE
