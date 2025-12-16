@@ -179,5 +179,8 @@
 /obj/item/device/augment_implanter/engineering_toolset
 	augment = /obj/item/organ/internal/augment/active/polytool/engineer
 
+/obj/item/device/augment_implanter/engineering_toolset/advanced
+	augment = /obj/item/organ/internal/augment/active/polytool/engineer/advanced
+
 /obj/item/device/augment_implanter/powerfist
 	augment = /obj/item/organ/internal/augment/active/item/powerfist/prepared
