@@ -7,11 +7,11 @@
 	var/interactions = null
 	var/isCrayon = 0
 	var/origin = null
+	/// Mob. Who this fax is in reply to.
 	var/mob/sender = null
-	/// List (`/obj/machinery/photocopier/faxmachine`). List of fax machines matching the paper's target department.
+	/// List (string). List of GLOB.alldepartments for this fax.
 	var/list/destinations = list()
-	/// String. The paper's target department.
-	var/department = null
+	var/should_stamp = TRUE
 
 	var/header = null
 	var/headerOn = TRUE
@@ -32,17 +32,31 @@
 /obj/item/paper/admin/proc/generateInteractions()
 	//clear first
 	interactions = null
+	var/sending_to_msg = "Sending to "
+	if (!length(destinations))
+		sending_to_msg += " <i>nobody!</i>"
+	else if (length(destinations) > 1)
+		sending_to_msg += "[length(destinations)] destinations"
+	else
+		sending_to_msg += "[html_encode(destinations[1])]"
 
 	//Snapshot is crazy and likes putting each topic hyperlink on a seperate line from any other tags so it's nice and clean.
 	interactions += "<HR><center><span style='font-size: 10px'>The fax will transmit everything above this line</span><br>"
-	interactions += "<A href='byond://?src=\ref[src];confirm=1'>Send fax</A> "
-	interactions += "<A href='byond://?src=\ref[src];penmode=1'>Pen mode: [isCrayon ? "Crayon" : "Pen"]</A> "
-	interactions += "<A href='byond://?src=\ref[src];cancel=1'>Cancel fax</A> "
-	interactions += "<BR>"
-	interactions += "<A href='byond://?src=\ref[src];changelogo=1'>Change logo</A> "
-	interactions += "<A href='byond://?src=\ref[src];changelanguage=1'>Change language ([language])</A> "
-	interactions += "<A href='byond://?src=\ref[src];toggleheader=1'>Toggle Header</A> "
-	interactions += "<A href='byond://?src=\ref[src];togglefooter=1'>Toggle Footer</A> "
+	if (length(destinations))
+		interactions += "<A href='byond://?src=\ref[src];confirm=1'>Send fax</A> • "
+	else
+		interactions += "<A>Send fax</A> • "
+	interactions += "<A href='byond://?src=\ref[src];penmode=1'>Pen mode: [isCrayon ? "Crayon" : "Pen"]</A> • "
+	interactions += "<A href='byond://?src=\ref[src];cancel=1'>Cancel fax</A><BR>"
+	interactions += "<A href='byond://?src=\ref[src];togglestamp=1'>[should_stamp ? "" : "<i>Not</i> "]Stamped</A> • "
+	if (sender)
+		interactions += "<A>[sending_to_msg]</A><BR>"
+	else
+		interactions += "<A href='byond://?src=\ref[src];destinations=1'>[sending_to_msg]</A><BR>"
+	interactions += "<A href='byond://?src=\ref[src];changelogo=1'>Change logo</A> • "
+	interactions += "<A href='byond://?src=\ref[src];changelanguage=1'>Change language ([language])</A> • "
+	interactions += "<A href='byond://?src=\ref[src];toggleheader=1'>Toggle Header</A> • "
+	interactions += "<A href='byond://?src=\ref[src];togglefooter=1'>Toggle Footer</A> • "
 	interactions += "<A href='byond://?src=\ref[src];clear=1'>Clear page</A> "
 	interactions += "</center>"
 
@@ -78,8 +92,6 @@
 
 /obj/item/paper/admin/proc/updateDisplay()
 	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
-
-
 
 /obj/item/paper/admin/Topic(href, href_list)
 	if(href_list["write"])
@@ -167,3 +179,67 @@
 		generateInteractions()
 		updateDisplay()
 		return
+
+	if (href_list["destinations"])
+		show_destinations_window()
+
+	if (href_list["adddest"])
+		var/resolved_dest = locate(href_list["adddest"])
+		if (resolved_dest)
+			destinations += resolved_dest
+		show_destinations_window()
+		generateInteractions()
+		updateDisplay()
+		return
+
+	if (href_list["remdest"])
+		var/resolved_dest = locate(href_list["remdest"])
+		if (resolved_dest)
+			destinations -= resolved_dest
+		show_destinations_window()
+		generateInteractions()
+		updateDisplay()
+		return
+
+	if (href_list["alldests"])
+		destinations = GLOB.alldepartments.Copy()
+		show_destinations_window()
+		generateInteractions()
+		updateDisplay()
+		return
+
+	if (href_list["nonedests"])
+		destinations = list()
+		show_destinations_window()
+		generateInteractions()
+		updateDisplay()
+		return
+
+	if (href_list["togglestamp"])
+		should_stamp = !should_stamp
+		generateInteractions()
+		updateDisplay()
+		return
+
+/obj/item/paper/admin/proc/show_destinations_window()
+	var/list/dat = list()
+	var/list/missing_destinations = GLOB.alldepartments - destinations
+	dat += "<div align='center'><b>Select fax desinations.</b><br>"
+	dat += "<a href='byond://?src=\ref[src];alldests=1'>All ON</a> "
+	dat += "<a href='byond://?src=\ref[src];nonedests=1'>All OFF</a><hr>"
+	dat += "<div align='right' style='width:45%;float:left;'><b>Available</b><br>"
+	for (var/dest in missing_destinations)
+		var/refdest = "\ref[dest]"
+		dat += "<a href='byond://?src=\ref[src];adddest=[refdest]'>[html_encode(dest)] &gt;</a>"
+		dat += "<br>"
+	dat += "</div><div style='width:10%;float:center;'>   </div>"
+	dat += "<div align='left' style='width:45%;float:right;'><b>Sending To</b><br>"
+	for (var/dest in destinations)
+		var/refdest = "\ref[dest]"
+		dat += "<a href='byond://?src=\ref[src];remdest=[refdest]'>&lt; [html_encode(dest)]</a>"
+		dat += "<br>"
+	dat += "</div></div>"
+
+	var/datum/browser/panel = new(usr, "Fax Destinations", "Fax Destinations", 650, 720, src)
+	panel.set_content(dat.Join())
+	panel.open()
