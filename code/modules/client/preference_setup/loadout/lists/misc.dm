@@ -105,6 +105,11 @@
 	knives["lightweight utility knife"] = /obj/item/material/knife/utility/lightweight
 	gear_tweaks += new/datum/gear_tweak/path(knives)
 
+/datum/gear/kirpan
+	display_name = "kirpan"
+	description = "A ceremonial Sikh dagger."
+	path = /obj/item/material/knife/kirpan
+
 /datum/gear/lunchbox
 	display_name = "lunchbox"
 	description = "A little lunchbox."
