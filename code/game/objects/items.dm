@@ -100,7 +100,6 @@
 
 	var/attack_ignore_harm_check = FALSE
 
-
 /obj/item/Initialize()
 	. = ..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc))
@@ -985,3 +984,23 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if (href_list["examine"])
 		examinate(usr, src)
 		return TOPIC_HANDLED
+
+/obj/item/MouseEntered(location, control, params)
+	if (!usr.client)
+		return
+
+	usr.client.set_hover_outline(src, Adjacent(usr))
+
+/obj/item/MouseExited(location, control, params)
+	if (!usr.client)
+		return
+
+	usr.client.clear_hover_outline(src)
+
+/obj/item/MouseDrop(over_atom, source_loc, over_loc, src_control, over_control, params)
+	. = ..()
+
+	if (!usr.client)
+		return
+
+	usr.client.clear_hover_outline(src)

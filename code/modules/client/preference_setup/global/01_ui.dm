@@ -4,6 +4,10 @@
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/UI_outline_accessible_color = "#00d485"
+	var/UI_outline_accessible_alpha = 255
+	var/UI_outline_inaccessible_color = "#99002e"
+	var/UI_outline_inaccessible_alpha = 255
 
 	var/tooltip_style = "Midnight" //Style for popup tooltips
 
@@ -19,7 +23,10 @@
 	pref.UI_style_alpha = R.read("UI_style_alpha")
 	pref.ooccolor = R.read("ooccolor")
 	pref.clientfps = R.read("clientfps")
-
+	pref.UI_outline_accessible_color = R.read("UI_outline_accessible_color")
+	pref.UI_outline_accessible_alpha = R.read("UI_outline_accessible_alpha")
+	pref.UI_outline_inaccessible_color = R.read("UI_outline_inaccessible_color")
+	pref.UI_outline_inaccessible_alpha = R.read("UI_outline_inaccessible_alpha")
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
 	W.write("UI_style", pref.UI_style)
@@ -27,12 +34,20 @@
 	W.write("UI_style_alpha", pref.UI_style_alpha)
 	W.write("ooccolor", pref.ooccolor)
 	W.write("clientfps", pref.clientfps)
+	W.write("UI_outline_accessible_color", pref.UI_outline_accessible_color)
+	W.write("UI_outline_accessible_alpha", pref.UI_outline_accessible_alpha)
+	W.write("UI_outline_inaccessible_color", pref.UI_outline_inaccessible_color)
+	W.write("UI_outline_inaccessible_alpha", pref.UI_outline_inaccessible_alpha)
 
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
 	pref.UI_style_color	= sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
 	pref.UI_style_alpha	= sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
+	pref.UI_outline_accessible_color = sanitize_hexcolor(pref.UI_outline_accessible_color, initial(pref.UI_outline_accessible_color))
+	pref.UI_outline_accessible_alpha = sanitize_integer(pref.UI_outline_accessible_alpha, 50, 255, initial(pref.UI_outline_accessible_alpha))
+	pref.UI_outline_inaccessible_color = sanitize_hexcolor(pref.UI_outline_inaccessible_color, initial(pref.UI_outline_inaccessible_color))
+	pref.UI_outline_inaccessible_alpha = sanitize_integer(pref.UI_outline_inaccessible_alpha, 50, 255, initial(pref.UI_outline_inaccessible_alpha))
 	pref.ooccolor		= sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
 	sanitize_client_fps()
 
@@ -43,7 +58,12 @@
 	. += "<b>Custom UI</b> (recommended for White UI):<br>"
 	. += "-Color: <a href='byond://?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=ui'>reset</a><br>"
 	. += "-Alpha(transparency): <a href='byond://?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='byond://?src=\ref[src];reset=alpha'>reset</a><br>"
-	. += "<b>Tooltip Style:</b> <a href='byond://?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
+	. += "<br><b>Targeting outlines</b>:<br>"
+	. += "- Accessible color: <a href='byond://?src=\ref[src];select_accessible_color=1'><b>[pref.UI_outline_accessible_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_outline_accessible_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=accessible_color'>reset</a><br>"
+	. += "- Accessible alpha: <a href='byond://?src=\ref[src];select_accessible_alpha=1'><b>[pref.UI_outline_accessible_alpha]</b></a> <a href='byond://?src=\ref[src];reset=accessible_alpha'>reset</a><br>"
+	. += "- Inaccessible color: <a href='byond://?src=\ref[src];select_inaccessible_color=1'><b>[pref.UI_outline_inaccessible_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_outline_inaccessible_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=inaccessible_color'>reset</a><br>"
+	. += "- Inaccessible alpha: <a href='byond://?src=\ref[src];select_inaccessible_alpha=1'><b>[pref.UI_outline_inaccessible_alpha]</b></a> <a href='byond://?src=\ref[src];reset=inaccessible_alpha'>reset</a><br>"
+	. += "<br><b>Tooltip Style:</b> <a href='byond://?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
 	if(can_select_ooc_color(user))
 		. += "<b>OOC Color:</b> "
 		if(pref.ooccolor == initial(pref.ooccolor))
@@ -64,6 +84,30 @@
 		var/UI_style_color_new = input(user, "Choose UI color, dark colors are not recommended!", "Global Preference", pref.UI_style_color) as color|null
 		if(isnull(UI_style_color_new) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_color = UI_style_color_new
+		return TOPIC_REFRESH
+
+	else if (href_list["select_accessible_color"])
+		var/UI_accessible_color_new = input(user, "Choose outline color:", "Global Preference") as color|null
+		if(UI_accessible_color_new && CanUseTopic(user))
+			pref.UI_outline_accessible_color = UI_accessible_color_new
+			return TOPIC_REFRESH
+
+	else if (href_list["select_inaccessible_color"])
+		var/UI_inaccessible_color_new = input(user, "Choose outline color:", "Global Preference") as color|null
+		if(UI_inaccessible_color_new && CanUseTopic(user))
+			pref.UI_outline_inaccessible_color = UI_inaccessible_color_new
+			return TOPIC_REFRESH
+
+	else if (href_list["select_accessible_alpha"])
+		var/UI_accessible_alpha_new = input(user, "Select outline alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_outline_accessible_alpha) as num|null
+		if (isnull(UI_accessible_alpha_new) || (UI_accessible_alpha_new < 50 || UI_accessible_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
+		pref.UI_outline_accessible_alpha = UI_accessible_alpha_new
+		return TOPIC_REFRESH
+
+	else if (href_list["select_inaccessible_alpha"])
+		var/UI_inaccessible_alpha_new = input(user, "Select outline alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_outline_inaccessible_alpha) as num|null
+		if (isnull(UI_inaccessible_alpha_new) || (UI_inaccessible_alpha_new < 50 || UI_inaccessible_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
+		pref.UI_outline_inaccessible_alpha = UI_inaccessible_alpha_new
 		return TOPIC_REFRESH
 
 	else if(href_list["select_alpha"])
@@ -103,6 +147,14 @@
 				pref.UI_style_alpha = initial(pref.UI_style_alpha)
 			if("ooc")
 				pref.ooccolor = initial(pref.ooccolor)
+			if ("accessible_color")
+				pref.UI_outline_accessible_color = initial(pref.UI_outline_accessible_color)
+			if ("accessible_alpha")
+				pref.UI_outline_accessible_alpha = initial(pref.UI_outline_accessible_alpha)
+			if ("inaccessible_color")
+				pref.UI_outline_inaccessible_color = initial(pref.UI_outline_inaccessible_color)
+			if ("inaccessible_alpha")
+				pref.UI_outline_inaccessible_alpha = initial(pref.UI_outline_inaccessible_alpha)
 		return TOPIC_REFRESH
 
 	return ..()

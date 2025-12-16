@@ -98,7 +98,7 @@
 
 /obj/item/tray/use_before(atom/target, mob/living/user, click_parameters)
 	var/intent_check = ishuman(user) ? I_GRAB : I_HELP
-	if (user.a_intent != intent_check || istype(target, /obj/item/storage) || istype(target, /obj/screen/storage))
+	if (user.a_intent != intent_check || istype(target, /obj/item/storage) || istype(target, /obj/screen/item_relayed/storage))
 		return ..()
 
 	var/turf/turf = get_turf(target)
