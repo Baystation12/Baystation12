@@ -1,0 +1,5 @@
+author: KatTheFox
+changes:
+  - rscadd: added an advanced engineering toolset augment, which roboticists can
+      print given research and materials
+delete-after: true
