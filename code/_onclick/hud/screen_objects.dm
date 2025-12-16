@@ -61,14 +61,19 @@
 	owner.ui_action_click(owner)
 	return 1
 
+/// Base type for screen objects that relay to an /obj/item instance
 /obj/screen/item_relayed
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/obj/item/mouse_down_on = null
 	var/obj/item/hovered_on = null
 
-	proc/find_item(params)
-	proc/empty_click(atom/location, control, params)
+/// Finds the item for the given mouse parameters. Returns an /obj/item or null.
+/obj/screen/item_relayed/proc/find_item(params)
+	return null
+
+/// Called when the item relay is clicked, but not at a location with an item.
+/obj/screen/item_relayed/proc/empty_click(atom/location, control, params)
 
 /obj/screen/item_relayed/Click(atom/location, control, params)
 	if(!usr.canClick())
@@ -132,6 +137,7 @@
 		hovered_on.MouseExited(location, control, params)
 	hovered_on = null
 
+/// Item relay used by storage UIs - uses mouse position to determine which item in the storage is being pointed at
 /obj/screen/item_relayed/storage
 	name = "storage"
 
@@ -459,6 +465,7 @@
 			return 0
 	return 1
 
+// An item relay that represents an inventory slot for some mob
 /obj/screen/item_relayed/inventory_slot
 	var/slot_id
 
