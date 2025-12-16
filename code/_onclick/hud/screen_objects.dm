@@ -28,11 +28,6 @@
 	maptext_height = 480
 	maptext_width = 480
 
-
-/obj/screen/inventory
-	var/slot_id	//The indentifier for the slot. It has nothing to do with ID cards.
-
-
 /obj/screen/close
 	name = "close"
 
@@ -70,6 +65,7 @@
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	var/obj/item/mouse_down_on = null
+	var/obj/item/hovered_on = null
 
 	proc/find_item(params)
 	proc/empty_click(atom/location, control, params)
@@ -113,6 +109,15 @@
 /obj/screen/item_relayed/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
 	if (!isnull(mouse_down_on))
 		mouse_down_on.MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+
+/obj/screen/item_relayed/MouseEntered(location, control, params)
+	hovered_on = find_item(params)
+
+/obj/screen/item_relayed/MouseMove(location, control, params)
+	hovered_on = find_item(params)
+
+/obj/screen/item_relayed/MouseExited(location, control, params)
+	hovered_on = null
 
 /obj/screen/item_relayed/storage
 	name = "storage"
@@ -441,13 +446,17 @@
 			return 0
 	return 1
 
-/obj/screen/inventory/Click()
-	// At this point in client Click() code we have passed the 1/10 sec check and little else
-	// We don't even know if it's a middle click
-	if(!usr.canClick())
-		return 1
-	if(usr.incapacitated())
-		return 1
+/obj/screen/item_relayed/inventory_slot
+	var/slot_id
+
+/obj/screen/item_relayed/inventory_slot/find_item(params)
+	if (!ismob(usr))
+		return null
+
+	var/mob/C = usr
+	return C.get_equipped_item(slot_id)
+
+/obj/screen/item_relayed/inventory_slot/empty_click(atom/location, control, params)
 	switch(name)
 		if("r_hand")
 			if(iscarbon(usr))
@@ -471,12 +480,11 @@
 			if(usr.attack_ui(slot_id))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
-	return 1
 
-/obj/screen/inventory/Adjacent(atom/neighbor)
+/obj/screen/item_relayed/inventory_slot/Adjacent(atom/neighbor)
 	return neighbor == usr
 
-/obj/screen/inventory/MouseDrop_T(atom/dropped, mob/living/user)
+/obj/screen/item_relayed/inventory_slot/MouseDrop_T(atom/dropped, mob/living/user)
 	// Hands - Transfer items to between hands with drag+drop.
 	if (name == BP_R_HAND && user.l_hand == dropped)
 		return user.put_in_r_hand(dropped)

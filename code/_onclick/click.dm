@@ -63,6 +63,11 @@
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
 
+	if (istype(A, /obj/screen/item_relayed))
+		var/obj/screen/item_relayed/relay = A
+		if (!isnull(relay.hovered_on))
+			return ClickOn(relay.hovered_on, params, use_in_world)
+
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
