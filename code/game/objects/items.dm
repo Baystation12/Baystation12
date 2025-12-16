@@ -994,6 +994,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/agreed = "outline-[any2ref(src)]"
 	render_target = agreed
 	displaying_outline_image = image(icon = src, loc = src)
+	displaying_outline_image.appearance_flags |= RESET_COLOR | RESET_ALPHA
 	if (Adjacent(usr))
 		displaying_outline_image.filters += FILTER_OUTLINE_ACCESSIBLE
 	else
@@ -1002,6 +1003,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	displaying_outline_image.pixel_x = 0
 	displaying_outline_image.pixel_y = 0
 	displaying_outline_image.pixel_z = 0
+	displaying_outline_image.color = null
 
 	usr.client.images += displaying_outline_image
 
