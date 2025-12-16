@@ -123,6 +123,8 @@
 		var/trait_type = istext(trait) ? text2path(trait) : trait
 		var/singleton/trait/selected = GET_SINGLETON(trait_type)
 		var/severity
+		if (!selected)
+			continue
 
 		if (length(selected.metaoptions))
 			var/list/interim = preferences[trait]
