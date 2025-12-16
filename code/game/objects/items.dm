@@ -100,6 +100,7 @@
 
 	var/attack_ignore_harm_check = FALSE
 
+	var/image/displaying_outline_image = null
 
 /obj/item/Initialize()
 	. = ..()
@@ -985,3 +986,28 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if (href_list["examine"])
 		examinate(usr, src)
 		return TOPIC_HANDLED
+
+/obj/item/MouseEntered(location, control, params)
+	if (!usr.client)
+		return
+
+	var/agreed = "outline-[any2ref(src)]"
+	render_target = agreed
+	displaying_outline_image = image(icon = src, loc = src)
+	if (Adjacent(usr))
+		displaying_outline_image.filters += FILTER_OUTLINE_ACCESSIBLE
+	else
+		displaying_outline_image.filters += FILTER_OUTLINE_INACCESSIBLE
+	displaying_outline_image.filters += filter(type = "alpha", render_source = agreed, flags = MASK_INVERSE)
+	displaying_outline_image.pixel_x = 0
+	displaying_outline_image.pixel_y = 0
+	displaying_outline_image.pixel_z = 0
+
+	usr.client.images += displaying_outline_image
+
+/obj/item/MouseExited(location, control, params)
+	if (!usr.client || !displaying_outline_image)
+		return
+
+	usr.client.images -= displaying_outline_image
+	displaying_outline_image = null
