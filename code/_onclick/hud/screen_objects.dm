@@ -112,11 +112,24 @@
 
 /obj/screen/item_relayed/MouseEntered(location, control, params)
 	hovered_on = find_item(params)
+	if (!isnull(hovered_on))
+		hovered_on.MouseEntered(location, control, params)
 
 /obj/screen/item_relayed/MouseMove(location, control, params)
-	hovered_on = find_item(params)
+	var/obj/item/new_hovered_on = find_item(params)
+
+	if (hovered_on != new_hovered_on)
+		if (!isnull(hovered_on))
+			hovered_on.MouseExited(location, control, params)
+		if (!isnull(new_hovered_on))
+			new_hovered_on.MouseEntered(location, control, params)
+		hovered_on = new_hovered_on
+	else if (!isnull(hovered_on))
+		hovered_on.MouseMove(location, control, params)
 
 /obj/screen/item_relayed/MouseExited(location, control, params)
+	if (!isnull(hovered_on))
+		hovered_on.MouseExited(location, control, params)
 	hovered_on = null
 
 /obj/screen/item_relayed/storage
