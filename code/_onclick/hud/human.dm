@@ -17,7 +17,7 @@
 
 	var/list/hud_elements = list()
 	var/obj/screen/using
-	var/obj/screen/inventory/inv_box
+	var/obj/screen/item_relayed/inventory_slot/inv_box
 
 	stamina_bar = new
 	adding += stamina_bar
@@ -26,7 +26,7 @@
 	var/has_hidden_gear
 	for(var/gear_slot in hud_data.gear)
 
-		inv_box = new /obj/screen/inventory()
+		inv_box = new /obj/screen/item_relayed/inventory_slot
 		inv_box.icon = ui_style
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
@@ -97,7 +97,7 @@
 		using.alpha = ui_alpha
 		src.adding += using
 
-		inv_box = new /obj/screen/inventory()
+		inv_box = new /obj/screen/item_relayed/inventory_slot
 		inv_box.SetName("r_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "r_hand_inactive"
@@ -111,7 +111,7 @@
 		src.r_hand_hud_object = inv_box
 		src.adding += inv_box
 
-		inv_box = new /obj/screen/inventory()
+		inv_box = new /obj/screen/item_relayed/inventory_slot
 		inv_box.SetName("l_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "l_hand_inactive"
@@ -124,7 +124,7 @@
 		src.l_hand_hud_object = inv_box
 		src.adding += inv_box
 
-		using = new /obj/screen/inventory()
+		using = new /obj/screen/item_relayed/inventory_slot
 		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand1"
@@ -133,7 +133,7 @@
 		using.alpha = ui_alpha
 		src.adding += using
 
-		using = new /obj/screen/inventory()
+		using = new /obj/screen/item_relayed/inventory_slot
 		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand2"

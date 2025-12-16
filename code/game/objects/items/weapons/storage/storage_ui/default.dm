@@ -1,42 +1,53 @@
 /datum/storage_ui/default
 	var/list/is_seeing = list() //List of mobs which are currently seeing the contents of this item's storage
 
-	var/obj/screen/storage/boxes
-	var/obj/screen/storage/storage_start //storage UI
-	var/obj/screen/storage/storage_continue
-	var/obj/screen/storage/storage_end
-	var/obj/screen/storage/stored_start
-	var/obj/screen/storage/stored_continue
-	var/obj/screen/storage/stored_end
+	// mapping of screen locations to items in slots
+	var/list/slot_obj_locs = alist()
+
+	// arrays containing the start-x and end-x for items in a space storage. each index corresponds to the item of the same one in storage.contents
+	var/list/space_obj_x_start = list()
+	var/list/space_obj_x_end = list()
+
+	var/obj/screen/item_relayed/storage/boxes
+	var/obj/screen/item_relayed/storage/storage_start //storage UI
+	var/obj/screen/item_relayed/storage/storage_continue
+	var/obj/screen/item_relayed/storage/storage_end
+	var/obj/screen/item_relayed/storage/stored_start
+	var/obj/screen/item_relayed/storage/stored_continue
+	var/obj/screen/item_relayed/storage/stored_end
 	var/obj/screen/close/closer
 
 /datum/storage_ui/default/New(storage)
 	..()
-	boxes = new /obj/screen/storage(  )
+	boxes = new /obj/screen/item_relayed/storage
 	boxes.SetName("storage")
 	boxes.master = storage
 	boxes.icon_state = "block"
 	boxes.screen_loc = "7,7 to 10,8"
 	boxes.layer = HUD_BASE_LAYER
+	boxes.containing_ui = src
 
-	storage_start = new /obj/screen/storage(  )
+	storage_start = new /obj/screen/item_relayed/storage
 	storage_start.SetName("storage")
 	storage_start.master = storage
 	storage_start.icon_state = "storage_start"
 	storage_start.screen_loc = "7,7 to 10,8"
 	storage_start.layer = HUD_BASE_LAYER
-	storage_continue = new /obj/screen/storage(  )
+	storage_start.containing_ui = src
+	storage_continue = new /obj/screen/item_relayed/storage
 	storage_continue.SetName("storage")
 	storage_continue.master = storage
 	storage_continue.icon_state = "storage_continue"
 	storage_continue.screen_loc = "7,7 to 10,8"
 	storage_continue.layer = HUD_BASE_LAYER
-	storage_end = new /obj/screen/storage(  )
+	storage_continue.containing_ui = src
+	storage_end = new /obj/screen/item_relayed/storage
 	storage_end.SetName("storage")
 	storage_end.master = storage
 	storage_end.icon_state = "storage_end"
 	storage_end.screen_loc = "7,7 to 10,8"
 	storage_end.layer = HUD_BASE_LAYER
+	storage_end.containing_ui = src
 
 	stored_start = new /obj //we just need these to hold the icon
 	stored_start.icon_state = "stored_start"
@@ -151,22 +162,6 @@
 			is_seeing -= M
 	return cansee
 
-//This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
-//The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
-/datum/storage_ui/default/proc/orient_objs(tx, ty, mx, my)
-	var/cx = tx
-	var/cy = ty
-	boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
-	for(var/obj/O in storage.contents)
-		O.screen_loc = "[cx],[cy]"
-		O.hud_layerise()
-		cx++
-		if (cx > mx)
-			cx = tx
-			cy--
-	closer.screen_loc = "[mx+1],[my]"
-	return
-
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
 /datum/storage_ui/default/proc/slot_orient_objs()
 	var/adjusted_contents = length(storage.contents)
@@ -181,9 +176,11 @@
 	var/cx = 4
 	var/cy = 2+rows
 	boxes.screen_loc = "4:16,2:16 to [4+cols]:16,[2+rows]:16"
+	slot_obj_locs.Cut()
 
 	for(var/obj/O in storage.contents)
 		O.screen_loc = "[cx]:16,[cy]:16"
+		slot_obj_locs["[cx],[cy]"] = O
 		O.maptext = ""
 		O.hud_layerise()
 		cx++
@@ -211,6 +208,9 @@
 	var/startpoint = 0
 	var/endpoint = 1
 
+	space_obj_x_start.Cut()
+	space_obj_x_end.Cut()
+
 	for(var/obj/item/O in storage.contents)
 		startpoint = endpoint + 1
 		endpoint += storage_width * O.get_storage_cost()/storage.max_storage_space
@@ -229,6 +229,11 @@
 		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
 		O.maptext = ""
 		O.hud_layerise()
+
+		var/base = 4 * WORLD_ICON_SIZE + 2 + (WORLD_ICON_SIZE/2)
+
+		space_obj_x_start.Add(base + startpoint)
+		space_obj_x_end.Add(base + endpoint)
 
 	closer.screen_loc = "4:[storage_width+19],2:16"
 
