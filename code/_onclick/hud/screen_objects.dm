@@ -66,19 +66,110 @@
 	owner.ui_action_click(owner)
 	return 1
 
-/obj/screen/storage
+/obj/screen/item_relayed
+	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
+
+	var/obj/item/mouse_down_on = null
+
+	proc/find_item(params)
+	proc/empty_click(atom/location, control, params)
+
+/obj/screen/item_relayed/Click(atom/location, control, params)
+	if(!usr.canClick())
+		return
+	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
+		return
+
+	var/obj/item/clicked_on = find_item(params)
+	if (!isnull(clicked_on))
+		usr.ClickOn(clicked_on, params)
+	else
+		empty_click(location, control, params)
+
+	return 1
+
+/obj/screen/item_relayed/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	var/obj/item/drag_on = find_item(params)
+
+	if (!isnull(drag_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseDrag(drag_on, params)
+
+/obj/screen/item_relayed/MouseUp(location, control, params)
+	var/obj/item/up_on = find_item(params)
+
+	if (!isnull(up_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseUp(up_on, location, control, params)
+
+/obj/screen/item_relayed/MouseDown(location, control, params)
+	var/obj/item/down_on = find_item(params)
+
+	if (!isnull(down_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseDown(down_on, location, control, params)
+		mouse_down_on = down_on
+
+/obj/screen/item_relayed/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
+	if (!isnull(mouse_down_on))
+		mouse_down_on.MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+
+/obj/screen/item_relayed/storage
 	name = "storage"
 
-/obj/screen/storage/Click()
-	if(!usr.canClick())
-		return 1
-	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
-		return 1
-	if(master)
+	var/datum/storage_ui/default/containing_ui = null
+
+/obj/screen/item_relayed/storage/empty_click(atom/location, control, string_params)
+	if (master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
 			usr.ClickOn(master)
+
 	return 1
+
+/obj/screen/item_relayed/storage/find_item(string_params)
+	if (isnull(master) || isnull(containing_ui))
+		return null
+
+	var/list/params = params2list(string_params)
+	var/list/clicked_loc = splittext(params[MOUSE_SCREEN_LOC], ",")
+	var/list/clicked_loc_X = splittext(clicked_loc[1],":")
+	var/list/clicked_loc_Y = splittext(clicked_loc[2],":")
+
+	if (!isnull(containing_ui.storage.storage_slots))
+		var/clicked_loc_tile_X = text2num(clicked_loc_X[1])
+		var/clicked_loc_pixel_X = text2num(clicked_loc_X[2])
+
+		if (clicked_loc_pixel_X <= 16)
+			clicked_loc_tile_X -= 1
+
+		var/clicked_loc_tile_Y = text2num(clicked_loc_Y[1])
+		var/clicked_loc_pixel_Y = text2num(clicked_loc_Y[2])
+
+		if (clicked_loc_pixel_Y <= 16)
+			clicked_loc_tile_Y -= 1
+
+		var/obj/item/O = containing_ui.slot_obj_locs["[clicked_loc_tile_X],[clicked_loc_tile_Y]"]
+
+		if (istype(O, /obj/item))
+			return O
+	else
+		var/clicked_loc_tile_X = text2num(clicked_loc_X[1])
+		var/clicked_loc_pixel_X = text2num(clicked_loc_X[2])
+
+		var/clicked_loc_x = clicked_loc_tile_X * WORLD_ICON_SIZE + clicked_loc_pixel_X 
+
+		for (var/i in 1 to length(containing_ui.space_obj_x_start))
+			var/obj/item/O = master.contents[i]
+			if (!istype(O, /obj/item))
+				continue
+
+			if (!(containing_ui.space_obj_x_start[i] <= clicked_loc_x && clicked_loc_x <= containing_ui.space_obj_x_end[i]))
+				continue
+
+			return O
+
+	return null
 
 /obj/screen/zone_sel
 	name = "damage zone"
