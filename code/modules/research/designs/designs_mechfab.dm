@@ -609,6 +609,13 @@
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000)
 	id = "augment_toolset_engineering"
 
+/datum/design/item/mechfab/augment/engineering/advanced
+	name = "Advanced engineering toolset"
+	build_path = /obj/item/organ/internal/augment/active/polytool/engineer/advanced
+	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 1000, MATERIAL_PHORON = 1000)
+	req_tech = list(TECH_ENGINEERING = 5, TECH_POWER = 4)
+	id = "augment_toolset_engineering_advanced"
+
 /datum/design/item/mechfab/augment/surgery
 	name = "Surgical toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/surgical
