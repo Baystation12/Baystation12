@@ -991,6 +991,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if (!usr.client)
 		return
 
+	if (!isnull(displaying_outline_image))
+		usr.client.images -= displaying_outline_image
+
 	var/agreed = "outline-[any2ref(src)]"
 	render_target = agreed
 	displaying_outline_image = image(icon = src, loc = src)
@@ -1013,3 +1016,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	usr.client.images -= displaying_outline_image
 	displaying_outline_image = null
+
+/obj/item/MouseDrop(over_atom, source_loc, over_loc, src_control, over_control, params)
+	. = ..()
+
+	if (!usr.client || !displaying_outline_image)
+		return
+
+	usr.client.images -= displaying_outline_image
+	displaying_outline_image = null
+
