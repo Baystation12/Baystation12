@@ -295,6 +295,8 @@
 	books["Kitab-i-Aqdas"] = /obj/item/storage/bible/aqdas
 	books["Kojiki"] = /obj/item/storage/bible/kojiki
 	books["Guru Granth Sahib"] = /obj/item/storage/bible/guru
+	books["Histories of the Kaahnepos (blue)"] = /obj/item/storage/bible/grandstratagem
+	books["Histories of the Kaahnepos (green)"] = /obj/item/storage/bible/grandstratagem/green
 	gear_tweaks += new/datum/gear_tweak/path(books)
 
 /datum/gear/swiss
@@ -302,7 +304,6 @@
 	path = /obj/item/material/knife/folding/swiss
 	cost = 4
 	flags = GEAR_HAS_COLOR_SELECTION
-
 
 /datum/gear/cross
 	display_name = "cross"
@@ -337,3 +338,9 @@
 	path = /obj/item/icon_christ
 	cost = 2
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/cup_of_knowledge
+	display_name = "markesheli cup of knowledge"
+	path = /obj/item/cup_of_knowledge
+	cost = 2
+	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)

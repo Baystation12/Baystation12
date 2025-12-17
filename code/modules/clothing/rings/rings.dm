@@ -106,6 +106,16 @@
 	icon_state = "seal-signet"
 	var/nameset = 0
 
+/obj/item/clothing/ring/seal/lhossekskull
+	name = "lhossek skull ring"
+	desc = "A golden ring adorned with the Lhossek skull emblem of the Grand Stratagem."
+	icon_state = "seal-lhossek"
+
+/obj/item/clothing/ring/seal/lhossekskull/fruitfullights
+	name = "fruitful lights ring"
+	desc = "A ring adorned with a symbol associated with the Fruitful Lights sect."
+	icon_state = "seal-fruitfullights"
+
 /obj/item/clothing/ring/seal/signet/attack_self(mob/user)
 	if(nameset)
 		to_chat(user, SPAN_NOTICE("The [src] has already been claimed!"))

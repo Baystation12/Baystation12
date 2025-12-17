@@ -166,3 +166,11 @@
 	name = "icon of Mary"
 	desc = "It's an Icon of the Blessed Virgin Mary, commonly used as a holy image by Christians."
 	icon_state = "icon_mary"
+
+/obj/item/cup_of_knowledge
+	name = "\improper Cup of Knowledge"
+	desc = "A stone cup representing the secret knowledge of Markesh, carried by Markesheli adherents."
+	icon = 'icons/obj/weapons/other.dmi'
+	icon_state = "cupofknowledge"
+	w_class = ITEM_SIZE_SMALL
+	attack_verb = list("tapped")

@@ -65,6 +65,17 @@
 	renamed = 1
 	icon_changed = 1
 
+/obj/item/storage/bible/grandstratagem
+	name = "\improper Histories of the Kaahnepos"
+	desc = "A blue scaled hide-bound tome detailing the lives of Kaahnepos, told through poems and epics."
+	icon_state = "stratagem_blue"
+	renamed = 1
+	icon_changed = 1
+
+/obj/item/storage/bible/grandstratagem/green
+	desc = "A green scaled hide-bound tome detailing the lives of Kaahnepos, told through poems and epics."
+	icon_state = "stratagem_green"
+
 /obj/item/storage/bible/use_before(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	. = FALSE
 	if (user == M || !ishuman(user) || !ishuman(M))
@@ -130,7 +141,7 @@
 
 		for(var/i = 10; i >= 0; i -= 1)
 			if(src && !M.stat && in_range(M,src))
-				var/icon_picked = input(M, "Icon?", "Book Icon", null) in list("don't change", "bible", "koran", "scrapbook", "white", "holylight", "atheist", "kojiki", "torah", "kingyellow", "ithaqua", "necronomicon", "ninestar")
+				var/icon_picked = input(M, "Icon?", "Book Icon", null) in list("don't change", "bible", "koran", "scrapbook", "white", "holylight", "atheist", "kojiki", "torah", "kingyellow", "ithaqua", "necronomicon", "ninestar", "stratagem_blue", "stratagem_green", "guru")
 				if(icon_picked != "don't change" && icon_picked)
 					icon_state = icon_picked
 				if(i != 0)
