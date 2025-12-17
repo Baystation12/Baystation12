@@ -1589,10 +1589,10 @@
 		P.admindatum = src
 		P.origin = replyorigin
 
-		P.department = fax.department
-		P.destinations = get_fax_machines_by_department(fax.department)
+		P.destinations += fax.department
 		P.sender = sender
 
+		P.generateInteractions()
 		P.adminbrowse()
 
 	else if(href_list["jumpto"])

@@ -334,10 +334,11 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 
 /// Handles the loop of sending a fax to all machines matching the department tag. Returns `TRUE` if at least one fax machine successfully received the fax. Does not include sending faxes to admins.
-/proc/send_fax_loop(copyitem, department, origin = "Unknown")
+/proc/send_fax_loop(copyitem, destinations, origin = "Unknown")
 	var/success = FALSE
-	for (var/obj/machinery/photocopier/faxmachine/fax in get_fax_machines_by_department(department))
-		if (fax.department == department && fax.can_receive_fax())
-			success = TRUE
-			fax.recievefax(copyitem, origin)
+	for (var/department in destinations)
+		for (var/obj/machinery/photocopier/faxmachine/fax in get_fax_machines_by_department(department))
+			if (fax.department == department && fax.can_receive_fax())
+				success = TRUE
+				fax.recievefax(copyitem, origin)
 	return success
