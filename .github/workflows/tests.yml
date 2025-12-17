@@ -64,6 +64,7 @@ jobs:
           - geminus_city         
           - geminus_city_urf_active
           - system_conquest
+          - vt9
           #- example
           #- overmap_example
     
