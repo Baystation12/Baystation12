@@ -1,6 +1,0 @@
-author: Banditoz
-changes:
-  - admin: Admin faxes have been reworked! You can choose multiple destinations,
-      and stamping is configured while writing the fax.
-  - admin: Replying to faxes is now stamped by default.
-delete-after: true
