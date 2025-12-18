@@ -1,0 +1,5 @@
+author: KatTheFox
+changes:
+  - tweak: the augment arc welder's cell can now be removed with an empty hand, 
+      so you don't need to carry a screwdriver around
+delete-after: true
