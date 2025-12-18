@@ -1,0 +1,9 @@
+author: KatTheFox
+changes:
+  - bugfix: IC grabbers now drop items instead of early-returning when 
+      unfiltered
+  - tweak: IC adjacent locators now have a second input pin that filters by 
+      movable objects when enabled, to be more in line with how they are 
+      intended to be used. the original functionality is preserved by just 
+      setting this pin to false
+delete-after: true
