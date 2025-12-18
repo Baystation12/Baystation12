@@ -388,6 +388,12 @@ var/global/const/access_pilot = "ACCESS_PILOT"
 	desc = "Pilot"
 	region = ACCESS_REGION_GENERAL
 
+var/global/const/access_medical_records = "ACCESS_MEDICAL_RECORDS"
+/datum/access/access_medical_records
+	id = access_medical_records
+	desc = "Medical Records"
+	region = ACCESS_REGION_MEDBAY
+
 /******************
 * Central Command *
 ******************/

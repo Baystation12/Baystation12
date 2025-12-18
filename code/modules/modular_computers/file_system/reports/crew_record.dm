@@ -251,10 +251,10 @@ FIELD_SHORT("Religion", religion, access_chapel_office, access_change_ids)
 FIELD_LONG("General Notes (Public)", public_record, null, access_bridge)
 
 // MEDICAL RECORDS
-FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical, access_medical)
-FIELD_LONG("Medical Record", medRecord, access_medical, access_medical)
-FIELD_LONG("Known Implants", implants, access_medical, access_medical)
-FIELD_LONG("Allergies", allergies, access_medical, access_medical)
+FIELD_LIST("Blood Type", bloodtype, GLOB.blood_types, access_medical_records, access_medical_records)
+FIELD_LONG("Medical Record", medRecord, access_medical_records, access_medical_records)
+FIELD_LONG("Known Implants", implants, access_medical_records, access_medical_records)
+FIELD_LONG("Allergies", allergies, access_medical_records, access_medical_records)
 
 // SECURITY RECORDS
 FIELD_LIST("Criminal Status", criminalStatus, GLOB.security_statuses, access_security, access_brig)

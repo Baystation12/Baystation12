@@ -213,7 +213,7 @@
 	                    SKILL_ANATOMY      = SKILL_EXPERIENCED)
 
 	access = list(
-		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng
+		access_robotics, access_engine, access_solgov_crew, access_network, access_radio_eng, access_medical_records
 	)
 
 /datum/job/roboticist/get_description_blurb()
