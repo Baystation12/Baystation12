@@ -995,6 +995,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	name = "core fabricator console"
 	id = 1
 
+/obj/machinery/computer/rdconsole/dismantle(mob/user)
+	if(istype(src,/obj/machinery/computer/rdconsole/robotics))
+		for(var/obj/item/stock_parts/circuitboard/rdconsole/board in component_parts)
+			board.SetName("circuit board (RD Console - Robotics)")
+			board.build_path = /obj/machinery/computer/rdconsole/robotics
+	return ..()
+
 
 #undef CHECK_LATHE
 #undef CHECK_IMPRINTER
