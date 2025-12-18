@@ -32,14 +32,10 @@ NanoStateClass.prototype.onUpdate = function (data) {
       this.layoutRendered = true
     }
     if (!this.contentRendered || (data['config'].hasOwnProperty('autoUpdateContent') && data['config']['autoUpdateContent'])) {
-      const position = $(window).scrollTop()
-
       $("#uiContent").html(NanoTemplate.parse('main', data))
       if (NanoTemplate.templateExists('layoutHeader'))
         $("#uiHeaderContent").html(NanoTemplate.parse('layoutHeader', data))
       this.contentRendered = true
-
-      $(window).scrollTop(position)
     }
     if (NanoTemplate.templateExists('mapContent')) {
       if (!this.mapInitialised) {
