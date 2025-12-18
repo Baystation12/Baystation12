@@ -1,0 +1,8 @@
+author: sowelipililimute
+changes:
+  - tweak: The seed storage UI now has more legible styling and will no longer 
+      reset its scroll position when you dispense a seed, as well as staying up 
+      to date when someone else interacts with it
+  - tweak: NanoUIs now automatically attempt to keep the scroll position after 
+      they update
+delete-after: true
