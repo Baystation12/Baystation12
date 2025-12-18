@@ -100,8 +100,6 @@
 
 	var/attack_ignore_harm_check = FALSE
 
-	var/image/displaying_outline_image = null
-
 /obj/item/Initialize()
 	. = ..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc))
@@ -991,38 +989,18 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if (!usr.client)
 		return
 
-	if (!isnull(displaying_outline_image))
-		usr.client.images -= displaying_outline_image
-
-	var/agreed = "outline-[any2ref(src)]"
-	render_target = agreed
-	displaying_outline_image = image(icon = src, loc = src)
-	displaying_outline_image.appearance_flags |= RESET_COLOR | RESET_ALPHA
-	if (Adjacent(usr))
-		displaying_outline_image.filters += FILTER_OUTLINE_ACCESSIBLE
-	else
-		displaying_outline_image.filters += FILTER_OUTLINE_INACCESSIBLE
-	displaying_outline_image.filters += filter(type = "alpha", render_source = agreed, flags = MASK_INVERSE)
-	displaying_outline_image.pixel_x = 0
-	displaying_outline_image.pixel_y = 0
-	displaying_outline_image.pixel_z = 0
-	displaying_outline_image.color = null
-
-	usr.client.images += displaying_outline_image
+	usr.client.set_hover_outline(src, Adjacent(usr))
 
 /obj/item/MouseExited(location, control, params)
-	if (!usr.client || !displaying_outline_image)
+	if (!usr.client)
 		return
 
-	usr.client.images -= displaying_outline_image
-	displaying_outline_image = null
+	usr.client.clear_hover_outline(src)
 
 /obj/item/MouseDrop(over_atom, source_loc, over_loc, src_control, over_control, params)
 	. = ..()
 
-	if (!usr.client || !displaying_outline_image)
+	if (!usr.client)
 		return
 
-	usr.client.images -= displaying_outline_image
-	displaying_outline_image = null
-
+	usr.client.clear_hover_outline(src)
