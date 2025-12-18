@@ -4,9 +4,9 @@
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
-	var/UI_outline_accessible_color = "#00D485"
+	var/UI_outline_accessible_color = "#00d485"
 	var/UI_outline_accessible_alpha = 255
-	var/UI_outline_inaccessible_color = "#99002E"
+	var/UI_outline_inaccessible_color = "#99002e"
 	var/UI_outline_inaccessible_alpha = 255
 
 	var/tooltip_style = "Midnight" //Style for popup tooltips
