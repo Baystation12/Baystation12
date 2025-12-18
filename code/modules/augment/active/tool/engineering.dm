@@ -136,3 +136,21 @@
 
 /obj/item/weldingtool/electric/finger/on_update_icon()
 	icon_state = welding ? "welder_finger_on" : "welder_finger"
+
+
+/obj/item/weldingtool/electric/finger/attack_hand(mob/living/user)
+	if (!cell || user.get_inactive_hand() != src)
+		return ..()
+
+	if (!welding)
+		user.visible_message(
+			SPAN_ITALIC("\The [user] removes \a [cell] from \a [src]."),
+			SPAN_ITALIC("You remove \the [cell] from \the [src].")
+		)
+		user.put_in_hands(cell)
+		cell = null
+		w_class = initial(w_class)
+		force = initial(force)
+		update_icon()
+	else
+		to_chat(user, SPAN_WARNING("Turn off the welder first!"))
