@@ -23,6 +23,7 @@
 	var/weakref/collw
 	var/allowed_circuit_action_flags = IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE //which circuit flags are allowed
 	var/creator // circuit creator if any
+	var/obj/item/card/id/idcard = /obj/item/card/id
 	var/static/next_assembly_id = 0
 	var/interact_page = 0
 	var/components_per_page = 10
@@ -94,11 +95,8 @@
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
 
-/obj/item/device/electronic_assembly/GetAccess()
-	. = list()
-	for(var/obj/item/integrated_circuit/output/O in assembly_components)
-		var/o_access = O.GetAccess()
-		. |= o_access
+/obj/item/device/electronic_assembly/GetIdCard()
+	return idcard
 
 /obj/item/device/electronic_assembly/Bump(atom/AM, called)
 	collw = weakref(AM)
@@ -115,6 +113,8 @@
 	spark_system = new /datum/effect/spark_spread
 	spark_system.set_up(7, 0, src)
 	spark_system.attach(src)
+	if(ispath(idcard))
+		idcard = new idcard(src)
 
 /obj/item/device/electronic_assembly/Destroy()
 	QDEL_NULL(spark_system)
@@ -554,6 +554,18 @@
 		user.visible_message(
 			SPAN_NOTICE("\The [user] repairs some of \a [src]'s damage with [cable.get_vague_name(TRUE)]."),
 			SPAN_NOTICE("You repair some of \the [src]'s damage with [cable.get_exact_name(5)].")
+		)
+		return TRUE
+
+	// ID card - Update access
+	var/obj/item/card/id/id = tool.GetIdCard()
+	if (istype(id))
+		var/id_name = GET_ID_NAME(id, tool)
+		var/list/new_access = id.GetAccess()
+		idcard.access = new_access
+		user.visible_message(
+			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating its access."),
+			SPAN_NOTICE("You scan [id_name] over \the [src], updating its access.")
 		)
 		return TRUE
 
