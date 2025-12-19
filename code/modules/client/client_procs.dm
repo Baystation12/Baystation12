@@ -157,6 +157,8 @@
 		to_chat(src, SPAN_WARNING("You are running an older version of BYOND than the server and may experience issues."))
 		to_chat(src, SPAN_WARNING("It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/."))
 	to_chat(src, SPAN_WARNING("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
+	if (!src)
+		return
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
