@@ -39,12 +39,8 @@
 	var/list/uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
 	/// List of componant paths and the maximum number of that specific path that can be inserted into the machine. `null` - no max. `list(type part = number max)`.
 	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)
-	/// Numeric unique ID number. Set to the value of `gl_uid++` when used.
-	var/uid
 	/// Boolean. Whether or not the maintenance panel is open.
 	var/panel_open = FALSE
-	/// Numeric unique ID number tracker. Used for ensuring `uid` is unique.
-	var/static/gl_uid = 1
 	/// Boolean. Can the machine be interacted with while de-powered.
 	var/interact_offline = FALSE
 	/// Sound played on succesful interface use by a carbon lifeform.

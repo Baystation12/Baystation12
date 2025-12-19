@@ -33,11 +33,13 @@
 	/// Amount of DoS "packets" dissipated over time.
 	var/dos_dissipate = 1
 
+	var/relay_id
+
 
 /obj/machinery/ntnet_relay/Destroy()
 	if (ntnet_global)
 		ntnet_global.relays -= src
-		ntnet_global.add_log("Quantum Relay ([uid]) connection severed. Current amount of linked relays: [length(ntnet_global.relays)]")
+		ntnet_global.add_log("Quantum Relay ([relay_id]) connection severed. Current amount of linked relays: [length(ntnet_global.relays)]")
 	for (var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null
 		D.error = "Connection to quantum relay severed"
@@ -47,11 +49,10 @@
 
 /obj/machinery/ntnet_relay/Initialize()
 	. = ..()
-	uid = gl_uid
-	gl_uid++
+	relay_id = random_id("netnet_relay", 1, 999)
 	if (ntnet_global)
 		ntnet_global.relays += src
-		ntnet_global.add_log("New Quantum Relay ([uid]) activated. Current amount of linked relays: [length(ntnet_global.relays)]")
+		ntnet_global.add_log("New Quantum Relay ([relay_id]) activated. Current amount of linked relays: [length(ntnet_global.relays)]")
 	update_icon()
 
 
@@ -82,10 +83,10 @@
 	if (dos_failure)
 		if (!dos_overload)
 			dos_failure = FALSE
-			ntnet_global.add_log("Quantum relay ([uid]) switched from overload recovery mode to normal operation mode.")
+			ntnet_global.add_log("Quantum relay ([relay_id]) switched from overload recovery mode to normal operation mode.")
 	else if (dos_overload > dos_capacity)
 		dos_failure = TRUE
-		ntnet_global.add_log("Quantum relay ([uid]) switched from normal operation mode to overload recovery mode.")
+		ntnet_global.add_log("Quantum relay ([relay_id]) switched from normal operation mode to overload recovery mode.")
 	if (operable())
 		update_use_power(POWER_USE_ACTIVE)
 	else
@@ -121,16 +122,16 @@
 		dos_overload = 0
 		dos_failure = FALSE
 		update_icon()
-		ntnet_global.add_log("Quantum relay ([uid]) manually restarted from overload recovery mode to normal operation mode.")
+		ntnet_global.add_log("Quantum relay ([relay_id]) manually restarted from overload recovery mode to normal operation mode.")
 		return TOPIC_HANDLED
 	else if (href_list["toggle"])
 		enabled = !enabled
-		ntnet_global.add_log("Quantum relay ([uid]) manually [enabled ? "enabled" : "disabled"].")
+		ntnet_global.add_log("Quantum relay ([relay_id]) manually [enabled ? "enabled" : "disabled"].")
 		update_icon()
 		return TOPIC_HANDLED
 	else if (href_list["purge"])
 		ntnet_global.banned_nids.Cut()
-		ntnet_global.add_log("Override: Network blacklist manually cleared from Quantum relay ([uid]).")
+		ntnet_global.add_log("Override: Network blacklist manually cleared from Quantum relay ([relay_id]).")
 		return TOPIC_HANDLED
 	else if (href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and ejects its portable disk.")

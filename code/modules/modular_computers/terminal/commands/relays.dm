@@ -13,7 +13,7 @@
 /datum/terminal_command/relays/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	. = list("[name]: Number of relays found: [length(ntnet_global.relays)]")
 	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
-		. += "Quantum relay ([R.uid]) status: [(R.operable() ? "Reachable" : "Unreachable")]"
+		. += "Quantum relay ([R.relay_id]) status: [(R.operable() ? "Reachable" : "Unreachable")]"
 		if(R.operable())
 			if(!!R.get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable))
 				. += "LOG BACKUP STORAGE DEVICE PRESENT"
