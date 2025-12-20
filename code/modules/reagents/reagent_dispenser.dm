@@ -372,4 +372,5 @@
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
 	anchored = TRUE
+	density = FALSE
 	initial_reagent_types = list(/datum/reagent/acid = 1)
