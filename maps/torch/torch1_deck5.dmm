@@ -11806,6 +11806,12 @@
 	pixel_x = -5;
 	pixel_y = -3
 	},
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
+	name = "Blast Shutter Control";
+	pixel_x = 5;
+	pixel_y = -3
+	},
 /turf/simulated/wall/titanium,
 /area/shuttle/petrov/rd)
 "DN" = (
