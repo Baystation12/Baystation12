@@ -1,0 +1,4 @@
+author: KatTheFox
+changes:
+  - bugfix: pAI no longer use you/yours pronouns
+delete-after: true
