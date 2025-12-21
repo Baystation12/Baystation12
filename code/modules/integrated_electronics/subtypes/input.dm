@@ -932,6 +932,24 @@
 	spawn_flags = 0
 	extended_desc = "This microphone did not come with any documentation."
 
+/obj/item/integrated_circuit/input/microphone/unfiltered
+	name = "stripped-down microphone"
+	desc = "For when you want to hear the background noise."
+	spawn_flags = IC_SPAWN_DEFAULT
+	extended_desc = "A microphone with no translation system and its voice isolation unit inverted, for when you actually want to hear all the background noise."
+	outputs = list(
+		"message" = IC_PINTYPE_STRING
+	)
+	activators = list("on message received" = IC_PINTYPE_PULSE_OUT)
+
+/obj/item/integrated_circuit/input/microphone/unfiltered/hear_talk(mob/living/M as mob, text, verb, datum/language/speaking)
+	return // We don't want this to actually handle mobs talking
+
+/obj/item/integrated_circuit/input/microphone/unfiltered/show_message(msg, type, alt, alt_type)
+	if(msg && (type & AUDIBLE_MESSAGE)) // No using your mic as a camera
+		set_pin_data(IC_OUTPUT, 1, msg)
+		push_data()
+		activate_pin(1)
 
 /obj/item/integrated_circuit/input/sensor
 	name = "sensor"
