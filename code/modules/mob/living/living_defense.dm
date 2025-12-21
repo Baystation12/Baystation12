@@ -358,6 +358,28 @@
 
 	return
 
+/mob/living/verb/activate_action_button(button_select as text|num)
+	set name = "Activate Action Button"
+	set category = "Object"
+	if(!hud_used || !client || !client.screen) return
+	var/obj/screen/movable/action_button/chosen
+	if(isnum(button_select))
+		var/list/buttons=list()
+		for(var/obj/screen/movable/action_button/button in client.screen)
+			buttons.Add(button)
+		if(button_select <= length(buttons))
+			chosen = buttons[button_select]
+	else
+		for(var/obj/screen/movable/action_button/button in client.screen)
+			if(button.name == button_select)
+				chosen = button
+	if(!chosen || usr.next_move >= world.time) // Original code containing the latter check bore the comment "Is this needed ?"
+		return
+	if(istype(chosen,/obj/screen/movable/action_button/hide_toggle))
+		chosen.Click()
+	else
+		chosen.owner?.Trigger()
+
 /mob/living/update_action_buttons()
 	if(!hud_used) return
 	if(!client) return
