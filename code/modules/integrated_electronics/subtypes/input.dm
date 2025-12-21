@@ -920,10 +920,16 @@
 
 /obj/item/integrated_circuit/input/microphone/exo
 	name = "interspecies exchange microphone"
-	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_UNATHI_SINTA, LANGUAGE_UNATHI_YEOSA, LANGUAGE_SKRELLIAN)
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_HUMAN_SELENIAN, LANGUAGE_UNATHI_SINTA, LANGUAGE_SKRELLIAN)
 	spawn_flags = IC_SPAWN_RESEARCH
 	extended_desc = "A microphone with a xenolinguistic database to facilitate EXO missions with mixed species. It translates the most common Skrellian and Unathi dialects to ZAC."
 	//Selenian is an in-character undocumented feature demanded by a corp exec
+
+/obj/item/integrated_circuit/input/microphone/cuttingedge
+	name = "anthropological research microphone"
+	languages_understood = list(LANGUAGE_HUMAN_EURO, LANGUAGE_SPACER, LANGUAGE_UNATHI_YEOSA)
+	spawn_flags = IC_SPAWN_RESEARCH
+	extended_desc = "A microphone with a xenolinguistic database tailored to fill the gaps in older models. It translates the most common Yeosa and Spacer dialects to ZAC."
 
 /obj/item/integrated_circuit/input/microphone/fringe
 	name = "gray market microphone"
