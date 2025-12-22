@@ -167,7 +167,7 @@ GLOBAL_LIST_EMPTY(exo_event_mob_count)// a list of all mobs currently spawned
 				var/turf/MT = get_turf(M)
 				if (MT)
 					if (istype(chosen_planet, /obj/overmap/visitable/sector/exoplanet))
-						T = CircularRandomTurfAround(MT, Frand(3, 5))
+						T = CircularRandomTurfAround(MT, frand(3, 5))
 				else
 					T = pick(area_turfs)
 			else

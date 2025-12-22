@@ -219,7 +219,7 @@
 			if(percent_unstable > 1)
 				percent_unstable = 1
 			if(percent_unstable > 0)
-				percent_unstable = max(0, percent_unstable-Frand(0.01,0.03))
+				percent_unstable = max(0, percent_unstable-frand(0.01,0.03))
 				UpdateVisuals()
 
 	if(percent_unstable >= 1)

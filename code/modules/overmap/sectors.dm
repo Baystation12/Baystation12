@@ -53,7 +53,7 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 		if (place_near_main)
 			var/obj/overmap/visitable/main = map_sectors["1"]
 			if (islist(place_near_main))
-				place_near_main = Roundm(Frand(place_near_main[1], place_near_main[2]), 0.1)
+				place_near_main = Roundm(frand(place_near_main[1], place_near_main[2]), 0.1)
 			home = CircularRandomTurfAround(main, abs(place_near_main), map_low, map_low, map_high, map_high)
 			log_debug("place_near_main moving [src] near [main] ([main.x],[main.y]) with radius [place_near_main], got ([home.x],[home.y])")
 		else

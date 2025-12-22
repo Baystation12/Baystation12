@@ -876,7 +876,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 					I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),5)
 				else
 					I.dropInto(I.loc)
-			I.take_general_damage(I.max_damage * Frand(0.5, 1.0))
+			I.take_general_damage(I.max_damage * frand(0.5, 1.0))
 
 	removed(null, ignore_children)
 	if(QDELETED(src))

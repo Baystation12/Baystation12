@@ -67,7 +67,7 @@
 		if (prob(50))
 			loot += new /obj/item/material/shard/shrapnel/copper (origin)
 		for (var/obj/item/item as anything in loot)
-			item.throw_at(CircularRandomTurfAround(origin, Frand(2, 6)), 5, 5)
+			item.throw_at(CircularRandomTurfAround(origin, frand(2, 6)), 5, 5)
 	qdel(src)
 
 // Ion version of the defending robots. Watch the friendly fire!
