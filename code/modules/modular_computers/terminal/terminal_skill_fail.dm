@@ -72,7 +72,7 @@ GLOBAL_LIST_AS(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 	var/obj/machinery/ntnet_relay/R = pick(ntnet_global.relays)
 	if (!istype(R))
 		return "Unable to locate Quantum Relay to attack."
-	ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([R.uid]) detected from 1 device\s: [terminal.computer.get_network_tag()]")
+	ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([R.relay_id]) detected from 1 device\s: [terminal.computer.get_network_tag()]")
 	return ..()
 
 /datum/terminal_skill_fail/antag/camera

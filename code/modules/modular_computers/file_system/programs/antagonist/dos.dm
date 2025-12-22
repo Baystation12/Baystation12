@@ -64,9 +64,9 @@
 	else
 		var/list/relays = list()
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
-			relays.Add(R.uid)
+			relays += R.relay_id
 		data["relays"] = relays
-		data["focus"] = PRG.target ? PRG.target.uid : null
+		data["focus"] = PRG.target ? PRG.target.relay_id : null
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -81,7 +81,7 @@
 		return TOPIC_HANDLED
 	if(href_list["PRG_target_relay"])
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
-			if("[R.uid]" == href_list["PRG_target_relay"])
+			if("[R.relay_id]" == href_list["PRG_target_relay"])
 				target = R
 		return TOPIC_HANDLED
 	if(href_list["PRG_reset"])
@@ -107,5 +107,5 @@
 				if(os.get_ntnet_status())
 					sources_to_show |= os.get_network_tag()
 
-		ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([target.uid]) detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")
+		ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([target.relay_id]) detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")
 		return TRUE
