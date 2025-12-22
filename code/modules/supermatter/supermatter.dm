@@ -72,7 +72,7 @@
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
-	var/pull_time = 30 SECONDS
+	var/pull_time = 16 SECONDS
 	var/explosion_power = 9
 
 	var/emergency_issued = 0
@@ -186,6 +186,13 @@
 		return SUPERMATTER_NORMAL
 	return SUPERMATTER_INACTIVE
 
+/obj/machinery/power/supermatter/proc/playsound_to_connected_zs(soundin, vol as num)
+	var/turf/our_turf = get_turf(src)
+	var/connected_zs = GetConnectedZlevels(our_turf.z)
+	for (var/mob/mob in GLOB.player_list)
+		var/turf/turf = get_turf(mob)
+		if (turf?.z in connected_zs)
+			mob.playsound_local(mob, soundin, vol)
 
 /obj/machinery/power/supermatter/proc/explode()
 	set waitfor = 0
@@ -197,6 +204,7 @@
 	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
+	playsound_to_connected_zs('sound/effects/sm_pnr.ogg', 65)
 	sleep(pull_time)
 	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, exosuit, or other container shouldn't block it's effects that way.
 	if(!istype(TS))
@@ -249,7 +257,7 @@
 			S.set_broken(TRUE)
 
 
-
+	playsound_to_connected_zs('sound/effects/sm_delam.ogg', 65)
 	// Effect 4: Medium scale explosion
 	spawn(0)
 		explosion(TS, explosion_power * 3.5)
@@ -309,10 +317,7 @@
 			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
 			GLOB.using_map.unbolt_saferooms() // torch
-			for(var/mob/M in GLOB.player_list)
-				var/turf/T = get_turf(M)
-				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
-					sound_to(M, 'sound/ambience/matteralarm.ogg')
+			playsound_to_connected_zs('sound/ambience/matteralarm.ogg', 45)
 		else if(safe_warned && public_alert)
 			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
