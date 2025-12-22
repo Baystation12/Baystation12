@@ -1,5 +1,0 @@
-author: KatTheFox
-changes:
-  - bugfix: You can no longer drag augment items (among other things) out of the
-      hand they're installed in to your other hand
-delete-after: true

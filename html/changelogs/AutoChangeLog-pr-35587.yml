@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - bugfix: Fixed a case where stars could have zero scale, making solars act 
-      oddly
-delete-after: true

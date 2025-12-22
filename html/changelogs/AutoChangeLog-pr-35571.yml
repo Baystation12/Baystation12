@@ -1,5 +1,0 @@
-author: KatTheFox
-changes:
-  - rscadd: added a verb to trigger action buttons (the things at the top left 
-      of the screen, like the magboots or welding mask toggles)
-delete-after: true
