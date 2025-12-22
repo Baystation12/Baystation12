@@ -1,0 +1,5 @@
+author: KatTheFox
+changes:
+  - tweak: The microphone made to understand Unathi and Skrell now understands 
+      Yeosa, not just Sinta
+delete-after: true
