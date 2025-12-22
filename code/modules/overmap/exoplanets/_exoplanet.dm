@@ -208,7 +208,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	if (GLOB.using_map.using_sun)
 		var/obj/overmap/visitable/ship/sector = map_sectors["[z]"]
 		var/obj/overmap/visitable/star/closest_star
-		for (var/obj/overmap/visitable/star/iterator_star in map_stars)
+		for (var/obj/overmap/visitable/star/iterator_star in GLOB.map_stars)
 			if (get_dist(sector, iterator_star) == 0)
 				closest_star = iterator_star
 		if (closest_star)

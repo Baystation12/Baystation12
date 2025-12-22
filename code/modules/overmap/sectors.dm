@@ -206,14 +206,14 @@ GLOBAL_LIST_EMPTY(known_overmap_sectors)
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
 
-	if(GLOB.using_map.using_sun)
+	if (GLOB.using_map.using_sun)
 		var/centre = ceil(GLOB.using_map.overmap_size / 2)
 		var/turf/sun_turf = locate(centre, centre, GLOB.using_map.overmap_z)
-		var/obj/overmap/visitable/star/new_star = new /obj/overmap/visitable/star(sun_turf)
-		LAZYADD(map_stars, new_star)
-		LAZYADD(GLOB.known_overmap_sectors, new_star)
-		for(var/obj/machinery/computer/ship/helm/H as anything in GLOB.overmap_helm_computers)
-			H.add_known_sector(new_star)
+		var/obj/overmap/visitable/star/star = new (sun_turf)
+		GLOB.map_stars += star
+		GLOB.known_overmap_sectors += star
+		for (var/obj/machinery/computer/ship/helm/helm as anything in GLOB.overmap_helm_computers)
+			helm.add_known_sector(star)
 
 	testing("Overmap build complete.")
 	return 1
