@@ -1,0 +1,5 @@
+author: KatTheFox
+changes:
+  - rscadd: Added a utility blade augment, smaller and less combat-effective 
+      than armblades, for actual utility use. Works for plant sampling!
+delete-after: true
