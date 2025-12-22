@@ -24,6 +24,7 @@
 	augment_slots = AUGMENT_ARM
 	item = /obj/item/material/armblade
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
+	origin_tech = list(TECH_COMBAT = 2, TECH_BIO = 3, TECH_MAGNET = 2, TECH_MATERIAL = 3)
 
 
 /obj/item/material/armblade/claws
@@ -42,7 +43,21 @@
 	augment_slots = AUGMENT_HAND
 	item = /obj/item/material/armblade/claws
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
+	origin_tech = list(TECH_MAGNET = 2, TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_BIO = 3)
 
+/obj/item/material/armblade/xsmall
+	name = "utility blade"
+	desc = "For non-combat use only"
+	base_parry_chance = 0
+	max_force = 10 // These values taken from the actual utility blade item. The one you can shove in your boot
+	force_multiplier = 0.2
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/organ/internal/augment/active/item/armblade/xsmall
+	name = "utility armblade"
+	desc = "An extra-small armblade, designed to be completely ineffective in combat. For those who really want to make sure they're within regulations."
+	item = /obj/item/material/armblade/xsmall
+	origin_tech = list()
 
 /// Traitor version - no parry chance but good damage, and compatible with organic limbs
 /obj/item/organ/internal/augment/active/item/wrist_blade
