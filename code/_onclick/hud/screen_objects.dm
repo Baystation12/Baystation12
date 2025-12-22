@@ -386,6 +386,11 @@
 	return neighbor == usr
 
 /obj/screen/inventory/MouseDrop_T(atom/dropped, mob/living/user)
+	// No more cloning knife hands by drag-dropping augs to the other hand slot
+	var/obj/item/droppeditem = dropped
+	if (istype(droppeditem) && !droppeditem.canremove)
+		return ..()
+
 	// Hands - Transfer items to between hands with drag+drop.
 	if (name == BP_R_HAND && user.l_hand == dropped)
 		return user.put_in_r_hand(dropped)
