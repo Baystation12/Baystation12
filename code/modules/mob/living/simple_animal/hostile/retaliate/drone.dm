@@ -163,7 +163,7 @@
 				loot += new /obj/item/drone_loot_board (origin)
 			var/strength = exploding ? 1 : 0.5
 			for (var/obj/item/item as anything in loot)
-				item.throw_at(CircularRandomTurfAround(origin, Frand(2, 6) * strength), 5, 5 * strength)
+				item.throw_at(CircularRandomTurfAround(origin, frand(2, 6) * strength), 5, 5 * strength)
 	qdel(src)
 
 

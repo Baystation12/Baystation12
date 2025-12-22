@@ -1,5 +1,5 @@
 /// A random real number between low and high inclusive
-#define Frand(low, high) ( rand() * ((high) - (low)) + (low) )
+#define frand(low, high) ( rand() * ((high) - (low)) + (low) )
 
 
 /// Value or the next multiple of divisor in a positive direction. Ceilm(-1.5, 0.3) = -1.5 , Ceilm(-1.5, 0.4) = -1.2
@@ -146,7 +146,7 @@
 * in box constraint
 *
 * A "donut" pattern can be achieved by varying the number supplied as
-* radius outside the scope of the proc, eg as BoundedCircularRandomCoordinate(Frand(1, 3), ...)
+* radius outside the scope of the proc, eg as BoundedCircularRandomCoordinate(frand(1, 3), ...)
 */
 /proc/BoundedCircularRandomCoordinate(radius, center_x, center_y, low_x, low_y, high_x, high_y, round)
 	RETURN_TYPE(/list)

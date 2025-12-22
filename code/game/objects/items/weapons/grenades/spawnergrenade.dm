@@ -30,7 +30,7 @@
 			movable = new spawn_type (origin)
 			spawned += movable
 			if (spawn_throw_range)
-				target = CircularRandomTurfAround(origin, Frand(1, spawn_throw_range))
+				target = CircularRandomTurfAround(origin, frand(1, spawn_throw_range))
 				movable.throw_at(target, spawn_throw_range, 3)
 		AfterSpawn(user, spawned)
 	qdel(src)
