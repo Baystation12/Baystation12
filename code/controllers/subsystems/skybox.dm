@@ -64,7 +64,7 @@ SUBSYSTEM_DEF(skybox)
 
 	if (GLOB.using_map.using_sun && use_overmap_details)
 		var/obj/overmap/visitable/ship/sector = map_sectors["[z]"]
-		for (var/obj/overmap/visitable/star/iterator_star in map_stars)
+		for (var/obj/overmap/visitable/star/iterator_star in GLOB.map_stars)
 			if (get_dist(sector, iterator_star) == 0)
 				background_color = iterator_star.color
 				break

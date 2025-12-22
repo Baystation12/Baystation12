@@ -2,7 +2,7 @@
 #define OVERMAP_EDGE 3
 //Dimension of overmap (squares 4 lyfe)
 var/global/list/map_sectors = list()
-var/global/list/map_stars = list()
+GLOBAL_LIST_EMPTY(map_stars)
 
 /area/overmap
 	name = "System Map"
@@ -90,7 +90,7 @@ var/global/list/moving_levels = list()
 	if (!sector || !GLOB.using_map?.using_sun)
 		return GLOB.sun_angle
 	var/obj/overmap/visitable/star/closest_star
-	for (var/obj/overmap/visitable/star/iterator_star in map_stars)
+	for (var/obj/overmap/visitable/star/iterator_star in GLOB.map_stars)
 		if (!closest_star || get_dist(sector, iterator_star) < get_dist(sector, closest_star))
 			closest_star = iterator_star
 	if (!closest_star)
@@ -109,7 +109,7 @@ var/global/list/moving_levels = list()
 		return 0
 	var/star_dist = 100 // The void consumes
 	var/obj/overmap/visitable/star/closest_star
-	for (var/obj/overmap/visitable/star/iterator_star in map_stars)
+	for (var/obj/overmap/visitable/star/iterator_star in GLOB.map_stars)
 		if (!closest_star || get_dist(sector, iterator_star) < star_dist)
 			star_dist = get_dist(sector, iterator_star)
 			closest_star = iterator_star
