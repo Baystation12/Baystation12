@@ -12457,7 +12457,6 @@
 	},
 /obj/structure/table/standard,
 /obj/item/storage/toolbox/electrical,
-/obj/item/paper/newrust,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/prototype/control)
 "Fj" = (
