@@ -38,9 +38,9 @@ var/global/list/weighted_star_classes = list(
 
 	color = class.color
 	star_luminosity = class.luminosity + startype.luminosity_bonus
-	star_scale = rand(startype.scale_min, startype.scale_max)
 	filters += filter(type="blur", size = 1)
 
+	star_scale = frand(startype.scale_min, startype.scale_max)
 	generate_star_image()
 
 /obj/overmap/visitable/star/get_scan_data(mob/user)
