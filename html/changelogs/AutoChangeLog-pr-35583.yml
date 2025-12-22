@@ -1,0 +1,4 @@
+author: KatTheFox
+changes:
+  - maptweak: The Petrov's external shutters can now be closed from its hallway.
+delete-after: true
