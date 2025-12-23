@@ -6102,15 +6102,12 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/robotics_lift)
 "aor" = (
-/obj/structure/ladder,
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/floor_decal/industrial/hatch/yellow,
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
+/obj/structure/ladder,
 /obj/catwalk_plated,
+/obj/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics/office)
 "ape" = (
@@ -11420,21 +11417,20 @@
 /area/maintenance/firstdeck/centralport)
 "aPb" = (
 /obj/floor_decal/corner/yellow/mono,
-/obj/machinery/computer/modular{
-	dir = 8
-	},
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
 	pixel_y = 24
 	},
 /obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
 	},
+/obj/structure/table/steel,
+/obj/machinery/photocopier/faxmachine,
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics/office)
 "aPq" = (
@@ -11985,22 +11981,11 @@
 /area/maintenance/firstdeck/centralport)
 "aRb" = (
 /obj/floor_decal/corner/yellow/mono,
-/obj/structure/closet/wardrobe/robotics_black,
-/obj/item/clothing/under/rank/roboticist/skirt,
-/obj/item/clothing/under/rank/roboticist/skirt,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
-	},
 /obj/machinery/light_switch{
 	pixel_x = 24
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/computer/modular{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/assembly/robotics/office)
@@ -12466,16 +12451,12 @@
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/closet/wardrobe/robotics_black,
+/obj/item/clothing/under/rank/roboticist/skirt,
+/obj/item/clothing/under/rank/roboticist/skirt,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "aSd" = (
@@ -14188,15 +14169,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "bkb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/floor_decal/corner/yellow{
+	dir = 5
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/floor_decal/corner/yellow{
-	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics/laboratory)
@@ -16291,11 +16272,11 @@
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
-/obj/machinery/disposal,
-/obj/floor_decal/industrial/hatch/yellow,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/machinery/disposal,
+/obj/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
@@ -17154,7 +17135,7 @@
 /area/maintenance/firstdeck/aftport)
 "foK" = (
 /obj/wallframe_spawn/reinforced/no_grille,
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/steel_grid,
 /area/assembly/robotics/office)
 "foP" = (
 /obj/floor_decal/corner/research{
@@ -17307,6 +17288,19 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"fGB" = (
+/obj/floor_decal/corner/yellow{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled,
+/area/assembly/robotics/office)
 "fHk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -17679,6 +17673,10 @@
 /obj/floor_decal/techfloor{
 	dir = 8
 	},
+/obj/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
@@ -17729,14 +17727,19 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "gos" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
 	},
 /obj/structure/bed/chair/padded/yellow{
-	dir = 8
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
@@ -17989,9 +17992,6 @@
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
-	},
-/obj/structure/bed/chair/padded/yellow{
-	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
@@ -19310,15 +19310,24 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/firstdeck)
 "iyb" = (
-/obj/structure/table/steel,
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
 	},
-/obj/item/book/manual/ripley_build_and_repair,
-/obj/item/book/manual/robotics_cyborgs,
+/obj/structure/filingcabinet/chestdrawer{
+	dir = 1
+	},
+/obj/item/material/folder/blue,
+/obj/item/material/folder/red,
+/obj/item/material/folder,
+/obj/item/material/folder/nt,
+/obj/item/material/folder/yellow,
+/obj/item/material/folder/white,
+/obj/item/material/folder/envelope,
+/obj/item/material/folder/yellow,
+/obj/item/material/folder/envelope,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "izd" = (
@@ -20668,11 +20677,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/assembly/robotics/laboratory)
 "kfb" = (
-/obj/structure/table/steel,
-/obj/item/paper_bin,
-/obj/item/pen,
-/obj/item/material/folder/yellow,
-/obj/item/tape_roll,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
@@ -20717,6 +20721,16 @@
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/table/steel,
+/obj/item/pen,
+/obj/item/material/folder/yellow,
+/obj/item/tape_roll,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "kiR" = (
@@ -21129,23 +21143,34 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
 "kNb" = (
-/obj/item/stool/padded,
 /obj/floor_decal/corner/yellow{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
-/area/assembly/robotics/laboratory)
-"kOb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/item/stool/padded,
+/turf/simulated/floor/tiled/white,
+/area/assembly/robotics/laboratory)
+"kOb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics/laboratory)
@@ -23817,16 +23842,6 @@
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
 "ocG" = (
-/obj/structure/filingcabinet/chestdrawer{
-	dir = 1
-	},
-/obj/item/material/folder/blue,
-/obj/item/material/folder/red,
-/obj/item/material/folder,
-/obj/item/material/folder/nt,
-/obj/item/material/folder/yellow,
-/obj/item/material/folder/white,
-/obj/item/material/folder/yellow,
 /obj/floor_decal/corner/yellow{
 	dir = 5
 	},
@@ -23836,8 +23851,10 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/material/folder/envelope,
-/obj/item/material/folder/envelope,
+/obj/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "odb" = (
@@ -24300,6 +24317,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
@@ -30450,6 +30471,10 @@
 	},
 /obj/floor_decal/corner/yellow,
 /obj/structure/disposalpipe/segment,
+/obj/floor_decal/industrial/warning{
+	dir = 8;
+	icon_state = "warning"
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/robotics/office)
 "xMx" = (
@@ -48110,9 +48135,9 @@ amA
 xcW
 kib
 gos
-knb
-kvb
-ohy
+fGB
+aTb
+bkb
 kNb
 kVb
 acE
@@ -48313,8 +48338,8 @@ xcW
 aPb
 aRb
 aSb
-aTb
-bkb
+kvb
+ohy
 kOb
 kWb
 ldb
