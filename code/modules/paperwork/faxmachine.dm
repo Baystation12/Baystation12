@@ -219,7 +219,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	use_power_oneoff(200)
 
-	var/success = send_fax_loop(copyitem, destination, department)
+	var/success = send_fax_loop(copyitem, list(destination), department)
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
