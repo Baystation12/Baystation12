@@ -100,8 +100,8 @@ SUBSYSTEM_DEF(timer)
 				if (match)
 					if (!(flags & TIMER_OVERRIDE))
 						return
-					subsystem.timers_by_hash[hash] = timer
 					subsystem.queue -= match
+				subsystem.timers_by_hash[hash] = timer
 			timer.hash = hash
 	timer.fire_time = timer.wait + world.time
 	BINARY_INSERT(timer, subsystem.queue, /datum/timer, timer, fire_time, COMPARE_KEY)

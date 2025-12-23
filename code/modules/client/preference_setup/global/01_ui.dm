@@ -8,6 +8,7 @@
 	var/UI_outline_accessible_alpha = 255
 	var/UI_outline_inaccessible_color = "#99002e"
 	var/UI_outline_inaccessible_alpha = 255
+	var/UI_outline_fast = TRUE
 
 	var/tooltip_style = "Midnight" //Style for popup tooltips
 
@@ -27,6 +28,7 @@
 	pref.UI_outline_accessible_alpha = R.read("UI_outline_accessible_alpha")
 	pref.UI_outline_inaccessible_color = R.read("UI_outline_inaccessible_color")
 	pref.UI_outline_inaccessible_alpha = R.read("UI_outline_inaccessible_alpha")
+	pref.UI_outline_fast = R.read("UI_outline_fast")
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
 	W.write("UI_style", pref.UI_style)
@@ -38,6 +40,7 @@
 	W.write("UI_outline_accessible_alpha", pref.UI_outline_accessible_alpha)
 	W.write("UI_outline_inaccessible_color", pref.UI_outline_inaccessible_color)
 	W.write("UI_outline_inaccessible_alpha", pref.UI_outline_inaccessible_alpha)
+	W.write("UI_outline_fast", pref.UI_outline_fast)
 
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
@@ -48,6 +51,7 @@
 	pref.UI_outline_accessible_alpha = sanitize_integer(pref.UI_outline_accessible_alpha, 50, 255, initial(pref.UI_outline_accessible_alpha))
 	pref.UI_outline_inaccessible_color = sanitize_hexcolor(pref.UI_outline_inaccessible_color, initial(pref.UI_outline_inaccessible_color))
 	pref.UI_outline_inaccessible_alpha = sanitize_integer(pref.UI_outline_inaccessible_alpha, 50, 255, initial(pref.UI_outline_inaccessible_alpha))
+	pref.UI_outline_fast = sanitize_bool(pref.UI_outline_fast, initial(pref.UI_outline_fast))
 	pref.ooccolor		= sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
 	sanitize_client_fps()
 
@@ -62,7 +66,8 @@
 	. += "- Accessible color: <a href='byond://?src=\ref[src];select_accessible_color=1'><b>[pref.UI_outline_accessible_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_outline_accessible_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=accessible_color'>reset</a><br>"
 	. += "- Accessible alpha: <a href='byond://?src=\ref[src];select_accessible_alpha=1'><b>[pref.UI_outline_accessible_alpha]</b></a> <a href='byond://?src=\ref[src];reset=accessible_alpha'>reset</a><br>"
 	. += "- Inaccessible color: <a href='byond://?src=\ref[src];select_inaccessible_color=1'><b>[pref.UI_outline_inaccessible_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_outline_inaccessible_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=inaccessible_color'>reset</a><br>"
-	. += "- Inaccessible alpha: <a href='byond://?src=\ref[src];select_inaccessible_alpha=1'><b>[pref.UI_outline_inaccessible_alpha]</b></a> <a href='byond://?src=\ref[src];reset=inaccessible_alpha'>reset</a><br>"
+	. += "- Inaccessible alpha: <a href='byond://?src=\ref[src];select_inaccessible_alpha=1'><b>[pref.UI_outline_inaccessible_alpha]</b></a> <a href='byond://?src=\ref[src];reset=inaccessible_alpha'>reset</a><br><br>"
+	. += "- Speed: <a href='byond://?src=\ref[src];select_outline_speed=1'><b>[pref.UI_outline_fast ? "Fast" : "Delayed"]</b></a><br>"
 	. += "<br><b>Tooltip Style:</b> <a href='byond://?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
 	if(can_select_ooc_color(user))
 		. += "<b>OOC Color:</b> "
@@ -108,6 +113,13 @@
 		var/UI_inaccessible_alpha_new = input(user, "Select outline alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_outline_inaccessible_alpha) as num|null
 		if (isnull(UI_inaccessible_alpha_new) || (UI_inaccessible_alpha_new < 50 || UI_inaccessible_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_outline_inaccessible_alpha = UI_inaccessible_alpha_new
+		return TOPIC_REFRESH
+
+	else if (href_list["select_outline_speed"])
+		var/speed_new = input(user, "Choose outline speed on hover.", "Global Preference", ui_outline_speeds[pref.UI_outline_fast ? 1 : 2]) as null|anything in ui_outline_speeds
+		if (isnull(speed_new) || !CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.UI_outline_fast = speed_new == ui_outline_speeds[1]
 		return TOPIC_REFRESH
 
 	else if(href_list["select_alpha"])

@@ -18,6 +18,11 @@ var/global/all_tooltip_styles = list(
 	"Clockwork"
 	)
 
+var/global/ui_outline_speeds = list(
+	"As soon as pointer enters item",
+	"When pointer is held over item",
+	)
+
 /proc/ui_style2icon(ui_style)
 	if(ui_style in all_ui_styles)
 		return all_ui_styles[ui_style]
