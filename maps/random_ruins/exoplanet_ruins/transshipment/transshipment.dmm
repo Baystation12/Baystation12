@@ -113,7 +113,7 @@
 "rp" = (/obj/decal/cleanable/dirt,/obj/structure/table/steel{flipped = 1},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
 "rF" = (/obj/floor_decal/industrial/warning/dust,/obj/item/spike,/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
 "rL" = (/obj/floor_decal/industrial/warning/dust,/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
-"rO" = (/obj/machinery/computer/ship/sensors,/obj/machinery/light{dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel_grid,/area/map_template/transshipment/old_snz)
+"rO" = (/obj/machinery/computer/modular/preset/sensors,/obj/machinery/light{dir = 1},/obj/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel_grid,/area/map_template/transshipment/old_snz)
 "rR" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/obj/structure/railing/mapped{dir = 1; icon_state = "railing0-1"},/obj/decal/cleanable/liquid_fuel,/turf/simulated/floor/tiled/techfloor/grid,/area/map_template/transshipment/old_snz)
 "sd" = (/obj/decal/cleanable/dirt,/obj/item/gun/energy/stunrevolver,/turf/simulated/floor/exoplanet/concrete,/area/map_template/transshipment/airstrip)
 "sm" = (/obj/decal/cleanable/blood/drip,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{dir = 8; id_tag = "transshipment_hangar_pump_out_internal"},/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "transshipment_hangar_sensor_chamber"; pixel_y = 22},/turf/simulated/floor/plating,/area/map_template/transshipment/warehouse)

@@ -124,7 +124,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "as" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/modular/preset/sensors,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "at" = (

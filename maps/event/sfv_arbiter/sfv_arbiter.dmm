@@ -538,7 +538,7 @@
 /area/map_template/sfv_arbiter)
 "qP" = (
 /obj/floor_decal/corner/grey/mono,
-/obj/machinery/computer/ship/navigation/telescreen{
+/obj/item/modular_computer/telescreen/preset/navigation{
 	pixel_x = -32
 	},
 /obj/structure/bed/chair/shuttle/black,
@@ -825,7 +825,7 @@
 /turf/simulated/floor/tiled,
 /area/map_template/sfv_arbiter)
 "zZ" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/modular/preset/sensors,
 /obj/floor_decal/corner/blue/mono,
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -2290,7 +2290,7 @@
 /area/map_template/sfv_arbiter)
 "Yn" = (
 /obj/floor_decal/corner/grey/mono,
-/obj/machinery/computer/ship/navigation/telescreen{
+/obj/item/modular_computer/telescreen/preset/navigation{
 	pixel_x = 32
 	},
 /obj/structure/bed/chair/shuttle/black,

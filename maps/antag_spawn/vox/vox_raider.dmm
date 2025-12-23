@@ -585,7 +585,7 @@
 /turf/space,
 /area/space)
 "wm" = (
-/obj/machinery/computer/ship/sensors/vox{
+/obj/machinery/computer/modular/preset/sensors/vox{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile/vox,

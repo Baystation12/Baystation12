@@ -1210,7 +1210,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/salvage_shuttle/net)
 "qi" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/modular/preset/sensors{
 	dir = 1;
 	initial_health_percent = 10
 	},
@@ -1329,7 +1329,7 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/modular/preset/sensors{
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
