@@ -17,6 +17,11 @@
 		cylinders += new /obj/item/nuclear_cylinder()
 	update_icon()
 
+/obj/machinery/nuke_cylinder_dispenser/examine(mob/user)
+	. = ..()
+	var/cyl_len = length(cylinders)
+	to_chat(user, "There [cyl_len == 1 ? "is" : "are"] [cyl_len] cylinder\s inside.")
+
 /obj/machinery/nuke_cylinder_dispenser/emag_act(remaining_charges, mob/user, emag_source)
 	to_chat(user, SPAN_NOTICE("The card fails to do anything. It seems this device has an advanced encryption system."))
 	return NO_EMAG_ACT
