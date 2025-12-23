@@ -39,6 +39,7 @@
 	var/off_icon									// Icon state used when not cooking.
 	var/cooking										// Whether or not the machine is currently operating.
 	var/cook_type									// A string value used to track what kind of food this machine makes.
+	var/use_container_cook_type						// Whether to allow a container to override cook_type
 	var/can_cook_mobs								// Whether or not this machine accepts grabbed mobs.
 	var/mobdamagetype = DAMAGE_BRUTE				// Burn damage for cooking appliances, brute for cereal/candy
 	var/food_color									// Colour of resulting food item.
@@ -177,7 +178,7 @@
 
 	// We're trying to cook something else. Check if it's valid.
 	var/obj/item/reagent_containers/food/snacks/check = item
-	if(istype(check) && check.cooked)
+	if(istype(check) && check.cooked && (check.cooked == cook_type))
 		to_chat(user, SPAN_WARNING("[check] has already been [check.cooked]."))
 		return COOKING_CANNOT_INSERT
 	else if(istype(item, /obj/item/reagent_containers/glass))
@@ -467,7 +468,7 @@
 	result.filling_color = totalcolour
 
 	//Set the name.
-	words -= list("and", "the", "in", "is", "bar", "raw", "sticks", "boiled", "fried", "deep", "-o-", "warm", "two", "flavored")
+	words -= list("and", "the", "in", "is", "bar", "raw", "sticks", "deep", "-o-", "warm", "two", "flavored", "boiled", "small", "large", "tiny", "huge", "massive", "extra")
 	//Remove common connecting words and unsuitable ones from the list. Unsuitable words include those describing
 	//the shape, cooked-ness/temperature or other state of an ingredient which doesn't apply to the finished product
 	words.Remove(result.name)
@@ -499,11 +500,16 @@
 
 	result.cooked = cook_type
 
+	if (use_container_cook_type)
+		var/obj/item/reagent_containers/cooking_container/cooking_container = cooking_item.container
+		if (istype(cooking_container) && cooking_container.cook_type)
+			result.cooked = cooking_container.cook_type
+
 	// Set icon and appearance.
 	change_product_appearance(result, cooking_item)
 
 	// Update strings.
-	change_product_strings(result, cooking_item)
+	change_product_strings(result, cooking_item, result.cooked)
 
 /obj/machinery/appliance/proc/burn_food(datum/cooking_item/cooking_item)
 	// You dun goofed.
@@ -584,7 +590,7 @@
 /obj/machinery/appliance/proc/cook_mob(mob/living/victim, mob/user)
 	return
 
-/obj/machinery/appliance/proc/change_product_strings(obj/item/reagent_containers/food/snacks/product, datum/cooking_item/cooking_item)
+/obj/machinery/appliance/proc/change_product_strings(obj/item/reagent_containers/food/snacks/product, datum/cooking_item/cooking_item, cook_type)
 	product.name = "[cook_type] [product.name]"
 	product.desc = "[product.desc]\nIt has been [cook_type]."
 
