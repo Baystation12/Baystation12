@@ -1787,7 +1787,7 @@
 
 /mob/living/carbon/human/proc/make_reagent(amount, reagent_type)
 	if(stat == CONSCIOUS)
-		var/limit = max(0, reagents.get_overdose(reagent_type) - reagents.get_reagent_amount(reagent_type))
+		var/limit = max(0, reagents.get_overdose(reagent_type) - reagents.get_reagent_amount(reagent_type) - metabolized.get_reagent_amount(reagent_type))
 		reagents.add_reagent(reagent_type, min(amount, limit))
 
 //Get fluffy numbers

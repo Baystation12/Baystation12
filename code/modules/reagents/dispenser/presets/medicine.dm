@@ -11,11 +11,11 @@
 
 
 /obj/item/reagent_containers/chem_disp_cartridge/tramadol
-	spawn_reagent = /datum/reagent/tramadol
+	spawn_reagent = /datum/reagent/opiate/tramadol
 
 
 /obj/item/reagent_containers/chem_disp_cartridge/oxycodone
-	spawn_reagent = /datum/reagent/tramadol/oxycodone
+	spawn_reagent = /datum/reagent/opiate/oxycodone
 
 
 /obj/item/reagent_containers/chem_disp_cartridge/sterilizine

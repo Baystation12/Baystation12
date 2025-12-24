@@ -131,9 +131,11 @@
 			var/list/final_interim = list()
 			var/trait_count
 			for (var/metaoption in interim)
+				var/metaoption_type = istext(metaoption) ? text2path(metaoption) : metaoption
+				if (!(metaoption_type in selected.metaoptions))
+					continue
 				if (selected.maximum_count && trait_count >= selected.maximum_count)
 					break
-				var/metaoption_type = istext(metaoption) ? text2path(metaoption) : metaoption
 				severity = interim[metaoption]
 				trait_count++
 				LAZYSET(final_interim, metaoption_type, severity)

@@ -50,8 +50,8 @@
 /proc/mass_spectrometer_scan(datum/reagents/reagents, mob/user, details)
 	if(!reagents || !reagents.total_volume)
 		return SPAN_WARNING("No sample to scan.")
-	var/list/blood_traces = list()
-	var/list/blood_doses = list()
+	var/list/blood_chems = list()
+	var/list/blood_metabolites = list()
 	for(var/datum/reagent/R in reagents.reagent_list)
 		if(length(reagents.reagent_list) == 1)
 			var/datum/reagent/random/random = R
@@ -61,22 +61,22 @@
 		if(R.type != /datum/reagent/blood)
 			return SPAN_WARNING("The sample was contaminated! Please insert another sample")
 		else
-			blood_traces = R.data["trace_chem"]
-			blood_doses = R.data["dose_chem"]
+			blood_chems = R.data["blood_chem"]
+			blood_metabolites = R.data["metabolites_chem"]
 			break
 
 	var/list/dat = list("Trace Chemicals Found: ")
-	for(var/T in blood_traces)
+	for(var/T in blood_chems)
 		var/datum/reagent/R = T
 		if(details)
-			dat += "[initial(R.name)] ([blood_traces[T]] units) "
+			dat += "[initial(R.name)] ([blood_chems[T]] units) "
 		else
 			dat += "[initial(R.name)] "
 	if(details)
 		dat += "Metabolism Products of Chemicals Found:"
-		for(var/T in blood_doses)
+		for(var/T in blood_metabolites)
 			var/datum/reagent/R = T
-			dat += "[initial(R.name)] ([blood_doses[T]] units) "
+			dat += "[initial(R.name)] ([blood_metabolites[T]] units) "
 
 	return jointext(dat, "<br>")
 

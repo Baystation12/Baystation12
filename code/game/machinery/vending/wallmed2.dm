@@ -22,6 +22,7 @@
 	products = list(
 		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline = 5,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy = 4,
+		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/naloxone = 4,
 		/obj/item/stack/medical/bruise_pack = 4,
 		/obj/item/stack/medical/ointment = 4,
 		/obj/item/storage/med_pouch/trauma,

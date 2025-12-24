@@ -88,8 +88,8 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
-		M.reagents.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
+	if (M.metabolized.has_reagent(/datum/reagent/toxin/amatoxin))
+		M.bloodstr.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
 		next_symptom -= 1
 		//completely reworks symptoms to be much less obvious and in your face, and not happen every single second.
 		if(next_symptom == 0)
@@ -147,8 +147,8 @@
 	var/effectiveness = 1
 	var/effective_dose = 2
 
-	if(M.chem_doses[type] < effective_dose)
-		effectiveness = M.chem_doses[type]/effective_dose
+	if(M.metabolized.get_reagent_amount(type) < effective_dose)
+		effectiveness = M.metabolized.get_reagent_amount(type)/effective_dose
 	else if(volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_BLOCKAGE, (80 * effectiveness)/100)
@@ -267,7 +267,7 @@
 		M.take_organ_damage(6 * removed, 0)
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 
-/datum/reagent/toxin/stimm/overdose(mob/living/carbon/M)
+/datum/reagent/toxin/stimm/process_overdose(mob/living/carbon/M)
 	..()
 	if (prob(10)) // 1 in 10. This thing's made with welder fuel and fertilizer, what do you expect?
 		var/mob/living/carbon/human/H = M
@@ -364,7 +364,7 @@
 	..()
 	M.mod_confused(2)
 
-/datum/reagent/toxin/taxine/overdose(mob/living/carbon/M)
+/datum/reagent/toxin/taxine/process_overdose(mob/living/carbon/M)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -383,7 +383,7 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/potassium_chloride/overdose(mob/living/carbon/M)
+/datum/reagent/toxin/potassium_chloride/process_overdose(mob/living/carbon/M)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -424,6 +424,7 @@
 	reagent_state = SOLID
 	color = "#669900"
 	metabolism = REM
+	removal_multiplier = 100 //Once out of the bloodstream, breaks down extremely quickly.
 	strength = 0.1
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
@@ -433,12 +434,12 @@
 	..()
 	if (IS_METABOLICALLY_INERT(M))
 		return
+	if (!(M.status_flags & FAKEDEATH))
+		M.timeofdeath = world.time
 	M.status_flags |= FAKEDEATH
 	M.adjustOxyLoss(-5 * removed)
 	M.Weaken(10)
 	M.silent = max(M.silent, 10)
-	if(M.chem_doses[type] <= removed) //half-assed attempt to make timeofdeath update only at the onset
-		M.timeofdeath = world.time
 	M.add_chemical_effect(CE_NOPULSE, 1)
 
 /datum/reagent/toxin/zombiepowder/Destroy()
@@ -537,7 +538,7 @@
 	if (M.species.breath_type != GAS_OXYGEN || IS_METABOLICALLY_INERT(M))
 		return
 
-	var/permeability = GET_TRAIT_LEVEL(carbon, /singleton/trait/general/permeable_skin)
+	var/permeability = GET_TRAIT_LEVEL(M, /singleton/trait/general/permeable_skin)
 	M.take_organ_damage((10 - (2 * permeability)) * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 	if (prob(10))
 		M.visible_message(
@@ -560,7 +561,7 @@
 		SPAN_DANGER("You feel a painful fizzling and your skin begins to flake!.")
 	)
 
-	var/permeability = GET_TRAIT_LEVEL(carbon, /singleton/trait/general/permeable_skin)
+	var/permeability = GET_TRAIT_LEVEL(M, /singleton/trait/general/permeable_skin)
 	M.reagents.add_reagent(/datum/reagent/lexorin, (0.5 + (2.5 * permeability)) * removed)
 
 /datum/reagent/mutagen
@@ -626,23 +627,30 @@
 	reagent_state = LIQUID
 	color = "#009ca8"
 	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.5
+	active_metabolites = /datum/reagent/soporific
 	value = 2.5
 	scannable = TRUE
 	should_admin_log = TRUE
 
-/datum/reagent/soporific/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/soporofic/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	if (affected.metabolized.has_reagent(/datum/reagent/methylphenidate))
+		affected.metabolized.remove_reagent(/datum/reagent/methylphenidate, 5 * removed)
+
+
+/datum/reagent/soporific/affect_metabolites(mob/living/carbon/M, dose)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-
 	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
-	if(M.chem_doses[type] < 1 * threshold)
-		if(M.chem_doses[type] == metabolism * 2 || prob(5))
+	if(dose < 1 * threshold)
+		if(dose == metabolism * 2 || prob(5))
 			M.emote("yawn")
-	else if(M.chem_doses[type] < 1.5 * threshold)
+	else if(dose < 1.5 * threshold)
 		M.eye_blurry = max(M.eye_blurry, 10)
-	else if(M.chem_doses[type] < 5 * threshold)
+	else if(dose < 5 * threshold)
 		if(prob(50))
 			M.Weaken(2)
 			M.add_chemical_effect(CE_SEDATE, 1)
@@ -659,30 +667,13 @@
 	taste_description = "bitterness"
 	reagent_state = SOLID
 	color = "#000067"
-	metabolism = REM * 0.5
+	metabolism = REM * 5
 	overdose = REAGENTS_OVERDOSE * 0.5
+	active_metabolites = /datum/reagent/soporific
+	metabolite_potency = 2
+	bioavailability = 0.8
 	value = 2.6
 	should_admin_log = TRUE
-
-/datum/reagent/chloralhydrate/affect_blood(mob/living/carbon/M, removed)
-	if (IS_METABOLICALLY_INERT(M))
-		return
-
-	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
-	M.add_chemical_effect(CE_SEDATE, 1)
-
-	if(M.chem_doses[type] <= metabolism * threshold)
-		M.mod_confused(2)
-		M.drowsyness += 2
-
-	if(M.chem_doses[type] < 2 * threshold)
-		M.Weaken(30)
-		M.eye_blurry = max(M.eye_blurry, 10)
-	else
-		M.Sleeping(30)
-
-	if(M.chem_doses[type] > 1 * threshold)
-		M.adjustToxLoss(removed)
 
 /datum/reagent/chloralhydrate/beer //disguised as normal beer for use by emagged brobots
 	name = "Beer"
@@ -702,29 +693,30 @@
 	color = "#ff337d"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
+	active_metabolites = /datum/reagent/vecuronium_bromide
 	value = 2.6
 	should_admin_log = TRUE
 
-/datum/reagent/vecuronium_bromide/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/vecuronium_bromide/affect_metabolites(mob/living/carbon/M, dose)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
 	var/threshold = 2 + (0.4 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
-	if(M.chem_doses[type] >= metabolism * threshold * 0.5)
+	if(dose >= metabolism * threshold * 0.5)
 		M.set_confused(2)
 		M.add_chemical_effect(CE_VOICELOSS, 1)
-	if(M.chem_doses[type] > threshold * 0.5)
+	if(dose > threshold * 0.5)
 		M.make_dizzy(3)
 		M.Weaken(2)
-	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
+	if(dose == round(threshold * 0.5, metabolism))
 		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
-	if(M.chem_doses[type] >= threshold)
+	if(dose >= threshold)
 		M.add_chemical_effect(CE_SEDATE, 1)
 		M.eye_blurry = max(M.eye_blurry, 10)
 
-	if(M.chem_doses[type] > 1 * threshold)
-		M.adjustToxLoss(removed)
+	if(dose > 1 * threshold)
+		M.adjustToxLoss(metabolism)
 
 /datum/reagent/impedrezene // Impairs mental function correctly, takes an overwhelming dose to kill.
 	name = "Impedrezene"
@@ -772,7 +764,6 @@
 
 	reagent_state = LIQUID
 	metabolism = REM * 0.5
-	ingest_met = REM * 1.5
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/drugs/affect_blood(mob/living/carbon/M, removed)
@@ -905,7 +896,7 @@
 	M.add_chemical_effect(CE_MIND, -2)
 
 	var/hallucination_duration = 50 - (25 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
-	var/hallucination_power = 50 - (20 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
+	var/hallucination_power = 200 - (20 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 
 	if (hallucination_duration && hallucination_power)
 		M.hallucination(hallucination_duration, hallucination_power)
@@ -917,6 +908,7 @@
 	taste_description = "mushroom"
 	color = "#e700e7"
 	metabolism = REM * 0.5
+	active_metabolites = /datum/reagent/drugs/psilocybin
 	value = 0.7
 	high_message_list = list("The world distorts around you...!",
 	"The walls look like they're moving...",
@@ -925,16 +917,16 @@
 	)
 	sober_message_list = list("Everything feels... flat.", "You feel almost TOO grounded in your surroundings.")
 
-/datum/reagent/drugs/psilocybin/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/drugs/psilocybin/affect_metabolites(mob/living/carbon/M, dose)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
 	var/threshold = 1 + (0.2 * GET_TRAIT_LEVEL(M, /singleton/trait/boon/clear_mind))
 	M.druggy = max(M.druggy, 30)
 
-	if(M.chem_doses[type] < 1 * threshold)
+	if(dose < 1 * threshold)
 		M.make_dizzy(5)
-	else if(M.chem_doses[type] < 2 * threshold)
+	else if(dose < 2 * threshold)
 		M.apply_effect(3, EFFECT_STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
@@ -1013,7 +1005,7 @@
 /datum/reagent/drugs/three_eye/on_leaving_metabolism(mob/parent, metabolism_class)
 	parent.remove_client_color(/datum/client_color/thirdeye)
 
-/datum/reagent/drugs/three_eye/overdose(mob/living/carbon/M)
+/datum/reagent/drugs/three_eye/process_overdose(mob/living/carbon/M)
 	..()
 	M.adjustBrainLoss(rand(1, 5))
 	if(ishuman(M) && prob(10))
@@ -1035,15 +1027,22 @@
 	value = 2
 	should_admin_log = TRUE
 
-/datum/reagent/slimetoxin/affect_blood(mob/living/carbon/human/H, removed)
+/datum/reagent/slimetoxin/affect_blood(mob/living/carbon/human/affected, removed)
+	if (!istype(affected))
+		return
+	if(affected.species.name == SPECIES_PROMETHEAN)
+		return
+	affected.adjustToxLoss(40 * removed)
+
+/datum/reagent/slimetoxin/affect_metabolites(mob/living/carbon/human/H, dose)
 	if(!istype(H))
 		return
 	if(H.species.name == SPECIES_PROMETHEAN)
 		return
-	H.adjustToxLoss(40 * removed)
-	if(H.chem_doses[type] < 1 || prob(30))
+	if (dose < 1 || prob(30))
 		return
-	H.chem_doses[type] = 0
+
+	remove_self(dose)
 	var/list/meatchunks = list()
 	for(var/limb_tag in list(BP_R_ARM, BP_L_ARM, BP_R_LEG,BP_L_LEG))
 		var/obj/item/organ/external/E = H.get_organ(limb_tag)

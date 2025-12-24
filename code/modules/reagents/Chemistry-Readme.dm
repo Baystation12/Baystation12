@@ -156,22 +156,16 @@ About Reagents:
 			Current volume.
 
 		metabolism
-			How quickly reagent is processed in mob's bloodstream; by default aslo affects ingest and touch metabolism.
+			How quickly reagent is absorbed/processed in mob's bloodstream; by default also affects touch metabolism.
 
-		ingest_met
-			How quickly reagent is processed when ingested; [metabolism] is used if zero.
+		bioavailability
+			What percentage of a drug's metabolism is absorbed into the blood when ingested. Defaults to 0.6.
 
 		touch_met
-			Ditto when touching.
-
-		dose
-			How much of the reagent has been processed, limited by [max_dose]. Used for reagents with varying effects (e.g. ethanol or rezadone) and overdosing.
-
-		max_dose
-			Maximum amount of reagent that has ever been in a mob. Exists so dose won't grow infinitely when small amounts of reagent are added over time.
+			How quickly reagent on skin is absorbed/processed. If no value given; defaults to metabolism. Only species with SKIN_PERMEABLE trait can absorb into the blood.
 
 		overdose
-			If [dose] is bigger than [overdose], overdose() proc is called every tick.
+			If volume of reagent in bloodstream PLUS metabolites exceeds this value, the mob will be overdosed.
 
 		scannable
 			If set to 1, will show up on health analyzers by name.
@@ -208,20 +202,28 @@ About Reagents:
 		touch_turf(var/turf/T)
 			How reagent reacts with turfs.
 
-		on_mob_life(var/mob/living/carbon/M, var/alien, var/location)
-			Makes necessary checks and calls one of affect procs.
+		on_mob_life(var/mob/living/carbon/M, var/location)
+			Where most mob-linked metabolism is handled. Drugs exert effect by calling one of four affect_ procs. For the majority of drugs; affect_blood which is called by drugs in the bloodstream is most relevant.
+			This proc also handles moving drugs between one of four compartments: bloodstream, stomach, skin, and metabolites.
+			Ingested drugs in the stomach call affect_ingest (if applicable) then a portion is then moved to the bloodstream (depending on bioavailability).
+			Drugs on the skin call affect_touch (if applicable) then a portion is moved to the bloodstream if the mob has the SKIN_PERMEABLE trait.
+			All drugs injected IV move to the bloodstream immediately and call affect_blood. This is in addition to whatever is absorbed from the stomach or skin.
+			The metabolites compartment stores drugs that have been processed by the bloodstream. Most reagents are inert at that stage, but some exert an effect/relevant to OD thresholds.
 
-		affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-			How reagent affects mob when injected. [removed] is the amount of reagent that has been removed this tick. [alien] is the mob's reagent flag.
+		affect_blood(var/mob/living/carbon/M, var/removed)
+			How reagent affects mob when in the blood stream. [removed] is the amount of reagent that has been removed this tick. [alien] is the mob's reagent flag.
 
-		affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-			Ditto, ingested. Defaults to affect_blood with halved dose.
+		affect_ingest(var/mob/living/carbon/M, var/removed)
+			How reagent affects mob when in the stomach; used for effects specific to ingestion. In addition, all ingested drugs are transfered to the bloodstream multiplied by bioavailability.
 
-		affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-			Ditto, touching.
+		affect_touch(var/mob/living/carbon/M, var/removed)
+			How reagent affects mob when on the skin; used for effects specific to being on the skin. After affect_touch is called on_mob_life(), reagents are moved into the bloodstream (to be called by affect_blood) ONLY if the mob has the SKIN_PERMEABLE trait. [removed] is the amount of reagent that has been removed this tick. [alien] is the mob's reagent flag.
+.
+		affect_metabolites(var/mob/living/carbon/M, var/removed)
+			Handles effects caused by buildup of active metabolites after being ingested. Most drugs don't have any.
 
-		overdose(var/mob/living/carbon/M, var/alien)
-			Called when dose is above overdose. Defaults to M.adjustToxLoss(REM).
+		process_overdose(var/mob/living/carbon/M)
+			Called when bloodstream OR metabolized contents (depending on reagent) are above overdose threshold. Defaults to M.adjustToxLoss(REM).
 
 		initialize_data(var/newdata)
 			Called when reagent is created. Defaults to setting [data] to [newdata].

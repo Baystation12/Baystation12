@@ -265,11 +265,16 @@ GLOBAL_TYPED_NEW(temp_reagents_holder, /obj)
 			return current
 	return
 
-/datum/reagents/proc/get_reagent_amount(reagent_type, allow_subtypes)
+/datum/reagents/proc/get_reagent_amount(reagent_type, allow_subtypes = FALSE)
+	var/total_volume = 0
 	for (var/datum/reagent/current in reagent_list)
-		if(current.type == reagent_type)
+		if (current.type == reagent_type && !allow_subtypes)
 			return current.volume
-	return 0
+		if (allow_subtypes)
+			var/list/allowed_types = typesof_real(reagent_type)
+			if (current.type in allowed_types)
+				total_volume += current.volume
+	return total_volume
 
 
 /datum/reagents/proc/get_reagent_amount_list(reagent_type)
@@ -334,7 +339,6 @@ GLOBAL_TYPED_NEW(temp_reagents_holder, /obj)
 		return
 
 	var/part = amount / total_volume
-
 	for(var/datum/reagent/current in reagent_list)
 		var/amount_to_transfer = current.volume * part
 		target.add_reagent(current.type, amount_to_transfer * multiplier, current.get_data(), safety = 1) // We don't react until everything is in place
@@ -352,6 +356,24 @@ GLOBAL_TYPED_NEW(temp_reagents_holder, /obj)
 		HANDLE_REACTIONS(src)
 	if(!safety)
 		HANDLE_REACTIONS(target)
+	return amount
+
+///Proc to transfer a specific reagent out of one holder to another. Use when you don't want to single out a reagent unlike trans_to_holder
+/// Returns actual amount removed from [src] (not amount transferred to [target]).
+/datum/reagents/proc/trans_reagent_to_holder(datum/reagents/target_holder, datum/reagent/reagent, amount = 1, multiplier = 1, copy = 0, safety = 0)
+	if (!target_holder || !istype(target_holder) || !reagent || !istype(reagent))
+		return
+
+	amount = max(0, min(amount, reagent.volume, target_holder.get_free_space() / (multiplier ? multiplier : 1)))
+	if (!amount)
+		return
+	target_holder.add_reagent(reagent.type, amount * multiplier, reagent.get_data(), safety)
+
+	if (!copy)
+		remove_reagent(reagent.type, amount, 1)
+		HANDLE_REACTIONS(src)
+	if (!safety)
+		HANDLE_REACTIONS(target_holder)
 	return amount
 
 /* Holder-to-atom and similar procs */

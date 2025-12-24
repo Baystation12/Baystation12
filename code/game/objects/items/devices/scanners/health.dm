@@ -279,14 +279,14 @@
 			print_reagent_default_message = FALSE
 			. += SPAN_CLASS("scan_warning", "Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.")
 
-	if(length(H.chem_doses))
-		var/list/chemtraces = list()
-		for(var/T in H.chem_doses)
+	if(length(H.metabolized?.reagent_list))
+		var/list/metabolites = list()
+		for(var/T in H.metabolized.reagent_list)
 			var/datum/reagent/R = T
-			if(initial(R.scannable))
-				chemtraces += "[initial(R.name)] ([H.chem_doses[T]])"
-		if(length(chemtraces))
-			. += SPAN_CLASS("scan_notice", "Metabolism products of [english_list(chemtraces)] found in subject's system.")
+			if(initial(R.scannable) && R.active_metabolites)
+				metabolites += "[initial(R.name)] ([round(R.volume, 1)])"
+		if(length(metabolites))
+			. += SPAN_CLASS("scan_notice", "Metabolically active breakdown products of [english_list(metabolites)] found in subject's system.")
 
 	if(print_reagent_default_message)
 		. += "No results."
