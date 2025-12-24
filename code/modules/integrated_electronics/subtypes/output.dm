@@ -134,6 +134,7 @@
 	activators = list("play sound" = IC_PINTYPE_PULSE_IN)
 	power_draw_per_use = 10
 	var/list/sounds = list()
+	var/list/sound_messages = list()
 
 /obj/item/integrated_circuit/output/sound/Initialize()
 	.= ..()
@@ -154,6 +155,16 @@
 			return
 		vol = clamp(vol ,0 , 100)
 		playsound(get_turf(src), selected_sound, vol, freq, -1)
+		var/text = sound_messages[ID]
+		if(isnull(text))
+			return
+		var/atom/movable/speaking = get_object()
+		var/sanitized_text = sanitize(text)
+		speaking.audible_message("\The [speaking][sanitized_text]")
+		if (assembly)
+			log_say("[assembly] \ref[assembly] : [sanitized_text]")
+		else
+			log_say("[name] ([type]) : [sanitized_text]")
 
 /obj/item/integrated_circuit/output/sound/on_data_written()
 	power_draw_per_use =  get_pin_data(IC_INPUT, 2) * 15
@@ -171,6 +182,16 @@
 		"synth no"		= 'sound/machines/synth_no.ogg',
 		"warning buzz"	= 'sound/machines/warning-buzzer.ogg'
 		)
+	sound_messages = list(
+		"beep"			 = " beeps.",
+		"chime"			 = " chimes.",
+		"buzz sigh"		 = " buzzes.",
+		"buzz twice"	 = " buzzes twice.",
+		"ping"			 = " pings.",
+		"synth yes"		 = " emits an affirmative blip.",
+		"synth no"		 = " emits a negative blip.",
+		"warning buzz"	 = " buzzes alarmingly."
+		)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/output/sound/beepsky
@@ -184,6 +205,15 @@
 		"i am the law"	= 'sound/voice/biamthelaw.ogg',
 		"radio"			= 'sound/voice/bradio.ogg',
 		"secure day"	= 'sound/voice/bsecureday.ogg'
+		)
+	sound_messages = list(
+		"creep"			= "'s speakers skreech, \"Your move, creep.\".",
+		"criminal"		= "'s speakers skreech, \"Criminal Detected.\".",
+		"freeze"		= "'s speakers skreech, \"Freeze, scumbag!\".",
+		"god"			= "'s speakers skreech, \"God made tomorrow for the crooks we don't catch today.\".",
+		"i am the law"	= "'s speakers skreech, \"I am the law!\".",
+		"radio"			= "'s speakers skreech, \"You cannot run a radio.\".",
+		"secure day"	= "'s speakers skreech, \"Have a secure day.\"."
 		)
 	spawn_flags = IC_SPAWN_RESEARCH
 
@@ -200,6 +230,16 @@
 		"keystroke3"	= 'sound/machines/keyboard/keystroke3.ogg',
 		"keystroke4"	= 'sound/machines/keyboard/keystroke4.ogg'
 		)
+	sound_messages = list(
+		"keypress1"		= " emits a mechanical click.",
+		"keypress2"		= " emits a mechanical click.",
+		"keypress3"		= " emits a mechanical click.",
+		"keypress4"		= " emits a mechanical click.",
+		"keystroke1"	= " emits several mechanical clicks.",
+		"keystroke2"	= " emits several mechanical clicks.",
+		"keystroke3"	= " emits several mechanical clicks.",
+		"keystroke4"	= " emits several mechanical clicks.",
+		)
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/output/sound/electronic
@@ -215,6 +255,17 @@
 		"sparks3"		= 'sound/effects/sparks3.ogg',
 		"sparks4"		= 'sound/effects/sparks4.ogg'
 		)
+	sound_messages = list(
+		"transmit"		= " emits a staticky click.",
+		"turn on"		= " beeps as if powering on.",
+		"radio"			= " emits the sound of static.",
+		"scan"			= " beeps as if scanning.",
+		"sparks1"		= " emits the sound of sparks.",
+		"sparks2"		= " emits the sound of sparks.",
+		"sparks3"		= " emits the sound of sparks.",
+		"sparks4"		= " emits the sound of sparks.",
+		)
+
 	spawn_flags = IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/output/text_to_speech
