@@ -38,14 +38,12 @@
 	var/list/client_preference_keys = list()
 	for(var/cp in get_client_preferences())
 		var/datum/client_preference/client_pref = cp
-
 		client_preference_keys |= client_pref.key
-
 		// if the preference has never been set, or if the player is no longer allowed to set the it, set it to default
-		preference_mob() // we don't care about the mob it returns, but it finds the correct client.
+		var/mob/mob = preference_mob()
 		if(!client_pref.may_set(pref.client) || !(client_pref.key in pref.preference_values))
 			pref.preference_values[client_pref.key] = client_pref.default_value
-
+		client_pref.started(mob, pref.preference_values[client_pref.key])
 
 	// Clean out preferences that no longer exist.
 	for(var/key in pref.preference_values)

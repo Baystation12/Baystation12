@@ -4,6 +4,9 @@
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/outline_reachable = "#00ff00"
+	var/outline_unreachable = "#ff0000"
+	var/outline_alpha = 255
 
 	var/tooltip_style = "Midnight" //Style for popup tooltips
 
@@ -19,6 +22,9 @@
 	pref.UI_style_alpha = R.read("UI_style_alpha")
 	pref.ooccolor = R.read("ooccolor")
 	pref.clientfps = R.read("clientfps")
+	pref.outline_reachable = R.read("outline_reachable")
+	pref.outline_unreachable = R.read("outline_unreachable")
+	pref.outline_alpha = R.read("outline_alpha")
 
 
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
@@ -27,13 +33,19 @@
 	W.write("UI_style_alpha", pref.UI_style_alpha)
 	W.write("ooccolor", pref.ooccolor)
 	W.write("clientfps", pref.clientfps)
+	W.write("outline_reachable", pref.outline_reachable)
+	W.write("outline_unreachable", pref.outline_unreachable)
+	W.write("outline_alpha", pref.outline_alpha)
 
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
 	pref.UI_style_color	= sanitize_hexcolor(pref.UI_style_color, initial(pref.UI_style_color))
-	pref.UI_style_alpha	= sanitize_integer(pref.UI_style_alpha, 0, 255, initial(pref.UI_style_alpha))
+	pref.UI_style_alpha	= sanitize_integer(pref.UI_style_alpha, 50, 255, initial(pref.UI_style_alpha))
 	pref.ooccolor		= sanitize_hexcolor(pref.ooccolor, initial(pref.ooccolor))
+	pref.outline_reachable = sanitize_hexcolor(pref.outline_reachable, initial(pref.outline_reachable))
+	pref.outline_unreachable = sanitize_hexcolor(pref.outline_unreachable, initial(pref.outline_unreachable))
+	pref.outline_alpha = sanitize_integer(pref.outline_alpha, 50, 255, initial(pref.outline_alpha))
 	sanitize_client_fps()
 
 
@@ -44,6 +56,12 @@
 	. += "-Color: <a href='byond://?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='byond://?src=\ref[src];reset=ui'>reset</a><br>"
 	. += "-Alpha(transparency): <a href='byond://?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='byond://?src=\ref[src];reset=alpha'>reset</a><br>"
 	. += "<b>Tooltip Style:</b> <a href='byond://?src=\ref[src];select_tooltip_style=1'><b>[pref.tooltip_style]</b></a><br>"
+	. += "<b>Atom Hover Outlines</b><br>"
+	var/outlines_enabled = user.get_preference_value(/datum/client_preference/atom_outlines) == GLOB.PREF_YES
+	. += "- Enabled: <a href='byond://?src=\ref[src];outline_toggle=1'>[outlines_enabled ? "Yes" : "No"]</a><br>"
+	. += "- Reachable: <a href='byond://?src=\ref[src];outline_reachable=1' style='background:[pref.outline_reachable];color:transparent'>--</a><br>"
+	. += "- Unreachable: <a href='byond://?src=\ref[src];outline_unreachable=1' style='background:[pref.outline_unreachable];color:transparent'>--</a><br>"
+	. += "- Alpha: <a href='byond://?src=\ref[src];outline_alpha=1'>[pref.outline_alpha]</a><br>"
 	if(can_select_ooc_color(user))
 		. += "<b>OOC Color:</b> "
 		if(pref.ooccolor == initial(pref.ooccolor))
@@ -70,6 +88,39 @@
 		var/UI_style_alpha_new = input(user, "Select UI alpha (transparency) level, between 50 and 255.", "Global Preference", pref.UI_style_alpha) as num|null
 		if(isnull(UI_style_alpha_new) || (UI_style_alpha_new < 50 || UI_style_alpha_new > 255) || !CanUseTopic(user)) return TOPIC_NOACTION
 		pref.UI_style_alpha = UI_style_alpha_new
+		return TOPIC_REFRESH
+
+	else if (href_list["outline_toggle"])
+		user.cycle_preference(/datum/client_preference/atom_outlines)
+		return TOPIC_REFRESH
+
+	else if (href_list["outline_reachable"])
+		var/response = input(user, "Reachable atom outline color:", "Global Preference", pref.outline_reachable) as null | color
+		if (!response)
+			return TOPIC_NOACTION
+		if (!CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.outline_reachable = response
+		return TOPIC_REFRESH
+
+	else if (href_list["outline_unreachable"])
+		var/response = input(user, "Unreachable atom outline color:", "Global Preference", pref.outline_unreachable) as null | color
+		if (!response)
+			return TOPIC_NOACTION
+		if (!CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.outline_unreachable = response
+		return TOPIC_REFRESH
+
+	else if (href_list["outline_alpha"])
+		var/response = input(user, "Atom outline transparency, between 50 - 255:", "Global Preference", pref.outline_alpha) as null | num
+		if (!response)
+			return TOPIC_NOACTION
+		if (response < 50 || response > 255)
+			return TOPIC_NOACTION
+		if (!CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.outline_alpha = response
 		return TOPIC_REFRESH
 
 	else if(href_list["select_ooc_color"])

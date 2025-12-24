@@ -250,6 +250,10 @@
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
 			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
 			break
+	if (atom_outline)
+		images -= atom_outline
+		atom_outline = null
+	outline_atom = null
 	if (holder)
 		holder.owner = null
 		GLOB.admins -= src

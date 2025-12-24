@@ -88,6 +88,10 @@ var/global/list/_client_preferences_by_type
 /datum/client_preference/proc/changed(mob/preference_mob, new_value)
 	return
 
+/// Called when a client's preferences are first set up
+/datum/client_preference/proc/started(mob/user, value)
+	return
+
 /*********************
 * Player Preferences *
 *********************/
@@ -345,6 +349,21 @@ GLOBAL_CONST(PREF_VA_HALF_POPUP, "Reminder Popup")
 			to_chat(mob, "[description]:When a vote starts, you will be notified.")
 		else
 			to_chat(mob, {"[description]: "[new_value]" is unexpected. Please report this."})
+
+
+/datum/client_preference/atom_outlines
+	description = "Show Atom Outlines"
+	key = "ATOM_OUTLINE"
+
+
+/datum/client_preference/atom_outlines/changed(mob/user, new_value)
+	var/client/client = user.client
+	client?.SetOutlineAtom()
+	client?.outline_enabled = new_value == GLOB.PREF_YES
+
+
+/datum/client_preference/atom_outlines/started(mob/user, value)
+	changed(user, value)
 
 
 /********************
