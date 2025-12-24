@@ -1,0 +1,4 @@
+author: KatTheFox
+changes:
+  - tweak: rollerbeds no longer slow you down
+delete-after: true
