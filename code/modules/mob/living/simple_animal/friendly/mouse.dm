@@ -119,8 +119,13 @@
 	icon_state = "mouse_rat"
 	maxHealth = 20
 	health = 20
-
+	natural_weapon = /obj/item/natural_weapon/bite/rat
 	ai_holder = /datum/ai_holder/simple_animal/melee/evasive
+
+/obj/item/natural_weapon/bite/rat
+	force = 3
+	attack_verb = list("nipped", "slashed")
+	hitsound = null
 
 /mob/living/simple_animal/passive/mouse/rat/chill
 	ai_holder = /datum/ai_holder/simple_animal/passive/mouse
