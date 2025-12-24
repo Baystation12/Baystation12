@@ -1,0 +1,6 @@
+author: Sennalen
+changes:
+  - tweak: Different pots and pans on a stove cause different cooking types.
+  - tweak: A food item can once again be cooked multiple ways as long as it 
+      isn't the same way twice in a row
+delete-after: true
