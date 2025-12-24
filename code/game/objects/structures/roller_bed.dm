@@ -5,6 +5,7 @@
 	can_buckle = TRUE
 	buckle_dir = SOUTH
 	buckle_stance = BUCKLE_FORCE_PRONE
+	obj_flags = OBJ_FLAG_HAS_WHEELS
 
 	/// A shared list of pixel offsets for roller beds to move their buckled mobs by.
 	var/static/list/roller_bed_buckle_pixel_shift = list(0, 0, 6)
