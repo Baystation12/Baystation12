@@ -1,0 +1,4 @@
+author: Podszywacz
+changes:
+  - bugfix: Eyestab proc no longer damages random external organs
+delete-after: true
