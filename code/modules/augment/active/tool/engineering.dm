@@ -21,7 +21,12 @@
 
 
 /obj/item/weldingtool/finger/on_update_icon()
-	icon_state = welding ? "welder_finger_on" : "welder_finger"
+	if(welding)
+		icon_state = "welder_finger_on"
+		set_light(2.5, 0.6, l_color =COLOR_PALE_ORANGE)
+	else
+		icon_state = "welder_finger"
+		set_light(0)
 
 
 /obj/item/wirecutters/finger
@@ -135,7 +140,12 @@
 
 
 /obj/item/weldingtool/electric/finger/on_update_icon()
-	icon_state = welding ? "welder_finger_on" : "welder_finger"
+	if(welding)
+		icon_state = "welder_finger_on"
+		set_light(0.6, 0.5, 2.5, l_color = COLOR_LIGHT_CYAN)
+	else
+		icon_state = "welder_finger"
+		set_light(0)
 
 
 /obj/item/weldingtool/electric/finger/attack_hand(mob/living/user)
