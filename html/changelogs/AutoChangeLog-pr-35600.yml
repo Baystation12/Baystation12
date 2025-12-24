@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - bugfix: Merc railgun is now available for purchase again.
+delete-after: true
