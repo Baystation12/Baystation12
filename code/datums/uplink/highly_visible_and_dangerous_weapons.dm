@@ -194,7 +194,7 @@
 			capable of firing slugs at intense speeds."
 	item_cost = 65
 	antag_roles = list(MODE_MERCENARY)
-	path = /obj/item/gun/magnetic/railgun
+	path = /obj/item/gun/magnetic/railgun/thunderclap
 
 /datum/uplink_item/item/visible_weapons/railguntcc // Only slightly better than the normal railgun; but cooler looking
 	name = "Advanced Railgun"
