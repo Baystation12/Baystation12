@@ -115,6 +115,7 @@
 /obj/machinery/appliance/cooker/oven/can_remove_items(mob/user)
 	if (!open)
 		to_chat(user, SPAN_WARNING("You can't take anything out while the door is closed!"))
+		to_chat(user, SPAN_SUBTLE("Ctrl-click to set the temperature."))
 		return FALSE
 	return ..()
 

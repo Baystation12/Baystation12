@@ -2,7 +2,8 @@
 	name = "stove"
 	desc = "Don't touch it!"
 	icon_state = "stove"
-	cook_type = "pan-fried"
+	cook_type = "seared"
+	use_container_cook_type = TRUE
 	appliancetype = COOKING_APPLIANCE_SKILLET | COOKING_APPLIANCE_SAUCEPAN | COOKING_APPLIANCE_POT
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	food_color = "#a34719"

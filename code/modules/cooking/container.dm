@@ -26,6 +26,7 @@
 	var/appliancetype // Bitfield, uses the same as appliances
 	var/show_food_items = TRUE
 	w_class = ITEM_SIZE_NORMAL
+	var/cook_type // optional string to influence the appliance cook_type
 
 /obj/item/reagent_containers/cooking_container/on_update_icon()
 	..()
@@ -345,6 +346,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = COOKING_APPLIANCE_SKILLET
 	show_food_items = FALSE
+	cook_type = "pan-fried"
 
 /obj/item/reagent_containers/cooking_container/skillet/Initialize(mapload, new_material)
 	. = ..(mapload)
@@ -366,6 +368,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER // Will still react
 	appliancetype = COOKING_APPLIANCE_SAUCEPAN
 	show_food_items = FALSE
+	cook_type = "sauteed"
 
 /obj/item/reagent_containers/cooking_container/saucepan/Initialize(mapload, new_material)
 	. = ..(mapload)
@@ -389,6 +392,7 @@
 	appliancetype = COOKING_APPLIANCE_POT
 	w_class = ITEM_SIZE_LARGE
 	show_food_items = FALSE
+	cook_type = "boiled"
 
 /obj/item/reagent_containers/cooking_container/pot/Initialize(mapload, new_material)
 	. = ..(mapload)
