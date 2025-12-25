@@ -1,0 +1,5 @@
+author: sowelipililimute
+changes:
+  - rscadd: You can now click items anywhere in your inventory or in open 
+      storages, not just the exact pixels of the sprite.
+delete-after: true
