@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - bugfix: Stars don't crash the sensors console anymore
-delete-after: true

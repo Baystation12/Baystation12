@@ -1,4 +1,0 @@
-author: KatTheFox
-changes:
-  - bugfix: Augment welders no longer perpetually glow as if actively welding
-delete-after: true
