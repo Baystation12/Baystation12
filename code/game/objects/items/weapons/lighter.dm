@@ -33,6 +33,7 @@
 	update_icon()
 	light_effects(user)
 	set_light(2, l_color = COLOR_PALE_ORANGE)
+	set_extension(src, /datum/extension/flame_source, src)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/flame/lighter/proc/fail_light(mob/user)
@@ -68,6 +69,7 @@
 	else if(!no_message)
 		visible_message(SPAN_NOTICE("[src] goes out."))
 	set_light(0)
+	remove_extension(src, /datum/extension/flame_source)
 
 /obj/item/flame/lighter/proc/shutoff_effects(mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] quietly shuts off \the [src]."))
@@ -89,21 +91,6 @@
 		AddOverlays(overlay_image(icon, "[bis.base_icon_state]_flame", flags=RESET_COLOR))
 	else
 		AddOverlays(overlay_image(icon, "[bis.base_icon_state]_striker", flags=RESET_COLOR))
-
-/obj/item/flame/lighter/use_before(mob/living/M, mob/living/carbon/user)
-	. = FALSE
-	if (!istype(M))
-		return FALSE
-
-	if (lit)
-		M.IgniteMob()
-		if (istype(M.wear_mask, /obj/item/clothing/mask/smokable/cigarette) && user.zone_sel.selecting == BP_MOUTH)
-			var/obj/item/clothing/mask/smokable/cigarette/cig = M.wear_mask
-			if (M == user)
-				cig.use_tool(src, user)
-			else
-				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
-			return TRUE
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))

@@ -17,6 +17,8 @@
 	var/ignitermes = "USER lights NAME with FLAME"
 	var/brand
 	var/gas_consumption = 0.04
+	var/hitsound_on = 'sound/items/cigarette_fizzle.ogg'
+	hitsound = 'sound/weapons/throwtap.ogg'
 
 	z_flags = ZMM_MANGLE_PLANES
 
@@ -132,12 +134,14 @@
 			var/turf/T = get_turf(src)
 			T.visible_message(flavor_text)
 		START_PROCESSING(SSobj, src)
+		set_extension(src, /datum/extension/flame_source, src)
 
 /obj/item/clothing/mask/smokable/proc/extinguish(mob/user, no_message)
 	lit = 0
 	damtype = DAMAGE_BRUTE
 	STOP_PROCESSING(SSobj, src)
 	set_light(0)
+	remove_extension(src, /datum/extension/flame_source)
 	update_icon()
 
 /obj/item/clothing/mask/smokable/use_tool(obj/item/W, mob/living/user, list/click_params)
@@ -155,19 +159,21 @@
 			text = ignitermes
 		else
 			text = genericmes
+		var/mob/holding_user = loc
 		text = replacetext(text, "USER", "[user]")
-		text = replacetext(text, "NAME", "[name]")
+		text = replacetext(text, "NAME", "[holding_user == user ? "their [name]" : "\the [name]"]")
 		text = replacetext(text, "FLAME", "[W.name]")
+		text = replacetext(text, "TRANSACTION", "[(istype(holding_user) && holding_user != user) ? " for [holding_user]" : ""]")
 		light(text)
 	return ..()
 
-/obj/item/clothing/mask/smokable/use_before(mob/living/M, mob/living/user)
+/obj/item/clothing/mask/smokable/use_before(mob/living/fiery, mob/living/user)
 	. = FALSE
-	if (istype(M) && M.on_fire)
-		user.do_attack_animation(M)
-		light(SPAN_NOTICE("\The [user] coldly lights the \the [src] with the burning body of \the [M]."))
+	if(istype(fiery) && fiery.on_fire)
+		user.do_attack_animation(fiery)
+		light(SPAN_NOTICE("\The [user] coldly lights \the [src] with \the burning body of \the [fiery]."))
 		return TRUE
-
+	return
 
 /obj/item/clothing/mask/smokable/IsFlameSource()
 	return lit
@@ -185,11 +191,11 @@
 	type_butt = /obj/item/trash/cigbutt
 	chem_volume = 5
 	smoketime = 300
-	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
-	lightermes = "<span class='notice'>USER manages to light their NAME with their FLAME.</span>"
-	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
-	weldermes = "<span class='notice'>USER casually lights their NAME with their FLAME.</span>"
-	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light their NAME.</span>"
+	matchmes = "<span class='notice'>USER lights NAME with their FLAMETRANSACTION.</span>"
+	lightermes = "<span class='notice'>USER manages to light NAME with their FLAMETRANSACTION.</span>"
+	zippomes = "<span class='rose'>With a flick of their wrist, USER lights NAME with their FLAMETRANSACTION.</span>"
+	weldermes = "<span class='notice'>USER casually lights NAME with their FLAMETRANSACTION.</span>"
+	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light NAMETRANSACTION.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
 	var/list/filling = list(/datum/reagent/tobacco = 1)
 
@@ -331,7 +337,7 @@
 	return ..()
 
 /obj/item/clothing/mask/smokable/use_before(mob/living/carbon/human/H, mob/user)
-	if (lit && H == user && istype(H))
+	if (lit && H == user && istype(H) && user.a_intent == I_HELP)
 		var/obj/item/blocked = H.check_mouth_coverage()
 		if (blocked)
 			to_chat(H, SPAN_WARNING("\The [blocked] is in the way!"))
@@ -490,6 +496,7 @@
 		damtype = DAMAGE_BURN
 		icon_state = icon_on
 		item_state = icon_on
+		hitsound = hitsound_on
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
 		START_PROCESSING(SSobj, src)
@@ -507,6 +514,7 @@
 		var/mob/living/M = loc
 		if (!no_message)
 			to_chat(M, SPAN_NOTICE("Your [name] goes out, and you empty the ash."))
+	hitsound = initial(hitsound)
 	remove_extension(src, /datum/extension/scent)
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(mob/user)
