@@ -63,6 +63,11 @@
 	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
 		return
 
+	if (istype(A, /obj/screen/item_relayed))
+		var/obj/screen/item_relayed/relay = A
+		if (!isnull(relay.hovered_on))
+			return ClickOn(relay.hovered_on, params, use_in_world)
+
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
@@ -525,15 +530,15 @@ GLOBAL_LIST_INIT(click_catchers)
 
 /client/MouseDown(object, location, control, params)
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnMouseDown(object, location, params)
+	click_handler.OnMouseDown(object, location, control, params)
 
 /client/MouseUp(object, location, control, params)
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnMouseUp(object, location, params)
+	click_handler.OnMouseUp(object, location, control, params)
 
 /client/MouseDrag(src_object,atom/over_object,src_location,over_location,src_control,over_control,params)
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
-	click_handler.OnMouseDrag(over_object, params)
+	click_handler.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
 
 /client/MouseEntered(object, location, control, params)
 	var/datum/click_handler/click_handler = usr.GetClickHandler()

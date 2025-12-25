@@ -28,11 +28,6 @@
 	maptext_height = 480
 	maptext_width = 480
 
-
-/obj/screen/inventory
-	var/slot_id	//The indentifier for the slot. It has nothing to do with ID cards.
-
-
 /obj/screen/close
 	name = "close"
 
@@ -66,19 +61,142 @@
 	owner.ui_action_click(owner)
 	return 1
 
-/obj/screen/storage
+/// Base type for screen objects that relay to an /obj/item instance
+/obj/screen/item_relayed
+	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
+
+	var/obj/item/mouse_down_on = null
+	var/obj/item/hovered_on = null
+
+/// Finds the item for the given mouse parameters. Returns an /obj/item or null.
+/obj/screen/item_relayed/proc/find_item(params)
+	return null
+
+/// Called when the item relay is clicked, but not at a location with an item.
+/obj/screen/item_relayed/proc/empty_click(atom/location, control, params)
+
+/obj/screen/item_relayed/Click(atom/location, control, params)
+	if(!usr.canClick())
+		return
+	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
+		return
+
+	var/obj/item/clicked_on = find_item(params)
+	if (!isnull(clicked_on))
+		usr.ClickOn(clicked_on, params)
+	else
+		empty_click(location, control, params)
+
+	return 1
+
+/obj/screen/item_relayed/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	var/obj/item/drag_on = find_item(params)
+
+	if (!isnull(drag_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseDrag(drag_on, params)
+
+/obj/screen/item_relayed/MouseUp(location, control, params)
+	var/obj/item/up_on = find_item(params)
+
+	if (!isnull(up_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseUp(up_on, location, control, params)
+
+/obj/screen/item_relayed/MouseDown(location, control, params)
+	var/obj/item/down_on = find_item(params)
+
+	if (!isnull(down_on))
+		var/datum/click_handler/click_handler = usr.GetClickHandler()
+		click_handler.OnMouseDown(down_on, location, control, params)
+		mouse_down_on = down_on
+
+/obj/screen/item_relayed/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
+	if (!isnull(mouse_down_on))
+		mouse_down_on.MouseDrop(over_object, src_location, over_location, src_control, over_control, params)
+
+/obj/screen/item_relayed/MouseEntered(location, control, params)
+	hovered_on = find_item(params)
+	if (!isnull(hovered_on))
+		hovered_on.MouseEntered(location, control, params)
+
+/obj/screen/item_relayed/MouseMove(location, control, params)
+	var/obj/item/new_hovered_on = find_item(params)
+
+	if (hovered_on != new_hovered_on)
+		if (!isnull(hovered_on))
+			hovered_on.MouseExited(location, control, params)
+		if (!isnull(new_hovered_on))
+			new_hovered_on.MouseEntered(location, control, params)
+		hovered_on = new_hovered_on
+	else if (!isnull(hovered_on))
+		hovered_on.MouseMove(location, control, params)
+
+/obj/screen/item_relayed/MouseExited(location, control, params)
+	if (!isnull(hovered_on))
+		hovered_on.MouseExited(location, control, params)
+	hovered_on = null
+
+/// Item relay used by storage UIs - uses mouse position to determine which item in the storage is being pointed at
+/obj/screen/item_relayed/storage
 	name = "storage"
 
-/obj/screen/storage/Click()
-	if(!usr.canClick())
-		return 1
-	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
-		return 1
-	if(master)
+	var/datum/storage_ui/default/containing_ui = null
+
+/obj/screen/item_relayed/storage/empty_click(atom/location, control, string_params)
+	if (master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
 			usr.ClickOn(master)
+
 	return 1
+
+/obj/screen/item_relayed/storage/find_item(string_params)
+	if (isnull(master) || isnull(containing_ui))
+		return null
+
+	var/list/params = params2list(string_params)
+	// the screen location format is "tileX:pixelX,tileY:pixelY"
+	var/list/clicked_loc = splittext(params[MOUSE_SCREEN_LOC], ",")
+	// so this is "tileX:pixelX"
+	var/list/clicked_loc_X = splittext(clicked_loc[1],":")
+	// and "tileY:pixelY"
+	var/list/clicked_loc_Y = splittext(clicked_loc[2],":")
+
+	if (!isnull(containing_ui.storage.storage_slots))
+		var/clicked_loc_tile_X = text2num(clicked_loc_X[1])
+		var/clicked_loc_pixel_X = text2num(clicked_loc_X[2])
+
+		if (clicked_loc_pixel_X <= 16)
+			clicked_loc_tile_X -= 1
+
+		var/clicked_loc_tile_Y = text2num(clicked_loc_Y[1])
+		var/clicked_loc_pixel_Y = text2num(clicked_loc_Y[2])
+
+		if (clicked_loc_pixel_Y <= 16)
+			clicked_loc_tile_Y -= 1
+
+		var/obj/item/stored = containing_ui.slot_obj_locs["[clicked_loc_tile_X],[clicked_loc_tile_Y]"]
+
+		if (istype(stored, /obj/item))
+			return stored
+	else
+		var/clicked_loc_tile_X = text2num(clicked_loc_X[1])
+		var/clicked_loc_pixel_X = text2num(clicked_loc_X[2])
+
+		var/clicked_loc_x = clicked_loc_tile_X * WORLD_ICON_SIZE + clicked_loc_pixel_X 
+
+		for (var/i in 1 to length(containing_ui.space_obj_x_start))
+			var/obj/item/stored = master.contents[i]
+			if (!istype(stored, /obj/item))
+				continue
+
+			if (!(containing_ui.space_obj_x_start[i] <= clicked_loc_x && clicked_loc_x <= containing_ui.space_obj_x_end[i]))
+				continue
+
+			return stored
+
+	return null
 
 /obj/screen/zone_sel
 	name = "damage zone"
@@ -350,13 +468,18 @@
 			return 0
 	return 1
 
-/obj/screen/inventory/Click()
-	// At this point in client Click() code we have passed the 1/10 sec check and little else
-	// We don't even know if it's a middle click
-	if(!usr.canClick())
-		return 1
-	if(usr.incapacitated())
-		return 1
+// An item relay that represents an inventory slot for some mob
+/obj/screen/item_relayed/inventory_slot
+	var/slot_id
+
+/obj/screen/item_relayed/inventory_slot/find_item(params)
+	if (!ismob(usr))
+		return null
+
+	var/mob/mob = usr
+	return mob.get_equipped_item(slot_id)
+
+/obj/screen/item_relayed/inventory_slot/empty_click(atom/location, control, params)
 	switch(name)
 		if("r_hand")
 			if(iscarbon(usr))
@@ -380,12 +503,11 @@
 			if(usr.attack_ui(slot_id))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
-	return 1
 
-/obj/screen/inventory/Adjacent(atom/neighbor)
+/obj/screen/item_relayed/inventory_slot/Adjacent(atom/neighbor)
 	return neighbor == usr
 
-/obj/screen/inventory/MouseDrop_T(atom/dropped, mob/living/user)
+/obj/screen/item_relayed/inventory_slot/MouseDrop_T(atom/dropped, mob/living/user)
 	// No more cloning knife hands by drag-dropping augs to the other hand slot
 	var/obj/item/droppeditem = dropped
 	if (istype(droppeditem) && !droppeditem.canremove)
