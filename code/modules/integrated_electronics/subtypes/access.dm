@@ -55,7 +55,11 @@
 	var/list/access
 
 /obj/item/integrated_circuit/output/access_displayer/do_work()
-	var/list/signature_and_data = splittext(get_pin_data(IC_INPUT, 1), ":")
+	var/pin_data = get_pin_data(IC_INPUT, 1)
+	if(!pin_data)
+		access = null // Allow revoking the circuit's access by passing something falsy
+		return
+	var/list/signature_and_data = splittext(pin_data, ":")
 	if(length(signature_and_data) < 2)
 		return
 
