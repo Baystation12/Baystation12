@@ -27,8 +27,7 @@
 
 
 /obj/structure/hygiene/use_tool(obj/item/tool, mob/user, list/click_params)
-	// Plunger - Unclog
-	if (isplunger(tool))
+	if (istype(tool, /obj/item/clothing/mask/plunger))
 		if (!clogged)
 			USE_FEEDBACK_FAILURE("\The [src] isn't clogged.")
 			return TRUE
@@ -57,7 +56,6 @@
 		if (clogged <= 0)
 			unclog()
 		return TRUE
-
 	return ..()
 
 
@@ -506,7 +504,7 @@
 	SHOULD_CALL_PARENT(FALSE)
 
 	// Plunger - Passthrough to parent if clogged
-	if (isplunger(tool) && clogged)
+	if (clogged && istype(tool, /obj/item/clothing/mask/plunger))
 		return ..()
 
 	// Reagent Container - Fill container

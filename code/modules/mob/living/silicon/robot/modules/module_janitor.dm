@@ -16,7 +16,7 @@
 		/obj/item/holosign_creator,
 		/obj/item/device/lightreplacer,
 		/obj/item/borg/sight/hud/jani,
-		/obj/item/device/plunger/robot,
+		/obj/item/clothing/mask/plunger,
 		/obj/item/crowbar,
 		/obj/item/weldingtool
 	)

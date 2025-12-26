@@ -43,7 +43,7 @@
 		/obj/item/inflatable_dispenser/robot,
 		/obj/item/reagent_containers/spray/cleaner/drone,
 		/obj/item/inducer/borg,
-		/obj/item/device/plunger/robot,
+		/obj/item/clothing/mask/plunger,
 		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
