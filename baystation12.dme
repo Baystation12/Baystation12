@@ -1605,6 +1605,7 @@
 #include "code\modules\client\client_color.dm"
 #include "code\modules\client\client_defines.dm"
 #include "code\modules\client\client_helpers.dm"
+#include "code\modules\client\client_outline.dm"
 #include "code\modules\client\client_procs.dm"
 #include "code\modules\client\darkmode.dm"
 #include "code\modules\client\movement.dm"

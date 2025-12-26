@@ -50,3 +50,15 @@
 
 	/// The current fullscreen state for /client/toggle_fullscreen()
 	var/fullscreen = FALSE
+
+	/// When the client has atom outlines enabled and hovers something applicable, that thing's outline
+	var/image/atom_outline
+
+	/// A resolvable to the current atom outline target, if any
+	var/weakref/outline_atom
+
+	/// True while an atom outline update is in-flight
+	var/outline_updating
+
+	/// Mirror of the truthiness of the atom_outlines preference
+	var/outline_enabled
