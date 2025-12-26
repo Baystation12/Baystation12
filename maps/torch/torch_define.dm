@@ -59,3 +59,11 @@
 	welcome_sound = null
 
 	use_bluespace_interlude = TRUE
+
+	var/list/memorial_entries = list()
+
+/datum/map/torch/setup_config(name, value, filename)
+	if (name == "memorial_entry")
+		memorial_entries = value
+		return
+	..()

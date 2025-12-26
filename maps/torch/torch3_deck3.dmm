@@ -17935,7 +17935,7 @@
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
 "SK" = (
-/obj/structure/sign/memorial/torch,
+/obj/structure/sign/memorial,
 /obj/structure/sign/double/solgovflag/left{
 	pixel_x = -16;
 	pixel_y = 32
