@@ -1,4 +1,0 @@
-author: KatTheFox
-changes:
-  - tweak: IC access circuits now revoke their access when passed falsy values
-delete-after: true
