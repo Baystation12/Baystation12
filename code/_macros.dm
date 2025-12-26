@@ -108,8 +108,6 @@
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
-#define isplunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
-
 #define isadmin(X) (check_rights(R_ADMIN, 0, (X)) != 0)
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)

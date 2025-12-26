@@ -28958,6 +28958,7 @@
 /obj/item/reagent_containers/glass/bucket,
 /obj/random/ironing_board_item,
 /obj/item/ironing_iron,
+/obj/item/clothing/mask/plunger,
 /turf/simulated/floor/tiled/freezer,
 /area/medical/washroom)
 "ugg" = (
