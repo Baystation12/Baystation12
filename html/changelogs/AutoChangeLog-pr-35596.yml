@@ -1,4 +1,0 @@
-author: KatTheFox
-changes:
-  - tweak: IC beeper circuits now properly emit chatlogs
-delete-after: true

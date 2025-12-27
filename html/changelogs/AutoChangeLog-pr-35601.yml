@@ -1,5 +1,0 @@
-author: Spookerton
-changes:
-  - rscadd: Added optional mouse hover outlines for items, defaulting on and 
-      configurable through Setup → Global
-delete-after: true
