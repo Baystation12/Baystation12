@@ -1,6 +1,6 @@
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
 
-/datum/shuttle/autodock
+/datum/shuttle/autodock // someone needs to describe what autodock means shuttle, is that fucking shuttle type or what??
 	var/in_use = null	//tells the controller whether this shuttle needs processing, also attempts to prevent double-use
 	var/last_dock_attempt_time = 0
 	var/current_dock_target

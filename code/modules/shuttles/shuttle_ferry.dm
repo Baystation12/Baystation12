@@ -1,6 +1,6 @@
 
 
-/datum/shuttle/autodock/ferry
+/datum/shuttle/autodock/ferry // i dont know what Ferry-shuttle means, someone need to explain it here
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/direction = 0	//0 = going to station, 1 = going to offsite.
 

@@ -2,8 +2,8 @@
 
 /datum/shuttle
 	var/name = ""
-	var/warmup_time = 0
-	var/moving_status = SHUTTLE_IDLE
+	var/warmup_time = 0 // what that var means? someone explain it
+	var/moving_status = SHUTTLE_IDLE // same, explain it
 
 	var/list/shuttle_area //can be both single area type or a list of areas
 	var/obj/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.

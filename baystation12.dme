@@ -3162,6 +3162,7 @@
 #include "code\modules\shuttles\shuttle_engines.dm"
 #include "code\modules\shuttles\shuttle_ferry.dm"
 #include "code\modules\shuttles\shuttle_log.dm"
+#include "code\modules\shuttles\shuttle_meatship.dm"
 #include "code\modules\shuttles\shuttle_specops.dm"
 #include "code\modules\shuttles\shuttle_supply.dm"
 #include "code\modules\shuttles\shuttles_multi.dm"
