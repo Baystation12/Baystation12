@@ -4061,7 +4061,7 @@
 /area/quartermaster/expedition/storage)
 "jA" = (
 /obj/floor_decal/industrial/outline/yellow,
-/obj/structure/ore_box,
+/obj/structure/ore_box/persistent,
 /obj/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
@@ -4966,7 +4966,7 @@
 /area/quartermaster/storage)
 "lq" = (
 /obj/floor_decal/industrial/outline/yellow,
-/obj/structure/ore_box,
+/obj/structure/ore_box/persistent,
 /obj/floor_decal/industrial/warning{
 	dir = 4
 	},

@@ -37,6 +37,7 @@ SUBSYSTEM_DEF(persistence)
 	if(!tracking_values[track_type])
 		tracking_values[track_type] = list()
 	tracking_values[track_type] += value
+	return TRUE
 
 /datum/controller/subsystem/persistence/proc/forget_value(atom/value, track_type)
 	if(tracking_values[track_type])
