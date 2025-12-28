@@ -21,7 +21,7 @@
 
 /mob/observer/eye/aiEye/Initialize(mapload)
 	. = ..()
-	visualnet = cameranet
+	visualnet = GLOB.ainet
 
 
 /mob/observer/eye/aiEye/setLoc(T, cancel_tracking = 1)

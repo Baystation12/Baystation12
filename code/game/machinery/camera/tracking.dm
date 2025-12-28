@@ -231,7 +231,7 @@
 		return TRACKING_TERMINATE
 
 	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
-	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+	return TRACKING_POSSIBLE
 
 /mob/living/carbon/human/tracking_status()
 	if(is_cloaked())
