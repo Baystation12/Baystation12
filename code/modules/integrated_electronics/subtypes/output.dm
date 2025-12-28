@@ -159,12 +159,11 @@
 		if(isnull(text))
 			return
 		var/atom/movable/speaking = get_object()
-		var/sanitized_text = sanitize(text)
-		speaking.audible_message("\The [speaking][sanitized_text]")
+		speaking.audible_message("\The [speaking][text]")
 		if (assembly)
-			log_say("[assembly] \ref[assembly] : [sanitized_text]")
+			log_say("[assembly] \ref[assembly] : [text]")
 		else
-			log_say("[name] ([type]) : [sanitized_text]")
+			log_say("[name] ([type]) : [text]")
 
 /obj/item/integrated_circuit/output/sound/on_data_written()
 	power_draw_per_use =  get_pin_data(IC_INPUT, 2) * 15
