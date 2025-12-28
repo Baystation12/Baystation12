@@ -46,6 +46,7 @@
 			SPAN_NOTICE("\The [user] lights \a [src] with \a [tool]."),
 			SPAN_NOTICE("You light \the [src] with \the [tool].")
 		)
+		set_extension(src, /datum/extension/flame_source, src)
 		return TRUE
 
 	return ..()
