@@ -2537,6 +2537,7 @@
 #include "code\modules\mob\observer\freelook\read_me.dm"
 #include "code\modules\mob\observer\freelook\update_triggers.dm"
 #include "code\modules\mob\observer\freelook\visualnet.dm"
+#include "code\modules\mob\observer\freelook\ai\aivisualnet.dm"
 #include "code\modules\mob\observer\freelook\ai\cameranet.dm"
 #include "code\modules\mob\observer\freelook\ai\chunk.dm"
 #include "code\modules\mob\observer\freelook\ai\eye.dm"

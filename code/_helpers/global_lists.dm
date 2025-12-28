@@ -42,6 +42,7 @@ GLOBAL_TYPED_NEW(underwear, /datum/category_collection/underwear)
 // Visual nets
 var/global/list/datum/visualnet/visual_nets = list()
 var/global/datum/visualnet/camera/cameranet = new()
+GLOBAL_TYPED_NEW(ainet, /datum/visualnet/ai)
 
 // Runes
 var/global/list/rune_list = new()
