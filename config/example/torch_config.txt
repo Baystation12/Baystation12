@@ -52,3 +52,10 @@
 #LOCAL_CURRENCY_NAME Thalers
 #LOCAL_CURRENCY_NAME_SINGULAR Thaler
 #LOCAL_CURRENCY_NAME_SHORT T
+
+## Torch memorial rock names
+#MEMORIAL_ENTRY Senior Explorer Paula Wojciak | Expeditionary Corps
+#MEMORIAL_ENTRY Senior Explorer Ziva Karim-Kirilisav | Expeditionary Corps
+#MEMORIAL_ENTRY Petty Officer Third Class Tatyanna Svetka | Fleet
+#MEMORIAL_ENTRY Lieutenant Adrian Schmidt | Expeditionary Corps
+#MEMORIAL_ENTRY Ensign Brock Bunten | Expeditionary Corps

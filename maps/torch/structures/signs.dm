@@ -45,16 +45,10 @@
 		"Fleet"
 	)
 
-
-/obj/structure/sign/memorial/torch
-	fallen = list(
-		"Senior Explorer Paula Wojciak | Expeditionary Corps",
-		"Senior Explorer Ziva Karim-Kirilisav | Expeditionary Corps",
-		"Petty Officer Third Class Tatyanna Svetka | Fleet",
-		"Lieutenant Adrian Schmidt | Expeditionary Corps",
-		"Ensign Brock Bunten | Expeditionary Corps"
-	)
-
+/obj/structure/sign/memorial/Initialize()
+	. = ..()
+	var/datum/map/torch/torch_map = GLOB.using_map
+	fallen += torch_map?.memorial_entries
 
 /obj/structure/sign/memorial/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Dog Tags - Add dog tag
@@ -79,8 +73,11 @@
 
 /obj/structure/sign/memorial/examine(mob/user, distance)
 	. = ..()
-	if (distance <= 2 && length(fallen))
-		to_chat(user, "<b>The fallen:</b> [jointext(fallen, "<br>")]")
+	if (distance <= 2)
+		if (length(fallen))
+			to_chat(user, "<b>Among the many names, you read:</b><br> [jointext(fallen, "<br>")]")
+		else
+			to_chat(user, "<b>There are many names engraved on \the [src].</b>")
 
 // Disallow trader to sell unique memorial
 /datum/trader/trading_beacon/manufacturing/New()
