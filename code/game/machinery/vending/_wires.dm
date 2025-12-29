@@ -38,6 +38,8 @@
 
 /datum/wires/vending/UpdatePulsed(index)
 	var/obj/machinery/vending/vendor = holder
+	if (vendor.inoperable())
+		return
 	switch (index)
 		if (WIRE_THROW_PRODUCTS)
 			if (IsIndexCut(WIRE_THROW_PRODUCTS))
