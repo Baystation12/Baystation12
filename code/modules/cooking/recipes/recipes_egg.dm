@@ -87,7 +87,9 @@
 /singleton/cooking_recipe/sea_delight
 	appliance = COOKING_APPLIANCE_SKILLET
 	consumed_reagents = list(
-		/datum/reagent/water = 10,
+		/datum/reagent/water = 10
+	)
+	required_reagents = list(
 		/datum/reagent/nutriment/protein/egg = 9
 	)
 	required_produce = list(
