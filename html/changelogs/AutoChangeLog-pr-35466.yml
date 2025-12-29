@@ -1,9 +1,0 @@
-author: Podszywacz
-changes:
-  - rscadd: Mobs can be ignited directly with lit flame sources by clicking.
-  - rscadd: Lit cigs can now be extinguished on flesh, causing damage, 
-      especially for eyes.
-  - soundadd: Extinguishing lit cigs now makes a sound.
-  - admin: All ignition and extinguish attempts using this method are now attack
-      logged.
-delete-after: true
