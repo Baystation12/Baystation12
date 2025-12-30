@@ -1,3 +1,3 @@
 PROCESSING_SUBSYSTEM_DEF(fastprocess)
 	name = "Fast Processing"
-	wait = 2 SECONDS
+	wait = 2

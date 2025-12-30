@@ -188,11 +188,14 @@
 	START_PROCESSING(SSfastprocess, src)
 	var/list/zlevels = GetConnectedZlevels(z)
 	for (var/mob/living/L as anything in GLOB.alive_mobs)
-		if (!(L.z in zlevels))
+		if (!(get_z(L) in zlevels))
 			continue
-		if (istype(L, /mob/living/exosuit))
+		if (is_forbidden_type(L))
 			continue
 		mobs_to_switch += L
+
+/datum/bubble_effect/bluespace_pulse/proc/is_forbidden_type(mob)
+	return istype(mob, /mob/living/exosuit) || istype(mob, /mob/living/silicon/sil_brainmob) || istype(mob, /mob/living/carbon/brain)
 
 
 /datum/bubble_effect/bluespace_pulse/Destroy()
@@ -215,13 +218,19 @@
 	var/obj/machinery/light/light = locate() in turf
 	if (light && prob(20))
 		light.broken()
-	var/mob/living/being = locate() in turf
+
+	var/mob/living/being
+	for (var/mob/living/candidate as anything in GLOB.alive_mobs)
+		var/turf/mob_turf = get_turf(candidate)
+		if (mob_turf == turf)
+			being = candidate
+			break
 	if (being && prob(parent.affect_chance))
-		var/list/zlevels = GetConnectedZlevels(being.z)
+		var/list/zlevels = GetConnectedZlevels(get_z(being))
 		if (GLOB.using_map.use_bluespace_interlude && prob(parent.interlude_chance))
 			if (istype(being, /mob/living/simple_animal) && prob(80))
 				return
-			if (istype(being, /mob/living/exosuit))
+			if (is_forbidden_type(being))
 				return
 			var/turf/T = pick_area_turf_in_connected_z_levels(
 				list(GLOBAL_PROC_REF(is_not_space_area)),
@@ -238,7 +247,9 @@
 		//swap places with another mob
 		for (var/mob/living/mob as anything in mobs_to_switch)
 			var/swap_chance = affect_chance
-			if (!(mob.z in zlevels))
+			if (!(get_z(mob) in zlevels))
+				continue
+			if (is_forbidden_type(being))
 				continue
 			if (istype(mob.loc, /turf/space) || istype(being.loc, /turf/space))
 				swap_chance = 10 //lots of mobs in space can cause the entire ship to get spaced, so lower the chance
