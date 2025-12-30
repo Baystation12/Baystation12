@@ -31,7 +31,7 @@
 	var/overmap_name = "missile"
 
 	// how many pieces of dense objects can this missile still punch through
-	var/inertia = 4
+	var/inertia = 12
 
 	var/maintenance_hatch_open = FALSE
 	var/armed = FALSE
@@ -97,6 +97,9 @@
 	if (x < TRANSITIONEDGE || x > world.maxx - TRANSITIONEDGE || y < TRANSITIONEDGE || y > world.maxy - TRANSITIONEDGE)
 		touch_map_edge()
 
+/obj/structure/missile/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	return istype(mover, /obj/structure/missile) ? 1 : ..()
+
 /obj/structure/missile/Bump(atom/obstacle)
 	. = ..()
 	if (!armed)
@@ -107,12 +110,30 @@
 		if (istype(obstacle, /obj/machinery/shield))
 			inertia = 0
 		else
-			qdel(obstacle)
-			inertia--
-			return
-	// Stop moving
-	walk(src, 0)
-	detonate(obstacle)
+			penetrate(obstacle)
+			damping_inertia()
+	else
+		// Detonating on hit
+		walk(src, 0)
+		detonate(obstacle)
+
+/obj/structure/missile/proc/penetrate(turf/target_turf)
+	//first bust whatever is in the turf
+	for(var/atom/contained_atom in target_turf)
+		if(contained_atom != src && !contained_atom.CanPass(src, loc, 0.5, 0)) //only penetrate stuff that would actually block us
+			contained_atom.ex_act(EX_ACT_HEAVY)
+
+	//then, penetrate the turf if it still exists
+	if(target_turf && !target_turf.CanPass(src, loc, 0.5, 0))
+		target_turf.ex_act(EX_ACT_HEAVY, TRUE)
+
+/obj/structure/missile/proc/damping_inertia()
+	inertia--
+	if(inertia <= 0)
+		detonate()
+
+/obj/structure/missile/ex_act()
+	return
 
 // Move to the overmap until we encounter a new z
 /obj/structure/missile/touch_map_edge()
@@ -275,6 +296,7 @@
 		return
 	var/obj/item/missile_equipment/thruster/thruster = equipment[MISSILE_PART_THRUSTER]
 	if (thruster && thruster.try_consume_fuel())
+		pass_flags |= PASS_FLAG_TABLE
 		playsound(src, 'sound/machines/thruster.ogg', 50, 0, 0)
 		walk(src, dir, 1)
 
