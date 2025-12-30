@@ -32,3 +32,31 @@
 	addprompt = "Select reagent to make mob allergic to."
 	remprompt = "Select reagent to remove allergy to."
 	selectable = TRUE
+
+/// Migrates allergies from lower save versions to higher ones.
+/// If you change the metaoptions list above via retyping, add a new migration below!!!
+/singleton/trait/malus/allergy/migrate(metaoption, save_version)
+	if (save_version < 4)
+		switch (metaoption)
+			// painkillers
+			if ("/datum/reagent/tramadol")
+				metaoption = "/datum/reagent/opiate"
+			if ("/datum/reagent/tramadol/oxycodone")
+				metaoption = "/datum/reagent/opiate"
+
+			// antidepressants
+			if ("/datum/reagent/citalopram")
+				metaoption = "/datum/reagent/antidepressant"
+			if ("/datum/reagent/paroxetine")
+				metaoption = "/datum/reagent/antidepressant"
+
+			// various alcohol types rolled into ethanol
+			if ("/datum/reagent/ethanol/creme_de_menthe")
+				metaoption = "/datum/reagent/ethanol"
+			if ("/datum/reagent/ethanol/gin")
+				metaoption = "/datum/reagent/ethanol"
+			if ("/datum/reagent/ethanol/tequilla")
+				metaoption = "/datum/reagent/ethanol"
+			if ("/datum/reagent/ethanol/vodka")
+				metaoption = "/datum/reagent/ethanol"
+	return metaoption
