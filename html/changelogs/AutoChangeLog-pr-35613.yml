@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - bugfix: Vendor wires can't be pulsed while inoperable
-delete-after: true

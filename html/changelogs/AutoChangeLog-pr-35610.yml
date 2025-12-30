@@ -1,4 +1,0 @@
-author: KatTheFox
-changes:
-  - bugfix: IC sound circuits no longer strip whitespace from constant values
-delete-after: true
