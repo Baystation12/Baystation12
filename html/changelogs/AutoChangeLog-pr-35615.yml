@@ -1,0 +1,4 @@
+author: LordNest
+changes:
+  - bugfix: Impact missiles can now penetrate hull properly
+delete-after: true
