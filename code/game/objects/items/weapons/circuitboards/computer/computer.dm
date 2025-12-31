@@ -77,18 +77,6 @@
 	name = "circuit board (helm control console)"
 	build_path = /obj/machinery/computer/ship/helm
 
-/obj/item/stock_parts/circuitboard/nav
-	name = "circuit board (navigation console)"
-	build_path = /obj/machinery/computer/ship/navigation
-
-/obj/item/stock_parts/circuitboard/nav/tele
-	name = "circuit board (navigation telescreen)"
-	build_path = /obj/machinery/computer/ship/navigation/telescreen
-
-/obj/item/stock_parts/circuitboard/sensors
-	name = "circuit board (sensors console)"
-	build_path = /obj/machinery/computer/ship/sensors
-
 /obj/item/stock_parts/circuitboard/area_atmos
 	name = "circuit board (area air control console)"
 	build_path = /obj/machinery/computer/area_atmos

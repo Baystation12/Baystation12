@@ -99,7 +99,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "ao" = (
-/obj/machinery/computer/ship/sensors/spacer{
+/obj/machinery/computer/modular/preset/sensors/spacer{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -5481,7 +5481,7 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/hallway/port)
 "pP" = (
-/obj/machinery/computer/ship/sensors/spacer,
+/obj/machinery/computer/modular/preset/sensors/spacer,
 /turf/simulated/floor,
 /area/ship/scrap/shuttle/cubkitten)
 "qT" = (
