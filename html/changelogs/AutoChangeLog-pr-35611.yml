@@ -1,6 +1,0 @@
-author: Banditoz
-changes:
-  - bugfix: The bluespace drive instability event now considers all mobs no 
-      matter what they're inside, if on a Torch Z.
-  - bugfix: The bluespace drive instability bubble is fast again.
-delete-after: true
