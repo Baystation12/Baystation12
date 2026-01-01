@@ -1,0 +1,35 @@
+author: emmanuelbassil, Banditoz
+changes:
+  - balance: Reworked drug metabolism extensively. Affects alcohol, opioids, 
+      nicotine and another handful of drugs most visibly. More details on the 
+      wiki.
+  - balance: Reworked how protein/sugar maluses work; where it now depends on 
+      how much sugar/protein was actually absorbed and not how much is in your 
+      stomach. This means IV sugar/protein or protein on skin (for Skrell) now 
+      contributes to toxicity as well.
+  - rscadd: Added Naloxone, which cleans out opiate metabolites. 5u should 
+      remove 25u of opiate relatively quickly (2 per tick.) Made with ethanol, 
+      inaprovaline, and phoron catalyst.
+  - tweak: Therapeutic doses of anti-depressants make you less prone to 
+      hallucinations. ODing does the opposite.
+  - tweak: Therapeutic doses of methylphenidate makes you more prone to 
+      hallucinations.
+  - tweak: ODing on methylphenidate now causes seizures. Can be reversed by 
+      soporifics.
+  - tweak: Alcohol now provides a painkilling effect that scales up with dose.
+  - tweak: Lowered deletrathol OD to 10; metabolized very slowly and lasts long.
+  - tweak: ODing on nicotine can lead to heart damage. Nicotine metabolite 
+      products are counted towards OD; so chain smoking places you at higher 
+      risk.
+  - tweak: Higher quality tobacco is less toxic and prone to side effects than 
+      lower quality tobacco.
+  - tweak: Cigarettes now consistently deliver some nicotine for as long as 
+      they're lit; as opposed to giving it all at the beginning and emptying 
+      out.
+  - tweak: Allergies for tramadol and oxycodone have been migrated to opiate; 
+      the metabolic product of both. Please double check your character's 
+      allergies.
+  - tweak: Allergies for alcohols have been migrated to the parent ethanol 
+      alcohol type. If you were allergic to vodka, you're now allergic to all 
+      alcohols!
+delete-after: true
