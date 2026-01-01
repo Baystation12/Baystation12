@@ -8,8 +8,9 @@
 	hallucination_power = max(hallucination_power, power)
 
 /mob/living/carbon/proc/adjust_hallucination(duration, power)
-	hallucination_duration = max(0, hallucination_duration + duration)
-	hallucination_power = max(0, hallucination_power + power)
+	var/resistance = GET_TRAIT_LEVEL(src, /singleton/trait/boon/clear_mind) * 3
+	hallucination_duration = max(0, hallucination_duration + duration - resistance)
+	hallucination_power = max(0, hallucination_power + power - resistance)
 
 /mob/living/carbon/proc/handle_hallucinations()
 	//Tick down the duration

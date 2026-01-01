@@ -1,4 +1,10 @@
-#define PREF_SER_VERSION 3
+// You will want to increment this for each migration you create.
+// Migrations:
+// 1: Base version
+// 2: Booster -> human species migration
+// 3: Pronouns
+// 4: Tram/oxy, alcohol, antidepressant retyping
+#define PREF_SER_VERSION 4
 
 /datum/preferences/proc/get_path(ckey, record_key, extension="json")
 	return "data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/[record_key].[extension]"

@@ -67,7 +67,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.body_markings = R.read("body_markings")
 	pref.body_descriptors = R.read("body_descriptors")
 	pref.picked_traits = R.read("traits")
-	pref.picked_traits = sanitize_trait_prefs(pref.picked_traits)
+	pref.picked_traits = sanitize_trait_prefs(pref.picked_traits, R.get_version())
 
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)

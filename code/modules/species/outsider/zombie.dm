@@ -348,6 +348,7 @@ GLOBAL_LIST_AS(zombie_species, list(
 	color = "#411111"
 	taste_mult = 5
 	metabolism = REM
+	active_metabolites = /datum/reagent/zombie
 	overdose = 200
 	filter_mod = 0.3
 	hidden_from_codex = TRUE
@@ -355,16 +356,16 @@ GLOBAL_LIST_AS(zombie_species, list(
 	heating_point = null
 	should_admin_log = TRUE
 
-/datum/reagent/zombie/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/zombie/affect_metabolites(mob/living/carbon/M, dose)
 	if (!ishuman(M))
 		return
 	var/mob/living/carbon/human/H = M
 
 	if (!(H.species.name in GLOB.zombie_species) || H.is_species(SPECIES_DIONA) || H.isSynthetic())
-		remove_self(volume)
+		remove_self(dose)
 		return
-	var/true_dose = H.chem_doses[type] + volume
 
+	var/true_dose = dose + H.bloodstr.get_reagent_amount(type)
 	if (true_dose >= 30)
 		if (M.getBrainLoss() > 140)
 			H.zombify()
@@ -401,7 +402,7 @@ GLOBAL_LIST_AS(zombie_species, list(
 		if (prob(3))
 			H.zombify()
 
-	M.reagents.add_reagent(/datum/reagent/zombie, frand(0.1, 1))
+	M.bloodstr.add_reagent(/datum/reagent/zombie, frand(0.1, 1))
 
 /datum/reagent/zombie/affect_touch(mob/living/carbon/M, removed)
 	affect_blood(M, removed * 0.5)

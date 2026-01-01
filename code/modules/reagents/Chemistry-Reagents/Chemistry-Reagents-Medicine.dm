@@ -17,7 +17,7 @@
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
 
-/datum/reagent/inaprovaline/overdose(mob/living/carbon/M)
+/datum/reagent/inaprovaline/process_overdose(mob/living/carbon/M)
 	M.add_chemical_effect(CE_SLOWDOWN, 1)
 	if(prob(5))
 		M.slurring = max(M.slurring, 10)
@@ -41,10 +41,10 @@
 		M.heal_organ_damage(6 * removed, 0)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
 
-/datum/reagent/bicaridine/overdose(mob/living/carbon/M)
+/datum/reagent/bicaridine/process_overdose(mob/living/carbon/M)
 	..()
 	if(ishuman(M))
-		M.add_chemical_effect(CE_BLOCKAGE, (15 + volume - overdose)/100)
+		M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_ARTERY_CUT && prob(2))
@@ -254,99 +254,83 @@
 /datum/reagent/paracetamol/affect_blood(mob/living/carbon/M, removed)
 	M.add_chemical_effect(CE_PAINKILLER, 35)
 
-/datum/reagent/paracetamol/overdose(mob/living/carbon/M)
+/datum/reagent/paracetamol/process_overdose(mob/living/carbon/M)
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.druggy = max(M.druggy, 2)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
 
-/datum/reagent/tramadol
-	name = "Tramadol"
-	description = "A simple, yet effective painkiller. Don't mix with alcohol."
-	taste_description = "sourness"
+/datum/reagent/opiate
+	name = "Opiate"
+	description = "A generic painkiller from the opiate family."
+	taste_description = "generic sourness"
 	reagent_state = LIQUID
-	color = "#cb68fc"
-	overdose = 30
-	scannable = 1
-	metabolism = 0.05
-	ingest_met = 0.02
+	color = "#7b23a4"
+	overdose = 60
+	scannable = TRUE
+	metabolism = 0.1
+	active_metabolites = /datum/reagent/opiate
 	flags = IGNORE_MOB_SIZE
-	value = 3.1
-	var/pain_power = 80 //magnitide of painkilling effect
-	var/effective_dose = 0.5 //how many units it need to process to reach max power
 
-/datum/reagent/tramadol/affect_blood(mob/living/carbon/M, removed)
-	var/effectiveness = 1
-	if(M.chem_doses[type] < effective_dose) //some ease-in ease-out for the effect
-		effectiveness = M.chem_doses[type]/effective_dose
-	else if(volume < effective_dose)
-		effectiveness = volume/effective_dose
-	M.add_chemical_effect(CE_PAINKILLER, pain_power * effectiveness)
-	if(M.chem_doses[type] > 0.5 * overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(1))
-			M.slurring = max(M.slurring, 10)
-	if(M.chem_doses[type] > 0.75 * overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		if(prob(5))
-			M.slurring = max(M.slurring, 20)
-	if(M.chem_doses[type] > overdose)
-		M.add_chemical_effect(CE_SLOWDOWN, 1)
-		M.slurring = max(M.slurring, 30)
-		if(prob(1))
-			M.Weaken(2)
-			M.drowsyness = max(M.drowsyness, 5)
-	var/boozed = isboozed(M)
+/datum/reagent/opiate/affect_metabolites(mob/living/carbon/affected, dose)
+	if (!istype(affected))
+		return
+	var/pain_effect = 5 * dose
+	var/hallucination_chance = 0
+	affected.add_chemical_effect(CE_PAINKILLER, pain_effect)
+
+	if ((dose >= 0.25 * overdose) && prob(1))
+		affected.slurring = max(affected.slurring, 10)
+	if (dose >= 0.5 * overdose)
+		affected.add_chemical_effect(CE_SLOWDOWN, 1)
+		if (prob(10))
+			affected.slurring = max(affected.slurring, 20)
+	if (dose >= 0.75 * overdose)
+		affected.add_chemical_effect(CE_SLOWDOWN, 1)
+	if (dose >= overdose)
+		affected.add_chemical_effect(CE_PAINKILLER, dose*0.5)
+		hallucination_chance += dose/3
+
+	var/boozed = affected.chem_effects[CE_ALCOHOL]
 	if(boozed)
-		M.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
-		M.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
-	if(isfast(M))
-		M.add_chemical_effect(CE_BREATHLOSS, 0.5)
-		M.add_chemical_effect(CE_SLOWDOWN, 2) //hyperzine reacts negatively with opiates
+		affected.add_chemical_effect(CE_ALCOHOL_TOXIC, 1)
+		affected.add_chemical_effect(CE_BREATHLOSS, 0.1 * boozed) //drinking and opiating makes breathing kinda hard
+		hallucination_chance *= 1.2
+	if(affected.is_fast())
+		affected.add_chemical_effect(CE_BREATHLOSS, 0.5)
+		affected.add_chemical_effect(CE_SLOWDOWN, 2) //hyperzine reacts negatively with opiates
+		hallucination_chance *= 1.5
 
-/datum/reagent/tramadol/overdose(mob/living/carbon/M)
-	..()
-	M.hallucination(120, 30)
+	hallucination_chance = min(hallucination_chance, 100)
+	if (prob(hallucination_chance))
+		affected.hallucination(60, 30)
+
+/datum/reagent/opiate/process_overdose(mob/living/carbon/M)
+	if (!istype(M))
+		return
 	M.druggy = max(M.druggy, 10)
-	M.add_chemical_effect(CE_PAINKILLER, pain_power*0.5) //extra painkilling for extra trouble
 	M.add_chemical_effect(CE_BREATHLOSS, 0.6) //Have trouble breathing, need more air
-	if(isboozed(M))
+	if(M.chem_effects[CE_ALCOHOL])
 		M.add_chemical_effect(CE_BREATHLOSS, 0.2) //Don't drink and OD on opiates folks
-	if(isfast(M))
+	if(M.is_fast())
 		M.add_chemical_effect(CE_NOPULSE, 1)
 		var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART] //heart damage + arrest
 		heart.take_internal_damage(heart.max_damage * 0.045)
 
-/datum/reagent/tramadol/proc/isboozed(mob/living/carbon/M)
-	. = 0
-	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested)
-		var/list/pool = M.reagents.reagent_list | ingested.reagent_list
-		for(var/datum/reagent/ethanol/booze in pool)
-			if(M.chem_doses[booze.type] < 2) //let them experience false security at first
-				continue
-			. = 1
-			if(booze.strength < 40) //liquor stuff hits harder
-				return 2
+/datum/reagent/opiate/tramadol
+	name = "Tramadol"
+	description = "A simple, yet effective painkiller. Don't mix with alcohol."
+	taste_description = "sourness"
+	color = "#cb68fc"
+	value = 3.1
+	metabolite_potency = 2
 
-/datum/reagent/tramadol/proc/isfast(mob/living/carbon/M)
-	. = FALSE
-	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(!ingested)
-		return FALSE
-	var/list/pool = M.reagents.reagent_list | ingested.reagent_list
-	for(var/datum/reagent/hyperzine/fast in pool)
-		if(M.chem_doses[fast.type])
-			return TRUE
-
-/datum/reagent/tramadol/oxycodone
+/datum/reagent/opiate/oxycodone
 	name = "Oxycodone"
 	description = "An effective and very addictive painkiller. Don't mix with alcohol."
 	taste_description = "bitterness"
 	color = "#800080"
-	scannable = 1
-	overdose = 20
-	pain_power = 200
-	effective_dose = 2
+	value = 3.5
+	metabolite_potency = 5
 
 /datum/reagent/deletrathol
 	name = "Deletrathol"
@@ -354,9 +338,9 @@
 	taste_description = "confusion"
 	color = "#800080"
 	reagent_state = LIQUID
-	overdose = 15
-	scannable = 1
+	overdose = 10
 	metabolism = 0.02
+	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/deletrathol/affect_blood(mob/living/carbon/human/H, removed)
@@ -368,7 +352,7 @@
 	if(prob(25))
 		H.mod_confused(1)
 
-/datum/reagent/deletrathol/overdose(mob/living/carbon/M)
+/datum/reagent/deletrathol/process_overdose(mob/living/carbon/M)
 	..()
 	M.druggy = max(M.druggy, 2)
 	M.add_chemical_effect(CE_PAINKILLER, 10)
@@ -382,6 +366,7 @@
 	reagent_state = LIQUID
 	color = "#99ccff"
 	metabolism = REM * 0.05
+	bioavailability = 0.5
 	overdose = REAGENTS_OVERDOSE / 6 // 5
 	scannable = 1
 	value = 4.6
@@ -522,6 +507,23 @@
 	M.add_chemical_effect(CE_PULSE, 3)
 	M.add_chemical_effect(CE_STIMULANT, 4)
 
+/datum/reagent/naloxone
+	name = "Naloxone"
+	description = "A reversal agent to nullify the effects of opiates."
+	reagent_state = LIQUID
+	color = "#a4a76d"
+	scannable = TRUE
+	metabolism = REM * 2
+	overdose = REAGENTS_OVERDOSE * 2
+	value = 2.7
+
+/datum/reagent/naloxone/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	if (affected.metabolized.has_reagent(/datum/reagent/opiate))
+		affected.metabolized.remove_reagent(/datum/reagent/opiate, 5 * removed)
+
+
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	description = "A powerful oxidizer that reacts with ethanol."
@@ -538,11 +540,9 @@
 	M.drowsyness = 0
 	M.stuttering = 0
 	M.clear_confused()
-	var/datum/reagents/ingested = M.get_ingested_reagents()
-	if(ingested)
-		for(var/datum/reagent/R in ingested.reagent_list)
-			if(istype(R, /datum/reagent/ethanol))
-				M.chem_doses[R.type] = max(M.chem_doses[R.type] - removed * 5, 0)
+
+	if (M.metabolized.has_reagent(/datum/reagent/ethanol))
+		M.metabolized.remove_reagent(/datum/reagent/ethanol, 5 * removed)
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"
@@ -581,24 +581,21 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#c1c1c1"
-	metabolism = REM * 0.1
+	metabolism = REM * 0.2
+	active_metabolites = /datum/reagent/spaceacillin
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
 	value = 2.5
 
-/datum/reagent/spaceacillin/affect_blood(mob/living/carbon/M, removed)
-	M.immunity = max(M.immunity - 0.1, 0)
+/datum/reagent/spaceacillin/affect_metabolites(mob/living/carbon/M, dose)
+	M.immunity = max(M.immunity - (dose/45), 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
 	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
-	if(volume > 10)
-		M.immunity = max(M.immunity - 0.3, 0)
+	if (dose > 10)
 		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
-	if(M.chem_doses[type] > 15)
-		M.immunity = max(M.immunity - 0.25, 0)
 
-/datum/reagent/spaceacillin/overdose(mob/living/carbon/M)
+/datum/reagent/spaceacillin/process_overdose(mob/living/carbon/M)
 	..()
-	M.immunity = max(M.immunity - 0.25, 0)
 	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
 	if(prob(2))
 		M.immunity_norm = max(M.immunity_norm - 1, 0)
@@ -691,69 +688,82 @@
 	reagent_state = LIQUID
 	color = "#bf80bf"
 	scannable = 1
-	metabolism = 0.01
+	metabolism = REM
+	removal_multiplier = 0.01
+	bioavailability = 0.8
+	active_metabolites = /datum/reagent/methylphenidate
 	data = 0
 	value = 6
 
-/datum/reagent/methylphenidate/affect_blood(mob/living/carbon/M, removed)
-	if (IS_METABOLICALLY_INERT(M))
+/datum/reagent/methylphenidate/affect_metabolites(mob/living/carbon/affected, dose)
+	if (IS_METABOLICALLY_INERT(affected))
 		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+	if (data && dose <= 1)
+		data = 0
+		to_chat(affected, SPAN_WARNING("You feel unfocused..."))
+	if (!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
-		to_chat(M, SPAN_WARNING("You lose focus..."))
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			to_chat(M, SPAN_NOTICE("Your mind feels focused and undivided."))
+		to_chat(affected, SPAN_NOTICE("Your mind feels focused and undivided."))
+		affected.add_chemical_effect(CE_MIND, -1) //Amphetamines make you more prone to ill-effects of hallucinogens.
+	if (dose >= overdose && prob(dose))
+		affected.hallucination(60,120)
 
-/datum/reagent/citalopram
-	name = "Citalopram"
-	description = "Stabilizes the mind a little."
-	taste_description = "bitterness"
+/datum/reagent/methylphenidate/process_overdose(mob/living/carbon/affected)
+	affected.seizure()
+
+/datum/reagent/antidepressant
+	name = "Antidepressant"
+	description = "A generic antidepressant. It makes you feel better."
+	taste_description = "generic bitterness"
 	reagent_state = LIQUID
 	color = "#ff80ff"
 	scannable = 1
-	metabolism = 0.01
+	overdose = 30
+	metabolism = REM
+	removal_multiplier = 0.01
+	active_metabolites = /datum/reagent/antidepressant
+	bioavailability = 0.8
 	data = 0
 	value = 6
 
-/datum/reagent/citalopram/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/antidepressant/affect_metabolites(mob/living/carbon/M, dose)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-		data = world.time
-		to_chat(M, SPAN_WARNING("Your mind feels a little less stable..."))
-	else
+	if (data && dose <= 0.1)
+		data = 0
+		to_chat(M, SPAN_WARNING("Your mind feels less stable."))
+	if (dose > 0.1 && dose <= 10)
 		M.add_chemical_effect(CE_MIND, 1)
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		if (!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, SPAN_NOTICE("Your mind feels stable... a little stable."))
+	else if (dose > 10 && dose < overdose)
+		M.add_chemical_effect(CE_MIND, 2)
+		if(!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+			data = world.time
+			to_chat(M, SPAN_NOTICE("Your mind feels much more stable."))
+	else if (dose >= overdose)
+		M.add_chemical_effect(CE_MIND, -1)
+		if(!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+			data = world.time
+			to_chat(M, SPAN_NOTICE("You feel like your mind is racing!"))
 
-/datum/reagent/paroxetine
+/datum/reagent/antidepressant/process_overdose(mob/living/carbon/affected)
+	..()
+	affected.add_chemical_effect(CE_STIMULANT, 1)
+
+/datum/reagent/antidepressant/citalopram
+	name = "Citalopram"
+	description = "Stabilizes the mind a little."
+	taste_description = "bitterness"
+	value = 6
+	metabolite_potency = 1
+
+/datum/reagent/antidepressant/paroxetine
 	name = "Paroxetine"
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
-	reagent_state = LIQUID
-	color = "#ff80bf"
-	scannable = 1
-	metabolism = 0.01
-	data = 0
 	value = 3.5
-
-/datum/reagent/paroxetine/affect_blood(mob/living/carbon/M, removed)
-	if (IS_METABOLICALLY_INERT(M))
-		return
-	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-		data = world.time
-		to_chat(M, SPAN_WARNING("Your mind feels much less stable..."))
-	else
-		M.add_chemical_effect(CE_MIND, 2)
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			if(prob(90))
-				to_chat(M, SPAN_NOTICE("Your mind feels much more stable."))
-			else
-				to_chat(M, SPAN_WARNING("Your mind breaks apart..."))
-				M.hallucination(200, 100)
+	metabolite_potency = 2
 
 /datum/reagent/nicotine
 	name = "Nicotine"
@@ -761,28 +771,33 @@
 	taste_description = "peppery bitterness"
 	reagent_state = LIQUID
 	color = "#efebaa"
-	metabolism = REM * 0.002
-	overdose = 6
+	metabolism = 0.5
+	removal_multiplier = 0.1
+	overdose = 20
+	active_metabolites = /datum/reagent/nicotine
 	scannable = 1
 	data = 0
 	value = 2
 
-/datum/reagent/nicotine/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/nicotine/affect_metabolites(mob/living/carbon/M, volume)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(prob(volume*20))
+	if (prob(volume*20))
 		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume <= 0.02 && M.chem_doses[type] >= 0.05 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
-		data = world.time
+	if (data && volume <= 0.5)
+		data = 0
 		to_chat(M, SPAN_WARNING("You feel antsy, your concentration wavers..."))
-	else
-		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3)
-			data = world.time
-			to_chat(M, SPAN_NOTICE("You feel invigorated and calm."))
+	if (volume > 0.5 && (!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.3))
+		data = world.time
+		to_chat(M, SPAN_NOTICE("You feel invigorated and calm."))
 
-/datum/reagent/nicotine/overdose(mob/living/carbon/M)
-	..()
-	M.add_chemical_effect(CE_PULSE, 2)
+/datum/reagent/nicotine/process_overdose(mob/living/carbon/affected)
+	affected.add_chemical_effect(CE_PULSE, 2)
+	if (ishuman(affected) && prob(affected.metabolized.get_reagent_amount(/datum/reagent/nicotine)))
+		var/mob/living/carbon/human/human = affected
+		var/obj/item/organ/internal/heart/heart = human.internal_organs_by_name[BP_HEART]
+		if (heart && istype(heart))
+			heart.take_internal_damage(0.2,0)
 
 /datum/reagent/tobacco
 	name = "Tobacco"
@@ -795,12 +810,8 @@
 	scent = "cigarette smoke"
 	scent_descriptor = SCENT_DESC_ODOR
 	scent_range = 4
-
-	var/nicotine = REM * 0.2
-
-/datum/reagent/tobacco/affect_blood(mob/living/carbon/M, removed)
-	..()
-	M.reagents.add_reagent(/datum/reagent/nicotine, nicotine)
+	active_metabolites = /datum/reagent/nicotine
+	metabolite_potency = 1
 
 /datum/reagent/tobacco/fine
 	name = "Fine Tobacco"
@@ -808,6 +819,7 @@
 	value = 5
 	scent = "fine tobacco smoke"
 	scent_descriptor = SCENT_DESC_PLUME
+	metabolite_potency = 0.7
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
@@ -816,6 +828,7 @@
 	scent = "acrid tobacco smoke"
 	scent_intensity = /singleton/scent_intensity/strong
 	scent_descriptor = SCENT_DESC_HAZE
+	metabolite_potency = 1.5
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -823,7 +836,7 @@
 	reagent_state = LIQUID
 	taste_mult = 0
 	color = "#fcfcfc"
-	nicotine = REM * 0.1
+	metabolite_potency = 0.5
 	scent = null
 	scent_intensity = null
 	scent_descriptor = null
@@ -835,7 +848,8 @@
 	taste_description = "mint"
 	reagent_state = LIQUID
 	color = "#80af9c"
-	metabolism = REM * 0.002
+	metabolism = 0.02
+	bioavailability = 0
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	data = 0
@@ -843,7 +857,7 @@
 /datum/reagent/menthol/affect_blood(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
-	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
+	if(!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
 		data = world.time
 		to_chat(M, SPAN_NOTICE("You feel faintly sore in the throat."))
 
@@ -863,13 +877,15 @@
 	M.adjustOxyLoss(-2 * removed)
 	M.heal_organ_damage(20 * removed, 20 * removed)
 	M.adjustToxLoss(-20 * removed)
-	if(M.chem_doses[type] > 3 && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
-			E.status |= ORGAN_DISFIGURED //currently only matters for the head, but might as well disfigure them all.
-	if(M.chem_doses[type] > 10)
-		M.make_dizzy(5)
-		M.make_jittery(5)
+
+/datum/reagent/rezadone/affect_metabolites(mob/living/carbon/affected, dose)
+	if (dose > 3 && ishuman(affected))
+		var/mob/living/carbon/human/human = affected
+		for (var/obj/item/organ/external/external in human.organs)
+			external.status |= ORGAN_DISFIGURED
+	if (dose > 10)
+		affected.make_dizzy(5)
+		affected.make_jittery(5)
 
 /datum/reagent/noexcutite
 	name = "Noexcutite"
@@ -895,7 +911,7 @@
 	color = "#c8a5dc"
 	overdose = 60
 	scannable = 1
-	metabolism = REM * 0.05
+	metabolism = REM * 0.1
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/antidexafen/affect_blood(mob/living/carbon/M, removed)
@@ -905,9 +921,9 @@
 	M.add_chemical_effect(CE_PAINKILLER, 15)
 	M.add_chemical_effect(CE_ANTIVIRAL, 1)
 
-/datum/reagent/antidexafen/overdose(mob/living/carbon/M)
+/datum/reagent/antidexafen/process_overdose(mob/living/carbon/M)
 	M.add_chemical_effect(CE_TOXIN, 1)
-	M.hallucination(60, 20)
+	M.hallucination(60, 30)
 	M.druggy = max(M.druggy, 2)
 
 /datum/reagent/adrenaline
@@ -919,26 +935,30 @@
 	scannable = 1
 	overdose = 20
 	metabolism = 0.1
+	bioavailability = 0
 	value = 2
 
 /datum/reagent/adrenaline/affect_blood(mob/living/carbon/human/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
-	if(M.chem_doses[type] < 0.2)	//not that effective after initial rush
-		M.add_chemical_effect(CE_PAINKILLER, min(30*volume, 80))
-		M.add_chemical_effect(CE_PULSE, 1)
-	else if(M.chem_doses[type] < 1)
-		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
 	M.add_chemical_effect(CE_STIMULANT, 2)
-	if(M.chem_doses[type] > 10)
-		M.make_jittery(5)
 	if(volume >= 4 && M.is_asystole())
 		remove_self(4)
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
 			heart.take_internal_damage(heart.max_damage * 0.075)
+	if (volume > 10)
+		M.make_jittery(5)
+		M.add_chemical_effect(CE_PULSE, 1)
+
+/datum/reagent/adrenaline/affect_metabolites(mob/living/carbon/affected, dose)
+	var/bloodstr_amount = affected.bloodstr.get_reagent_amount(/datum/reagent/adrenaline)
+	if (dose < 0.2) //Initial rush of adrenaline is more effective. Only works if there's still adrenaline left in the bloodstream.
+		affected.add_chemical_effect(CE_PAINKILLER, min(30*bloodstr_amount, 80))
+	else if (dose < 1)
+		affected.add_chemical_effect(CE_PAINKILLER, min(10*bloodstr_amount, 20))
 
 /datum/reagent/lactate
 	name = "Lactic acid"
@@ -959,8 +979,10 @@
 	if(volume >= 5)
 		M.add_chemical_effect(CE_PULSE, 1)
 		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
-	else if(M.chem_doses[type] > 20) //after prolonged exertion
-		M.make_jittery(10)
+
+/datum/reagent/lactate/affect_metabolites(mob/living/carbon/affected, dose)
+	if (dose > 20)
+		affected.make_jittery(10)
 
 /datum/reagent/nanoblood
 	name = "Nanoblood"
@@ -969,6 +991,7 @@
 	reagent_state = LIQUID
 	color = "#c10158"
 	scannable = 1
+	bioavailability = 0
 	overdose = 5
 	metabolism = 1
 
@@ -977,8 +1000,10 @@
 		return
 	if(M.regenerate_blood(4 * removed))
 		M.immunity = max(M.immunity - 0.75, 0)
-		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
-			M.immunity = max(M.immunity - 3, 0)
+
+/datum/reagent/nanoblood/affect_metabolites(mob/living/carbon/affected, dose)
+	if(dose > affected.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
+		affected.immunity = max(affected.immunity - 3, 0)
 
 // Sleeping agent, produced by breathing N2O.
 /datum/reagent/nitrous_oxide
@@ -987,7 +1012,7 @@
 	taste_description = "dental surgery"
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
-	metabolism = 1
+	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
 	var/do_giggle = TRUE
 
 /datum/reagent/nitrous_oxide/xenon
@@ -997,12 +1022,14 @@
 	taste_description = "nothing"
 	color = COLOR_GRAY80
 
-/datum/reagent/nitrous_oxide/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/nitrous_oxide/affect_metabolites(mob/living/carbon/M, dosage)
 	if (IS_METABOLICALLY_INERT(M))
 		return
+	M.add_chemical_effect(CE_PULSE, -1)
+	if(dosage >= 1)
+		if(prob(5)) M.Sleeping(3)
 	if (volume > 2)
 		M.Sleeping(10)
-	var/dosage = M.chem_doses[type]
 	if(dosage >= 10)
 		if (prob(5)) M.Sleeping(3)
 		M.dizziness =  max(M.dizziness, 3)
@@ -1013,8 +1040,6 @@
 		M.slurring =   max(M.slurring, 3)
 	if(do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
-	M.add_chemical_effect(CE_PULSE, -1)
-
 
 	// Immunity-restoring reagent
 /datum/reagent/immunobooster
@@ -1037,7 +1062,7 @@
 		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
 
 
-/datum/reagent/immunobooster/overdose(mob/living/carbon/M)
+/datum/reagent/immunobooster/process_overdose(mob/living/carbon/M)
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
@@ -1048,6 +1073,7 @@
 	taste_description = "iron"
 	reagent_state = LIQUID
 	color = "#bf0000"
+	bioavailability = 0
 	metabolism = REM * 0.05
 	scannable = TRUE
 

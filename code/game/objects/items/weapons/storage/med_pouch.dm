@@ -119,6 +119,7 @@ Single Use Emergency Pouches
 	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/adrenaline,
 	/obj/item/reagent_containers/pill/pouch_pill/inaprovaline,
 	/obj/item/reagent_containers/pill/pouch_pill/dexalin,
+	/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/naloxone,
 		)
 	instructions = {"
 	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
@@ -220,3 +221,8 @@ Single Use Emergency Pouches
 	name = "emergency allergy autoinjector"
 	desc = "The ingredient label reads 1.5 units of adrenaline and 3.5 units of inaprovaline."
 	starts_with = list(/datum/reagent/adrenaline = 1.5, /datum/reagent/inaprovaline = 3.5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/naloxone
+	name = "emergency overdose autoinjector"
+	desc = "The ingredient label reads 5 units of naloxone. To be used in case of opiate overdose."
+	starts_with = list(/datum/reagent/naloxone = 5)

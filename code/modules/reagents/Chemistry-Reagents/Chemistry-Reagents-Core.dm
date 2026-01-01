@@ -5,8 +5,8 @@
 		"blood_DNA" = null,
 		"blood_type" = null,
 		"blood_colour" = COLOR_BLOOD_HUMAN,
-		"trace_chem" = null,
-		"dose_chem" = null,
+		"blood_chem" = null,
+		"metabolites_chem" = null,
 		"has_oxy" = 1
 	)
 	name = "Blood"
@@ -16,6 +16,7 @@
 	color = "#c80000"
 	scannable = 1
 	taste_description = "iron"
+	bioavailability = 0
 	taste_mult = 1.3
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
@@ -59,17 +60,7 @@
 			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
 /datum/reagent/blood/affect_ingest(mob/living/carbon/M, removed)
-
-	if(M.chem_doses[type] > 5)
-		M.adjustToxLoss(removed)
-	if(M.chem_doses[type] > 15)
-		M.adjustToxLoss(removed)
-
-/datum/reagent/blood/affect_touch(mob/living/carbon/M, removed)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.isSynthetic())
-			return
+	M.adjustToxLoss(removed)
 
 /datum/reagent/blood/affect_blood(mob/living/carbon/M, removed)
 	M.inject_blood(src, volume)
@@ -85,6 +76,7 @@
 	alpha = 120
 	scannable = 1
 	metabolism = REM * 10
+	bioavailability = 1
 	taste_description = "water"
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
@@ -100,10 +92,6 @@
 		M.adjustToxLoss(malus_level * removed)
 
 /datum/reagent/water/affect_ingest(mob/living/carbon/M, removed)
-
-	var/malus_level = M.GetTraitLevel(/singleton/trait/malus/water)
-	if (malus_level)
-		M.adjustToxLoss(malus_level * removed)
 	M.adjust_hydration(removed * 10)
 
 /datum/reagent/water/touch_turf(turf/simulated/T)
@@ -174,7 +162,8 @@
 			S.Target = null
 		if(S.Victim)
 			S.Feedstop()
-	if(M.chem_doses[type] == removed)
+
+	if (prob(10 * trait_level))
 		M.visible_message(SPAN_WARNING("[S]'s flesh sizzles where the water touches it!"), SPAN_DANGER("Your flesh burns in the water!"))
 		M.set_confused(2)
 
@@ -252,6 +241,7 @@
 	color = "#aa0000"
 	taste_description = "chewy iron"
 	taste_mult = 1.5
+	bioavailability = 0
 	description = "When exposed to unsuitable conditions, such as the floor or an oven, blood becomes coagulated and useless for transfusions. It's great for making blood pudding, though."
 	glass_name = "tomato salsa"
 	glass_desc = "Are you sure this is tomato salsa?"

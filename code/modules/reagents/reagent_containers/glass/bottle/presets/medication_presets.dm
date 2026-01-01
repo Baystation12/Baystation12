@@ -26,7 +26,7 @@
 /obj/item/reagent_containers/glass/bottle/citalopram
 	name = "citalopram bottle"
 	desc = "A small bottle. Contains citalopram - a mild antidepressant."
-	preset_reagent = /datum/reagent/citalopram
+	preset_reagent = /datum/reagent/antidepressant/citalopram
 
 /obj/item/reagent_containers/glass/bottle/clonexadone
 	name = "clonexadone bottle"
@@ -111,7 +111,7 @@
 /obj/item/reagent_containers/glass/bottle/oxycodone
 	name = "oxycodone bottle"
 	desc = "A small bottle. Contains oxycodone - a powerful painkiller."
-	preset_reagent = /datum/reagent/tramadol/oxycodone
+	preset_reagent = /datum/reagent/opiate/oxycodone
 
 /obj/item/reagent_containers/glass/bottle/paracetamol
 	name = "paracetamol bottle"
@@ -121,7 +121,7 @@
 /obj/item/reagent_containers/glass/bottle/paroxetine
 	name = "paroxetine bottle"
 	desc = "A small bottle. Contains paroxetine - a strong antidepressant."
-	preset_reagent = /datum/reagent/paroxetine
+	preset_reagent = /datum/reagent/antidepressant/paroxetine
 
 /obj/item/reagent_containers/glass/bottle/peridaxon
 	name = "peridaxon bottle"
@@ -151,7 +151,7 @@
 /obj/item/reagent_containers/glass/bottle/tramadol
 	name = "tramadol bottle"
 	desc = "A small bottle. Contains tramadol - a moderate painkiller."
-	preset_reagent = /datum/reagent/tramadol
+	preset_reagent = /datum/reagent/opiate/tramadol
 
 /obj/item/reagent_containers/glass/bottle/tricordrazine
 	name = "tricordrazine bottle"

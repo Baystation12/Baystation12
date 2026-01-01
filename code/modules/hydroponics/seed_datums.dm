@@ -559,7 +559,7 @@
 	name = "poppies"
 	seed_name = "poppy"
 	display_name = "poppy patch"
-	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/tramadol = list(1,10))
+	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/opiate = list(1,10))
 	kitchen_tag = "poppy"
 
 /datum/seed/flower/poppy/New()

@@ -28,7 +28,7 @@
 				"blood_DNA" = dna.unique_enzymes,
 				"blood_colour" = species.get_blood_colour(src),
 				"blood_type" = dna.b_type,
-				"trace_chem" = null
+				"blood_chem" = null
 			)
 			B.color = B.data["blood_colour"]
 
@@ -135,9 +135,9 @@
 	if (!injected || !istype(injected))
 		return
 	var/list/chems = list()
-	chems = injected.data["trace_chem"]
-	for(var/C in chems)
-		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
+	chems = injected.data["blood_chem"]
+	for(var/reagent in chems)
+		bloodstr.add_reagent(reagent, (text2num(chems[reagent]) / species.blood_volume) * amount)
 
 //Transfers blood from reagents to vessel, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(datum/reagent/blood/injected, amount)
@@ -202,11 +202,16 @@
 	data["blood_type"] = dna.b_type
 	data["species"] = species.name
 	data["has_oxy"] = species.blood_oxy
-	var/list/temp_chem = list()
-	for(var/datum/reagent/R in reagents.reagent_list)
-		temp_chem[R.type] = R.volume
-	data["trace_chem"] = temp_chem
-	data["dose_chem"] = chem_doses.Copy()
+
+	var/list/temp_blood_chem = list()
+	for (var/datum/reagent/reagent in bloodstr.reagent_list)
+		temp_blood_chem[reagent.type] = round(reagent.volume, 0.1)
+	data["blood_chem"] = temp_blood_chem
+
+	var/list/temp_blood_metabolites = list()
+	for (var/datum/reagent/reagent in metabolized.reagent_list)
+		temp_blood_metabolites[reagent.type] = round(reagent.volume, 0.1)
+	data["metabolites_chem"] = temp_blood_metabolites
 	data["blood_colour"] = species.get_blood_colour(src)
 	return data
 

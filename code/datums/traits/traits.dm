@@ -108,7 +108,7 @@
 			crash_with("Inappopriate arguments fed into proc.")
 	return severity
 
-/proc/sanitize_trait_prefs(list/preferences)
+/proc/sanitize_trait_prefs(list/preferences, save_version)
 	RETURN_TYPE(/list)
 	var/list/final_preferences = list()
 	if (isnull(preferences))
@@ -129,13 +129,13 @@
 		if (length(selected.metaoptions))
 			var/list/interim = preferences[trait]
 			var/list/final_interim = list()
-			var/trait_count
 			for (var/metaoption in interim)
-				if (selected.maximum_count && trait_count >= selected.maximum_count)
+				var/metaoption_type = istext(metaoption) ? text2path(selected.migrate(metaoption, save_version)) : metaoption
+				if (!(metaoption_type in selected.metaoptions))
+					continue
+				if (selected.maximum_count && length(final_interim) >= selected.maximum_count)
 					break
-				var/metaoption_type = istext(metaoption) ? text2path(metaoption) : metaoption
 				severity = interim[metaoption]
-				trait_count++
 				LAZYSET(final_interim, metaoption_type, severity)
 			LAZYSET(final_preferences, trait_type, final_interim)
 
@@ -179,3 +179,8 @@
 		return (level in levels) && (meta_option in metaoptions)
 	else
 		return (level in levels)
+
+/// Performs migrations for this trait. Useful is a typepath has changed.
+/// Don't forget to increment PREF_SER_VERSION for each migration you create.
+/singleton/trait/proc/migrate(metaoption, save_version)
+	return metaoption

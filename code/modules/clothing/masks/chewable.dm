@@ -190,7 +190,7 @@
 				/datum/reagent/hyperzine,
 				/datum/reagent/hyronalin,
 				/datum/reagent/methylphenidate,
-				/datum/reagent/citalopram,
+				/datum/reagent/antidepressant/citalopram,
 				/datum/reagent/dylovene,
 				/datum/reagent/bicaridine,
 				/datum/reagent/kelotane,

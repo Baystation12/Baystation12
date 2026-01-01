@@ -431,12 +431,11 @@
 	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
 
-/datum/reagent/carbon_monoxide/affect_blood(mob/living/carbon/human/M, removed)
+/datum/reagent/carbon_monoxide/affect_metabolites(mob/living/carbon/human/M, dosage)
 	if(!istype(M) || IS_METABOLICALLY_INERT(M))
 		return
 	var/warning_message
 	var/warning_prob = 10
-	var/dosage = M.chem_doses[type]
 	if(dosage >= 3)
 		warning_message = pick("extremely dizzy","short of breath","faint","confused")
 		warning_prob = 15

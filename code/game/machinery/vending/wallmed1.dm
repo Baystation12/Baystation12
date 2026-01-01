@@ -24,6 +24,7 @@
 		/obj/item/stack/medical/ointment = 3,
 		/obj/item/reagent_containers/pill/paracetamol = 4,
 		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/allergy = 3,
+		/obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/naloxone = 3,
 		/obj/item/storage/med_pouch/trauma,
 		/obj/item/storage/med_pouch/burn,
 		/obj/item/storage/med_pouch/oxyloss,

@@ -17,7 +17,7 @@
 
 /datum/reagent/ethanol/New()
 	..()
-	if (strength <= 15) // drinks are hell
+	if (metabolite_potency >= 2.25) // drinks are hell
 		gas_flags = XGM_GAS_FUEL
 		gas_molar_mass = 0.046
 		gas_specific_heat = 118.4

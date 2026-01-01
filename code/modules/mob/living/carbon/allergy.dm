@@ -30,7 +30,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		return
 	if ((trait_flags & MILD_ALLERGY) && allergy_severity <= TRAIT_LEVEL_MINOR)
 		return
-	if (chem_effects[CE_STABLE] || chem_doses[/datum/reagent/adrenaline])
+	if (chem_effects[CE_STABLE] || bloodstr.has_reagent(/datum/reagent/adrenaline))
 		return
 
 	switch (allergy_severity)
@@ -54,7 +54,7 @@ Also checks if medications that stop allergies from triggering are in system. Th
 		return
 
 	if ((trait_flags & MILD_ALLERGY) && (!allergy_flag || (allergy_flag & MILD_ALLERGY)))
-		if (!can_feel_pain() && !chem_effects[CE_STABLE]) //People with inaprov aren't itching to start with.
+		if (can_feel_pain() && !chem_effects[CE_STABLE]) //People with inaprov aren't itching to start with.
 			to_chat(src, SPAN_NOTICE("You feel the itching subside."))
 		trait_flags &= ~MILD_ALLERGY
 
@@ -79,15 +79,15 @@ Also checks if medications that stop allergies from triggering are in system. Th
 	var/list/allergy_list = traits[/singleton/trait/malus/allergy]
 
 	for (var/picked as anything in allergy_list)
-		if (!(picked in chem_doses) && !(picked in active_allergies))
-			continue
 		var/datum/reagent/reagent = picked
-		check_allergy(reagent, chem_doses[reagent])
+		if (!(metabolized.has_reagent(reagent.type)) && !(picked in active_allergies))
+			continue
+		check_allergy(reagent, metabolized.get_reagent_amount(reagent.type))
 
 	if ((trait_flags & MILD_ALLERGY) && (!length(active_allergies)))
 		stop_allergy(MILD_ALLERGY)
 
-	if ((trait_flags & SEVERE_ALLERGY) && chem_doses[/datum/reagent/adrenaline] >= 1)
+	if ((trait_flags & SEVERE_ALLERGY) && bloodstr.get_reagent_amount(/datum/reagent/adrenaline) >= 0.5)
 		stop_allergy(SEVERE_ALLERGY)
 
 	run_allergy_symptoms()

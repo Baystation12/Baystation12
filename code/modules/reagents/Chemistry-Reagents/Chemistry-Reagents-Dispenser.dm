@@ -50,7 +50,7 @@
 	reagent_state = LIQUID
 	color = "#404030"
 	metabolism = REM * 0.5
-	overdose = 5
+	overdose = 30
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/ammonia/affect_blood(mob/living/carbon/M, removed)
@@ -58,19 +58,17 @@
 		M.add_chemical_effect(CE_OXYGENATED, 2)
 	else if (!IS_METABOLICALLY_INERT(M))
 		M.adjustToxLoss(removed * 1.5)
-
-/datum/reagent/ammonia/overdose(mob/living/carbon/M)
-	if (M.species.breath_type != GAS_AMMONIA || volume > overdose*6)
-		..()
+		M.add_chemical_effect(CE_TOXIN, 1)
 
 /datum/reagent/carbon
 	name = "Carbon"
 	description = "A chemical element, the building block of life."
 	taste_description = "sour chalk"
 	taste_mult = 1.5
+	metabolism = 1
+	bioavailability = 0
 	reagent_state = SOLID
 	color = "#1c1300"
-	ingest_met = REM * 5
 	value = DISPENSER_REAGENT_VALUE
 
 /datum/reagent/carbon/affect_ingest(mob/living/carbon/M, removed)
@@ -107,13 +105,20 @@
 	reagent_state = LIQUID
 	color = "#404030"
 	alpha = 180
+	metabolism = REM * 2 //Alcohol metabolite levels builds up at a rapid rate.
+	removal_multiplier = 0.5 //Breakdown of alcohol metabolism is slower; effectively equivalent to REM. Effectively get drunk faster; get sober slower.
 	touch_met = 5
 	sugar_amount = 0.5
+	bioavailability = 1
+	overdose = 60
+	active_metabolites = /datum/reagent/ethanol
+	//Pure ethanol is very potent; the majority of other drinks will have a lower potency than this.
+	metabolite_potency = 2.5
+
 	var/nutriment_factor = 3 //Baseline nutriment is 10; empty calories with no real nutritious value.
 	var/hydration_factor = 3 //Water is 10.
-	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
-	var/toxicity = 1
-
+	///For alcohols that are toxic no matter the dose; like hooch.
+	var/toxicity = 0
 	var/druggy = 0
 	var/adj_temp = 0
 	var/targ_temp = 310
@@ -128,50 +133,47 @@
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 15)
 
-/datum/reagent/ethanol/affect_blood(mob/living/carbon/M, removed)
-	M.adjustToxLoss(removed * 2 * toxicity)
-	return
+///Effects common to all alcohols handled here. Unique effects handled under affect_blood and affect_ingest
+/datum/reagent/ethanol/affect_metabolites(mob/living/carbon/affected, dose)
+	var/strength_mod = (affected.GetTraitLevel(/singleton/trait/malus/ethanol) * 1.5) || 1
+	if (IS_METABOLICALLY_INERT(affected))
+		strength_mod = 0
+
+	affected.add_chemical_effect(CE_ALCOHOL, 1)
+	affected.add_chemical_effect(CE_PAINKILLER, clamp(round(dose, 1), 1, 80))
+	var/effective_dose = dose * strength_mod
+
+	if (prob(effective_dose*2))
+		affected.make_dizzy(6)
+	if (effective_dose >= 0.5 * overdose)
+		affected.slurring = max(affected.slurring, 30)
+		affected.add_chemical_effect(CE_ALCOHOL, 1)
+	if (effective_dose >= 0.75 * overdose)
+		affected.set_confused(20)
+		affected.add_chemical_effect(CE_ALCOHOL, 1)
+	if (effective_dose >= overdose)
+		affected.eye_blurry = max(affected.eye_blurry, 10)
+		affected.drowsyness = max(affected.drowsyness, 20)
+		affected.add_chemical_effect(CE_ALCOHOL_TOXIC, clamp(round(dose/60, 1), 1, 8))
+	if (effective_dose >= 1.5 * overdose)
+		affected.Paralyse(20)
+		affected.Sleeping(30)
 
 /datum/reagent/ethanol/affect_ingest(mob/living/carbon/M, removed)
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
-	var/strength_mod = (M.GetTraitLevel(/singleton/trait/malus/ethanol) * 2.5) || 1
-	if (IS_METABOLICALLY_INERT(M))
-		strength_mod = 0
 
-	M.add_chemical_effect(CE_ALCOHOL, 1)
-	var/effective_dose = M.chem_doses[type] * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
-
-	if(effective_dose >= strength) // Early warning
-		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
-	if(effective_dose >= strength * 2) // Slurring
-		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.slurring = max(M.slurring, 30)
-	if(effective_dose >= strength * 3) // Confusion - walking in random directions
-		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.set_confused(20)
-	if(effective_dose >= strength * 4) // Blurry vision
-		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.eye_blurry = max(M.eye_blurry, 10)
-	if(effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
-		M.add_chemical_effect(CE_PAINKILLER, 150/strength)
-		M.drowsyness = max(M.drowsyness, 20)
-	if(effective_dose >= strength * 6) // Toxic dose
-		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
-	if(effective_dose >= strength * 7) // Pass out
-		M.Paralyse(20)
-		M.Sleeping(30)
-
-	if(druggy != 0)
-		M.druggy = max(M.druggy, druggy)
-
+/datum/reagent/ethanol/affect_blood(mob/living/carbon/M, removed)
 	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
 		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(adj_temp < 0 && M.bodytemperature > targ_temp)
 		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-
 	if(halluci)
 		M.adjust_hallucination(halluci, halluci)
+	if (druggy)
+		M.druggy = max(M.druggy, druggy)
+	if (toxicity)
+		M.adjustToxLoss(toxicity * removed)
 
 /datum/reagent/ethanol/touch_obj(obj/O)
 	if(istype(O, /obj/item/paper))
@@ -423,6 +425,7 @@
 	taste_description = "sugar"
 	taste_mult = 3
 	reagent_state = SOLID
+	bioavailability = 1
 	color = "#ffffff"
 	scannable = 1
 	sugar_amount = 1
@@ -437,7 +440,6 @@
 	condiment_icon_state = "sugar"
 
 /datum/reagent/sugar/affect_blood(mob/living/carbon/human/M, removed)
-	handle_sugar(M, src)
 	M.adjust_nutrition(removed * 3)
 
 /datum/reagent/sulfur

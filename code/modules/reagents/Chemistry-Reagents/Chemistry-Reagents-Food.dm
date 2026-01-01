@@ -4,9 +4,9 @@
 	taste_mult = 4
 	reagent_state = SOLID
 	metabolism = REM * 4
+	bioavailability = 1
 	var/nutriment_factor = 10 // Per unit
 	var/hydration_factor = 0 // Per unit
-	var/injectable = 0
 	color = "#664330"
 	value = 0.1
 
@@ -33,15 +33,7 @@
 		if(data[taste]/totalFlavor < 0.1)
 			data -= taste
 
-/datum/reagent/nutriment/affect_blood(mob/living/carbon/M, removed)
-	if(!injectable)
-		M.adjustToxLoss(0.2 * removed)
-		return
-	affect_ingest(M, removed)
-
 /datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, removed)
-	if (protein_amount)
-		handle_protein(M, src)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
 	adjust_nutrition(M, removed)
@@ -61,7 +53,6 @@
 	name = "Glucose"
 	color = "#ffffff"
 	scannable = 1
-	injectable = 1
 
 /datum/reagent/nutriment/glucose/adjust_nutrition(mob/living/carbon/M, removed)
 	M.adjust_nutrition(nutriment_factor * removed)
@@ -477,12 +468,13 @@
 	reagent_state = LIQUID
 	color = "#07aab2"
 	value = 0.2
+	bioavailability = 0.2
 
 	condiment_icon_state = "coldsauce"
 	condiment_name = "cold sauce"
 	condiment_desc = "Leaves the tongue numb in its passage."
 
-/datum/reagent/frostoil/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/frostoil/affect_ingest(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
@@ -490,7 +482,7 @@
 		M.emote("shiver")
 	if(istype(M, /mob/living/carbon/slime))
 		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
-	holder.remove_reagent(/datum/reagent/capsaicin, 5)
+	holder.remove_reagent(/datum/reagent/capsaicin, removed * 5)
 
 /datum/reagent/capsaicin
 	name = "Capsaicin Oil"
@@ -503,6 +495,8 @@
 	var/agony_amount = 2
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
+	metabolism = REM * 0.5 //Takes forever to leave the stomach!
+	bioavailability = 0 //Does not get into the blood; just hangs around the stomach.
 	value = 0.2
 
 	condiment_icon_state= "hotsauce"
@@ -521,17 +515,17 @@
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
 			return
-	if(M.chem_doses[type] < agony_dose)
-		if(prob(5) || M.chem_doses[type] == metabolism) //dose == metabolism is a very hacky way of forcing the message the first time this procs
-			to_chat(M, discomfort_message)
-	else
+
+	if (volume < agony_dose && prob(5))
+		to_chat(M, discomfort_message)
+	else if (volume >= agony_dose)
 		M.apply_effect(agony_amount, EFFECT_PAIN, 0)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
 			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
 	if(istype(M, /mob/living/carbon/slime))
-		M.bodytemperature += rand(0, 15) + slime_temp_adj
-	holder.remove_reagent(/datum/reagent/frostoil, 5)
+		M.bodytemperature += (rand(0, 15) * agony_amount/2) + slime_temp_adj
+	holder.remove_reagent(/datum/reagent/frostoil, removed * 2 * agony_amount)
 
 /datum/reagent/capsaicin/condensed
 	name = "Condensed Capsaicin"
@@ -605,23 +599,6 @@
 		if(prob(stun_probability))
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 			M.Stun(3)
-
-/datum/reagent/capsaicin/condensed/affect_ingest(mob/living/carbon/M, removed)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(!H.can_feel_pain())
-			return
-	if(M.chem_doses[type] == metabolism)
-		to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
-	else
-		M.apply_effect(6, EFFECT_PAIN, 0)
-		if(prob(5))
-			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
-			M.custom_emote(2, "[pick("coughs.","gags.","retches.")]")
-			M.Stun(2)
-	if(istype(M, /mob/living/carbon/slime))
-		M.bodytemperature += rand(15, 30)
-	holder.remove_reagent(/datum/reagent/frostoil, 5)
 
 /datum/reagent/nutriment/vinegar
 	name = "Vinegar"

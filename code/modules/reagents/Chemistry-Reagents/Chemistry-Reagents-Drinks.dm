@@ -10,16 +10,9 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	value = 0.1
-
-/datum/reagent/drink/affect_blood(mob/living/carbon/M, removed)
-	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
-	return
+	bioavailability = 1
 
 /datum/reagent/drink/affect_ingest(mob/living/carbon/M, removed)
-	if (protein_amount)
-		handle_protein(M, src)
-	if (sugar_amount)
-		handle_sugar(M, src)
 	if(nutrition)
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
@@ -346,7 +339,7 @@
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
 
-/datum/reagent/drink/coffee/overdose(mob/living/carbon/M)
+/datum/reagent/drink/coffee/process_overdose(mob/living/carbon/M)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.make_jittery(5)
@@ -1466,7 +1459,7 @@
 	description = "Wine made from various fruits from the swamps of Moghes."
 	taste_description = "swampy fruit"
 	color = "#6b596b"
-	strength = 10
+	metabolite_potency = 2.5
 	glass_name = "wasgaelhi"
 	glass_desc = "Wine made from various fruits from the swamps of Moghes."
 

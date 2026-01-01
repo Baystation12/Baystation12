@@ -101,7 +101,7 @@ var/global/list/lunchables_ethanol_reagents_ = list(
 												/datum/reagent/ethanol/threemileisland,
 												/datum/reagent/ethanol/toxins_special,
 												/datum/reagent/ethanol/qokkloa,
-												/datum/reagent/ethanol/qokkhrona,
+												/datum/reagent/ethanol/qokkloa/qokkhrona,
 												/datum/reagent/ethanol/iridast
 											)
 
