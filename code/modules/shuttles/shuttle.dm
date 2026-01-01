@@ -3,7 +3,17 @@
 /datum/shuttle
 	var/name = ""
 	var/warmup_time = 0
+	/*
+	this var is makin warmup time so you can add time, so its usefull when you wanna make
+	shuttle which is like gonna heavy cargo shuttle or jsut heavy shuttle, or wanna give time to escape or smth
+	*/
 	var/moving_status = SHUTTLE_IDLE
+	/*
+	its var of state
+	its changing, when you gonna fly shuttle, so its for procs only
+	it can be usefull, if you wanna add your own states, f.e. SHUTTLE_EMERGENCY_STOP or SHUTTLE_CRASH, and then shuttle wil crash
+	at planet or something ahhaha
+	*/
 
 	var/list/shuttle_area //can be both single area type or a list of areas
 	var/obj/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
