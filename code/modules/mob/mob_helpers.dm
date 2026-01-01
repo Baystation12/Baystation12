@@ -616,7 +616,8 @@ var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /mob/proc/try_teleport(area/thearea)
 	if(!istype(thearea))
 		if(islist(thearea))
-			thearea = thearea[1]
+			var/list/area_list = thearea
+			thearea = area_list[1]
 	var/list/L = list()
 	for(var/turf/T in get_area_turfs(thearea))
 		if(!T.density)

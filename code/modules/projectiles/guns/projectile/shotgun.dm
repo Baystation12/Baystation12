@@ -144,8 +144,8 @@
 	else
 		chamberlist += "🌣|"
 	if (length(loaded) > 0)
-		var/obj/item/ammo_casing/casinglist = loaded
-		if (casinglist[1].BB)
+		var/obj/item/ammo_casing/casing = loaded[1]
+		if (casing.BB)
 			chamberlist += "◉"
 		else
 			chamberlist += "◎"
