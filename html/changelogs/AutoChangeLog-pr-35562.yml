@@ -1,9 +1,0 @@
-author: Cakey
-changes:
-  - rscadd: The sensors console has been moved to a nano console program. The 
-      program requires a ship interface board in order to be able to modify 
-      sensors settings.
-  - tweak: Navigation consoles and telescreens have also been moved to modular 
-      consoles, using the sensors program while lacking the necessary component 
-      and access to make changes to the sensor settings.
-delete-after: true
