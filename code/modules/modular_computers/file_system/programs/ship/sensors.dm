@@ -34,6 +34,7 @@
 
 /datum/nano_module/program/ship/sensors/spacer
 	print_language = LANGUAGE_SPACER
+	modify_access_req = null
 
 /datum/nano_module/program/ship/sensors/proc/get_sensors()
 	var/obj/machinery/shipsensors/sensors = sensor_ref?.resolve()
