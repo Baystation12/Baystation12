@@ -672,14 +672,14 @@
 
 	// ID Card - Toggle panel lock
 	var/obj/item/card/id/id = tool.GetIdCard()
-	if (istype(id))
+	if (istype(id) || istype(tool, /obj/item/card/robot))
 		var/id_name = GET_ID_NAME(id, tool)
 		if (emagged)
 			to_chat(user, SPAN_WARNING("\The [src]'s panel lock seems slightly damaged."))
 		if (opened)
 			USE_FEEDBACK_FAILURE("\The [src]'s cover must be closed before you can lock it.")
 			return TRUE
-		if (!check_access(id))
+		if (!check_access(id) && !istype(tool, /obj/item/card/robot))
 			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
 			return TRUE
 		locked = !locked

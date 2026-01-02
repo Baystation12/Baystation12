@@ -94,12 +94,12 @@
 /mob/living/bot/use_tool(obj/item/tool, mob/user, list/click_params)
 	// ID Card - Toggle access panel lock
 	var/obj/item/card/id/id = tool.GetIdCard()
-	if (istype(id))
+	if (istype(id) || istype(tool, /obj/item/card/robot))
 		if (open)
 			USE_FEEDBACK_FAILURE("\The [src]'s access panel must be closed before you can lock it.")
 			return TRUE
 		var/id_name = GET_ID_NAME(id, tool)
-		if (!access_scanner.check_access(id))
+		if (!access_scanner.check_access(id) && !istype(tool, /obj/item/card/robot))
 			USE_FEEDBACK_ID_CARD_DENIED(src, id_name)
 			return TRUE
 		locked = !locked
