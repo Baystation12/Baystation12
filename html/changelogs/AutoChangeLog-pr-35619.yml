@@ -1,4 +1,0 @@
-author: Cakey
-changes:
-  - bugfix: Non-Torch off-ship sensors consoles no longer require bridge access.
-delete-after: true
