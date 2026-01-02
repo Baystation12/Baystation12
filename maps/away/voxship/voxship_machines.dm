@@ -4,6 +4,7 @@
 
 /datum/nano_module/program/ship/sensors/vox
 	print_language = LANGUAGE_VOX
+	modify_access_req = null
 
 /obj/machinery/computer/modular/preset/sensors/vox
 	default_software = list(
