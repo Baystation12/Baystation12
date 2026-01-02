@@ -140,6 +140,10 @@
 	if(scope_zoom)
 		verbs += /obj/item/gun/proc/scope
 
+	if (length(firemodes))
+		var/datum/firemode/mode = firemodes[sel_mode]
+		mode.apply_to(src)
+
 /obj/item/gun/on_update_icon()
 	var/mob/living/M = loc
 	ClearOverlays()
