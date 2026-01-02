@@ -38,7 +38,7 @@
 			"burst_accuracy" = list(30),
 			"dispersion" = null,
 			"projectile_type" = /obj/item/projectile/beam/stun/darkmatter,
-			"charge_cost" = 50
+			"charge_cost" = 20
 		),
 		list(
 			"mode_name" = "focused",
@@ -48,7 +48,7 @@
 			"burst_accuracy" = list(30),
 			"dispersion" = null,
 			"projectile_type" = /obj/item/projectile/beam/darkmatter,
-			"charge_cost" = 75
+			"charge_cost" = 30
 		),
 		list(
 			"mode_name" = "scatter burst",
@@ -85,7 +85,7 @@
 		list(
 			"mode_name" = "normal",
 			"projectile_type" = /obj/item/projectile/energy/plasmastun/sonic/weak,
-			"charge_cost" = 50
+			"charge_cost" = 20
 		),
 		list(
 			"mode_name" = "overcharge",
