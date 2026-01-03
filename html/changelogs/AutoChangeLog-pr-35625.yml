@@ -1,6 +1,0 @@
-author: Banditoz
-changes:
-  - balance: Naloxone reverses antidepressant metabolites.
-  - balance: Antidepressant overdoses no longer deal lots of tox damage, but now
-      add slowdown.
-delete-after: true
