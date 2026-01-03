@@ -207,9 +207,6 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		// access-granting is only available for arrest warrants
 		if(activewarrant.fields["arrestsearch"] == "search")
 			return
-		if(!(access_change_ids in I.access))
-			to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
-			return
 
 		// only works if they are in the crew records with a valid job
 		var/datum/computer_file/report/crew_record/warrant_subject
@@ -226,6 +223,10 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			return
 
 		var/list/warrant_access = J.get_access()
+		//if the user has all the access the target does, they can grant warrant access
+		if (!(access_change_ids in I.access) || length(difflist(warrant_access, I.access)))
+			to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
+			return
 		// warrants can never grant command access
 		warrant_access.Remove(get_region_accesses(ACCESS_REGION_COMMAND))
 
