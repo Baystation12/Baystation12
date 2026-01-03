@@ -108,7 +108,7 @@
 			var/list/as_list = instruments
 			var/list/categories = list()
 			for (var/key in as_list)
-				var/datum/instrument/instrument = instruments[key]
+				var/datum/instrument/instrument = as_list[key]
 				categories |= instrument.category
 
 			var/category = input(user, "Choose a category") as null|anything in categories
@@ -116,7 +116,7 @@
 				return
 			var/list/instruments_available = list()
 			for (var/key in as_list)
-				var/datum/instrument/instrument = instruments[key]
+				var/datum/instrument/instrument = as_list[key]
 				if (instrument.category == category)
 					instruments_available += key
 
@@ -124,7 +124,7 @@
 			if(!CanInteractWith(user, owner, GLOB.physical_state))
 				return
 			if (new_instrument)
-				src.player.song.instrument_data = instruments[new_instrument]
+				src.player.song.instrument_data = as_list[new_instrument]
 		if ("autorepeat") src.player.song.autorepeat = value
 		if ("decay") src.player.song.linear_decay = value
 		if ("echo") src.player.apply_echo = value
@@ -211,7 +211,7 @@
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
 	//Initialization data
-	var/datum/instrument/instruments = list()
+	var/list/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
 	obj_flags = OBJ_FLAG_ANCHORABLE
@@ -266,7 +266,7 @@
 /obj/item/device/synthesized_instrument
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
-	var/datum/instrument/instruments = list()
+	var/list/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
 

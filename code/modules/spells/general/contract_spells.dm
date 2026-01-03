@@ -27,7 +27,8 @@
 		return null
 
 	if(islist(target))
-		target = target[1]
+		var/list/target_list = target
+		target = target_list[1]
 	return target
 
 
