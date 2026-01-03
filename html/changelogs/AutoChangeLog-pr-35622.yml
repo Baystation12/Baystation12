@@ -1,0 +1,5 @@
+author: Banditoz
+changes:
+  - bugfix: Guns now properly use everything their first firemode specifies on 
+      init.
+delete-after: true
