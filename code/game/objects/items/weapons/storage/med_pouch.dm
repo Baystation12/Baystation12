@@ -224,5 +224,5 @@ Single Use Emergency Pouches
 
 /obj/item/reagent_containers/hypospray/autoinjector/pouch_auto/naloxone
 	name = "emergency overdose autoinjector"
-	desc = "The ingredient label reads 5 units of naloxone. To be used in case of opiate overdose."
+	desc = "The ingredient label reads 5 units of naloxone. To be used in case of opiate or antidepressant overdose."
 	starts_with = list(/datum/reagent/naloxone = 5)

@@ -509,7 +509,7 @@
 
 /datum/reagent/naloxone
 	name = "Naloxone"
-	description = "A reversal agent to nullify the effects of opiates."
+	description = "A reversal agent to nullify the effects of opiates and antidepressants."
 	reagent_state = LIQUID
 	color = "#a4a76d"
 	scannable = TRUE
@@ -522,7 +522,8 @@
 		return
 	if (affected.metabolized.has_reagent(/datum/reagent/opiate))
 		affected.metabolized.remove_reagent(/datum/reagent/opiate, 5 * removed)
-
+	if (affected.metabolized.has_reagent(/datum/reagent/antidepressant))
+		affected.metabolized.remove_reagent(/datum/reagent/antidepressant, 5 * removed)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -742,15 +743,14 @@
 		if(!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			to_chat(M, SPAN_NOTICE("Your mind feels much more stable."))
-	else if (dose >= overdose)
-		M.add_chemical_effect(CE_MIND, -1)
-		if(!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
-			data = world.time
-			to_chat(M, SPAN_NOTICE("You feel like your mind is racing!"))
 
 /datum/reagent/antidepressant/process_overdose(mob/living/carbon/affected)
-	..()
 	affected.add_chemical_effect(CE_STIMULANT, 1)
+	affected.add_chemical_effect(CE_MIND, -1)
+	affected.add_chemical_effect(CE_SLOWDOWN, 1)
+	if (!data || world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
+		data = world.time
+		to_chat(affected, SPAN_NOTICE("You feel like your mind is racing!"))
 
 /datum/reagent/antidepressant/citalopram
 	name = "Citalopram"
