@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - tweak: Department heads can now grant warrant access if the target is a 
+      subordinate in their department.
+delete-after: true
