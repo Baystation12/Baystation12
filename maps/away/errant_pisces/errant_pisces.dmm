@@ -6503,7 +6503,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qh" = (
-/obj/machinery/computer/modular/preset/helm{
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,

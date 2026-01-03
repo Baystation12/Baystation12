@@ -234,3 +234,22 @@
 		/datum/computer_file/program/ship/sensors/spacer
 	)
 	autorun_program = /datum/computer_file/program/ship/sensors/spacer
+
+
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one
+	default_software = list(
+		/datum/computer_file/program/ship/sensors/spacer,
+		/datum/computer_file/program/ship/engine_control,
+		/datum/computer_file/program/munitions/spacer
+	)
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/computer/ship_interface
+	)
+	autorun_program = /datum/computer_file/program/ship/sensors/spacer
+
+/datum/computer_file/program/munitions/spacer
+	nanomodule_path = /datum/nano_module/program/munitions/spacer
+	available_on_ntnet = FALSE
+
+/datum/nano_module/program/munitions/spacer
+	access_req = null

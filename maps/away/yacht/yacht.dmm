@@ -37,7 +37,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "aj" = (
-/obj/machinery/computer/modular/preset/sensors{
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
@@ -50,7 +50,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "al" = (
-/obj/machinery/computer/modular/preset/helm{
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,

@@ -2018,9 +2018,6 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/computer/modular/preset/sensors/spacer{
-	dir = 4
-	},
 /obj/item/device/radio/intercom/map_preset/scavver{
 	default_hailing = 1;
 	dir = 4;
@@ -2028,6 +2025,9 @@
 	},
 /obj/floor_decal/corner/grey/border{
 	dir = 8
+	},
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
@@ -2507,12 +2507,12 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/computer/modular/preset/helm{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile{
 	initial_gas = newlist()
@@ -3829,13 +3829,13 @@
 /turf/simulated/floor,
 /area/scavver/yachtup)
 "FK" = (
-/obj/machinery/computer/modular/preset/sensors/spacer{
-	dir = 8
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
+	},
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)

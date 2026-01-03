@@ -27,6 +27,14 @@
 /datum/nano_module/program/munitions/syndicate
 	access_req = list(access_syndicate)
 
+/datum/nano_module/program/munitions/spacer
+	access_req = null
+
+/datum/computer_file/program/munitions/spacer
+	nanomodule_path = /datum/nano_module/program/munitions/spacer
+	required_access = null
+	available_on_ntnet = FALSE
+
 /datum/nano_module/program/munitions/New()
 	..()
 	linked = get_owning_sector_recursive(nano_host())

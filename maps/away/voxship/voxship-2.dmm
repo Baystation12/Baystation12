@@ -1256,7 +1256,7 @@
 	pixel_x = -26;
 	pixel_y = -8
 	},
-/obj/machinery/computer/modular/preset/helm{
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
 	req_access = list("ACCESS_VOXSHIP")
 	},
 /turf/simulated/floor/tiled/techmaint/vox,

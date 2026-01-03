@@ -1329,15 +1329,15 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/computer/modular/preset/sensors{
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /obj/item/device/radio/intercom/hailing{
 	dir = 4;
 	pixel_x = -24
+	},
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/salvage_shuttle/cockpit)
@@ -3520,9 +3520,6 @@
 /obj/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/machinery/computer/modular/preset/helm{
-	dir = 1
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -3530,6 +3527,9 @@
 	dir = 8;
 	pixel_x = 24;
 	req_access = list()
+	},
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/salvage_shuttle/cockpit)

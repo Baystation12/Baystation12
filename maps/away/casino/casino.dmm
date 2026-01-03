@@ -116,15 +116,11 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aq" = (
-/obj/machinery/computer/modular/preset/helm,
+/obj/machinery/computer/modular/preset/helm/spacer_all_in_one,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "ar" = (
 /obj/machinery/computer/ship/helm,
-/turf/simulated/floor/tiled,
-/area/casino/casino_bridge)
-"as" = (
-/obj/machinery/computer/modular/preset/sensors,
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "at" = (
@@ -9860,7 +9856,7 @@ aa
 aa
 aa
 an
-as
+aq
 av
 pb
 ay
