@@ -1,0 +1,5 @@
+author: Builder13
+changes:
+  - bugfix: Access code transmission device of the research robot module is now 
+      functional and also works on simple bots
+delete-after: true
