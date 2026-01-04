@@ -5,15 +5,18 @@
 
 /datum/persistent/crate/CompileEntry(atom/entry, write_file)
 	. = ..()
-	var/obj/structure/ore_box/box = entry
+	var/obj/structure/ore_box/persistent/box = entry
+	if(!istype(box))
+		return
 	var/list/ores = list()
-	for(var/obj/item/ore/C in box.contents)
-		var/name = C.material.name
+	for (var/obj/item/ore/ore_piece in box.contents)
+		var/name = ore_piece.material.name
 		if(name)
 			if(ores[name])
 				ores[name]++
 			else
 				ores[name] = 1
+
 	.["ores"] = ores
 
 /datum/persistent/crate/CreateEntryInstance(turf/creating, list/tokens)
@@ -21,11 +24,7 @@
 	if(!length(ore_count))
 		return
 
-	var/obj/structure/ore_box/persistent/B
-	for(var/thing in creating.contents)
-		B = thing
-		if(istype(B))
-			break
+	var/obj/structure/ore_box/persistent/B = locate() in range(1, creating)
 
 	if(!istype(B))
 		B = new /obj/structure/ore_box/persistent(creating)

@@ -6497,6 +6497,7 @@
 /area/quartermaster/storage)
 "ox" = (
 /obj/structure/railing/mapped,
+/obj/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "oy" = (
@@ -14487,6 +14488,8 @@
 	pixel_x = 32
 	},
 /obj/structure/railing/mapped,
+/obj/floor_decal/industrial/outline/orange,
+/obj/structure/ore_box/persistent/heavy,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "OC" = (

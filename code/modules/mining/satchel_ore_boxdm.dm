@@ -41,11 +41,11 @@
 
 /obj/structure/ore_box/proc/update_ore_count()
 	stored_ore = list()
-	for(var/obj/item/ore/O in contents)
-		if(stored_ore[O.name])
-			stored_ore[O.name]++
+	for(var/obj/item/ore/ore_piece in contents)
+		if(stored_ore[ore_piece.name])
+			stored_ore[ore_piece.name]++
 		else
-			stored_ore[O.name] = 1
+			stored_ore[ore_piece.name] = 1
 
 	last_update = world.time
 
