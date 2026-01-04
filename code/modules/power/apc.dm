@@ -48,6 +48,7 @@
 	environ = 0
 	locked = 0
 	coverlocked = 0
+	req_access = list()
 
 /obj/machinery/power/apc/critical
 	is_critical = 1
@@ -62,6 +63,11 @@
 	environ = 0
 	locked = 0
 	coverlocked = 0
+
+/obj/machinery/power/apc/inactive/open_empty
+	opened = 1
+	icon_state = "apcmaint"
+	cell_type = null
 
 /obj/machinery/power/apc/super
 	cell_type = /obj/item/cell/super
@@ -299,7 +305,8 @@
 	has_electronics = 2 //installed and secured
 
 	var/obj/item/stock_parts/power/battery/bat = get_component_of_type(/obj/item/stock_parts/power/battery)
-	bat.add_cell(src, new cell_type(bat))
+	if (cell_type)
+		bat.add_cell(src, new cell_type(bat))
 	var/obj/item/stock_parts/power/terminal/term = get_component_of_type(/obj/item/stock_parts/power/terminal)
 	term.make_terminal(src)
 

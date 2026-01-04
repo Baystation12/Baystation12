@@ -80,3 +80,8 @@
 	var/def_zone = get_exposed_defense_zone(A)
 	P.launch(A, def_zone)
 	return TRUE
+
+/mob/living/bot/secbot/ed209/angry
+	check_arrest = 0
+	emagged = 1
+	req_access = list()
