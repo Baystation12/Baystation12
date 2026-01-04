@@ -727,3 +727,9 @@
 	icon_state = "kimono"
 	worn_state = "kimono"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
+/obj/item/clothing/under/slate
+	name = "\improper Slate Engineering uniform"
+	desc = "A dress shirt and khakis belonging to Slate Sisters Engineering, a shipbuilding and asteroid excavation firm."
+	icon_state = "dispatch"
+	worn_state = "dispatch"
