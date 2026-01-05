@@ -1,0 +1,4 @@
+author: Cakey
+changes:
+  - bugfix: Fixed sensors viewing program not working on telescreens.
+delete-after: true
