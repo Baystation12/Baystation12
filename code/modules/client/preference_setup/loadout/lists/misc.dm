@@ -105,6 +105,26 @@
 	knives["lightweight utility knife"] = /obj/item/material/knife/utility/lightweight
 	gear_tweaks += new/datum/gear_tweak/path(knives)
 
+/datum/gear/utensil
+	display_name = "utensil selection"
+	description = "A selection of utensils."
+	path = /obj/item/material/utensil
+
+/datum/gear/utensil/New()
+	..()
+	var/utensil = list()
+	utensil["fork"] = /obj/item/material/utensil/fork
+	utensil["knife"] = /obj/item/material/utensil/knife
+	utensil["spork"] = /obj/item/material/utensil/spork
+	utensil["spoon"] = /obj/item/material/utensil/spoon
+	utensil["chopsticks"] = /obj/item/material/utensil/chopsticks
+	gear_tweaks += new/datum/gear_tweak/path(utensil)
+
+/datum/gear/serving_bowl
+	display_name = "serving bowl"
+	description = "An empty serving bowl, used to combine food together."
+	path = /obj/item/serving_bowl
+
 /datum/gear/kirpan
 	display_name = "kirpan"
 	description = "A ceremonial Sikh dagger."
