@@ -1,0 +1,5 @@
+author: Banditoz
+changes:
+  - bugfix: Quick and tactical reloads no longer inexplicably consume mags when 
+      moving.
+delete-after: true
