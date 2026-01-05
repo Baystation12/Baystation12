@@ -191,34 +191,36 @@
 							if(!can_special_reload)
 								to_chat(user, SPAN_WARNING("You can't tactically reload this gun!"))
 								return
+							//Experienced gets a 1 second delay, master gets a 0.5 second delay
+							if(!do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_TAC_RELOAD : EXP_TAC_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+								return
 							if(!user.unEquip(AM, src))
 								return
-							//Experienced gets a 1 second delay, master gets a 0.5 second delay
-							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_TAC_RELOAD : EXP_TAC_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
-								if(jam_chance && (!(ammo_magazine.type == magazine_type)))
-									jam_chance -= 20
-								ammo_magazine.update_icon()
-								user.put_in_hands(ammo_magazine)
-								user.visible_message(
-									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-									SPAN_WARNING("You tactically reload \the [src] with \the [AM]!")
-								)
+							if(jam_chance && (!(ammo_magazine.type == magazine_type)))
+								jam_chance -= 20
+							ammo_magazine.update_icon()
+							user.put_in_hands(ammo_magazine)
+							user.visible_message(
+								SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+								SPAN_WARNING("You tactically reload \the [src] with \the [AM]!")
+							)
 						else //Speed reloading
 							if(!can_special_reload)
 								to_chat(user, SPAN_WARNING("You can't speed reload with this gun!"))
 								return
+							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
+							if(!do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+								return
 							if(!user.unEquip(AM, src))
 								return
-							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
-							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_MASTER ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
-								if(jam_chance && istype(ammo_magazine, magazine_type))
-									jam_chance -= 10
-								ammo_magazine.update_icon()
-								ammo_magazine.dropInto(user.loc)
-								user.visible_message(
-									SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
-									SPAN_WARNING("You speed reload \the [src] with \the [AM]!")
-								)
+							if(jam_chance && istype(ammo_magazine, magazine_type))
+								jam_chance -= 10
+							ammo_magazine.update_icon()
+							ammo_magazine.dropInto(user.loc)
+							user.visible_message(
+								SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+								SPAN_WARNING("You speed reload \the [src] with \the [AM]!")
+							)
 					ammo_magazine = AM
 					playsound(loc, mag_insert_sound, 75, 1)
 					update_icon()
