@@ -1,16 +1,16 @@
 /singleton/trait/malus/allergy
 	name = "Allergy"
 	levels = list(TRAIT_LEVEL_MINOR, TRAIT_LEVEL_MAJOR)
-	maximum_count = 2
-	///Used to select which reagent mob is allergic to.
+	budget_cost = 2
+	///Used to select which reagent mob is allergic to. Number represents budget cost. If none set; defaults to budget_cost.
 	metaoptions = list(
 		/datum/reagent/antidexafen,
 		/datum/reagent/bicaridine,
 		/datum/reagent/dermaline,
-		/datum/reagent/drink/juice/apple,
-		/datum/reagent/drink/juice/berry,
-		/datum/reagent/drink/juice/garlic,
-		/datum/reagent/drink/juice/orange,
+		/datum/reagent/drink/juice/apple = 0,
+		/datum/reagent/drink/juice/berry = 1,
+		/datum/reagent/drink/juice/garlic = 0,
+		/datum/reagent/drink/juice/orange = 0,
 		/datum/reagent/drink/kefir,
 		/datum/reagent/drink/thoom,
 		/datum/reagent/drugs/psilocybin,

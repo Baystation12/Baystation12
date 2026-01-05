@@ -85,6 +85,9 @@ GLOBAL_LIST_EMPTY(mob_ref_to_species_name)
 	var/min_age = 17
 	var/max_age = 70
 
+	///Budget for traits added during character setup.
+	var/trait_budget = 4
+
 	// Speech vars.
 	var/assisted_langs = list()               // The languages the species can't speak without an assisted organ.
 	var/list/speech_sounds                    // A list of sounds to potentially play when speaking.
