@@ -6,6 +6,7 @@
 	program_key_state = "teleport_key"
 	program_menu_icon = "eject"
 	extended_desc = "Used to activate, monitor, and configure a spaceship's sensors. Higher range means higher temperature; dangerously high temperatures may fry the delicate equipment."
+	usage_flags = PROGRAM_CONSOLE|PROGRAM_TELESCREEN
 	size = 5
 
 /datum/nano_module/program/ship/sensors
