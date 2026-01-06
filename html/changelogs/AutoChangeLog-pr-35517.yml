@@ -1,0 +1,5 @@
+author: Cakey
+changes:
+  - rscadd: Modular consoles and laptops can now open multiple windows at a 
+      time, depending on processing bandwidth.
+delete-after: true
