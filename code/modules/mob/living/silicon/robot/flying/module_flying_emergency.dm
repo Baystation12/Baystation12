@@ -3,7 +3,7 @@
 	display_name = "Emergency Response"
 	channels = list("Medical" = TRUE)
 	networks = list(NETWORK_MEDICAL)
-	subsystems = list(/datum/nano_module/crew_monitor)
+	subsystems = list(/datum/nano_module/program/crew_monitor)
 	sprites = list(
 		"Drone" = "drone-medical",
 		"Eyebot" = "eyebot-medical"

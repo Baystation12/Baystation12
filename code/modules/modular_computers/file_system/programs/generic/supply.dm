@@ -5,7 +5,7 @@
 /datum/computer_file/program/supply
 	filename = "supply"
 	filedesc = "Supply Management"
-	nanomodule_path = /datum/nano_module/supply
+	nanomodule_path = /datum/nano_module/program/supply
 	ui_header = null // Set when enabled by an admin user.
 	program_icon_state = "supply"
 	program_key_state = "rd_key"
@@ -18,7 +18,7 @@
 
 /datum/computer_file/program/supply/process_tick()
 	..()
-	var/datum/nano_module/supply/SNM = NM
+	var/datum/nano_module/program/supply/SNM = NM
 	if(istype(SNM))
 		SNM.emagged = computer.emagged()
 		if(SNM.notifications_enabled)
@@ -31,7 +31,7 @@
 		else if(ui_header)
 			ui_header = null
 
-/datum/nano_module/supply
+/datum/nano_module/program/supply
 	name = "Supply Management program"
 	var/screen = 1		// 1: Ordering menu, 2: Statistics, 3: Shuttle control, 4: Orders menu
 	var/selected_category
@@ -45,8 +45,8 @@
 	var/notifications_enabled = FALSE
 	var/admin_access = list(access_cargo, access_mailsorting)
 
-/datum/nano_module/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/supply/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 	var/is_admin = emagged || check_access(user, admin_access)
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	if(!LAZYLEN(category_names) || !LAZYLEN(category_contents) || current_security_level != security_state.current_security_level || emagged_memory != emagged )
@@ -119,12 +119,12 @@
 		ui.open()
 
 // Supply the order ID and where to look. This is just to reduce copypaste code.
-/datum/nano_module/supply/proc/find_order_by_id(order_id, list/find_in)
+/datum/nano_module/program/supply/proc/find_order_by_id(order_id, list/find_in)
 	for(var/datum/supply_order/SO in find_in)
 		if(SO.ordernum == order_id)
 			return SO
 
-/datum/nano_module/supply/Topic(href, href_list)
+/datum/nano_module/program/supply/Topic(href, href_list)
 	var/mob/user = usr
 	if(..())
 		return 1
@@ -312,7 +312,7 @@
 		notifications_enabled = !notifications_enabled
 		return 1
 
-/datum/nano_module/supply/proc/generate_categories()
+/datum/nano_module/program/supply/proc/generate_categories()
 	category_names.Cut()
 	category_contents.Cut()
 	var/singleton/hierarchy/supply_pack/root = GET_SINGLETON(/singleton/hierarchy/supply_pack)
@@ -331,7 +331,7 @@
 			)))
 		category_contents[sp.name] = category
 
-/datum/nano_module/supply/proc/generate_order_contents(order_ref)
+/datum/nano_module/program/supply/proc/generate_order_contents(order_ref)
 	var/singleton/hierarchy/supply_pack/sp = locate(order_ref) in SSsupply.master_supply_list
 	if(!istype(sp))
 		return FALSE
@@ -359,11 +359,11 @@
 	return TRUE
 
 
-/datum/nano_module/supply/proc/clear_order_contents()
+/datum/nano_module/program/supply/proc/clear_order_contents()
 	contents_of_order.Cut()
 	showing_contents_of_ref = null
 
-/datum/nano_module/supply/proc/get_shuttle_status()
+/datum/nano_module/program/supply/proc/get_shuttle_status()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 	if(!istype(shuttle))
 		return "No Connection"
@@ -375,7 +375,7 @@
 		return "Docked"
 	return "Docking/Undocking"
 
-/datum/nano_module/supply/proc/order_to_nanoui(datum/supply_order/SO, list_id)
+/datum/nano_module/program/supply/proc/order_to_nanoui(datum/supply_order/SO, list_id)
 	return list(list(
 		"id" = SO.ordernum,
 		"time" = SO.timestamp,
@@ -386,13 +386,13 @@
 		"list_id" = list_id
 		))
 
-/datum/nano_module/supply/proc/can_print()
+/datum/nano_module/program/supply/proc/can_print()
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
 	if(os)
 		return os.has_component(PART_PRINTER)
 	return 0
 
-/datum/nano_module/supply/proc/print_order(datum/supply_order/O, mob/user)
+/datum/nano_module/program/supply/proc/print_order(datum/supply_order/O, mob/user)
 	if(!O)
 		return
 
@@ -410,7 +410,7 @@
 	t += "<hr>"
 	print_text(t, user)
 
-/datum/nano_module/supply/proc/print_summary(mob/user)
+/datum/nano_module/program/supply/proc/print_summary(mob/user)
 	var/t = ""
 	t += "<center><BR><b><large>[GLOB.using_map.station_name]</large></b><BR><i>[GLOB.station_date]</i><BR><i>Export overview<field></i></center><hr>"
 	for(var/source in SSsupply.point_source_descriptions)

@@ -1,7 +1,7 @@
 /datum/computer_file/program/rcon_console
 	filename = "rconconsole"
 	filedesc = "RCON Remote Control"
-	nanomodule_path = /datum/nano_module/rcon
+	nanomodule_path = /datum/nano_module/program/rcon
 	program_icon_state = "generic"
 	program_key_state = "rd_key"
 	program_menu_icon = "power"
@@ -14,7 +14,7 @@
 	size = 19
 	category = PROG_ENG
 
-/datum/nano_module/rcon
+/datum/nano_module/program/rcon
 	name = "Power RCON"
 	var/list/known_SMESs = null
 	var/list/known_breakers = null
@@ -23,9 +23,9 @@
 	var/hide_SMES_details = 0
 	var/hide_breakers = 0
 
-/datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, datum/topic_state/state = GLOB.default_state)
 	FindDevices() // Update our devices list
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 
 	// SMES DATA (simplified view)
 	var/list/smeslist = list()
@@ -67,7 +67,7 @@
 // Proc: Topic()
 // Parameters: 2 (href, href_list - allows us to process UI clicks)
 // Description: Allows us to process UI clicks, which are relayed in form of hrefs.
-/datum/nano_module/rcon/Topic(href, href_list)
+/datum/nano_module/program/rcon/Topic(href, href_list)
 	if(..())
 		return
 
@@ -111,7 +111,7 @@
 // Proc: GetSMESByTag()
 // Parameters: 1 (tag - RCON tag of SMES we want to look up)
 // Description: Looks up and returns SMES which has matching RCON tag
-/datum/nano_module/rcon/proc/GetSMESByTag(tag)
+/datum/nano_module/program/rcon/proc/GetSMESByTag(tag)
 	if(!tag)
 		return
 
@@ -122,7 +122,7 @@
 // Proc: FindDevices()
 // Parameters: None
 // Description: Refreshes local list of known devices.
-/datum/nano_module/rcon/proc/FindDevices()
+/datum/nano_module/program/rcon/proc/FindDevices()
 	known_SMESs = list()
 	for(var/obj/machinery/power/smes/buildable/SMES in SSmachines.machinery)
 		if(AreConnectedZLevels(get_host_z(), get_z(SMES)) && SMES.RCon_tag && (SMES.RCon_tag != "NO_TAG") && SMES.RCon)

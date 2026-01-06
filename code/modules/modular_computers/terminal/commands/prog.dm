@@ -45,7 +45,13 @@
 			var/datum/computer_file/program/P = get_program_by_pid(arguments[2], terminal)
 			if(!istype(P))
 				return "[name]: Error; invalid pid."
-			(P.program_state == PROGRAM_STATE_ACTIVE ? terminal.computer.minimize_program() : terminal.computer.activate_program(P))
+			(P == terminal.computer.active_program ? terminal.computer.minimize_program(P, user) : terminal.computer.activate_program(P, user))
+			return "[name]: Program focus toggled."
+		else if (arguments[1] == "-fw")
+			var/datum/computer_file/program/P = get_program_by_pid(arguments[2], terminal)
+			if(!istype(P))
+				return "[name]: Error; invalid pid."
+			((P in terminal.computer.running_program_windows) ? terminal.computer.minimize_program(P, user) : terminal.computer.activate_program_new_window(P, user))
 			return "[name]: Program focus toggled."
 		else if(arguments[1] == "-k")
 			var/datum/computer_file/program/P = get_program_by_pid(arguments[2], terminal)
@@ -55,6 +61,13 @@
 			return "[name]: Program [P.filename] terminated."
 		else if(arguments[1] == "-x")
 			var/datum/computer_file/program/P = terminal.computer.run_program_remote(arguments[2], user, 0)
+			if(!istype(P))
+				return "[name]: Error; unable to execute program '[arguments[2]]'."
+			return "[name]: Program '[P.filename]' running with pid [P.uid]."
+		else if(arguments[1] == "-xw")
+			if (!terminal.computer.allow_multiple_windows)
+				return "[name]: Error; unable to run multiple windows on hardware."
+			var/datum/computer_file/program/P = terminal.computer.run_program_new_window(arguments[2], user, 0)
 			if(!istype(P))
 				return "[name]: Error; unable to execute program '[arguments[2]]'."
 			return "[name]: Program '[P.filename]' running with pid [P.uid]."

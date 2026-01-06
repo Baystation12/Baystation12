@@ -28,7 +28,7 @@
 /datum/computer_file/program/camera_monitor
 	filename = "cammon"
 	filedesc = "Camera Monitoring"
-	nanomodule_path = /datum/nano_module/camera_monitor
+	nanomodule_path = /datum/nano_module/program/camera_monitor
 	program_icon_state = "cameras"
 	program_key_state = "generic_key"
 	program_menu_icon = "search"
@@ -38,19 +38,19 @@
 	requires_ntnet = FALSE
 	category = PROG_MONITOR
 
-/datum/nano_module/camera_monitor
+/datum/nano_module/program/camera_monitor
 	name = "Camera Monitoring program"
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 
 
-/datum/nano_module/camera_monitor/Destroy()
+/datum/nano_module/program/camera_monitor/Destroy()
 	reset_current()
 	. = ..()
 
 
-/datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	data["current_camera"] = current_camera ? current_camera.nano_structure() : null
 	data["current_network"] = current_network
@@ -83,17 +83,17 @@
 	user.reset_view(current_camera)
 
 // Intended to be overriden by subtypes to manually add non-station networks to the list.
-/datum/nano_module/camera_monitor/proc/modify_networks_list(list/networks)
+/datum/nano_module/program/camera_monitor/proc/modify_networks_list(list/networks)
 	return networks
 
-/datum/nano_module/camera_monitor/proc/can_access_network(mob/user, network_access)
+/datum/nano_module/program/camera_monitor/proc/can_access_network(mob/user, network_access)
 	// No access passed, or 0 which is considered no access requirement. Allow it.
 	if(!network_access)
 		return 1
 
 	return check_access(user, access_security) || check_access(user, network_access)
 
-/datum/nano_module/camera_monitor/Topic(href, href_list)
+/datum/nano_module/program/camera_monitor/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -130,7 +130,7 @@
 		usr.reset_view(current_camera)
 		return 1
 
-/datum/nano_module/camera_monitor/proc/switch_to_camera(mob/user, obj/machinery/camera/C)
+/datum/nano_module/program/camera_monitor/proc/switch_to_camera(mob/user, obj/machinery/camera/C)
 	//don't need to check if the camera works for AI because the AI jumps to the camera location and doesn't actually look through cameras.
 	if(isAI(user))
 		var/mob/living/silicon/ai/A = user
@@ -145,7 +145,7 @@
 	set_current(C)
 	return 1
 
-/datum/nano_module/camera_monitor/proc/set_current(obj/machinery/camera/C)
+/datum/nano_module/program/camera_monitor/proc/set_current(obj/machinery/camera/C)
 	if(current_camera == C)
 		return
 
@@ -160,12 +160,12 @@
 		if(istype(L))
 			L.tracking_initiated()
 
-/datum/nano_module/camera_monitor/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
+/datum/nano_module/program/camera_monitor/proc/camera_moved(atom/movable/moved_atom, atom/old_loc, atom/new_loc)
 	if (AreConnectedZLevels(get_z(old_loc), get_z(new_loc)))
 		return
 	reset_current()
 
-/datum/nano_module/camera_monitor/proc/reset_current()
+/datum/nano_module/program/camera_monitor/proc/reset_current()
 	if(current_camera)
 		GLOB.destroyed_event.unregister(current_camera, src, PROC_REF(reset_current))
 		GLOB.moved_event.unregister(current_camera, src, PROC_REF(camera_moved))
@@ -174,7 +174,7 @@
 			L.tracking_cancelled()
 	current_camera = null
 
-/datum/nano_module/camera_monitor/check_eye(mob/user as mob)
+/datum/nano_module/program/camera_monitor/check_eye(mob/user as mob)
 	if(!current_camera)
 		return 0
 	var/viewflag = current_camera.check_eye(user)
@@ -188,27 +188,27 @@
 	filename = "ertcammon"
 	filedesc = "SCGDF Camera Monitoring"
 	extended_desc = "A special version of the camera monitoring system tailored for SCG's security and defense forces. Has expanded access to a broad encryption key database and is compatible with PDAs."
-	nanomodule_path = /datum/nano_module/camera_monitor/ert
+	nanomodule_path = /datum/nano_module/program/camera_monitor/ert
 	required_access = access_ert_responder
 	usage_flags = PROGRAM_ALL
 
-/datum/nano_module/camera_monitor/ert
+/datum/nano_module/program/camera_monitor/ert
 	name = "SCGDF Camera Monitoring Program"
 	available_to_ai = FALSE
 
 // The ERT variant has access to ERT and crescent cams, but still checks for accesses. ERT members should be able to use it.
-/datum/nano_module/camera_monitor/ert/modify_networks_list(list/networks)
+/datum/nano_module/program/camera_monitor/ert/modify_networks_list(list/networks)
 	..()
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))
 	return networks
 
-/datum/nano_module/camera_monitor/apply_visual(mob/M)
+/datum/nano_module/program/camera_monitor/apply_visual(mob/M)
 	if(current_camera)
 		current_camera.apply_visual(M)
 	else
 		remove_visual(M)
 
-/datum/nano_module/camera_monitor/remove_visual(mob/M)
+/datum/nano_module/program/camera_monitor/remove_visual(mob/M)
 	if(current_camera)
 		current_camera.remove_visual(M)

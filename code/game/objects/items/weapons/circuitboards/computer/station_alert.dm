@@ -12,7 +12,7 @@
 	if(..(SA))
 		SA.unregister_monitor()
 
-		var/datum/nano_module/alarm_monitor/monitor = new(SA)
+		var/datum/nano_module/program/alarm_monitor/monitor = new(SA)
 		monitor.alarm_handlers.Cut()
 		for(var/alarm_handler in alarm_handlers)
 			monitor.alarm_handlers += alarm_handler

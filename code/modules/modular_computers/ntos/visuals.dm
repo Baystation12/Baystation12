@@ -1,5 +1,7 @@
 
-/datum/extension/interactive/ntos/proc/update_host_icon()
+/datum/extension/interactive/ntos/proc/update_host_icon(datum/computer_file/program/program, was_interacted = TRUE)
+	if (was_interacted)
+		last_interacted_program = program
 	var/atom/A = holder
 	if(istype(A))
 		A.update_icon()
@@ -11,8 +13,8 @@
 		var/atom/A = holder
 		if(istype(A))
 			screen_icon_file = A.icon
-	if(active_program)
-		return image(screen_icon_file, active_program.program_icon_state)
+	if(last_interacted_program)
+		return image(screen_icon_file, last_interacted_program.program_icon_state)
 	else
 		return image(screen_icon_file, menu_icon)
 
@@ -23,8 +25,8 @@
 		var/atom/A = holder
 		if(istype(A))
 			screen_icon_file = A.icon
-	if(active_program && active_program.program_key_state)
-		return image(screen_icon_file, active_program.program_key_state)
+	if(last_interacted_program && last_interacted_program.program_key_state)
+		return image(screen_icon_file, last_interacted_program.program_key_state)
 
 /datum/extension/interactive/ntos/proc/get_keyboard_state()
 	if(!on)

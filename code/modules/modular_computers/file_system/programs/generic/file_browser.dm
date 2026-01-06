@@ -96,7 +96,7 @@
 	name = "NTOS File Manager"
 
 /datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 	var/datum/computer_file/program/filemanager/PRG
 	PRG = program
 

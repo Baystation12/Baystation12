@@ -1,7 +1,7 @@
 /datum/computer_file/program/shields_monitor
 	filename = "shieldsmonitor"
 	filedesc = "Shield Generators Monitoring"
-	nanomodule_path = /datum/nano_module/shields_monitor
+	nanomodule_path = /datum/nano_module/program/shields_monitor
 	program_icon_state = "shield"
 	program_key_state = "generic_key"
 	program_menu_icon = "radio-on"
@@ -12,15 +12,15 @@
 	size = 10
 	category = PROG_ENG
 
-/datum/nano_module/shields_monitor
+/datum/nano_module/program/shields_monitor
 	name = "Shields monitor"
 	var/obj/machinery/power/shield_generator/active = null
 
-/datum/nano_module/shields_monitor/Destroy()
+/datum/nano_module/program/shields_monitor/Destroy()
 	. = ..()
 	deselect_shield()
 
-/datum/nano_module/shields_monitor/proc/get_shields()
+/datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/shield_generator/S as anything in GLOB.shield_generators)
@@ -32,8 +32,8 @@
 		deselect_shield()
 	return shields
 
-/datum/nano_module/shields_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/shields_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 
 	if (active)
 		data["active"] = 1
@@ -84,7 +84,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/shields_monitor/Topic(href, href_list)
+/datum/nano_module/program/shields_monitor/Topic(href, href_list)
 	if(..())
 		return 1
 	if( href_list["refresh"] )
@@ -102,7 +102,7 @@
 			active = S
 		return 1
 
-/datum/nano_module/shields_monitor/proc/deselect_shield(source)
+/datum/nano_module/program/shields_monitor/proc/deselect_shield(source)
 	if(!active)
 		return
 	GLOB.destroyed_event.unregister(active, src)

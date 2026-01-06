@@ -26,7 +26,7 @@
 	var/prog_state = REPORTS_VIEW
 
 /datum/nano_module/program/reports/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 	data["prog_state"] = prog_state
 	switch(prog_state)
 		if(REPORTS_VIEW)

@@ -8,6 +8,9 @@
 
 /obj/machinery/computer/modular/Initialize()
 	set_extension(src, /datum/extension/interactive/ntos/console)
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if (os)
+		os.allow_multiple_windows = TRUE
 	. = ..()
 
 /obj/machinery/computer/modular/Destroy()

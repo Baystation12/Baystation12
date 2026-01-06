@@ -1,5 +1,5 @@
 /mob/living/carbon/human/proc/change_appearance(flags, mob/user = src, datum/topic_state/state = GLOB.default_state)
-	var/datum/nano_module/appearance_changer/changer = new(src, flags)
+	var/datum/nano_module/program/appearance_changer/changer = new(src, flags)
 	changer.ui_interact(user, state = state)
 
 /mob/living/carbon/human/proc/change_species(new_species)

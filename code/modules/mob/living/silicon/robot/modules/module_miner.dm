@@ -2,7 +2,7 @@
 	name = "miner robot module"
 	display_name = "Miner"
 	subsystems = list(
-		/datum/nano_module/supply
+		/datum/nano_module/program/supply
 	)
 	channels = list(
 		"Supply" = TRUE,

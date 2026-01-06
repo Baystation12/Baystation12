@@ -1,7 +1,7 @@
 /datum/computer_file/program/atmos_control
 	filename = "atmoscontrol"
 	filedesc = "Atmosphere Control"
-	nanomodule_path = /datum/nano_module/atmos_control
+	nanomodule_path = /datum/nano_module/program/atmos_control
 	program_icon_state = "atmos_control"
 	program_key_state = "atmos_key"
 	program_menu_icon = "shuffle"
@@ -14,14 +14,14 @@
 	category = PROG_ENG
 	size = 17
 
-/datum/nano_module/atmos_control
+/datum/nano_module/program/atmos_control
 	name = "Atmospherics Control"
 	var/obj/access = new()
 	var/emagged = FALSE
 	var/ui_ref
 	var/list/monitored_alarms = list()
 
-/datum/nano_module/atmos_control/New(atmos_computer, list/req_access, monitored_alarm_ids)
+/datum/nano_module/program/atmos_control/New(atmos_computer, list/req_access, monitored_alarm_ids)
 	..()
 
 	if(istype(req_access))
@@ -36,7 +36,7 @@
 		// machines may not yet be ordered at this point
 		monitored_alarms = dd_sortedObjectList(monitored_alarms)
 
-/datum/nano_module/atmos_control/Topic(href, href_list)
+/datum/nano_module/program/atmos_control/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -48,8 +48,8 @@
 				alarm.ui_interact(usr, master_ui = ui_ref, state = TS)
 		return 1
 
-/datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/atmos_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 	var/list/alarms = list()
 	var/list/alarmsAlert = list()
 	var/list/alarmsDanger = list()
@@ -81,14 +81,14 @@
 		ui.set_auto_update(1)
 	ui_ref = ui
 
-/datum/nano_module/atmos_control/proc/generate_state(air_alarm)
+/datum/nano_module/program/atmos_control/proc/generate_state(air_alarm)
 	var/datum/topic_state/air_alarm/state = new()
 	state.atmos_control = src
 	state.air_alarm = air_alarm
 	return state
 
 /datum/topic_state/air_alarm
-	var/datum/nano_module/atmos_control/atmos_control	= null
+	var/datum/nano_module/program/atmos_control/atmos_control	= null
 	var/obj/machinery/alarm/air_alarm					= null
 
 /datum/topic_state/air_alarm/can_use_topic(src_object, mob/user)

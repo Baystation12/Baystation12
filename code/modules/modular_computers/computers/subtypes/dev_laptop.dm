@@ -20,6 +20,9 @@
 
 /obj/item/modular_computer/laptop/Initialize()
 	. = ..()
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if (os)
+		os.allow_multiple_windows = TRUE
 	screen_on = anchored
 
 /obj/item/modular_computer/laptop/AltClick(mob/user)

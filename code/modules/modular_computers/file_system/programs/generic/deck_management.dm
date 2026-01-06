@@ -6,7 +6,7 @@
 /datum/computer_file/program/deck_management
 	filename = "deckmngr"
 	filedesc = "Deck Management"
-	nanomodule_path = /datum/nano_module/deck_management
+	nanomodule_path = /datum/nano_module/program/deck_management
 	program_icon_state = "request"
 	program_key_state = "rd_key"
 	program_menu_icon = "clock"
@@ -16,7 +16,7 @@
 	requires_ntnet = TRUE
 	category = PROG_SUPPLY
 
-/datum/nano_module/deck_management
+/datum/nano_module/program/deck_management
 	name = "Deck Management Program"
 	var/prog_state = DECK_HOME                       //Which menu we are in.
 	var/can_view_only = 0                            //Whether we are in view-only mode for the report viewer.
@@ -28,20 +28,20 @@
 	//The default access needed to properly use. Should be set in map files.
 	var/default_access = list(access_cargo, access_bridge)  //The format is (needs one of list(these access constants or lists of access constants))
 
-/datum/nano_module/deck_management/New()
+/datum/nano_module/program/deck_management/New()
 	..()
 	for(var/shuttle in SSshuttle.shuttle_logs) //Registering to get shuttle updates.
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.register(src)
 
-/datum/nano_module/deck_management/Destroy()
+/datum/nano_module/program/deck_management/Destroy()
 	for(var/shuttle in SSshuttle.shuttle_logs) //Unregistering; important for garbage collection.
 		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.unregister(src)
 	. = ..()
 
-/datum/nano_module/deck_management/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/deck_management/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
+	var/list/data = host.initial_data(program)
 	var/logs = SSshuttle.shuttle_logs
 
 	data["prog_state"] = prog_state
@@ -128,7 +128,7 @@
 		ui.open()
 
 //Checks that the selected shuttle is valid, and resets to home screen if not.
-/datum/nano_module/deck_management/proc/ensure_valid_shuttle()
+/datum/nano_module/program/deck_management/proc/ensure_valid_shuttle()
 	if(!(selected_shuttle in SSshuttle.shuttle_logs))
 		selected_mission = null
 		selected_shuttle = null
@@ -137,7 +137,7 @@
 	return 1
 
 //Same for mission, checks that the shuttle is valid first.
-/datum/nano_module/deck_management/proc/ensure_valid_mission()
+/datum/nano_module/program/deck_management/proc/ensure_valid_mission()
 	if(!ensure_valid_shuttle())
 		return 0
 	var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
@@ -147,7 +147,7 @@
 		return 0
 	return 1
 
-/datum/nano_module/deck_management/proc/generate_mission_data(datum/shuttle_mission/mission)
+/datum/nano_module/program/deck_management/proc/generate_mission_data(datum/shuttle_mission/mission)
 	var/mission_data = list()
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
@@ -171,15 +171,15 @@
 			mission_data["queued"] = 1
 	return mission_data
 
-/datum/nano_module/deck_management/proc/get_default_access(mob/user)
+/datum/nano_module/program/deck_management/proc/get_default_access(mob/user)
 	for(var/access_pattern in default_access)
 		if(check_access(user, access_pattern))
 			return 1
 
-/datum/nano_module/deck_management/proc/get_shuttle_access(mob/user, datum/shuttle/shuttle)
+/datum/nano_module/program/deck_management/proc/get_shuttle_access(mob/user, datum/shuttle/shuttle)
 	return shuttle.logging_access ? (check_access(user, shuttle.logging_access) || check_access(user, access_bridge)) : 0
 
-/datum/nano_module/deck_management/proc/set_shuttle(mob/user, shuttle_name, need_access = 1)
+/datum/nano_module/program/deck_management/proc/set_shuttle(mob/user, shuttle_name, need_access = 1)
 	var/datum/shuttle/shuttle
 	if(!(shuttle = SSshuttle.shuttles[shuttle_name]))
 		return 0
@@ -198,7 +198,7 @@
 			report_prototypes += new_report
 	return 1
 
-/datum/nano_module/deck_management/proc/set_mission(mission_ID)
+/datum/nano_module/program/deck_management/proc/set_mission(mission_ID)
 	var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 	var/datum/shuttle_mission/mission = my_log.mission_from_ID(mission_ID)
 	if(!mission)
@@ -206,7 +206,7 @@
 	selected_mission = mission
 	return ensure_valid_mission()
 
-/datum/nano_module/deck_management/Topic(href, href_list)
+/datum/nano_module/program/deck_management/Topic(href, href_list)
 	var/mob/user = usr
 	if(..())
 		return 1

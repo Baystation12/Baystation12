@@ -49,7 +49,7 @@
 	return output
 
 /datum/nano_module/program/munitions/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+	var/list/data = host.initial_data(program)
 	var/authenticated = check_access(user, access_req)
 
 	data["src"] = "\ref[src]"
