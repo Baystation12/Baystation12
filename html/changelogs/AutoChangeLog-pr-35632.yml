@@ -1,0 +1,6 @@
+author: Banditoz
+changes:
+  - balance: The strength of alcohol has overall been reduced.
+  - bugfix: Drinking a significant amount of alcohol no longer deals an extreme 
+      amount of organ damage.
+delete-after: true
