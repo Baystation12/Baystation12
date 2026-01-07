@@ -110,7 +110,7 @@
 	touch_met = 5
 	sugar_amount = 0.5
 	bioavailability = 1
-	overdose = 60
+	overdose = 100
 	active_metabolites = /datum/reagent/ethanol
 	//Pure ethanol is very potent; the majority of other drinks will have a lower potency than this.
 	metabolite_potency = 2.5
@@ -143,21 +143,24 @@
 	affected.add_chemical_effect(CE_PAINKILLER, clamp(round(dose, 1), 1, 80))
 	var/effective_dose = dose * strength_mod
 
-	if (prob(effective_dose*2))
+	if (effective_dose >= 0.25 * overdose)
 		affected.make_dizzy(6)
 	if (effective_dose >= 0.5 * overdose)
 		affected.slurring = max(affected.slurring, 30)
-		affected.add_chemical_effect(CE_ALCOHOL, 1)
 	if (effective_dose >= 0.75 * overdose)
 		affected.set_confused(20)
 		affected.add_chemical_effect(CE_ALCOHOL, 1)
 	if (effective_dose >= overdose)
 		affected.eye_blurry = max(affected.eye_blurry, 10)
 		affected.drowsyness = max(affected.drowsyness, 20)
-		affected.add_chemical_effect(CE_ALCOHOL_TOXIC, clamp(round(dose/60, 1), 1, 8))
+	if (effective_dose >= 1.25 * overdose)
+		affected.add_chemical_effect(CE_ALCOHOL_TOXIC, clamp(round(dose / (overdose + 25), 1), 1, 8))
 	if (effective_dose >= 1.5 * overdose)
 		affected.Paralyse(20)
 		affected.Sleeping(30)
+
+/datum/reagent/ethanol/process_overdose()
+	return // noop
 
 /datum/reagent/ethanol/affect_ingest(mob/living/carbon/M, removed)
 	M.adjust_nutrition(nutriment_factor * removed)
