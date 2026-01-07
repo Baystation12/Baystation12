@@ -87,7 +87,7 @@
 	color = "#f6db93"
 
 /datum/reagent/nutriment/protein/egg // Also bad for skrell.
-	name = "egg yolk"
+	name = "Egg Yolk"
 	taste_description = "egg"
 	color = "#ffffaa"
 
@@ -173,12 +173,16 @@
 	protein_amount = 0.3
 	sugar_amount = 0.3
 	condiment_name = "cake batter mix"
+	active_metabolites = /datum/reagent/nutriment/batter
+	metabolite_potency = 0.7
 
 /datum/reagent/nutriment/batter/cakebatter/soy
 	name = "Soy Cake Batter"
 	description = "A gooey mixture of soy, flour and honey, an important precursor to cake!"
 	protein_amount = 0
 	sugar_amount = 0.4
+	active_metabolites = /datum/reagent/nutriment/batter/soy
+	metabolite_potency = 0.7
 
 /datum/reagent/nutriment/coffee
 	name = "Coffee Powder"
@@ -621,26 +625,31 @@
 	condiment_name = "mayonnaise"
 	condiment_desc = "Mayonnaise, used for centuries to make things edible."
 
-/datum/reagent/nutriment/groundpeanuts
-	name = "Ground Peanuts"
-	description = "Roughly ground peanuts."
+/datum/reagent/nutriment/peanut
+	name = "Peanuts"
+	description = "Whole peanuts"
 	taste_description = "peanut"
 	reagent_state = SOLID
 	color = "#ad7937"
 	taste_mult = 2
 
+/datum/reagent/nutriment/peanut/groundpeanuts
+	name = "Ground Peanuts"
+	description = "Roughly ground peanuts."
+	active_metabolites = /datum/reagent/nutriment/peanut
+
 	condiment_icon_state = "peanut"
 	condiment_name = "sack of ground peanuts"
 	condiment_desc = "A sack full of crunchy ground peanuts."
 
-/datum/reagent/nutriment/peanutbutter
+/datum/reagent/nutriment/peanut/peanutbutter
 	name = "Peanut Butter"
 	description = "Clearer the better spread, exception for those who are deathly allergic."
 	taste_description = "peanut butter"
 	reagent_state = LIQUID
-	color = "#ad7937"
-	taste_mult = 2
 	sugar_amount = 0.1
+	active_metabolites = /datum/reagent/nutriment/peanut
+	metabolite_potency = 0.7
 
 	condiment_icon_state = "pbjar"
 	condiment_name = "peanut butter jar"

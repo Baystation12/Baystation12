@@ -3778,7 +3778,7 @@
 
 /obj/item/reagent_containers/food/snacks/saturn/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/groundpeanuts, 3)
+	reagents.add_reagent(/datum/reagent/nutriment/peanut/groundpeanuts, 3)
 
 
 /obj/item/reagent_containers/food/snacks/jupiter
@@ -3871,7 +3871,7 @@
 /obj/item/reagent_containers/food/snacks/weebonuts/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/capsaicin, 1)
-	reagents.add_reagent(/datum/reagent/nutriment/groundpeanuts, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/peanut/groundpeanuts, 4)
 
 /obj/item/reagent_containers/food/snacks/chocobanana
 	name = "choco banang"

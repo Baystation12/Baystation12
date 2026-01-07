@@ -67,7 +67,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.body_markings = R.read("body_markings")
 	pref.body_descriptors = R.read("body_descriptors")
 	pref.picked_traits = R.read("traits")
-	pref.picked_traits = sanitize_trait_prefs(pref.picked_traits, R.get_version())
+	pref.picked_traits = sanitize_trait_prefs(pref.picked_traits, R.get_version(), pref.species)
 
 
 /datum/category_item/player_setup_item/physical/body/save_character(datum/pref_record_writer/W)
@@ -732,16 +732,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if (length(selected.metaoptions))
 			var/list/sanitized_metaoptions
 			for (var/atom/option as anything in selected.metaoptions)
-				var/named_option = initial(option.name)
+				var/cost = isnull(selected.metaoptions[option]) ? selected.budget_cost : selected.metaoptions[option]
+				var/named_option = initial(option.name) + " ([cost])"
 				LAZYSET(sanitized_metaoptions, named_option, option)
 
-			var/additional_input = input(user, "[selected.addprompt]", "Select Option") as null | anything in sanitized_metaoptions
+			var/additional_input = input(user, "[selected.addprompt]", "Select Option") as null | anything in sortAssoc(sanitized_metaoptions)
 			if (!additional_input)
 				return
 			additional_data = sanitized_metaoptions[additional_input]
 
 		if (selected.GetCost(additional_data) && remaining_budget - selected.GetCost(additional_data) < 0)
-			to_chat(usr, SPAN_WARNING("\The [selected.name] trait cannot be selected as you are out of budget."))
+			to_chat(usr, SPAN_WARNING("\The [selected.name] trait cannot be selected as it costs [selected.GetCost(additional_data)] and the remaining trait budget is [remaining_budget]."))
 			return
 
 		if (additional_data)
