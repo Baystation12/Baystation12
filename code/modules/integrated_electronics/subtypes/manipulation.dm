@@ -294,14 +294,17 @@
 
 				else if(istype(O, /obj/item/seeds) && !istype(O, /obj/item/seeds/cutting))
 					if(!TR.seed)
+						var/obj/item/seeds/S = O
 						acting_object.visible_message(SPAN_NOTICE("[acting_object] plants [O]."))
+						TR.seed = S.seed
+						TR.lastproduce = 0
 						TR.dead = 0
-						TR.seed = O
 						TR.age = 1
 						TR.health = TR.seed.get_trait(TRAIT_ENDURANCE)
 						TR.lastcycle = world.time
-						O.forceMove(TR)
+						qdel(O)
 						TR.update_icon()
+						TR.check_health()
 	activate_pin(2)
 
 /obj/item/integrated_circuit/manipulation/seed_extractor
