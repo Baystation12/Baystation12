@@ -47,7 +47,7 @@
 
 	var/list/ladder_turfs = get_area_turfs(location, list(
 		GLOBAL_PROC_REF(not_turf_contains_dense_objects),
-		GLOBAL_PROC_REF(IsTurfAtmosSafe)
+		GLOBAL_PROC_REF(is_turf_human_safe)
 	))
 	if(!length(ladder_turfs))
 		log_debug("Failed to find viable turfs to spawn ladders in \the [location].")

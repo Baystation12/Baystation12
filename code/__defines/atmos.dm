@@ -130,3 +130,11 @@
 #define GAS_BORON				"boron"
 #define GAS_HEAT                "heat" //Not a real gas, used for visual effects
 #define GAS_COLD                "cold" //Not a real gas, used for visual effects
+
+/** A get_atmosphere_issues mode. Used to indicate the proc
+	should return the count of all failed safeness conditions */
+#define ATMOS_ISSUE_COUNT 1
+
+/** A get_atmosphere_issues mode. Used to indicate the proc
+	should return the list of reasons for failed safeness conditions */
+#define ATMOS_ISSUE_DETAILED 2

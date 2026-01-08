@@ -163,7 +163,15 @@ SUBSYSTEM_DEF(jobs)
 
 /datum/controller/subsystem/jobs/proc/check_unsafe_spawn(mob/living/spawner, turf/spawn_turf)
 	var/radlevel = SSradiation.get_rads_at_turf(spawn_turf)
-	var/airstatus = IsTurfAtmosUnsafe(spawn_turf)
+	var/airstatus = ""
+	if (!isturf(spawn_turf))
+		airstatus = "The spawn location is not a turf."
+	else if (istype(spawn_turf, /turf/space))
+		airstatus = "The spawn location is open to space."
+	else
+		var/other_issues = get_atmosphere_issues(spawn_turf.return_air(), ATMOS_ISSUE_DETAILED)
+		if (length(other_issues))
+			airstatus = "The spawn location has an unsafe atmosphere: [jointext(other_issues, " ")]"
 	if(airstatus || radlevel > 0)
 		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
 		You may die shortly after spawning. \

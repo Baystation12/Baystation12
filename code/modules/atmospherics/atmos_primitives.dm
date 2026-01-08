@@ -456,59 +456,56 @@
 
 	return (source_pressure - sink_pressure)/(R_IDEAL_GAS_EQUATION * (source.temperature/source_volume + sink.temperature/sink_volume))
 
-//Determines if the atmosphere is safe (for humans). Safe atmosphere:
-// - Is between 80 and 120kPa
-// - Has between 17% and 30% oxygen
-// - Has temperature between -10C and 50C
-// - Has no or only minimal phoron or N2O
-/proc/get_atmosphere_issues(datum/gas_mixture/atmosphere, returntext = 0)
-	var/list/status = list()
-	if(!atmosphere)
-		status.Add("No atmosphere present.")
 
-	// Temperature check
-	if((atmosphere.temperature > (T0C + 50)) || (atmosphere.temperature < (T0C - 10)))
-		status.Add("Temperature too [atmosphere.temperature > (T0C + 50) ? "high" : "low"].")
+/// Used to squash repetition in the following get_atmosphere_issues proc
+#define ATMOS_ISSUE_REASON(MESSAGE) switch (mode) { \
+	if (ATMOS_ISSUE_DETAILED) { issues += (MESSAGE); } \
+	if (ATMOS_ISSUE_COUNT) { ++issues; } \
+	else { return 1; } \
+}
 
-	// Pressure check
-	var/pressure = atmosphere.return_pressure()
-	if((pressure > 120) || (pressure < 80))
-		status.Add("Pressure too [pressure > 120 ? "high" : "low"].")
+/**
+* Determines if a gas mixture is human-safe according to the following conditions:
+* - It has pressure in the range 80 .. 120 kPa
+* - It has temperature in the range -10C .. 50C
+* - It has oxygen in the range 17 .. 30 %
+* - It has safe levels of phoron, co2, n2o, and hydrogen
+*
+* Has three modes:
+* - ATMOS_ISSUE_DETAILED returns a list of strings explaining each failed
+*   condition that is zero-length when the mixture is safe
+* - ATMOS_ISSUE_COUNT returns the number of failed conditions, 0 when safe
+* - Otherwise, returns 1 on the first failed condition, or 0 when safe
+*/
+/proc/get_atmosphere_issues(datum/gas_mixture/mix, mode)
+	var/issues = 0
+	if (mode == ATMOS_ISSUE_DETAILED)
+		issues = list()
+	var/moles = mix?.total_moles
+	if (!moles)
+		ATMOS_ISSUE_REASON("No gas present.")
+	var/temperature = mix.temperature
+	if (temperature < T0C - 10 || temperature > T0C + 50)
+		ATMOS_ISSUE_REASON("Temperature too [temperature > (T0C - 10) ? "low" : "high"].")
+	var/pressure = mix.return_pressure()
+	if (pressure < 80 || pressure > 120)
+		ATMOS_ISSUE_REASON("Pressure too [pressure < 80 ? "low" : "high"].")
+	var/list/gas = mix.gas
+	var/oxygen = gas[GAS_OXYGEN] / moles
+	if (oxygen < 0.17 || oxygen > 0.3)
+		ATMOS_ISSUE_REASON("Oxygen too [oxygen < 0.17 ? "low" : "high"].")
+	if (gas[GAS_PHORON] / moles > 0.001)
+		ATMOS_ISSUE_REASON("Phoron contamination.")
+	if (gas[GAS_CO2] / moles > 0.05)
+		ATMOS_ISSUE_REASON("CO2 concentration high.")
+	if (gas[GAS_N2O] / moles > 0.001)
+		ATMOS_ISSUE_REASON("Nitrous Oxide contamination")
+	if (gas[GAS_HYDROGEN] / moles > 0.025)
+		ATMOS_ISSUE_REASON("Hydrogen contamination.")
+	return issues
 
-	// Gas concentration checks
-	var/oxygen = 0
-	var/phoron = 0
-	var/carbondioxide = 0
-	var/nitrousoxide = 0
-	var/hydrogen = 0
-	if(atmosphere.total_moles) // Division by zero prevention
-		oxygen = (atmosphere.gas[GAS_OXYGEN] / atmosphere.total_moles) * 100 // Percentage of the gas
-		phoron = (atmosphere.gas[GAS_PHORON] / atmosphere.total_moles) * 100
-		carbondioxide = (atmosphere.gas[GAS_CO2] / atmosphere.total_moles) * 100
-		nitrousoxide = (atmosphere.gas[GAS_N2O] / atmosphere.total_moles) * 100
-		hydrogen = (atmosphere.gas[GAS_HYDROGEN] / atmosphere.total_moles) * 100
+#undef ATMOS_ISSUE_REASON
 
-	if(!oxygen)
-		status.Add("No oxygen.")
-	else if((oxygen > 30) || (oxygen < 17))
-		status.Add("Oxygen too [oxygen > 30 ? "high" : "low"].")
-
-
-
-	if(phoron > 0.1)		// Toxic even in small amounts.
-		status.Add("Phoron contamination.")
-	if(nitrousoxide > 0.1)	// Probably slightly less dangerous but still.
-		status.Add("N2O contamination.")
-	if(hydrogen > 2.5)	// Not too dangerous, but flammable.
-		status.Add("Hydrogen contamination.")
-	if(carbondioxide > 5)	// Not as dangerous until very large amount is present.
-		status.Add("CO2 concentration high.")
-
-
-	if(returntext)
-		return jointext(status, " ")
-	else
-		return length(status)
 
 /singleton/public_access/public_variable/power_draw
 	expected_type = /obj/machinery/atmospherics

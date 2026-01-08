@@ -227,7 +227,7 @@
 				list(GLOBAL_PROC_REF(is_not_space_area)),
 				list(
 					GLOBAL_PROC_REF(not_turf_contains_dense_objects),
-					GLOBAL_PROC_REF(IsTurfAtmosSafe)
+					GLOBAL_PROC_REF(is_turf_human_safe)
 				),
 				zlevels[1])
 			if (!T)

@@ -107,26 +107,11 @@
 /proc/has_air(turf/T)
 	return !!T.return_air()
 
-/proc/IsTurfAtmosUnsafe(turf/T)
-	if (!T)
-		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
+/proc/is_turf_human_safe(turf/turf)
+	return isturf(turf) && !istype(turf, /turf/space) && !get_atmosphere_issues(turf.return_air())
 
-	if(istype(T, /turf/space)) // Space tiles
-		return "Spawn location is open to space."
-	var/datum/gas_mixture/air = T.return_air()
-	if(!air)
-		return "Spawn location lacks atmosphere."
-	return get_atmosphere_issues(air, 1)
-
-/proc/IsTurfAtmosSafe(turf/T)
-	return !IsTurfAtmosUnsafe(T)
-
-/proc/is_below_sound_pressure(turf/T)
-	var/datum/gas_mixture/environment = T ? T.return_air() : null
-	var/pressure =  environment ? environment.return_pressure() : 0
-	if(pressure < SOUND_MINIMUM_PRESSURE)
-		return TRUE
-	return FALSE
+/proc/is_below_sound_pressure(turf/turf)
+	return turf?.return_air()?.return_pressure() < SOUND_MINIMUM_PRESSURE
 
 /*
 	Turf manipulation
