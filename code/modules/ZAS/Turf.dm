@@ -266,15 +266,12 @@
 	return 0
 
 /turf/return_air()
-	//Create gas mixture to hold data for passing
-	var/datum/gas_mixture/GM = new
-
+	var/datum/gas_mixture/mix = new
 	if (initial_gas)
-		GM.gas = initial_gas.Copy()
-	GM.temperature = temperature
-	GM.update_values()
-
-	return GM
+		mix.gas = initial_gas.Copy()
+	mix.temperature = temperature
+	mix.update_values()
+	return mix
 
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = return_air()
@@ -295,21 +292,18 @@
 	return 1
 
 /turf/simulated/return_air()
-	// ZAS participation
-	if (zone && !zone.invalid)
+	if (zone?.invalid == FALSE)
 		SSair.mark_zone_update(zone)
 		return zone.air
-
-	// Exterior turf global atmosphere
-	if ((!air && isnull(initial_gas)) || (external_atmosphere_participation && is_outside()))
-		. = get_external_air()
-
-	// Base behavior
-	if (!.)
-		. = air || make_air()
-		if (zone)
-			c_copy_air()
-			zone = null
+	if (!air && !initial_gas || external_atmosphere_participation && is_outside())
+		return get_external_air()
+	var/datum/gas_mixture/result = air
+	if (!result)
+		result = make_air()
+	if (zone)
+		c_copy_air()
+		zone = null
+	return result
 
 // Returns the external air if this turf is outside, modified by weather and heat sources. Outside checks do not occur in this proc!
 /turf/proc/get_external_air(include_heat_sources = TRUE)

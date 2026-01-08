@@ -91,10 +91,8 @@
 	if(H.stasis_sources[STASIS_CRYOBAG] != stasis_power)
 		H.SetStasis(stasis_power, STASIS_CRYOBAG)
 
-/obj/structure/closet/body_bag/cryobag/return_air() //Used to make stasis bags protect from vacuum.
-	if(airtank)
-		return airtank
-	..()
+/obj/structure/closet/body_bag/cryobag/return_air()
+	return airtank
 
 /obj/structure/closet/body_bag/cryobag/examine(mob/user, distance, is_adjacent)
 	. = ..()

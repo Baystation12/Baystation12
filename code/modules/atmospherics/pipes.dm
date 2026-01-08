@@ -76,8 +76,8 @@
 	return 1
 
 /obj/machinery/atmospherics/pipe/return_air()
-	if(!parent && !QDELING(src))
-		parent = new /datum/pipeline()
+	if (!parent && !QDELING(src))
+		parent = new /datum/pipeline
 		parent.build_pipeline(src)
 	return parent?.air
 

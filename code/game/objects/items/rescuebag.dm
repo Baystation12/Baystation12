@@ -145,7 +145,7 @@
 		var/transfer_moles = calculate_transfer_moles(airtank.air_contents, atmo, pressure_delta)
 		pump_gas_passive(airtank, airtank.air_contents, atmo, transfer_moles)
 
-/obj/structure/closet/body_bag/rescue/return_air() //Used to make stasis bags protect from vacuum.
+/obj/structure/closet/body_bag/rescue/return_air()
 	return atmo
 
 /obj/structure/closet/body_bag/rescue/examine(mob/user)

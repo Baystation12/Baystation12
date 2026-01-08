@@ -69,11 +69,6 @@
 	var/secures_occupant = TRUE
 	var/busy =             FALSE
 
-/obj/structure/kitchenspike/return_air()
-	var/turf/T = get_turf(src)
-	if(istype(T))
-		return T.return_air()
-
 /obj/structure/kitchenspike/improvised
 	name = "truss"
 	icon_state = "improvised"

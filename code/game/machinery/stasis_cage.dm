@@ -236,12 +236,10 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	return ..()
 
 
-/obj/machinery/stasis_cage/return_air() //Used to make stasis cage protect from vacuum.
-	if (!is_powered())
-		return
-	if(airtank)
+/obj/machinery/stasis_cage/return_air()
+	if (is_powered())
 		return airtank
-	..()
+	return ..()
 
 
 /obj/machinery/stasis_cage/RefreshParts()

@@ -162,11 +162,8 @@
  *
  * Returns instance of `/datum/gas_mixture`.
  */
-/atom/proc/return_air()
-	if(loc)
-		return loc.return_air()
-	else
-		return null
+/atom/proc/return_air() as /datum/gas_mixture
+	return loc?.return_air()
 
 /**
  * Determines sight flags that should be added to user's sight var.

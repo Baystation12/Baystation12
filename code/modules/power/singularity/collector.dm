@@ -161,8 +161,7 @@ var/global/list/rad_collectors = list()
 	update_icon()
 
 /obj/machinery/power/rad_collector/return_air()
-	if(P)
-		return P.return_air()
+	return P?.return_air()
 
 /obj/machinery/power/rad_collector/proc/eject()
 	locked = 0
