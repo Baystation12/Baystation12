@@ -1,0 +1,5 @@
+author: Spookerton
+changes:
+  - bugfix: You can drag-drop a netgun net onto a stasis cage to insert its 
+      contained animal
+delete-after: true
