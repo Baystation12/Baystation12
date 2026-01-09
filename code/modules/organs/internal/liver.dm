@@ -21,11 +21,11 @@
 		return
 
 	if (germ_level > INFECTION_LEVEL_ONE)
+		owner.add_chemical_effect(CE_NAUSEA , 2)
 		if(prob(1))
 			to_chat(owner, SPAN_DANGER("Your skin itches."))
 	if (germ_level > INFECTION_LEVEL_TWO)
-		if(prob(1))
-			spawn owner.vomit()
+		owner.add_chemical_effect(CE_NAUSEA ,2)
 
 	//Detox can heal small amounts of damage
 	if (damage < max_damage && !owner.chem_effects[CE_TOXIN])

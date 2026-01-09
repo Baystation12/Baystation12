@@ -40,7 +40,7 @@
 	return !isnull(get_devour_time(food))
 
 /obj/item/organ/internal/stomach/proc/is_full(atom/movable/food)
-	var/total = floor(ingested.total_volume / 10)
+	var/total = floor(ingested.total_volume / 15)
 	for(var/a in contents + food)
 		if(ismob(a))
 			var/mob/M = a
@@ -128,8 +128,6 @@
 	if(is_usable())
 		ingested.metabolize()
 
-#define STOMACH_VOLUME 65
-
 /obj/item/organ/internal/stomach/Process()
 	..()
 
@@ -155,20 +153,5 @@
 		else if(world.time >= next_cramp)
 			next_cramp = world.time + rand(200,800)
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
-
-		var/alcohol_volume = ingested.get_reagent_amount(/datum/reagent/ethanol)
-
-		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
-		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
-			owner.seizure()
-
-		// Alcohol counts as double volume for the purposes of vomit probability
-		var/effective_volume = ingested.total_volume + alcohol_volume
-
-		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
-		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
-		if(prob(vomit_probability))
-			owner.vomit()
-
-#undef STOMACH_VOLUME
+			owner.add_chemical_effect(CE_NAUSEA, 3)
 #undef PUKE_ACTION_NAME

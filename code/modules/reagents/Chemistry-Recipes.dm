@@ -306,6 +306,11 @@
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 2
 
+/singleton/reaction/ondansetron
+	name = "Ondansetron"
+	result = /datum/reagent/ondansetron
+	required_reagents = list(/datum/reagent/inaprovaline = 1, /datum/reagent/ammonia = 1, /datum/reagent/potassium = 1)
+
 /singleton/reaction/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	result = /datum/reagent/ethylredoxrazine

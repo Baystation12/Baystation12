@@ -11,11 +11,11 @@
 
 	if (effective_dose > 20)
 		adjustToxLoss(clamp((effective_dose - 20) / 4, 2, 10))
-		vomit(8, 3, rand(1 SECONDS, 5 SECONDS))
+		add_chemical_effect(CE_NAUSEA, 6)
 	else if (effective_dose > 10)
-		vomit(4, 2, rand(3 SECONDS, 10 SECONDS))
+		add_chemical_effect(CE_NAUSEA, 3)
 	else if(effective_dose)
-		vomit(1, 1, rand(5 SECONDS, 15 SECONDS))
+		add_chemical_effect(CE_NAUSEA, 1)
 
 /mob/living/carbon/proc/handle_sugar()
 	var/malus_level = GetTraitLevel(/singleton/trait/malus/sugar)

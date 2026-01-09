@@ -855,22 +855,7 @@
 	return 1
 
 /mob/living/carbon/human/handle_random_events()
-	// Puke if toxloss is too high
-	var/vomit_score = 0
-	for(var/tag in list(BP_LIVER,BP_KIDNEYS))
-		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
-		if(I)
-			vomit_score += I.damage
-		else if (should_have_organ(tag))
-			vomit_score += 45
-	if(chem_effects[CE_TOXIN] || radiation)
-		vomit_score += 0.5 * getToxLoss()
-	if(chem_effects[CE_ALCOHOL_TOXIC])
-		vomit_score += 10 * chem_effects[CE_ALCOHOL_TOXIC]
-	if(chem_effects[CE_ALCOHOL] > 1)
-		vomit_score += 10 * chem_effects[CE_ALCOHOL]/2
-	if(stat != DEAD && vomit_score > 25 && prob(10))
-		vomit(vomit_score, vomit_score/25)
+	handle_vomit()
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
@@ -883,6 +868,36 @@
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
 		to_chat(src,SPAN_NOTICE("You feel like you're [pick("moving","flying","floating","falling","hovering")]."))
+
+/*Calculates vomit probability score in a central location. Anti-nausea medications and traits that affect vomiting chance also act here.
+Score also scales with severity; with higher scores trigger symptoms more frequently (non-linear increase).
+0-29: Nausea
+30-59: Nausea with chance of vomit
+60-99: Severe nausea with large chance of vomit
+100+ Definite vomit
+*/
+/mob/living/carbon/human/proc/handle_vomit()
+	if (!check_has_mouth() || isSynthetic() || is_dead())
+		return
+	var/vomit_score = 0
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if (stomach && stomach.is_full())
+		vomit_score += 20
+	for (var/tag in list(BP_LIVER,BP_KIDNEYS))
+		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
+		if (I)
+			vomit_score += I.damage
+		else if (should_have_organ(tag))
+			vomit_score += 45
+	if (chem_effects[CE_NAUSEA])
+		vomit_score += 10 * chem_effects[CE_NAUSEA]
+	if (chem_effects[CE_TOXIN] || radiation)
+		vomit_score += 0.5 * getToxLoss()
+	if (chem_effects[CE_ALCOHOL_TOXIC])
+		vomit_score += 20 * chem_effects[CE_ALCOHOL_TOXIC]
+	if (vomit_score <= 0)
+		return
+	vomit(vomit_score)
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

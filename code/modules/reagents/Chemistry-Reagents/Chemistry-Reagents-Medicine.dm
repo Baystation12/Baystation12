@@ -488,6 +488,27 @@
 		M.dna.ResetSE()
 		domutcheck(M, null, MUTCHK_FORCED)
 
+/datum/reagent/ondansetron
+	name = "Ondansetron"
+	description = "Ondansetron is a long-lasting medication used to treat and prevent nausea and vomiting."
+	taste_description = "viscous"
+	reagent_state = LIQUID
+	color = "#C4A484"
+	metabolism = REM * 0.2
+	scannable = TRUE
+	value = 3
+	bioavailability = 0.9
+
+/datum/reagent/ondansetron/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	affected.add_chemical_effect(CE_NAUSEA, -2)
+
+/datum/reagent/ondansetron/process_overdose(mob/living/carbon/affected)
+	..()
+	affected.make_dizzy(3)
+	affected.add_chemical_effect(CE_NAUSEA, -2)
+
 /datum/reagent/hyperzine
 	name = "Hyperzine"
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant. Do not mix with opiates!"
@@ -540,6 +561,7 @@
 	M.dizziness = 0
 	M.drowsyness = 0
 	M.stuttering = 0
+	M.add_chemical_effect(CE_NAUSEA, -2)
 	M.clear_confused()
 
 	if (M.metabolized.has_reagent(/datum/reagent/ethanol))

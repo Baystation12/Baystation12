@@ -14,7 +14,7 @@
 	var/bioavailability = 0.6
 	var/touch_met = 0
 	var/overdose = 0
-	///If set to a reagent path; reagents in the blood will break down into that reagen. This metabolite will then have some sort of effect and also contribute to reaching overdose threshold in addition to bloodstream levels.
+	///If set to a reagent path; reagents in the blood will break down into that reagen. This metabolite will then have some sort of effect and also contribute to reaching overdose threshold instead of bloodstream levels.
 	var/active_metabolites = null
 	///Multiplier effect for reagents with active metabolites; where the higher the potency the more active metabolite it produces. For example, vodka having more potency than beer means more alcohol is added to metabolized per tick.
 	var/metabolite_potency = 1

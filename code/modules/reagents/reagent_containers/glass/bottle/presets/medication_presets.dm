@@ -58,6 +58,11 @@
 	desc = "A small bottle. Contains dylovene - an anti-toxin."
 	preset_reagent = /datum/reagent/dylovene
 
+/obj/item/reagent_containers/glass/bottle/ondansetron
+	name = "ondansetron bottle"
+	desc = "A small bottle. Contains ondansetron - an anti-emetic"
+	preset_reagent = /datum/reagent/ondansetron
+
 /obj/item/reagent_containers/glass/bottle/ethylredoxrazine
 	name = "ethylredoxrazine bottle"
 	desc = "A small bottle. Contains ethylredoxrazine - used to treat alcohol poisoning, diziness, sleepiness, and stuttering."

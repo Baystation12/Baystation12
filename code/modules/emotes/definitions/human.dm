@@ -2,10 +2,10 @@
 	key = "vomit"
 
 /singleton/emote/human/check_user(mob/living/carbon/human/user)
-	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
+	return (istype(user))
 
 /singleton/emote/human/do_emote(mob/living/carbon/human/user)
-	user.vomit()
+	user.vomit(100, TRUE)
 
 /singleton/emote/human/deathgasp
 	key = "deathgasp"
