@@ -87,7 +87,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 /obj/machinery/stasis_cage/proc/release()
 	if (contained)
-		contained.dropInto(src)
+		contained.dropInto(loc)
 		if (HAS_FLAGS(contained.status_flags, GODMODE) && !god)
 			var/mob/living/SA = contained
 			CLEAR_FLAGS(SA.status_flags, GODMODE)
@@ -318,6 +318,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 /obj/machinery/stasis_cage/MouseDrop_T(mob/target, mob/user)
 	if(!CanMouseDrop(target, user))
 		return
+	if (istype(target, /obj/energy_net))
+		target = astype(target, /obj/energy_net).captured
 	if (!isanimal(target) && safety)
 		to_chat(user, SPAN_WARNING("\The [src] smartly refuses \the [target]."))
 		return
