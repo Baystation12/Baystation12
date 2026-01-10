@@ -306,7 +306,7 @@
 			pointblank = 0
 
 	//update timing
-	var/delay = max(burst_delay+1, fire_delay)
+	var/delay = max((burst_delay+1)*!can_autofire, fire_delay)
 	user.setClickCooldown(min(delay, DEFAULT_QUICK_COOLDOWN))
 	user.SetMoveCooldown(move_delay)
 	next_fire_time = world.time + delay
