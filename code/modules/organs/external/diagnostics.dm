@@ -134,7 +134,7 @@
 	var/list/symptoms = GET_SINGLETON_SUBTYPE_MAP(/singleton/diagnostic_sign)
 	for(var/S in symptoms)
 		var/singleton/diagnostic_sign/sign = symptoms[S]
-		if(sign.manifested_in(src))
+		if(sign.manifested_in(src) && user.skill_check(SKILL_MEDICAL, sign.min_skill))
 			badness += sign.get_description(user)
 	if(!length(badness))
 		to_chat(user, SPAN_NOTICE("[owner]'s skin is normal."))
@@ -179,15 +179,14 @@
 	var/name = "Some symptom"
 	var/descriptor
 	var/explanation
-	var/hint_min_skill = SKILL_BASIC
+	var/min_skill = SKILL_BASIC
 
 //Checks conditions for this sign to appear
 /singleton/diagnostic_sign/proc/manifested_in(obj/item/organ/external/victim)
 
 /singleton/diagnostic_sign/proc/get_description(mob/user)
 	. = descriptor
-	if(user && user.skill_check(SKILL_MEDICAL, hint_min_skill))
-		. += "<small><a href='byond://?src=\ref[src];show_diagnostic_hint=1'>(?)</a></small>"
+	. += "<small><a href='byond://?src=\ref[src];show_diagnostic_hint=1'>(?)</a></small>"
 
 /singleton/diagnostic_sign/Topic(href, list/href_list)
 	. = ..()
@@ -224,7 +223,7 @@
 /singleton/diagnostic_sign/circulation
 	name = "Paleness"
 	descriptor = "very pale"
-	explanation = "Patient has issues with blood circulaion or volume."
+	explanation = "Patient has issues with blood circulation or volume."
 
 /singleton/diagnostic_sign/circulation/manifested_in(obj/item/organ/external/victim)
 	return victim.owner && victim.owner.get_blood_circulation() <= 60
@@ -236,3 +235,20 @@
 
 /singleton/diagnostic_sign/gangrene/manifested_in(obj/item/organ/external/victim)
 	return victim.status & ORGAN_DEAD
+
+/singleton/diagnostic_sign/mild_rash
+	name = "Mild Rash"
+	descriptor = "slightly red and warm to the touch"
+	explanation = "Patient is experiencing some sort of reaction."
+	min_skill = SKILL_TRAINED
+
+/singleton/diagnostic_sign/mild_rash/manifested_in(obj/item/organ/external/victim)
+	return victim.owner && HAS_FLAGS(victim.owner.trait_flags, MILD_ALLERGY) && !HAS_FLAGS(victim.owner.trait_flags, SEVERE_ALLERGY)
+
+/singleton/diagnostic_sign/severe_rash
+	name = "Severe Rash"
+	descriptor = "diffusely red, warm, and breaks open at slightest touch"
+	explanation = "Patient is experiencing a severe reaction."
+
+/singleton/diagnostic_sign/severe_rash/manifested_in(obj/item/organ/external/victim)
+	return victim.owner && HAS_FLAGS(victim.owner.trait_flags, SEVERE_ALLERGY)
