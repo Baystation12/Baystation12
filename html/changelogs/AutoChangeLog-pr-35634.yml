@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - tweak: Wire shocks now scale with wattage beyond 1MW, making them extremely 
+      dangerous at high loads.
+delete-after: true
