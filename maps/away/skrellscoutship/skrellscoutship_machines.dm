@@ -1,7 +1,16 @@
-/obj/machinery/computer/ship/sensors/skrell
-	construct_state = /singleton/machine_construction/default/panel_closed/computer/no_deconstruct
-	base_type = /obj/machinery/computer/ship/sensors
+/datum/computer_file/program/ship/sensors/skrell
+	nanomodule_path = /datum/nano_module/program/ship/sensors/skrell
+	available_on_ntnet = FALSE
+
+/datum/nano_module/program/ship/sensors/skrell
 	print_language = LANGUAGE_SKRELLIAN
+	modify_access_req = null
+
+/obj/machinery/computer/modular/preset/sensors/skrell
+	default_software = list(
+		/datum/computer_file/program/ship/sensors/skrell
+	)
+	autorun_program = /datum/computer_file/program/ship/sensors/skrell
 
 // This is an absolutely stupid machine. Basically the same as the debug one with some alterations.
 // It is a placeholder for a proper reactor setup (probably a RUST descendant)

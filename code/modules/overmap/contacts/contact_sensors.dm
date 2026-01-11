@@ -8,7 +8,7 @@
 
 /obj/machinery/shipsensors
 	var/obj/overmap/visitable/ship/linked
-	var/list/linked_consoles = list() // To
+	var/list/linked_programs = list()
 
 	var/list/external_sources = list()
 	var/list/objects_in_view = list() // Associative list of objects in view -> identification progress
@@ -71,16 +71,16 @@
 				user.client.images -= record.marker
 
 /obj/machinery/shipsensors/proc/alert_unknown_contact(contact_id, bearing, bearing_variability)
-	for (var/obj/machinery/computer/ship/sensors/console in linked_consoles)
-		console.alert_unknown_contact(contact_id, bearing, bearing_variability)
+	for (var/datum/nano_module/program/ship/sensors/sensors in linked_programs)
+		sensors.alert_unknown_contact(contact_id, bearing, bearing_variability)
 
 /obj/machinery/shipsensors/proc/alert_contact_identified(contact_name, bearing)
-	for (var/obj/machinery/computer/ship/sensors/console in linked_consoles)
-		console.alert_contact_identified(contact_name, bearing)
+	for (var/datum/nano_module/program/ship/sensors/sensors in linked_programs)
+		sensors.alert_contact_identified(contact_name, bearing)
 
 /obj/machinery/shipsensors/proc/alert_contact_lost(contact_name)
-	for (var/obj/machinery/computer/ship/sensors/console in linked_consoles)
-		console.alert_contact_lost(contact_name)
+	for (var/datum/nano_module/program/ship/sensors/sensors in linked_programs)
+		sensors.alert_contact_lost(contact_name)
 
 /obj/machinery/shipsensors/Process()
 	..()

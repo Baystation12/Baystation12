@@ -1813,7 +1813,7 @@
 "gd" = (
 /obj/floor_decal/corner/mauve/mono,
 /obj/floor_decal/industrial/outline/yellow,
-/obj/machinery/computer/ship/navigation,
+/obj/machinery/computer/modular/preset/navigation,
 /turf/simulated/floor/tiled/monotile,
 /area/command/pathfinder)
 "gf" = (

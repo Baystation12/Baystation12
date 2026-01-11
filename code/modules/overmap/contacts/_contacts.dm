@@ -20,7 +20,7 @@
 	/// The actual overmap effect associated with this
 	var/obj/overmap/effect
 
-/datum/overmap_contact/New(obj/machinery/computer/ship/sensors/creator, obj/overmap/source)
+/datum/overmap_contact/New(obj/machinery/shipsensors/creator, obj/overmap/source)
 	// Update local tracking information
 	owner =  creator
 	effect = source

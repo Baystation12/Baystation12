@@ -367,7 +367,7 @@
 /turf/template_noop,
 /area/template_noop)
 "sw" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/modular/preset/sensors{
 	dir = 8
 	},
 /obj/floor_decal/corner/blue/border{

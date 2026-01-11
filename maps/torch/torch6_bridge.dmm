@@ -2571,7 +2571,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/cockpit)
 "eJ" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/modular/preset/sensors,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/cockpit)
 "eK" = (
@@ -4365,7 +4365,7 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 8
 	},
-/obj/machinery/computer/ship/navigation/telescreen{
+/obj/item/modular_computer/telescreen/preset/navigation{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -5541,7 +5541,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/modular/preset/sensors,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "ni" = (
@@ -10055,7 +10055,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/machinery/computer/ship/navigation{
+/obj/machinery/computer/modular/preset/navigation{
 	dir = 4
 	},
 /obj/floor_decal/corner/blue{

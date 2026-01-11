@@ -99,16 +99,3 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if (linked)
 		linked.consoles -= src
 	. = ..()
-
-/obj/machinery/computer/ship/sensors/Destroy()
-	if (sensor_ref)
-		var/obj/machinery/shipsensors/sensor = sensor_ref.resolve()
-		LAZYREMOVE(sensor.linked_consoles, src)
-		sensor_ref = null
-
-	if (LAZYLEN(viewers))
-		for(var/weakref/W in viewers)
-			var/M = W.resolve()
-			if (M)
-				unlook(M)
-	. = ..()
