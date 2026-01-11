@@ -535,6 +535,26 @@
 	build_path = /obj/item/stock_parts/circuitboard/helm
 	sort_string = "JFAAB"
 
+/datum/design/circuit/nav
+	name = "navigation control console"
+	id = "nav"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/stock_parts/circuitboard/nav
+	sort_string = "JFAAC"
+
+/datum/design/circuit/nav/tele
+	name = "navigation telescreen"
+	id = "nav_tele"
+	build_path = /obj/item/stock_parts/circuitboard/nav/tele
+	sort_string = "JFAAD"
+
+/datum/design/circuit/sensors
+	name = "ship sensor control console"
+	id = "sensors"
+	req_tech = list(TECH_DATA = 4)
+	build_path = /obj/item/stock_parts/circuitboard/sensors
+	sort_string = "JFAAE"
+
 /datum/design/circuit/shuttle
 	name = "basic shuttle console"
 	id = "shuttle"

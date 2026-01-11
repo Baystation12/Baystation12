@@ -156,7 +156,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icgnv_hound)
 "hV" = (
-/obj/machinery/computer/modular/preset/sensors{
+/obj/machinery/computer/ship/sensors{
 	dir = 8
 	},
 /obj/floor_decal/techfloor{
@@ -542,7 +542,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
-/obj/item/modular_computer/telescreen/preset/navigation{
+/obj/machinery/computer/ship/navigation/telescreen{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -568,7 +568,7 @@
 /obj/structure/bed/chair/shuttle/black{
 	dir = 8
 	},
-/obj/item/modular_computer/telescreen/preset/navigation{
+/obj/machinery/computer/ship/navigation/telescreen{
 	pixel_x = 32
 	},
 /turf/simulated/floor/tiled/techfloor,

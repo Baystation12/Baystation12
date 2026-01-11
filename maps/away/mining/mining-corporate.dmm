@@ -3494,7 +3494,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/abadoned_data_capsule)
 "hq" = (
-/obj/machinery/computer/modular/preset/sensors{
+/obj/machinery/computer/ship/sensors{
 	dir = 2
 	},
 /obj/floor_decal/techfloor{

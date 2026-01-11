@@ -105,13 +105,14 @@
 		return TOPIC_HANDLED
 
 	var/mob/user = usr
+	var/obj/item/card/id/user_id_card = user?.GetIdCard()
 	var/datum/nano_module/program/munitions/module = NM
 
-	if (!module?.check_access(user, module.access_req))
+	if (!user_id_card || !module || !module.check_access(module.access_req))
 		return TOPIC_NOACTION
 
 	var/obj/machinery/payload_interface/interface = locate(href_list["target"])
-	if (!istype(interface) || !module.linked?.check_ownership(interface))
+	if (!istype(interface) || !module.linked || !module.linked.check_ownership(interface))
 		return TOPIC_NOACTION
 
 	switch(href_list["action"])
