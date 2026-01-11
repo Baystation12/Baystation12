@@ -20,7 +20,7 @@
 	var/working_sound = 'sound/machines/sensors/sensorloop.ogg'
 	var/datum/sound_token/sound_token
 	var/sound_id
-	var/modify_access_req = access_bridge
+	var/modify_access_req
 
 /datum/computer_file/program/ship/sensors/spacer
 	nanomodule_path = /datum/nano_module/program/ship/sensors/spacer
@@ -35,7 +35,6 @@
 
 /datum/nano_module/program/ship/sensors/spacer
 	print_language = LANGUAGE_SPACER
-	modify_access_req = null
 
 /datum/nano_module/program/ship/sensors/proc/get_sensors()
 	var/obj/machinery/shipsensors/sensors = sensor_ref?.resolve()
@@ -56,6 +55,7 @@
 			LAZYDISTINCTADD(sensors.linked_programs, src)
 			sensors.link_ship(linked)
 			sensor_ref = weakref(sensors)
+			modify_access_req = sensors.req_access
 			break
 
 /datum/nano_module/program/ship/sensors/Destroy()

@@ -16,6 +16,11 @@
 	var/list/contact_datums = list()
 	var/list/trackers = list()
 
+/obj/machinery/shipsensors/Initialize()
+	. = ..()
+	var/area/sensor_area = get_area(src)
+	req_access = sensor_area.req_access
+
 /obj/machinery/shipsensors/Destroy()
 	objects_in_view.Cut()
 	memorized_objects.Cut()

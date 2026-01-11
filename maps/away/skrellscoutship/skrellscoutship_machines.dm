@@ -4,7 +4,6 @@
 
 /datum/nano_module/program/ship/sensors/skrell
 	print_language = LANGUAGE_SKRELLIAN
-	modify_access_req = null
 
 /obj/machinery/computer/modular/preset/sensors/skrell
 	default_software = list(
