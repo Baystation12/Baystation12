@@ -69,13 +69,8 @@
 	var/singleton/trait/T = GET_SINGLETON(trait_type)
 	if(!T.Validate(trait_level, additional_option))
 		return FALSE
-
-	if(!traits) // If traits haven't been setup before, check if we need to do so now
-		var/species_level = species.traits[trait_type]
-		if(species_level == trait_level) // Matched the default species trait level, ignore
-			return TRUE
-		traits = species.traits.Copy() // The setup is to simply copy the species list of traits
-
+	if (!traits) // If traits haven't been setup before, check if we need to do so now
+		traits = species.traits.Copy()
 	return ..(trait_type, trait_level, additional_option)
 
 /mob/living/proc/RemoveTrait(trait_type, additional_option)
@@ -164,7 +159,7 @@
 	var/addprompt = "Select a property to add."
 	var/remprompt = "Select a property to remove."
 
-	/// These trait types may not co-exist on the same mob/species
+	/// These trait types may not co-exist on the same mob/species. Should be set on both traits; not only one.
 	var/list/incompatible_traits
 	abstract_type = /singleton/trait
 
