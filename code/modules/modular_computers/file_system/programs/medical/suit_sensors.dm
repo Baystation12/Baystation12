@@ -38,6 +38,7 @@
 
 /datum/nano_module/program/crew_monitor
 	name = "Crew monitor"
+	available_to_ai = TRUE
 
 /datum/nano_module/program/crew_monitor/proc/has_alerts()
 	for(var/z_level in GLOB.using_map.map_levels)

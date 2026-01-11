@@ -32,6 +32,7 @@
 
 /datum/nano_module/program/power_monitor
 	name = "Power monitor"
+	available_to_ai = TRUE
 	var/list/grid_sensors
 	var/active_sensor = null	//name_tag of the currently selected sensor
 

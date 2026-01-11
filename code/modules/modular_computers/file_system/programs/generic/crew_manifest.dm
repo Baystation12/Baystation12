@@ -13,6 +13,7 @@
 
 /datum/nano_module/program/crew_manifest
 	name = "Crew Manifest"
+	available_to_ai = TRUE
 
 /datum/nano_module/program/crew_manifest/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data(program)

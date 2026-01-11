@@ -46,6 +46,7 @@
 // and should generally not be used, as such nano modules are hard to use on other places.
 /datum/nano_module/program/arcade_classic
 	name = "Classic Arcade"
+	available_to_ai = TRUE
 	var/player_mana			// Various variables specific to the nano module. In this case, the nano module is a simple arcade game, so the variables store health and other stats.
 	var/player_health
 	var/enemy_mana

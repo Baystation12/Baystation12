@@ -18,6 +18,7 @@
 
 /datum/nano_module/program/deck_management
 	name = "Deck Management Program"
+	available_to_ai = TRUE
 	var/prog_state = DECK_HOME                       //Which menu we are in.
 	var/can_view_only = 0                            //Whether we are in view-only mode for the report viewer.
 	var/datum/shuttle/selected_shuttle               //Which shuttle is currently selected, if any.

@@ -60,6 +60,7 @@
 
 /datum/nano_module/program/email_client
 	name = "Email Client"
+	available_to_ai = TRUE
 	var/stored_login = ""
 	var/stored_password = ""
 	var/error = ""

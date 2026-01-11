@@ -1,6 +1,7 @@
 //Holders/managers for nano_ui for the skill panel.
 
 /datum/nano_module/skill_ui
+	available_to_ai = FALSE
 	var/datum/skillset/skillset
 	var/template = "skill_ui.tmpl"
 	var/hide_unskilled = FALSE
