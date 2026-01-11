@@ -20,7 +20,7 @@
 	var/working_sound = 'sound/machines/sensors/sensorloop.ogg'
 	var/datum/sound_token/sound_token
 	var/sound_id
-	var/modify_access_req = access_bridge
+	var/modify_access_req = list(access_guppy_helm, access_aquila_helm, access_expedition_shuttle_helm, access_torch_helm)
 
 /datum/computer_file/program/ship/sensors/spacer
 	nanomodule_path = /datum/nano_module/program/ship/sensors/spacer
