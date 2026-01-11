@@ -1,5 +1,0 @@
-author: Builder13
-changes:
-  - bugfix: Fixed list outputs for integrated circuits, fixed seed planting for 
-      plant manipulation module circuit
-delete-after: true

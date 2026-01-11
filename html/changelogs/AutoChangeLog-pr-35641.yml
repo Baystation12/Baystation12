@@ -1,4 +1,0 @@
-author: Karl Johansson
-changes:
-  - bugfix: Automatic firearms now fire at the correct rate.
-delete-after: true
