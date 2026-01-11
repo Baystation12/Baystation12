@@ -37,7 +37,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "aj" = (
-/obj/machinery/computer/modular/preset/sensors{
+/obj/machinery/computer/ship/sensors{
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,

@@ -21676,7 +21676,7 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/item/modular_computer/telescreen/preset/navigation{
+/obj/machinery/computer/ship/navigation/telescreen{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -22096,7 +22096,7 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
-/obj/item/modular_computer/telescreen/preset/navigation{
+/obj/machinery/computer/ship/navigation/telescreen{
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/techfloor,

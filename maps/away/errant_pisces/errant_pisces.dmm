@@ -6180,7 +6180,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pi" = (
-/obj/machinery/computer/modular/preset/navigation{
+/obj/machinery/computer/ship/navigation{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -6463,7 +6463,7 @@
 /turf/space,
 /area/space)
 "qa" = (
-/obj/machinery/computer/modular/preset/sensors{
+/obj/machinery/computer/ship/sensors{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
