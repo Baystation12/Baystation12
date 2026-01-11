@@ -877,13 +877,14 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 100+ Definite vomit
 */
 /mob/living/carbon/human/proc/handle_vomit()
-	if (!check_has_mouth() || isSynthetic() || is_dead())
+	if (isSynthetic() || is_dead())
 		return
 	var/vomit_score = 0
+	var/motion_sickness = FALSE
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if (stomach && stomach.is_full())
 		vomit_score += 20
-	for (var/tag in list(BP_LIVER,BP_KIDNEYS))
+	for (var/tag in list(BP_LIVER, BP_KIDNEYS, BP_BRAIN))
 		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
 		if (I)
 			vomit_score += I.damage
@@ -895,9 +896,24 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 		vomit_score += 0.5 * getToxLoss()
 	if (chem_effects[CE_ALCOHOL_TOXIC])
 		vomit_score += 20 * chem_effects[CE_ALCOHOL_TOXIC]
+	if (!has_gravity())
+		if (!skill_check(SKILL_EVA, SKILL_TRAINED))
+			vomit_score += 15 * (SKILL_TRAINED - get_skill_value(SKILL_EVA))
+		if (species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
+			vomit_score -= 20
+
+	//Leave trait-based multipliers at the end of this code block.
+	if (HAS_TRAIT(src, /singleton/trait/malus/sensitive_stomach))
+		var/trait_level = GET_TRAIT_LEVEL(src, /singleton/trait/malus/sensitive_stomach)
+		motion_sickness = !!moving_levels["[get_z(src)]"]
+		vomit_score += (10 * motion_sickness * trait_level) //Motion sickness
+		vomit_score *= (1 + (0.20 * trait_level))
+	if (HAS_TRAIT(src, /singleton/trait/boon/cast_iron_stomach))
+		vomit_score *= 0.65
+
 	if (vomit_score <= 0)
 		return
-	vomit(vomit_score)
+	vomit(vomit_score, motion_sickness)
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

@@ -747,13 +747,13 @@
 		splat.update_icon()
 
 ///Process all vomiting through handle_vomit() unless you want to force it by design. If called without value; default value will cause vomiting.
-/mob/living/carbon/human/vomit(vomit_score = 100, silent = FALSE)
+/mob/living/carbon/human/vomit(vomit_score = 100, motion = FALSE, silent = FALSE)
 	if (isSynthetic() || is_dead() || !vomit_score || vomit_score < 0)
 		return
-	var/interval = clamp(70 SECONDS - (((vomit_score/100)**2) * 55 SECONDS), 15 SECONDS, 70 SECONDS) //Symptoms are more frequent the higher the score; non-linear increase.
+	var/interval = clamp(120 SECONDS - (((vomit_score/100)**2) * 100 SECONDS), 20 SECONDS, 120 SECONDS) //Symptoms are more frequent the higher the score; non-linear increase.
 	if (!silent && world.time >= last_nausea_time + interval/2)
 		last_nausea_time = world.time
-		nausea(vomit_score)
+		nausea(vomit_score, motion)
 	if (!check_has_mouth() || vomit_score < 30)
 		return
 	if ((world.time >= last_puke_time + interval))
@@ -763,18 +763,18 @@
 
 ///Process all nausea through handle_vomit() and vomit() unless you want to force it by design. If called without value; default value will cause severe nausea.
 ///Calling it directly won't have a cool-down.
-/mob/living/carbon/human/nausea(vomit_score = 100)
+/mob/living/carbon/human/nausea(vomit_score = 100, motion = FALSE)
 	if (isSynthetic() || is_dead() || !vomit_score || vomit_score < 0)
 		return
-	var/nausea_message
+	var/nausea_message = motion? "You feel the world moving around you and ": "You feel "
 	switch (vomit_score)
 		if (0 to 29)
-			nausea_message = "nauseous..."
+			nausea_message += "nauseous..."
 		if (30 to 59)
-			nausea_message = "like you might throw up."
+			nausea_message += "that you might throw up."
 		if (60 to INFINITY)
-			nausea_message = "like you are about to throw up!"
-	to_chat(src, SPAN_WARNING("You feel [nausea_message]"))
+			nausea_message += "that you are about to throw up!"
+	to_chat(src, SPAN_WARNING("[nausea_message]"))
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"

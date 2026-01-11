@@ -5,7 +5,7 @@
 	return (istype(user))
 
 /singleton/emote/human/do_emote(mob/living/carbon/human/user)
-	user.vomit(100, TRUE)
+	user.vomit(100, silent = TRUE)
 
 /singleton/emote/human/deathgasp
 	key = "deathgasp"

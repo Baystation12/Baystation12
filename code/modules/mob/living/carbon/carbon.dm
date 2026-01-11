@@ -552,10 +552,10 @@
 	if(internals)
 		internals.icon_state = "internal[!!internal]"
 
-/mob/living/carbon/proc/vomit(vomit_score = 100, silent = FALSE)
+/mob/living/carbon/proc/vomit(vomit_score = 100, motion = FALSE, silent = FALSE)
 	return
 
-/mob/living/carbon/proc/nausea(vomit_score = 100)
+/mob/living/carbon/proc/nausea(vomit_score = 100, motion = FALSE)
 	return
 
 /mob/living/carbon/proc/is_fast()
