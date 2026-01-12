@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - rscdel: Reverted the sensor console -> program change due to various access 
-      issues that aren't easily resolved.
-delete-after: true
