@@ -193,7 +193,7 @@
 
 /obj/item/ammo_magazine/pistol/double
 	name = "doublestack pistol magazine"
-	icon_state = "pistol_mag"
+	icon_state = "pistolds"
 	matter = list(MATERIAL_STEEL = 1050)
 	max_ammo = 15
 

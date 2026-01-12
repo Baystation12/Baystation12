@@ -185,6 +185,7 @@
 	icon_state = "rocketshell"
 	projectile_type = /obj/item/missile
 	caliber = "rocket"
+	spent_icon = "rocketshell"
 
 /obj/item/ammo_casing/cap
 	name = "cap"
