@@ -108,7 +108,7 @@
 			crash_with("Inappopriate arguments fed into proc.")
 	return severity
 
-/proc/sanitize_trait_prefs(list/preferences, save_version)
+/proc/sanitize_trait_prefs(list/preferences, save_version, species)
 	RETURN_TYPE(/list)
 	var/list/final_preferences = list()
 	if (isnull(preferences))
@@ -118,6 +118,10 @@
 		return
 	if (!length(preferences))
 		return list()
+	if(!species || !(species in GLOB.playable_species))
+		species = SPECIES_HUMAN
+	var/singleton/species/mob_species = GLOB.species_by_name[species]
+	var/remaining_budget = mob_species.trait_budget
 
 	for (var/trait in preferences)
 		var/trait_type = istext(trait) ? text2path(trait) : trait
@@ -133,13 +137,18 @@
 				var/metaoption_type = istext(metaoption) ? text2path(selected.migrate(metaoption, save_version)) : metaoption
 				if (!(metaoption_type in selected.metaoptions))
 					continue
-				if (selected.maximum_count && length(final_interim) >= selected.maximum_count)
-					break
+				var/selection_cost = selected.GetCost(metaoption_type)
+				if (selection_cost && (remaining_budget - selection_cost < 0))
+					continue
+				remaining_budget -= selection_cost
 				severity = interim[metaoption]
 				LAZYSET(final_interim, metaoption_type, severity)
 			LAZYSET(final_preferences, trait_type, final_interim)
-
 		else
+			var/selection_cost = selected.GetCost()
+			if (selection_cost && (remaining_budget - selection_cost < 0))
+				continue
+			remaining_budget -= selection_cost
 			severity = preferences[trait]
 			LAZYSET(final_preferences, trait_type, severity)
 	return final_preferences
@@ -159,12 +168,13 @@
 	var/list/incompatible_traits
 	abstract_type = /singleton/trait
 
+	///Cost of trait from budget. Used in loadout/char setup through GetCost() proc. If metaoptions; can override default budget cost by adding cost to metaoption proper.
+	///Cannot set budget on individual meta_options of a trait if the trait's default budget_cost is set to 0.
+	var/budget_cost = 0
 	///List of species in which this trait is forbidden.
 	var/list/forbidden_species = list()
 	///Determines if trait can be selected in character setup
 	var/selectable = FALSE
-	///Maximum amount of allowable traits during character setup. Only applies to traits with metaoptions. Null by default; which means no limit.
-	var/maximum_count
 
 /singleton/trait/New()
 	if(type == abstract_type)
@@ -179,6 +189,15 @@
 		return (level in levels) && (meta_option in metaoptions)
 	else
 		return (level in levels)
+
+/singleton/trait/proc/GetCost(selected_metaoption)
+	. = budget_cost
+	if (!metaoptions)
+		return
+	if (!selected_metaoption)
+		return
+	if (selected_metaoption in metaoptions)
+		return isnull(metaoptions[selected_metaoption]) ? budget_cost : metaoptions[selected_metaoption]
 
 /// Performs migrations for this trait. Useful is a typepath has changed.
 /// Don't forget to increment PREF_SER_VERSION for each migration you create.

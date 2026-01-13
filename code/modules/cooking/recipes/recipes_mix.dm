@@ -212,7 +212,7 @@
 /singleton/cooking_recipe/pbjsandwich_cherry
 	required_reagents = list(
 		/datum/reagent/nutriment/cherryjelly = 5,
-		/datum/reagent/nutriment/peanutbutter = 5
+		/datum/reagent/nutriment/peanut/peanutbutter = 5
 	)
 	required_items = list(
 		/obj/item/reagent_containers/food/snacks/slice/bread,
@@ -223,7 +223,7 @@
 /singleton/cooking_recipe/pbjsandwich_slime
 	required_reagents = list(
 		/datum/reagent/slimejelly = 5,
-		/datum/reagent/nutriment/peanutbutter = 5
+		/datum/reagent/nutriment/peanut/peanutbutter = 5
 	)
 	required_items = list(
 		/obj/item/reagent_containers/food/snacks/slice/bread,

@@ -53,7 +53,7 @@
 /singleton/cooking_recipe/pbtoast
 	appliance = COOKING_APPLIANCE_SKILLET | COOKING_APPLIANCE_MICROWAVE
 	required_reagents = list(
-		/datum/reagent/nutriment/peanutbutter = 5
+		/datum/reagent/nutriment/peanut/peanutbutter = 5
 	)
 	required_items = list(
 		/obj/item/reagent_containers/food/snacks/slice/bread
