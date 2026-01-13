@@ -15,6 +15,7 @@
 
 /datum/nano_module/program/forceauthorization
 	name = "Use of Force Authorization Manager"
+	available_to_ai = TRUE
 
 /datum/nano_module/program/forceauthorization/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data(program)

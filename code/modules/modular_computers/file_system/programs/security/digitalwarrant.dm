@@ -18,6 +18,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 
 /datum/nano_module/program/digitalwarrant
 	name = "Warrant Assistant"
+	available_to_ai = TRUE
 	var/datum/computer_file/data/warrant/activewarrant
 
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)

@@ -30,6 +30,7 @@
 
 /datum/nano_module/program/supermatter_monitor
 	name = "Supermatter monitor"
+	available_to_ai = TRUE
 	var/list/supermatters
 	var/obj/machinery/power/supermatter/active = null		// Currently selected supermatter crystal.
 	var/screen = SM_MONITOR_SCREEN_MAIN // Which screen the monitor is currently on

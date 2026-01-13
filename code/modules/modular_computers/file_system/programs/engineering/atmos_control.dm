@@ -16,6 +16,7 @@
 
 /datum/nano_module/program/atmos_control
 	name = "Atmospherics Control"
+	available_to_ai = TRUE
 	var/obj/access = new()
 	var/emagged = FALSE
 	var/ui_ref

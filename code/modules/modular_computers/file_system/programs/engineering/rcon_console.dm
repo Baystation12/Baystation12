@@ -16,6 +16,7 @@
 
 /datum/nano_module/program/rcon
 	name = "Power RCON"
+	available_to_ai = TRUE
 	var/list/known_SMESs = null
 	var/list/known_breakers = null
 	// Allows you to hide specific parts of the UI

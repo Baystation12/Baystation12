@@ -13,6 +13,7 @@
 
 /datum/nano_module/program/records
 	name = "Crew Records"
+	available_to_ai = TRUE
 	var/datum/computer_file/report/crew_record/active_record
 	var/message = null
 

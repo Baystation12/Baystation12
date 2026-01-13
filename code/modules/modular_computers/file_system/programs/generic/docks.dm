@@ -21,6 +21,7 @@
 
 /datum/nano_module/program/docking
 	name = "Docking Control program"
+	available_to_ai = TRUE
 	var/list/docking_controllers = list() //list of tags
 
 /datum/nano_module/program/docking/New(datum/host, topic_manager)

@@ -21,6 +21,7 @@ The answer was five and a half years -ZeroBits
 
 /datum/nano_module/program/library
 	name = "Library"
+	available_to_ai = TRUE
 	var/error_message = ""
 	var/current_book
 	var/obj/machinery/libraryscanner/scanner

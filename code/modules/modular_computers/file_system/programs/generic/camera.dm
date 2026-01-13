@@ -40,6 +40,7 @@
 
 /datum/nano_module/program/camera_monitor
 	name = "Camera Monitoring program"
+	available_to_ai = TRUE
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 

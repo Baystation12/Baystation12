@@ -33,6 +33,7 @@
 
 /datum/nano_module/program/supply
 	name = "Supply Management program"
+	available_to_ai = TRUE
 	var/screen = 1		// 1: Ordering menu, 2: Statistics, 3: Shuttle control, 4: Orders menu
 	var/selected_category
 	var/list/category_names = list()

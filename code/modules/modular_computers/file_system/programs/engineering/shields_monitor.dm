@@ -14,6 +14,7 @@
 
 /datum/nano_module/program/shields_monitor
 	name = "Shields monitor"
+	available_to_ai = TRUE
 	var/obj/machinery/power/shield_generator/active = null
 
 /datum/nano_module/program/shields_monitor/Destroy()
