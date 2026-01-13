@@ -1,4 +1,0 @@
-author: Builder13
-changes:
-  - bugfix: AI subsystem tab now contains all the programs, that it had before.
-delete-after: true

@@ -1,8 +1,0 @@
-author: emmanuelbassil
-changes:
-  - rscadd: Added budgets to traits; baseline budget is 4 points.
-  - rscadd: Drug allergies all cost 2 points; food allergies cost between 0 and 
-      1 point.
-  - tweak: Added peanut, fish, shellfish, cheese, and egg allergies.
-  - tweak: Added a handful of additional (non-medication) allergy options.
-delete-after: true
