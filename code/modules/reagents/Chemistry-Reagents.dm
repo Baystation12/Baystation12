@@ -160,9 +160,10 @@
 /datum/reagent/proc/affect_blood(mob/living/carbon/M, removed)
 	return
 
-///This proc handles the effect of accumulated metabolites for active metabolites only.
-///Dose supplied should be the total accumulated metabolites usually.
-///Is not called unless reagent has an active_metabolite path set.
+/*
+This proc handles the effect of accumulated metabolites. If nothing defined at the drug level; metabolites exert no effect.
+Dose supplied should be the total accumulated metabolites usually.
+It is called even for reagents without an active metabolite set. Only difference is non-active metabolites don't contribute to OD.*/
 /datum/reagent/proc/affect_metabolites(mob/living/carbon/affected, dose)
 
 /datum/reagent/proc/affect_ingest(mob/living/carbon/M, removed)

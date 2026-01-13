@@ -33,9 +33,8 @@
 		if(data[taste]/totalFlavor < 0.1)
 			data -= taste
 
-/datum/reagent/nutriment/affect_ingest(mob/living/carbon/M, removed)
+/datum/reagent/nutriment/affect_blood(mob/living/carbon/M, removed)
 	M.heal_organ_damage(0.5 * removed, 0) //what
-
 	adjust_nutrition(M, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 

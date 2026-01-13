@@ -583,23 +583,23 @@
 	reagent_state = LIQUID
 	color = "#c1c1c1"
 	metabolism = REM * 0.2
-	active_metabolites = /datum/reagent/spaceacillin
 	overdose = REAGENTS_OVERDOSE/2
 	scannable = 1
 	value = 2.5
 
-/datum/reagent/spaceacillin/affect_metabolites(mob/living/carbon/M, dose)
-	M.immunity = max(M.immunity - (dose/45), 0)
-	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
-	M.add_chemical_effect(CE_ANTIBIOTIC, 1)
-	if (dose > 10)
-		M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
+/datum/reagent/spaceacillin/affect_blood(mob/living/carbon/affected, removed)
+	affected.immunity = max(affected.immunity - (volume/45), 0)
+	affected.add_chemical_effect(CE_ANTIBIOTIC, 1)
+	if (volume < 10)
+		affected.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
+	else if (volume < overdose)
+		affected.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
 
-/datum/reagent/spaceacillin/process_overdose(mob/living/carbon/M)
+/datum/reagent/spaceacillin/process_overdose(mob/living/carbon/affected)
 	..()
-	M.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
-	if(prob(2))
-		M.immunity_norm = max(M.immunity_norm - 1, 0)
+	affected.add_chemical_effect(CE_ANTIVIRAL, VIRUS_EXOTIC)
+	if (prob(2))
+		affected.immunity_norm = max(affected.immunity_norm - 1, 0)
 
 /datum/reagent/sterilizine
 	name = "Sterilizine"
