@@ -1,0 +1,5 @@
+author: Albens
+changes:
+  - tweak: Corp Liaison can now access Semi-formal uniforms. This is intended 
+      for Union Reps.
+delete-after: true
