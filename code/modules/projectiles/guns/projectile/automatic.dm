@@ -111,7 +111,8 @@
 
 /obj/item/gun/projectile/automatic/merc_smg
 	name = "submachine gun"
-	desc = "The Novaya Zemlya Arms C-20r is a lightweight and rapid firing SMG. In production since the 2280s, the C-20r has proliferated across human space, in some part due to it being issued to smaller ICCGN vessels."
+	desc = "The Novaya Zemlya Arms C-20r is a lightweight and rapid-firing SMG. In production since the 2280s, \
+			the C-20r has proliferated across human space. Previously used by the GCN before overhauls."
 	icon = 'icons/obj/guns/merc_smg.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
