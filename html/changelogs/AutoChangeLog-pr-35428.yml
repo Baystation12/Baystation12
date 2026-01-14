@@ -1,0 +1,10 @@
+author: reen062, PurplePineapple, Karl Johansson
+changes:
+  - rscadd: Adds the Jaguar SMG, a new, integrally suppressed, Gilgameshi 
+      submachine gun, replacing the C-20r in service.
+  - rscadd: Adds the framework to add other guns with folding stocks. Looking at
+      you, WT-550 Saber.
+  - tweak: Changes the flavour text of and slightly relores the Panther, 
+      autoshotgun, and C-20r
+  - tweak: Moves the location of the Panther and autoshotgun to the ICCGN pack
+delete-after: true
