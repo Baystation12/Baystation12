@@ -1005,14 +1005,17 @@
 	if(dose > affected.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 		affected.immunity = max(affected.immunity - 3, 0)
 
-// Sleeping agent, produced by breathing N2O.
+/* Sleeping agent, produced by breathing N2O.
+Metabolism rate, potency, and removal designed that this only works when a continuous non-stop source of gas is being provided.*/
 /datum/reagent/nitrous_oxide
 	name = "Nitrous Oxide"
 	description = "An ubiquitous sleeping agent also known as laughing gas."
 	taste_description = "dental surgery"
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
-	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+	metabolism = REM * 10
+	metabolite_potency = 0.3
+	removal_multiplier = 4
 	var/do_giggle = TRUE
 
 /datum/reagent/nitrous_oxide/xenon
@@ -1022,24 +1025,20 @@
 	taste_description = "nothing"
 	color = COLOR_GRAY80
 
-/datum/reagent/nitrous_oxide/affect_metabolites(mob/living/carbon/M, dosage)
-	if (IS_METABOLICALLY_INERT(M))
+/datum/reagent/nitrous_oxide/affect_metabolites(mob/living/carbon/affected, dosage)
+	if (IS_METABOLICALLY_INERT(affected))
 		return
-	M.add_chemical_effect(CE_PULSE, -1)
-	if(dosage >= 1)
-		if(prob(5)) M.Sleeping(3)
-	if (volume > 2)
-		M.Sleeping(10)
-	if(dosage >= 10)
-		if (prob(5)) M.Sleeping(3)
-		M.dizziness =  max(M.dizziness, 3)
-		M.set_confused(3)
-	if(dosage >= 2)
-		if(prob(5)) M.Paralyse(1)
-		M.drowsyness = max(M.drowsyness, 3)
-		M.slurring =   max(M.slurring, 3)
-	if(do_giggle && prob(20))
-		M.emote(pick("giggle", "laugh"))
+	affected.add_chemical_effect(CE_PULSE, -1)
+	if (dosage >= 1)
+		affected.drowsyness = max(affected.drowsyness, 3)
+		affected.slurring =   max(affected.slurring, 3)
+	if (dosage >= 2)
+		affected.dizziness =  max(affected.dizziness, 3)
+		affected.set_confused(3)
+	if (dosage >= 3)
+		affected.Sleeping(10)
+	if (do_giggle && prob(20) && !affected.sleeping)
+		affected.emote(pick("giggle", "laugh"))
 
 	// Immunity-restoring reagent
 /datum/reagent/immunobooster
