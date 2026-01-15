@@ -1,22 +1,24 @@
 
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
 	<legend style="text-align:center">Controls</legend>
-	<div class='item'>
-		<div class="itemLabel">
-			Power
+	{{if data.allowchange}}
+		<div class='item'>
+			<div class="itemLabel">
+				Power
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.on ? 'On' : 'Off', 'power', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
+			</div>
 		</div>
-		<div class="itemContent">
-			{{:helper.link(data.on ? 'On' : 'Off', 'power', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
+		<div class='item'>
+			<div class="itemLabel">
+				Range
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
+			</div>
 		</div>
-	</div>
-	<div class='item'>
-		<div class="itemLabel">
-			Range
-		</div>
-		<div class="itemContent">
-			{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
-		</div>
-	</div>
+	{{/if}}
 	<div class='item'>
 		<div class="itemLabel">
 			Sector map view
@@ -31,45 +33,49 @@
 		</div>
 		<div class="itemContent">
 			{{:helper.link(data.muted ? 'Disabled' : 'Enabled', data.muted ? 'volume-off' : 'volume-on', { 'mute' : 1 }, null, null)}}
-			{{:helper.link(data.sound_off ? '' : '', 'volume-off', { 'sound_off' : 1 }, null, data.sound_off ? 'selected' : null)}}
+			{{if data.allowchange}}
+				{{:helper.link(data.sound_off ? '' : '', 'volume-off', { 'sound_off' : 1 }, null, data.sound_off ? 'selected' : null)}}
+			{{/if}}
 		</div>
 	</div>
 
 </fieldset>
-<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
-	<legend style="text-align:center">Status</legend>
-	<div class='item'>
-		<div class="itemLabel">
-			Status:
+{{if data.allowchange}}
+	<fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
+		<legend style="text-align:center">Status</legend>
+		<div class='item'>
+			<div class="itemLabel">
+				Status:
+			</div>
+			<div class="itemContent">
+				{{:data.status}}
+			</div>
 		</div>
-		<div class="itemContent">
-			{{:data.status}}
+		<div class='item'>
+			<div class="itemLabel">
+				Temperature:
+			</div>
+			<div class="itemContent">
+				{{if data.heat < (data.critical_heat * 0.5)}}
+					{{:helper.displayBar(data.heat, 0, data.critical_heat, 'good')}}
+				{{else data.heat < (data.critical_heat * 0.75)}}
+					{{:helper.displayBar(data.heat, 0, data.critical_heat, 'average')}}
+				{{else}}
+					{{:helper.displayBar(data.heat, 0, data.critical_heat, 'bad')}}
+				{{/if}}
+			</div>
+			<div class="itemContent">
+				{{if data.heat < (data.critical_heat * 0.5)}}
+					<span class="good">Temperature low.</span>
+				{{else data.heat < (data.critical_heat * 0.75)}}
+					<span class="average">Sensor temperature high!</span>
+				{{else}}
+					<span class="bad">TEMPERATURE CRITICAL: Disable or reduce power immediately!</span>
+				{{/if}}
+			</div>
 		</div>
-	</div>
-	<div class='item'>
-		<div class="itemLabel">
-			Temperature:
-		</div>
-		<div class="itemContent">
-			{{if data.heat < (data.critical_heat * 0.5)}}
-				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'good')}}
-			{{else data.heat < (data.critical_heat * 0.75)}}
-				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'average')}}
-			{{else}}
-				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'bad')}}
-			{{/if}}
-		</div>
-		<div class="itemContent">
-			{{if data.heat < (data.critical_heat * 0.5)}}
-				<span class="good">Temperature low.</span>
-			{{else data.heat < (data.critical_heat * 0.75)}}
-				<span class="average">Sensor temperature high!</span>
-			{{else}}
-				<span class="bad">TEMPERATURE CRITICAL: Disable or reduce power immediately!</span>
-			{{/if}}
-		</div>
-	</div>
-</fieldset>
+	</fieldset>
+{{/if}}
 <fieldset style="background-color: #202020;border-color: rgb(117, 117, 117);">
 	<legend style="text-align:center">Contacts</legend>
 	{{if data.known_contacts || data.unknown_contacts }}

@@ -32,3 +32,10 @@
 		os.create_file(new/datum/computer_file/program/shields_monitor())
 		os.create_file(new/datum/computer_file/program/supermatter_monitor())
 		os.set_autorun("alarmmonitor")
+
+/obj/item/modular_computer/telescreen/preset/navigation/install_default_programs()
+	..()
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		os.create_file(new/datum/computer_file/program/ship/sensors())
+		os.set_autorun("sensors")

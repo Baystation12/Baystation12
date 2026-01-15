@@ -37,7 +37,7 @@
 "xU" = (/obj/structure/table/steel,/obj/random/contraband,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "yK" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/item/stack/material/rods,/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5; icon_state = "intact"},/obj/random/masks,/obj/machinery/airlock_sensor{frequency = 1380; id_tag = "graysontug_shuttle_sensor"; pixel_x = -24; pixel_y = -7},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "za" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/universal{dir = 4},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
-"zl" = (/obj/machinery/constructable_frame/computerframe{dir = 8},/obj/item/stock_parts/circuitboard/sensors,/obj/item/material/shard,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
+"zl" = (/obj/machinery/constructable_frame/computerframe{dir = 8},/obj/item/stock_parts/circuitboard/modular_computer,/obj/item/stock_parts/computer/hard_drive/super/helm,/obj/item/stock_parts/computer/ship_interface,/obj/item/material/shard,/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "zp" = (/turf/template_noop,/area/template_noop)
 "zL" = (/obj/decal/cleanable/generic,/obj/machinery/atmospherics/binary/passive_gate{unlocked = 1; dir = 1},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)
 "zP" = (/obj/decal/cleanable/liquid_fuel,/obj/machinery/atmospherics/pipe/simple/visible/cyan{dir = 9; icon_state = "intact"},/turf/simulated/floor/plating,/area/map_template/crashed_shuttle/graysontug)

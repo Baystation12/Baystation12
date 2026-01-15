@@ -90,7 +90,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aq" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/modular/preset/sensors,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ar" = (

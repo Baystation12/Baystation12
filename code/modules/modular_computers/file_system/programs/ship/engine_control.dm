@@ -1,7 +1,7 @@
 /datum/computer_file/program/ship/engine_control
 	filename = "engctrl"
 	filedesc = "Engine Control"
-	nanomodule_path = /datum/nano_module/ship/engine_control
+	nanomodule_path = /datum/nano_module/program/ship/engine_control
 	program_icon_state = "engines"
 	program_key_state = "tech_key"
 	program_menu_icon = "eject"
@@ -11,11 +11,11 @@
 	required_parts = list(/obj/item/stock_parts/computer/ship_interface)
 	size = 5
 
-/datum/nano_module/ship/engine_control
+/datum/nano_module/program/ship/engine_control
 	name = "Engine control"
 	var/display_state = "status"
 
-/datum/nano_module/ship/engine_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/ship/engine_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	data["synced"] = !isnull(linked)
 	data["state"] = display_state
@@ -45,7 +45,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/nano_module/ship/engine_control/Topic(href, href_list)
+/datum/nano_module/program/ship/engine_control/Topic(href, href_list)
 	if (..())
 		return TOPIC_HANDLED
 
