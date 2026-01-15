@@ -1,0 +1,5 @@
+author: Karl Johansson
+changes:
+  - bugfix: Double stack pistol magazines now have a unique icon.
+  - bugfix: Fixes rocket launcher rockets not displaying their sprite.
+delete-after: true
