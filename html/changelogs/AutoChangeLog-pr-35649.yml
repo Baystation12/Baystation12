@@ -1,7 +1,0 @@
-author: emmanuelbassil
-changes:
-  - bugfix: Sleeping gas now builds up and washes out properly again.
-  - bugfix: Only works as long as a continuous source of gas is delivered; at 
-      default tank setting and normal breathing a person falls asleep after 
-      roughly 10 seconds.
-delete-after: true

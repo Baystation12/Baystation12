@@ -1,5 +1,0 @@
-author: Mucker, Cakey
-changes:
-  - rscadd: Re-added programmified sensors with a general fix for access on 
-      shuttles and off-ships.
-delete-after: true
