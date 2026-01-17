@@ -716,6 +716,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				remaining_budget -= existing_trait.GetCost()
 
 		var/list/possible_levels = selected.levels
+		if (selected.type in mob_species.traits)
+			var/minimum_level = mob_species.traits[selected.type]
+			var/cut = possible_levels.Find(minimum_level)
+			if (cut >= length(possible_levels)) //get_selectable_traits() already weeded out traits where Cut(1, cut + 1) returns an out of bound error. This is just for safety.
+				crash_with("Tried to cause an out of bounds error. ")
+				return
+			possible_levels.Cut(1, cut + 1)
+
 		var/selected_level
 		if (length(possible_levels) > 1)
 			var/list/letterized_levels
@@ -727,6 +735,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			selected_level = letterized_levels[letterized_input]
 		else
 			selected_level = possible_levels[1]
+			to_chat(usr, SPAN_NOTICE ("The only level available for this trait is [LetterizeSeverity(selected_level)]."))
 
 		var/additional_data
 		if (length(selected.metaoptions))

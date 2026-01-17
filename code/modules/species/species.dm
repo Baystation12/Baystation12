@@ -778,14 +778,21 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	for (var/singleton/trait/allowed_trait in trait_list)
 		if (!allowed_trait.selectable)
 			continue
-		if (LAZYISIN(traits, allowed_trait.type))
-			continue
+		if (LAZYISIN(traits, allowed_trait.type)) //This allows you to select higher levels for selectable traits that species start with.
+			var/list/possible_levels = allowed_trait.levels
+			var/minimum_level = traits[allowed_trait.type]
+			var/cut = possible_levels.Find(minimum_level)
+			if (cut >= length(possible_levels))
+				continue
 		if (LAZYISIN(allowed_trait.forbidden_species, name))
 			continue
+		if (allowed_trait.incompatible_traits)
+			var/list/incompatibles = allowed_trait.incompatible_traits & traits
+			if (length(incompatibles))
+				continue
 		if (!allowed_trait.name)
 			continue
 		LAZYSET(allowed_traits, allowed_trait.name, allowed_trait)
-
 	return allowed_traits
 
 /singleton/species/proc/get_description(header, append, verbose = TRUE, skip_detail, skip_photo)
