@@ -1,0 +1,6 @@
+author: emmanuelbassil
+changes:
+  - bugfix: Spaceacillin is no longer an active metabolite. Increasing levels in
+      blood now have increasing anti-viral effect; like pre rework behavior.
+  - bugfix: Glucose now also restores blood when given IV; not only orally
+delete-after: true
