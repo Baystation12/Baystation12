@@ -1,5 +1,0 @@
-author: emmanuelbassil
-changes:
-  - bugfix: Fixed bug where non-humans would not spawn with their traits unless 
-      they had an allergy selected
-delete-after: true
