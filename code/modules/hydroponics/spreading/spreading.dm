@@ -1,7 +1,7 @@
 #define DEFAULT_SEED "glowshroom"
 #define VINE_GROWTH_STAGES 5
 
-/proc/spacevine_infestation(potency_min=70, potency_max=100, maturation_min=5, maturation_max=15)
+/proc/spacevine_infestation(potency_min=80, potency_max=120, maturation_min=5, maturation_max=15)
 	spawn() //to stop the secrets panel hanging
 		var/turf/T = pick_subarea_turf(/area/hallway , list(
 			GLOBAL_PROC_REF(is_station_turf),
@@ -15,6 +15,7 @@
 			seed.set_trait(TRAIT_HARVEST_REPEAT, 1)
 			seed.set_trait(TRAIT_STINGS, 1)
 			seed.set_trait(TRAIT_CARNIVOROUS,2)
+			seed.set_trait(TRAIT_ENDURANCE, 150)
 
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
@@ -53,6 +54,7 @@
 	pass_flags = PASS_FLAG_TABLE
 	buckle_sound = null
 	health_max = 100
+	can_buckle = TRUE
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -255,7 +257,6 @@
 		return TRUE
 
 	return ..()
-
 
 //handles being overrun by vines - note that attacker_parent may be null in some cases
 /obj/vine/proc/vine_overrun(datum/seed/attacker_seed, obj/vine/attacker_parent)

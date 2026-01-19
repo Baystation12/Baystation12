@@ -67,7 +67,8 @@
 
 	//Growing up
 	if(health_damaged())
-		restore_health(1)
+		var/health_to_restore = max(1, round(seed.get_trait(TRAIT_ENDURANCE)/10))
+		restore_health(health_to_restore)
 		if(round(growth_threshold) && !(get_current_health() % growth_threshold))
 			update_icon()
 

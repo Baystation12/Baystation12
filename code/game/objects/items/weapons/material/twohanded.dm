@@ -99,7 +99,7 @@
 
 	if(istype(A,/obj/vine))
 		var/obj/vine/P = A
-		P.kill_health()
+		P.use_weapon(src, user, click_parameters)
 		return TRUE
 
 /obj/item/material/twohanded/fireaxe/IsHatchet()
