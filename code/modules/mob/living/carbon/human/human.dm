@@ -88,7 +88,10 @@
 		return FALSE //Always hungry, but you can't actually eat. :(
 	if (stomach.is_full())
 		return INFINITY
-	return nutrition
+	var/food_volume = 0
+	for (var/datum/reagent/nutriment/food in stomach.ingested.reagent_list)
+		food_volume += food.volume
+	return nutrition + food_volume * 15
 
 /mob/living/carbon/human/ex_act(severity)
 	if (status_flags & GODMODE)
@@ -704,6 +707,7 @@
 
 	if(nothing_to_puke)
 		custom_emote(1,"dry heaves.")
+		adjust_nutrition(-(rand(1,5)))
 		return
 
 	if(should_have_organ(BP_STOMACH))
@@ -717,6 +721,7 @@
 			M.dropInto(get_turf(src))
 			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
 				M.throw_at(get_edge_target_turf(src,dir),7,7,src)
+	adjust_nutrition(-(rand(3,8)))
 
 	// vomit into a toilet
 	for(var/obj/structure/hygiene/toilet/T in range(1, src))

@@ -104,6 +104,8 @@
 		hud_used.update_stamina()
 
 /mob/living/carbon/human/proc/handle_stamina()
+	if (stamina <= 0)
+		add_chemical_effect(CE_NAUSEA, 2)
 	if((world.time - last_quick_move_time) > 5 SECONDS)
 		var/mod = (lying + (nutrition / initial(nutrition))) / 2
 		adjust_stamina(max(config.minimum_stamina_recovery, config.maximum_stamina_recovery * mod) * (1+chem_effects[CE_ENERGETIC]))
@@ -901,13 +903,24 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 			vomit_score += 15 * (SKILL_TRAINED - get_skill_value(SKILL_EVA))
 		if (species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
 			vomit_score -= 20
+	if (istype(get_area(src), /area/bluespace_interlude))
+		vomit_score += 30
+		motion_sickness = TRUE
 
 	//Leave trait-based multipliers at the end of this code block.
 	if (HAS_TRAIT(src, /singleton/trait/malus/sensitive_stomach))
 		var/trait_level = GET_TRAIT_LEVEL(src, /singleton/trait/malus/sensitive_stomach)
-		motion_sickness = !!moving_levels["[get_z(src)]"]
-		vomit_score += (10 * motion_sickness * trait_level) //Motion sickness
+		//Teleporting is not for the faint of stomach; effects lasts for 10 seconds.
+		if (last_teleport_time && ((world.time - last_teleport_time) <= 10 SECONDS))
+			vomit_score += (10 * trait_level)
+			motion_sickness = TRUE
+		//Handles motion sickness from moving z-levels
+		if (trait_level >= 2 && !!moving_levels["[get_z(src)]"])
+			vomit_score += (10 * trait_level)
+			motion_sickness = TRUE
+		//General multiplier to total vomit_score based on trait
 		vomit_score *= (1 + (0.20 * trait_level))
+
 	if (HAS_TRAIT(src, /singleton/trait/boon/cast_iron_stomach))
 		vomit_score *= 0.65
 
