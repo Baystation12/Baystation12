@@ -1,8 +1,0 @@
-author: Mucker
-changes:
-  - bugfix: Fixed vines not being able to snag mobs.
-  - balance: Made the vine biohazard event more dangerous by making vines grow 
-      faster and giving them more health.
-  - balance: Fireaxe no longer instant kills vines in cases where it has lots of
-      health.
-delete-after: true
