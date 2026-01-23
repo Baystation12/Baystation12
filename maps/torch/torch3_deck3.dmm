@@ -3765,7 +3765,6 @@
 /obj/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	name = "Observation Blast Door";
-	icon_state = "pdoor0";
 	dir = 4;
 	id_tag = "bsa-window"
 	},
@@ -13540,7 +13539,6 @@
 	},
 /obj/machinery/door/blast/regular/open{
 	name = "Observation Blast Door";
-	icon_state = "pdoor0";
 	dir = 4;
 	id_tag = "bsa-window"
 	},
@@ -13677,7 +13675,6 @@
 /obj/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular/open{
 	name = "Observation Blast Door";
-	icon_state = "pdoor0";
 	dir = 4;
 	id_tag = "bsa-window"
 	},
@@ -17935,15 +17932,6 @@
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d3starboard)
 "SK" = (
-/obj/structure/sign/memorial,
-/obj/structure/sign/double/solgovflag/left{
-	pixel_x = -16;
-	pixel_y = 32
-	},
-/obj/structure/sign/double/solgovflag/right{
-	pixel_x = 16;
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/chapel/memorial)
 "SL" = (
@@ -18910,7 +18898,6 @@
 /obj/structure/sign/solgov,
 /obj/machinery/door/blast/regular/open{
 	name = "Observation Blast Door";
-	icon_state = "pdoor0";
 	dir = 4;
 	id_tag = "bsa-window"
 	},
@@ -19766,7 +19753,6 @@
 	dir = 4;
 	pixel_x = -25
 	},
-/obj/item/tableflag,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/memorial)
 "XC" = (
@@ -20628,7 +20614,6 @@
 /area/maintenance/thirddeck/starboard)
 "ZW" = (
 /obj/structure/table/woodentable_reinforced/mahogany,
-/obj/item/spirit_board,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
