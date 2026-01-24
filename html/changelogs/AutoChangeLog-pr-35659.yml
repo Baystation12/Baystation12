@@ -1,5 +1,0 @@
-author: Karl Johansson
-changes:
-  - bugfix: Fixes doublestack pistol mag rubber and practice sprites so they 
-      don't show errors.
-delete-after: true
