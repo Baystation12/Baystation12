@@ -78,17 +78,19 @@
 		target = get_atom_on_turf(src)
 	if(!target)
 		target = src
-	if(location)
-		explosion(location, 2, EX_ACT_LIGHT)
 
 	if(target)
 		if (istype(target, /turf/simulated/wall))
 			var/turf/simulated/wall/W = target
 			W.kill_health()
+			// slight hack, but killing a wall doesn't actually leave plating, it leaves a girder also, so we need to destroy that
+			var/obj/structure/girder/girder = locate() in location
+			qdel(girder)
 		else if(istype(target, /mob/living))
 			target.ex_act(EX_ACT_HEAVY) // c4 can't gib mobs anymore.
 		else
 			target.ex_act(EX_ACT_DEVASTATING)
+	explosion(location, 3, EX_ACT_HEAVY)
 	if(target)
 		target.CutOverlays(image_overlay)
 	qdel(src)
