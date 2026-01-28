@@ -2859,6 +2859,7 @@
 #include "code\modules\persistence\persistence_datum_graffiti.dm"
 #include "code\modules\persistence\persistence_datum_paper.dm"
 #include "code\modules\persistence\persistence_datum_paper_sticky.dm"
+#include "code\modules\persistence\persistence_datum_research.dm"
 #include "code\modules\pointdefense\pointdefense.dm"
 #include "code\modules\power\apc.dm"
 #include "code\modules\power\breaker_box.dm"
