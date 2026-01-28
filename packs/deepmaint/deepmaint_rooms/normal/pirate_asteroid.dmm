@@ -33,7 +33,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/deepmaint)
 "gq" = (
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
@@ -81,7 +81,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "no" = (
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
@@ -93,7 +93,7 @@
 /obj/floor_decal/industrial/warning/dust{
 	dir = 8
 	},
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},

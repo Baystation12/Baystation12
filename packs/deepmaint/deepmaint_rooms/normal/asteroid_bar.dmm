@@ -162,7 +162,7 @@
 /turf/simulated/floor/lino,
 /area/map_template/deepmaint)
 "B" = (
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
@@ -200,7 +200,7 @@
 /area/map_template/deepmaint)
 "G" = (
 /obj/floor_decal/industrial/warning/dust,
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap{
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong{
 	icon = 'icons/obj/flora/hydroponics_growing.dmi';
 	icon_state = null
 	},
