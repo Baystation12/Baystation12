@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - rscadd: Adds a "functional" version of the cinnamon resort, spawnable only 
+      by admins.
+delete-after: true
