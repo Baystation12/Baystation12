@@ -18,40 +18,27 @@
 	if(!icon_state)
 		icon_state = "pill[rand(1, 5)]" //preset pills only use colour changing or unique icons
 
-/obj/item/reagent_containers/pill/use_before(mob/M as mob, mob/user as mob)
+/obj/item/reagent_containers/pill/transfer_fed_to_mob(mob/living/user, mob/living/carbon/human/target)
+	if (!istype(target) || !istype(user))
+		return
+	if (reagents.total_volume)
+		reagents.trans_to_mob(target, reagents.total_volume, CHEM_INGEST)
+	qdel(src)
+
+/obj/item/reagent_containers/pill/self_feed_message(mob/user)
+	to_chat(user, SPAN_NOTICE("You swallow \the [src]"))
+
+/obj/item/reagent_containers/pill/other_feed_message_start(mob/user, mob/target)
+	user.visible_message(SPAN_WARNING("\The [user] attempts to force \the [target] to swallow \the [src]."))
+
+/obj/item/reagent_containers/pill/other_feed_message_finish(mob/user, mob/target)
+	user.visible_message(SPAN_WARNING("\The [user] forces \the [target] to swallow \the [src]."))
+
+/obj/item/reagent_containers/pill/use_before(mob/target as mob, mob/user as mob)
 	. = FALSE
-	if (!istype(M))
+	if (!istype(target))
 		return FALSE
-
-	if (M == user)
-		if (!M.can_eat(src))
-			return TRUE
-
-		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
-		if (reagents.total_volume)
-			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-		qdel(src)
-		return TRUE
-
-	if (ishuman(M))
-		if (!M.can_force_feed(user, src))
-			return TRUE
-
-		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (!do_after(user, 3 SECONDS, M, DO_MEDICAL))
-			return TRUE
-
-		if (user.get_active_hand() != src)
-			return TRUE
-
-		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
-		var/contained = reagentlist()
-		if (reagents.should_admin_log())
-			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-		if (reagents.total_volume)
-			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-		qdel(src)
+	if (standard_feed_mob(user, target, DO_MEDICAL))
 		return TRUE
 
 /obj/item/reagent_containers/pill/use_after(atom/target, mob/living/user, click_parameters)

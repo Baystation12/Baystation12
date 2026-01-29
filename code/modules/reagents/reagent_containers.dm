@@ -79,7 +79,8 @@
 	to_chat(user, SPAN_NOTICE("You fill [src] with [trans] units of the contents of [target]."))
 	return 1
 
-/obj/item/reagent_containers/proc/standard_splash_mob(mob/user, mob/target) // This goes into use_after()
+///Called only by splashtarget()
+/obj/item/reagent_containers/proc/standard_splash_mob(mob/user, mob/target)
 	if(!istype(target))
 		return
 
@@ -107,6 +108,7 @@
 	reagents.splash(target, reagents.total_volume)
 	return 1
 
+///This is called by use_after for certain types of reagent_containers; not all. (So that you can't splash pills)
 /obj/item/reagent_containers/proc/splashtarget(obj/target, mob/user)
 	if (user.a_intent == I_HURT)
 		if (standard_splash_mob(user,target))
@@ -124,22 +126,33 @@
 	to_chat(user, SPAN_NOTICE("You eat \the [src]"))
 
 /obj/item/reagent_containers/proc/other_feed_message_start(mob/user, mob/target)
-	user.visible_message(SPAN_WARNING("[user] is trying to feed [target] \the [src]!"))
+	user.visible_message(SPAN_WARNING("\The [user] is trying to feed \the [target] \the [src]!"))
 
 /obj/item/reagent_containers/proc/other_feed_message_finish(mob/user, mob/target)
-	user.visible_message(SPAN_WARNING("[user] has fed [target] \the [src]!"))
+	user.visible_message(SPAN_WARNING("\The [user] has fed \the [target] \the [src]!"))
+
+/obj/item/reagent_containers/proc/transfer_fed_to_mob(mob/living/user, mob/living/carbon/human/target)
+	if (!istype(user) || !istype(target))
+		return
+	feed_sound(target)
+	var/transfer_amount = target.species?.ingest_amount || 10
+	if (user.a_intent == I_DISARM)
+		transfer_amount = ceil(transfer_amount * 0.5)
+	else if (user.a_intent == I_GRAB)
+		transfer_amount = ceil(transfer_amount * 1.5)
+	reagents.trans_to_mob(target, transfer_amount, CHEM_INGEST)
 
 /obj/item/reagent_containers/proc/feed_sound(mob/user)
 	return
 
-/obj/item/reagent_containers/proc/standard_feed_mob(mob/living/user, mob/living/carbon/human/target)
+/obj/item/reagent_containers/proc/standard_feed_mob(mob/living/user, mob/living/carbon/human/target, do_skill)
 	if (!istype(target))
+		return FALSE
+	if (user?.a_intent == I_HURT)
 		return FALSE
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return TRUE
-	if (user?.a_intent == I_HURT)
-		return FALSE
 	var/is_self = target == user
 	if (!target.check_has_mouth())
 		to_chat(user, SPAN_WARNING("[is_self ? "You" : "\The [target]"] can't consume \the [src] - [is_self ? "you" : "they"] don't have a mouth!"))
@@ -154,19 +167,17 @@
 		add_trace_DNA(target)
 	else
 		other_feed_message_start(user, target)
-		if (!do_after(user, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+		if (!do_skill)
+			do_skill = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS
+		if (!do_after(user, 3 SECONDS, target, do_skill))
+			return TRUE
+		if (user.get_active_hand() != src)
 			return TRUE
 		other_feed_message_finish(user, target)
 		add_trace_DNA(target)
 		var/contained = reagentlist()
 		admin_attack_log(user, target, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
-	feed_sound(target)
-	var/transfer_amount = target.species?.ingest_amount || 10
-	if (user.a_intent == I_DISARM)
-		transfer_amount = ceil(transfer_amount * 0.5)
-	else if (user.a_intent == I_GRAB)
-		transfer_amount = ceil(transfer_amount * 1.5)
-	reagents.trans_to_mob(target, transfer_amount, CHEM_INGEST)
+	transfer_fed_to_mob(user, target)
 	return TRUE
 
 

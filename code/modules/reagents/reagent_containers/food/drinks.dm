@@ -96,7 +96,7 @@
 	if (standard_dispenser_refill(user, target) || standard_pour_into(user, target))
 		return TRUE
 
-/obj/item/reagent_containers/food/drinks/standard_feed_mob(mob/user, mob/target)
+/obj/item/reagent_containers/food/drinks/standard_feed_mob(mob/user, mob/target, do_skill)
 	if(!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
 		return 1

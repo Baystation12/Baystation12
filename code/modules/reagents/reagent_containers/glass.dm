@@ -73,12 +73,10 @@
 	if (standard_feed_mob(user, M))
 		return TRUE
 
-/obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
+/obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target, do_skill)
 	if(!is_open_container())
 		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
 		return TRUE
-	if(user.a_intent == I_HURT)
-		return FALSE
 	return ..()
 
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)
