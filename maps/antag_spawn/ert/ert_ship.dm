@@ -215,7 +215,7 @@
 	icon_vend = "med-vend"
 	base_type = /obj/machinery/vending/ert/medical
 	products = list(
-		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/hypospray/vial,
 		/obj/item/reagent_containers/syringe = 12,
 		/obj/item/device/scanner/health = 5,
 		/obj/item/reagent_containers/hypospray/autoinjector = 12,

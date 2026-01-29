@@ -5569,10 +5569,10 @@
 /obj/item/gun/launcher/syringe/rapid,
 /obj/item/storage/box/syringes,
 /obj/item/storage/box/syringes,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
-/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/hypospray/vial,
+/obj/item/reagent_containers/hypospray/vial,
+/obj/item/reagent_containers/hypospray/vial,
+/obj/item/reagent_containers/hypospray/vial,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/ert/ship/armory)
 "IG" = (
