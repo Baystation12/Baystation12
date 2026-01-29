@@ -1,0 +1,5 @@
+author: Mucker
+changes:
+  - tweak: Replaced the airlock brace circuits in hard storage with actual 
+      braces.
+delete-after: true
