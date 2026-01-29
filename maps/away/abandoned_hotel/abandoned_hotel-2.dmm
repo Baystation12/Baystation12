@@ -18,28 +18,13 @@
 	},
 /turf/simulated/open,
 /area/abandoned_hotel/overlook)
-"ak" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/catwalk,
-/turf/space,
-/area/space)
 "al" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/catwalk,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "am" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -68,15 +53,6 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"aq" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/turf/space,
-/area/space)
 "ar" = (
 /obj/floor_decal/corner/red,
 /obj/floor_decal/corner/white{
@@ -93,8 +69,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/catwalk,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "ax" = (
 /obj/machinery/door/firedoor,
@@ -120,22 +95,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/catwalk,
-/turf/space,
-/area/space)
-"aE" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/catwalk,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "aQ" = (
 /obj/structure/railing/mapped,
@@ -771,25 +731,6 @@
 	},
 /turf/simulated/floor/wood,
 /area/abandoned_hotel/rooms)
-"gx" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/catwalk,
-/turf/space,
-/area/space)
 "gy" = (
 /obj/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -1081,7 +1022,7 @@
 /obj/floor_decal/solarpanel,
 /obj/structure/cable/yellow,
 /obj/structure/lattice,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "jv" = (
 /obj/structure/table/standard,
@@ -1109,7 +1050,7 @@
 	icon_state = "0-2"
 	},
 /obj/structure/lattice,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "jG" = (
 /obj/structure/window/reinforced/full,
@@ -1352,7 +1293,7 @@
 /obj/structure/cable/yellow,
 /obj/item/solar_assembly,
 /obj/structure/lattice,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/space)
 "oy" = (
 /obj/structure/table/woodentable/walnut,
@@ -27056,7 +26997,7 @@ aa
 ap
 hO
 jD
-ak
+dx
 jh
 aC
 bl
@@ -27258,7 +27199,7 @@ aa
 ap
 aa
 jD
-gx
+dZ
 jh
 aC
 bl
@@ -27460,7 +27401,7 @@ aa
 ap
 aa
 jD
-gx
+dZ
 jh
 aC
 bl
@@ -27662,7 +27603,7 @@ aa
 ap
 aa
 jD
-gx
+dZ
 jh
 aC
 bl
@@ -27864,7 +27805,7 @@ aa
 ap
 aa
 jD
-gx
+dZ
 ot
 aC
 bl
@@ -28066,7 +28007,7 @@ aa
 ap
 aa
 jD
-gx
+dZ
 jh
 aC
 bl
@@ -28269,8 +28210,8 @@ ap
 aa
 aa
 al
-aq
-aE
+cw
+en
 cw
 en
 cw
