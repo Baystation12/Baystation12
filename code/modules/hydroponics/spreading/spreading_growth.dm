@@ -10,16 +10,24 @@
 
 /obj/vine/proc/get_zlevel_neighbors()
 	var/list/zlevel_neighbors = list()
-
 	var/turf/start = loc
 	var/turf/up = GetAbove(loc)
 	var/turf/down = GetBelow(loc)
 
-	if(start && start.CanZPass(src, DOWN))
-		zlevel_neighbors += down
-	if(up && up.CanZPass(src, UP))
-		zlevel_neighbors += up
-
+	if (up)
+		for (var/obj/vine/other in up.contents)
+			if(other.seed == seed)
+				up = null
+				break
+		if(up?.CanZPass(src, UP))
+			zlevel_neighbors += up
+	if (down && start)
+		for (var/obj/vine/other in down.contents)
+			if (other.seed == seed)
+				down = null
+				break
+		if (down && start.CanZPass(src, DOWN))
+			zlevel_neighbors += down
 	return zlevel_neighbors
 
 /obj/vine/proc/get_neighbors()
