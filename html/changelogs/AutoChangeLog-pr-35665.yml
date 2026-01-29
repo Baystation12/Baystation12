@@ -1,0 +1,4 @@
+author: Mucker
+changes:
+  - bugfix: Fixed vines stacking on the same tile when they spread vertically.
+delete-after: true
