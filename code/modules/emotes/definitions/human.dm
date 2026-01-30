@@ -2,7 +2,7 @@
 	key = "vomit"
 
 /singleton/emote/human/check_user(mob/living/carbon/human/user)
-	return (istype(user))
+	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
 
 /singleton/emote/human/do_emote(mob/living/carbon/human/user)
 	user.vomit(100, silent = TRUE)

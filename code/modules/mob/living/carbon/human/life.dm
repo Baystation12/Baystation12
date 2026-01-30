@@ -884,8 +884,16 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 	var/vomit_score = 0
 	var/motion_sickness = FALSE
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if (stomach && stomach.is_full())
-		vomit_score += 20
+	if (stomach && stomach.ingested.total_volume) //Avoid running this block if stomach is empty
+		var/unique_count = 0
+		if (stomach.is_full())
+			vomit_score += 20
+		for (var/datum/reagent/ethanol/unique_alcohol in stomach.ingested.reagent_list)
+			if (!istype(unique_alcohol))
+				continue
+			unique_count++
+		if (unique_count >=3)
+			vomit_score += ((unique_count - 2) * 33)
 	for (var/tag in list(BP_LIVER, BP_KIDNEYS, BP_BRAIN))
 		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
 		if (I)
@@ -903,9 +911,6 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 			vomit_score += 15 * (SKILL_TRAINED - get_skill_value(SKILL_EVA))
 		if (species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
 			vomit_score -= 20
-	if (istype(get_area(src), /area/bluespace_interlude))
-		vomit_score += 30
-		motion_sickness = TRUE
 
 	//Leave trait-based multipliers at the end of this code block.
 	if (HAS_TRAIT(src, /singleton/trait/malus/sensitive_stomach))

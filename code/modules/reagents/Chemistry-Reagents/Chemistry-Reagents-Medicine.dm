@@ -994,8 +994,7 @@
 	if(volume >= 5)
 		M.add_chemical_effect(CE_PULSE, 1)
 		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
-		M.add_chemical_effect(CE_NAUSEA, clamp((volume/5 * 1), 1, 6))
-		clamp()
+		M.add_chemical_effect(CE_NAUSEA, clamp(volume/5, 1, 6))
 
 /datum/reagent/lactate/affect_metabolites(mob/living/carbon/affected, dose)
 	if (dose > 20)

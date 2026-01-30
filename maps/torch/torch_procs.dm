@@ -93,8 +93,10 @@
 		do_teleport(target, destination)
 		return
 
-	if (isliving(target))
-		to_chat(target, FONT_LARGE(SPAN_WARNING("Your vision goes blurry and nausea strikes your stomach. Where are you...?")))
+	if (iscarbon(target))
+		var/mob/living/carbon/teleported = target
+		to_chat(teleported, FONT_LARGE(SPAN_WARNING("Your vision goes blurry and nausea strikes your stomach. Where are you...?")))
+		teleported.add_chemical_effect(CE_NAUSEA, 3)
 	do_teleport(target, T, precision, type)
 	if (destination)
 		addtimer(new Callback(GLOBAL_PROC, GLOBAL_PROC_REF(do_teleport), target, destination), duration)

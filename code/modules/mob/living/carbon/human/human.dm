@@ -705,7 +705,7 @@
 	else if(!(locate(/mob) in contents))
 		nothing_to_puke = TRUE
 
-	if(nothing_to_puke)
+	if(nothing_to_puke && prob(80))
 		custom_emote(1,"dry heaves.")
 		adjust_nutrition(-(rand(1,5)))
 		return
@@ -760,6 +760,8 @@
 		last_nausea_time = world.time
 		nausea(vomit_score, motion)
 	if (!check_has_mouth() || vomit_score < 30)
+		return
+	if (vomit_score < 100 && world.time <= last_nausea_time + 5 SECONDS) //Don't try to trigger vomiting if nausea message just played. Exception if vomit score is maximal.
 		return
 	if ((world.time >= last_puke_time + interval))
 		last_puke_time = world.time
