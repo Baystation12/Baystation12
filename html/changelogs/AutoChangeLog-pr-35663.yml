@@ -1,5 +1,0 @@
-author: emmanuelbassil
-changes:
-  - bugfix: Fixed bug where dropping certain foods while force-feeding someone 
-      would still feed them
-delete-after: true
