@@ -7708,7 +7708,7 @@
 /turf/simulated/floor/asteroid,
 /area/merchant_station)
 "aMh" = (
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap,
+/obj/item/reagent_containers/food/snacks/grown/mushroom/hallucinogenic/strong,
 /turf/simulated/floor/asteroid,
 /area/merchant_station)
 "aMm" = (

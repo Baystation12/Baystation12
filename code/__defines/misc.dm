@@ -404,3 +404,9 @@
 #define COOKING_CHECK_FAIL			-1
 #define COOKING_CHECK_EXTRA			0
 #define COOKING_CHECK_EXACT			1
+
+// used to define a paired produce item and seed datum, eg wheat
+#define PRODUCE_SEED(PATH, NAME) \
+/obj/item/reagent_containers/food/snacks/grown/PATH/plantname = NAME;\
+/datum/seed/PATH/name = NAME;\
+/datum/seed/PATH

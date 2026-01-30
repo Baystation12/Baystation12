@@ -54,8 +54,7 @@
 	spread = 40
 	return "Your sanctuary will now grow beyond that of the grassy perimeter."
 
-/datum/seed/merlin_tear
-	name = "merlin tears"
+PRODUCE_SEED(merlin_tear, "merlin tears")
 	seed_name = "merlin tears"
 	display_name = "merlin tears"
 	chems = list(/datum/reagent/bicaridine = list(3,7), /datum/reagent/dermaline = list(3,7), /datum/reagent/dylovene = list(3,7), /datum/reagent/tricordrazine = list(3,7), /datum/reagent/alkysine = list(1,2), /datum/reagent/imidazoline = list(1,2), /datum/reagent/peridaxon = list(4,5))

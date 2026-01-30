@@ -39,21 +39,30 @@
 	icon_state = "cig_filter"
 	w_class = ITEM_SIZE_TINY
 
-//tobacco sold seperately if you're too snobby to grow it yourself.
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco
-	plantname = "tobacco"
-	w_class = ITEM_SIZE_TINY
 
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/Initialize()
+/obj/item/reagent_containers/food/snacks/grown/tobacco/dried/Initialize()
 	. = ..()
 	dry = TRUE
 	SetName("dried [name]")
 	color = "#a38463"
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/bad
-	plantname = "badtobacco"
+	w_class = ITEM_SIZE_TINY
 
-/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
-	plantname = "finetobacco"
+
+/obj/item/reagent_containers/food/snacks/grown/tobacco/bad/dried/Initialize()
+	. = ..()
+	dry = TRUE
+	SetName("dried [name]")
+	color = "#a38463"
+	w_class = ITEM_SIZE_TINY
+
+
+/obj/item/reagent_containers/food/snacks/grown/tobacco/fine/dried/Initialize()
+	. = ..()
+	dry = TRUE
+	SetName("dried [name]")
+	color = "#a38463"
+	w_class = ITEM_SIZE_TINY
+
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/paper/cig/filter))

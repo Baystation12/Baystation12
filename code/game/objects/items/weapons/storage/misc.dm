@@ -118,26 +118,26 @@
 /obj/item/storage/chewables/rollable/bad
 	name = "bag of Men at Arms tobacco"
 	desc = "A bag of coarse, gritty tobacco, marketed towards leather-necks."
-	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/bad = 8)
+	startswith = list(/obj/item/reagent_containers/food/snacks/grown/tobacco/bad/dried = 8)
 	icon_state = "rollcoarse"
 
 /obj/item/storage/chewables/rollable/generic
 	name = "bag of BluSpace tobacco"
 	desc = "Decent quality tobacco for mid-income earners and long haul space sailors."
-	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco = 8)
+	startswith = list(/obj/item/reagent_containers/food/snacks/grown/tobacco/dried = 8)
 	icon_state = "rollgeneric"
 
 /obj/item/storage/chewables/rollable/fine
 	name = "bag of Golden Sol tobacco"
 	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a hidden lagrange point station somewhere in Sol."
-	startswith = list(/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine = 8)
+	startswith = list(/obj/item/reagent_containers/food/snacks/grown/tobacco/fine/dried = 8)
 	icon_state = "rollfine"
 
 /obj/item/storage/chewables/rollable/rollingkit
 	name = "bag of Crewman's First tobacco"
 	desc = "Generic, middling quality dried tobacco for the recently enlisted and cost-conscious smokers. This bag comes with rolling papers and filters to kick-start your new habit."
 	startswith = list(
-	/obj/item/reagent_containers/food/snacks/grown/dried_tobacco = 8,
+	/obj/item/reagent_containers/food/snacks/grown/tobacco/dried = 8,
 	/obj/item/storage/cigpaper = 1,
 	/obj/item/storage/cigpaper/filters = 1
 	)

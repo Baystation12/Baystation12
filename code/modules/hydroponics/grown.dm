@@ -314,13 +314,6 @@
 		seed.do_thorns(H,src,affected)
 		seed.do_sting(H,src,affected)
 
-// Predefined types for placing on the map.
-
-/obj/item/reagent_containers/food/snacks/grown/mushroom/libertycap
-	plantname = "libertycap"
-
-/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris
-	plantname = "ambrosia"
 
 /obj/item/reagent_containers/food/snacks/fruit_slice
 	name = "fruit slice"
