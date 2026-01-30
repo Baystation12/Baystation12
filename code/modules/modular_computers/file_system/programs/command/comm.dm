@@ -3,6 +3,7 @@
 #define STATE_VIEWMESSAGE	3
 #define STATE_STATUSDISPLAY	4
 #define STATE_ALERT_LEVEL	5
+
 /datum/computer_file/program/comm
 	filename = "comm"
 	filedesc = "Command and Communications Program"
@@ -16,13 +17,11 @@
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	network_destination = "long-range communication array"
 	category = PROG_COMMAND
-	var/datum/comm_message_listener/message_core = new
+	var/singleton/comm_message_listener/message_core
 
-/datum/computer_file/program/comm/clone()
-	var/datum/computer_file/program/comm/temp = ..()
-	temp.message_core.messages = null
-	temp.message_core.messages = message_core.messages.Copy()
-	return temp
+/datum/computer_file/program/comm/New()
+	..()
+	message_core = GET_SINGLETON(/singleton/comm_message_listener)
 
 /datum/nano_module/program/comm
 	name = "Command and Communications Program"
@@ -81,10 +80,8 @@
 		security_levels[LIST_PRE_INC(security_levels)] = security_setup
 	data["security_levels"] = security_levels
 
-	var/datum/comm_message_listener/l = obtain_message_listener()
+	var/singleton/comm_message_listener/l = GET_SINGLETON(/singleton/comm_message_listener)
 	data["messages"] = l.messages
-	data["message_deletion_allowed"] = l != global_message_listener
-	data["message_current_id"] = current_viewing_message_id
 	if(current_viewing_message)
 		data["message_current"] = current_viewing_message
 
@@ -113,19 +110,13 @@
 		return program.can_run(user)
 	return TRUE
 
-/datum/nano_module/program/comm/proc/obtain_message_listener()
-	if(program)
-		var/datum/computer_file/program/comm/P = program
-		return P.message_core
-	return global_message_listener
-
 /datum/nano_module/program/comm/Topic(href, href_list)
 	if(..())
 		return TOPIC_HANDLED
 	var/mob/user = usr
 	var/ntn_comm = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_COMMUNICATION) : TRUE
 	var/ntn_cont = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL) : TRUE
-	var/datum/comm_message_listener/l = obtain_message_listener()
+	var/singleton/comm_message_listener/l = GET_SINGLETON(/singleton/comm_message_listener)
 	switch(href_list["action"])
 		if("sw_menu")
 			. = TOPIC_HANDLED
@@ -237,11 +228,6 @@
 					if(m["id"] == current_viewing_message_id)
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
-		if("delmessage")
-			. = TOPIC_HANDLED
-			if(is_authenticated(user) && ntn_comm && l != global_message_listener)
-				l.Remove(current_viewing_message)
-			current_status = STATE_MESSAGELIST
 		if("printmessage")
 			. = TOPIC_HANDLED
 			if(is_authenticated(user) && ntn_comm)
@@ -264,16 +250,10 @@
 #undef STATE_STATUSDISPLAY
 #undef STATE_ALERT_LEVEL
 
-/*
-General message handling stuff
-*/
-var/global/list/comm_message_listeners = list() //We first have to initialize list then we can use it.
-var/global/datum/comm_message_listener/global_message_listener = new //May be used by admins
-var/global/last_message_id = 0
-
 /proc/get_comm_message_id()
-	last_message_id = last_message_id + 1
-	return last_message_id
+	var/singleton/comm_message_listener/global_message_listener = GET_SINGLETON(/singleton/comm_message_listener)
+	global_message_listener.last_message_id = global_message_listener.last_message_id + 1
+	return global_message_listener.last_message_id
 
 /proc/post_comm_message(message_title, message_text)
 	var/list/message = list()
@@ -281,22 +261,19 @@ var/global/last_message_id = 0
 	message["title"] = message_title
 	message["contents"] = message_text
 
-	for (var/datum/comm_message_listener/l in comm_message_listeners)
-		l.Add(message)
+	var/singleton/comm_message_listener/global_message_listener = GET_SINGLETON(/singleton/comm_message_listener)
+	global_message_listener.Add(message)
 
-/datum/comm_message_listener
+/singleton/comm_message_listener
 	var/list/messages
+	var/last_message_id = 0
 
-/datum/comm_message_listener/New()
+/singleton/comm_message_listener/New()
 	..()
 	messages = list()
-	comm_message_listeners.Add(src)
 
-/datum/comm_message_listener/proc/Add(list/message)
+/singleton/comm_message_listener/proc/Add(list/message)
 	messages[LIST_PRE_INC(messages)] = message
-
-/datum/comm_message_listener/proc/Remove(list/message)
-	messages -= list(message)
 
 /proc/post_status(command, data1, data2)
 
