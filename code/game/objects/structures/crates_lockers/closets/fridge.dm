@@ -26,9 +26,18 @@
 
 /obj/structure/closet/fridge/meat/WillContain()
 	return list(
-		/obj/item/storage/fancy/bugmeat = 4,
-		/obj/item/reagent_containers/food/snacks/meat/chicken = 2,
-		/obj/item/reagent_containers/food/snacks/meat/beef = 2,
-		/obj/item/reagent_containers/food/snacks/cutlet/ham = 2,
-		/obj/random/fish = 4
+		/obj/item/storage/fancy/bugmeat = 8,
+		/obj/item/reagent_containers/food/snacks/meat/chicken = 4,
+		/obj/item/reagent_containers/food/snacks/meat/beef = 4,
+		/obj/item/reagent_containers/food/snacks/cutlet/ham = 4,
+		/obj/random/fish = 8
+	)
+
+/obj/structure/closet/fridge/extra/WillContain()
+	return list(
+		/obj/item/reagent_containers/food/snacks/grown/cabbage = rand(0, 4),
+		/obj/item/reagent_containers/food/snacks/grown/lettuce = rand(0, 4),
+		/obj/item/reagent_containers/food/snacks/grown/tomato = rand(0, 4),
+		/obj/item/reagent_containers/food/snacks/grown/potato = rand(0, 4),
+		/obj/item/reagent_containers/food/snacks/grown/carrots = rand(0, 4)
 	)

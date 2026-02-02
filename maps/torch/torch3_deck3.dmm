@@ -2328,6 +2328,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
+/obj/item/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "fz" = (
@@ -3129,11 +3130,10 @@
 /area/crew_quarters/gym)
 "hm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/closet/fridge/meat,
-/obj/item/reagent_containers/food/condiment/enzyme,
 /obj/structure/window/basic{
 	dir = 1
 	},
+/obj/structure/closet/fridge/extra,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/galleybackroom)
 "hn" = (
