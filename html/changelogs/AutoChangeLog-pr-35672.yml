@@ -1,0 +1,7 @@
+author: Mucker
+changes:
+  - tweak: New instances of the command & communications program will always 
+      have previous messages in the messages list now.
+  - tweak: Removed the button to delete messages from the command & 
+      communications program.
+delete-after: true
