@@ -1,7 +1,0 @@
-author: Mucker
-changes:
-  - rscadd: Replaced the third fridge (from the left) in the kitchen freezer 
-      room with one that spawns with random fruits and veggies at round start.
-  - tweak: Doubled the contents of the remaining meat fridge to replace the one 
-      that was removed.
-delete-after: true
