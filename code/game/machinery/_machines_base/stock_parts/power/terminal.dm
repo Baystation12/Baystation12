@@ -4,7 +4,7 @@
 	name = "wired connection"
 	desc = "A power connection directly to the grid, via power cables."
 	icon = 'icons/obj/machines/apc.dmi'
-	icon_state = "terminal"
+	icon_state = "term"
 	priority = 2
 	var/obj/machinery/power/terminal/terminal
 	var/terminal_dir = 0
