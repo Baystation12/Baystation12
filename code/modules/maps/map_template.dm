@@ -105,6 +105,9 @@
 	var/x = round((world.maxx - width)/2)
 	var/y = round((world.maxy - height)/2)
 	var/initial_z = world.maxz + 1
+	var/next_z = initial_z //for multi-z maps, next zlevel to put the next level of the map on
+	for (var/i = 1, i <= tallness, i++)
+		INCREMENT_WORLD_Z_SIZE
 
 	if (x < 1) x = 1
 	if (y < 1) y = 1
@@ -115,7 +118,8 @@
 
 	var/initialized_areas_by_type = list()
 	for (var/mappath in mappaths)
-		var/datum/map_load_metadata/M = GLOB.maploader.load_map(file(mappath), x, y, no_changeturf = no_changeturf, initialized_areas_by_type = initialized_areas_by_type)
+		var/datum/map_load_metadata/M = GLOB.maploader.load_map(file(mappath), x, y, next_z, no_changeturf = no_changeturf, initialized_areas_by_type = initialized_areas_by_type)
+		next_z += 1
 		if (M)
 			bounds = extend_bounds_if_needed(bounds, M.bounds)
 			atoms_to_initialise += M.atoms_to_initialise
