@@ -135,3 +135,22 @@
 				else if(dir_offset & SOUTH)
 					pixel_y -= 32
 		return TRUE
+
+//Custom pad that has persistent text on it on all notes taken from it
+/obj/item/sticky_pad/tag_out
+	var/template_text =  "\
+	\[table\]\[cell\]\[center\]\[table\]\[cell\]<pre>SYSTEM / COMPONENT / IDENTIFICATION</pre>\[field\]\[cell\]<pre>DATE</pre>\[field\]\[row\]\[cell\]<pre>POSITION OR CONDITION OF ITEM TAGGED</pre>\[field\]\[cell\]<pre>TIME</pre>\[field\]\
+	\[/table\]\[row\]\[cell\]\[center\]\[h1\]DANGER\[/h1\]\[h2\]DO NOT OPERATE\[/h2\]\[h3\]OPERATION OF THIS EQUIPMENT WILL ENDANGER PERSONNEL OR HARM THE EQUIPMENT. THIS EQUIPMENT SHALL NOT BE OPERATED UNTIL THIS TAG HAS BEEN REMOVED BY AN AUTHORIZED PERSON.\
+	\[/h3\]\[row\]\[cell\]\[center\]\[table\]\[cell\]<pre>SIGNATURE OF PERSON ATTACHING TAG</pre>\[field\]\[cell\]<pre>SIGNATURES OF PERSONS CHECKING TAG</pre>\[field\]\[row\]\[cell\]<pre>SIGNATURE OF AUTHORIZING PERSONNEL</pre>\[field\]\[cell\]\
+	<pre>SIGNATURE OF VENDOR REPRESENTATIVE</pre>\[field\]\[/table\]\[/center\]\[/table\]\
+	"
+
+/obj/item/sticky_pad/tag_out/Initialize()
+	. = ..()
+	color = COLOR_RED
+	written_text = template_text
+
+
+/obj/item/sticky_pad/tag_out/attack_hand(mob/user)
+	. = ..()
+	written_text = template_text
