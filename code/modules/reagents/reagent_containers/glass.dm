@@ -126,6 +126,9 @@
 	splashtarget(target, user)
 	return TRUE
 
+/obj/item/reagent_containers/glass/feed_sound(mob/user)
+	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+
 
 /obj/item/reagent_containers/glass/beaker
 	name = "beaker"
