@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - bugfix: Fixed issues with multi-z maps that were loaded after ZCopy 
-      initialized with the "place on new z" verb.
-delete-after: true
