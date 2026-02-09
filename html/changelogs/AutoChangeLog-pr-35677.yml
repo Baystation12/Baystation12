@@ -1,5 +1,0 @@
-author: Mucker
-changes:
-  - tweak: Added drinking sounds when drinking from some other glass types 
-      (beakers, buckets, some artifact "bowls").
-delete-after: true
