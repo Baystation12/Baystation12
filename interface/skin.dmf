@@ -1043,7 +1043,7 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		font-family = "Arial Rounded MT Bold,Arial Black,Arial,sans-serif"
+		font-family = "'Small Fonts',Fixedsys,sans-serif"
 		font-size = 7
 		is-default = true
 		saved-params = "icon-size"
