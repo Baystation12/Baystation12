@@ -24,3 +24,9 @@
 	desc = "An Amaranth Armorers P87 Bobcat. A light pistol issued as a Confederation Navy service weapon."
 	item_cost = 32
 	path = /obj/item/gun/projectile/pistol/bobcat
+
+/datum/uplink_item/item/visible_weapons/grosser
+	name = "Pistol, Magnitkan, Heavy"
+	desc = "A ZvezMekh Grosser. A Magnitkan heavy pistol, seen in the hands of all kinds of people."
+	item_cost = 40
+	path = /obj/item/gun/projectile/pistol/grosser

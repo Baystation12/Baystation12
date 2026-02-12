@@ -178,3 +178,13 @@
 			"dispersion" = list(1.0, 1.0, 1.0, 1.0, 1.2)
 		)
 	)
+
+/obj/item/gun/projectile/pistol/grosser
+	name = "pistol"
+	desc = "The ZvezMekh Grosser is a pistol of Magnitkan origin, feeding from a doublestack magazine. A popular, affordable handgun for all sorts across the frontier."
+	icon_state = "grosser"
+	icon = 'icons/obj/guns/pistol_doublestack.dmi'
+	safety_icon = "grosser-safety"
+	magazine_type = /obj/item/ammo_magazine/pistol/double
+	allowed_magazines = /obj/item/ammo_magazine/pistol/double
+	fire_delay = 7
