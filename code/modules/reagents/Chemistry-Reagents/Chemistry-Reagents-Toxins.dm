@@ -766,7 +766,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 
-/datum/reagent/drugs/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/drugs/affect_metabolites(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 
@@ -878,6 +878,7 @@
 	reagent_state = LIQUID
 	color = "#b31008"
 	metabolism = REM * 0.25
+	bioavailability = 1
 	value = 0.6
 	should_admin_log = TRUE
 	high_message_list = list("You don't quite know what up or down is anymore...",
@@ -890,7 +891,7 @@
 	"Colors seem... flatter.",
 	"Everything feels a little dull, now.")
 
-/datum/reagent/drugs/mindbreaker/affect_blood(mob/living/carbon/M, removed)
+/datum/reagent/drugs/mindbreaker/affect_metabolites(mob/living/carbon/M, removed)
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	M.add_chemical_effect(CE_MIND, -2)
