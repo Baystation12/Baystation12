@@ -19,6 +19,7 @@
 	darksight_range = 3
 	darksight_tint = DARKTINT_MODERATE
 	gluttonous = GLUT_TINY
+	stomach_capacity = 115
 	strength = STR_HIGH
 	breath_pressure = 18
 	slowdown = 0.5

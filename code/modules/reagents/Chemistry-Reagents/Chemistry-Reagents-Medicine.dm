@@ -551,6 +551,22 @@
 	if (M.metabolized.has_reagent(/datum/reagent/ethanol))
 		M.metabolized.remove_reagent(/datum/reagent/ethanol, 5 * removed)
 
+/datum/reagent/ondansetron
+	name = "Ondansetron"
+	description = "Ondansentron is a mild anti-emetic used to treat nausea and vomiting."
+	taste_description = "sourness"
+	reagent_state = SOLID
+	color = "#5a82bd"
+	overdose = REAGENTS_OVERDOSE
+	bioavailability = 0.8
+	scannable = TRUE
+	value = 2.1
+
+/datum/reagent/ondansetron/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	affected.add_chemical_effect(CE_NAUSEA, -2)
+
 /datum/reagent/hyronalin
 	name = "Hyronalin"
 	description = "Hyronalin is an anti-emetic drug that can also be used to counter the effect of radiation poisoning."
@@ -566,13 +582,13 @@
 /datum/reagent/hyronalin/affect_blood(mob/living/carbon/affected, removed)
 	if (IS_METABOLICALLY_INERT(affected))
 		return
-	affected.add_chemical_effect(CE_NAUSEA, -2)
+	affected.add_chemical_effect(CE_NAUSEA, -3)
 	affected.radiation = max(affected.radiation - 30 * removed, 0)
 
 /datum/reagent/hyronalin/process_overdose(mob/living/carbon/affected)
 	..()
 	affected.make_dizzy(3)
-	affected.add_chemical_effect(CE_NAUSEA, -2)
+	affected.add_chemical_effect(CE_NAUSEA, -3)
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"

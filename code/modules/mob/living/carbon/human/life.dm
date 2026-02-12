@@ -886,18 +886,19 @@ Score also scales with severity; with higher scores trigger symptoms more freque
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if (stomach && stomach.ingested.total_volume) //Avoid running this block if stomach is empty
 		var/unique_count = 0
-		if (stomach.is_full())
-			vomit_score += 20
+		var/filled_perc = stomach.stomach_fullness()
+		if (filled_perc >= 75)
+			vomit_score += (200 * ((filled_perc / 200) ** 2))
 		for (var/datum/reagent/ethanol/unique_alcohol in stomach.ingested.reagent_list)
 			if (!istype(unique_alcohol))
 				continue
 			unique_count++
 		if (unique_count >=3)
-			vomit_score += ((unique_count - 2) * 33)
+			vomit_score += ((unique_count - 1) * 33)
 	for (var/tag in list(BP_LIVER, BP_KIDNEYS, BP_BRAIN))
-		var/obj/item/organ/internal/I = internal_organs_by_name[tag]
-		if (I)
-			vomit_score += I.damage
+		var/obj/item/organ/internal/organ = internal_organs_by_name[tag]
+		if (organ)
+			vomit_score += organ.damage
 		else if (should_have_organ(tag))
 			vomit_score += 45
 	if (chem_effects[CE_NAUSEA])

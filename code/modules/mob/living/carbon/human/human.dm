@@ -85,7 +85,7 @@
 		return ..()
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if (!stomach)
-		return FALSE //Always hungry, but you can't actually eat. :(
+		return 0 //Always hungry, but you can't actually eat. :(
 	if (stomach.is_full())
 		return INFINITY
 	var/food_volume = 0
@@ -753,7 +753,7 @@
 
 ///Process all vomiting through handle_vomit() unless you want to force it by design. If called without value; default value will cause vomiting.
 /mob/living/carbon/human/vomit(vomit_score = 100, motion = FALSE, silent = FALSE)
-	if (isSynthetic() || is_dead() || !vomit_score || vomit_score < 0)
+	if (isSynthetic() || is_dead() || vomit_score <= 0)
 		return
 	var/interval = clamp(120 SECONDS - (((vomit_score/100)**2) * 100 SECONDS), 20 SECONDS, 120 SECONDS) //Symptoms are more frequent the higher the score; non-linear increase.
 	if (!silent && world.time >= last_nausea_time + interval/2)
@@ -761,17 +761,19 @@
 		nausea(vomit_score, motion)
 	if (!check_has_mouth() || vomit_score < 30)
 		return
-	if (vomit_score < 100 && world.time <= last_nausea_time + 5 SECONDS) //Don't try to trigger vomiting if nausea message just played. Exception if vomit score is maximal.
-		return
 	if ((world.time >= last_puke_time + interval))
 		last_puke_time = world.time
-		if (prob(vomit_score)) //Will reset vomit counter even if it fails to trigger.
+		if (!prob(vomit_score))
+			return //Will reset vomit counter even if it fails to trigger.
+		if (world.time <= last_nausea_time + 5 SECONDS)
+			addtimer(new Callback(src, PROC_REF(empty_stomach)), 5 SECONDS)
+		else
 			empty_stomach()
 
 ///Process all nausea through handle_vomit() and vomit() unless you want to force it by design. If called without value; default value will cause severe nausea.
 ///Calling it directly won't have a cool-down.
 /mob/living/carbon/human/nausea(vomit_score = 100, motion = FALSE)
-	if (isSynthetic() || is_dead() || !vomit_score || vomit_score < 0)
+	if (isSynthetic() || is_dead() || vomit_score <= 0)
 		return
 	var/nausea_message = motion? "You feel the world moving around you and ": "You feel "
 	switch (vomit_score)
