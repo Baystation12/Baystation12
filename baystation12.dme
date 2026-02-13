@@ -2658,6 +2658,7 @@
 #include "code\modules\modular_computers\ntos\visuals.dm"
 #include "code\modules\modular_computers\ntos\subtypes\console.dm"
 #include "code\modules\modular_computers\ntos\subtypes\device.dm"
+#include "code\modules\modular_computers\ntos\subtypes\telescreen.dm"
 #include "code\modules\modular_computers\terminal\terminal.dm"
 #include "code\modules\modular_computers\terminal\terminal_commands.dm"
 #include "code\modules\modular_computers\terminal\terminal_remote.dm"

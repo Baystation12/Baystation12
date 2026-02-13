@@ -54,3 +54,7 @@
 
 	var/interact_sounds
 	var/interact_sound_volume = 40
+
+	/// Types of /datum/extension/interactive/ntos/device. Defines the NTOS extension
+	/// this modular computer will have on creation.
+	var/ntos_extension_type = /datum/extension/interactive/ntos/device
