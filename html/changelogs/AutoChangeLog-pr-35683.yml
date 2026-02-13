@@ -1,6 +1,0 @@
-author: Banditoz
-changes:
-  - bugfix: It's now possible to use the mindbreaker implanting effect if the 
-      mindbreaker was in food.
-  - balance: Mindbreaker effects last longer.
-delete-after: true

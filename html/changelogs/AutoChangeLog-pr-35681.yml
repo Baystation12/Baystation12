@@ -1,6 +1,0 @@
-author: Karl Johansson
-changes:
-  - rscadd: Adds a new heavy pistol, the ZvezMekh Grosser, to the uplink and 
-      away site loot pool
-  - bugfix: Trims some duplicated entries from a weapon spawner
-delete-after: true
