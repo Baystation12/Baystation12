@@ -14,6 +14,12 @@
 	vermin_probability = 0
 	web_probability = 0
 
+/singleton/turf_initializer/maintenance/none
+	clutter_probability = 0
+	oil_probability = 0
+	vermin_probability = 0
+	web_probability = 0
+
 /singleton/turf_initializer/maintenance/InitializeTurf(turf/simulated/T)
 	if(T.density)
 		return

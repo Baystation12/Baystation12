@@ -54,14 +54,14 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/deepmaint)
 "ak" = (
-/obj/random/pack/machine,
+/obj/random/machine,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/deepmaint)
 "al" = (
 /obj/structure/table/rack,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/deepmaint)
 "am" = (
@@ -77,8 +77,8 @@
 /area/map_template/deepmaint)
 "aq" = (
 /obj/structure/table/woodentable,
-/obj/random/pack/rare,
-/obj/random/pack/rare,
+/obj/random/rare,
+/obj/random/rare,
 /turf/simulated/floor/carpet/red,
 /area/map_template/deepmaint)
 "as" = (
@@ -402,7 +402,7 @@
 /area/map_template/deepmaint)
 "bD" = (
 /obj/structure/table/woodentable,
-/obj/random/pack/rare,
+/obj/random/rare,
 /obj/random/loot,
 /turf/simulated/floor/wood,
 /area/map_template/deepmaint)
@@ -436,9 +436,9 @@
 /area/map_template/deepmaint)
 "xs" = (
 /obj/structure/table/rack,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/deepmaint)
 "PX" = (

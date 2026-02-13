@@ -9,17 +9,17 @@ GLOBAL_LIST_EMPTY(small_deepmaint_room_templates)
 GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 /proc/populateDeepMaintMapLists()
-	if(length(GLOB.big_deepmaint_room_templates) || length(GLOB.small_deepmaint_room_templates))
-		return
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
-		var/datum/map_template/deepmaint_template/temp = item
-		var/datum/map_template/deepmaint_template/S = new temp()
-		GLOB.small_deepmaint_room_templates += S
+	if(!length(GLOB.small_deepmaint_room_templates))
+		for(var/item in subtypesof(/datum/map_template/deepmaint_template/room))
+			var/datum/map_template/deepmaint_template/temp = item
+			var/datum/map_template/deepmaint_template/S = new temp()
+			GLOB.small_deepmaint_room_templates += S
 
-	for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
-		var/datum/map_template/deepmaint_template/temp = item
-		var/datum/map_template/deepmaint_template/S = new temp()
-		GLOB.big_deepmaint_room_templates += S
+	if(!length(GLOB.big_deepmaint_room_templates))
+		for(var/item in subtypesof(/datum/map_template/deepmaint_template/big))
+			var/datum/map_template/deepmaint_template/temp = item
+			var/datum/map_template/deepmaint_template/S = new temp()
+			GLOB.big_deepmaint_room_templates += S
 
 /obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint
 	name = "deepmaint room"
@@ -113,7 +113,9 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 		done_rooms += picked_room
 
 /obj/procedural/jp_DungeonGenerator/deepmaint/proc/populateCorridors()
+	var/area/bluespace_interlude/platform/P = new
 	for(var/turf/T in path_turfs)
+		ChangeArea(T, P)
 		if(prob(30))
 			new /obj/decal/cleanable/dirt(T)
 
@@ -135,7 +137,7 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 		testing("Beginning procedural generation of [name] -  Z-level [z].")
 		generate.name = name
 		generate.setArea(locate(50, 50, z), locate(110, 110, z))
-		generate.setWallType(/turf/simulated/wall)
+		generate.setWallType(/turf/simulated/floor/bluespace/interlude)
 		generate.setFloorType(/turf/simulated/floor/tiled/techmaint)
 		generate.setAllowedRooms(list(/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint/big))
 		generate.setNumRooms(2) //3 deepmaints "core" rooms
@@ -152,9 +154,9 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 
 		sleep(90)
 
-		generate.setArea(locate(20, 20, z), locate(150, 150, z))
+		generate.setArea(locate(20, 20, z), locate(100, 100, z))
 		generate.setAllowedRooms(list(/obj/procedural/jp_dungeonroom/preexist/square/submap/deepmaint))
-		generate.setNumRooms(15) // 25 smaller rooms
+		generate.setNumRooms(8) // 25 smaller rooms
 		generate.setExtraPaths(1)
 		generate.setMinPathLength(0)
 		generate.setMaxPathLength(60) //Small Rooms are 60 at most appart
@@ -167,6 +169,74 @@ GLOBAL_LIST_EMPTY(big_deepmaint_room_templates)
 		generate.setUsePreexistingRegions(TRUE)
 		generate.setDoAccurateRoomPlacementCheck(TRUE)
 		generate.generate()
+		// sleep(60)
 		generate.populateCorridors()
 		generate.makeLadders()
 		testing("Finished procedural generation of [name]. [generate.errString(generate.out_error)] -  Z-level [z], in [(get_game_time() - start) / 10] seconds.")
+
+
+/turf/simulated/floor/bluespace/interlude
+	name = "\improper bluespace"
+	icon = 'icons/turf/space.dmi'
+	icon_state = "bluespace"
+	dynamic_lighting = FALSE
+	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
+	var/list/victims
+
+/turf/simulated/floor/bluespace/interlude/Initialize(mapload, ...)
+	. = ..()
+	set_light(3, 1, l_color = "#0066ff")
+	desc = "Infinite, otherwordly energy swirling and morphing endlessly."
+
+/turf/simulated/floor/bluespace/interlude/Entered(atom/movable/AM)
+	if (istype(AM, /mob/living/simple_animal/hostile/bluespace) || istype(AM, /mob/observer))
+		return
+
+	LAZYADD(victims, weakref(AM))
+	START_PROCESSING(SSobj, src)
+
+/turf/simulated/floor/bluespace/interlude/Exited(atom/movable/AM)
+	LAZYREMOVE(victims, weakref(AM))
+
+/turf/simulated/floor/bluespace/interlude/Process()
+	for(var/weakref/W in victims)
+		var/atom/movable/AM = W.resolve()
+		if (isnull(AM) || get_turf(AM) != src)
+			victims -= W
+			continue
+		if (istype(AM, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = AM
+			var/target_limb = pick(BP_ALL_LIMBS)
+			var/obj/item/organ/external/limb = H.get_organ(target_limb)
+			if (!limb)
+				continue
+			limb.take_external_damage(0, 10)
+			if (prob(5))
+				to_chat(H, SPAN_DANGER("You feel a sharp, burning pain in your [limb]!"))
+		else if (istype(AM, /mob/living/exosuit))
+			var/mob/living/exosuit/suit = AM
+			suit.apply_damage(200, DAMAGE_BRUTE, BP_LEGS_FEET)
+			suit.apply_damage(rand(80, 120), DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
+		else
+			if (!AM.damage_health(10, DAMAGE_BURN))
+				if (!istype(AM, /obj/sparks) && !istype(AM, /obj/effect))
+					visible_message(SPAN_DANGER("\The [AM] disintegrates in a flash of blue light!"))
+					playsound(AM.loc, 'sound/magic/summon_carp.ogg', 50, 1)
+				qdel(AM)
+	if(!LAZYLEN(victims))
+		return PROCESS_KILL
+
+/area/bluespace_interlude/platform
+	name = "Bluespace Interlude - Platform"
+	requires_power = FALSE
+	base_turf = /turf/simulated/floor/bluespace/interlude
+	forced_ambience = list('sound/ambience/bluespace_interlude_ambience.ogg')
+	sound_env = LARGE_ENCLOSED
+
+/area/bluespace_interlude/surroundings
+	name = "Bluespace Interlude - Surroundings"
+	base_turf = /turf/simulated/floor/bluespace/interlude
+	forced_ambience = list('sound/ambience/bluespace_interlude_ambience.ogg')
+	sound_env = LARGE_ENCLOSED
+
+/obj/random/rare

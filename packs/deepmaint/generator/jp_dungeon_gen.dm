@@ -122,9 +122,10 @@
 	 *	Probably not useful if you just want to make a simple dungeon				   *
 	 ***********************************************************************************/
 
-/obj/procedural/jp_DungeonGenerator/proc/updateWallConnections()
-	for(var/turf/simulated/wall/W in border_turfs)
-		W.update_connections(1)
+//this is purely an icon op so dont need it now that its just floor turfs
+// /obj/procedural/jp_DungeonGenerator/proc/updateWallConnections()
+// 	for(var/turf/simulated/floor/bluespace/interlude/W in border_turfs)
+// 		W.update_connections(1)
 
 /**
 	Returns a list of turfs adjacent to the turf 't'. The definition of 'adjacent'
@@ -590,7 +591,7 @@
 	if(usePreexistingRegions)
 		examined = list()
 		for(var/turf/t in block(locate(getMinX(), getMinY(), getZ()), locate(getMaxX(), getMaxY(), getZ())))
-			if(!t.is_wall()) if(!(t in examined)) rooms+=regionCreate(t)
+			if(!istype(t, /turf/simulated/floor/bluespace/interlude)) if(!(t in examined)) rooms+=regionCreate(t)
 
 	for(var/k in allowedRooms)
 		nextentry = allowedRooms[k]
@@ -645,9 +646,9 @@
 
 	for(var/turf/t in border_turfs)
 		for(var/turf/t2 in range(t, 1))
-			if(t2.is_wall()&&!(t2 in border_turfs))
+			if(istype(t2, /turf/simulated/floor/bluespace/interlude) &&!(t2 in border_turfs))
 				for(var/turf/t3 in range(t2, 1))
-					if(!t3.is_wall())
+					if(!istype(t3, /turf/simulated/floor/bluespace/interlude))
 						border_turfs+=t2
 						break
 
@@ -701,7 +702,7 @@
 		r.finalise()
 
 	initializeSubmaps()
-	updateWallConnections()
+	// updateWallConnections()
 
 	out_time = (world.timeofday-timer)
 	out_rooms = rooms
@@ -743,7 +744,7 @@
 		next-=nt
 		examined+=nt
 		if(nt.x<getMinX() || nt.x>getMaxX() || nt.y<getMinY() || nt.y>getMaxY()) continue
-		if(nt.is_wall())
+		if(istype(nt, /turf/simulated/floor/bluespace/interlude))
 			border+=nt
 			continue
 
@@ -865,7 +866,7 @@
 
 	next-=borders
 	for(var/turf/t in next)
-		if(!t.is_wall()) next-=t
+		if(!istype(t, /turf/simulated/floor/bluespace/interlude)) next-=t
 		previous["\ref[t]"] = start
 		cost["\ref[t]"]=1
 
@@ -898,7 +899,7 @@
 		for(var/turf/t in getAdjacent(min))
 			var/stop_looking = FALSE
 			for(var/turf/t1 in GetSquare(t, pathWidth + 1))
-				if(!(t1.is_wall() && !(t1 in borders)))
+				if(!(istype(t1, /turf/simulated/floor/bluespace/interlude) && !(t1 in borders)))
 					stop_looking = TRUE
 					break
 			if(stop_looking)
@@ -1028,7 +1029,7 @@ Make a new jp_DungeonRegion, and set its reference to its generator object
 			contained+=t
 			if(!noborder)
 				for(var/turf/t2 in gen.getAdjacent(t))
-					if(t2.is_wall() && !(t2 in border)) border+=t2
+					if(istype(t2, /turf/simulated/floor/bluespace/interlude) && !(t2 in border)) border+=t2
 
 /**
 	Adds a list of turfs to the border of the region.
@@ -1193,7 +1194,7 @@ to the floor that return true from is_wall().
 		for(var/turf/t2 in gen.getAdjacent(t))
 			if(t2 in turfs)
 				continue
-			if(t2.is_wall() && !(t2 in border))
+			if(istype(t2, /turf/simulated/floor/bluespace/interlude) && !(t2 in border))
 				border += t2
 
 	border -= getCorners() //If the path width is more than 1, the corner and path connection looks really ugly
@@ -1232,7 +1233,7 @@ return true from is_wall()
 		for(var/turf/t2 in gen.getAdjacent(t))
 			if(t2 in turfs)
 				continue
-			if(t2.is_wall() && !(t2 in border))
+			if(istype(t2, /turf/simulated/floor/bluespace/interlude) && !(t2 in border))
 				border+=t2
 
 /obj/procedural/jp_dungeonroom/preexist/circle/place()
@@ -1258,7 +1259,7 @@ the arms of the plus sign - there are only four.
 
 	for(var/turf/t in range(centre, size+1))
 		if(t in turfs) continue
-		if(t.is_wall() && (t.x == getX() || t.y == getY()))
+		if(istype(t, /turf/simulated/floor/bluespace/interlude) && (t.x == getX() || t.y == getY()))
 			border+=t
 
 /obj/procedural/jp_dungeonroom/preexist/cross/place()
@@ -1292,3 +1293,6 @@ the arms of the plus sign - there are only four.
 		my_map.load(centre, centered = TRUE)
 	else
 		gen.out_error = gen.ERROR_NO_SUBMAPS
+
+/obj/procedural/jp_dungeonroom/proc/is_border_turf(turf/border_turf)
+	return istype(border_turf, /turf/simulated/floor/bluespace/interlude)

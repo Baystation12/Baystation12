@@ -58,8 +58,8 @@
 /area/map_template/deepmaint)
 "aw" = (
 /obj/structure/table/standard,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /obj/random/tech_supply,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/deepmaint)
@@ -80,8 +80,8 @@
 /area/map_template/deepmaint)
 "aB" = (
 /obj/structure/table/standard,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/deepmaint)
 "aC" = (
@@ -89,8 +89,8 @@
 /area/map_template/deepmaint)
 "aJ" = (
 /obj/structure/table/standard,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /obj/machinery/light{
 	dir = 8
 	},
@@ -150,8 +150,8 @@
 /area/map_template/deepmaint)
 "aW" = (
 /obj/structure/closet/cabinet,
-/obj/random/pack/rare,
-/obj/random/pack/rare,
+/obj/random/rare,
+/obj/random/rare,
 /obj/random/clothing,
 /turf/simulated/floor/carpet,
 /area/map_template/deepmaint)

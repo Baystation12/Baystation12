@@ -1472,21 +1472,29 @@ var/global/list/multi_point_spawns
 /obj/random/rare
 
 /obj/random/rare/spawn_choices()
-	return list(
-		/obj/random/single/playing_cards,
-		/obj/item/device/flashlight/flashdark
+	var/list/items = list(
+		/obj/item/device/flashlight/flashdark,
+		/obj/item/storage/backpack/chameleon,
+		/obj/item/clothing/glasses/thermal/,
+		/obj/item/device/spy_bug
 		)
+	items += subtypesof_real(/obj/item/gun)
 
 
 /obj/random/tech_loot
 
 /obj/random/tech_loot/spawn_choices()
-	return list(/obj/random/single/lighter)
+	var/list/items = list()
+	items += subtypesof_real(/obj/item/stock_parts/circuitboard)
+	items += subtypesof_real(/obj/item/gun/energy)
+	items += subtypesof_real(/obj/item/device/augment_implanter)
+	items += /obj/item/shield/energy
+	return items
 
 /obj/random/machine
 
 /obj/random/machine/spawn_choices()
-	return list(/obj/machinery/jukebox)
+	return subtypesof_real(/obj/machinery)
 /obj/random/scrap/dense_even
 
 /obj/random/scrap/dense_even/spawn_choices()

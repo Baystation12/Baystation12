@@ -11,6 +11,6 @@
 /area/map_template/deepmaint
 	name = "\improper Deep Maintenance"
 	sound_env = TUNNEL_ENCLOSED
-	turf_initializer = /singleton/turf_initializer/maintenance
+	turf_initializer = /singleton/turf_initializer/maintenance/none
 	forced_ambience = list('sound/ambience/maintambience.ogg')
 	requires_power = FALSE

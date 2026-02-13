@@ -181,12 +181,12 @@
 /area/map_template/deepmaint)
 "aM" = (
 /obj/structure/table/reinforced,
-/obj/random/pack/tech_loot,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
+/obj/random/tech_loot,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "aN" = (
-/obj/random/pack/machine,
+/obj/random/machine,
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "aP" = (
@@ -296,8 +296,8 @@
 /area/space)
 "LI" = (
 /obj/structure/table/reinforced,
-/obj/random/pack/rare,
-/obj/random/pack/rare,
+/obj/random/rare,
+/obj/random/rare,
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 

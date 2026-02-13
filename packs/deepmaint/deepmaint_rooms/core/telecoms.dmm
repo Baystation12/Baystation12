@@ -18,7 +18,7 @@
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "ah" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/item/trash/material/device,
 /obj/item/trash/broken_robot_part,
 /obj/decal/cleanable/blood/oil,
@@ -97,7 +97,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aC" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/item/trash/material/device,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
@@ -178,7 +178,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "aN" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/bluegrid,
@@ -186,7 +186,7 @@
 "aO" = (
 /obj/item/stack/cable_coil,
 /obj/item/stack/material/plastic/random,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/decal/cleanable/blood/oil,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
@@ -206,7 +206,7 @@
 "aU" = (
 /obj/item/circuitboard/telecomms/hub,
 /obj/item/stack/cable_coil,
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/random/techpart,
 /obj/machinery/light/floor/built,
 /obj/decal/cleanable/dirt,
@@ -347,7 +347,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "bt" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/item/trash/material/circuit,
 /obj/item/trash/broken_robot_part,
 /obj/decal/cleanable/dirt,
@@ -355,7 +355,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bu" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
@@ -532,7 +532,7 @@
 /turf/simulated/floor/bluegrid,
 /area/map_template/deepmaint)
 "bZ" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/item/trash/material/metal,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
@@ -560,7 +560,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "ce" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/decal/cleanable/dirt,
 /obj/decal/cleanable/dirt,
 /obj/item/computer_hardware/network_card/advanced,
@@ -681,14 +681,14 @@
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "ns" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/random/techpart,
 /obj/structure/table/reinforced,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "nu" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/structure/table/reinforced,
 /obj/machinery/light,
 /turf/simulated/floor/reinforced,
@@ -706,7 +706,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "pZ" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/structure/table/reinforced,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced,
@@ -737,7 +737,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "yZ" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "BF" = (
@@ -758,7 +758,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "GM" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/structure/table/reinforced,
 /obj/machinery/light,
 /obj/decal/cleanable/dirt,
@@ -788,7 +788,7 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
 "KH" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/structure/table/reinforced,
 /turf/simulated/floor/reinforced,
 /area/map_template/deepmaint)
@@ -799,7 +799,7 @@
 /turf/simulated/floor/tiled/steel/bar_dance,
 /area/map_template/deepmaint)
 "Pp" = (
-/obj/random/pack/tech_loot,
+/obj/random/tech_loot,
 /obj/random/techpart,
 /obj/structure/table/bench/wooden,
 /obj/decal/cleanable/dirt,

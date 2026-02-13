@@ -198,9 +198,9 @@
 	#include "../event/functional_resort/hotel.dm"
 	#include "../event/empty/empty.dm"
 
-	#include "../bluespace_interlude/bluespace_interlude.dm"
-	#include "../bluespace_interlude/bluespace_interlude.dmm"
-
+	// #include "../bluespace_interlude/bluespace_interlude.dm"
+	// #include "../bluespace_interlude/bluespace_interlude.dmm"
+	#include "../../packs/deepmaint/deepmaint-1.dmm"
 
 	#define using_map_DATUM /datum/map/torch
 
