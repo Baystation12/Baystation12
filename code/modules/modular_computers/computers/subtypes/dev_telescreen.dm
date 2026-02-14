@@ -15,6 +15,7 @@
 	health_max = 300
 	broken_damage = 150
 	w_class = ITEM_SIZE_HUGE
+	ntos_extension_type = /datum/extension/interactive/ntos/device/telescreen
 
 /obj/item/modular_computer/telescreen/New()
 	..()

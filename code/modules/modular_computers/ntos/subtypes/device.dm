@@ -45,9 +45,9 @@
 	if(os)
 		. += os.get_header_data(program)
 
-/obj/item/modular_computer/check_eye()
+/obj/item/modular_computer/check_eye(user)
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
-		return os.check_eye()
+		return os.check_eye(user)
 	else
 		return ..()
