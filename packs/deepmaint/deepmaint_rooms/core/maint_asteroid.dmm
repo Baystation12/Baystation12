@@ -45,7 +45,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/deepmaint)
 "at" = (
-/obj/random/scrap,
+/obj/random/scrap/dense_even,
 /turf/simulated/floor/asteroid,
 /area/map_template/deepmaint)
 "au" = (
@@ -168,6 +168,7 @@
 /area/map_template/deepmaint)
 "bb" = (
 /obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/techmaint,
 /area/map_template/deepmaint)
 "bc" = (
 /obj/structure/table/woodentable,
