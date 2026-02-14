@@ -1,0 +1,6 @@
+author: LordNest
+changes:
+  - tweak: 'More fake NanoUI for: Evolution Tree, Spellbook, Newscaster, Suit Cycler,
+      Cryo Oversight and Destination Tagger'
+  - bugfix: Fixed input text for ATMs
+delete-after: true
