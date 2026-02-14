@@ -246,7 +246,7 @@ var/global/list/datum/power/changeling/powerinstances = list()
 
 					body += "<span style='font-size: 13px'><b>"+desc+"</b></span> <BR>"
 
-					body += "<span style='font-size: 13px; color: red'><b>"+helptext+"</b></span><BR>"
+					body += "<span style='font-size: 13px; color: orange'><b>"+helptext+"</b></span><BR>"
 
 					if(!ownsthis)
 					{
@@ -392,9 +392,9 @@ var/global/list/datum/power/changeling/powerinstances = list()
 			ownsthis = 1
 
 
-		var/color = "#e6e6e6"
+		var/color = COLOR_DARKMODE_DARKBACKGROUND
 		if(i%2 == 0)
-			color = "#f2f2f2"
+			color = COLOR_DARKMODE_BACKGROUND
 
 
 		dat += {"
@@ -428,7 +428,9 @@ var/global/list/datum/power/changeling/powerinstances = list()
 	</body></html>
 	"}
 
-	show_browser(usr, dat, "window=powers;size=900x480")
+	var/datum/browser/popup = new(usr, "powers", name, 900, 480)
+	popup.set_content(dat)
+	popup.open()
 
 
 /datum/changeling/Topic(href, href_list)

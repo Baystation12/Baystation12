@@ -503,7 +503,9 @@
 
 	dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
 	dat += "<br><a href='byond://?src=\ref[src];nextTag=CUSTOM'>Enter custom location.</a>"
-	show_browser(user, dat, "window=destTagScreen;size=450x375")
+	var/datum/browser/popup = new(user, "destTagScreen", name, 700, 380)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "destTagScreen")
 
 /obj/item/device/destTagger/attack_self(mob/user as mob)

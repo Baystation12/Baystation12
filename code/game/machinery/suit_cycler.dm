@@ -227,9 +227,11 @@
 
 		dat += "<h2>Customisation</h2>"
 		dat += "<b>Target product:</b> <A href='byond://?src=\ref[src];select_department=1'>[target_modification.name]</a>, <A href='byond://?src=\ref[src];select_species=1'>[target_species]</a>."
-		dat += "<A href='byond://?src=\ref[src];apply_paintjob=1'><br>\[apply customisation routine\]</a><br><hr>"
+		dat += "<A href='byond://?src=\ref[src];apply_paintjob=1'>\[apply customisation routine\]</a><br><hr>"
 
-	show_browser(user, jointext(dat, null), "window=suit_cycler")
+	var/datum/browser/popup = new(user, "suit_cycler", name)
+	popup.set_content(jointext(dat, null))
+	popup.open()
 	onclose(user, "suit_cycler")
 	return
 

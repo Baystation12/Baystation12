@@ -115,11 +115,11 @@ GLOBAL_LIST_EMPTY(powerinstances)
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font></font><BR>"
+					body += "<font size='2'><font color = 'orange'><b>"+helptext+"</b></font></font><BR>"
 
 					if(enhancedtext)
 					{
-						body += "<font size='2'><font color = 'blue'>Recursive Enhancement Effect: <b>"+enhancedtext+"</b></font></font><BR>"
+						body += "<font size='2'><font color = 'aquamarine'>Recursive Enhancement Effect: <b>"+enhancedtext+"</b></font></font><BR>"
 					}
 
 					if(!ownsthis)
@@ -266,9 +266,9 @@ GLOBAL_LIST_EMPTY(powerinstances)
 			ownsthis = 1
 
 
-		var/color = "#e6e6e6"
+		var/color = COLOR_DARKMODE_DARKBACKGROUND
 		if(i%2 == 0)
-			color = "#f2f2f2"
+			color = COLOR_DARKMODE_BACKGROUND
 
 
 		dat += {"
@@ -302,8 +302,9 @@ GLOBAL_LIST_EMPTY(powerinstances)
 	</body></html>
 	"}
 
-	show_browser(usr, dat, "window=powers;size=900x480")
-
+	var/datum/browser/popup = new(usr, "powers", "Evolution Tree", 900, 480)
+	popup.set_content(dat)
+	popup.open()
 
 /datum/changeling/Topic(href, href_list)
 	..()
