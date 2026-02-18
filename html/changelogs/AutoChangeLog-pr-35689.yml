@@ -1,4 +1,0 @@
-author: Spookerton
-changes:
-  - admin: Clients with roles can observe before the game is ready.
-delete-after: true
