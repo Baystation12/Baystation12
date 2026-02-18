@@ -160,9 +160,10 @@
 		new_player_panel()
 
 	if(href_list["observe"])
-		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
-			return
+		if (GAME_STATE < RUNLEVEL_LOBBY)
+			if (!client.holder)
+				to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
+				return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
