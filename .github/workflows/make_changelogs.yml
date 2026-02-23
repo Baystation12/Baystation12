@@ -1,35 +1,67 @@
-name: Make changelogs
-
-permissions:
-  contents: read
+name: Make and compile changelogs
 
 on:
   push:
     branches:
     - dev
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   MakeCL:
     permissions:
       contents: write # required to push the changelog chunk yml commit
+      pull-requests: read
     runs-on: ubuntu-22.04
     if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
-          fetch-depth: 25
+          fetch-depth: 0
+      - name: Get PR number
+        id: pr
+        run: |
+          PR_NUM=$(gh pr list --search ${{ github.sha }} --state merged --json number -q '.[] | .number' || echo "")
+          echo "PR number: $PR_NUM"
+          echo "pull_request_number=$PR_NUM" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Python setup
         uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: '3.x'
+        if: ${{ steps.pr.outputs.pull_request_number != '' }}
       - name: Install depends
         run: |
           python -m pip install --upgrade pip
-          pip install ruamel.yaml PyGithub
+          pip install ruamel.yaml PyGithub pyyaml bs4
+        if: ${{ steps.pr.outputs.pull_request_number != '' }}
       - name: Make CL
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GIT_EMAIL: "${{ secrets.BOT_EMAIL }}"
-          GIT_NAME: "${{ secrets.BOT_NAME }}"
+          BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_PR: "${{ steps.pr.outputs.pull_request_number }}"
+        if: ${{ steps.pr.outputs.pull_request_number != '' }}
         run: python tools/changelog/generate_cl.py
+      - name: List CL files
+        id: cl_files
+        run: |
+          CL_FILES=$(ls html/changelogs | grep -vwE 'example.yml|__CHANGELOG_README.txt' | wc -l || '0')
+          echo "Number of changelog files: $CL_FILES"
+          echo "cl_files=$CL_FILES" >> $GITHUB_OUTPUT
+        if: ${{ steps.pr.outputs.pull_request_number != '' }}
+      - name: Compile CL
+        run: python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
+        if: ${{ steps.cl_files.outputs.cl_files != '0' }}
+      - name: Commit And Push
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+        run: |
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
+          git config --global user.name "${{ secrets.BOT_NAME }}"
+          git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
+          git commit -m "Automatic changelog generation for PR #$PR_NUMBER [ci skip]" -a
+          git push
+        if: ${{ steps.cl_files.outputs.cl_files != '0' }}
