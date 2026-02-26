@@ -179,6 +179,55 @@
 /obj/machinery/recharge_station/Bumped(mob/living/silicon/robot/R)
 	go_in(R)
 
+/obj/machinery/recharge_station/MouseDrop_T(atom/dropped, mob/living/user)
+	if (!issilicon(dropped) && !ishuman(dropped))
+		return ..()
+	if (!CanMouseDrop(dropped, user))
+		return FALSE
+
+	if (!hascell(dropped))
+		to_chat(user, SPAN_WARNING("\The [dropped] has no cell for \the [src] to charge."))
+		return TRUE
+	if (occupant)
+		to_chat(user, SPAN_WARNING("\The [src] is already in use."))
+		return TRUE
+
+	user.visible_message(
+		SPAN_NOTICE("\The [user] starts stuffing \a [dropped] into \the [src]."),
+		SPAN_NOTICE("You start stuffing \the [dropped] into \the [src]"),
+		exclude_mobs = list(dropped)
+	)
+	var/mob/living/living_dropped = dropped
+	living_dropped.show_message(
+		SPAN_NOTICE("\The [user] starts putting you into \the [src]."),
+		VISIBLE_MESSAGE,
+		SPAN_WARNING("Someone is stuffing you into a machine!")
+	)
+
+	if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
+		return FALSE
+	if (!CanMouseDrop(dropped, user))
+		return FALSE
+	if (!hascell(dropped))
+		to_chat(user, SPAN_WARNING("\The [dropped] has no cell for \the [src] to charge."))
+		return TRUE
+	if (occupant)
+		to_chat(user, SPAN_WARNING("\The [src] is already in use."))
+		return TRUE
+
+	user.visible_message(
+		SPAN_NOTICE("\The [user] stuffs \a [dropped] into \the [src]."),
+		SPAN_NOTICE("You stuff \the [dropped] into \the [src]"),
+		exclude_mobs = list(dropped)
+	)
+	living_dropped.show_message(
+		SPAN_NOTICE("\The [user] starts stuffing you into \the [src]."),
+		VISIBLE_MESSAGE,
+		SPAN_WARNING("Someone stuffs you into a machine!")
+	)
+	go_in(dropped)
+	return TRUE
+
 /obj/machinery/recharge_station/proc/go_in(mob/M)
 
 
