@@ -87,13 +87,21 @@
 		var/charge_used = diff - use_power_oneoff(diff / CELLRATE, LOCAL) * CELLRATE
 		target.give(charge_used)
 
-/obj/machinery/recharge_station/examine(mob/user)
+/obj/machinery/recharge_station/examine(mob/user, distance)
 	. = ..()
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		to_chat(user, "The charge meter reads: [cell.percent()]%")
 	else
 		to_chat(user, "The indicator shows that the cell is missing.")
+
+	if (occupant)
+		if (distance <= 1)
+			to_chat(user, SPAN_NOTICE("It is currently occupied by \the [occupant]."))
+		else
+			to_chat(user, SPAN_NOTICE("It is currently occupied. You have to get closer to see what's inside."))
+	else
+		to_chat(user, SPAN_NOTICE("It is currently empty."))
 
 /obj/machinery/recharge_station/relaymove(mob/user as mob)
 	if(user.stat)
