@@ -7,6 +7,7 @@
 	id = "deepmaint"
 	description = "Somewhere inbetween. How did we get here? How do we leave?"
 	suffixes = list("packs/deepmaint/deepmaint-1.dmm")
+	skip_main_unit_tests = "Is a deepmaint ruin template."
 
 /area/map_template/deepmaint
 	name = "\improper Deep Maintenance"
