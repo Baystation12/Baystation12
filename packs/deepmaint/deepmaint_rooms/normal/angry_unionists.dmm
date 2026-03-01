@@ -78,7 +78,7 @@
 "ll" = (
 /obj/structure/window/reinforced,
 /obj/structure/table/woodentable/walnut,
-/obj/structure/flora/pottedplant/deskleaf,
+/obj/item/flora/pottedplantsmall/leaf,
 /turf/simulated/floor/carpet/blue2,
 /area/map_template/deepmaint)
 "lK" = (
@@ -184,7 +184,7 @@
 /obj/structure/table/rack,
 /obj/item/gun/projectile/shotgun/pump,
 /obj/machinery/door/window/brigdoor/southleft,
-/obj/item/gun/projectile/pistol/military,
+/obj/item/gun/projectile/pistol/sec,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/deepmaint)
 "yQ" = (

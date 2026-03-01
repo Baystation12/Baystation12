@@ -200,8 +200,9 @@
 
 	// #include "../bluespace_interlude/bluespace_interlude.dm"
 	// #include "../bluespace_interlude/bluespace_interlude.dmm"
+#ifndef UNIT_TEST
 	#include "../../packs/deepmaint/deepmaint-1.dmm"
-
+#endif
 	#define using_map_DATUM /datum/map/torch
 
 #elif !defined(MAP_OVERRIDE)

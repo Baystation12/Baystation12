@@ -1475,7 +1475,7 @@ var/global/list/multi_point_spawns
 	var/list/items = list(
 		/obj/item/device/flashlight/flashdark,
 		/obj/item/storage/backpack/chameleon,
-		/obj/item/clothing/glasses/thermal/,
+		/obj/item/clothing/glasses/thermal,
 		/obj/item/device/spy_bug
 		)
 	items += subtypesof_real(/obj/item/gun)
