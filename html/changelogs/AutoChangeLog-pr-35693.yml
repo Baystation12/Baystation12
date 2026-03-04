@@ -1,0 +1,7 @@
+author: SierraKomodo
+changes:
+  - rscadd: Examining an occupied charging station while adjacent now tells you 
+      who/what's in it.
+  - rscadd: You can now put people and borgs into recharging stations by 
+      drag+drop.
+delete-after: true
