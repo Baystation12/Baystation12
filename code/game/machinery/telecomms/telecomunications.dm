@@ -511,6 +511,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 				var/datum/comm_log_entry/log = new
 				var/mob/M = signal.data["mob"]
+				log.timestamp = "[stationdate2text()], [time_stamp()]"
 
 				// Copy the signal.data entries we want
 				log.parameters["mobtype"] = signal.data["mobtype"]
@@ -585,6 +586,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	log.input_type = input
 	log.parameters["message"] = content
 	log_entries.Add(log)
+	log.timestamp = "[stationdate2text()], [time_stamp()]"
 	update_logs()
 
 /obj/machinery/telecomms/server/proc/get_channel_info(freq)
@@ -601,3 +603,4 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/name = "data packet (#)"
 	var/garbage_collector = 1 // if set to 0, will not be garbage collected
 	var/input_type = "Speech File"
+	var/timestamp
