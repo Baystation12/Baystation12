@@ -176,6 +176,15 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559e"
 #define COLOR_ASSEMBLY_PURPLE  "#6f6192"
 
+//Colors for status/incident displays
+#define COLOR_DISPLAY_RED "#be3455"
+#define COLOR_DISPLAY_ORANGE "#ff9900"
+#define COLOR_DISPLAY_YELLOW "#fff743"
+#define COLOR_DISPLAY_GREEN "#3cf046"
+#define COLOR_DISPLAY_CYAN "#22ffcc"
+#define COLOR_DISPLAY_BLUE "#22ccff"
+#define COLOR_DISPLAY_PURPLE "#5d5dfc"
+
 //Colors defines used by e-sword lighting
 #define COLOR_SABER_BLUE       "#40ceff"
 #define COLOR_SABER_RED        "#ff0000"	//In case someone wants to tweak COLOR_RED, since COLOR_GREEN is not #00ff00
