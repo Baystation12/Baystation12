@@ -19,6 +19,6 @@ jobs:
           avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
           embed-author-name: ${{ github.event.pull_request.user.login }}
           embed-title: ${{ github.event.pull_request.title }}
-          embed-url: ${{ github.event.pull_request.url }}
+          embed-url: ${{ github.event.pull_request.html_url }}
           embed-description: |
             Pull request is flagged "Update Wiki after Merge" and has been merged.
