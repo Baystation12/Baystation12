@@ -1,6 +1,0 @@
-author: Mucker
-changes:
-  - rscadd: Added timestamps to t-comms radio logs.
-  - rscadd: T-comms now lists "corrupted" radio logs.
-  - tweak: Tweaked the ordering of t-comm radio logs.
-delete-after: true
