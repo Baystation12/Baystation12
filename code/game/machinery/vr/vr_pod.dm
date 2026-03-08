@@ -260,7 +260,7 @@
 	dat += "<br>"
 	dat += "<a href='?src=\ref[src];simulate=1'><b>Begin Simulation</b></a>"
 
-	var/datum/browser/popup = new(usr, "vrpod", "[initial(name)]", 250, 200)
+	var/datum/browser/popup = new(usr, "vrpod", "[initial(name)]", 250, 250)
 	popup.set_content(dat)
 	popup.open()
 	return TRUE
