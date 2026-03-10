@@ -1,5 +1,0 @@
-author: Banditoz
-changes:
-  - bugfix: Fax machines are now removed as a possible destination when they're 
-      destroyed.
-delete-after: true

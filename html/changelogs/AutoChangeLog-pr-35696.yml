@@ -1,6 +1,0 @@
-author: Banditoz
-changes:
-  - rscadd: Add new font for status displays! They also now scroll if the line 
-      is too long.
-  - bugfix: Light no longer infinitely stacks on status displays.
-delete-after: true
