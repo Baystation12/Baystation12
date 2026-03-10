@@ -1,7 +1,11 @@
-#define FONT_SIZE "5pt"
-#define FONT_COLOR "#09f"
-#define FONT_STYLE "Arial Black"
-#define SCROLL_SPEED 2
+#define MAX_STATIC_WIDTH 24
+#define SCROLL_RATE 0.045 SECONDS
+#define SCROLL_PADDING 2 // how many pixels we chop to make a smooth loop
+#define LINE1_X 1
+#define LINE1_Y -4
+#define LINE2_X 1
+#define LINE2_Y -11
+#define STATUS_DISPLAY_FONT /singleton/font/tiny_unicode/size_12pt
 
 // Status display
 // (formerly Countdown timer display)
@@ -29,8 +33,8 @@
 	var/picture_state = "greenalert" // icon_state of alert picture
 	var/message1 = ""                // message line 1
 	var/message2 = ""                // message line 2
-	var/index1                       // display index for scrolling messages or 0 if non-scrolling
-	var/index2
+	var/obj/overlay/status_display_text/message1_overlay
+	var/obj/overlay/status_display_text/message2_overlay
 	var/picture = null
 
 	var/frequency = 1435		// radio frequency
@@ -41,7 +45,6 @@
 	maptext_height = 26
 	maptext_width = 32
 
-	var/const/CHARS_PER_LINE = 5
 	var/const/STATUS_DISPLAY_BLANK = 0
 	var/const/STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME = 1
 	var/const/STATUS_DISPLAY_MESSAGE = 2
@@ -50,6 +53,10 @@
 	var/const/STATUS_DISPLAY_IMAGE = 5
 	var/const/STATUS_DISPLAY_CUSTOM = 99
 
+	/// Normal text color
+	var/text_color = COLOR_DISPLAY_BLUE
+	/// Color for headers, eg. "- ETA -"
+	var/header_text_color =  COLOR_DISPLAY_PURPLE
 	var/status_display_show_alert_border = FALSE
 
 /obj/machinery/status_display/Destroy()
@@ -98,10 +105,12 @@
 /obj/machinery/status_display/Process()
 	if (MACHINE_IS_BROKEN(src))
 		return PROCESS_KILL
-	if(!is_powered())
+	if (!is_powered())
 		remove_display()
+		set_light(0)
 		return
-	update()
+	if (mode == STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME || mode == STATUS_DISPLAY_TIME || mode == STATUS_DISPLAY_CUSTOM)
+		update()
 
 /obj/machinery/status_display/emp_act(severity)
 	if(inoperable())
@@ -117,14 +126,11 @@
 		return
 	if(friendc && !ignore_friendc)
 		set_picture("ai_friend")
-		if(status_display_show_alert_border)
-			add_alert_border_to_display()
 		return 1
 
 	switch(mode)
 		if(STATUS_DISPLAY_BLANK)	//blank
-			if(status_display_show_alert_border)
-				add_alert_border_to_display()
+			remove_messages()
 			return 1
 		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
 			if(evacuation_controller.is_prepared())
@@ -133,42 +139,14 @@
 					message2 = "Launch"
 				else
 					message2 = get_shuttle_timer()
-					if(length(message2) > CHARS_PER_LINE)
-						message2 = "Error"
 				update_display(message1, message2)
 			else if(evacuation_controller.has_eta())
 				message1 = "-ETA-"
 				message2 = get_shuttle_timer()
-				if(length(message2) > CHARS_PER_LINE)
-					message2 = "Error"
 				update_display(message1, message2)
-			if(status_display_show_alert_border)
-				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_MESSAGE)	//custom messages
-			var/line1
-			var/line2
-
-			if(!index1)
-				line1 = message1
-			else
-				line1 = copytext(message1+"|"+message1, index1, index1+CHARS_PER_LINE)
-				var/message1_len = length(message1)
-				index1 += SCROLL_SPEED
-				if(index1 > message1_len)
-					index1 -= message1_len
-
-			if(!index2)
-				line2 = message2
-			else
-				line2 = copytext(message2+"|"+message2, index2, index2+CHARS_PER_LINE)
-				var/message2_len = length(message2)
-				index2 += SCROLL_SPEED
-				if(index2 > message2_len)
-					index2 -= message2_len
-			update_display(line1, line2)
-			if(status_display_show_alert_border)
-				add_alert_border_to_display()
+			update_display(message1, message2)
 			return 1
 		if(STATUS_DISPLAY_ALERT)
 			display_alert()
@@ -177,13 +155,9 @@
 			message1 = "TIME"
 			message2 = stationtime2text()
 			update_display(message1, message2)
-			if(status_display_show_alert_border)
-				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_IMAGE)
 			set_picture(picture_state)
-			if(status_display_show_alert_border)
-				add_alert_border_to_display()
 			return 1
 	return 0
 
@@ -195,31 +169,73 @@
 		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
-/obj/machinery/status_display/proc/set_message(m1, m2)
-	if(m1)
-		index1 = (length(m1) > CHARS_PER_LINE)
-		message1 = m1
-	else
-		message1 = ""
-		index1 = 0
+/obj/machinery/status_display/proc/update_display(line1, line2)
+	if (message1_overlay?.message == line1 && message2_overlay?.message == line2)
+		return
 
-	if(m2)
-		index2 = (length(m2) > CHARS_PER_LINE)
-		message2 = m2
-	else
-		message2 = ""
-		index2 = 0
+	var/line1_metric
+	var/line2_metric
+	var/line_pair
+	var/singleton/font/display_font = GET_SINGLETON(/singleton/font/tiny_unicode/size_12pt)
+	line1_metric = display_font.get_metrics(line1)
+	line2_metric = display_font.get_metrics(line2)
+	line_pair = (line1_metric > line2_metric ? line1_metric : line2_metric)
+	var/overlay = update_message(message1_overlay, LINE1_Y, line1, LINE1_X, line_pair)
+	if (overlay)
+		message1_overlay = overlay
+	overlay = update_message(message2_overlay, LINE2_Y, line2, LINE2_X, line_pair)
+	if (overlay)
+		message2_overlay = overlay
+	var/pending_overlays = list()
+	pending_overlays += emissive_appearance(icon, "outline", src, alpha = src.alpha)
+	if (status_display_show_alert_border)
+		pending_overlays += get_alert_border()
+	AddOverlays(pending_overlays)
+	set_light(2, 0.5, COLOR_WHITE)
+
+/**
+ * Remove both message objs and null the fields.
+ */
+/obj/machinery/status_display/proc/remove_messages()
+	SHOULD_NOT_OVERRIDE(TRUE)
+	if (message1_overlay)
+		QDEL_NULL(message1_overlay)
+	if (message2_overlay)
+		QDEL_NULL(message2_overlay)
+
+/**
+ * Create/update message overlay.
+ * They must be handled as real objects for the animation to run.
+ * Don't call this in subclasses.
+ * Arguments:
+ * * overlay - the current /obj/effect/overlay/status_display_text instance
+ * * line_y - The Y offset to render the text.
+ * * x_offset - Used to offset the text on the X coordinates, not usually needed.
+ * * message - the new message text.
+ * Returns new /obj/effect/overlay/status_display_text or null if unchanged.
+ */
+/obj/machinery/status_display/proc/update_message(obj/overlay/status_display_text/overlay, line_y, message, x_offset, line_pair)
+	if (overlay && message == overlay.message)
+		return null
+
+	if (overlay)
+		qdel(overlay)
+
+	var/obj/overlay/status_display_text/new_status_display_text = new(src, line_y, message, text_color, header_text_color, x_offset, line_pair)
+	// Draw our object visually "in front" of this display, taking advantage of sidemap
+	new_status_display_text.pixel_y = -32
+	new_status_display_text.pixel_z = 32
+	vis_contents += new_status_display_text
+	return new_status_display_text
 
 /obj/machinery/status_display/proc/toggle_alert_border()
 	status_display_show_alert_border = !status_display_show_alert_border
 
-/obj/machinery/status_display/proc/add_alert_border_to_display()
+/obj/machinery/status_display/proc/get_alert_border()
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	var/singleton/security_level/sl = security_state.current_security_level
 
-	var/border = image(sl.icon,sl.alert_border)
-
-	AddOverlays(border)
+	return image(sl.icon, sl.alert_border)
 
 /obj/machinery/status_display/proc/display_alert()
 	remove_display()
@@ -227,23 +243,22 @@
 	var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
 	var/singleton/security_level/sl = security_state.current_security_level
 
-	var/image/alert = overlay_image(sl.icon, sl.overlay_status_display, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
+	var/pending_overlays = list(overlay_image(sl.icon, sl.overlay_status_display, plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER))
+	if (status_display_show_alert_border)
+		pending_overlays += get_alert_border()
 
 	set_light(sl.light_range, sl.light_power, sl.light_color_alarm)
-	AddOverlays(alert)
+	AddOverlays(pending_overlays)
 
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()
-	if(!picture || picture_state != state)
+	if (!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/machines/status_display.dmi', icon_state=picture_state)
-	AddOverlays(picture)
-	set_light(2, 0.5, COLOR_WHITE)
-
-/obj/machinery/status_display/proc/update_display(line1, line2)
-	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
-	if(maptext != new_text)
-		maptext = new_text
+	var/pending_overlays = list(emissive_appearance(icon, "outline", src, alpha = src.alpha), picture)
+	if (status_display_show_alert_border)
+		pending_overlays += get_alert_border()
+	AddOverlays(pending_overlays)
 	set_light(2, 0.5, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
@@ -265,10 +280,10 @@
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
-	if(length(overlays))
+	if (length(overlays))
 		ClearOverlays()
-	if(maptext)
-		maptext = ""
+	vis_contents.Cut()
+	remove_messages()
 	set_light(0)
 
 /obj/machinery/status_display/receive_signal(datum/signal/signal)
@@ -281,7 +296,8 @@
 
 		if("message")
 			mode = STATUS_DISPLAY_MESSAGE
-			set_message(signal.data["msg1"], signal.data["msg2"])
+			message1 = signal.data["msg1"]
+			message2 = signal.data["msg2"]
 
 		if("alert")
 			mode = STATUS_DISPLAY_ALERT
@@ -292,11 +308,66 @@
 		if("image")
 			mode = STATUS_DISPLAY_IMAGE
 			set_picture(signal.data["picture_state"])
+			return
 		if("toggle_alert_border")
 			toggle_alert_border()
 	update()
 
-#undef FONT_SIZE
-#undef FONT_COLOR
-#undef FONT_STYLE
-#undef SCROLL_SPEED
+/**
+ * Nice overlay to make text smoothly scroll with no client updates after setup.
+ */
+/obj/overlay/status_display_text
+	icon = 'icons/obj/machines/status_display.dmi'
+	icon_state = "blank"
+	vis_flags = VIS_INHERIT_LAYER | VIS_INHERIT_PLANE | VIS_INHERIT_ID
+
+	/// The message this overlay is displaying.
+	var/message
+
+	// If the line is short enough to not marquee, and it matches this, it's a header.
+	var/static/regex/header_regex = regex("^-.*-$")
+
+/obj/overlay/status_display_text/Initialize(mapload, yoffset, line, text_color, header_text_color, xoffset = 0, line_pair)
+	. = ..()
+
+	maptext_y = yoffset
+	message = line
+
+	var/singleton/font/display_font = GET_SINGLETON(/singleton/font/tiny_unicode/size_12pt)
+	var/line_width = display_font.get_metrics(line)
+
+	if (line_width > MAX_STATIC_WIDTH)
+		// Marquee text
+		var/marquee_message = "[line]    [line]    [line]"
+
+		// Width of full content. Must of these is never revealed unless the user inputted a single character.
+		var/full_marquee_width = display_font.get_metrics("[marquee_message]    ")
+		// We loop after only this much has passed.
+		var/looping_marquee_width = (display_font.get_metrics("[line]    ]") - SCROLL_PADDING)
+
+		maptext = generate_text(marquee_message, center = FALSE, text_color = text_color)
+		maptext_width = full_marquee_width
+		maptext_x = 0
+
+		// Mask off to fit in screen.
+		filters += filter(type = "alpha", icon = icon(icon, "outline"))
+
+		// Scroll.
+		var/time = line_pair * SCROLL_RATE
+		animate(src, maptext_x = (-looping_marquee_width) + MAX_STATIC_WIDTH, time = time, loop = -1)
+		animate(maptext_x = MAX_STATIC_WIDTH, time = 0)
+	else
+		// Centered text
+		var/color = header_regex.Find(line) ? header_text_color : text_color
+		maptext = generate_text(line, center = TRUE, text_color = color)
+		maptext_x = xoffset // Defaults to 0, this would be centered unless overided
+
+/**
+ * Generate the actual maptext.
+ * Arguments:
+ * * text - the text to display
+ * * center - center the text if TRUE, otherwise right-align (the direction the text is coming from)
+ * * text_color - the text color
+ */
+/obj/overlay/status_display_text/proc/generate_text(text, center, text_color)
+	return {"<div style="color:[text_color];font:12pt 'TinyUnicode';[center ? "text-align:center" : ""]" valign="top">[text]</div>"}

@@ -3486,6 +3486,8 @@
 #include "code\unit_tests\~helpers.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "interface\fonts\font.dm"
+#include "interface\fonts\tiny_unicode.dm"
 #include "maps\_map_include.dm"
 #include "maps\_maps.dm"
 #include "packs\event_e14b\_pack.dm"
