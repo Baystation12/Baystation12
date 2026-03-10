@@ -491,4 +491,5 @@
 					continue moving
 	for (var/turf/simulated/simulated in turfs_to_update)
 		SSair.mark_for_update(simulated)
+	CHECK_TICK
 	return copied_movables

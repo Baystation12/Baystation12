@@ -238,13 +238,16 @@ SUBSYSTEM_DEF(virtual_reality)
 		log_and_message_admins("changed the VR area to [A.name], ejecting [the_matrix.len] occupants.", user)
 	else
 		log_and_message_admins("changed the VR area to [A.name].", user)
+	to_chat(user, SPAN_WARNING("Loading template: [A.name]..."))
 
 	var/loaded_normally = TRUE
 	if (!vr_program.emagged || prob(75))
 		for (var/atom/SO in simulated_objects[zone]) // Clear the entire previous template before we place another one
 			if (length(SO.contents))
 				for (var/atom/sub_SO in SO.contents)
+					CHECK_TICK
 					qdel(sub_SO)
+			CHECK_TICK
 			qdel(SO)
 		for (var/turf/T in zone_area)
 			if (!istype(T, /turf/unsimulated/floor/plating))
