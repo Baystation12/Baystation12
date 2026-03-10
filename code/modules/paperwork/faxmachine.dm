@@ -48,6 +48,8 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		for (var/obj/item/modular_computer/pda/pda as anything in linked_pdas)
 			unlink_pda(pda)
 		linked_pdas = null
+	GLOB.alldepartments -= src.department
+	GLOB.allfaxes -= src
 	. = ..()
 
 
