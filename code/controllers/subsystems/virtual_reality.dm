@@ -245,10 +245,10 @@ SUBSYSTEM_DEF(virtual_reality)
 		for (var/atom/SO in simulated_objects[zone]) // Clear the entire previous template before we place another one
 			if (length(SO.contents))
 				for (var/atom/sub_SO in SO.contents)
-					CHECK_TICK
 					qdel(sub_SO)
-			CHECK_TICK
+					CHECK_TICK
 			qdel(SO)
+			CHECK_TICK
 		for (var/turf/T in zone_area)
 			if (!istype(T, /turf/unsimulated/floor/plating))
 				T.ChangeTurf(/turf/unsimulated/floor/plating)
