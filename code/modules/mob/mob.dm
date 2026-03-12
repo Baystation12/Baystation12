@@ -228,7 +228,7 @@
 	if(pulling)
 		if(isobj(pulling))
 			var/obj/O = pulling
-			. += clamp(O.w_class, 0, ITEM_SIZE_GARGANTUAN) / ((O.obj_flags & OBJ_FLAG_HAS_WHEELS) ? 10 : 5)
+			. += clamp(O.w_class, 0, ITEM_SIZE_GARGANTUAN) / 5
 		else if(ismob(pulling))
 			var/mob/M = pulling
 			. += max(0, M.mob_size) / MOB_MEDIUM
