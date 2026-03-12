@@ -63,5 +63,6 @@ jobs:
           git config --global user.name "${{ secrets.BOT_NAME }}"
           git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
           git commit -m "Automatic changelog generation for PR #$PR_NUMBER [ci skip]" -a
-          git push
+          git remote set-url origin https://${{secrets.BOT_NAME}}:${{secrets.BOT_TOKEN}}@github.com/${{github.repository}}
+          git push origin dev
         if: ${{ steps.cl_files.outputs.cl_files != '0' }}
