@@ -1,11 +1,11 @@
 name: Run Tests
 
 env:
-  CACHE_PREFIX: "test-1.1.1" # Update when this file is changed
+  CACHE_PREFIX: "test-1.1.2" # Update when this file is changed
   BYOND_SOURCE: "https://indm.dev/byond" # Canonical: "https://www.byond.com/download/build"
   BYOND_MAJOR: "516"
-  BYOND_MINOR: "1667"
-  SDMM_TARGET: "suite-1.11"
+  BYOND_MINOR: "1679"
+  SDMM_TARGET: "suite-1.11" # Refer to https://github.com/SpaceManiac/SpacemanDMM/releases
 
 permissions:
   contents: read
