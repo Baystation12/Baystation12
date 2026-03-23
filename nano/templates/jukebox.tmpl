@@ -2,8 +2,10 @@
 <div>
     {{:helper.link('Play', 'play', {'act': 'play'}, data.playing ?  'disabled' : null, null)}}
     {{:helper.link('Stop', 'stop', {'act': 'stop'}, !data.playing ? 'disabled' : null, null)}}
+{{if data.is_admin}}
+    {{:helper.link('Modify Current Track', 'gear', {'act': 'modify_track'}, null, null)}}
+{{/if}}
 </div>
-
 <H3><span class="white">Volume Level:</span></H3>
 {{:helper.displayBar(data.volume, 0, 50, 'average')}}
 <div class="itemContent">
@@ -19,7 +21,7 @@
 <div class="itemContent">
     {{for data.tracks}}
         <div class="item">
-            {{:helper.link(value.track, 'gear', {'act': 'track', 'dat': value.index}, value.track == data.track ? 'disabled' : null, null)}}    
+            {{:helper.link(value.track, 'gear', {'act': 'track', 'dat': value.index}, value.track == data.track ? 'disabled' : null, null)}}
         </div>
     {{/for}}
 </div>
