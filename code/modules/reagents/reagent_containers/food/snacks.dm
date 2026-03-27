@@ -3980,3 +3980,36 @@
 	w_class = ITEM_SIZE_TINY
 	bitesize = 3
 	volume = 15
+
+/obj/item/reagent_containers/food/snacks/ribs
+	name = "honey ribs"
+	desc = "A rack of ribs slow cooked with honey and sweet BBQ sauce."
+	icon_state = "ribs"
+	center_of_mass = "x=17;y=18"
+	nutriment_amt = 10
+	nutriment_desc = list("sticky sweet meat" = 1)
+	w_class = ITEM_SIZE_TINY
+	bitesize = 3
+	volume = 15
+
+/obj/item/reagent_containers/food/snacks/ramen
+	name = "bowl of ramen"
+	desc = "A large bowl of ramen with all the trimmings."
+	icon_state = "ramen"
+	center_of_mass = "x=17;y=18"
+	nutriment_amt = 10
+	nutriment_desc = list("warm salty broth" = 1)
+	w_class = ITEM_SIZE_TINY
+	bitesize = 3
+	volume = 15
+
+/obj/item/reagent_containers/food/snacks/bbqwich
+	name = "\improper BBQ sandwich"
+	desc = "A pulled barbeque sandwich, with barbeque sauce."
+	icon_state = "bbq_sandwich"
+	center_of_mass = "x=17;y=18"
+	nutriment_amt = 5
+	nutriment_desc = list("sweet and spicy meat" = 1)
+	w_class = ITEM_SIZE_TINY
+	bitesize = 3
+	volume = 15
