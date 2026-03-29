@@ -1,3 +1,6 @@
+#define ALDEN_MODE_BURIED 0
+#define ALDEN_MODE_SURFACE 1
+
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -43,9 +46,24 @@
 
 	var/last_scan_time = 0
 	var/scan_delay = 25
+	var/mode = ALDEN_MODE_BURIED
 
 /obj/item/device/ano_scanner/attack_self(mob/living/user)
 	interact(user)
+
+/obj/item/device/ano_scanner/verb/change_mode(mob/living/user)
+	set name = "Toggle Alden-Saraspova mode"
+	set desc = "Switches the scanner between buried and surface modes."
+	set category = "Object"
+	set src in view(1)
+
+	if (mode == ALDEN_MODE_BURIED)
+		mode = ALDEN_MODE_SURFACE
+		to_chat(user, SPAN_NOTICE("Counter set to surface mode."))
+	else
+		mode = ALDEN_MODE_BURIED
+		to_chat(user, SPAN_NOTICE("Counter set to buried mode."))
+	playsound(loc, 'sound/weapons/guns/selector.ogg', 40)
 
 /obj/item/device/ano_scanner/interact(mob/living/user)
 	if(world.time - last_scan_time >= scan_delay)
@@ -57,24 +75,32 @@
 		var/nearestSimpleTargetDist = -1
 		var/turf/cur_turf = get_turf(src)
 
-		for (var/turf/simulated/mineral/T as anything in GLOB.xeno_artifact_turfs)
-			if(T.density && T.artifact_find)
-				if(T.z == cur_turf.z)
-					var/cur_dist = get_dist(cur_turf, T) * 2
+		if (mode == ALDEN_MODE_BURIED)
+			for (var/turf/simulated/mineral/T as anything in GLOB.xeno_artifact_turfs)
+				if(T.density && T.artifact_find)
+					if(T.z == cur_turf.z)
+						var/cur_dist = get_dist(cur_turf, T) * 2
+						if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
+							nearestTargetDist = cur_dist + rand() * 2 - 1
+							nearestTargetId = T.artifact_find.artifact_id
+				else
+					GLOB.xeno_artifact_turfs -= T
+
+			for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
+				if(T.density && T.finds && length(T.finds))
+					if(T.z == cur_turf.z)
+						var/cur_dist = get_dist(cur_turf, T) * 2
+						if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
+							nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
+				else
+					GLOB.xeno_digsite_turfs -= T
+		else
+			for (var/obj/machinery/artifact/anomaly)
+				if (anomaly.z == cur_turf.z)
+					var/cur_dist = get_dist(cur_turf, anomaly) * 2
 					if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
 						nearestTargetDist = cur_dist + rand() * 2 - 1
-						nearestTargetId = T.artifact_find.artifact_id
-			else
-				GLOB.xeno_artifact_turfs -= T
-
-		for(var/turf/simulated/mineral/T as anything in GLOB.xeno_digsite_turfs)
-			if(T.density && T.finds && length(T.finds))
-				if(T.z == cur_turf.z)
-					var/cur_dist = get_dist(cur_turf, T) * 2
-					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
-						nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
-			else
-				GLOB.xeno_digsite_turfs -= T
+						nearestTargetId = anomaly.my_effect.artifact_id
 
 		if(nearestTargetDist >= 0)
 			to_chat(user, SPAN_NOTICE("Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"))
@@ -275,3 +301,6 @@
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
+
+#undef ALDEN_MODE_BURIED
+#undef ALDEN_MODE_SURFACE
