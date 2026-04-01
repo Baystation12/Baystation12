@@ -125,8 +125,6 @@
 		BP_R_ARM    = list(/obj/item/organ/external/arm/right,  65),
 		BP_L_LEG    = list(/obj/item/organ/external/leg,        65),
 		BP_R_LEG    = list(/obj/item/organ/external/leg/right,  65),
-		BP_L_FOOT   = list(/obj/item/organ/external/foot,       40),
-		BP_R_FOOT   = list(/obj/item/organ/external/foot/right, 40),
 		BP_L_HAND   = list(/obj/item/organ/external/hand,       40),
 		BP_R_HAND   = list(/obj/item/organ/external/hand/right, 40),
 		BP_GROIN    = list(/obj/item/organ/external/groin,      75),

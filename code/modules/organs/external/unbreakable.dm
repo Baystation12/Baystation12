@@ -29,16 +29,6 @@
 	arterial_bleed_severity = 0
 	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
 
-/obj/item/organ/external/foot/unbreakable
-	dislocated = -1
-	arterial_bleed_severity = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND
-
-/obj/item/organ/external/foot/right/unbreakable
-	dislocated = -1
-	arterial_bleed_severity = 0
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE
-
 /obj/item/organ/external/hand/unbreakable
 	dislocated = -1
 	arterial_bleed_severity = 0

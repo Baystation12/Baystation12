@@ -19,16 +19,6 @@
 	name = "right tail side"
 	encased = "carapace"
 
-/obj/item/organ/external/foot/insectoid
-	name = "left tail tip"
-	icon_position = LEFT
-	encased = "carapace"
-
-/obj/item/organ/external/foot/right/insectoid
-	name = "right tail tip"
-	icon_position = RIGHT
-	encased = "carapace"
-
 /obj/item/organ/external/hand/insectoid
 	name = "left grasper"
 	icon_position = LEFT

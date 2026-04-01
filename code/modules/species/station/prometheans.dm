@@ -49,9 +49,7 @@
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/unbreakable/slime),
 		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/unbreakable/slime),
 		BP_L_HAND = list("path" = /obj/item/organ/external/hand/unbreakable/slime),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/unbreakable/slime),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/unbreakable/slime),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable/slime)
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/unbreakable/slime)
 		)
 	heat_discomfort_strings = list("You feel too warm.")
 	cold_discomfort_strings = list("You feel too cool.")

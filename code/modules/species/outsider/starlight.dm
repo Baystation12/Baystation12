@@ -15,9 +15,7 @@
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/unbreakable),
 		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/unbreakable),
 		BP_L_HAND = list("path" = /obj/item/organ/external/hand/unbreakable),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/unbreakable),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/unbreakable),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/unbreakable)
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/unbreakable)
 		)
 	has_organ = list(
 		BP_BRAIN = /obj/item/organ/internal/brain/starlight

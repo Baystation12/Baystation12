@@ -107,32 +107,6 @@
 	joint = "right knee"
 	amputation_point = "right hip"
 
-/obj/item/organ/external/foot
-	organ_tag = BP_L_FOOT
-	name = "left foot"
-	icon_name = "l_foot"
-	max_damage = 30
-	min_broken_damage = 15
-	w_class = ITEM_SIZE_SMALL
-	body_part = FOOT_LEFT
-	icon_position = LEFT
-	parent_organ = BP_L_LEG
-	joint = "left ankle"
-	amputation_point = "left ankle"
-	tendon_name = "Achilles tendon"
-	arterial_bleed_severity = 0.5
-	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
-
-/obj/item/organ/external/foot/right
-	organ_tag = BP_R_FOOT
-	name = "right foot"
-	icon_name = "r_foot"
-	body_part = FOOT_RIGHT
-	icon_position = RIGHT
-	parent_organ = BP_R_LEG
-	joint = "right ankle"
-	amputation_point = "right ankle"
-
 /obj/item/organ/external/hand
 	organ_tag = BP_L_HAND
 	name = "left hand"

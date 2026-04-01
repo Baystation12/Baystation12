@@ -19,12 +19,6 @@
 /obj/item/organ/external/leg/right/unbreakable/slime
 	max_damage = 15
 
-/obj/item/organ/external/foot/unbreakable/slime
-	max_damage = 5
-
-/obj/item/organ/external/foot/right/unbreakable/slime
-	max_damage = 5
-
 /obj/item/organ/external/hand/unbreakable/slime
 	max_damage = 5
 

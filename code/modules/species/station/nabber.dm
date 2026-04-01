@@ -101,9 +101,7 @@
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
 		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid)
 		)
 
 	base_skin_colours = list(
