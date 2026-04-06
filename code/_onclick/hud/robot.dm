@@ -28,7 +28,7 @@ var/global/obj/screen/robot_inventory
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
 	src.adding += using
-	mymob:inv1 = using
+	mymob:inv += using
 
 	using = new /obj/screen()
 	using.SetName("module2")
@@ -37,7 +37,7 @@ var/global/obj/screen/robot_inventory
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
 	src.adding += using
-	mymob:inv2 = using
+	mymob:inv += using
 
 	using = new /obj/screen()
 	using.SetName("module3")
@@ -46,7 +46,7 @@ var/global/obj/screen/robot_inventory
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
 	src.adding += using
-	mymob:inv3 = using
+	mymob:inv += using
 
 	//End of module select
 

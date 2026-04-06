@@ -63,7 +63,7 @@
 	var/obj/item/W = get_active_hand()
 
 	// Cyborgs have no range-checking unless there is item use
-	if(!W)
+	if(!W || istype(A.loc, /obj/item/robot_module))
 		A.add_hiddenprint(src)
 		A.attack_robot(src)
 		return
