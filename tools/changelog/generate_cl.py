@@ -93,8 +93,8 @@ if write_cl['changes']:
         yaml.dump(write_cl, cl_contents)
         cl_contents.seek(0)
 
-        with open(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml", "w") as cl_file:
-            cl_file.write(cl_contents.read())
+        #Push the newly generated changelog to the master branch so that it can be compiled
+        repo.create_file(f"html/changelogs/AutoChangeLog-pr-{pr_number}.yml", f"Automatic changelog generation for PR #{pr_number} [ci skip]", content=f'{cl_contents.read()}', branch='dev', committer=InputGitAuthor(git_name, git_email))
     print("Done!")
 else:
     print("No CL changes detected!")
