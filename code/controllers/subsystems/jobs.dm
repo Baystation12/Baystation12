@@ -621,7 +621,7 @@ SUBSYSTEM_DEF(jobs)
 	if(istype(V))
 		location_name = V.name
 
-	var/style = "font-family: 'Fixedsys'; -dm-text-outline: 1 black; font-size: 11px;"
+	var/style = "-dm-text-outline: 1 black; font-size: 11px;"
 	var/area/A = get_area(mob)
 	var/text = "Earthdate [stationdate2text()]\n[A.name], [location_name]\n[star_name] system"
 	text = uppertext(text)

@@ -81,7 +81,7 @@ var/global/list/floating_chat_colors = list()
 	I.pixel_w = -round(I.maptext_width/2) + 16 + holder.get_overhead_text_x_offset()
 	I.pixel_z = holder.get_overhead_text_y_offset()
 
-	style = "font-family: 'Small Fonts'; -dm-text-outline: 1px black; font-size: [size]px; line-height: 1.1; [style]"
+	style = "-dm-text-outline: 1px black; font-size: [size]px; line-height: 1.1; [style]"
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
 	animate(I, CHAT_MESSAGE_SPAWN_TIME, alpha = 255, pixel_z = 28)
 

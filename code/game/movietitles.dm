@@ -66,7 +66,7 @@ GLOBAL_LIST(end_titles)
 /obj/screen/credit/Initialize(mapload, credited, client/P)
 	. = ..()
 	parent = P
-	maptext = {"<div style="font:'Small Fonts'">[credited]</div>"}
+	maptext = "<div>[credited]</div>"
 	maptext_height = world.icon_size * 2
 	maptext_width = world.icon_size * 14
 
