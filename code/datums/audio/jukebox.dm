@@ -108,6 +108,24 @@
 		token.SetVolume(volume)
 
 
+/datum/jukebox/proc/ModifyCurrentTrack()
+	if (!isadmin(usr.client))
+		return
+	var/track_name = sanitize(input(usr, "Give the current track a new name.", "Name track") as text|null)
+	if (!track_name)
+		return
+	var/track_file = input(usr, "Pick an audio file. Mono-tracked ogg files are recommended, for file size.", "Upload audio file") as file|null
+	if (!track_file)
+		return
+	var/datum/jukebox_track/track = tracks[index]
+	track.title = track_name
+	track.source = track_file
+	log_and_message_admins("has modified a jukebox track belonging to [src.owner]. New title: '[track_name]' with file [track_file]")
+	if (playing)
+		Stop()
+		Play()
+
+
 /datum/jukebox/nano_host()
 	return owner
 
@@ -122,7 +140,8 @@
 		"track" = track.title,
 		"playing" = playing,
 		"volume" = volume,
-		"tracks" = data_tracks
+		"tracks" = data_tracks,
+		"is_admin" = isadmin(user.client)
 	)
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -145,6 +164,8 @@
 			Volume("[href_list["dat"]]")
 		if ("track")
 			Track("[href_list["dat"]]")
+		if ("modify_track")
+			ModifyCurrentTrack()
 	return TOPIC_REFRESH
 
 
