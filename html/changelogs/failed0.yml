@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes:
+  - admin: "Admins can now modify the current jukebox track right from the jukebox without having to go through VV!"

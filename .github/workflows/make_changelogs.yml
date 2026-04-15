@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Get PR number
         id: pr
         run: |
@@ -61,8 +62,10 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.BOT_EMAIL }}"
           git config --global user.name "${{ secrets.BOT_NAME }}"
+          git config --global --unset credential.helper || true # this might not be needed, but it's just in case
+          git config --unset-all http.https://github.com/.extraheader || true
           git diff --quiet --exit-code && echo "No changes found, abort." && exit 0
           git commit -m "Automatic changelog generation for PR #$PR_NUMBER [ci skip]" -a
-          git remote set-url origin https://${{secrets.BOT_NAME}}:${{secrets.BOT_TOKEN}}@github.com/${{github.repository}}
-          git push origin dev
+          git remote add changelog https://${{secrets.BOT_NAME}}:${{secrets.BOT_TOKEN}}@github.com/${{github.repository}}
+          git push changelog dev
         if: ${{ steps.cl_files.outputs.cl_files != '0' }}
