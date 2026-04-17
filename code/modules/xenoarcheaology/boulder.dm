@@ -99,5 +99,6 @@
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/pickaxe))
-			use_tool(R.module_active,R)
+		var/obj/item/module_active = R.get_active_module()
+		if(istype(module_active,/obj/item/pickaxe))
+			use_tool(module_active,R)

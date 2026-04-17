@@ -38,19 +38,15 @@
 
 //Hud stuff
 
-	var/obj/screen/inv1 = null
-	var/obj/screen/inv2 = null
-	var/obj/screen/inv3 = null
+	var/obj/screen/inv = list()
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
 	var/obj/screen/robot_modules_background
 
 //3 Modules can be activated at any one time.
 	var/obj/item/robot_module/module = null
-	var/obj/item/module_active
-	var/obj/item/module_state_1
-	var/obj/item/module_state_2
-	var/obj/item/module_state_3
+	var/module_active_index = null
+	var/obj/item/module_states = list(null, null, null)
 
 	silicon_camera = /obj/item/device/camera/siliconcam/robot_camera
 	silicon_radio = /obj/item/device/radio/borg
@@ -920,6 +916,7 @@
 		else
 			AddOverlays("[panelprefix]-openpanel -c")
 
+	var/obj/item/module_active = get_active_module()
 	if (module_active && istype(module_active,/obj/item/borg/combat/shield))
 		if (modtype == "Combat")
 			AddOverlays("[module_sprites[icontype]]-shield")
@@ -939,11 +936,11 @@
 	var/dat = "<HEAD><TITLE>Modules</TITLE></HEAD><BODY>\n"
 	dat += {"
 	<B>Activated Modules</B>
-	<BR>
-	Module 1: [module_state_1 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_1]'>[module_state_1]</A>" : "No Module"]<BR>
-	Module 2: [module_state_2 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_2]'>[module_state_2]</A>" : "No Module"]<BR>
-	Module 3: [module_state_3 ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state_3]'>[module_state_3]</A>" : "No Module"]<BR>
-	<BR>
+	<BR>"}
+	for (var/index = 1; index <= length(module_states); index++)
+		var/obj/item/module_state = module_states[index]
+		dat += {"Module [index]: [!isnull(module_state) ? "<A HREF='byond://?src=\ref[src];mod=\ref[module_state]'>[module_state]</A>" : "No Module"]<BR>"}
+	dat += {"<BR>
 	<B>Installed Modules</B><BR><BR>"}
 
 
@@ -975,50 +972,14 @@
 			if (!istype(O))
 				return TOPIC_HANDLED
 
-			if(!(O in module.equipment))
-				return TOPIC_HANDLED
-
-			if (IsHolding(O))
-				to_chat(src, "Already activated")
-				return TOPIC_HANDLED
-			if (!HasFreeHand())
-				to_chat(src, "You need to disable a module first!")
-				return TOPIC_HANDLED
-
-			if(!module_state_1)
-				module_state_1 = O
-				O.hud_layerise()
-				O.forceMove(src)
-				O.equipped_robot()
-				if(istype(module_state_1,/obj/item/borg/sight))
-					sight_mode |= module_state_1:sight_mode
-			else if(!module_state_2)
-				module_state_2 = O
-				O.hud_layerise()
-				O.forceMove(src)
-				O.equipped_robot()
-				if(istype(module_state_2,/obj/item/borg/sight))
-					sight_mode |= module_state_2:sight_mode
-			else if(!module_state_3)
-				module_state_3 = O
-				O.hud_layerise()
-				O.forceMove(src)
-				O.equipped_robot()
-				if(istype(module_state_3,/obj/item/borg/sight))
-					sight_mode |= module_state_3:sight_mode
+			activate_module(O)
 			installed_modules()
 			return TOPIC_HANDLED
 
 		if (href_list["deact"])
 			var/obj/item/O = locate(href_list["deact"])
 			if (IsHolding(O))
-				if(module_state_1 == O)
-					module_state_1 = null
-				else if(module_state_2 == O)
-					module_state_2 = null
-				else if(module_state_3 == O)
-					module_state_3 = null
-				O.forceMove(null)
+				uneq_module_by_obj(O)
 			else
 				to_chat(src, "Module isn't activated")
 			installed_modules()

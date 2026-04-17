@@ -28,6 +28,7 @@
 	if (vtec)
 		tally -= 1
 
+	var/obj/item/module_active = get_active_module()
 	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
 		tally -= 3
 

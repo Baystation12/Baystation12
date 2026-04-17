@@ -276,12 +276,14 @@
 		for(var/obj/I in src.contents)
 			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
 				src.client.screen += I
-	if(src.module_state_1)
-		src.module_state_1:screen_loc = ui_inv1
-	if(src.module_state_2)
-		src.module_state_2:screen_loc = ui_inv2
-	if(src.module_state_3)
-		src.module_state_3:screen_loc = ui_inv3
+
+	var/list/locations = list(ui_inv1, ui_inv2, ui_inv3)
+	var/index = 0
+	for (var/module_state in src.module_states)
+		index += 1
+		if (isnull(module_state))
+			continue
+		module_state:screen_loc = locations[index]
 	update_icon()
 
 /mob/living/silicon/robot/update_fire()

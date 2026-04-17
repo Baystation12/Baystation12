@@ -469,11 +469,11 @@
 		module = new /obj/item/robot_module/drone(src)
 
 	var/window = {"
-	<b>Activated Modules</b><br>
-	Module 1: [module_state_1 ? "<a href='byond://?src=\ref[src];mod=\ref[module_state_1]'>[module_state_1]</a>" : "No Module"]<br>
-	Module 2: [module_state_2 ? "<a href='byond://?src=\ref[src];mod=\ref[module_state_2]'>[module_state_2]</a>" : "No Module"]<br>
-	Module 3: [module_state_3 ? "<a href='byond://?src=\ref[src];mod=\ref[module_state_3]'>[module_state_3]</a>" : "No Module"]<br>
-	<br><b>Available Modules</b><br>"}
+	<b>Activated Modules</b><br>"}
+	for (var/index = 1; index <= length(module_states); index++)
+		var/obj/item/module_state = module_states[index]
+		window += {"Module [index]: [!isnull(module_state) ? "<a href='byond://?src=\ref[src];mod=\ref[module_state]'>[module_state]</a>" : "No Module"]<br>"}
+	window += {"<br><b>Available Modules</b><br>"}
 	for (var/O in module.equipment)
 		if (!O)
 			window += "<br><b>Depleted Resource</b>"
