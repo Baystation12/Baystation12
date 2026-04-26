@@ -2357,8 +2357,7 @@
 /singleton/reaction/deuterium
 	name = "Deuterium"
 	result = null
-	required_reagents = list(/datum/reagent/water = 10)
-	catalysts = list(/datum/reagent/toxin/phoron/oxygen = 5)
+	required_reagents = list(/datum/reagent/water = 10, /datum/reagent/toxin/phoron/oxygen = 5)
 	result_amount = 1
 	mix_message = "The solution makes a loud cracking sound as it crystalizes."
 
