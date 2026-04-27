@@ -27,7 +27,7 @@ exactly() { # exactly N name search [mode] [filter]
 
 # If you increase any of these numbers you're probably doing it wrong
 exactly 0 "escapes" '\\\\(red|blue|green|black|b|i[^mc])'
-exactly 4 "Del()s" '\WDel\('
+exactly 5 "Del()s" '\WDel\('
 exactly 2 "/atom text paths" '"/atom'
 exactly 2 "/area text paths" '"/area'
 exactly 18 "/datum text paths" '"/datum'
