@@ -51,7 +51,7 @@
 /obj/item/device/ano_scanner/attack_self(mob/living/user)
 	interact(user)
 
-/obj/item/device/ano_scanner/verb/change_mode(mob/living/user)
+/obj/item/device/ano_scanner/verb/change_mode()
 	set name = "Toggle Alden-Saraspova mode"
 	set desc = "Switches the scanner between buried and surface modes."
 	set category = "Object"
