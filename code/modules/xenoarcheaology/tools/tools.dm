@@ -59,10 +59,10 @@
 
 	if (mode == ALDEN_MODE_BURIED)
 		mode = ALDEN_MODE_SURFACE
-		to_chat(user, SPAN_NOTICE("Counter set to surface mode."))
+		to_chat(usr, SPAN_NOTICE("Counter set to surface mode."))
 	else
 		mode = ALDEN_MODE_BURIED
-		to_chat(user, SPAN_NOTICE("Counter set to buried mode."))
+		to_chat(usr, SPAN_NOTICE("Counter set to buried mode."))
 	playsound(loc, 'sound/weapons/guns/selector.ogg', 40)
 
 /obj/item/device/ano_scanner/interact(mob/living/user)
