@@ -188,7 +188,7 @@
 	if(slot_start) deselect_module(slot_start) //Only deselect if we have a selected slot.
 
 	var/slot_num
-	if(slot_start == 0)
+	if(isnull(slot_start))
 		slot_num = 1
 		slot_start = 2
 	else

@@ -45,6 +45,7 @@
 
 //3 Modules can be activated at any one time.
 	var/obj/item/robot_module/module = null
+	/// 1, 2, 3 for the selected module in the hotbar. Null if no module is selected.
 	var/module_active_index = null
 	var/list/obj/item/module_states = list(null, null, null)
 
