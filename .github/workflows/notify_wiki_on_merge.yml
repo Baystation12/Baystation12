@@ -12,13 +12,20 @@ jobs:
     if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'Update Wiki after Merge')
     steps:
       - name: Notify Wiki On Merge
-        uses: tsickert/discord-webhook@b217a69502f52803de774ded2b1ab7c282e99645
-        with:
-          webhook-url: ${{ secrets.DISCORD_WIKI_WEBHOOK_URL }}
-          username: GitHub
-          avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-          embed-author-name: ${{ github.event.pull_request.user.login }}
-          embed-title: ${{ github.event.pull_request.title }}
-          embed-url: ${{ github.event.pull_request.html_url }}
-          embed-description: |
-            Pull request is flagged "Update Wiki after Merge" and has been merged.
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          PAYLOAD=$(jq -n --arg author "$PR_AUTHOR" --arg title "$PR_TITLE" --arg url "$PR_URL" \
+            '{
+              username: "GitHub",
+              avatar_url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+              embeds: [{
+                author: {name: $author},
+                title: $title,
+                url: $url,
+                description: "Pull request is flagged \"Update Wiki after Merge\" and has been merged."
+              }]
+            }')
+          curl -sS --fail-with-body -X POST "${{ secrets.DISCORD_WIKI_WEBHOOK_URL }}" -H "Content-Type: application/json" -d "$PAYLOAD"
