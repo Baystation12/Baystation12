@@ -181,6 +181,7 @@
 		persistantMind = owner.mind
 		if(owner.ckey)
 			ownerckey = owner.ckey
+		stored_mmi.brainmob.languages = owner.languages.Copy()
 	..()
 
 /obj/item/organ/internal/mmi_holder/proc/transfer_and_delete()

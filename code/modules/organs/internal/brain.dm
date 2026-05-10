@@ -70,6 +70,7 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
 		brainmob.timeofhostdeath = H.timeofdeath
+		brainmob.languages = H.languages.Copy()
 
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
