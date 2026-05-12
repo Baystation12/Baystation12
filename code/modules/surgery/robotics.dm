@@ -602,6 +602,8 @@
 	if(M.brainmob && M.brainmob.mind)
 		M.brainmob.mind.transfer_to(target)
 
+	target.languages = M.brainmob.languages.Copy()
+
 /singleton/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(SPAN_WARNING("[user]'s hand slips."), \
 	SPAN_WARNING("Your hand slips."))

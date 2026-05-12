@@ -89,7 +89,9 @@
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
-	new_character.skillset.obtain_from_mob(current)	//handles moving skills over.
+	var/datum/skillset/S = new_character.skillset
+	if(S && !ispath(S))
+		S.obtain_from_mob(current)	//handles moving skills over.
 
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
