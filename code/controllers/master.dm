@@ -66,7 +66,7 @@ var/global/datum/controller/master/Master = new
 
 /datum/controller/master/New()
 	if (!global.diary)
-		global.diary = file("data/logs/[time2text(world.timeofday, "YYYY/MM/DD", -world.timezone)].log")
+		global.diary = file("[GLOB.log_directory]/round-[game_id].log")
 	if (!config)
 		config = new
 	total_run_times = list()
