@@ -71,6 +71,7 @@ exactly 0 "istype /atom where isloc should be used" 'istype\(.*?,\s*/atom\s*\)' 
 exactly 0 "istype atom/movable where ismovable should be used" 'istype\(.*?,\s*/atom/movable\s*\)' -P
 exactly 0 "callback proc/ or verb/ where PROC_REF, VERB_REF, etc should be used" 'Callback\([\w/]*,\s*[\w\./]*proc' -P # Callback(src, .proc/foo) should be Callback(src, PROC_REF(foo)), or equivalent. See code\__defines\procs.dm
 exactly 0 "uses of deprecated text proc" '\btext\(' -P
+exactly 8 "calls to SSmachines.machinery where MACHINES_OF() should be used" 'SSmachines\.machinery(?!_by_type)' -P
 # If you increase any of these numbers you're probably doing it wrong
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`

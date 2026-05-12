@@ -307,7 +307,7 @@
 
 
 /proc/is_relay_online()
-	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
+	for(var/obj/machinery/bluespacerelay/M as anything in MACHINES_OF(/obj/machinery/bluespacerelay))
 		if(M.stat == FLAGS_OFF)
 			return 1
 	return 0

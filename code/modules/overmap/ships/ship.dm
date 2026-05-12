@@ -176,9 +176,9 @@
 
 /obj/overmap/visitable/ship/populate_sector_objects()
 	..()
-	for(var/obj/machinery/computer/ship/ship_computer in SSmachines.machinery)
+	for(var/obj/machinery/computer/ship/ship_computer as anything in MACHINES_OF(/obj/machinery/computer/ship))
 		ship_computer.sync_linked()
-	for(var/obj/machinery/payload_interface/payload_interface in SSmachines.machinery)
+	for(var/obj/machinery/payload_interface/payload_interface as anything in MACHINES_OF(/obj/machinery/payload_interface))
 		payload_interface.sync_linked()
 	for(var/datum/ship_engine/ship_engine in ship_engines)
 		if(check_ownership(ship_engine.holder))

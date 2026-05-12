@@ -332,7 +332,7 @@ var/global/list/debug_verbs = list (
 	set name = "Find Leaky Pipes"
 
 	var/list/baddies = list("LEAKY PIPES")
-	for(var/obj/machinery/atmospherics/pipe/P in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/pipe/P as anything in MACHINES_OF(/obj/machinery/atmospherics/pipe))
 		if(P.leaking)
 			baddies += "[P] ([P.x],[P.y],[P.z] - <A HREF='byond://?_src_=holder;adminplayerobservecoodjump=1;X=[P.x];Y=[P.y];Z=[P.z]'>JMP</a>)"
 

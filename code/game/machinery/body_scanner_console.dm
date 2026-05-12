@@ -54,7 +54,7 @@
 	update_icon()
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
-	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
+	for(var/obj/machinery/body_scan_display/D as anything in MACHINES_OF(/obj/machinery/body_scan_display))
 		if (AreConnectedZLevels(D.z, z))
 			connected_displays += D
 			GLOB.destroyed_event.register(D, src, PROC_REF(remove_display))

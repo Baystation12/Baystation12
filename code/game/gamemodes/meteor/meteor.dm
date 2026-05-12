@@ -58,7 +58,7 @@
 /datum/game_mode/meteor/proc/on_enter_field()
 	alert_sent = 2
 	command_announcement.Announce(start_text, alert_title)
-	for(var/obj/machinery/shield_diffuser/SD in SSmachines.machinery)
+	for(var/obj/machinery/shield_diffuser/SD as anything in MACHINES_OF(/obj/machinery/shield_diffuser))
 		SD.meteor_alarm(INFINITY)
 	if(GLOB.using_map.use_overmap)
 		var/area/map = locate(/area/overmap)
