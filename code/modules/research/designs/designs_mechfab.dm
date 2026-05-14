@@ -892,3 +892,12 @@
 	req_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 6,  TECH_ENGINEERING = 6)
 	id = "rig_kinetic"
 	sort_string = "WCLAC"
+
+/datum/design/item/mechfab/rig/radiation_module
+	category = "Hardsuits"
+	name = "Electromagnetic Cloak Module"
+	build_path = /obj/item/rig_module/radiation
+	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500, MATERIAL_PLASTIC = 2000, MATERIAL_SILVER = 1000, MATERIAL_GOLD = 1000, MATERIAL_URANIUM = 1000, MATERIAL_GOLD = 1000)
+	req_tech = list(TECH_MATERIAL = 5, TECH_MAGNET = 5, TECH_POWER = 5, TECH_ENGINEERING = 6)
+	id = "rig_radiation"
+	sort_string = "WCLAD"
