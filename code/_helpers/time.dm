@@ -129,6 +129,10 @@ GLOBAL_VAR_AS(next_station_date_change, 1 DAY)
 	return time2text(station_time_in_ticks, "hh:mm:ss")
 
 
+/proc/time_stamp_iso8601()
+	return time2text(world.realtime, "YYYY-MM-DDThh:mm:ssZ", 0)
+
+
 GLOBAL_VAR(round_start_time)
 
 /hook/roundstart/proc/start_timer()

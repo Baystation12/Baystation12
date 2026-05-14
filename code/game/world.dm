@@ -114,7 +114,7 @@ GLOBAL_VAR_AS(world_topic_last, world.timeofday)
 
 
 /world/Topic(T, addr, master, key)
-	to_file(global.diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+	game_log_realtime("TOPIC", "\"[T]\" from:[addr], master:[master], key:[key]")
 
 	if (GLOB.world_topic_last > world.timeofday)
 		GLOB.world_topic_throttle = list() //probably passed midnight
