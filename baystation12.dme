@@ -3450,6 +3450,7 @@
 #include "code\unit_tests\atmospherics_tests.dm"
 #include "code\unit_tests\atom_exemptions.dm"
 #include "code\unit_tests\cargo_tests.dm"
+#include "code\unit_tests\cigarette_tests.dm"
 #include "code\unit_tests\closets.dm"
 #include "code\unit_tests\culture.dm"
 #include "code\unit_tests\equipment_tests.dm"
