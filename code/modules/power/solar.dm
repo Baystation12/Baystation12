@@ -103,7 +103,7 @@ var/global/solar_gen_rate = 1500
 		sunfrac = 0
 		return
 
-	sunfrac = (cos(p_angle) ** 2) - get_solar_distance_penalty(z)
+	sunfrac = max((cos(p_angle) ** 2) - get_solar_distance_penalty(z), 0)
 	//isn't the power received from the incoming light proportional to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/Process()
