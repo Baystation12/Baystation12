@@ -111,6 +111,12 @@
 		var/ambient_pressure = air.return_pressure()
 		var/epr = active.get_epr()
 
+		var/shutdown_phase = active.get_phase()
+		if (active.shutdown_aborted)
+			shutdown_phase = SPAN_BAD("ABORTING")
+		else if ((active.cooldown_time + active.last_shutdown_time) > world.time)
+			shutdown_phase = SPAN_BAD("COOLING DOWN")
+
 		data["active"] = TRUE
 		data["screen"] = screen
 		data["threshholds"] = active.threshholds
@@ -123,6 +129,7 @@
 		data["SM_ambientpressure_label"] = get_threshhold_color(SUPERMATTER_DATA_PRESSURE, ambient_pressure)
 		data["SM_EPR"] = process_data_output(engine_skill, epr)
 		data["SM_EPR_label"] = get_threshhold_color(SUPERMATTER_DATA_EPR, epr)
+		data["SM_shutdown_phase"] = shutdown_phase
 		if(air.total_moles)
 			data["SM_gas_O2"] = round(100*air.gas[GAS_OXYGEN]/air.total_moles,0.01)
 			data["SM_gas_CO2"] = round(100*air.gas[GAS_CO2]/air.total_moles,0.01)
@@ -181,6 +188,12 @@
 		var/new_value = input(usr, "Select a new threshhold, or set to -1 to disable:", "Threshhold", href_list["value"]) as null | num
 		if (!isnull(new_value))
 			set_threshhold_value(href_list["threshhold"], href_list["category"], new_value)
+		return TOPIC_HANDLED
+	if (href_list["set"])
+		var/obj/machinery/power/supermatter/supermatter = locate(href_list["set"])
+		if (!(supermatter in supermatters))
+			return TOPIC_NOACTION
+		active = supermatter
 		return TOPIC_HANDLED
 	if (href_list["set"])
 		var/obj/machinery/power/supermatter/supermatter = locate(href_list["set"])
