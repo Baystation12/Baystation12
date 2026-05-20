@@ -657,11 +657,11 @@ BLIND     // can't see anything
 /obj/item/clothing/mask/proc/filters_water()
 	return FALSE
 
-/obj/item/clothing/mask/New()
-	if(pull_mask)
+/obj/item/clothing/mask/Initialize()
+	. = ..()
+	if (pull_mask)
 		action_button_name = "Adjust Mask"
 		verbs += /obj/item/clothing/mask/proc/adjust_mask
-	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))

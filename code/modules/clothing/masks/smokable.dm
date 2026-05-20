@@ -33,8 +33,8 @@
 			sprite_sheets = list()
 	return ..()
 
-/obj/item/clothing/mask/smokable/New()
-	..()
+/obj/item/clothing/mask/smokable/Initialize()
+	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
@@ -190,20 +190,23 @@
 	slot_flags = SLOT_EARS | SLOT_MASK
 	attack_verb = list("burnt", "singed")
 	type_butt = /obj/item/trash/cigbutt
-	chem_volume = 5
-	smoketime = 100
+	smoketime = 300
 	matchmes = "<span class='notice'>USER lights NAME with their FLAMETRANSACTION.</span>"
 	lightermes = "<span class='notice'>USER manages to light NAME with their FLAMETRANSACTION.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights NAME with their FLAMETRANSACTION.</span>"
 	weldermes = "<span class='notice'>USER casually lights NAME with their FLAMETRANSACTION.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with their FLAME, and manages to light NAMETRANSACTION.</span>"
 	brand = "\improper Trans-Stellar Duty-free"
-	///Try to have at least a volume of 2 in the cigarette; if reagent transfer amount is too small nothing will happen.
-	var/list/filling = list(/datum/reagent/tobacco = 2)
+	/// Ensure your sum(values(filling)) / smoketime is at least 0.01, or no reagents will be transferred.
+	var/list/filling = list(/datum/reagent/tobacco = 3)
 
-/obj/item/clothing/mask/smokable/cigarette/New()
-	..()
-	for(var/R in filling)
+/obj/item/clothing/mask/smokable/cigarette/Initialize()
+	// first, we need to know the capacity of this cigarette by iterating through map values
+	for (var/datum/reagent/R as anything in filling)
+		chem_volume += filling[R]
+	. = ..()
+	// then, now that max volume is satisfied, add the chemical!
+	for (var/datum/reagent/R as anything in filling)
 		reagents.add_reagent(R, filling[R])
 
 /obj/item/clothing/mask/smokable/cigarette/light(flavor_text = "[usr] lights the [name].")
@@ -276,7 +279,7 @@
 	brand = "\improper Professional"
 	icon_state = "cigpro"
 	type_butt = /obj/item/trash/cigbutt/professionals
-	filling = list(/datum/reagent/tobacco/bad = 2)
+	filling = list(/datum/reagent/tobacco/bad = 3)
 
 /obj/item/trash/cigbutt/professionals
 	icon_state = "cigbuttpro"
@@ -295,9 +298,8 @@
 	icon_state = "cigarello"
 	item_state = "cigaroff"
 	smoketime = 600
-	chem_volume = 10
 	type_butt = /obj/item/trash/cigbutt/woodbutt
-	filling = list(/datum/reagent/tobacco/fine = 4)
+	filling = list(/datum/reagent/tobacco/fine = 6)
 
 /obj/item/clothing/mask/smokable/cigarette/trident/mint
 	icon_state = "cigarelloMi"
@@ -397,7 +399,6 @@
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 300
-	chem_volume = 15
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with their FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
@@ -419,7 +420,6 @@
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 	smoketime = 500
-	chem_volume = 20
 	brand = "Havana"
 	filling = list(/datum/reagent/tobacco/fine = 15)
 
@@ -457,10 +457,9 @@
 	item_state = "cigar3off"
 	icon_on = "cigar3on"
 	type_butt = /obj/item/trash/cigbutt/sausagebutt
-	chem_volume = 6
-	smoketime = 5000
+	smoketime = 1250
 	brand = "sausage... wait what."
-	filling = list(/datum/reagent/nutriment/protein = 6)
+	filling = list(/datum/reagent/nutriment/protein = 25)
 
 /obj/item/trash/cigbutt/sausagebutt
 	name = "sausage butt"
