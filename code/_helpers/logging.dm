@@ -32,6 +32,9 @@ var/global/log_end= world.system_type == UNIX ? ascii2text(13) : ""
 /proc/game_log(category, text)
 	to_file(global.diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
+/proc/game_log_realtime(category, text)
+	to_file(global.diary, "\[[time_stamp_iso8601()]] [game_id] [category]: [text][log_end]")
+
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)
 	if (config.log_admin)
