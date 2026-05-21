@@ -186,6 +186,8 @@
 
 #define SPAN_BAD(X) SPAN_CLASS("bad", "[X]")
 
+#define SPAN_AVERAGE(X) SPAN_CLASS("average", "[X]")
+
 #define SPAN_DANGER(X) SPAN_CLASS("danger", "[X]")
 
 #define SPAN_OCCULT(X) SPAN_CLASS("cult", "[X]")
