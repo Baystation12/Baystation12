@@ -2,6 +2,7 @@
 #define SSMACHINES_MACHINERY 2
 #define SSMACHINES_POWERNETS 3
 #define SSMACHINES_POWER_OBJECTS 4
+#define MACHINES_OF(Type) SSmachines.machinery_by_type[Type]
 
 
 #define START_PROCESSING_IN_LIST(Datum, List) \
@@ -45,11 +46,46 @@ SUBSYSTEM_DEF(machines)
 	var/static/cost_powernets = 0
 	var/static/cost_power_objects = 0
 	var/static/list/pipenets = list()
+	/// all machinery
 	var/static/list/machinery = list()
+	/// map(type, list(instance)): holds a map (alist) of machinery instances by typepath, including parents up-to /obj/machinery
+	var/static/alist/machinery_by_type = alist()
+	var/static/machinery_by_type_size_with_elts
+	var/static/machinery_by_type_size
 	var/static/list/powernets = list()
 	var/static/list/power_objects = list()
 	var/static/list/processing = list()
 	var/static/list/queue = list()
+
+
+/datum/controller/subsystem/machines/proc/AddMachinery(obj/machinery/machine)
+	machinery += machine
+	var/datum/machine_type = machine.type
+	do
+		if (!machinery_by_type[machine_type])
+			machinery_by_type[machine_type] = list()
+		machinery_by_type[machine_type] += machine
+	while ((machine_type = machine_type.parent_type) != /obj/machinery)
+
+
+/datum/controller/subsystem/machines/proc/RemoveMachinery(obj/machinery/machine)
+	machinery -= machine
+	var/datum/machine_type = machine.type
+	do
+		machinery_by_type[machine_type] -= machine // list creation should already be satisfied by AddMachinery
+		if (!length(machinery_by_type[machine_type]))
+			machinery_by_type[machine_type] = null
+	while ((machine_type = machine_type.parent_type) != /obj/machinery)
+
+
+/// Calculates the size of all the elements contained in all of the lists of machinery_by_type
+/// May be useful for debugging.
+/datum/controller/subsystem/machines/proc/CalcSize()
+	machinery_by_type_size = 0
+	machinery_by_type_size_with_elts = 0
+	for (var/list in machinery_by_type)
+		machinery_by_type_size_with_elts += length(machinery_by_type[list])
+		machinery_by_type_size++
 
 
 /datum/controller/subsystem/machines/Recover()
@@ -146,7 +182,11 @@ SUBSYSTEM_DEF(machines)
 		Machines [Round(cost_machinery)] \
 		Networks [Round(cost_powernets)] \
 		Objects [Round(cost_power_objects)]\n\
-		Overall [Roundm(cost ? length(processing) / cost : 0, 0.1)]
+		Overall [Roundm(cost ? length(processing) / cost : 0, 0.1)]\n\
+		Counts: \
+		Machinery [length(machinery)] \
+		Machinery By Type [isnull(machinery_by_type_size_with_elts) ? "(call CalcSize() for val)" : machinery_by_type_size_with_elts] \
+		Machinery By Type Lists [isnull(machinery_by_type_size) ? "(call CalcSize() for val)" : machinery_by_type_size]
 	"})
 
 

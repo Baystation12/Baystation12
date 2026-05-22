@@ -31,7 +31,7 @@
 /datum/nano_module/program/docking/proc/refresh_docks()
 	docking_controllers.Cut()
 	var/list/zlevels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
+	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D as anything in MACHINES_OF(/obj/machinery/embedded_controller/radio/airlock/docking_port))
 		if(D.z in zlevels)
 			var/shuttleside = 0
 			for(var/sname in SSshuttle.shuttles) //do not touch shuttle-side ones

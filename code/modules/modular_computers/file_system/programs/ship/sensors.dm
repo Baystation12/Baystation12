@@ -50,7 +50,7 @@
 /datum/nano_module/program/ship/sensors/proc/find_sensors()
 	if (!linked)
 		return
-	for (var/obj/machinery/shipsensors/sensors in SSmachines.machinery)
+	for (var/obj/machinery/shipsensors/sensors as anything in MACHINES_OF(/obj/machinery/shipsensors))
 		if (linked.check_ownership(sensors))
 			LAZYDISTINCTADD(sensors.linked_programs, src)
 			sensors.link_ship(linked)

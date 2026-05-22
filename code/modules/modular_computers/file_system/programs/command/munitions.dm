@@ -43,7 +43,7 @@
 
 /datum/nano_module/program/munitions/proc/collect_munitions()
 	var/list/output = list()
-	for (var/obj/machinery/payload_interface/interface in SSmachines.machinery)
+	for (var/obj/machinery/payload_interface/interface as anything in MACHINES_OF(/obj/machinery/payload_interface))
 		if (linked?.check_ownership(interface))
 			output += interface
 	return output

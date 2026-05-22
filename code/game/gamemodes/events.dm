@@ -74,7 +74,7 @@ var/global/hadevent    = 0
 				apc.overload_lighting()
 
 	else
-		for(var/obj/machinery/power/apc/apc in SSmachines.machinery)
+		for (var/obj/machinery/power/apc/apc as anything in MACHINES_OF(/obj/machinery/power/apc))
 			apc.overload_lighting()
 
 	return
@@ -143,6 +143,6 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE [uppertext(station_name())] IS [who2pref] [who2]")
 
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in SSmachines.machinery)
+		for(var/mob/living/bot/bot in SSmobs.mob_list)
 			if(prob(botEmagChance))
 				bot.emag_act(1)

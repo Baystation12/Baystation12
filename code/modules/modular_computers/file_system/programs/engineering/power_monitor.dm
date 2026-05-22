@@ -88,7 +88,7 @@
 /datum/nano_module/program/power_monitor/proc/refresh_sensors()
 	grid_sensors = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/sensor/S in SSmachines.machinery)
+	for(var/obj/machinery/power/sensor/S as anything in MACHINES_OF(/obj/machinery/power/sensor))
 		if((S.long_range) || (S.loc.z in connected_z_levels)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
 				warning("Powernet sensor with unset ID Tag! [S.x]X [S.y]Y [S.z]Z")

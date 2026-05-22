@@ -66,7 +66,7 @@
 		return
 	arrived = TRUE
 
-	for(var/obj/machinery/rotating_alarm/start_on/ert/alarm in SSmachines.machinery)
+	for(var/obj/machinery/rotating_alarm/start_on/ert/alarm as anything in MACHINES_OF(/obj/machinery/rotating_alarm/start_on/ert))
 		alarm.set_off()
 
 	if(!ship || GLOB.ert.is_secret)

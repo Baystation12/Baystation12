@@ -132,7 +132,7 @@ var/global/const/HOLOPAD_MODE = RANGE_BASED
 						var/obj/overmap/visitable/O = map_sectors["[zlevel]"]
 						if(!isnull(O))
 							zlevels_long |= O.map_z
-				for(var/obj/machinery/hologram/holopad/H in SSmachines.machinery)
+				for(var/obj/machinery/hologram/holopad/H as anything in MACHINES_OF(/obj/machinery/hologram/holopad))
 					if (H.operable())
 						if(H.z in zlevels)
 							holopadlist["[H.loc.loc.name]"] = H	//Define a list and fill it with the area of every holopad in the world

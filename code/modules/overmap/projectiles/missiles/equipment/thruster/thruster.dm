@@ -124,7 +124,7 @@
 		return TRUE
 
 	var/obj/machinery/shipsensors/sensors = null
-	for (var/obj/machinery/shipsensors/found_sensors in SSmachines.machinery)
+	for (var/obj/machinery/shipsensors/found_sensors as anything in MACHINES_OF(/obj/machinery/shipsensors))
 		if (ship.check_ownership(found_sensors) && found_sensors.powered())
 			sensors = found_sensors
 			break

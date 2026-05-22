@@ -12,7 +12,7 @@
 		GLOB.using_map.admin_levels |= GetConnectedZlevels(zlevel)
 		GLOB.using_map.escape_levels |= GetConnectedZlevels(zlevel)
 
-	var/obj/machinery/computer/shuttle_control/multi/ert/console = locate() in SSmachines.machinery
+	var/obj/machinery/computer/shuttle_control/multi/ert/console = locate() in MACHINES_OF(/obj/machinery/computer/shuttle_control/multi/ert)
 	if(console)
 		GLOB.ert_announcer.forceMove(get_turf(console))
 		GLOB.ert_announcer.simulated = TRUE

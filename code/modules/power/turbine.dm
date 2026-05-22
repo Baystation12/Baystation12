@@ -198,11 +198,11 @@
 
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
-	for(var/obj/machinery/compressor/C in SSmachines.machinery)
+	for(var/obj/machinery/compressor/C as anything in MACHINES_OF(/obj/machinery/compressor))
 		if(id_tag == C.comp_id)
 			compressor = C
 	doors = list()
-	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
+	for(var/obj/machinery/door/blast/P as anything in MACHINES_OF(/obj/machinery/door/blast))
 		if(P.id_tag == id_tag)
 			doors += P
 
