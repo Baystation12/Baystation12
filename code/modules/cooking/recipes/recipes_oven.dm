@@ -731,6 +731,16 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/chocolatebar
 
+/singleton/cooking_recipe/cake/clown
+	required_reagents = list(
+		/datum/reagent/nutriment/batter/cakebatter = 30,
+		/datum/reagent/nutriment/sprinkles = 2,
+	)
+	required_produce = list(
+		"banana" = 2
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/sliceable/clowncake
+
 /singleton/cooking_recipe/aghrassh_cake
 	appliance = COOKING_APPLIANCE_OVEN
 	required_reagents = list(

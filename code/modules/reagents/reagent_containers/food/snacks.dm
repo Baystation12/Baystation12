@@ -4013,3 +4013,24 @@
 	w_class = ITEM_SIZE_TINY
 	bitesize = 3
 	volume = 15
+
+/obj/item/reagent_containers/food/snacks/sliceable/clowncake
+	name = "clown cake"
+	desc = "You've honked your last honk."
+	icon_state = "clown_cake"
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/clowncake
+	slices_num = 5
+	filling_color = "#ffb85d"
+	center_of_mass = "x=16;y=12"
+	nutriment_amt = 10
+	nutriment_desc = list("banana and silliness" = 1)
+
+/obj/item/reagent_containers/food/snacks/slice/clowncake
+	name = "slice of clown cake"
+	desc = "A slice of colorful cake. Is that a clown nose instead of a cherry?"
+	icon_state = "clown_cake_slice"
+	filling_color = "#ffb85d"
+	trash = /obj/item/trash/plate
+	bitesize = 3
+	center_of_mass = "x=16;y=12"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/clowncake
