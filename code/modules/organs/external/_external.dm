@@ -683,7 +683,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
-	owner?.handle_internal_organ_verbs()
 
 	var/update_surgery
 	if(BP_IS_ROBOTIC(src) || BP_IS_CRYSTAL(src)) //Robotic limbs don't heal or get worse.
@@ -1032,13 +1031,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 // this is the retract step of surgery
 /obj/item/organ/external/proc/open_incision()
 	var/datum/wound/W = get_incision()
-	if (!W)
-		return
+	if(!W)	return
 	W.open_wound(min(W.damage * 2, W.damage_list[1] - W.damage))
-	owner?.handle_internal_organ_verbs()
 
-	if (!encased)
-		for (var/obj/item/implant/I in implants)
+	if(!encased)
+		for(var/obj/item/implant/I in implants)
 			I.exposed()
 
 /obj/item/organ/external/proc/fracture()
@@ -1047,7 +1044,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if((status & ORGAN_BROKEN) || !(limb_flags & ORGAN_FLAG_CAN_BREAK))
 		return
 
-	status |= ORGAN_BROKEN
 	if(owner)
 		owner.visible_message(\
 			SPAN_DANGER("You hear a loud cracking sound coming from \the [owner]."),\
@@ -1056,9 +1052,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 		jostle_bone()
 		if(can_feel_pain())
 			owner.emote("scream")
-		owner.handle_internal_organ_verbs()
 
 	playsound(src.loc, "fracture", 100, 1, -2)
+	status |= ORGAN_BROKEN
 	if(BP_IS_ROBOTIC(src) || BP_IS_CRYSTAL(src))
 		broken_description = pick("broken","shattered","structural rupture")
 	else
@@ -1342,8 +1338,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(encased && (status & ORGAN_BROKEN))
 				. = SURGERY_ENCASED
 		else
-			var/smol_threshold = min_broken_damage * 0.3
-			var/beeg_threshold = min_broken_damage * 0.5
+			var/smol_threshold = min_broken_damage * 0.4
+			var/beeg_threshold = min_broken_damage * 0.6
 			if(!incision.autoheal_cutoff == 0) //not clean incision
 				smol_threshold *= 1.5
 				beeg_threshold = max(beeg_threshold, min(beeg_threshold * 1.5, incision.damage_list[1])) //wounds can't achieve bigger
