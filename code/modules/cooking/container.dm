@@ -517,6 +517,11 @@
 	do_empty(usr, get_turf(src))
 	update_icon()
 
+/obj/item/reagent_containers/cooking_container/board/cheese
+  name = "cheesecloth"
+  appliancetype = COOKING_APPLIANCE_CHEESE
+  icon_state = "cheesecloth"
+
 /obj/item/reagent_containers/cooking_container/board/bowl
 	name = "mixing bowl"
 	desc = "A large mixing bowl."

@@ -328,3 +328,10 @@
 	starting_reagents = list(/datum/reagent/crayon_dust/brown = 10)
 
 //End of MRE stuff.
+
+/obj/item/reagent_containers/food/condiment/pear_compote
+	name = "pear compote"
+	desc = "A delicious compote made of spiced pears."
+	icon_state = "pearcompote"
+	center_of_mass = "x=16;y=8"
+	starting_reagents = list(/datum/reagent/pearcompote = 50)

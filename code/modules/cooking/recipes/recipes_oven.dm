@@ -1010,3 +1010,17 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/rugelach_berry
 	cooked_scent = /datum/extension/scent/food/sugar
+
+/singleton/cooking_recipe/dark_orchard_pie
+	appliance = COOKING_APPLIANCE_OVEN
+	required_reagents = list(
+		/datum/reagent/cinnamon = 3,
+		/datum/reagent/sugar = 5,
+		/datum/reagent/pearcompote = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/doughslice,
+		/obj/item/reagent_containers/food/snacks/bacon/ham
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/dark_orchard_pie
+	cooked_scent = /datum/extension/scent/food/pie

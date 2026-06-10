@@ -933,3 +933,47 @@
 	sharp = TRUE
 	var/icon/broken_outline = icon('icons/obj/food/drinks/drink_effects.dmi', "broken")
 	var/icon/flipped_broken_outline = icon('icons/obj/food/drinks/drink_effects.dmi', "broken-flipped")
+
+/obj/item/reagent_containers/food/drinks/bottle/new_douro_vintage
+	name = "New Douro Vintage 2293"
+	desc = "A prestigious Gaian port wine, made even more sought after due to its wartime production."
+	icon_state = "new_douro"
+	center_of_mass = "x=16;y=6"
+	drink_offset_y = 11
+
+/obj/item/reagent_containers/food/drinks/bottle/new_douro_vintage/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/wine/newdouro, 100)
+
+/obj/item/reagent_containers/food/drinks/bottle/chartrose
+	name = "Chartreuse Valley Rose"
+	desc = "A sweet rose wine, produced on Amelie and famous across the known universe."
+	icon_state = "chartrose"
+	center_of_mass = "x=16;y=6"
+	drink_offset_y = 11
+
+/obj/item/reagent_containers/food/drinks/bottle/chartrose/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/wine/chartrose, 100)
+
+/obj/item/reagent_containers/food/drinks/bottle/andawine
+	name = "Andalusia Vinyeards Sherry"
+	desc = "A delicacy rarely found in Solar Space, this Gaian wine has obtained a mythic aura due to its rare export."
+	icon_state = "andawine"
+	center_of_mass = "x=16;y=6"
+	drink_offset_y = 11
+
+/obj/item/reagent_containers/food/drinks/bottle/andawine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/wine/andawine, 100)
+
+/obj/item/reagent_containers/food/drinks/bottle/cloudnine
+	name = "Cloud District Nine"
+	desc = "A wine from the highest cloud district on Venus. It tastes of old school Hollywood films and hushed whispers."
+	icon_state = "cloudnine"
+	center_of_mass = "x=16;y=6"
+	drink_offset_y = 11
+
+/obj/item/reagent_containers/food/drinks/bottle/cloudnine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/wine/cloudnine, 100)

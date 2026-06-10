@@ -685,3 +685,14 @@
 
 	condiment_name = "bottle of space spice"
 	condiment_icon_state = "spacespicebottle"
+
+/datum/reagent/pearcompote
+	name = "Pear Compote"
+	description = "A delicious compote made of spiced pears."
+	taste_description = "spiced pears"
+	reagent_state = SOLID
+	sugar_amount = 0.5
+
+	condiment_icon_state = "pearcompote"
+	condiment_name = "pear compote jar"
+	condiment_desc = "A delicious spread of spiced pears."

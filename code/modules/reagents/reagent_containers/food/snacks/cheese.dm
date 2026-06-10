@@ -93,3 +93,33 @@
 	intensity = /singleton/scent_intensity/strong
 	descriptor = SCENT_DESC_ODOR
 	range = 3
+
+/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/mozzarella
+	name = "lump of mozzarella"
+	desc = "A lump of mozzarella cheese."
+	icon_state = "cheesewheel-mozz"
+	filling_color = "#9eee86"
+	nutriment_desc = list("mild and stretchy cheese" = 10)
+	slice_path = /obj/item/reagent_containers/food/snacks/cheesewedge/mozz
+
+/obj/item/reagent_containers/food/snacks/cheesewedge/mozz
+	name = "slice of mozzarella"
+	desc = "A slice of soft, stretchy mozzarella."
+	icon_state = "cheesewedge-mozz"
+	filling_color = "#9eee86"
+	nutriment_desc = list("mild and stretchy" = 10)
+
+/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/burrata
+	name = "lump of burrata"
+	desc = "A lump of burrata cheese."
+	icon_state = "cheesewheel-burrata"
+	filling_color = "#9eee86"
+	nutriment_desc = list("mild and soft cheese" = 10)
+	slice_path = /obj/item/reagent_containers/food/snacks/cheesewedge/burrata
+
+/obj/item/reagent_containers/food/snacks/cheesewedge/burrata
+	name = "slice of burrata"
+	desc = "A slice of burrata cheese."
+	icon_state = "cheesewedge-burrata"
+	filling_color = "#9eee86"
+	nutriment_desc = list("mild and soft cheese" = 10)

@@ -62,3 +62,15 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/shrimp_tempura
 	cooked_scent = /datum/extension/scent/food/grease
+
+/singleton/cooking_recipe/mozzsticks
+	appliance = COOKING_APPLIANCE_FRYER
+	required_reagents = list(
+		/datum/reagent/nutriment/batter = 5
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/cheesewedge/mozz,
+		/obj/item/reagent_containers/food/snacks/cheesewedge/mozz
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/mozzsticks
+	cooked_scent = /datum/extension/scent/food/grease
