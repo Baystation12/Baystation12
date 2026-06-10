@@ -55,3 +55,24 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/cheesewedge/blue
+
+/singleton/cooking_recipe/mozzarella
+	appliance = COOKING_APPLIANCE_CHEESE
+	required_reagents = list(
+		/datum/reagent/enzyme = 5,
+		/datum/reagent/drink/milk = 5,
+		/datum/reagent/sodiumchloride = 3
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/mozzarella
+
+/singleton/cooking_recipe/burrata
+	appliance = COOKING_APPLIANCE_CHEESE
+	required_reagents = list(
+		/datum/reagent/enzyme = 5,
+		/datum/reagent/drink/milk/cream = 5,
+		/datum/reagent/sodiumchloride = 3
+	)
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/mozzarella
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/burrata

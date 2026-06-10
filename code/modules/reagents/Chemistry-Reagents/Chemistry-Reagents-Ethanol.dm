@@ -1083,6 +1083,17 @@
 	glass_name = "moonshine"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
 
+/datum/reagent/ethanol/wine/newdouro
+	name = "New Douro Vintage 2293"
+	description = "A prestigious Gaian port wine, made even more sought after due to its wartime production."
+	taste_description = "dry and sweet berries."
+	taste_mult = 2.5
+	color = "#541000"
+	metabolite_potency = 1.5
+
+	glass_name = "New Douro Vintage 2293"
+	glass_desc = "Gaian wine at its finest."
+
 /datum/reagent/ethanol/oldfashioned
 	name = "Old Fashioned"
 	description = "A classic mix of whiskey, sugar, and herbal liqour."
@@ -1546,3 +1557,33 @@
 
 	glass_name = "horchata"
 	glass_desc = "A lovely looking horchata del chufa."
+
+/datum/reagent/ethanol/wine/chartrose
+	name = "Chartreuse Valley Rose"
+	description = "A sweet rose wine, produced on Amelie and famous across the known universe."
+	taste_description = "sweet rose wine"
+	color = "#f4c4bb"
+	metabolite_potency = 1
+
+	glass_name = "chartreuse valley rose"
+	glass_desc = "A delightful glass of rose wine."
+
+/datum/reagent/ethanol/wine/andawine
+	name = "Andalusia Vinyeards Sherry"
+	description = "A delicacy rarely found in Solar Space, this Gaian wine has obtained a mythic aura due to its rare export"
+	taste_description = "rare mythical dreams"
+	color = "#6c333f"
+	metabolite_potency = 2
+
+	glass_name = "Andalusia Vinyeards Sherry"
+	glass_desc = "You had to take out a second mortgage on your space home for this glass. Worth it."
+
+/datum/reagent/ethanol/wine/cloudnine
+	name = "Cloud District Nine"
+	description = "A wine from the highest cloud district on Venus. It tastes of old school Hollywood films and hushed whispers."
+	taste_description = "sweet and potent cloud berries"
+	color = "#6c333f"
+	metabolite_potency = 2.5
+
+	glass_name = "Andalusia Vinyeards Sherry"
+	glass_desc = "Is this what the nectar of the Gods taste like?"

@@ -48,6 +48,7 @@
 		/obj/item/reagent_containers/food/drinks/bottle/bluecuracao = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/cachaca = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/champagne = 5,
+		/obj/item/reagent_containers/food/drinks/bottle/chartrose = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/cognac = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/gin = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/herbal = 5,
@@ -101,6 +102,8 @@
 		/obj/item/glass_extra/straw = 15
 	)
 	contraband = list(
+		/obj/item/reagent_containers/food/drinks/bottle/cloudnine = 5,
+		/obj/item/reagent_containers/food/drinks/bottle/new_douro_vintage = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/premiumwine = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/premiumvodka = 5,
 		/obj/item/reagent_containers/food/drinks/bottle/patron = 5,

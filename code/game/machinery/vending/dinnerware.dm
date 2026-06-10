@@ -37,6 +37,7 @@
 		/obj/item/reagent_containers/cooking_container/pot = 4,
 		/obj/item/reagent_containers/cooking_container/board = 3,
 		/obj/item/reagent_containers/cooking_container/board/bowl = 2,
+		/obj/item/reagent_containers/cooking_container/board/cheese = 2,
 		/obj/item/clothing/suit/chef/classic = 2,
 		/obj/item/storage/lunchbox/rainbow = 3,
 		/obj/item/storage/lunchbox/heart = 3,

@@ -238,8 +238,7 @@
 	required_items = list(
 		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
 		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
-		/obj/item/reagent_containers/food/snacks/shellfish/shrimp,
-		/obj/item/reagent_containers/food/drinks/glass2/cocktail
+		/obj/item/reagent_containers/food/snacks/shellfish/shrimp
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/shrimp_cocktail
 
@@ -301,3 +300,13 @@
 	)
 	result_path = /obj/item/reagent_containers/food/snacks/ramen
 	cooked_scent = /datum/extension/scent/food/veg
+
+/singleton/cooking_recipe/hamslider
+	appliance = COOKING_APPLIANCE_SKILLET
+	required_items = list(
+		/obj/item/reagent_containers/food/snacks/bacon/ham,
+		/obj/item/reagent_containers/food/snacks/cheesewedge,
+		/obj/item/reagent_containers/food/snacks/bun
+	)
+	result_path = /obj/item/reagent_containers/food/snacks/hamslider
+	cooked_scent = /datum/extension/scent/food/meat

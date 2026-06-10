@@ -3272,3 +3272,11 @@
 	result_amount = 3
 	minimum_temperature = 200 CELSIUS
 	mix_message = "The mixture solidifies into a salt-like substance."
+
+/singleton/reaction/pearcompote
+	name = "Pear Compote"
+	result = /datum/reagent/pearcompote
+	required_reagents = list(/datum/reagent/sugar = 2, /datum/reagent/drink/juice/pear = 5, /datum/reagent/cinnamon = 3)
+	result_amount = 10
+	minimum_temperature = 100 CELSIUS
+	mix_message = "The solution thickens into a spicy pear compote."

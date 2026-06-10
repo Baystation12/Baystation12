@@ -608,6 +608,7 @@ PRODUCE_SEED(grapes, "grapes")
 	display_name = "grape vine"
 	mutants = list("greengrapes","whitegrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape = list(10,10))
+	kitchen_tag = "grapes"
 
 /datum/seed/grapes/New()
 	..()
