@@ -165,6 +165,10 @@
 		return 0
 	if(shock_damage < 1)
 		shock_damage = 1
+	if (fire_stacks < 0)
+		shock_damage *= (0.65 * abs(fire_stacks))
+	if (fire_stacks > 0)
+		IgniteMob()
 	apply_damage(shock_damage, DAMAGE_BURN, def_zone, used_weapon="Electrocution")
 	return(shock_damage)
 
