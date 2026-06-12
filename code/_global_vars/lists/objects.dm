@@ -22,8 +22,6 @@ GLOBAL_LIST_AS(full_alphabet, list("a","b","c","d","e","f","g","h","i","j","k","
 
 GLOBAL_LIST_EMPTY(meteor_list)
 
-GLOBAL_LIST_EMPTY(shield_generators) // All shield generators
-
 GLOBAL_LIST_AS(wall_blend_objects, list(
 	/obj/machinery/door,
 	/obj/structure/wall_frame,

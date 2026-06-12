@@ -24,7 +24,7 @@
 /datum/nano_module/program/shields_monitor/proc/get_shields()
 	var/list/shields = list()
 	var/connected_z_levels = GetConnectedZlevels(get_host_z())
-	for(var/obj/machinery/power/shield_generator/S as anything in GLOB.shield_generators)
+	for(var/obj/machinery/power/shield_generator/S as anything in MACHINES_OF(/obj/machinery/power/shield_generator))
 		if(!(S.z in connected_z_levels))
 			continue
 		shields.Add(S)
