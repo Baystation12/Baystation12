@@ -179,7 +179,8 @@ var/global/list/channel_to_radio_key = new
 	message = html_decode(message)
 
 	var/end_char = copytext_char(message, -1)
-	if(!(end_char in list(".", "?", "!", "-", "~", ":")))
+	var/static/list/end_char_puncuation = list(".", "?", "!", "-", "~", ":", "\"", "'")
+	if(!(end_char in end_char_puncuation))
 		message += "."
 
 	return html_encode(message)
