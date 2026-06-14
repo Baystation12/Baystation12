@@ -89,7 +89,7 @@
 	var/obj/overmap/visitable/visitable_effect = effect
 	if (!visitable_effect || !istype(visitable_effect))
 		return FALSE
-	for (var/obj/machinery/power/shield_generator/S as anything in GLOB.shield_generators)
+	for (var/obj/machinery/power/shield_generator/S as anything in MACHINES_OF(/obj/machinery/power/shield_generator))
 		if (S.z in visitable_effect.map_z)
 			if (S.running == SHIELD_RUNNING)
 				return TRUE
