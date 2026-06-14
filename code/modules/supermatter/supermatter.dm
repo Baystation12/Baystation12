@@ -872,13 +872,14 @@
 			T.icon_state = "gcircuit"
 
 	//end shutdown sequence after second stage, returns SM to normal
-	if (shutdown_phase == SHUTDOWN_PHASE_OFF)
+	if (shutdown_phase == SHUTDOWN_PHASE_TWO)
 		if (power <= 0.01)
 			power = 0
 		shutdown_phase = SHUTDOWN_PHASE_OFF
 		GLOB.global_announcer.autosay(shutdown_complete_alert, "Supermatter Monitor", "Engineering")
 		for (var/turf/simulated/floor/greengrid/sm/T in oview(2, src))
 			T.icon_state = "gcircuit"
+		last_shutdown_time = world.time
 
 	radiation_release_modifier = initial(radiation_release_modifier)
 	thermal_release_modifier = initial(thermal_release_modifier)
@@ -886,7 +887,6 @@
 	charging_factor = initial(charging_factor)
 	power_factor = initial(power_factor)
 	damage_rate_limit = initial(damage_rate_limit)
-	last_shutdown_time = world.time
 
 /obj/machinery/power/supermatter/proc/end_abort_phase()
 	radiation_release_modifier = initial(radiation_release_modifier)

@@ -115,7 +115,7 @@
 		if (active.shutdown_aborted)
 			shutdown_phase = SPAN_BAD("ABORTING")
 		else if ((active.cooldown_time + active.last_shutdown_time) > world.time)
-			shutdown_phase = SPAN_BAD("COOLING DOWN")
+			shutdown_phase = SPAN_BAD("COOLING DOWN ([round((active.cooldown_time + active.last_shutdown_time - world.time)/10, 0.1)]s)")
 
 		data["active"] = TRUE
 		data["screen"] = screen
