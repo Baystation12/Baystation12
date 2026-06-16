@@ -25,7 +25,8 @@
 
 	bleed_colour = "#816e12"
 
-	var/static/list/chemical_types = list(
+	var/list/chemical_types = list(
+		"adrenaline" = /datum/reagent/adrenaline,
 		"bicaridine" = /datum/reagent/bicaridine,
 		"hyperzine" =  /datum/reagent/hyperzine,
 		"tramadol" =   /datum/reagent/opiate/tramadol,
@@ -51,6 +52,18 @@
 	var/neutered                            // 'borer lite' mode - fewer powers, less hostile to the host.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
+
+	var/list/bonus_chemical_types = list(
+		"dexalin" = /datum/reagent/dexalin,
+		"hyronalin" = /datum/reagent/hyronalin,
+		"ryetalyn" = /datum/reagent/ryetalyn,
+		"rezadone" = /datum/reagent/rezadone,
+	)
+	var/deep_link = FALSE 					// Used to unlock stronger abilities
+	var/max_chemicals = 250					// Max amount of chemicals that borer can store, for deep_link
+	var/chem_gen_amount = 1					// Chemicals generation ratio, for deep_link
+	var/psi_boost = FALSE 					// Used to toggle psi boost
+	var/max_psi_rank = 5					// Max psi rank that host can recieve through psi boost
 
 /mob/living/simple_animal/borer/roundstart
 	roundstart = TRUE
@@ -165,9 +178,9 @@
 						to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
 					docile = 0
 
-			if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
+			if(chemicals < max_chemicals && host.nutrition >= (neutered ? 200 : 50))
 				host.nutrition--
-				chemicals++
+				chemicals += chem_gen_amount
 
 			if(controlling)
 
@@ -180,7 +193,7 @@
 					host.release_control()
 					return
 
-				if(prob(5))
+				if(!deep_link && prob(5))
 					host.adjustBrainLoss(0.1)
 
 				if(prob(host.getBrainLoss()/20))
@@ -202,17 +215,13 @@
 
 	if(!host || !controlling) return
 
-	if(istype(host,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = host
-		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
-		head.implants -= src
-
 	controlling = 0
 
 	host.remove_language(LANGUAGE_BORER_GLOBAL)
 	host.verbs -= /mob/living/carbon/proc/release_control
 	host.verbs -= /mob/living/carbon/proc/punish_host
 	host.verbs -= /mob/living/carbon/proc/spawn_larvae
+	host.verbs -= /mob/living/carbon/proc/borer_stun
 
 	if(host_brain)
 
@@ -249,6 +258,8 @@
 
 	qdel(host_brain)
 
+	set_ability_cooldown(15 SECONDS)
+
 #define COLOR_BORER_RED "#ff5555"
 /mob/living/simple_animal/borer/proc/set_ability_cooldown(amt)
 	last_special = world.time + amt
@@ -268,6 +279,11 @@
 	if(host.mind)
 		GLOB.borers.remove_antagonist(host.mind)
 
+	if(istype(host,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = host
+		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
+		head.implants -= src
+
 	dropInto(host.loc)
 
 	reset_view(null)
@@ -278,6 +294,14 @@
 
 	var/mob/living/H = host
 	H.status_flags &= ~PASSEMOTES
+
+	if(deep_link)
+		host.adjustBrainLoss(rand(80, 160))
+		host.visible_message(SPAN_WARNING("\The [host] twitches violently upon the removal of [src]. Seems like this procedure tore off a portion of their brain."))
+
+	weaken_connection()
+	reset_psi()
+
 	host = null
 	return
 

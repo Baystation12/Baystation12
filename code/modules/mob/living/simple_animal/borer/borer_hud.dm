@@ -44,7 +44,10 @@
 		return
 
 	to_chat(worm, SPAN_NOTICE("You begin delicately adjusting your connection to the host brain..."))
-	if(!do_after(worm, 100+(worm.host.getBrainLoss()*5), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.host || !worm.can_use_borer_ability())
+
+	var/delay = (worm.deep_link ? 0 : 100) + worm.host.getBrainLoss() * 5
+
+	if(!do_after(worm, delay, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.host || !worm.can_use_borer_ability())
 		return
 
 	to_chat(worm, SPAN_DANGER("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
@@ -79,6 +82,9 @@
 	worm.host.verbs += /mob/living/carbon/proc/release_control
 	worm.host.verbs += /mob/living/carbon/proc/punish_host
 	worm.host.verbs += /mob/living/carbon/proc/spawn_larvae
+
+	if(!worm.docile)
+		worm.host.verbs += /mob/living/carbon/proc/borer_stun
 
 	return TRUE
 
@@ -126,6 +132,10 @@
 	to_chat(worm, SPAN_NOTICE("You begin disconnecting from \the [worm.host]'s synapses and prodding at their internal ear canal."))
 	if(worm.host.stat == CONSCIOUS)
 		to_chat(worm.host, SPAN_WARNING("An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."))
+
+	if(worm.deep_link)
+		to_chat(worm, SPAN_WARNING("Weaken your connection to the host first."))
+		return
 
 	if(!do_after(worm, 10 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.can_use_borer_ability())
 		return

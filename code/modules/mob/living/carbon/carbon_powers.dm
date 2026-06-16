@@ -15,6 +15,7 @@
 		verbs -= /mob/living/carbon/proc/release_control
 		verbs -= /mob/living/carbon/proc/punish_host
 		verbs -= /mob/living/carbon/proc/spawn_larvae
+		verbs -= /mob/living/carbon/proc/borer_stun
 
 	else
 		to_chat(src, SPAN_DANGER("ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !"))
@@ -60,6 +61,55 @@
 
 	else
 		to_chat(src, SPAN_WARNING("You do not have enough chemicals stored to reproduce."))
+		return
+
+/mob/living/carbon/proc/borer_stun()
+	set category = "Abilities"
+	set name = "Psi Stun (100)"
+	set desc = "Stun a visible target in your field of view."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.neutered)
+		return
+
+	var/attack_val = B.deep_link ? 3 : 1
+	var/stun_range = B.deep_link ? 6 : 3
+
+	var/list/victims = list()
+	for(var/mob/living/carbon/C in oview(stun_range))
+		victims += C
+
+	var/mob/living/M = input(src, "Select a mob to stun") as null|anything in victims
+
+	if(!M || !(M in view(stun_range)))
+		return
+
+	if(B.chemicals >= 100)
+		B.chemicals -= 100
+
+		if(M.deflect_psionic_attack())
+			return
+
+		sound_to(src, sound('sound/effects/psi/power_evoke.ogg'))
+		sound_to(M, sound('sound/effects/psi/power_evoke.ogg'))
+
+		if(do_psionics_check(5, src))
+			to_chat(src, SPAN_DANGER("You try to focus on [M], but you cannot expel any psionic power!"))
+			return
+
+		if(M.do_psionics_check(5, src))
+			to_chat(src, SPAN_DANGER("You focus on [M], but your psionic assault skates across them like glass."))
+			return
+		to_chat(M, SPAN_DANGER("You feel a sudden, sharp assault upon your mind that rattles your consciousness!"))
+		M.Weaken(attack_val)
+		visible_message(SPAN_DANGER("A wave of psychic energy emanates from [src], striking [M]!"), SPAN_DANGER("You focus on [M] and use your psionic energy to disorient them!"))
+		B.set_ability_cooldown(15 SECONDS)
+	else
+		to_chat(src, SPAN_WARNING("You do not have enough chemicals stored to psionically stun."))
 		return
 
 /**
