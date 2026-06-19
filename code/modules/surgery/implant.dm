@@ -156,7 +156,7 @@
 /singleton/surgery_step/cavity/implant_removal/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = ..()
 	if(affected)
-		for(var/obj/O in affected.implants)
+		for(var/atom/O in affected.implants)
 			if(!istype(O, /obj/item/organ/internal))
 				return affected
 	return FALSE

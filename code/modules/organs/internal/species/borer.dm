@@ -12,10 +12,20 @@
 /obj/item/organ/internal/borer/Process()
 
 	// Borer husks regenerate health, feel no pain, and are resistant to stuns and brainloss.
-	for(var/chem_name in chemical_types)
-		var/chem = chemical_types[chem_name]
-		if(owner.reagents.get_reagent_amount(chem) < 3)
-			owner.reagents.add_reagent(chem, 5)
+	if(owner && world.time % 6)
+		owner.adjustBruteLoss(-1)
+		owner.adjustFireLoss(-1)
+		owner.adjustToxLoss(-1)
+		owner.adjustOxyLoss(-1)
+		owner.add_up_to_chemical_effect(CE_STABLE)
+		owner.add_up_to_chemical_effect(CE_PAINKILLER, 160)
+
+		for(var/obj/item/organ/internal/I in owner.internal_organs)
+			if(!BP_IS_ROBOTIC(I))
+				I.heal_damage(1)
+
+		if(prob(5))
+			owner.resuscitate()
 
 	// They're also super gross and ooze ichor.
 	if(prob(5))
