@@ -531,12 +531,12 @@ PRODUCE_SEED(mushroom/plastic, "plastic")
 	set_trait(TRAIT_PLANT_ICON,"mushroom10")
 
 
-PRODUCE_SEED(flower, "harebells")
+PRODUCE_SEED(flower/harebell, "harebells")
 	seed_name = "harebell"
 	display_name = "harebell patch"
 	chems = list(/datum/reagent/nutriment = list(1,20))
 
-/datum/seed/flower/New()
+/datum/seed/flower/harebell/New()
 	..()
 	set_trait(TRAIT_MATURATION,7)
 	set_trait(TRAIT_PRODUCTION,1)
@@ -1664,7 +1664,7 @@ PRODUCE_SEED(gummen, "gummen")
 	set_trait(TRAIT_PLANT_ICON,"stalk")
 
 
-PRODUCE_SEED(affelerin, "affelerin")
+PRODUCE_SEED(flower/affelerin, "affelerin")
 	seed_name = "affelerin"
 	display_name = "affelerin flower"
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/affelerin = list(10,10))
@@ -1685,7 +1685,7 @@ PRODUCE_SEED(affelerin, "affelerin")
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 
-PRODUCE_SEED(iridast, "iridast")
+PRODUCE_SEED(berry/iridast, "iridast")
 	seed_name = "iridast"
 	display_name = "iridast bush"
 	mutants = list("berries","glowberries","poisonberries","blueberries")
