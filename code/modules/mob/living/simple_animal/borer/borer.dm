@@ -313,3 +313,20 @@
 /mob/living/simple_animal/borer/flash_eyes(intensity, override_blindness_check, affect_silicon, visual, type)
 	intensity *= 1.5
 	. = ..()
+
+/mob/living/simple_animal/borer/handle_atmos(atmos_suitable = 1)
+	if(host)
+		return
+	. = ..()
+
+/mob/living/simple_animal/borer/attack_ghost(mob/observer/ghost/user)
+	if(!roundstart && !client && !key && user.client)
+		var/datum/ghosttrap/G = get_ghost_trap("cortical borer")
+
+		if (G.assess_candidate(user, src))
+			var/possess = alert(user, "Do you wish to become \the [src]?", "Become [src]?", "Yes", "No")
+			if (possess == "Yes")
+				G.transfer_personality(user, src)
+				return
+
+	. = ..()
