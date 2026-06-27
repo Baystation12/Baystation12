@@ -6,8 +6,6 @@
 	unset_machine()
 	QDEL_NULL(ability_master)
 	QDEL_NULL(hud_used)
-	QDEL_NULL_LIST(click_handlers)
-	QDEL_NULL(mind)
 	if(istype(skillset))
 		QDEL_NULL(skillset)
 	remove_grabs_and_pulls()
