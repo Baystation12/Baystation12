@@ -174,6 +174,8 @@
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
 
+	return ..()
+
 /obj/item/flame/lighter/zippo/black
 	color = COLOR_DARK_GRAY
 	name = "black zippo"
