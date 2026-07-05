@@ -147,10 +147,11 @@ SUBSYSTEM_DEF(jobs)
 		return FALSE
 	return TRUE
 
-/datum/controller/subsystem/jobs/proc/check_latejoin_blockers(mob/new_player/joining, datum/job/job)
+/datum/controller/subsystem/jobs/proc/check_offmap_latejoin_blockers(mob/new_player/joining, datum/job/job)
 	if(!check_general_join_blockers(joining, job))
 		return FALSE
-	if(job.minimum_character_age && (joining.client.prefs.age < job.minimum_character_age))
+	var/singleton/species/species = GLOB.species_by_name[joining.client.prefs.species]
+	if(LAZYACCESS(job.minimum_character_age, species.get_bodytype()) && (joining.client.prefs.age < job.minimum_character_age[species.get_bodytype()]))
 		to_chat(joining, SPAN_WARNING("Your character's in-game age is too low for this job."))
 		return FALSE
 	if(!job.player_old_enough(joining.client))
@@ -232,7 +233,8 @@ SUBSYSTEM_DEF(jobs)
 	for(var/datum/job/job in shuffle(primary_job_datums))
 		if(!job)
 			continue
-		if(job.minimum_character_age && (prefs.age < job.minimum_character_age))
+		var/singleton/species/species = GLOB.species_by_name[player.client.prefs.species]
+		if(LAZYACCESS(job.minimum_character_age, species.get_bodytype()) && (player.client.prefs.age < job.minimum_character_age[species.get_bodytype()]))
 			continue
 		if(istype(job, get_by_title(GLOB.using_map.default_assistant_title))) // We don't want to give him assistant, that's boring!
 			continue
@@ -261,31 +263,7 @@ SUBSYSTEM_DEF(jobs)
 			var/list/candidates = find_occupation_candidates(job, level)
 			if (!length(candidates))
 				continue
-			var/list/weightedCandidates = list()
-			for (var/mob/mob as anything in candidates)
-				if (!mob.client)
-					continue
-				var/age = 0
-				if(mob.client.prefs.use_slot_priority_list)
-					for(var/datum/preferences_slot/slot in mob.client.prefs.slot_priority_list)
-						if(slot.CorrectLevel(job, level))
-							age = slot.age
-							break
-				else
-					age = mob.client.prefs.age
-				if (age < job.minimum_character_age)
-					continue
-				if (age < job.minimum_character_age + 10)
-					weightedCandidates[mob] = 3
-				else if (age < job.ideal_character_age - 10)
-					weightedCandidates[mob] = 6
-				else if (age < job.ideal_character_age + 10)
-					weightedCandidates[mob] = 10
-				else if (age < job.ideal_character_age + 20)
-					weightedCandidates[mob] = 6
-				else
-					weightedCandidates[mob] = 3
-			var/mob/new_player/candidate = pickweight(weightedCandidates)
+			var/mob/new_player/candidate = pick(candidates)
 			if (assign_role(candidate, command_position, mode = mode))
 				return TRUE
 	return FALSE
