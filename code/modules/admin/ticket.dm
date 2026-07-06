@@ -2,6 +2,7 @@ var/global/list/tickets = list()
 var/global/list/ticket_panels = list()
 
 /datum/ticket
+	/// The recipient of this ticket. Not the staff member handling it.
 	var/datum/client_lite/owner
 	var/list/assigned_admins = list()
 	var/status = TICKET_OPEN
@@ -24,6 +25,8 @@ var/global/list/ticket_panels = list()
 		message_staff(SPAN_DANGER("[owner.key_name(0)] has not received a reply to their initial ahelp after 5 minutes!"))
 		addtimer(new Callback(src, PROC_REF(timeoutchecklast)), 5 MINUTES, TIMER_STOPPABLE)
 
+/datum/ticket/proc/can_view(client/user)
+	return user.holder || lowertext(owner.ckey) == lowertext(user.ckey)
 
 /datum/ticket/proc/timeoutchecklast()
 	if (status == TICKET_OPEN)
@@ -229,7 +232,7 @@ var/global/list/ticket_panels = list()
 			ticket_panel_window.update()
 
 	var/datum/ticket/ticket = locate(href_list["ticket"])
-	if(!ticket)
+	if(!ticket || !ticket.can_view(usr.client))
 		return
 
 	switch(href_list["action"])

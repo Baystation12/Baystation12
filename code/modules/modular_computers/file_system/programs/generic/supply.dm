@@ -152,7 +152,7 @@
 		if(!istype(P))
 			return 1
 
-		if(P.hidden && !emagged)
+		if((P.hidden || P.contraband || !P.sec_available()) && !emagged)
 			return 1
 
 		var/reason = sanitize(input(user,"Reason:","Why do you require this item?","") as null|text,,0)

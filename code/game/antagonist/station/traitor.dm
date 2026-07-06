@@ -14,9 +14,9 @@ GLOBAL_TYPED_NEW(traitors, /datum/antagonist/traitor)
 	return "<a href='byond://?src=\ref[player];common=crystals'>\[set crystals\]</a><a href='byond://?src=\ref[src];spawn_uplink=\ref[player.current]'>\[spawn uplink\]</a>"
 
 /datum/antagonist/traitor/Topic(href, href_list)
-	if (..())
+	if (..() || !check_rights(R_ADMIN|R_MOD, TRUE, usr.client))
 		return 1
-	if(href_list["spawn_uplink"])
+	if (href_list["spawn_uplink"])
 		spawn_uplink(locate(href_list["spawn_uplink"]))
 		return 1
 
