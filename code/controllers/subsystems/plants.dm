@@ -93,6 +93,8 @@ SUBSYSTEM_DEF(plants)
 
 	for (var/path in subtypesof(/datum/seed))
 		var/datum/seed/seed = new path
+		if (isnull(seed.name))
+			continue
 		seed.update_growth_stages()
 		seeds[seed.name] = seed
 		seed.roundstart = TRUE

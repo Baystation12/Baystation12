@@ -321,7 +321,8 @@
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
 					//create an entry in the account transaction log
-					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
+					if(amount <= authenticated_account.money)
+						authenticated_account.withdraw(amount, "Credit withdrawal", machine_id)
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_ewallet(amount,src.loc,usr)
 					else
@@ -333,7 +334,8 @@
 					alert("That is not a valid amount.")
 				else if(authenticated_account && amount > 0)
 					//remove the money
-					if(authenticated_account.withdraw(amount, "Credit withdrawal", machine_id))
+					if(amount <= authenticated_account.money)
+						authenticated_account.withdraw(amount, "Credit withdrawal", machine_id)
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						spawn_money(amount,src.loc,usr)
 					else

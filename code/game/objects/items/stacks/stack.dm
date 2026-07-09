@@ -168,7 +168,7 @@
 
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
-		if (!multiplier || (multiplier <= 0)) //href exploit protection
+		if (!multiplier || (multiplier < 1)) //href exploit protection
 			return
 
 		src.produce_recipe(R, multiplier, usr)

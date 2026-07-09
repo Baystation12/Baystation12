@@ -357,7 +357,7 @@ GLOBAL_CONST(PREF_VA_HALF_POPUP, "Reminder Popup")
 
 
 /datum/client_preference/atom_outlines/changed(mob/user, new_value)
-	var/client/client = user.client
+	var/client/client = user?.client
 	client?.SetOutlineAtom()
 	client?.outline_enabled = new_value == GLOB.PREF_YES
 

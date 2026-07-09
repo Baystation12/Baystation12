@@ -63,7 +63,7 @@
 		return ..()
 	if (!ismob(target))
 		return ..()
-	if (target.loc != loc)
+	if (target.loc != loc && can_touch(user))
 		step(target, get_dir(target, loc))
 	..()
 
