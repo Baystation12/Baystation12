@@ -14,11 +14,11 @@
 
 /datum/submap/proc/check_general_join_blockers(mob/new_player/joining, datum/job/submap/job)
 
-	if(!istype(job)) // This proc uses a specific type that check_latejoin_blockers() does not.
+	if(!istype(job)) // This proc uses a specific type that check_offmap_latejoin_blockers() does not.
 		log_debug("Job assignment error for [name] - job does not exist or is of the incorrect type.")
 		return FALSE
 
-	if(!SSjobs.check_latejoin_blockers(joining, job))
+	if(!SSjobs.check_offmap_latejoin_blockers(joining, job))
 		return FALSE
 
 	if(!available())
