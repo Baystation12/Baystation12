@@ -14,7 +14,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
-	matter = list(MATERIAL_ALUMINIUM = 3000)
+	matter = list(MATERIAL_ALUMINIUM = 300)
 	var/list/insertable = list(
 		/obj/item/reagent_containers/food/snacks,
 		/obj/item/holder,
@@ -528,7 +528,6 @@
 	desc = "A bowl. You bowl foods... wait, what?"
 	icon_state = "mixingbowl"
 	center_of_mass = "x=17;y=7"
-	matter = list(MATERIAL_STEEL = 300)
 	volume = 180
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;180"
