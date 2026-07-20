@@ -316,6 +316,7 @@
 	icon_state = "egg"
 	filling_color = "#fdffd1"
 	volume = 10
+	nutriment_amt = 0
 	center_of_mass = "x=16;y=13"
 
 /obj/item/reagent_containers/food/snacks/egg/Initialize()
