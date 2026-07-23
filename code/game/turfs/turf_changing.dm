@@ -195,6 +195,16 @@
 		other.zone.remove(other)
 	return 1
 
+/turf/simulated/floor/transport_properties_from(turf/simulated/floor/other)
+	if(other)
+		ClearOverlays()
+		if(other.flooring)
+			flooring = new other.flooring.type
+		else
+			flooring = null
+
+	. = ..()
+
 /turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
 	if(!..())
 		return 0
