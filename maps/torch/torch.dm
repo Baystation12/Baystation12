@@ -196,6 +196,7 @@
 	#include "../event/sfv_arbiter/sfv_arbiter.dm"
 	#include "../event/placeholders/placeholders.dm"
 	#include "../event/functional_resort/hotel.dm"
+	#include "../event/requiem/requiem.dm"
 	#include "../event/empty/empty.dm"
 
 	#include "../bluespace_interlude/bluespace_interlude.dm"

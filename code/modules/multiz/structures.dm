@@ -308,6 +308,18 @@
 	dir = SOUTH
 	bound_height = 64
 
+// This is a hack, sorry! :D
+/obj/structure/fake_stairs
+	name = "stairs"
+	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
+	icon = 'icons/obj/structures/stairs.dmi'
+	icon_state = "below"
+	density = FALSE
+	opacity = 0
+	anchored = TRUE
+	layer = RUNE_LAYER
+	dir = SOUTH
+
 /obj/structure/stairs/east
 	dir = EAST
 	bound_width = 64
