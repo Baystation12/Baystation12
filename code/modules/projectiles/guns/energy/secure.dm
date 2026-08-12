@@ -49,6 +49,7 @@
 	modifystate = "energyrevolverstun"
 	item_state = null
 	projectile_type = /obj/item/projectile/beam/stun
+	manufacturer = MANUFACTURER_LAWSON_ARMS
 	firemodes = list(
 		list(
 			"mode_name" = "stun",

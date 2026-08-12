@@ -16,6 +16,7 @@
 	projectile_type = /obj/item/projectile/ion
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
+	manufacturer = MANUFACTURER_NANOTRASEN
 
 /obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
@@ -156,6 +157,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
@@ -221,6 +223,7 @@
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser
 	max_shots = 4
+	manufacturer = MANUFACTURER_AL_MALIKI_MOSLEY
 
 
 /obj/item/gun/energy/laser/xenofauna
@@ -249,7 +252,7 @@
 
 
 /obj/item/gun/energy/laser/xenofauna/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if (emagged && distance < 3)
 		to_chat(user, SPAN_DANGER("The safety limiter doesn't look functional."))
 

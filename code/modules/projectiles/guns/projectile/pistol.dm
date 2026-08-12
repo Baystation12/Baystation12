@@ -34,6 +34,7 @@
 	accuracy = -1
 	fire_delay = 6
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	manufacturer = MANUFACTURER_NANOTRASEN
 
 /obj/item/gun/projectile/pistol/sec/empty
 	starts_loaded = FALSE
@@ -61,6 +62,7 @@
 	one_hand_penalty = 2
 	bulk = 3
 	ammo_indicator = TRUE
+	manufacturer = MANUFACTURER_HELTEK
 
 /obj/item/gun/projectile/pistol/throwback
 	name = "pistol"
@@ -73,6 +75,7 @@
 	fire_delay = 7
 	caliber = CALIBER_PISTOL_ANTIQUE
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	manufacturer = null
 	var/base_icon = "pistol1"
 
 /obj/item/gun/projectile/pistol/throwback/Initialize()
@@ -126,6 +129,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 	barrel_thread = TRUE
 	silencer_offset = -6
+	manufacturer = MANUFACTURER_LUMOCO
 
 /obj/item/gun/projectile/pistol/holdout/on_update_icon()
 	..()
@@ -188,3 +192,4 @@
 	magazine_type = /obj/item/ammo_magazine/pistol/double
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
 	fire_delay = 7
+	manufacturer = MANUFACTURER_ZVEZMEKH

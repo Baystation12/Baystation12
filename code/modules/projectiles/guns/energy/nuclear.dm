@@ -10,6 +10,7 @@
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	modifystate = "energystun"
+	manufacturer = MANUFACTURER_LAWSON_ARMS
 
 	firemodes = list(
 		list(
@@ -44,6 +45,7 @@
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	modifystate = "skrell_pistol_stun"
+	manufacturer = null // do Skrell stamp their firearms?
 
 	firemodes = list(
 		list(

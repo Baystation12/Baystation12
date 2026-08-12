@@ -10,6 +10,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	fire_delay = 7
 	ammo_indicator = TRUE
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/projectile/pistol/m22f/empty
 	starts_loaded = FALSE
@@ -29,6 +30,7 @@
 	safety_icon = "m19-safety"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	fire_delay = 5
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/projectile/pistol/m19/empty
 	starts_loaded = FALSE

@@ -10,6 +10,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ESOTERIC = 4)
 	ammo_indicator = TRUE
 	fire_delay = 8
+	manufacturer = MANUFACTURER_HELTEK
 
 
 /obj/item/gun/projectile/pistol/bobcat
@@ -28,6 +29,7 @@
 	)
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ESOTERIC = 4)
 	fire_delay = 4
+	manufacturer = MANUFACTURER_AMARANTH_ARMORERS
 
 // AUTOSHOTGUN
 
@@ -57,6 +59,7 @@
 	accuracy = -1
 	jam_chance = 0.5
 	safety_icon = "safety"
+	manufacturer = MANUFACTURER_AMARANTH_ARMORERS
 
 	firemodes = list(
 		list(mode_name="semi-auto",     burst=1, fire_delay=2, move_delay=3, one_hand_penalty=7, burst_accuracy=null, dispersion=list(1.5)),
@@ -112,6 +115,7 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
+	manufacturer = MANUFACTURER_NOVAYA_ZEMLYA
 
 /obj/item/gun/projectile/sniper/panther/on_update_icon()
 	if(ammo_magazine)
@@ -145,6 +149,7 @@
 	accuracy = -1.5
 	burst_delay = 1
 	w_class = ITEM_SIZE_SMALL
+	manufacturer = MANUFACTURER_NOVAYA_ZEMLYA
 
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1, fire_delay=null,    move_delay=null, one_hand_penalty=0, burst_accuracy=null, dispersion=null),

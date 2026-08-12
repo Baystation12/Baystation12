@@ -67,8 +67,8 @@
 	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
 		return loc.get_cell()
 
-/obj/item/gun/energy/examine(mob/user)
-	. = ..(user)
+/obj/item/gun/energy/examine(mob/user, distance)
+	. = ..(user, distance)
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return

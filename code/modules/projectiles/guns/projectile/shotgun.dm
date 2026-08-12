@@ -6,7 +6,7 @@
 
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
-	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 'Crawford' is a common sight across much of settled space. Useful for sweeping alleys or ship corridors."
+	desc = "A mass-produced shotgun by Mars Military Industries. The rugged MI-870 'Crawford' is a common sight across much of settled space. Useful for sweeping alleys or ship corridors."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "shotgun"
 	item_state = "shotgun"
@@ -22,6 +22,7 @@
 	handle_casings = HOLD_CASINGS
 	one_hand_penalty = 8
 	bulk = 6
+	manufacturer = MANUFACTURER_MARS_MILITARY
 	var/recentpump = 0 // to prevent spammage
 	wielded_item_state = "shotgun-wielded"
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
@@ -158,7 +159,7 @@
 
 /obj/item/gun/projectile/shotgun/pump/sawn
 	name = "riot shotgun"
-	desc = "A mass-produced shotgun by Mars Security Industries. The rugged MSI-870 is a common sight across much of settled space. MSI sells its own 'riot' configuration as the 870 'Bateman'."
+	desc = "A mass-produced shotgun by Mars Military Industries. The rugged MI-870 is a common sight across much of settled space. MSI sells its own 'riot' configuration as the 870 'Bateman'."
 	icon = 'icons/obj/guns/shotguns.dmi'
 	icon_state = "rshotgun"
 	item_state = "rshotgun"
@@ -188,6 +189,7 @@
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/shotgun
 	one_hand_penalty = 8
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/projectile/shotgun/pump/combat/on_update_icon()
 	..()
@@ -221,6 +223,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	one_hand_penalty = 8
 	wielded_item_state = "gun_wielded"
+	manufacturer = MANUFACTURER_NOVAYA_ZEMLYA
 
 	burst_delay = 0
 	firemodes = list(

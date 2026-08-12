@@ -64,6 +64,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/machine_pistol //more damage compared to the wt550, smaller mag size
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	one_hand_penalty = 2
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 	firemodes = list(
 		list(
@@ -130,6 +131,7 @@
 	bulk = -1
 	accuracy = 1
 	one_hand_penalty = 4
+	manufacturer = MANUFACTURER_NOVAYA_ZEMLYA
 
 	//SMG
 	firemodes = list(
@@ -191,6 +193,8 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/ltrifle_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
+	manufacturer = MANUFACTURER_HEPHAESTUS
+	serial_number = ""
 
 	//Assault rifle, burst fire degrades quicker than SMG, worse one-handing penalty, slightly increased move delay
 	firemodes = list(
@@ -252,6 +256,7 @@
 	fire_sound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	barrel_thread = TRUE
 	silencer_offset = 6
+	manufacturer = MANUFACTURER_WARD_TAKAHASHI
 
 	//machine pistol, like SMG but easier to one-hand with
 	firemodes = list(
@@ -321,6 +326,7 @@
 	mag_insert_sound = 'sound/weapons/guns/interaction/batrifle_magin.ogg'
 	mag_remove_sound = 'sound/weapons/guns/interaction/batrifle_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
+	manufacturer = MANUFACTURER_HEPHAESTUS
 	firemodes = list(
 		list(
 			"mode_name" = "semi auto",
@@ -403,8 +409,8 @@
 	else
 		icon_state = "carbine"
 
-/obj/item/gun/projectile/automatic/bullpup_rifle/examine(mob/user)
-	. = ..()
+/obj/item/gun/projectile/automatic/bullpup_rifle/examine(mob/user, distance)
+	. = ..(user, distance)
 	if(!launcher)
 		return
 	if(launcher.chambered)
@@ -469,6 +475,7 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
 	can_special_reload = FALSE
+	manufacturer = MANUFACTURER_FALLBACK
 
 	//LMG, better sustained fire accuracy than assault rifles (comparable to SMG), higer move delay and one-handing penalty
 	//No single-shot or 3-round-burst modes since using this weapon should come at a cost to flexibility.
@@ -642,6 +649,7 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/lmg_magout.ogg'
 	fire_sound = 'sound/weapons/gunshot/minigun.ogg'
 	can_special_reload = FALSE
+	manufacturer = MANUFACTURER_FALLBACK
 
 	firemodes = list(
 		list(

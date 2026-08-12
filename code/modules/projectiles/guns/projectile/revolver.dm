@@ -17,6 +17,7 @@
 	accuracy_power = 8
 	one_hand_penalty = 2
 	bulk = 3
+	manufacturer = MANUFACTURER_AL_MALIKI_MOSLEY
 
 /obj/item/gun/projectile/revolver/AltClick()
 	if(CanPhysicallyInteract(usr))
@@ -58,6 +59,7 @@
 	accuracy = 1
 	bulk = 0
 	fire_delay = 9
+	manufacturer = MANUFACTURER_LUMOCO
 
 /obj/item/gun/projectile/revolver/holdout
 	name = "holdout revolver"
@@ -81,6 +83,7 @@
 	caliber = CALIBER_CAPS
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/cap
+	manufacturer = null
 	var/snipped = FALSE
 
 

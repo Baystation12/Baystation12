@@ -53,6 +53,7 @@
 	item_state = null
 	icon_state = "ling_dart"
 	fire_sound = 'sound/weapons/Genhit.ogg'
+	manufacturer = null
 	anchored = TRUE
 	throwforce = 0 //Just to be on the safe side
 	throw_range = 0

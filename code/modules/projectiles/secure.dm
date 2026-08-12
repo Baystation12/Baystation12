@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(secure_weapons)
 	. = ..()
 
 /obj/item/gun/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 0 && is_secure_gun())
 		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
 

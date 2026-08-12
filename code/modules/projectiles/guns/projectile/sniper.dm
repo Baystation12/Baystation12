@@ -19,6 +19,7 @@
 	bulk = 8
 	scoped_accuracy = 8 //increased accuracy over the LWAP because only one shot
 	scope_zoom = 2
+	manufacturer = MANUFACTURER_HEPHAESTUS
 	var/bolt_open = 0
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
@@ -115,6 +116,7 @@
 	scoped_accuracy = 0
 	wielded_item_state = "boltaction-wielded"
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/projectile/sniper/garand
 	name = "garand rifle"
