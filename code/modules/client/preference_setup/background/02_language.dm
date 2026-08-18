@@ -9,6 +9,12 @@
 
 /datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
 	pref.alternate_languages = R.read("language")
+	if (R.get_version() < 5)
+		for (var/idx = 1; idx <= length(pref.alternate_languages); idx++)
+			if (pref.alternate_languages[idx] != "Sign Language")
+				continue
+
+			pref.alternate_languages[idx] = LANGUAGE_SIGN
 
 /datum/category_item/player_setup_item/background/languages/save_character(datum/pref_record_writer/W)
 	W.write("language", pref.alternate_languages)

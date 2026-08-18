@@ -29,7 +29,7 @@
 
 //Other
 #define LANGUAGE_PRIMITIVE         "Primitive"
-#define LANGUAGE_SIGN              "Sign Language"
+#define LANGUAGE_SIGN              "Zurich Accord Sign Language"
 #define LANGUAGE_ROBOT_GLOBAL      "Robot Talk"
 #define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
 #define LANGUAGE_CHANGELING_GLOBAL "Changeling"
