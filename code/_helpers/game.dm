@@ -271,7 +271,7 @@
 	var/list/hearturfs = list()
 
 	for(var/atom/movable/AM in hear)
-		if(ismob(AM))
+		if(ismob(AM) && !istype(AM, /mob/observer/virtual))
 			mobs += AM
 			hearturfs += get_turf(AM)
 		else if(isobj(AM))

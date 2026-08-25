@@ -736,8 +736,13 @@
 	if(istype(user))
 		if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
 			user.visible_message(SPAN_WARNING(message))
-			var/list/targets = list(user)
-			targets += trange(2, get_turf(src))
+			var/list/targets = list()
+			if(prob(50) && user.get_skill_value(SKILL_WEAPONS) == SKILL_UNSKILLED)
+				// oops, we REALLY don't know how to use guns, and will target a person instead!
+				get_mobs_and_objs_in_view_fast(get_turf(user), 4, targets, list(), TRUE)
+			else
+				targets += trange(2, get_turf(src))
+				targets += user
 			var/picked = pick(targets)
 			afterattack(picked, user)
 			return 1
