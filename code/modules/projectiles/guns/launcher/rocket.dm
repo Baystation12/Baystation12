@@ -12,6 +12,7 @@
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 5)
 	fire_sound = 'sound/effects/bang.ogg'
 	combustion = 1
+	manufacturer = MANUFACTURER_FALLBACK
 
 	release_force = 15
 	throw_distance = 30
@@ -19,7 +20,7 @@
 	var/list/rockets = list()
 
 /obj/item/gun/launcher/rocket/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 2)
 		to_chat(user, SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets."))
 

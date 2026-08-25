@@ -58,7 +58,9 @@ other types of metals and chemistry for reagents).
 //Returns a new instance of the item for this design
 //This is to allow additional initialization to be performed, including possibly additional contructor arguments.
 /datum/design/proc/Fabricate(newloc, fabricator)
-	return new build_path(newloc)
+	var/atom/thing = new build_path(newloc)
+	thing.PostFabrication()
+	return thing
 
 /datum/design/item
 	build_type = PROTOLATHE

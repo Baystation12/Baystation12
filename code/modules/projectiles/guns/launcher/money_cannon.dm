@@ -158,8 +158,8 @@
 	return ..()
 
 
-/obj/item/gun/launcher/money/examine(mob/user)
-	. = ..(user)
+/obj/item/gun/launcher/money/examine(mob/user, distance)
+	. = ..(user, distance)
 	to_chat(user, "It is configured to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.")
 
 	if(receptacle_value >= 1)

@@ -92,7 +92,7 @@
 
 
 /obj/item/gun/launcher/syringe/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	to_chat(user, SPAN_NOTICE("\The [src] has [length(darts)] dart\s left!"))
 
 	if (next)
@@ -184,6 +184,6 @@
 	release_force = 10
 
 /obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 1)
 		to_chat(user, "The button is a little stiff.")

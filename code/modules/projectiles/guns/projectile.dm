@@ -9,6 +9,7 @@
 	screen_shake = 1
 	space_recoil = 1
 	combustion = 1
+	manufacturer = MANUFACTURER_FALLBACK
 
 	var/caliber = CALIBER_PISTOL		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
@@ -382,8 +383,8 @@
 		ammo_magazine = null
 	update_icon() //make sure to do this after unsetting ammo_magazine
 
-/obj/item/gun/projectile/examine(mob/user)
-	. = ..()
+/obj/item/gun/projectile/examine(mob/user, distance)
+	. = ..(user, distance)
 	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		to_chat(user, SPAN_WARNING("It looks jammed."))
 	if(ammo_magazine)

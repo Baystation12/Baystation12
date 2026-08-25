@@ -59,6 +59,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/chemdart
 	auto_eject = 0
 	handle_casings = CLEAR_CASINGS //delete casings instead of dropping them
+	manufacturer = null
 
 	var/list/beakers = list() //All containers inside the gun.
 	var/list/mixing = list() //Containers being used for mixing.
@@ -95,8 +96,8 @@
 	if(istype(dart))
 		fill_dart(dart)
 
-/obj/item/gun/projectile/dartgun/examine(mob/user)
-	. = ..()
+/obj/item/gun/projectile/dartgun/examine(mob/user, distance)
+	. = ..(user, distance)
 	if (length(beakers))
 		to_chat(user, SPAN_NOTICE("\The [src] contains:"))
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
@@ -201,6 +202,7 @@
 /obj/item/gun/projectile/dartgun/vox
 	name = "alien dart gun"
 	desc = "A small gas-powered dartgun, fitted for nonhuman hands."
+	manufacturer = null
 
 /obj/item/gun/projectile/dartgun/vox/medical
 	starting_chems = list(/datum/reagent/kelotane,/datum/reagent/bicaridine,/datum/reagent/dylovene)

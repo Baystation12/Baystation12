@@ -13,6 +13,7 @@
 	throw_distance = 7
 	release_force = 5
 	combustion = 1
+	manufacturer = MANUFACTURER_FALLBACK
 
 	var/obj/item/grenade/chambered
 	var/list/grenades = list()
@@ -45,7 +46,7 @@
 	update_icon()
 
 /obj/item/gun/launcher/grenade/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 2)
 		var/grenade_count = length(grenades) + (chambered? 1 : 0)
 		to_chat(user, "Has [grenade_count] grenade\s remaining.")

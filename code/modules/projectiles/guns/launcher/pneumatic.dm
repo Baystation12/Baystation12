@@ -119,7 +119,7 @@
 	return launched
 
 /obj/item/gun/launcher/pneumatic/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance > 2)
 		return
 	to_chat(user, "The valve is dialed to [pressure_setting]%.")

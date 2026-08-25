@@ -23,6 +23,7 @@
 	power_cost = 300
 	fire_delay = 35
 	gun_unreliable = 0
+	manufacturer = MANUFACTURER_FALLBACK
 
 
 /obj/item/gun/magnetic/railgun/Initialize()
@@ -69,6 +70,7 @@
 	name = "railgun"
 	desc = "The HelTek Arms LM-76 'Thunderclap'. A portable linear motor cannon produced during the Gaia Conflict for anti-armour and \
 			anti-fortification operations. Today, it sees wide use among private militaries, and is a staple on the black market."
+	manufacturer = MANUFACTURER_HELTEK
 
 
 /obj/item/gun/magnetic/railgun/spatha
@@ -78,6 +80,7 @@
 
 	icon = 'icons/obj/guns/railgun_old.dmi'
 	icon_state = "old_railgun"
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 
 //Should only be available to TC shock troops or high-budget mercs.
@@ -97,6 +100,7 @@
 	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
 	load_sheet_max = 6 // Fewer shots per "magazine", but more abundant than matter cartridges.
 	slowdown_worn = 3 // Little slower when worn
+	manufacturer = MANUFACTURER_MARS_MILITARY
 
 
 /obj/item/gun/magnetic/railgun/tc/show_ammo(mob/user)
@@ -191,6 +195,7 @@
 	fire_delay = 10
 	slowdown_held = 1
 	power_cost = 100
+	manufacturer = null
 
 	firemodes = list()
 
@@ -209,6 +214,7 @@
 	cell = /obj/item/cell/infinite
 	capacitor = /obj/item/stock_parts/capacitor/super
 	fire_delay =  8
+	manufacturer = MANUFACTURER_HELTEK
 
 	firemodes = list(
 		list(
@@ -250,7 +256,7 @@
 	))
 
 /obj/item/gun/magnetic/railgun/automatic/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 1)
 		to_chat(user, SPAN_NOTICE("Someone has scratched <i>[verse]</i> onto the side of the barrel."))
 
@@ -261,6 +267,7 @@
 			Originally, a Terran Commonwealth design. The fact that it was made man-portable is mindboggling in itself."
 	icon = 'icons/obj/guns/railgun_old_heavy.dmi'
 	icon_state = "old_heavy_railgun"
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/magnetic/railgun/automatic/halberd/Initialize()
 	. = ..()

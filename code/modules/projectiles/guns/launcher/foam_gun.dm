@@ -15,6 +15,7 @@
 	fire_sound = 'sound/weapons/foamblaster.ogg'
 	fire_sound_text = "a pleasing 'pomp'"
 	matter = list(MATERIAL_PLASTIC = 200)
+	manufacturer = MANUFACTURER_FALLBACK
 
 	var/max_darts = 1
 	var/list/darts = list()
@@ -82,7 +83,7 @@
 	throw_distance = 12
 
 /obj/item/gun/launcher/foam/revolver/tampered/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 1)
 		to_chat(user, "The hammer is a lot more resistant than you'd expect.")
 

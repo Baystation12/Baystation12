@@ -23,7 +23,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
 /obj/item/gun/projectile/flare/examine(mob/user, distance)
-	. = ..()
+	. = ..(user, distance)
 	if(distance <= 2 && length(loaded))
 		to_chat(user, "\A [loaded[1]] is chambered.")
 

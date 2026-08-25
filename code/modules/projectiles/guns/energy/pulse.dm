@@ -17,6 +17,7 @@
 	accuracy = 1
 	wielded_item_state = "gun_wielded"
 	bulk = GUN_BULK_RIFLE
+	manufacturer = MANUFACTURER_LAWSON_ARMS
 
 /obj/item/gun/energy/pulse_rifle/carbine
 	name = "pulse carbine"
@@ -84,6 +85,7 @@
 	burst_delay=null
 	wielded_item_state = "skrell_carbine-wielded"
 	accuracy = 1
+	manufacturer = null
 
 	firemodes = list(
 		list(

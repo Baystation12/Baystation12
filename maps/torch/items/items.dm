@@ -113,6 +113,7 @@ Weapons
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	starts_loaded = 0 //Nobody keeps ballistic weapons loaded
+	manufacturer = MANUFACTURER_AL_MALIKI_MOSLEY
 
 /obj/item/gun/energy/stunrevolver/secure/nanotrasen
 	name = "corporate stun revolver"

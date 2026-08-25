@@ -112,6 +112,6 @@
 	. = ..()
 	update_chambered_shell()
 
-/obj/item/gun/launcher/net/borg/examine(mob/user)
-	. = ..()
+/obj/item/gun/launcher/net/borg/examine(mob/user, distance)
+	. = ..(user, distance)
 	to_chat(user, "There are [LAZYLEN(shells)] shell\s loaded.")

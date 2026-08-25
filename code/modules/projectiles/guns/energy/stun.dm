@@ -7,6 +7,7 @@
 	max_shots = 5
 	projectile_type = /obj/item/projectile/beam/stun
 	combustion = 0
+	manufacturer = MANUFACTURER_NANOTRASEN
 
 	firemodes = list(
 		list(
@@ -73,6 +74,7 @@
 	projectile_type = /obj/item/projectile/energy/electrode
 	max_shots = 6
 	combustion = 0
+	manufacturer = MANUFACTURER_AL_MALIKI_MOSLEY
 
 /obj/item/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
@@ -107,6 +109,7 @@
 	self_recharge = 1
 	charge_meter = 0
 	combustion = 0
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/crossbow/ninja
 	name = "energy dart thrower"
@@ -137,6 +140,7 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/energy/plasmastun
 	combustion = 0
+	manufacturer = MANUFACTURER_MARS_MILITARY
 
 /obj/item/gun/energy/confuseray
 	name = "disorientator"
@@ -149,3 +153,4 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0
+	manufacturer = MANUFACTURER_WARD_TAKAHASHI

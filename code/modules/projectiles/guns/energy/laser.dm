@@ -13,6 +13,7 @@
 	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/energy/laser/mounted
 	self_recharge = 1
@@ -59,6 +60,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 15 //old technology, and a pistol
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/captain
 	name = "antique laser gun"
@@ -74,6 +76,7 @@
 	max_shots = 5 //to compensate a bit for self-recharging
 	one_hand_penalty = 1 //a little bulky
 	self_recharge = 1
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/lasercannon
 	name = "laser cannon"
@@ -92,6 +95,7 @@
 	accuracy = 2
 	fire_delay = 20
 	wielded_item_state = "gun_wielded"
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
@@ -117,6 +121,7 @@
 	max_shots = 10
 	wielded_item_state = "gun_wielded"
 	combustion = 0
+	manufacturer = MANUFACTURER_FALLBACK
 
 /obj/item/gun/energy/xray/pistol
 	name = "x-ray laser gun"
@@ -149,6 +154,7 @@
 	scoped_accuracy = 9
 	scope_zoom = 2
 	wielded_item_state = "gun_wielded"
+	manufacturer = MANUFACTURER_HEPHAESTUS
 
 /obj/item/gun/energy/sniperrifle/on_update_icon()
 	..()
@@ -167,6 +173,7 @@
 	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
+	manufacturer = null
 
 /obj/item/gun/energy/lasertag/special_check(mob/living/carbon/human/M)
 	if(ishuman(M))

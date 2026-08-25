@@ -21,8 +21,8 @@
 		last_regen = world.time
 		update_icon()
 
-/obj/item/gun/launcher/alien/examine(mob/user)
-	. = ..()
+/obj/item/gun/launcher/alien/examine(mob/user, distance)
+	. = ..(user, distance)
 	to_chat(user, "It has [ammo] [ammo_name]\s remaining.")
 
 /obj/item/gun/launcher/alien/consume_next_projectile()
