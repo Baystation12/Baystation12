@@ -21,9 +21,10 @@
 
 /datum/language/sign
 	name = LANGUAGE_SIGN
-	desc = "A sign language commonly used for those who are deaf or mute."
-	signlang_verb = list("gestures")
+	desc = "A constructed sign language created by a conference hosted by an international federation of the Deaf in 2232, \
+			adopted by the then newly established Sol Central Government as the standard language for official sign interpretations."
+	signlang_verb = list("signs")
 	colour = "say_quote"
 	key = "s"
 	flags = SIGNLANG | NO_STUTTER | NONVERBAL
-	shorthand = "HS"
+	shorthand = "ZASL"

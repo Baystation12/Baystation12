@@ -4,7 +4,8 @@
 // 2: Booster -> human species migration
 // 3: Pronouns
 // 4: Tram/oxy, alcohol, antidepressant retyping
-#define PREF_SER_VERSION 4
+// 5: Sign language rename
+#define PREF_SER_VERSION 5
 
 /datum/preferences/proc/get_path(ckey, record_key, extension="json")
 	return "data/player_saves/[copytext_char(ckey,1,2)]/[ckey]/[record_key].[extension]"
