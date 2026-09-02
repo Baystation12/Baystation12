@@ -48,7 +48,7 @@
 	var/last_onln
 
 	health_max = 500 // Relatively resilient, given how expensive it is, but once destroyed produces small explosion.
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
+	health_resistances = /singleton/resistance/electrical
 
 	var/input_cut = 0
 	var/input_pulsed = 0

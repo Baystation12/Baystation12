@@ -14,13 +14,13 @@
 /atom/var/initial_health_percent = 100
 
 /**
- * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
+ * /singleton/resistance type, list, or null of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
  *
  * Index should be one of the `DAMAGE_` flags.
  * Value should be a multiplier that is applied against damage. Values below 1 are a resistance, above 1 are a weakness.
  * Value of `0` is considered immunity.
  */
-/atom/var/list/health_resistances = DAMAGE_RESIST_PHYSICAL
+/atom/var/health_resistances = /singleton/resistance/physical
 
 /// Minimum damage required to actually affect health in `can_damage_health()`.
 /atom/var/health_min_damage = 0
@@ -258,6 +258,7 @@
 	if (resistance_value == 1)
 		remove_damage_resistance(damage_type)
 		return
+	listify_health_resistances_if_needed()
 	LAZYSET(health_resistances, damage_type, resistance_value)
 
 /**
@@ -265,6 +266,7 @@
  */
 /atom/proc/remove_damage_resistance(damage_type)
 	SHOULD_CALL_PARENT(TRUE)
+	listify_health_resistances_if_needed()
 	LAZYREMOVE(health_resistances, damage_type)
 
 /**
@@ -274,8 +276,23 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!damage_type)
 		return 1
-	var/resistance_value = LAZYACCESS(health_resistances, damage_type)
+	var/singleton/resistance/resolved_resistances = GET_SINGLETON(health_resistances)
+	var/resistance_value
+	if (istype(resolved_resistances))
+		resistance_value = LAZYACCESS(resolved_resistances.resistances, damage_type)
+	else // should be a list, since we wanted to modify defaults
+		resistance_value = LAZYACCESS(health_resistances, damage_type)
 	return isnull(resistance_value) ? 1 : resistance_value
+
+/**
+ * Copies the default resistances for this atom into a list from its defining singleton.
+ * Needed if we want to modify damage values.
+ */
+/atom/proc/listify_health_resistances_if_needed()
+	PRIVATE_PROC(TRUE)
+	var/singleton/resistance/resolved_resistances = GET_SINGLETON(health_resistances)
+	if (istype(resolved_resistances))
+		health_resistances = isnull(resolved_resistances.resistances) ? list() : resolved_resistances.resistances.Copy()
 
 /**
  * Determines whether or not the atom has full immunity to the given damage type.

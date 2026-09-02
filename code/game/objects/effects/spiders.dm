@@ -90,7 +90,7 @@
 	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health_max = 3
-	health_resistances = DAMAGE_RESIST_BIOLOGICAL
+	health_resistances = /singleton/resistance/biological
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
 	var/last_itch = 0
 	var/amount_grown = -1
