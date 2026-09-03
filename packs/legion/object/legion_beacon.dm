@@ -8,7 +8,7 @@
 	desc = "Some form of broadcasting machine. It bears no manufacturer markings of any kind. <span class='warning'>You feel some form of malicious intelligence behind its shell...</span>"
 	icon_state = "beacon"
 	health_max = 2500
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
+	health_resistances = /singleton/resistance/electrical
 	anchored = TRUE
 
 	/// List (Types of `/mob/living/simple_animal/hostile/legion`). Mobs that this beacon has spawned and is linked to.

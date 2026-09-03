@@ -14,7 +14,7 @@
 	throw_speed = 1
 	throw_range = 5
 
-	health_resistances = DAMAGE_RESIST_ELECTRICAL
+	health_resistances = /singleton/resistance/electrical
 	health_flags = HEALTH_FLAG_STRUCTURE
 
 	/// Boolean. Whether or not the machine has been emagged.
