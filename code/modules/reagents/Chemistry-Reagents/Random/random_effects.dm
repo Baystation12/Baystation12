@@ -252,6 +252,13 @@
 	mode = RANDOM_CHEM_EFFECT_INT
 	desc = "liver damage"
 
+/singleton/random_chem_effect/random_properties/ce_nausea
+	chem_effect_define = CE_NAUSEA
+	beneficial = -1
+	maximum = 15
+	mode = RANDOM_CHEM_EFFECT_INT
+	desc = "nausea"
+
 /singleton/random_chem_effect/random_properties/ce_gofast
 	chem_effect_define = CE_SPEEDBOOST
 	beneficial = 1

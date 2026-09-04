@@ -509,6 +509,7 @@
 #include "code\datums\traits\maluses\animal_protein.dm"
 #include "code\datums\traits\maluses\ethanol.dm"
 #include "code\datums\traits\maluses\malus.dm"
+#include "code\datums\traits\maluses\sensitive_stomach.dm"
 #include "code\datums\traits\maluses\sugar.dm"
 #include "code\datums\traits\maluses\water.dm"
 #include "code\datums\underwear\bottom.dm"

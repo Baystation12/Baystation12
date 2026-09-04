@@ -23,7 +23,8 @@
 	var/coughedtime = null
 
 	var/cpr_time = 1.0
-	var/lastpuke = 0
+	var/last_puke_time = 0
+	var/last_nausea_time = 0
 	var/nutrition = 400
 	var/hydration = 400
 

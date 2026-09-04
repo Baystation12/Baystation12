@@ -84,12 +84,14 @@
 	if(!should_have_organ(BP_STOMACH))
 		return ..()
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
-	if(stomach)
-		var/food_volume = 0
-		for(var/datum/reagent/nutriment/A in stomach.ingested.reagent_list)
-			food_volume += A.volume
-		return nutrition + food_volume * 15
-	return 0 //Always hungry, but you can't actually eat. :(
+	if (!stomach)
+		return 0 //Always hungry, but you can't actually eat. :(
+	if (stomach.is_full())
+		return INFINITY
+	var/food_volume = 0
+	for (var/datum/reagent/nutriment/food in stomach.ingested.reagent_list)
+		food_volume += food.volume
+	return nutrition + food_volume * 15
 
 /mob/living/carbon/human/ex_act(severity)
 	if (status_flags & GODMODE)
@@ -703,8 +705,9 @@
 	else if(!(locate(/mob) in contents))
 		nothing_to_puke = TRUE
 
-	if(nothing_to_puke)
+	if(nothing_to_puke && prob(80))
 		custom_emote(1,"dry heaves.")
+		adjust_nutrition(-(rand(1,5)))
 		return
 
 	if(should_have_organ(BP_STOMACH))
@@ -718,6 +721,7 @@
 			M.dropInto(get_turf(src))
 			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
 				M.throw_at(get_edge_target_turf(src,dir),7,7,src)
+	adjust_nutrition(-(rand(3,8)))
 
 	// vomit into a toilet
 	for(var/obj/structure/hygiene/toilet/T in range(1, src))
@@ -747,27 +751,39 @@
 		handle_additional_vomit_reagents(splat)
 		splat.update_icon()
 
-/mob/living/carbon/human/vomit(timevomit = 1, level = 3, delay = 0)
-	set waitfor = 0
-
-	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || is_dead() || lastpuke)
+///Process all vomiting through handle_vomit() unless you want to force it by design. If called without value; default value will cause vomiting.
+/mob/living/carbon/human/vomit(vomit_score = 100, motion = FALSE, silent = FALSE)
+	if (isSynthetic() || is_dead() || vomit_score <= 0)
 		return
-
-	timevomit = clamp(timevomit, 1, 10)
-	level = clamp(level, 1, 3)
-
-	lastpuke = TRUE
-	if(delay)
-		sleep(delay)
-	to_chat(src, SPAN_WARNING("You feel nauseous..."))
-	if(level > 1)
-		sleep(150 / timevomit)	//15 seconds until second warning
-		to_chat(src, SPAN_WARNING("You feel like you are about to throw up!"))
-		if(level > 2)
-			sleep(100 / timevomit)	//and you have 10 more for mad dash to the bucket
+	var/interval = clamp(120 SECONDS - (((vomit_score/100)**2) * 100 SECONDS), 20 SECONDS, 120 SECONDS) //Symptoms are more frequent the higher the score; non-linear increase.
+	if (!silent && world.time >= last_nausea_time + interval/2)
+		last_nausea_time = world.time
+		nausea(vomit_score, motion)
+	if (!check_has_mouth() || vomit_score < 30)
+		return
+	if ((world.time >= last_puke_time + interval))
+		last_puke_time = world.time
+		if (!prob(vomit_score))
+			return //Will reset vomit counter even if it fails to trigger.
+		if (world.time <= last_nausea_time + 5 SECONDS)
+			addtimer(new Callback(src, PROC_REF(empty_stomach)), 5 SECONDS)
+		else
 			empty_stomach()
-	sleep(350)	//wait 35 seconds before next volley
-	lastpuke = FALSE
+
+///Process all nausea through handle_vomit() and vomit() unless you want to force it by design. If called without value; default value will cause severe nausea.
+///Calling it directly won't have a cool-down.
+/mob/living/carbon/human/nausea(vomit_score = 100, motion = FALSE)
+	if (isSynthetic() || is_dead() || vomit_score <= 0)
+		return
+	var/nausea_message = motion? "You feel the world moving around you and ": "You feel "
+	switch (vomit_score)
+		if (0 to 29)
+			nausea_message += "nauseous..."
+		if (30 to 59)
+			nausea_message += "that you might throw up."
+		if (60 to INFINITY)
+			nausea_message += "that you are about to throw up!"
+	to_chat(src, SPAN_WARNING("[nausea_message]"))
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
