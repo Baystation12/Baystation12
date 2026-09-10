@@ -661,12 +661,21 @@
 		if(hydration > 0)
 			adjust_hydration(-species.thirst_factor)
 
-		if(stasis_value > 1 && drowsyness < stasis_value * 4)
-			drowsyness += min(stasis_value, 3)
-			if(!stat && prob(1))
-				to_chat(src, SPAN_NOTICE("You feel slow and sluggish..."))
+		// stasis effects
+		if(stasis_value > 1)
+			var/lesser_evil = should_apply_lesser_evil_stasis_drowsyness()
+			var/drowsyness_cap = lesser_evil ? 9 : stasis_value * 4
+			if(drowsyness < drowsyness_cap)
+				drowsyness += lesser_evil ? 2 : min(stasis_value, 3)
+				if(prob(1))
+					to_chat(src, SPAN_NOTICE("You feel slow and sluggish..."))
 
 	return 1
+
+/mob/living/carbon/human/proc/should_apply_lesser_evil_stasis_drowsyness()
+	var/obj/machinery/atmospherics/unary/cryo_cell/cell = loc
+	var/has_cryo_drug = bloodstr.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone, /datum/reagent/nanitefluid))
+	return (has_cryo_drug && istype(cell) && cell.on > 0) || istype(loc, /obj/structure/closet/body_bag/cryobag)
 
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
