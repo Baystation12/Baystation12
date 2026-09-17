@@ -40,6 +40,27 @@ GLOBAL_LIST_AS(cable_default_colors, list(
 	stacktype = /obj/item/stack/cable_coil
 	singular_name = "length"
 	plural_name = "lengths"
+	action_button_name = "Enable Advanced Wire Placement"
+	default_action_type = /datum/action/item_action/cable
+
+
+/obj/item/stack/cable_coil/proc/IsHeldBy(mob/holder)
+	if (holder.get_active_hand() == src)
+		return TRUE
+	var/list/held = holder.GetAllHeld(/obj/item/stack/cable_coil)
+	return held && (src in held)
+
+
+/obj/item/stack/cable_coil/ui_action_click(mob/living/user)
+	if (user.GetCablePlacementHandler())
+		user.RemoveClickHandler(/datum/click_handler/default/cable)
+		to_chat(user, SPAN_NOTICE("Advanced wire placement disabled."))
+		user.update_action_buttons()
+		return
+	if (!user.PushClickHandler(/datum/click_handler/default/cable))
+		return
+	to_chat(user, SPAN_NOTICE("Advanced wire placement enabled."))
+	user.update_action_buttons()
 
 
 /obj/item/stack/cable_coil/Initialize(mapload, _amount, _color)
@@ -59,6 +80,11 @@ GLOBAL_LIST_AS(cable_default_colors, list(
 		<p>Cable coils can be used to place cables on the ground. To do this, click an adjacent plating turf with a cable coil while on help intent. Placing cables requires 1 unit of cable.</p>
 		<p>You can create continuous cables without cable knots by clicking on an existing cable knot instead of the turf.</p>
 		<p>You can wire across z-levels with cables by clicking on an open space turf with the cable coil. This creates a cable that descends down to the lower z-level's turf. If the open space turf has a lattice on it, this behaviour is overridden to allow placing normal cables in space. You can get around this by removing the lattice, placing the cable, then re-placing the lattice. Creating multi-z cables requires 2 lengths of cable.</p>
+
+		<h5>Advanced Placement Mode</h5>
+		<p>While holding a roll of coil in your hand, you can toggle <i>advanced placement mode</i> using an action button at the top left.</p>
+		<p>In this mode while holding the roll, you'll see a ghost of cables and possible directions. Click once to start drawing, and you'll get a new ghost of possible directions that cable can go.</p>
+		<p>Click again to place the cable. Swap hands to release the anchor, or click the spot you started at.</p>
 
 		<h5>Robotics Repairs</h5>
 		<p>Using cable coil on a mob while targeting a body part that is robotic allows you to perform rudimentary burn damage repair. This uses up to 5 lengths of cable at a time depending on the amount of damage, and may require multiple uses. You must be on help intent to perform this interaction.</p>
@@ -170,7 +196,7 @@ GLOBAL_LIST_AS(cable_default_colors, list(
 			w_class = ITEM_SIZE_NORMAL
 
 
-/obj/item/stack/cable_coil/proc/CreateCable(turf/target, mob/living/user, from_dir, to_dir)
+/obj/item/stack/cable_coil/proc/CreateCable(turf/target, mob/living/user, from_dir, to_dir, cost = 1)
 	if(!isturf(target))
 		return
 	var/obj/structure/cable/cable = new (target, color)
@@ -187,35 +213,64 @@ GLOBAL_LIST_AS(cable_default_colors, list(
 		cable.mergeDiagonalsNetworks(cable.d1)
 	if(cable.d2 & (cable.d2 - 1))
 		cable.mergeDiagonalsNetworks(cable.d2)
-	use(1)
+	use(cost)
 	if (!cable.shock(user, 50))
 		return
 	if (prob(50))
 		return
-	new /obj/item/stack/cable_coil (target, 1, cable.color)
+	new /obj/item/stack/cable_coil (target, cost, cable.color)
 	qdel(cable)
 
 
-/obj/item/stack/cable_coil/proc/PlaceCableOnTurf(turf/target, mob/living/user)
+/obj/item/stack/cable_coil/proc/CanPlaceCableOnTurf(turf/target, mob/living/user)
 	if (!isturf(user.loc))
-		return
+		return FALSE
 	if (get_amount() < 1)
 		to_chat(user, SPAN_WARNING("There is no cable left."))
-		return
+		return FALSE
 	if (!user.Adjacent(target))
 		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
-		return
+		return FALSE
 	if (istype(target, /turf/simulated/floor) && !target.is_plating()) // Making sure it's not a floor tile
 		to_chat(user, SPAN_WARNING("Remove the tiling first."))
-		return
+		return FALSE
 	var/obj/structure/catwalk/catwalk = locate(/obj/structure/catwalk, target)
 	if (catwalk)
 		if (catwalk.plated_tile && !catwalk.hatch_open)
 			to_chat(user, SPAN_WARNING("Open the catwalk hatch first."))
-			return
+			return FALSE
 		else if (!catwalk.plated_tile)
 			to_chat(user, SPAN_WARNING("You can't reach underneath the catwalk."))
-			return
+			return FALSE
+	return TRUE
+
+
+/obj/item/stack/cable_coil/proc/CreateCableChecked(turf/target, mob/living/user, dir_1, dir_2, cost = 1)
+	for (var/obj/structure/cable/cable in target)
+		if ((cable.d1 == dir_1 && cable.d2 == dir_2) || (cable.d2 == dir_1 && cable.d1 == dir_2))
+			to_chat(user, SPAN_WARNING("There's already a cable at that position."))
+			return FALSE
+	CreateCable(target, user, dir_1, dir_2, cost)
+	return TRUE
+
+
+/obj/item/stack/cable_coil/proc/PlaceCableBetween(turf/target, mob/living/user, dir_1, dir_2)
+	if (dir_1 == dir_2)
+		return FALSE
+	if (!CanPlaceCableOnTurf(target, user))
+		return FALSE
+	var/d1 = min(dir_1, dir_2)
+	var/d2 = max(dir_1, dir_2)
+	var/cost = d1 ? 2 : 1
+	if (!can_use(cost))
+		USE_FEEDBACK_STACK_NOT_ENOUGH(src, cost, "to lay a cable between those two points.")
+		return FALSE
+	return CreateCableChecked(target, user, d1, d2, cost)
+
+
+/obj/item/stack/cable_coil/proc/PlaceCableOnTurf(turf/target, mob/living/user, list/click_params)
+	if (!CanPlaceCableOnTurf(target, user))
+		return
 	var/to_dir = 0
 	if (istype(target, /turf/simulated/open) && !locate(/obj/structure/lattice, target))
 		if (!can_use(2))
@@ -226,26 +281,27 @@ GLOBAL_LIST_AS(cable_default_colors, list(
 			USE_FEEDBACK_FAILURE("\The [below] below needs to have its tiling removed before you can lay a cable.")
 			return
 		to_dir = DOWN
-	var/from_dir = user.dir
-	if (user.loc != target)
-		from_dir = get_dir(target, user)
-	for (var/obj/structure/cable/cable in target)
-		if ((cable.d1 == from_dir && cable.d2 == to_dir) || (cable.d2 == from_dir && cable.d1 == to_dir))
-			to_chat(user, SPAN_WARNING("There's already a cable at that position."))
-			return
-	CreateCable(target, user, to_dir, from_dir)
+	var/from_dir = 0
+	if (user.GetCablePlacementHandler())
+		from_dir = get_cable_dir_from_click(click_params)
+	if (!from_dir)
+		from_dir = user.dir
+		if (user.loc != target)
+			from_dir = get_dir(target, user)
+	if (!CreateCableChecked(target, user, to_dir, from_dir))
+		return
 	if (to_dir != DOWN)
 		return
 	CreateCable(GetBelow(target), user, UP, 0)
 
 
-/obj/item/stack/cable_coil/proc/JoinCable(obj/structure/cable/cable, mob/living/user)
+/obj/item/stack/cable_coil/proc/JoinCable(obj/structure/cable/cable, mob/living/user, list/click_params)
 	var/turf/user_turf = user.loc
 	if (!isturf(user_turf))
 		return
 	var/turf/cable_turf = cable.loc
 	if (user_turf == cable_turf)
-		PlaceCableOnTurf(cable_turf, user)
+		PlaceCableOnTurf(cable_turf, user, click_params)
 		return
 	var/from_dir = get_dir(cable, user)
 	if (cable.d1 == from_dir || cable.d2 == from_dir)

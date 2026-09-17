@@ -2,7 +2,7 @@
 	base_type = /datum/extension/support_lattice
 	expected_type = /atom
 
-/datum/extension/support_lattice/proc/try_construct(obj/item/C, mob/living/user)
+/datum/extension/support_lattice/proc/try_construct(obj/item/C, mob/living/user, list/click_params)
 	var/turf/T = get_turf(holder)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, T)
@@ -37,7 +37,7 @@
 
 	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
-		coil.PlaceCableOnTurf(T, user)
+		coil.PlaceCableOnTurf(T, user, click_params)
 		return TRUE
 
 	return FALSE
