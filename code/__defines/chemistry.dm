@@ -43,6 +43,7 @@
 #define CE_ENERGETIC     "energetic"    // Speeds up stamina recovery.
 #define	CE_VOICELOSS     "whispers"     // Lowers the subject's voice to a whisper
 #define CE_STIMULANT     "stimulants"   // Makes it harder to disarm someone
+#define CE_NAUSEA        "nausea"       // Increases probability of vomiting
 
 //reagent flags
 #define IGNORE_MOB_SIZE    FLAG_01

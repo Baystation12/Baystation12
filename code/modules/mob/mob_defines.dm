@@ -186,6 +186,9 @@
 
 	var/mob_size = MOB_MEDIUM
 
+	///Last world.time the mob teleported; used to track residual effects of teleporting on the mob.
+	var/last_teleport_time
+
 	var/paralysis = 0
 	var/stunned = 0
 	var/weakened = 0
