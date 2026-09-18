@@ -66,6 +66,21 @@
 		if (occupant)
 			occupant.examine(arglist(args))
 
+/obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user as mob)
+	if ((. = ..()) && !(user in src))
+		return
+
+	playsound(src, 'sound/effects/glassknock.ogg', 90, 1)
+	user.visible_message("[user.name] knocks on the glass from inside of \the [initial(src.name)].",
+						"You knock on the glass from inside of \the [initial(src.name)].",
+						"You hear a knocking sound.")
+	return TRUE
+
+/obj/machinery/atmospehrics/unary/cryo_cell/CanUseTopic(mob/user)
+	if (user in src)
+		return STATUS_CLOSE
+	. = ..()
+
 /obj/machinery/atmospherics/unary/cryo_cell/Process()
 	..()
 	if(!node)
@@ -288,7 +303,8 @@
 	if(occupant)
 		if(occupant.is_dead())
 			return
-		occupant.set_stat(UNCONSCIOUS)
+		if(occupant.silent < 1)
+			occupant.silent += 1
 		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone, /datum/reagent/nanitefluid)) >= REM
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
