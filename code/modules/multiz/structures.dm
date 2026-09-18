@@ -154,10 +154,10 @@
 		return
 
 	if(target_down && target_up)
-		var/direction = alert(M,"Do you want to go up or down?", "Ladder", "Up", "Down", "Cancel")
-
-		if(direction == "Cancel")
-			return
+		var/radial = list()
+		radial["Up"] = mutable_appearance("icons/screen/radial.dmi", "radial_ladder_up")
+		radial["Down"] = mutable_appearance("icons/screen/radial.dmi", "radial_ladder_down")
+		var/direction = show_radial_menu(M, src, radial, require_near = TRUE, radius = 30, tooltips = TRUE, check_locs = list(src))
 
 		if(!M.may_climb_ladders(src))
 			return
@@ -167,6 +167,8 @@
 				return target_up
 			if("Down")
 				return target_down
+			else
+				return
 	else
 		return target_down || target_up
 
