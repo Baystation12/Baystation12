@@ -60,7 +60,7 @@
 
 /turf/space/use_tool(obj/item/C, mob/living/user, list/click_params)
 	var/datum/extension/support_lattice/sl = get_extension(src, /datum/extension/support_lattice)
-	if (sl.try_construct(C, user))
+	if (sl.try_construct(C, user, click_params))
 		return TRUE
 
 	return ..()

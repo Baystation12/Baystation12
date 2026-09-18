@@ -164,7 +164,7 @@
 /turf/simulated/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(isCoil(thing) && can_build_cable(user))
 		var/obj/item/stack/cable_coil/coil = thing
-		coil.PlaceCableOnTurf(src, user)
+		coil.PlaceCableOnTurf(src, user, click_params)
 		return TRUE
 	return ..()
 

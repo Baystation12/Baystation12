@@ -140,7 +140,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		if (!cable.can_use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to add cable to \the [src].")
 			return TRUE
-		cable.JoinCable(src, user)
+		cable.JoinCable(src, user, click_params)
 		return TRUE
 
 	// Multitool - Measure power

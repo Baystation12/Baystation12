@@ -44,7 +44,7 @@
 		return TRUE
 
 	if(isCoil(C) || (flooring && istype(C, /obj/item/stack/material/rods)))
-		return ..(C, user)
+		return ..()
 
 	if(!(isScrewdriver(C) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
 		return TRUE

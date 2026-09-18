@@ -150,6 +150,7 @@
 	#define BEAM_PROJECTILE_LAYER  2
 	#define SUPERMATTER_WALL_LAYER 3
 	#define SPEECH_INDICATOR_LAYER 4
+	#define CURSOR_CATCHER_LAYER   5
 
 #define FULLSCREEN_PLANE                500 // for fullscreen overlays that do not cover the hud.
 

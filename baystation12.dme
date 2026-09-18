@@ -2865,6 +2865,7 @@
 #include "code\modules\power\apc.dm"
 #include "code\modules\power\breaker_box.dm"
 #include "code\modules\power\cable_coil.dm"
+#include "code\modules\power\cable_placement.dm"
 #include "code\modules\power\cable_structure.dm"
 #include "code\modules\power\cell.dm"
 #include "code\modules\power\cell_rack.dm"
