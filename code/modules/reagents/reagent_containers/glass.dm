@@ -79,6 +79,18 @@
 		return TRUE
 	return ..()
 
+/obj/item/reagent_containers/glass/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target)
+	if(!is_open_container())
+		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
+		return TRUE
+	return ..()
+
+/obj/item/reagent_containers/glass/standard_pour_into(mob/user, atom/target)
+	if(!is_open_container())
+		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
+		return TRUE
+	return ..()
+
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)
 	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
