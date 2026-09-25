@@ -43,6 +43,7 @@
 
 /datum/reagent/bicaridine/process_overdose(mob/living/carbon/M)
 	..()
+	M.add_chemical_effect(CE_NAUSEA, 1)
 	if(ishuman(M))
 		M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
 		var/mob/living/carbon/human/H = M
@@ -343,19 +344,21 @@
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
-/datum/reagent/deletrathol/affect_blood(mob/living/carbon/human/H, removed)
-	H.add_chemical_effect(CE_PAINKILLER, 80)
-	H.add_chemical_effect(CE_SLOWDOWN, 1)
-	H.make_dizzy(2)
-	if(prob(75))
-		H.drowsyness++
-	if(prob(25))
-		H.mod_confused(1)
+/datum/reagent/deletrathol/affect_blood(mob/living/carbon/affected, removed)
+	affected.add_chemical_effect(CE_PAINKILLER, 80)
+	affected.add_chemical_effect(CE_SLOWDOWN, 1)
+	affected.add_chemical_effect(CE_NAUSEA, 2)
+	affected.make_dizzy(2)
+	if (prob(75))
+		affected.drowsyness++
+	if (prob(25))
+		affected.mod_confused(1)
 
-/datum/reagent/deletrathol/process_overdose(mob/living/carbon/M)
+/datum/reagent/deletrathol/process_overdose(mob/living/carbon/affected)
 	..()
-	M.druggy = max(M.druggy, 2)
-	M.add_chemical_effect(CE_PAINKILLER, 10)
+	affected.druggy = max(affected.druggy, 2)
+	affected.add_chemical_effect(CE_NAUSEA, 2)
+	affected.add_chemical_effect(CE_PAINKILLER, 40)
 
 /* Other medicine */
 
@@ -410,15 +413,16 @@
 	flags = IGNORE_MOB_SIZE
 	value = 5.9
 
-/datum/reagent/alkysine/affect_blood(mob/living/carbon/M, removed)
-	if (IS_METABOLICALLY_INERT(M))
+/datum/reagent/alkysine/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
 		return
-	M.add_chemical_effect(CE_PAINKILLER, 10)
-	M.add_chemical_effect(CE_BRAIN_REGEN, 1)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.mod_confused(1)
-		H.drowsyness++
+	affected.add_chemical_effect(CE_PAINKILLER, 10)
+	affected.add_chemical_effect(CE_BRAIN_REGEN, 1)
+	affected.add_chemical_effect(CE_NAUSEA, 1)
+	if(ishuman(affected))
+		var/mob/living/carbon/human/human = affected
+		human.mod_confused(1)
+		human.drowsyness++
 
 /datum/reagent/imidazoline
 	name = "Imidazoline"
@@ -454,6 +458,7 @@
 	value = 6
 
 /datum/reagent/peridaxon/affect_blood(mob/living/carbon/M, removed)
+	M.add_chemical_effect(CE_NAUSEA, 2)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/internal/I in H.internal_organs)
@@ -540,14 +545,31 @@
 	M.dizziness = 0
 	M.drowsyness = 0
 	M.stuttering = 0
+	M.add_chemical_effect(CE_NAUSEA, -1)
 	M.clear_confused()
 
 	if (M.metabolized.has_reagent(/datum/reagent/ethanol))
 		M.metabolized.remove_reagent(/datum/reagent/ethanol, 5 * removed)
 
+/datum/reagent/ondansetron
+	name = "Ondansetron"
+	description = "Ondansentron is a mild anti-emetic used to treat nausea and vomiting."
+	taste_description = "sourness"
+	reagent_state = SOLID
+	color = "#5a82bd"
+	overdose = REAGENTS_OVERDOSE
+	bioavailability = 0.8
+	scannable = TRUE
+	value = 2.1
+
+/datum/reagent/ondansetron/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	affected.add_chemical_effect(CE_NAUSEA, -2)
+
 /datum/reagent/hyronalin
 	name = "Hyronalin"
-	description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
+	description = "Hyronalin is an anti-emetic drug that can also be used to counter the effect of radiation poisoning."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#408000"
@@ -557,8 +579,16 @@
 	flags = IGNORE_MOB_SIZE
 	value = 2.3
 
-/datum/reagent/hyronalin/affect_blood(mob/living/carbon/M, removed)
-	M.radiation = max(M.radiation - 30 * removed, 0)
+/datum/reagent/hyronalin/affect_blood(mob/living/carbon/affected, removed)
+	if (IS_METABOLICALLY_INERT(affected))
+		return
+	affected.add_chemical_effect(CE_NAUSEA, -3)
+	affected.radiation = max(affected.radiation - 30 * removed, 0)
+
+/datum/reagent/hyronalin/process_overdose(mob/living/carbon/affected)
+	..()
+	affected.make_dizzy(3)
+	affected.add_chemical_effect(CE_NAUSEA, -3)
 
 /datum/reagent/arithrazine
 	name = "Arithrazine"
@@ -594,6 +624,7 @@
 		affected.add_chemical_effect(CE_ANTIVIRAL, VIRUS_COMMON)
 	else if (volume < overdose)
 		affected.add_chemical_effect(CE_ANTIVIRAL, VIRUS_ENGINEERED)
+		affected.add_chemical_effect(CE_NAUSEA , 1)
 
 /datum/reagent/spaceacillin/process_overdose(mob/living/carbon/affected)
 	..()
@@ -979,10 +1010,12 @@
 	if(volume >= 5)
 		M.add_chemical_effect(CE_PULSE, 1)
 		M.add_chemical_effect(CE_SLOWDOWN, (volume/5) ** 2)
+		M.add_chemical_effect(CE_NAUSEA, clamp(volume/5, 1, 6))
 
 /datum/reagent/lactate/affect_metabolites(mob/living/carbon/affected, dose)
 	if (dose > 20)
 		affected.make_jittery(10)
+		affected.add_chemical_effect(CE_NAUSEA, 3)
 
 /datum/reagent/nanoblood
 	name = "Nanoblood"

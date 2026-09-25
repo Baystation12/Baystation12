@@ -414,7 +414,7 @@
 			if(istype(usr,/mob/living/carbon/human))
 				var/mob/living/carbon/human/M = usr
 				to_chat(M, SPAN_WARNING("An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit."))
-				M.vomit()
+				M.vomit(100, silent = TRUE)
 			else
 				to_chat(usr, SPAN_WARNING("You feel ill."))
 		if(ORION_TRAIL_CARP)
