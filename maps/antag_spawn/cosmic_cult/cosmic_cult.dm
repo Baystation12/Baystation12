@@ -4,6 +4,7 @@
 	skybox_background_for_zs = "void"
 	skybox_stars_for_zs = "wisp"
 	skybox_color_for_zs = COLOR_WHITE
+	area_usage_test_exempted_areas = list(/area/cosmic_dark)
 
 /datum/map_template/ruin/antag_spawn/cosmic_cult/after_load(z)
 	..()
