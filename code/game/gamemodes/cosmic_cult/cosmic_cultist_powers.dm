@@ -41,6 +41,7 @@ GLOBAL_ALIST_EMPTY(cosmic_cult_power_instances)
 		action.button_icon_state = power.ability_icon_state
 		action.power = power
 		action.cultist = src
+		action.cooldown = power.cooldown
 
 		active_powers[T] = action
 

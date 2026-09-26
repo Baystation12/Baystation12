@@ -4,7 +4,7 @@
 	ability_icon_state = "return"
 	innate_power = FALSE
 
-/datum/power/cosmic_cult/execute(datum/cosmic_cultist/cultist, datum/action/cosmic_cult/action)
+/datum/power/cosmic_cult/astral_return/execute(datum/cosmic_cultist/cultist, datum/action/cosmic_cult/action)
 	cosmic_cult_shift_vfx(cultist.owning_mind.current)
 	cosmic_cult_sink_out(cultist.owning_mind.current)
 	sleep(2 SECONDS)
@@ -17,3 +17,4 @@
 	cultist.return_to = null
 
 	cultist.revoke_power(/datum/power/cosmic_cult/astral_return)
+	return TRUE

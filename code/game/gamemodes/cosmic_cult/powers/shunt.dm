@@ -3,6 +3,7 @@
 	desc = "Shunt your target's mind out of their body and unto the cosmic dark, temporarily rendering their body mindless."
 	ability_icon_state = "shunt"
 	innate_power = TRUE
+	cooldown = 120 SECONDS
 
 /datum/power/cosmic_cult/shunt/can_target(atom/A)
 	return !is_cosmic_cultist(A) && ishuman(A)
@@ -11,10 +12,10 @@
 	var/mob/living/carbon/human/target = get_target(cultist)
 	var/datum/mind/mind = target.mind
 	if (!istype(target) || !istype(mind))
-		return
+		return FALSE
 
 	if (!do_after(usr, 0.6 SECONDS, target))
-		return
+		return FALSE
 
 	cosmic_cult_shunt_vfx(target)
 
@@ -27,6 +28,7 @@
 
 	var/datum/action/wisp_action = new /datum/action/cosmic_cult/astral_return(target)
 	wisp_action.Grant(wisp)
+	return TRUE
 
 /datum/action/cosmic_cult/astral_return
 	name = "Astral Return"

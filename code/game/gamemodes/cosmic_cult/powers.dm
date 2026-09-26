@@ -3,9 +3,12 @@
 	// if the power is granted just by virtue of being a cultist
 	var/innate_power = FALSE
 
+	// cooldown for the action
+	var/cooldown
+
 // executes the power
 /datum/power/cosmic_cult/proc/execute(datum/cosmic_cultist/cultist, datum/action/cosmic_cult/action)
-	return
+	return FALSE
 
 // gets a target
 /datum/power/cosmic_cult/proc/get_target(datum/cosmic_cultist/cultist)
@@ -50,6 +53,11 @@
 
 	var/datum/power/cosmic_cult/power
 	var/datum/cosmic_cultist/cultist
+	var/cooldown
 
 /datum/action/cosmic_cult/Activate()
-	power.execute(cultist, src)
+	var/ok = power.execute(cultist, src)
+	if (ok && !isnull(cooldown))
+		cooldown_end = cooldown + world.time
+		button?.UpdateIcon()
+
