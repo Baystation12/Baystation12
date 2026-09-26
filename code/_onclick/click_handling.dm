@@ -226,6 +226,7 @@ var/global/const/CLICK_HANDLER_REMOVE_ON_CANCEL     = FLAG_03
  * - `popped_handler`. Not used, should probably be removed?
  */
 /mob/proc/GetClickHandler(datum/click_handler/popped_handler)
+	RETURN_TYPE(/datum/click_handler)
 	SETUP_CLICK_HANDLERS
 	return click_handlers[1]
 
