@@ -38,6 +38,11 @@
 /datum/action/cosmic_cult/astral_return/Activate()
 	owner.mind?.transfer_to(target)
 
+	var/mob/living/cosmic_cult/wisp/wisp = owner
+	if (istype(wisp) && wisp.to_convert)
+		var/mob/living/target_mob = target
+		GLOB.cosmic_cult.add_antagonist(target_mob.mind, 1, 1)
+
 	cosmic_cult_shunt_vfx(owner)
 	qdel(owner)
 	qdel(src)
