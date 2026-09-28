@@ -16,3 +16,6 @@
 
 /obj/cosmic_cult/monument/on_update_icon()
 	set_light(6, 1, "#42a4ae")
+
+/obj/cosmic_cult/monument/attack_hand(mob/living/user)
+	cosmic_cult_shockwave_vfx(src)
