@@ -142,13 +142,13 @@
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
 	damage_flags = 0
-	damage = 15
-	agony = 15
+	damage = 8
+	agony = 30
 	embed = FALSE
 
 /obj/item/projectile/bullet/pistol/rubber/holdout
-	agony = 10
-	damage = 10
+	agony = 20
+	damage = 5
 
 //4mm. Tiny, very low damage, does not embed, but has very high penetration. Only to be used for the experimental SMG.
 /obj/item/projectile/bullet/flechette
@@ -169,7 +169,7 @@
 	name = "beanbag"
 	damage = 20
 	damage_flags = 0
-	agony = 30
+	agony = 60
 	embed = FALSE
 	armor_penetration = 0
 	distance_falloff = 3
