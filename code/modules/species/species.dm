@@ -193,7 +193,7 @@ GLOBAL_LIST_EMPTY(mob_ref_to_species_name)
 	var/greater_form              // Greater form, if any, ie. human for monkeys.
 	var/holder_type
 	var/gluttonous = 0            // Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING, GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT
-	var/stomach_capacity = 5      // How much stuff they can stick in their stomach
+	var/stomach_capacity = 75      // How much volume (considers mobs/items after conversion) they can stick in their stomach
 	var/rarity_value = 1          // Relative rarity/collector value for this species.
 	                              // Determines the organs that the species spawns with and
 	var/list/has_organ = list(    // which required-organ checks are conducted.
