@@ -152,6 +152,7 @@
 	else if(volume < effective_dose)
 		effectiveness = volume/effective_dose
 	M.add_chemical_effect(CE_BLOCKAGE, (80 * effectiveness)/100)
+	M.add_chemical_effect(CE_NAUSEA, 2)
 
 /datum/reagent/toxin/venom
 	name = "Spider Venom"

@@ -7,7 +7,8 @@
 	dead_icon = "stomach"
 	organ_tag = BP_STOMACH
 	parent_organ = BP_GROIN
-	var/stomach_capacity
+	///Defined at species level, this value is overriden at Initialize(). This is set here as a failsafe.
+	var/stomach_max_volume = 75
 	var/datum/reagents/metabolism/ingested
 	var/next_cramp = 0
 
@@ -19,6 +20,8 @@
 	. = ..()
 	var/ingested_atom = owner ? owner : src
 	ingested = new/datum/reagents/metabolism(240, ingested_atom, CHEM_INGEST)
+	if (species.stomach_capacity)
+		stomach_max_volume = species.stomach_capacity
 	if(species.gluttonous)
 		action_button_name = PUKE_ACTION_NAME
 
@@ -39,20 +42,22 @@
 /obj/item/organ/internal/stomach/proc/can_eat_atom(atom/movable/food)
 	return !isnull(get_devour_time(food))
 
-/obj/item/organ/internal/stomach/proc/is_full(atom/movable/food)
-	var/total = floor(ingested.total_volume / 10)
+///Can return values greater than 100%; to increase penalties of overeating.
+/obj/item/organ/internal/stomach/proc/stomach_fullness(atom/movable/food)
+	var/total = ingested.total_volume
 	for(var/a in contents + food)
 		if(ismob(a))
 			var/mob/M = a
-			total += M.mob_size
+			total += (M.mob_size * 8)
 		else if(isobj(a))
 			var/obj/item/I = a
-			total += I.get_storage_cost()
+			total += (I.get_storage_cost() * 25)
 		else
 			continue
-		if(total > species.stomach_capacity)
-			return TRUE
-	return FALSE
+	return ((total/stomach_max_volume) * 100)
+
+/obj/item/organ/internal/stomach/proc/is_full(atom/movable/food)
+	return (stomach_fullness(food) >= 100)
 
 /obj/item/organ/internal/stomach/proc/get_devour_time(atom/movable/food)
 	if(iscarbon(food) || isanimal(food))
@@ -128,8 +133,6 @@
 	if(is_usable())
 		ingested.metabolize()
 
-#define STOMACH_VOLUME 65
-
 /obj/item/organ/internal/stomach/Process()
 	..()
 
@@ -155,20 +158,5 @@
 		else if(world.time >= next_cramp)
 			next_cramp = world.time + rand(200,800)
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
-
-		var/alcohol_volume = ingested.get_reagent_amount(/datum/reagent/ethanol)
-
-		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
-		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
-			owner.seizure()
-
-		// Alcohol counts as double volume for the purposes of vomit probability
-		var/effective_volume = ingested.total_volume + alcohol_volume
-
-		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
-		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
-		if(prob(vomit_probability))
-			owner.vomit()
-
-#undef STOMACH_VOLUME
+			owner.add_chemical_effect(CE_NAUSEA, 3)
 #undef PUKE_ACTION_NAME
