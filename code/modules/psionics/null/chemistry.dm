@@ -66,8 +66,8 @@
 			if(BP_IS_CRYSTAL(I))
 				if(prob(35))
 					to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-				I.heal_damage(rand(1,3))
-				break
+					I.heal_damage(rand(1,3))
+					break
 				if(BP_IS_BRITTLE(I))
 					I.status &= ~ORGAN_BRITTLE
 					break
