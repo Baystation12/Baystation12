@@ -37,9 +37,6 @@
 	value = 4.9
 
 /datum/reagent/bicaridine/affect_blood(mob/living/carbon/M, removed)
-	// metorapan doesnt work with bicaridine
-	if (M.bloodstr.has_reagent(/datum/reagent/metorapan) || M.metabolized.has_reagent(/datum/reagent/metorapan))
-		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(6 * removed, 0)
 		M.add_chemical_effect(CE_PAINKILLER, 10)
@@ -52,44 +49,6 @@
 		for(var/obj/item/organ/external/E in H.organs)
 			if(E.status & ORGAN_ARTERY_CUT && prob(2))
 				E.status &= ~ORGAN_ARTERY_CUT
-
-/datum/reagent/metorapan
-	name = "Metorapan"
-	description = "Metoparan is an advanced medication used to treat physical trauma, working almost twice as fast as bicaridine, but coming with dangerous side effects if combined with its predecessor and requiring strict dosages."
-	taste_description = "metallic bitterness"
-	taste_mult = 3
-	reagent_state = LIQUID
-	color = "#ff4840"
-	overdose = REAGENTS_OVERDOSE / 2 // 15
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 6.7
-
-/datum/reagent/metorapan/affect_blood(mob/living/carbon/M, removed)
-	if (has_bicaridine(M))
-		if (volume < overdose)
-			process_overdose(M)
-		return
-	if (volume >= overdose)
-		return
-	if (!IS_METABOLICALLY_INERT(M))
-		M.heal_organ_damage(10 * removed, 0)
-
-/datum/reagent/metorapan/process_overdose(mob/living/carbon/M)
-	..()
-	if(ishuman(M))
-		M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
-		if(prob(70))
-			M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
-		if(has_bicaridine(M)) // od triggered with bicaridine wont heal tendons
-			return
-		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_TENDON_CUT && prob(2))
-				E.status &= ~ORGAN_TENDON_CUT
-
-/datum/reagent/metorapan/proc/has_bicaridine(mob/living/carbon/M)
-	return M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -507,32 +466,6 @@
 					if(I.damage >= I.min_bruised_damage)
 						continue
 				I.heal_damage(3 * removed)
-
-/datum/reagent/cortolin
-	name = "Cortolin"
-	description = "Cortolin is an advanced organ-regenerative medication used in treating cardiac damage. "
-	taste_description = "rotten bandaids"
-	reagent_state = LIQUID
-	color = "#008000"
-	metabolism = REM
-	overdose = REAGENTS_OVERDOSE / 3 // 10
-	scannable = 1
-	flags = IGNORE_MOB_SIZE
-	value = 6
-
-/datum/reagent/cortolin/affect_blood(mob/living/carbon/M, removed)
-	if (!ishuman(M))
-		return
-	var/mob/living/carbon/human/H = M
-
-	for (var/obj/item/organ/internal/heart/I in H.internal_organs)
-		if (BP_IS_ROBOTIC(I))
-			continue
-		if (I.organ_tag == BP_BRAIN)
-			H.mod_confused(1)
-			continue
-		if (I.organ_tag == BP_HEART && I.damage > 0)
-			I.damage = max(I.damage - 2 * removed, 0)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"

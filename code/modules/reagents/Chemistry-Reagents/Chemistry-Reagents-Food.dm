@@ -50,7 +50,6 @@
 
 /datum/reagent/nutriment/glucose
 	name = "Glucose"
-	taste_description = "sickly sweetness"
 	color = "#ffffff"
 	scannable = 1
 
