@@ -692,6 +692,7 @@
 #include "code\game\gamemodes\cosmic_cult\tileset\rift.dm"
 #include "code\game\gamemodes\cosmic_cult\tileset\wall.dm"
 #include "code\game\gamemodes\cosmic_cult\tileset\wall_material.dm"
+#include "code\game\gamemodes\cosmic_cult\vfx\corruption.dm"
 #include "code\game\gamemodes\cosmic_cult\vfx\glare.dm"
 #include "code\game\gamemodes\cosmic_cult\vfx\lapse.dm"
 #include "code\game\gamemodes\cosmic_cult\vfx\shift.dm"

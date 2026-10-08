@@ -8,8 +8,8 @@
 /obj/cosmic_cult/rift/Initialize()
 	. = ..()
 	update_icon()
-	START_PROCESSING(SScosmic_corruption, src)
 	set_light(2, 2, "#42a4ae")
+	set_extension(src, /datum/extension/cosmic_cult/corruptor)
 
 /obj/cosmic_cult/rift/on_update_icon()
 	ClearOverlays()
@@ -17,6 +17,3 @@
 		overlay_image(icon, "vfx"),
 		emissive_appearance(icon, "vfx")
 	))
-
-/obj/cosmic_cult/rift/Process()
-	. = ..()
