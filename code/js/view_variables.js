@@ -4,10 +4,6 @@ var last_filter = "";
 // Reading innerText forces a layout. Doing that after every removeChild froze long lists for seconds per key press.
 function entryText(node) {
 	var text = node.textContent;
-	if (typeof text != "string") {
-		// Old Trident document modes have no textContent.
-		text = node.innerText;
-	}
 	return text.toLowerCase();
 }
 
