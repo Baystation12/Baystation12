@@ -24,6 +24,9 @@ SUBSYSTEM_DEF(skybox)
 	/// The skybox icon state to use for stars
 	var/static/star_state = "stars"
 
+	/// whether to use the global skybox instead of per-map data
+	var/static/ignore_z_overrides = FALSE
+
 	/// A "z" => /image map of skyboxes already generated
 	var/static/list/skybox_cache = list()
 
@@ -51,11 +54,12 @@ SUBSYSTEM_DEF(skybox)
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if (!skybox_cache["[z]"])
 		skybox_cache["[z]"] = generate_skybox(z)
-		if (GLOB.using_map.use_overmap)
+		if (GLOB.using_map.use_overmap && !has_z_override(z))
 			var/obj/overmap/visitable/O = map_sectors["[z]"]
 			if (istype(O))
 				for (var/zlevel in O.map_z)
-					skybox_cache["[zlevel]"] = skybox_cache["[z]"]
+					if (!has_z_override(zlevel))
+						skybox_cache["[zlevel]"] = skybox_cache["[z]"]
 	return skybox_cache["[z]"]
 
 
@@ -69,9 +73,9 @@ SUBSYSTEM_DEF(skybox)
 				background_color = iterator_star.color
 				break
 
-	var/image/base = overlay_image(skybox_icon, background_icon, background_color)
+	var/image/base = overlay_image(skybox_icon, get_background_icon(z), get_background_color(z))
 	if (use_stars)
-		var/image/stars = overlay_image(skybox_icon, star_state, flags = RESET_COLOR)
+		var/image/stars = overlay_image(skybox_icon, get_star_state(z), flags = RESET_COLOR)
 		base.AddOverlays(stars)
 	res.AddOverlays(base)
 	if (GLOB.using_map.use_overmap && use_overmap_details)
@@ -90,6 +94,39 @@ SUBSYSTEM_DEF(skybox)
 	return res
 
 
+/datum/controller/subsystem/skybox/proc/has_z_override(z)
+	if (ignore_z_overrides)
+		return FALSE
+	var/key = "[z]"
+	return GLOB.using_map.skybox_background_by_z[key] || GLOB.using_map.skybox_stars_by_z[key] || GLOB.using_map.skybox_color_by_z[key]
+
+
+/datum/controller/subsystem/skybox/proc/get_background_icon(z)
+	if (ignore_z_overrides)
+		return background_icon
+	return GLOB.using_map.skybox_background_by_z["[z]"] || background_icon
+
+
+/datum/controller/subsystem/skybox/proc/get_star_state(z)
+	if (ignore_z_overrides)
+		return star_state
+	return GLOB.using_map.skybox_stars_by_z["[z]"] || star_state
+
+
+/datum/controller/subsystem/skybox/proc/get_background_color(z)
+	if (ignore_z_overrides)
+		return background_color
+	return GLOB.using_map.skybox_color_by_z["[z]"] || background_color
+
+
+/datum/controller/subsystem/skybox/proc/set_z_override(list/zlevels, new_background, new_stars, new_color)
+	for (var/z in zlevels)
+		GLOB.using_map.skybox_background_by_z["[z]"] = new_background
+		GLOB.using_map.skybox_stars_by_z["[z]"] = new_stars
+		GLOB.using_map.skybox_color_by_z["[z]"] = new_color
+	rebuild_skyboxes(zlevels)
+
+
 /datum/controller/subsystem/skybox/proc/rebuild_skyboxes(list/zlevels)
 	for (var/z in zlevels)
 		skybox_cache["[z]"] = generate_skybox(z)
@@ -97,8 +134,11 @@ SUBSYSTEM_DEF(skybox)
 		client.update_skybox(TRUE)
 
 
-/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details)
+/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details, new_ignore_z_overrides = FALSE)
 	var/need_rebuild = FALSE
+	if (new_ignore_z_overrides != ignore_z_overrides)
+		ignore_z_overrides = new_ignore_z_overrides
+		need_rebuild = TRUE
 	if (new_state != background_icon)
 		background_icon = new_state
 		need_rebuild = TRUE

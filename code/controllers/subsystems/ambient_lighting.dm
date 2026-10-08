@@ -20,6 +20,9 @@ SUBSYSTEM_DEF(ambient_lighting)
 	/// The index of the space ambient group, if one exists
 	var/static/space_group_index = 0
 
+	/// alist of overrides from z => ambient group index instead of the default rainbow one
+	var/static/list/z_group_indices = list()
+
 	/// Fifo queue of turfs that require an ambient lighting update
 	var/static/list/turf/queue = list()
 
@@ -65,10 +68,14 @@ SUBSYSTEM_DEF(ambient_lighting)
 						break
 			if (needs_ambience)
 				var/obj/overmap/visitable/sector/exoplanet/exoplanet = map_sectors["[turf.z]"]
-				if (!istype(exoplanet))
+				var/z_group_index = z_group_indices["[turf.z]"]
+				if (istype(exoplanet))
+					if (exoplanet.ambient_group_index)
+						groups[exoplanet.ambient_group_index]?.add_turf(turf)
+				else if (z_group_index)
+					groups[z_group_index]?.add_turf(turf)
+				else
 					space_group?.add_turf(turf)
-				else if (exoplanet.ambient_group_index)
-					groups[exoplanet.ambient_group_index]?.add_turf(turf)
 		else if (turf.ambient_active && turf.ambient_group_flags)
 			for (var/group_index in 1 to MAX_AMBIENT_GROUP_INDEX)
 				groups[group_index]?.remove_turf(turf)

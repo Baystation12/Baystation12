@@ -62,6 +62,10 @@
 			endgame_exits += loc
 			delete_me = 1
 			return
+		if ("cosmic_dark_entry")
+			GLOB.cosmic_dark_entries += loc
+			delete_me = 1
+			return
 
 	landmarks_list += src
 	return 1

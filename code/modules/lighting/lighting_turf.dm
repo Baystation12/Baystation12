@@ -168,8 +168,6 @@
 		if (!lighting_corners_initialised || !corners)
 			generate_missing_corners()
 
-		new /atom/movable/lighting_overlay(src, now)
-
 		for (var/datum/lighting_corner/C in corners)
 			if (!C.active) // We would activate the corner, calculate the lighting for it.
 				for (var/L in C.affecting)
@@ -177,6 +175,8 @@
 					S.recalc_corner(C, TRUE)
 
 				C.active = TRUE
+
+		new /atom/movable/lighting_overlay(src, now)
 
 // Returns the average color of this tile. Roughly corresponds to the color of a single old-style lighting overlay.
 /turf/proc/get_avg_color()

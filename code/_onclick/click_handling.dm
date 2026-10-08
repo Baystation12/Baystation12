@@ -26,6 +26,8 @@ if(!click_handlers) { \
 var/global/const/CLICK_HANDLER_REMOVE_ON_MOB_LOGOUT = FLAG_01
 /// Removes and prevents creation of the click handler if it is not the active handler for the mob.
 var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
+/// Removes the click handler when the current action is cancelled
+var/global/const/CLICK_HANDLER_REMOVE_ON_CANCEL     = FLAG_03
 
 /datum/click_handler
 	/// The mob this click handler is attached to.
@@ -173,6 +175,13 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
 /datum/click_handler/proc/CanAutoClick(object, location, params)
 	return
 
+/**
+ * Called when Cancel-Current-Action is invoked.
+ */
+/datum/click_handler/proc/OnCancel()
+	if (HAS_FLAGS(flags, CLICK_HANDLER_REMOVE_ON_CANCEL))
+		user.RemoveClickHandler(src)
+
 /datum/click_handler/default
 	/// Holds click params [2] and a reference [1] to the atom under the cursor on MouseDown/Drag
 	var/list/selected_target = list(null, null)
@@ -217,6 +226,7 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
  * - `popped_handler`. Not used, should probably be removed?
  */
 /mob/proc/GetClickHandler(datum/click_handler/popped_handler)
+	RETURN_TYPE(/datum/click_handler)
 	SETUP_CLICK_HANDLERS
 	return click_handlers[1]
 

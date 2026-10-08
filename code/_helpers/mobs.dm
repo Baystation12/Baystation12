@@ -308,7 +308,7 @@
 	if (!mob)
 		return
 	mob.do_user_interrupted = world.time
-
+	mob.GetClickHandler().OnCancel()
 
 /proc/able_mobs_in_oview(origin)
 	RETURN_TYPE(/list)
