@@ -59,11 +59,12 @@ var/global/list/sparring_attack_cache = list()
 	var/armour = target.get_blocked_ratio(zone, DAMAGE_BRUTE, damage = attack_damage)
 
 	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
+		var/obj/item/organ/external/affecting = target.get_organ(zone)
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
 				target.visible_message(SPAN_DANGER("\The [target] looks momentarily disoriented."), SPAN_DANGER("You see stars."))
-				target.apply_effect(attack_damage * 2, EFFECT_EYE_BLUR, armour)
+				target.apply_effect(attack_damage * 2, EFFECT_EYE_BLUR, armour * 100)
 			if(BP_L_ARM, BP_L_HAND)
 				if (target.l_hand)
 					// Disarm left hand
@@ -83,18 +84,20 @@ var/global/list/sparring_attack_cache = list()
 						target.visible_message(SPAN_CLASS("danger", "[pick("\The [target] was sent flying backward!", "\The [target] staggers back from the impact!")]"))
 					if(prob(50))
 						target.set_dir(GLOB.reverse_dir[target.dir])
-					target.apply_effect(attack_damage * 0.4, EFFECT_WEAKEN, armour)
+					target.apply_effect(attack_damage * 0.4, EFFECT_WEAKEN, armour * 100)
 			if(BP_GROIN)
-				var/datum/pronouns/pronouns = target.choose_from_pronouns()
-				target.visible_message(
-					SPAN_WARNING("\The [target] looks like [pronouns.he] [pronouns.is] in pain!"),
-					SPAN_WARNING("[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your [pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]")
-				)
-				target.apply_effects(stutter = attack_damage * 2, agony = attack_damage* 3, blocked = armour)
+				if(affecting?.can_feel_pain())
+					var/datum/pronouns/pronouns = target.choose_from_pronouns()
+					target.visible_message(
+						SPAN_WARNING("\The [target] looks like [pronouns.he] [pronouns.is] in pain!"),
+						SPAN_WARNING("[(target.gender=="female") ? "Oh god that hurt!" : "Oh no, not your [pick("testicles", "crown jewels", "clockweights", "family jewels", "marbles", "bean bags", "teabags", "sweetmeats", "goolies")]!"]")
+					)
+					target.apply_effect(attack_damage * 2, EFFECT_STUTTER, armour * 100)
+					affecting.add_pain(attack_damage * 3 * (1 - armour))
 			if(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT)
 				if(!target.lying)
 					target.visible_message(SPAN_WARNING("\The [target] gives way slightly."))
-					target.apply_effect(attack_damage * 3, EFFECT_PAIN, armour)
+					affecting?.add_pain(attack_damage * 3 * (1 - armour))
 	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
 			target.visible_message(SPAN_CLASS("danger", "\The [target] [pick("slumps", "falls", "drops")] down to the ground!"))
