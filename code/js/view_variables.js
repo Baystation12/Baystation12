@@ -1,5 +1,12 @@
 // main search functionality
 var last_filter = "";
+
+// Reading innerText forces a layout. Doing that after every removeChild froze long lists for seconds per key press.
+function entryText(node) {
+	var text = node.textContent;
+	return text.toLowerCase();
+}
+
 function updateSearch(refid) {
 	var filter = document.getElementById('filter').value.toLowerCase();
 	var vars_ol = document.getElementById("vars");
@@ -13,7 +20,7 @@ function updateSearch(refid) {
 		for (var i = children.length - 1; i >= 0; --i) {
 			try {
 				var li = children[i];
-				if (li.innerText.toLowerCase().indexOf(filter) == -1) {
+				if (entryText(li).indexOf(filter) == -1) {
 					vars_ol.removeChild(li);
 				}
 			} catch(err) {}
@@ -27,7 +34,7 @@ function updateSearch(refid) {
 		for (var i = 0; i < complete_list.length; ++i) {
 			try {
 				var li = complete_list[i];
-				if (!filter || li.innerText.toLowerCase().indexOf(filter) != -1) {
+				if (!filter || entryText(li).indexOf(filter) != -1) {
 					vars_ol.appendChild(li);
 				}
 			} catch(err) {}

@@ -47,3 +47,29 @@
 	else
 		pass("No special VV handlers had overlapping handling.")
 	return 1
+
+/datum/unit_test/view_variables_lists_holding_themselves_shall_be_rendered
+	name = "VIEW VARIABLES: Lists Holding Themselves Shall Be Rendered"
+
+/datum/unit_test/view_variables_lists_holding_themselves_shall_be_rendered/start_test()
+	var/list/looped = list("self")
+	looped["self"] = looped
+	// A datum's vars list holds itself under "vars".
+	var/datum/holder = new
+	var/looped_text
+	try
+		looped_text = make_view_variables_value(looped)
+		make_view_variables_value(list("holder" = holder.vars))
+	catch(var/exception/e)
+		fail("Rendering a list that holds itself caused an exception: [e] on [e.file]:[e.line]")
+		qdel(holder)
+		return 1
+	qdel(holder)
+
+	// The list is expanded once, and where it appears inside itself it is only named.
+	var/mentions = length(splittext(looped_text, "/list (1)")) - 1
+	if(mentions == 2)
+		pass("Lists that hold themselves are expanded once.")
+	else
+		fail("A list that holds itself was named [mentions] times instead of 2.")
+	return 1

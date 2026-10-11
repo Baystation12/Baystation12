@@ -158,7 +158,8 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 		. += make_view_variables_var_entry(D, x, D.get_variable_value(x))
 	return jointext(., null)
 
-/proc/make_view_variables_value(value, varname = "*")
+/// `ancestors` holds the lists this value is nested in, so a list that contains itself is not expanded forever.
+/proc/make_view_variables_value(value, varname = "*", list/ancestors)
 	var/vtext = ""
 	var/extra = list()
 	if(isnull(value))
@@ -181,14 +182,15 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	else if(islist(value))
 		var/list/L = value
 		vtext = "/list ([length(L)])"
-		if(!(varname in view_variables_dont_expand) && length(L) > 0 && length(L) < 100)
+		if(!(varname in view_variables_dont_expand) && length(L) > 0 && length(L) < 100 && !(L in ancestors))
+			var/list/nested_in = (ancestors || list()) + list(L)
 			extra += "<ul>"
 			for (var/index = 1 to length(L))
 				var/entry = L[index]
 				if(!isnum(entry) && !isnull(entry) && !(varname in view_variables_no_assoc))
-					extra += "<li>[index]: [make_view_variables_value(entry)] -> [make_view_variables_value(L[entry])]</li>"
+					extra += "<li>[index]: [make_view_variables_value(entry, ancestors = nested_in)] -> [make_view_variables_value(L[entry], ancestors = nested_in)]</li>"
 				else
-					extra += "<li>[index]: [make_view_variables_value(entry)]</li>"
+					extra += "<li>[index]: [make_view_variables_value(entry, ancestors = nested_in)]</li>"
 			extra += "</ul>"
 	else
 		vtext = "[value]"
