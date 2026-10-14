@@ -290,7 +290,7 @@
 	var/obj/item/card/id/I = user.GetIdCard()
 	if(length(GLOB.all_crew_records))
 		random_record = pick(GLOB.all_crew_records)
-	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)
+	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user, load_from_mob = FALSE)
 	if(I)
 		new_record.set_name(I.registered_name)
 		new_record.set_formal_name("[I.formal_name_prefix][I.registered_name][I.formal_name_suffix]")
@@ -300,6 +300,8 @@
 		new_record.set_fingerprint(I.fingerprint_hash)
 		new_record.set_bloodtype(I.blood_type)
 		new_record.set_dna(I.dna_hash)
+		new_record.photo_front = I.front
+		new_record.photo_side = I.side
 		if(I.military_branch)
 			new_record.set_branch(I.military_branch.name)
 			if(I.military_rank)
