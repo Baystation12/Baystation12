@@ -190,6 +190,7 @@
 	var/obj/item/I = get_active_hand()
 	if(istype(I))
 		I.on_active_hand(src)
+	update_mouse_pointer()
 
 /mob/living/carbon/proc/activate_hand(selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 

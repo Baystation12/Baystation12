@@ -95,6 +95,21 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
 	return
 
 /**
+ * Called by `/atom/Click()` before `OnClick()` when this is the mob's currently active click handler.
+ *
+ * BYOND sends a click when the mouse button is released. A handler that already ran the click for that press in
+ * `OnMouseDown()` returns `TRUE` here, so that one press is not clicked twice.
+ *
+ * **Parameters**:
+ * - `A` - The atom clicked on.
+ * - `params` (list of strings) - List of click parameters. See BYOND's `CLick()` documentation.
+ *
+ * Returns boolean. If `TRUE`, the click is dropped and `OnClick()` is not called.
+ */
+/datum/click_handler/proc/SkipClick(atom/A, params)
+	return FALSE
+
+/**
  * Called on doubleclick by `/atom/DblClick()` when this is the mob's currently active click handler.
  *
  * **Parameters**:
@@ -173,26 +188,84 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
 /datum/click_handler/proc/CanAutoClick(object, location, params)
 	return
 
+/**
+ * Whether a press of the mouse button on `object` should be run as a click at once, instead of waiting for the click
+ * BYOND sends when the button is released. Checked by `/datum/click_handler/default/OnMouseDown()`.
+ *
+ * **Parameters**:
+ * - `object` - The atom the press would click on.
+ * - `location` - the turf, stat panel, grid cell, etc. containing the object where it was clicked
+ * - `params` (list of strings) - List of click parameters. See BYOND's `CLick()` documentation.
+ *
+ * Returns boolean.
+ */
+/datum/click_handler/proc/CanClickOnPress(atom/object, location, params)
+	return FALSE
+
 /datum/click_handler/default
 	/// Holds click params [2] and a reference [1] to the atom under the cursor on MouseDown/Drag
 	var/list/selected_target = list(null, null)
+	/// Whether the latest press of the left mouse button was already run as a click by `OnMouseDown()`. The click BYOND sends for that press on release is then skipped.
+	var/clicked_on_press = FALSE
 
 /datum/click_handler/default/OnClick(atom/A, params)
 	user.ClickOn(A, params)
+
+/datum/click_handler/default/SkipClick(atom/A, params)
+	if (!clicked_on_press)
+		return FALSE
+	var/list/modifiers = params2list(params)
+	if (modifiers[MOUSE_BTN] != MOUSE_1)
+		return FALSE
+	clicked_on_press = FALSE
+	return TRUE
 
 /datum/click_handler/default/OnDblClick(atom/A, params)
 	user.DblClickOn(A, params)
 
 /datum/click_handler/default/OnMouseDown(atom/object, location, control, params)
+	var/list/modifiers = params2list(params)
+	if (modifiers[MOUSE_BTN] == MOUSE_1) // A new press. If the last one is still owed a click, it was released over something else and none is coming.
+		clicked_on_press = FALSE
 	var/delay = CanAutoClick(object, location, params)
 	if(delay)
 		selected_target[1] = object
 		selected_target[2] = params
 		while(selected_target[1])
-			OnClick(selected_target[1], selected_target[2])
+			var/atom/target = ResolveClickTarget(selected_target[1])
+			if(target)
+				OnClick(target, selected_target[2])
 			sleep(delay)
+	else if (ClickOnPress(object, location, params))
+		return
 	else if (istype(object, /obj/screen))
 		object.MouseDown(location, control, params)
+
+/**
+ * Runs a press of the mouse button as a click if `CanClickOnPress()` allows it, and has `SkipClick()` drop the click
+ * BYOND sends for the same press on release.
+ *
+ * Returns boolean. Whether the press was clicked.
+ */
+/datum/click_handler/default/proc/ClickOnPress(atom/object, location, params)
+	object = ResolveClickTarget(object)
+	if (!object || !CanClickOnPress(object, location, params))
+		return FALSE
+	clicked_on_press = TRUE
+	OnClick(object, params)
+	return TRUE
+
+/**
+ * The atom a click made from `OnMouseDown()` should go to. A click catcher stands in for the turf it covers on the
+ * user's screen, as it does in its own `Click()`.
+ *
+ * Returns an atom, or null if a click catcher covers no turf.
+ */
+/datum/click_handler/default/proc/ResolveClickTarget(atom/object)
+	if (istype(object, /obj/screen/click_catcher))
+		var/obj/screen/click_catcher/catcher = object
+		return screen_loc2turf(catcher.screen_loc, get_turf(user))
+	return object
 
 /datum/click_handler/default/OnMouseUp(atom/object, location, control, params)
 	selected_target[1] = null
@@ -209,6 +282,14 @@ var/global/const/CLICK_HANDLER_REMOVE_IF_NOT_TOP    = FLAG_02
 
 /datum/click_handler/default/CanAutoClick(object, location, params)
 	return user.CanMobAutoclick(object, location, params)
+
+/datum/click_handler/default/CanClickOnPress(atom/object, location, params)
+	var/list/modifiers = params2list(params)
+	if (modifiers[MOUSE_BTN] != MOUSE_1 || modifiers[MOUSE_2] || modifiers[MOUSE_3])
+		return FALSE
+	if (modifiers[MOUSE_SHIFT] || modifiers[MOUSE_CTRL] || modifiers[MOUSE_ALT])
+		return FALSE
+	return user.CanMobClickOnPress(object, location, params)
 
 /**
  * Returns the mob's currently active click handler.

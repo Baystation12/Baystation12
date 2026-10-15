@@ -23,6 +23,8 @@
 		return
 
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
+	if (click_handler.SkipClick(src, params))
+		return
 	click_handler.OnClick(src, params)
 
 /atom/DblClick(location, control, params)
@@ -566,6 +568,25 @@ GLOBAL_LIST_INIT(click_catchers)
 
 /obj/item/gun/CanItemAutoclick(object, location, params)
 	return can_autofire
+
+/// Whether a press of the left mouse button on `object` is clicked at once, without waiting for the release. See `/datum/click_handler/default/OnMouseDown()`.
+/mob/proc/CanMobClickOnPress(atom/object, location, params)
+	return FALSE
+
+/mob/living/carbon/CanMobClickOnPress(atom/object, location, params)
+	var/obj/item/held = get_active_hand()
+	if (!held?.CanItemClickOnPress(object, location, params))
+		return FALSE
+	// Only a click from the map on something out of reach. Anything at hand, and a mob inside something, waits for the release as usual.
+	if (!isturf(loc) || !(isturf(object) || isturf(object.loc)))
+		return FALSE
+	return !object.Adjacent(src)
+
+/obj/item/proc/CanItemClickOnPress(atom/object, location, params)
+	return FALSE
+
+/obj/item/gun/CanItemClickOnPress(atom/object, location, params)
+	return TRUE
 
 /atom/proc/IsAutoclickable()
 	return TRUE
