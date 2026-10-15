@@ -97,6 +97,7 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+	update_mouse_pointer()
 
 	if(machine)
 		machine.on_user_login(src)
