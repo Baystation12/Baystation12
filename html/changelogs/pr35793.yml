@@ -1,5 +1,0 @@
-author: Banditoz
-delete-after: True
-changes:
-  - bugfix: "The image from the ID card is now copied to the fake record when using the crew arrival announcement and records uplink item."
-  - bugfix: "Your current mob's records are also no longer copied to the new fake record."
