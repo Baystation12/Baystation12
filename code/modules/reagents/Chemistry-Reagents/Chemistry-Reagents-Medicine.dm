@@ -66,7 +66,8 @@
 	value = 6.7
 
 /datum/reagent/metorapan/affect_blood(mob/living/carbon/M, removed)
-	if (has_bicaridine(M))
+	var/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
+	if (has_bicaridine)
 		if (volume < overdose)
 			process_overdose(M)
 		return
@@ -77,20 +78,18 @@
 
 /datum/reagent/metorapan/process_overdose(mob/living/carbon/M)
 	..()
+	var/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
 	if (!ishuman(M))
-	    return
+		return
 	M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
 	if (prob(70))
 		M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
-	if (has_bicaridine(M)) // od triggered with bicaridine wont heal tendons
+	if (has_bicaridine) // od triggered with bicaridine wont heal tendons
 		return
 	var/mob/living/carbon/human/H = M
 	for (var/obj/item/organ/external/E in H.organs)
 		if (E.status & ORGAN_TENDON_CUT && prob(2))
 			E.status &= ~ORGAN_TENDON_CUT
-
-/datum/reagent/metorapan/proc/has_bicaridine(mob/living/carbon/M)
-	return M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -527,8 +526,8 @@
 	var/mob/living/carbon/human/H = M
 
 	var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
-	if (!BP_IS_ROBOTIC(heart))
-		I.damage = max(I.damage - 2 * removed, 0)
+	if (heart && !BP_IS_ROBOTIC(heart))
+		heart.damage = max(heart.damage - 2 * removed, 0)
 	H.mod_confused(1)
 
 /datum/reagent/ryetalyn
