@@ -1,0 +1,6 @@
+author: Aigamuxa
+delete-after: True
+changes:
+  - bugfix: "Armor now properly reduces knockdown, stutter and pain from unarmed attacks."
+  - bugfix: "Pain from a kick to the groin or legs is now felt in the limb that was hit instead of a random one."
+  - bugfix: "Prosthetic groins and species that cannot feel pain no longer react to groin kicks."
