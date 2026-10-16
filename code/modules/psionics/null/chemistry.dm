@@ -66,11 +66,10 @@
 			if(BP_IS_CRYSTAL(I))
 				if(prob(35))
 					to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
-					I.heal_damage(rand(1,3))
-					break
+				I.heal_damage(rand(1,3))
 				if(BP_IS_BRITTLE(I))
 					I.status &= ~ORGAN_BRITTLE
-					break
+				break
 			else if(prob(15))
 				to_chat(H, SPAN_DANGER("You feel visceral, sharp twisting within your body!"))
 				if(I.can_feel_pain())
