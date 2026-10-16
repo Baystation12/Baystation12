@@ -77,16 +77,17 @@
 
 /datum/reagent/metorapan/process_overdose(mob/living/carbon/M)
 	..()
-	if(ishuman(M))
-		M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
-		if(prob(70))
-			M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
-		if(has_bicaridine(M)) // od triggered with bicaridine wont heal tendons
-			return
-		var/mob/living/carbon/human/H = M
-		for(var/obj/item/organ/external/E in H.organs)
-			if(E.status & ORGAN_TENDON_CUT && prob(2))
-				E.status &= ~ORGAN_TENDON_CUT
+	if (!ishuman(M))
+	    return
+	M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
+	if (prob(70))
+		M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
+	if (has_bicaridine(M)) // od triggered with bicaridine wont heal tendons
+		return
+	var/mob/living/carbon/human/H = M
+	for (var/obj/item/organ/external/E in H.organs)
+		if (E.status & ORGAN_TENDON_CUT && prob(2))
+			E.status &= ~ORGAN_TENDON_CUT
 
 /datum/reagent/metorapan/proc/has_bicaridine(mob/living/carbon/M)
 	return M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
