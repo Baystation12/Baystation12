@@ -526,14 +526,10 @@
 		return
 	var/mob/living/carbon/human/H = M
 
-	for (var/obj/item/organ/internal/heart/I in H.internal_organs)
-		if (BP_IS_ROBOTIC(I))
-			continue
-		if (I.organ_tag == BP_BRAIN)
-			H.mod_confused(1)
-			continue
-		if (I.organ_tag == BP_HEART && I.damage > 0)
-			I.damage = max(I.damage - 2 * removed, 0)
+	var/obj/item/organ/internal/heart/heart = H.internal_organs_by_name[BP_HEART]
+	if (!BP_IS_ROBOTIC(heart))
+		I.damage = max(I.damage - 2 * removed, 0)
+	H.mod_confused(1)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"
