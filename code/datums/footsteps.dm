@@ -86,3 +86,11 @@
 		'sound/effects/footstep/sand2.ogg',
 		'sound/effects/footstep/sand3.ogg',
 		'sound/effects/footstep/sand4.ogg')
+
+/singleton/footsteps/cosmic
+	footstep_sounds = list(
+		'sound/coscult/step1.ogg',
+		'sound/coscult/step2.ogg',
+		'sound/coscult/step3.ogg',
+		'sound/coscult/step4.ogg',
+		'sound/coscult/step5.ogg')

@@ -274,7 +274,6 @@
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
 
-
 /////////Obj Abilities////////
 //Buttons to trigger objects//
 //////////////////////////////
