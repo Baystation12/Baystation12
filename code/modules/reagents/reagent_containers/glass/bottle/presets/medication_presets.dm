@@ -65,7 +65,7 @@
 
 /obj/item/reagent_containers/glass/bottle/hyronalin
 	name = "hyronalin bottle"
-	desc = "A small bottle. Contains hyronalin - used to treat radiation poisoning."
+	desc = "A small bottle. Contains hyronalin - an anti-emetic used to treat nausea, vomiting, and radiation poisoning."
 	preset_reagent = /datum/reagent/hyronalin
 
 /obj/item/reagent_containers/glass/bottle/imidazoline
