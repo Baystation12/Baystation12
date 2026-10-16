@@ -511,7 +511,7 @@
 
 /datum/reagent/cortolin
 	name = "Cortolin"
-	description = "Cortolin is an advanced organ-regenerative medication used in treating cardiac damage. "
+	description = "Cortolin is an advanced organ-regenerative medication used in treating cardiac damage."
 	taste_description = "rotten bandaids"
 	reagent_state = LIQUID
 	color = "#008000"
