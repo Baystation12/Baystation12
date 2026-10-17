@@ -47,6 +47,3 @@
 	var/player_triggered_sleeping = 0
 	///Reagents towards which there is an active allergy.
 	var/list/active_allergies = list()
-	/// Checks if the given reagent is in bloodstream or metabolized
-	/mob/living/carbon/proc/has_reagent(/datum/reagent/reagent)
-		return bloodstr.has_reagent(reagent) || metabolized.has_reagent(reagent)
