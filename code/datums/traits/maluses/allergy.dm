@@ -6,6 +6,7 @@
 	metaoptions = list(
 		/datum/reagent/antidexafen = 2,
 		/datum/reagent/bicaridine = 2,
+		/datum/reagent/metorapan = 2,
 		/datum/reagent/dermaline = 2,
 		/datum/reagent/drugs/mindbreaker = 1,
 		/datum/reagent/drink/juice/apple = 0,
@@ -27,6 +28,7 @@
 		/datum/reagent/paracetamol = 2,
 		/datum/reagent/antidepressant = 2,
 		/datum/reagent/peridaxon = 2,
+		/datum/reagent/cortolin = 2,
 		/datum/reagent/spaceacillin = 2,
 		/datum/reagent/opiate = 2,
 		/datum/reagent/tricordrazine = 2,
