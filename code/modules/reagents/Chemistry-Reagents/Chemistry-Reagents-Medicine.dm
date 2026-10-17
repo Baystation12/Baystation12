@@ -38,7 +38,7 @@
 
 /datum/reagent/bicaridine/affect_blood(mob/living/carbon/M, removed)
 	// metorapan doesnt work with bicaridine
-	if (M.bloodstr.has_reagent(/datum/reagent/metorapan) || M.metabolized.has_reagent(/datum/reagent/metorapan))
+	M.has_reagent(/datum/reagent/metorapan)
 		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(6 * removed, 0)
@@ -66,8 +66,7 @@
 	value = 6.7
 
 /datum/reagent/metorapan/affect_blood(mob/living/carbon/M, removed)
-	var/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
-	if (has_bicaridine)
+	M.has_reagent(/datum/reagent/bicaridine)
 		if (volume < overdose)
 			process_overdose(M)
 		return
@@ -78,7 +77,7 @@
 
 /datum/reagent/metorapan/process_overdose(mob/living/carbon/M)
 	..()
-	var/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
+	if(has_reagent(/datum/reagent/bicaridine))/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
 	if (!ishuman(M))
 		return
 	M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
