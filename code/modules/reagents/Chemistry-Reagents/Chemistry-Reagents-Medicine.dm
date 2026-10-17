@@ -82,7 +82,7 @@
 	M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
 	if (prob(70))
 		M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
-	if (has_reagent(/datum/reagent/bicaridine))
+	M.has_reagent(/datum/reagent/bicaridine)
 		return
 	var/mob/living/carbon/human/H = M
 	for (var/obj/item/organ/external/E in H.organs)
