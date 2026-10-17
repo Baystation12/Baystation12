@@ -563,3 +563,7 @@
 	if (bloodstr.has_reagent(/datum/reagent/hyperzine) || metabolized.has_reagent(/datum/reagent/hyperzine))
 		return TRUE
 	else return FALSE
+
+/// Checks if the given reagent is in bloodstream or metabolized
+/mob/living/carbon/proc/has_reagent(reagent_type, amount = null)
+	return (bloodstr?.has_reagent(reagent_type, amount) || metabolized?.has_reagent(reagent_type, amount))
