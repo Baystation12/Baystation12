@@ -38,7 +38,7 @@
 
 /datum/reagent/bicaridine/affect_blood(mob/living/carbon/M, removed)
 	// metorapan doesnt work with bicaridine
-	M.has_reagent(/datum/reagent/metorapan)
+	if(M.has_reagent(/datum/reagent/metorapan))
 		return
 	if (!IS_METABOLICALLY_INERT(M))
 		M.heal_organ_damage(6 * removed, 0)
@@ -66,7 +66,7 @@
 	value = 6.7
 
 /datum/reagent/metorapan/affect_blood(mob/living/carbon/M, removed)
-	M.has_reagent(/datum/reagent/bicaridine)
+	if(M.has_reagent(/datum/reagent/bicaridine))
 		if (volume < overdose)
 			process_overdose(M)
 		return
@@ -77,13 +77,12 @@
 
 /datum/reagent/metorapan/process_overdose(mob/living/carbon/M)
 	..()
-	if(has_reagent(/datum/reagent/bicaridine))/has_bicaridine = M.bloodstr.has_reagent(/datum/reagent/bicaridine) || M.metabolized.has_reagent(/datum/reagent/bicaridine)
 	if (!ishuman(M))
 		return
 	M.add_chemical_effect(CE_BLOCKAGE, (15 + M.metabolized.get_reagent_amount(type) - overdose)/100)
 	if (prob(70))
 		M.take_organ_damage(4 * metabolism, 0, ORGAN_DAMAGE_FLESH_ONLY)
-	if (has_bicaridine) // od triggered with bicaridine wont heal tendons
+	if(M.has_reagent(/datum/reagent/bicaridine))
 		return
 	var/mob/living/carbon/human/H = M
 	for (var/obj/item/organ/external/E in H.organs)
