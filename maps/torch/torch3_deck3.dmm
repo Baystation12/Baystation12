@@ -5533,6 +5533,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
+/obj/item/storage/box/checkers,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "mv" = (

@@ -135,37 +135,50 @@
 		return TRUE
 	return FALSE
 
-/obj/item/deck/verb/draw_card()
 
+/obj/item/deck/verb/DrawOneCard()
 	set category = "Object"
-	set name = "Draw"
-	set desc = "Draw a card from a deck."
+	set name = "Draw One Card"
+	set desc = "Draw a single card from a deck."
 	set src in view(1)
+	DrawCards(1)
 
-	if(usr.stat || !Adjacent(usr)) return
 
-	if(!istype(usr,/mob/living/carbon))
+/obj/item/deck/verb/DrawSomeCards()
+	set category = "Object"
+	set name = "Draw Some Cards"
+	set desc = "Draw cards from a deck."
+	set src in view(1)
+	DrawCards()
+
+
+/obj/item/deck/proc/DrawCards(amount)
+	if (!isnum(amount))
+		amount = input(usr, "How many cards would you like to draw?", null, 1) as null | num
+	if (isnull(amount))
 		return
-
 	var/mob/living/carbon/user = usr
-
-	if(!length(cards))
-		to_chat(usr, "There are no cards in the deck.")
+	if (!istype(user) || !user?.use_sanity_check(src))
 		return
-
+	var/taking = length(cards)
+	if (!taking)
+		to_chat(user, SPAN_WARNING("The [src] is empty."))
+		return
+	taking = clamp(amount, 1, taking)
 	var/obj/item/hand/held_hand = user.IsHolding(/obj/item/hand)
 	if (!held_hand)
-		held_hand = new(get_turf(src))
+		held_hand = new (get_turf(src))
 		user.put_in_hands(held_hand)
-
-	if(!held_hand || !user) return
-
-	var/datum/playingcard/drawn_card = cards[1]
-	held_hand.cards += drawn_card
-	cards -= drawn_card
+	var/list/removed = cards.Copy(1, taking + 1)
+	cards = cards.Copy(taking + 1)
+	held_hand.cards += removed
 	held_hand.update_icon()
-	user.visible_message("\The [user] draws a card.")
-	to_chat(user, "It's \the [drawn_card].")
+	user.visible_message(
+		SPAN_ITALIC("\The [user] draws [taking > 1 ? "some cards": "a card"]."),
+		SPAN_ITALIC("You draw [taking] card[taking > 1 ? "s" : ""][taking == amount ? "" : " - all that was left"]."),
+		SPAN_ITALIC("You hear card slide against card.")
+	)
+
 
 /obj/item/deck/verb/deal_card()
 

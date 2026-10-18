@@ -530,33 +530,40 @@
 	icon_state = "checkers"
 	max_storage_space = 24
 	foldable = null
-	contents_allowed = list(/obj/item/reagent_containers/food/snacks/checker)
-	startswith = list(/obj/item/reagent_containers/food/snacks/checker = 12,
-					/obj/item/reagent_containers/food/snacks/checker/red = 12)
+	contents_allowed = list(/obj/item/checker)
+	startswith = list(
+		/obj/item/checker = 12,
+		/obj/item/checker/red = 12
+	)
 
 
 /obj/item/storage/box/checkers/chess
 	name = "black chess box"
 	desc = "This box holds all the pieces needed for the black side of the chess board."
+	max_storage_space = 17
 	icon_state = "chess_b"
-	startswith = list(/obj/item/reagent_containers/food/snacks/checker/pawn = 8,
-				/obj/item/reagent_containers/food/snacks/checker/knight = 2,
-				/obj/item/reagent_containers/food/snacks/checker/bishop = 2,
-				/obj/item/reagent_containers/food/snacks/checker/rook = 2,
-				/obj/item/reagent_containers/food/snacks/checker/queen = 1,
-				/obj/item/reagent_containers/food/snacks/checker/king = 1)
+	startswith = list(
+		/obj/item/checker/pawn = 8,
+		/obj/item/checker/knight = 2,
+		/obj/item/checker/bishop = 2,
+		/obj/item/checker/rook = 2,
+		/obj/item/checker/queen = 2,
+		/obj/item/checker/king = 1
+	)
 
 
 /obj/item/storage/box/checkers/chess/red
 	name = "red chess box"
 	desc = "This box holds all the pieces needed for the red side of the chess board."
 	icon_state = "chess_r"
-	startswith = list(/obj/item/reagent_containers/food/snacks/checker/pawn/red = 8,
-				/obj/item/reagent_containers/food/snacks/checker/knight/red = 2,
-				/obj/item/reagent_containers/food/snacks/checker/bishop/red = 2,
-				/obj/item/reagent_containers/food/snacks/checker/rook/red = 2,
-				/obj/item/reagent_containers/food/snacks/checker/queen/red = 1,
-				/obj/item/reagent_containers/food/snacks/checker/king/red = 1)
+	startswith = list(
+		/obj/item/checker/pawn/red = 8,
+		/obj/item/checker/knight/red = 2,
+		/obj/item/checker/bishop/red = 2,
+		/obj/item/checker/rook/red = 2,
+		/obj/item/checker/queen/red = 2,
+		/obj/item/checker/king/red = 1
+	)
 
 
 /obj/item/storage/box/headset

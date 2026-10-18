@@ -9,7 +9,7 @@
 	var/board = list()
 	var/selected = -1
 
-/obj/item/board/AltClick(mob/user)
+/obj/item/board/ShiftClick(mob/user)
 	if (CanPhysicallyInteract(user))
 		interact(user)
 		return TRUE
@@ -61,7 +61,7 @@
 		close_browser(user, "window=boardgame")
 		user.unset_machine()
 		return
-
+	user.set_machine(src)
 	var/list/dat = list({"
 	<html><head><style type='text/css'>
 	td,td a{height:50px;width:50px}table{border-spacing:0;border:none;border-collapse:collapse}td{text-align:center;padding:0;background-repeat:no-repeat;background-position:center center}td.light{background-color:#6cf}td.dark{background-color:#544b50}td.selected{background-color:#c8dbc3}td a{display:table-cell;text-decoration:none;position:relative;line-height:50px;height:50px;width:50 px;vertical-align:middle}
@@ -159,65 +159,63 @@
 
 //Checkers
 
-/obj/item/reagent_containers/food/snacks/checker
+/obj/item/checker
 	name = "checker"
 	desc = "It is plastic and shiny."
 	icon = 'icons/obj/pieces.dmi'
 	icon_state = "checker_black"
 	w_class = ITEM_SIZE_TINY
 	center_of_mass = "x=16;y=16"
-	nutriment_desc = list("a choking hazard" = 4)
-	nutriment_amt = 1
 	var/piece_color ="black"
 
-/obj/item/reagent_containers/food/snacks/checker/New()
-	..()
+/obj/item/checker/Initialize()
+	. = ..()
 	icon_state = "[name]_[piece_color]"
 	name = "[piece_color] [name]"
 
-/obj/item/reagent_containers/food/snacks/checker/red
+/obj/item/checker/red
 	piece_color ="red"
 
 //Chess
 
-/obj/item/reagent_containers/food/snacks/checker/pawn
+/obj/item/checker/pawn
 	name = "pawn"
 	desc = "How many pawns will die in your war?"
 
-/obj/item/reagent_containers/food/snacks/checker/pawn/red
+/obj/item/checker/pawn/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/knight
+/obj/item/checker/knight
 	name = "knight"
 	desc = "The piece chess deserves, and needs to actually play."
 
-/obj/item/reagent_containers/food/snacks/checker/knight/red
+/obj/item/checker/knight/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/bishop
+/obj/item/checker/bishop
 	name = "bishop"
 	desc = "What corruption occured, urging holy men to fight?"
 
-/obj/item/reagent_containers/food/snacks/checker/bishop/red
+/obj/item/checker/bishop/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/rook
+/obj/item/checker/rook
 	name = "rook"
 	desc = "Representing ancient moving towers. So powerful and fast they were banned from wars, forever."
 
-/obj/item/reagent_containers/food/snacks/checker/rook/red
+/obj/item/checker/rook/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/queen
+/obj/item/checker/queen
 	name = "queen"
 	desc = "A queen of battle and pain. She dances across the battlefield."
 
-/obj/item/reagent_containers/food/snacks/checker/queen/red
+/obj/item/checker/queen/red
 	piece_color ="red"
 
-/obj/item/reagent_containers/food/snacks/checker/king
+/obj/item/checker/king
 	name = "king"
 	desc = "Why does a chess game end when the king dies?"
 
-/obj/item/reagent_containers/food/snacks/checker/king/red
+/obj/item/checker/king/red
 	piece_color ="red"
