@@ -14,6 +14,7 @@
 
 /datum/action
 	var/name = "Generic Action"
+	var/desc = null
 	var/action_type = AB_ITEM
 	var/procname = null
 	var/atom/movable/target = null
@@ -25,6 +26,7 @@
 	var/button_icon_state = "default"
 	var/background_icon_state = "bg_default"
 	var/mob/living/owner
+	var/cooldown_end
 
 /datum/action/New(Target)
 	target = Target
@@ -59,8 +61,12 @@
 	return
 
 /datum/action/proc/Trigger()
-	if(!Checks())
+	if(!Checks() || processing || OnCooldown())
 		return
+
+	processing = TRUE
+	button?.UpdateIcon()
+
 	switch(action_type)
 		if(AB_ITEM, AB_ITEM_USE_ICON)
 			if(target)
@@ -78,6 +84,9 @@
 		if(AB_GENERIC)
 			if(target && procname)
 				call(target,procname)(usr)
+
+	processing = FALSE
+	button?.UpdateIcon()
 	return
 
 /datum/action/proc/Activate()
@@ -94,6 +103,9 @@
 
 /datum/action/proc/IsAvailable()
 	return Checks()
+
+/datum/action/proc/OnCooldown()
+	return !isnull(cooldown_end) && cooldown_end > world.time
 
 /datum/action/proc/Checks()// returns 1 if all checks pass
 	if(!owner)
@@ -123,6 +135,9 @@
 /datum/action/proc/UpdateName()
 	return name
 
+/datum/action/proc/UpdateDesc()
+	return desc
+
 /obj/screen/movable/action_button
 	var/datum/action/owner
 	screen_loc = "WEST,NORTH"
@@ -149,8 +164,10 @@
 
 
 /obj/screen/movable/action_button/MouseEntered(location, control, params)
-	openToolTip(usr, src, params, tooltip_title, name)
-
+	if (isnull(desc))
+		openToolTip(usr, src, params, tooltip_title, name)
+	else
+		openToolTip(usr, src, params, name, desc)
 
 /obj/screen/movable/action_button/MouseExited(location, control, params)
 	closeToolTip(usr)
@@ -175,6 +192,13 @@
 
 	if(!owner.IsAvailable())
 		color = rgb(128,0,0,128)
+	else if (owner.OnCooldown())
+		color = "#004e6e"
+		animate(src, color = COLOR_WHITE, time = (owner.cooldown_end - world.time), tag = "cooldown_animation")
+		animate(color = COLOR_BLACK, time = 2, easing = JUMP_EASING)
+		animate(color = COLOR_WHITE, time = 1, easing = JUMP_EASING)
+	else if (owner.processing)
+		color = "#5199bd"
 	else
 		color = rgb(255,255,255,255)
 

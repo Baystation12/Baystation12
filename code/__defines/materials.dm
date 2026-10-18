@@ -50,6 +50,7 @@
 #define MATERIAL_ALUMINIUM               "aluminium"
 #define MATERIAL_NULLGLASS               "nullglass"
 #define MATERIAL_GROWTH                  "growth"
+#define MATERIAL_MALIGN                  "malign"
 
 //woods
 #define MATERIAL_WOOD                    "wood"
