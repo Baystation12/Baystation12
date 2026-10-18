@@ -453,17 +453,9 @@
 	fullscreen = !fullscreen
 
 	if (fullscreen)
-		winset(usr, "mainwindow", "titlebar=false")
-		winset(usr, "mainwindow", "can-resize=false")
-		winset(usr, "mainwindow", "is-maximized=false")
-		winset(usr, "mainwindow", "is-maximized=true")
-		winset(usr, "mainwindow", "menu=")
-//		winset(usr, "mainwindow.mainvsplit", "size=0x0")
+		winset(src, "mainwindow", "is-fullscreen=true;menu=")
 	else
-		winset(usr, "mainwindow", "is-maximized=false")
-		winset(usr, "mainwindow", "titlebar=true")
-		winset(usr, "mainwindow", "can-resize=true")
-		winset(usr, "mainwindow", "menu=menu")
+		winset(src, "mainwindow", "is-fullscreen=false;menu=menu")
 
 	fit_viewport()
 

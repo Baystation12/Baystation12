@@ -985,7 +985,7 @@ window "mainwindow"
 		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD
-		pos = 3,0
+		pos = 0,0
 		size = 634x416
 		anchor1 = 0,0
 		anchor2 = 100,100
@@ -1004,13 +1004,13 @@ window "mainwindow"
 
 	elem "input"
 		type = INPUT
-		pos = 3,420
+		pos = 1,420
 		size = 517x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		background-color = #d3b5b5
 		is-default = true
-		border = sunken
+		border = line
 		saved-params = "command"
 	elem "saybutton"
 		type = BUTTON
