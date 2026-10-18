@@ -38,3 +38,4 @@
 				clients += listener.client
 		if (length(clients))
 			invoke_async(user, TYPE_PROC_REF(/atom/movable, animate_chat), message, current_spoken_language, RUNECHAT_LARGE, clients, "radio")
+		log_say("[key_name(user.name)] : ([user.name]) used a megaphone to broadcast: [message]")
