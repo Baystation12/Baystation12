@@ -35,7 +35,7 @@
 	icon_state = "weightlifter"
 	var/weight = 1
 	var/max_weight = 5
-	var/list/success_message = list("with great effort", "straining hard", "without any trouble", "with ease")
+	var/list/success_message = list(" with great effort", ", straining hard", " without any trouble", " with ease")
 	var/list/fail_message = list(", lifting them part of the way and then letting them drop", ", unable to even budge them")
 
 
@@ -91,6 +91,6 @@
 					user.adjust_nutrition(-(adj_weight * DEFAULT_HUNGER_FACTOR))
 					user.adjust_hydration(-(adj_weight * DEFAULT_THIRST_FACTOR))
 				message = success_message[min(1 + round(skill - weight), length(fail_message))]
-				user.visible_message(SPAN_NOTICE("\The [user] lift\s the weights [message]."), SPAN_NOTICE("You lift the weights [message]."))
+				user.visible_message(SPAN_NOTICE("\The [user] lift\s the weights [message]."), SPAN_NOTICE("You lift the weights[message]."))
 				user.update_personal_goal(/datum/goal/weights, 1)
 		being_used = FALSE
