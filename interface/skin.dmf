@@ -1,7 +1,7 @@
 macro "borghotkeymode"
 	elem
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
+		command = ".winset \"input.text-color==#a4bad6 ? mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#3b2a2a : mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
 	elem
 		name = "Center+REP"
 		command = ".center"
@@ -228,7 +228,7 @@ macro "borghotkeymode"
 macro "macro"
 	elem
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
+		command = ".winset \"input.text-color==#a4bad6 ? mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#171717 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
 	elem
 		name = "Center+REP"
 		command = ".center"
@@ -410,7 +410,7 @@ macro "macro"
 macro "hotkeymode"
 	elem
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
+		command = ".winset \"input.text-color==#a4bad6 ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#3b2a2a : mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
 	elem
 		name = "Center+REP"
 		command = ".center"
@@ -655,7 +655,7 @@ macro "hotkeymode"
 macro "borgmacro"
 	elem
 		name = "Tab"
-		command = ".winset \"mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
+		command = ".winset \"input.text-color==#a4bad6 ? mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#171717 : mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
 	elem
 		name = "Center+REP"
 		command = ".center"
@@ -965,6 +965,7 @@ window "mainwindow"
 		icon = 'icons\\ss13_64.png'
 		macro = "macro"
 		menu = "menu"
+		statusbar = false
 	elem "asset_cache_browser"
 		type = BROWSER
 		pos = 424,208
@@ -973,20 +974,10 @@ window "mainwindow"
 		anchor2 = none
 		is-visible = false
 		saved-params = ""
-	elem "hotkey_toggle"
-		type = BUTTON
-		pos = 560,420
-		size = 80x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = ""
-		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
-		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD
 		pos = 0,0
-		size = 634x416
+		size = 640x440
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
@@ -1002,27 +993,6 @@ window "mainwindow"
 		is-visible = false
 		saved-params = ""
 
-	elem "input"
-		type = INPUT
-		pos = 1,420
-		size = 517x20
-		anchor1 = 0,100
-		anchor2 = 100,100
-		background-color = #d3b5b5
-		is-default = true
-		border = line
-		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 520,420
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
-
 window "mapwindow"
 	elem "mapwindow"
 		type = MAIN
@@ -1037,6 +1007,7 @@ window "mapwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		on-status = ".winset \"status_bar.text=[[*]]\" "
 	elem "map"
 		type = MAP
 		pos = 0,0
@@ -1059,6 +1030,17 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
+	elem "status_bar"
+		type = LABEL
+		pos = 0,464
+		size = 280x16
+		anchor1 = 0,100
+		is-visible = true
+		text = ""
+		align = left
+		background-color = #222222
+		text-color = #ffffff
+		border = line
 
 window "outputwindow"
 	elem "outputwindow"
@@ -1077,7 +1059,7 @@ window "outputwindow"
 	elem "browseroutput"
 		type = BROWSER
 		pos = 0,0
-		size = 640x480
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		background-color = #ffffff
@@ -1086,11 +1068,41 @@ window "outputwindow"
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
-		size = 640x480
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
 		saved-params = ""
+	elem "input"
+		type = INPUT
+		pos = 1,460
+		size = 517x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = #d3b5b5
+		is-default = true
+		border = line
+		saved-params = "command"
+	elem "saybutton"
+		type = BUTTON
+		pos = 520,460
+		size = 40x20
+		anchor1 = 100,100
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Chat"
+		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		button-type = pushbox
+	elem "hotkey_toggle"
+		type = BUTTON
+		pos = 560,460
+		size = 80x20
+		anchor1 = 100,100
+		anchor2 = none
+		saved-params = ""
+		text = "Hotkey Toggle"
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		button-type = pushbox
 
 window "rpane"
 	elem "rpane"

@@ -12,6 +12,14 @@ This then swaps the window theme automatically
 Thanks to spacemaniac and mcdonald for help with the JS side of this.
 */
 
+/client/var/dark_theme = FALSE
+
+/// Background color to use for the input.
+/client/proc/input_mode_color(hotkey_mode = FALSE)
+	if(dark_theme)
+		return hotkey_mode ? COLOR_DARKMODE_DARKBACKGROUND : "#3b2a2a"
+	return hotkey_mode ? "#f0f0f0" : "#d3b5b5"
+
 /client/proc/force_white_theme() //There's no way round it. We're essentially changing the skin by hand. It's painful but it works, and is the way Lummox suggested.
 	//Main windows
 	winset(src, "infowindow", "background-color = [COLOR_DARKMODE_DARKBACKGROUND];background-color = none")
@@ -70,8 +78,9 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "saybutton", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 	winset(src, "asset_cache_browser", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
 	winset(src, "asset_cache_browser", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
-	//winset(src, "input", "background-color = [COLOR_DARKMODE_BACKGROUND];background-color = none")
-	//winset(src, "input", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
+	dark_theme = FALSE
+	winset(src, "input", "background-color = [input_mode_color()];background-color = [input_mode_color()]")
+	winset(src, "input", "text-color = [COLOR_DARKMODE_TEXT];text-color = #000000")
 
 /client/proc/force_dark_theme() //Inversely, if theyre using white theme and want to swap to the superior dark theme, let's get WINSET() ing
 	//Main windows
@@ -132,5 +141,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	winset(src, "asset_cache_browser", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
 	winset(src, "asset_cache_browser", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
 
-	//winset(src, "input", "background-color = none;background-color = [COLOR_DARKMODE_BACKGROUND]")
-	//winset(src, "input", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
+	dark_theme = TRUE
+	winset(src, "input", "background-color = [input_mode_color()];background-color = [input_mode_color()]")
+	winset(src, "input", "text-color = #000000;text-color = [COLOR_DARKMODE_TEXT]")
