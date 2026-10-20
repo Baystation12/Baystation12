@@ -17,8 +17,8 @@
 							'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg')
 	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_BULLET_MEAT, BULLET_IMPACT_METAL = SOUNDS_BULLET_METAL)
 
-/obj/item/projectile/bullet/on_hit(atom/target, blocked = 0)
-	if (..(target, blocked))
+/obj/item/projectile/bullet/on_hit(atom/target, blocked = 0, def_zone = null)
+	if (..())
 		var/mob/living/L = target
 		shake_camera(L, 3, 2)
 
