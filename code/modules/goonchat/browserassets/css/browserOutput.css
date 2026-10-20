@@ -7,14 +7,14 @@ html, body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	color: #a4bad6;
+	color: #CBDAED;
 	background-color: #171717;
 }
 body {
 	background-color: #171717;
 	font-family: Verdana, sans-serif;
 	font-size: 13px;
-	color: #a4bad6;
+	color: #CBDAED;
 	line-height: 1.2;
 	overflow-x: hidden;
 	overflow-y: scroll;
@@ -70,9 +70,9 @@ img.icon {
 	border-radius: 10px;
 }
 
-a {color: #397ea5;}
-a.visited {color: #7c00e6;}
-a:visited {color: #7c00e6;}
+a {color: #7bb3d6;}
+a.visited {color: #9e7fe0;}
+a:visited {color: #9e7fe0;}
 a.popt {text-decoration: none;}
 
 /*****************************************
@@ -108,7 +108,7 @@ a.popt {text-decoration: none;}
 	font-variant: small-caps;
 	font-size: 1.1em;
 	font-weight: bold;
-	color: #a4bad6;
+	color: #CBDAED;
 }
 #newMessages:hover {background: #171717;}
 #newMessages i {vertical-align: middle; padding-left: 3px;}
@@ -139,7 +139,7 @@ a.popt {text-decoration: none;}
 	height: 30px;
 	padding: 5px 0;
 	display: block;
-	color: #a4bad6;
+	color: #CBDAED;
 	text-decoration: none;
 	line-height: 28px;
 	border-top: 1px solid #171717;
@@ -257,9 +257,9 @@ a.popt {text-decoration: none;}
 ******************************************/
 
 /* MOTD */
-.motd {color: #a4bad6;	font-family: Verdana, sans-serif;}
-.motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6 {color: #a4bad6;	text-decoration: underline;}
-.motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover {color: #a4bad6;}
+.motd {color: #CBDAED;	font-family: Verdana, sans-serif;}
+.motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6 {color: #CBDAED;	text-decoration: underline;}
+.motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover {color: #CBDAED;}
 
 /* ADD HERE FOR BOLD */
 .bold, .name, .prefix, .ooc, .looc, .adminooc, .admin, .medal, .yell {font-weight: bold;}
@@ -268,78 +268,78 @@ a.popt {text-decoration: none;}
 .italic, .italics, .emote {font-style: italic;}
 
 /* OUTPUT COLORS */
-.highlight {background: yellow;}
+.highlight {background: #695a00;}
 
-h1, h2, h3, h4, h5, h6	{color: #a4bad6;font-family: Georgia, Verdana, sans-serif;}
+h1, h2, h3, h4, h5, h6	{color: #CBDAED;font-family: Georgia, Verdana, sans-serif;}
 
 em						{font-style: normal;	font-weight: bold;}
 
 /* LOG */
-.log_message			{color: #386aff;	font-weight: bold;}
+.log_message			{color: #5574D1;	font-weight: bold;}
 
 /* OOC */
 .ooc					{font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
-.ooc .everyone			{color: #5353ff;}
-.ooc .looc				{color: #3a7496;}
+.ooc .everyone			{color: #7878E4;}
+.ooc .looc				{color: #5EAFDF;}
 .ooc .elevated			{color: #2e78d9;}
-.ooc .moderator			{color: #184880;}
-.ooc .developer			{color: #1b521f;}
-.ooc .admin				{color: #b82e00;}
-.ooc .aooc				{color: #960018;}
+.ooc .moderator			{color: #6E74F6;}
+.ooc .developer			{color: #56A95C;}
+.ooc .admin				{color: #CD5A34;}
+.ooc .aooc				{color: #BC2C43;}
 
 /* Admin: Private Messages */
-.pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
-.pm  .in				{color: #ff0000;}
-.pm  .out				{color: #ff0000;}
-.pm  .other				{color: #5353ff;}
+.pm  .howto				{color: #FF7070;	font-weight: bold;		font-size: 200%;}
+.pm  .in				{color: #FF7070;}
+.pm  .out				{color: #FF7070;}
+.pm  .other				{color: #7878E4;}
 
 /* Admin: Channels */
-.mod_channel			{color: #735638;	font-weight: bold;}
-.mod_channel .admin		{color: #b82e00;	font-weight: bold;}
-.admin_channel			{color: #9611d4;	font-weight: bold;}
+.mod_channel			{color: #A38260;	font-weight: bold;}
+.mod_channel .admin		{color: #CD5A34;	font-weight: bold;}
+.admin_channel			{color: #A765C6;	font-weight: bold;}
 
 /* Radio: Misc */
 .deadsay				{color: #e2c1ff}
-.radio					{color: #1ecc43;}
-.deptradio				{color: #ff00ff;}	/* when all other department colors fail */
-.newscaster				{color: #750000;}
+.radio					{color: #64C178;}
+.deptradio				{color: #B966B9;}	/* when all other department colors fail */
+.newscaster				{color: #DC2C2C;}
 
 /* Radio Channels */
-.comradio				{color: #193a7a;}
-.syndradio				{color: #6d3f40;}
-.centradio				{color: #5c5c8a;}
-.airadio				{color: #ff00ff;}
+.comradio				{color: #4A71BC;}
+.syndradio				{color: #936162;}
+.centradio				{color: #7777B4;}
+.airadio				{color: #B966B9;}
 .entradio				{color: #339966;}
 
-.secradio				{color: #b41c1c;}
-.engradio				{color: #a66300;}
-.medradio				{color: #008160;}
-.sciradio				{color: #993399;}
-.supradio				{color: #5f4519;}
-.srvradio				{color: #6eaa2c;}
-.expradio				{color: #a3a332;}
+.secradio				{color: #CE3737;}
+.engradio				{color: #BB822D;}
+.medradio				{color: #35B594;}
+.sciradio				{color: #D666D6;}
+.supradio				{color: #9A763B;}
+.srvradio				{color: #89C34A;}
+.expradio				{color: #CCCC57;}
 
-.hailradio				{color: #cc00aa;}
-.exampleradio			{color: #ff00ff;}
+.hailradio				{color: #FF46E0;}
+.exampleradio			{color: #B966B9;}
 .voxradio				{color: #f32b06;}
-.bearcatradio			{color: #590e2d;}
+.bearcatradio			{color: #B84B78;}
 .colonyradio			{color: #ceaf3e;}
 .verneradio				{color: #738465;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
 .alert					{color: #d82020;}
-h1.alert, h2.alert		{color: #a4bad6;}
+h1.alert, h2.alert		{color: #CBDAED;}
 
 .emote					{font-style: italic;}
 
 /* Game Messages */
-.attack					{color: #ff0000;}
-.moderate				{color: #cc0000;}
-.disarm					{color: #990000;}
-.passive				{color: #660000;}
+.attack					{color: #FF7070;}
+.moderate				{color: #E43B3B;}
+.disarm					{color: #D81414;}
+.passive				{color: #A13A3A;}
 
 .danger					{color: #f73e50; font-weight: bold;}
 .warning				{color: #f58e09; font-weight: bold; font-style: italic;}
@@ -354,48 +354,48 @@ h1.alert, h2.alert		{color: #a4bad6;}
 .legion					{color: #e09000; font-weight: bold; font-family: 'Courier New', Courier, monospace}
 
 /* Languages */
-.alien					{color: #855d85;}
+.alien					{color: #A280A2;}
 .changeling				{color: #059223;	font-style: italic;}
-.tajaran				{color: #803b56;}
-.tajaran_signlang		{color: #941c1c;}
+.tajaran				{color: #AB6581;}
+.tajaran_signlang		{color: #B43535;}
 .skrell					{color: #00ced1;}
-.soghun					{color: #228b22;}
-.yeosa 					{color: #218b89;}
-.nabber_lang			{color: #525252;}
-.solcom					{color: #22228b;}
-.vox					{color: #aa00aa;}
+.soghun					{color: #41BB41;}
+.yeosa 					{color: #38B4B1;}
+.nabber_lang			{color: #868686;}
+.solcom					{color: #4747BF;}
+.vox					{color: #CA32CA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif; color: #7c6256}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
-.russian				{color: #9c250b;}
-.moon					{color: #422863;}
+.russian				{color: #BA452C;}
+.moon					{color: #865FB7;}
 .spacer					{color: #ff6600;}
-.selenian				{color: #324bbd;}
+.selenian				{color: #576ED6;}
 .arabic					{color: #5a853e;}
 .chinese				{color: #d4a52a;}
-.indian					{color: #634c81;}
+.indian					{color: #7A59A7;}
 .iberian				{color: #be4ac9;}
 
-.interface				{color: #750e75;}
+.interface				{color: #B936B9;}
 
-.good                   {color: #4f7529; font-weight: bold;}
-.bad                    {color: #ee0000; font-weight: bold;}
+.good                   {color: #709E42; font-weight: bold;}
+.bad                    {color: #FF4040; font-weight: bold;}
 
 /* Admin: Who */
-.who_dead		{color: #5f5f5f;}
-.who_observing		{color: #9e9e9e;}
-.who_new_account	{color: #ff0000;}
+.who_dead		{color: #808080;}
+.who_observing		{color: #C2C2C2;}
+.who_new_account	{color: #FF7070;}
 .who_newish_account	{color: #ff8c00;}
-.who_antagonist		{color: #ff0000;}
+.who_antagonist		{color: #FF7070;}
 
 /* Admin: PM */
-.pm			{color: #ff0000;}
-.staff_pm		{color: #0059ff;}
+.pm			{color: #FF7070;}
+.staff_pm		{color: #5792FF;}
 
 @keyframes hypnocolor {
-	0%		{color: #202020;}
-	25%		{color: #4b02ac;}
+	0%		{color: #616161;}
+	25%		{color: #691FCD;}
 	50%		{color: #9f41f1;}
-	75%		{color: #541c9c;}
+	75%		{color: #6230A3;}
 	100%	{color: #7adbf3;}
 }
 
@@ -408,8 +408,8 @@ h1.alert, h2.alert		{color: #a4bad6;}
 
 .icon 					{height: 1em;	width: auto;}
 
-.connectionClosed, .fatalError {background: red;	color: white;	padding: 5px;}
-.connectionClosed.restored {background: green;}
+.connectionClosed, .fatalError {background: rgba(50%, 0%, 0%, 25%); border: 1px solid rgba(75%, 0%, 0%);	color: white;	padding: 5px;}
+.connectionClosed.restored {background: rgba(0%, 50%, 0%, 25%); border: 1px solid rgba(0%, 75%, 0%); }
 .internal.boldnshit {color: #3d5bc3;	font-weight: bold;}
 
 /* HELPER CLASSES */
