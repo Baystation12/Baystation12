@@ -567,7 +567,7 @@
 /obj/item/storage/box/pokerchips
 	name = "poker chips box"
 	desc = "This box has 20 of each common poker chip."
-	max_storage_space = 6
+	max_storage_space = 5
 	icon_state = "pokerbox"
 	startswith = list(
 		/obj/item/stack/pokerchip = 1,
