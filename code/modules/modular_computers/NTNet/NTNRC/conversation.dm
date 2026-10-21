@@ -5,6 +5,7 @@ var/global/ntnrc_uid = 0
 	var/title = "Untitled Conversation"
 	var/datum/computer_file/program/chatclient/operator // "Administrator" of this channel. Creator starts as channel's operator,
 	var/list/messages = list()
+	var/message_count = 0
 	var/list/clients = list()
 	var/password
 	var/source_z
@@ -17,13 +18,26 @@ var/global/ntnrc_uid = 0
 		ntnet_global.chat_channels.Add(src)
 	..()
 
+/datum/ntnet_conversation/Destroy()
+	if(ntnet_global)
+		ntnet_global.chat_channels -= src
+	for(var/datum/computer_file/program/chatclient/C as anything in clients)
+		C.forget_conversation(src)
+	clients.Cut()
+	operator = null
+	return ..()
+
+// [10:59] <User> Hello there
 /datum/ntnet_conversation/proc/add_message(message, username)
-	message = "[stationtime2text()] [username]: [message]"
+	message = "\[[stationtime2text()]\] &lt;[username]&gt; [message]"
 	messages.Add(message)
+	message_count++
 	trim_message_list()
 
+// [10:55] -!- User has joined the channel.
 /datum/ntnet_conversation/proc/add_status_message(message)
-	messages.Add("[stationtime2text()] -!- [message]")
+	messages.Add("\[[stationtime2text()]\] -!- [message]")
+	message_count++
 	trim_message_list()
 
 /datum/ntnet_conversation/proc/trim_message_list()
@@ -65,3 +79,14 @@ var/global/ntnrc_uid = 0
 
 	add_status_message("[client.username] has changed channel title from [title] to [newtitle]")
 	title = newtitle
+
+/proc/ntnrc_channel_name(name)
+	var/static/regex/valid = regex(@"^#?([A-Za-z0-9_-]{1,49})$")
+	if(valid.Find(trimtext(name)))
+		return "#[valid.group[1]]"
+
+/proc/ntnrc_find_channel(name, z)
+	var/list/connected_zs = GetConnectedZlevels(z)
+	for(var/datum/ntnet_conversation/channel as anything in ntnet_global.chat_channels)
+		if(cmptext(channel.title, name) && (channel.source_z in connected_zs))
+			return channel

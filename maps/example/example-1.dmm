@@ -253,6 +253,7 @@
 /area/shuttle/escape)
 "KI" = (
 /obj/machinery/light,
+/obj/machinery/ntnet_relay,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "KV" = (

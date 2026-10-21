@@ -13,10 +13,13 @@
 	ui_header = "ntnrc_idle.gif"
 	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_chatclient
-	/// Used to generate the toolbar icon
-	var/last_message = null
 	var/username
-	var/datum/ntnet_conversation/channel = null
+	/// Every conversation this client is in
+	var/list/datum/ntnet_conversation/conversations = list()
+	/// The conversation currently on screen, or null for the channel list
+	var/datum/ntnet_conversation/active_channel = null
+	/// Conversation -> its message_count when last read
+	var/list/last_read = list()
 	/// Channel operator mode
 	var/operator_mode = FALSE
 	/// Administrator mode (invisible to other users + bypasses passwords)
@@ -34,14 +37,14 @@
 
 	if(href_list["PRG_speak"])
 		. = TOPIC_HANDLED
-		if(!channel)
+		if(!active_channel)
 			return TOPIC_HANDLED
-		var/mob/living/user = usr
-		var/message = sanitize(input(user, "Enter message or leave blank to cancel: "), 512)
-		if(!message || !channel)
+		var/message = sanitize(href_list["message"], 512)
+		if(!message)
 			return
-		channel.add_message(message, username)
-		ntnrc_alert("[username] sent an NTNRC message.")
+		active_channel.add_message(message, username)
+		log_say("[key_name(usr.client)] : ([username] in [active_channel.title]) sent NTNRC message: [message]")
+		ntnrc_alert(active_channel, "[username] sent an NTNRC message in [active_channel.title]: [message]")
 
 	if(href_list["PRG_joinchannel"])
 		. = TOPIC_HANDLED
@@ -54,67 +57,53 @@
 		if(!C)
 			return TOPIC_HANDLED
 
-		if(netadmin_mode)
-			channel = C		// Bypasses normal leave/join and passwords. Technically makes the user invisible to others.
-			return TOPIC_HANDLED
-
-		if(C.password)
-			var/mob/living/user = usr
-			var/password = sanitize(input(user,"Access Denied. Enter password:"))
-			if(C && (password == C.password))
-				C.add_client(src)
-				channel = C
-				ntnrc_alert("A user has joined your channel.")
-			return TOPIC_HANDLED
-		C.add_client(src)
-		channel = C
-		ntnrc_alert("A user has joined your channel.")
+		try_join_channel(C, usr)
+	if(href_list["PRG_channellist"])
+		. = TOPIC_HANDLED
+		active_channel = null
 	if(href_list["PRG_leavechannel"])
 		. = TOPIC_HANDLED
-		if(channel)
-			channel.remove_client(src)
-			ntnrc_alert("A user has left your channel.")
-		channel = null
+		if(active_channel)
+			leave_conversation(active_channel)
 	if(href_list["PRG_newchannel"])
 		. = TOPIC_HANDLED
 		var/mob/living/user = usr
-		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
+		var/channel_title = ntnrc_channel_name(input(user, "Enter channel name or leave blank to cancel:", "New channel") as text|null)
 		if(!channel_title)
 			return
 		var/turf/turf = get_turf(computer.get_physical_host())
+		var/datum/ntnet_conversation/existing = ntnrc_find_channel(channel_title, turf.z)
+		if(existing)
+			try_join_channel(existing, user)
+			return
 		var/datum/ntnet_conversation/conversation = new/datum/ntnet_conversation(turf.z)
 		conversation.add_client(src)
 		conversation.operator = src
-		channel = conversation
+		join_conversation(conversation)
 		conversation.title = channel_title
 	if(href_list["PRG_toggleadmin"])
 		. = TOPIC_HANDLED
 		if(netadmin_mode)
 			netadmin_mode = FALSE
-			if(channel)
-				channel.remove_client(src) // We shouldn't be in channel's user list, but just in case...
-				channel = null
+			leave_all_conversations()
 			return TOPIC_HANDLED
 		var/mob/living/user = usr
 		if(can_run(usr, TRUE, access_network_admin))
-			if(channel)
+			if(length(conversations))
 				var/response = alert(user, "Really engage admin-mode? You will be disconnected from your current channel!", "NTNRC Admin mode", "Yes", "No")
 				if(response == "Yes")
-					if(channel)
-						channel.remove_client(src)
-						ntnrc_alert("A user has left your channel.")
-						channel = null
+					leave_all_conversations()
 				else
 					return
 			netadmin_mode = TRUE
 	if(href_list["PRG_changename"])
 		. = TOPIC_HANDLED
 		var/mob/living/user = usr
-		var/newname = sanitize(input(user,"Enter new nickname or leave blank to cancel:"), 20)
-		if(!newname)
+		var/newname = sanitize(input(user, "Enter new nickname or leave blank to cancel:", "Change nickname", html_decode(username)), 20)
+		if(!newname || newname == username)
 			return
-		if(channel)
-			channel.add_status_message("[username] is now known as [newname].")
+		if(active_channel)
+			active_channel.add_status_message("[username] is now known as [newname].")
 		username = newname
 
 	if (href_list["PRG_mutenotif"])
@@ -127,15 +116,15 @@
 
 	if(href_list["PRG_savelog"])
 		. = TOPIC_HANDLED
-		if(!channel)
+		if(!active_channel)
 			return
 		var/mob/living/user = usr
 		var/filename = input(user,"Enter desired logfile name (.LOG) or leave blank to cancel:")
-		if(!filename || !channel)
+		if(!filename || !active_channel)
 			return
 
-		var/content = "\[b\]Logfile dump from NTNRC channel [channel.title]\[/b\]\[BR\]"
-		for(var/logstring in channel.messages)
+		var/content = "\[b\]Logfile dump from NTNRC channel [active_channel.title]\[/b\]\[BR\]"
+		for(var/logstring in active_channel.messages)
 			content += "[logstring]\[BR\]"
 		content += "\[b\]Logfile dump completed.\[/b\]"
 
@@ -143,69 +132,90 @@
 			computer.show_error(user, "I/O Error - Check hard drive and free space.")
 	if(href_list["PRG_renamechannel"])
 		. = TOPIC_HANDLED
-		if(!operator_mode || !channel)
+		if(!operator_mode || !active_channel)
 			return
 		var/mob/living/user = usr
-		var/newname = sanitize(input(user, "Enter new channel name or leave blank to cancel:"), 64)
-		if(!newname || !channel)
+		var/newname = ntnrc_channel_name(input(user, "Enter new channel name or leave blank to cancel:", "Rename channel", active_channel.title) as text|null)
+		if(!newname || !active_channel || newname == active_channel.title)
 			return
-		channel.add_status_message("Channel renamed from [channel.title] to [newname] by operator.")
-		channel.title = newname
+		var/datum/ntnet_conversation/existing = ntnrc_find_channel(newname, active_channel.source_z)
+		if(existing && existing != active_channel)
+			return
+		active_channel.add_status_message("Channel renamed from [active_channel.title] to [newname] by operator.")
+		active_channel.title = newname
 	if(href_list["PRG_deletechannel"])
 		. = TOPIC_HANDLED
-		if(channel && ((channel.operator == src) || netadmin_mode))
-			if(ntnet_global)
-				ntnet_global.chat_channels.Remove(channel)
-			qdel(channel)
-			channel = null
+		if(active_channel && ((active_channel.operator == src) || netadmin_mode))
+			var/datum/ntnet_conversation/deleted = active_channel
+			qdel(deleted)
+			forget_conversation(deleted)
 	if(href_list["PRG_setpassword"])
 		. = TOPIC_HANDLED
-		if(!channel || ((channel.operator != src) && !netadmin_mode))
+		if(!active_channel || ((active_channel.operator != src) && !netadmin_mode))
 			return
 
-		var/mob/living/user = usr
-		var/newpassword = sanitize(input(user, "Enter new password for this channel. Leave blank to cancel, enter 'nopassword' to remove password completely:"))
-		if(!channel || !newpassword || ((channel.operator != src) && !netadmin_mode))
+		var/newpassword = sanitize(input(usr, "Enter new password for this channel. Leave blank to cancel, enter 'nopassword' to remove password completely:"))
+		if(!active_channel || !newpassword || ((active_channel.operator != src) && !netadmin_mode))
 			return
 
-		if(newpassword == "nopassword")
-			channel.password = ""
-		else
-			channel.password = newpassword
+		active_channel.password = newpassword == "nopassword" ? "" : newpassword
 
 /datum/computer_file/program/chatclient/process_tick()
 	..()
 	var/turf/turf = get_turf(computer.get_physical_host())
-	if (channel && !(channel.source_z in GetConnectedZlevels(turf.z)))
-		channel.remove_client(src)
-		ntnrc_alert("A user has left your channel.")
-		channel = null
-
-	if(program_state != PROGRAM_STATE_KILLED)
-		ui_header = "ntnrc_idle.gif"
-		if(channel)
-			// Remember the last message. If there is no message in the channel remember null.
-			last_message = length(channel.messages) ? channel.messages[length(channel.messages) - 1] : null
-		else
-			last_message = null
-		return
-
-	if(channel && channel.messages && length(channel.messages))
-		ui_header = last_message == channel.messages[length(channel.messages) - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
-	else
-		ui_header = "ntnrc_idle.gif"
+	var/list/connected_zs = GetConnectedZlevels(turf.z)
+	var/unread = FALSE
+	for (var/datum/ntnet_conversation/conversation as anything in conversations)
+		if (QDELETED(conversation))
+			forget_conversation(conversation)
+			continue
+		if (!(conversation.source_z in connected_zs))
+			leave_conversation(conversation)
+			continue
+		if (conversation == active_channel && program_state == PROGRAM_STATE_ACTIVE)
+			last_read[conversation] = conversation.message_count
+		if (last_read[conversation] != conversation.message_count)
+			unread = TRUE
+	ui_header = unread ? "ntnrc_new.gif" : "ntnrc_idle.gif"
 
 /datum/computer_file/program/chatclient/on_shutdown(forced = FALSE)
-	if(channel)
-		channel.remove_client(src)
-		src.ntnrc_alert("A user has left your channel.")
-		channel = null
+	leave_all_conversations()
 	..(forced)
 
-/datum/computer_file/program/chatclient/proc/ntnrc_alert(message)
-	if (!istype(src))
-		return
-	for (var/datum/computer_file/program/chatclient/client in channel.clients)
+/datum/computer_file/program/chatclient/proc/join_conversation(datum/ntnet_conversation/conversation)
+	if (!(conversation in conversations))
+		if (!netadmin_mode && !(src in conversation.clients))
+			conversation.add_client(src)
+			ntnrc_alert(conversation, "A user has joined your channel.")
+		conversations += conversation
+		last_read[conversation] = conversation.message_count
+	active_channel = conversation
+
+/datum/computer_file/program/chatclient/proc/try_join_channel(datum/ntnet_conversation/channel, mob/user)
+	if(channel.password && !netadmin_mode && !(channel in conversations))
+		var/password = sanitize(input(user,"Access Denied. Enter password:"))
+		if(QDELETED(channel) || password != channel.password)
+			return
+	join_conversation(channel)
+
+/datum/computer_file/program/chatclient/proc/leave_conversation(datum/ntnet_conversation/conversation)
+	if (src in conversation.clients)
+		conversation.remove_client(src)
+		ntnrc_alert(conversation, "A user has left your channel.")
+	forget_conversation(conversation)
+
+/datum/computer_file/program/chatclient/proc/leave_all_conversations()
+	for (var/datum/ntnet_conversation/conversation as anything in conversations)
+		leave_conversation(conversation)
+
+/datum/computer_file/program/chatclient/proc/forget_conversation(datum/ntnet_conversation/conversation)
+	conversations -= conversation
+	last_read -= conversation
+	if (active_channel == conversation)
+		active_channel = null
+
+/datum/computer_file/program/chatclient/proc/ntnrc_alert(datum/ntnet_conversation/conversation, message)
+	for (var/datum/computer_file/program/chatclient/client in conversation.clients)
 		if (client == src || client.muted)
 			continue
 		client.computer.visible_notification(SPAN_NOTICE(message))
@@ -227,21 +237,23 @@
 		return
 
 	data["adminmode"] = C.netadmin_mode
-	if(C.channel)
-		data["title"] = C.channel.title
+	data["username"] = C.username
+	var/datum/ntnet_conversation/channel = C.active_channel
+	if(channel)
+		data["title"] = channel.title
 		var/list/messages = list()
-		for(var/M in C.channel.messages)
+		for(var/M in channel.messages)
 			messages.Add(list(list(
 				"msg" = M
 			)))
 		data["messages"] = messages
 		var/list/clients = list()
-		for(var/datum/computer_file/program/chatclient/cl in C.channel.clients)
+		for(var/datum/computer_file/program/chatclient/cl in channel.clients)
 			clients.Add(list(list(
 				"name" = cl.username
 			)))
 		data["clients"] = clients
-		C.operator_mode = (C.channel.operator == C) ? TRUE : FALSE
+		C.operator_mode = (channel.operator == C) ? TRUE : FALSE
 		data["is_operator"] = C.operator_mode || C.netadmin_mode
 
 	else // Channel selection screen
@@ -252,7 +264,8 @@
 			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
 					"chan" = conv.title,
-					"id" = conv.id
+					"id" = conv.id,
+					"joined" = (conv in C.conversations)
 				)))
 		data["all_channels"] = all_channels
 

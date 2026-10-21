@@ -29,6 +29,14 @@ NanoBaseHelpers = function () {
       return '<div unselectable="on" class="linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + NanoUtility.generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>'
     },
 
+    textInput: (elementId, parameters, paramKey, buttonText, maxLength) => {
+      const maxLengthHtml = maxLength ? ` maxlength="${maxLength}"` : ''
+      return '<div class="textInputRow">' +
+        `<input type="text" class="textInput" id="${elementId}"${maxLengthHtml} data-href="${NanoUtility.generateHref(parameters)}" data-param="${paramKey}">` +
+        `<div unselectable="on" class="linkActive noIcon link textInputSend">${buttonText}</div>` +
+        '</div>'
+    },
+
     round: function (number) {
       return Math.round(number)
     },

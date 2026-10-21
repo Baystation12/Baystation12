@@ -530,6 +530,38 @@ div.notice {
     float: right;
 }
 
+.textInputRow {
+    display: flex;
+    gap: 4px;
+}
+
+.textInputSend {
+    height: 22px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 4px;
+    line-height: 20px;
+    border-color: #40628a;
+}
+
+.textInput {
+    flex: 1;
+    min-width: 0;
+    height: 22px;
+    box-sizing: border-box;
+    padding: 0 4px;
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #40628a;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.textInput:focus {
+    border-color: #507aac;
+    outline: none;
+}
+
 .floatLeft {
 	float: left;
 }
