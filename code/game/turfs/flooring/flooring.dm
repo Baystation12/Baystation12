@@ -437,12 +437,18 @@
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
 
+/singleton/flooring/proc/is_build_stack(obj/item/stack/S)
+	return build_type && (S.type == build_type || S.build_type == build_type)
+
+
 /singleton/flooring/glass
 	name = "glass flooring"
 	desc = "A window to the world outside. Or the world beneath your feet, rather."
 	icon = 'icons/turf/flooring/glassfloor.dmi'
 	icon_base = "glassfloor"
 	build_type = /obj/item/stack/material/glass/reinforced
+	var/stack_material = MATERIAL_GLASS
+	var/requires_reinforcement = TRUE
 	damage_temperature = T100C
 	flags = TURF_REMOVE_WRENCH
 	can_engrave = FALSE
@@ -452,8 +458,18 @@
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
 
+/singleton/flooring/glass/is_build_stack(obj/item/stack/S)
+	if (..())
+		return TRUE
+	var/obj/item/stack/material/M = S
+	if (!istype(M) || !M.material || M.material.name != stack_material)
+		return FALSE
+	return !requires_reinforcement || !!M.reinf_material
+
 /singleton/flooring/glass/boro
 	name = "borosilicate glass flooring"
 	build_type = /obj/item/stack/material/glass/boron
+	stack_material = MATERIAL_BORON_GLASS
+	requires_reinforcement = FALSE
 	color = GLASS_COLOR_BORON
 	damage_temperature = T0C + 4000
