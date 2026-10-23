@@ -1,9 +1,8 @@
 // chip sprites from this PR: https://github.com/new-frontiers-14/frontier-station-14/pull/4445
 
 /obj/item/stack/pokerchip
-	name = "Poker"
-	singular_name = "chip"
-	plural_name = "chips"
+	singular_name = "Poker chip"
+	plural_name = "Poker chips"
 	icon = 'icons/obj/pokerchips.dmi'
 	icon_state = "pokerchip"
 	base_state = "pokerchip"
@@ -72,7 +71,7 @@
 
 /obj/item/stack/pokerchip/proc/update()
 	SetName(get_stack_name())
-	if(amount>1 & value > 1)
+	if(amount>1 && value > 1)
 		SetName("[name] [plural_name]")
 		desc = "A stack of poker chips. These are worth [value] credits each."
 		gender = PLURAL
@@ -99,4 +98,8 @@
 	return
 
 /obj/item/stack/pokerchip/Initialize()
+	. = ..()
+	update()
+
+/obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
 	update()
