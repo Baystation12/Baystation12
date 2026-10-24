@@ -349,6 +349,7 @@
 /turf/simulated/floor/beach/sand
 	name = "sand"
 	icon_state = "sand"
+	footstep_type = /singleton/footsteps/sand
 
 /turf/simulated/floor/beach/sand/desert
 	icon_state = "desert"
@@ -363,11 +364,13 @@
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "sandwater"
 	turf_flags = TURF_IS_WET
+	footstep_type = /singleton/footsteps/water
 
 /turf/simulated/floor/beach/water
 	name = "water"
 	icon_state = "water"
 	turf_flags = TURF_IS_WET
+	footstep_type = /singleton/footsteps/water
 
 /turf/simulated/floor/beach/water/is_flooded(lying_mob, absolute)
 	. = absolute ? ..() : lying_mob

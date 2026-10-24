@@ -242,6 +242,14 @@
 	size = 4
 	w_class = ITEM_SIZE_TINY
 
+/obj/item/reagent_containers/food/snacks/variable/softcandy
+	name = "flavored soft taffy"
+	desc = "It's so soft and sticky."
+	icon_state = "softcandy"
+	size = 3
+	w_class = ITEM_SIZE_TINY
+
+
 /obj/item/reagent_containers/food/snacks/variable/jelly
 	name = "jelly"
 	desc = "All your friends will be jelly."

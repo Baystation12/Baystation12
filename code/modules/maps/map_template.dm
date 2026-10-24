@@ -146,7 +146,7 @@
 	return locate(world.maxx/2, world.maxy/2, world.maxz)
 
 /datum/map_template/proc/load(turf/T, centered=FALSE)
-	if(centered)
+	if(centered && !istype(src, /datum/map_template/ruin/resort)) // hack
 		T = locate(T.x - round(width/2) , T.y - round(height/2) , T.z)
 	if(!T)
 		log_debug("[src] map template failed to load, could not locate a center turf.")

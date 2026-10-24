@@ -113,6 +113,12 @@
 /obj/machinery/telecomms/broadcaster/map_preset/example,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
+"mr" = (
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 "mZ" = (
 /turf/simulated/wall,
 /area/constructionsite)
@@ -134,6 +140,12 @@
 /area/constructionsite)
 "qo" = (
 /obj/landmark/start,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"ra" = (
+/obj/structure/railing/mapped{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "rt" = (
@@ -178,6 +190,12 @@
 /area/shuttle/escape)
 "Bn" = (
 /turf/simulated/floor/carpet,
+/area/constructionsite)
+"BN" = (
+/obj/structure/railing/mapped{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
 /area/constructionsite)
 "Ca" = (
 /obj/machinery/telecomms/hub/map_preset/example,
@@ -350,6 +368,10 @@
 	dir = 1
 	},
 /obj/machinery/light/small,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"Za" = (
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "Zx" = (
@@ -1022,8 +1044,8 @@ Xg
 Xg
 Xg
 xL
-xL
-xL
+ra
+ra
 xL
 xL
 xL
@@ -1055,10 +1077,10 @@ Bn
 Xg
 Xg
 Xg
+Za
 xL
 xL
-xL
-xL
+BN
 xL
 Rc
 Rc
@@ -1089,10 +1111,10 @@ sX
 Xg
 Xg
 Xg
+Za
 xL
 xL
-xL
-xL
+BN
 xL
 Rc
 Rc
@@ -1124,8 +1146,8 @@ xL
 xL
 LQ
 xL
-xL
-xL
+mr
+mr
 OO
 xL
 Rc
