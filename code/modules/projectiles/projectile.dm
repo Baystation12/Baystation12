@@ -180,6 +180,8 @@
 /obj/item/projectile/proc/launch_from_mob(atom/target, mob/user, target_zone, x_offset = 0, y_offset = 0, angle_offset = 0)
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
+		on_impact(user)
+		QDEL_NULL_LIST(segments)
 		qdel(src)
 		return 0
 
@@ -197,6 +199,8 @@
 /obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/gun/launcher, target_zone, x_offset=0, y_offset=0)
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
+		on_impact(user)
+		QDEL_NULL_LIST(segments)
 		qdel(src)
 		return 0
 
