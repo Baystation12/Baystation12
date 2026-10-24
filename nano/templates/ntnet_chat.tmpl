@@ -19,26 +19,24 @@
 			<b>Disabled</b>
 		{{/if}}
 	</div>
-	<div class="itemLabel">
-		Controls:
+	<div class="item">
+		<b>Controls:</b>
 	</div>
-	<div class="itemContent">
-		<table>
-			<tr><td>{{:helper.link("Send message", null, {'PRG_speak' : 1})}}
-			<tr><td>{{:helper.link("Change nickname", null, {'PRG_changename' : 1})}}
-			<tr><td>{{:helper.link("Toggle notifications", null, {'PRG_mutenotif' : 1})}}
-			<tr><td>{{:helper.link("Toggle administration mode", null, {'PRG_toggleadmin' : 1})}}
-			<tr><td>{{:helper.link("Leave channel", null, {'PRG_leavechannel' : 1})}}
-			<tr><td>{{:helper.link("Save log to local drive", null, {'PRG_savelog' : 1})}}
-			{{if data.is_operator}}
-				<tr><td>{{:helper.link("Rename channel", null, {'PRG_renamechannel' : 1})}}
-				<tr><td>{{:helper.link("Set password", null, {'PRG_setpassword' : 1})}}
-				<tr><td>{{:helper.link("Delete channel", null, {'PRG_deletechannel' : 1})}}
-			{{/if}}
-		</table>
+	<div class="item">
+		{{:helper.link("Channel list", null, {'PRG_channellist' : 1})}}
+		{{:helper.link("Change nickname (" + data.username + ")", null, {'PRG_changename' : 1})}}
+		{{:helper.link("Toggle notifications", null, {'PRG_mutenotif' : 1})}}
+		{{:helper.link("Toggle administration mode", null, {'PRG_toggleadmin' : 1})}}
+		{{:helper.link("Leave channel", null, {'PRG_leavechannel' : 1})}}
+		{{:helper.link("Save log to local drive", null, {'PRG_savelog' : 1})}}
+		{{if data.is_operator}}
+			{{:helper.link("Rename channel", null, {'PRG_renamechannel' : 1})}}
+			{{:helper.link("Set password", null, {'PRG_setpassword' : 1})}}
+			{{:helper.link("Delete channel", null, {'PRG_deletechannel' : 1})}}
+		{{/if}}
 	</div>
 	<b>Chat Window</b>
-        <div class="statusDisplay" style="overflow: auto;">
+	<div id="ntnrcLog" class="statusDisplayRecords scrollToBottom fillHeight" style="min-height: 150px; scrollbar-color: #40628a #000000;">
 		<div class="item">
 			<div class="itemContent" style="width: 100%;">
 				{{for data.messages}}
@@ -46,22 +44,24 @@
 				{{/for}}
 			</div>
 		</div>
-        </div>
- 	<b>Connected Users</b><br>
-	{{for data.clients}}
-		{{:value.name}}<br>
-	{{/for}}
+	</div>
+	<div class="item">
+		{{:helper.textInput('ntnrcInput', {'PRG_speak' : 1}, 'message', 'Send', 512)}}
+	</div>
+	<div class="item">
+		<b>Connected Users ({{:data.clients.length}}):</b> {{for data.clients :value:index}}{{:value.name}}{{if index < data.clients.length - 1}}, {{/if}}{{/for}}
+	</div>
 {{else}}
 	<b>Controls:</b>
-	<table>
-		<tr><td>{{:helper.link("Change nickname", null, {'PRG_changename' : 1})}}
-		<tr><td>{{:helper.link("New Channel", null, {'PRG_newchannel' : 1})}}
-		<tr><td>{{:helper.link("Toggle Administration Mode", null, {'PRG_toggleadmin' : 1})}}
-	</table>
+	<div class="item">
+		{{:helper.link("Change nickname (" + data.username + ")", null, {'PRG_changename' : 1})}}
+		{{:helper.link("New Channel", null, {'PRG_newchannel' : 1})}}
+		{{:helper.link("Toggle Administration Mode", null, {'PRG_toggleadmin' : 1})}}
+	</div>
 	<b>Available channels:</b>
 	<table>
 	{{for data.all_channels}}
-		<tr><td>{{:helper.link(value.chan, null, {'PRG_joinchannel' : value.id})}}<br>
+		<tr><td>{{:helper.link(value.chan, null, {'PRG_joinchannel' : value.id})}}{{if value.joined}} (joined){{/if}}<br>
 	{{/for}}
 	</table>
 {{/if}}
