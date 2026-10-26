@@ -87,6 +87,9 @@ GLOBAL_VAR(href_logfile)
 			log = runtime_log
 		if (config.log_hrefs)
 			GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
+			// show_browser() passes a file through as-is, so the page carries its own header
+			if (!fexists(GLOB.href_logfile))
+				to_file(GLOB.href_logfile, "<!doctype html><meta charset=utf-8>")
 
 	if (byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
