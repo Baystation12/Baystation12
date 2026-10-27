@@ -437,8 +437,8 @@
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
 
-/singleton/flooring/proc/is_build_stack(obj/item/stack/S)
-	return build_type && (S.type == build_type || S.build_type == build_type)
+/singleton/flooring/proc/is_build_stack(obj/item/stack/stack)
+	return build_type && (stack.type == build_type || stack.build_type == build_type)
 
 
 /singleton/flooring/glass
@@ -461,10 +461,10 @@
 /singleton/flooring/glass/is_build_stack(obj/item/stack/S)
 	if (..())
 		return TRUE
-	var/obj/item/stack/material/M = S
-	if (!istype(M) || !M.material || M.material.name != stack_material)
+	var/obj/item/stack/material/material_stack = S
+	if (!istype(material_stack) || !material_stack.material || material_stack.material.name != stack_material)
 		return FALSE
-	return !requires_reinforcement || !!M.reinf_material
+	return !requires_reinforcement || !!material_stack.reinf_material
 
 /singleton/flooring/glass/boro
 	name = "borosilicate glass flooring"
