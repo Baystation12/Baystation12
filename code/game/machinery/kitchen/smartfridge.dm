@@ -308,6 +308,9 @@
 			attack_hand(user)
 		return TRUE
 
+	if(isWrench(O))
+		return ..()
+
 	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("\The [src] is unpowered and useless."))
 		return TRUE

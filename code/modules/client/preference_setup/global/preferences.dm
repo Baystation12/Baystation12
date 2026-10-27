@@ -226,6 +226,13 @@ var/global/list/_client_preferences_by_type
 	description = "Ignore safety on harm intent"
 	key = "SAFETY_ON_INTENT"
 
+/datum/client_preference/gun_crosshair
+	description = "Gun crosshair"
+	key = "GUN_CROSSHAIR"
+
+/datum/client_preference/gun_crosshair/changed(mob/preference_mob, new_value)
+	preference_mob.update_mouse_pointer()
+
 /datum/client_preference/show_credits
 	description = "Show End Titles"
 	key = "SHOW_CREDITS"

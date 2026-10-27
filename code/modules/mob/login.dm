@@ -97,6 +97,7 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+	update_mouse_pointer()
 
 	if(machine)
 		machine.on_user_login(src)
@@ -110,7 +111,7 @@
 		ability_master.toggle_open(1)
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
-	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")
+	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=[client.input_mode_color()]")
 
 	if(mind)
 		if(!mind.learned_spells)

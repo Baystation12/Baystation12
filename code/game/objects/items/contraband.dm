@@ -79,8 +79,14 @@
 /obj/item/reagent_containers/powder/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
 		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
-			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
+			to_chat(user, SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
 			return TRUE
+		var/mob/living/carbon/snorter = user
+		if(istype(snorter))
+			var/obj/item/blocked = snorter.check_mouth_coverage()
+			if(blocked)
+				to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
+				return TRUE
 
 		user.visible_message(
 			SPAN_WARNING("\The [user] starts to snort some of \the [src] with \a [W]!"),
