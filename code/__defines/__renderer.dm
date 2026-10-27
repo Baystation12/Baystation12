@@ -188,10 +188,10 @@
 	#define SCENE_CHROMATIC_ABERRATION_BLUE_PLANE 802
 
 /// Pixels of displacement at full shockwave strength.
-#define SHOCKWAVE_ABERRATION_SIZE 16
+#define SHOCKWAVE_ABERRATION_SIZE 28
 
 /// Modifier for how much the red/blue channels diverge from the green in the shockwave aberration
-#define SHOCKWAVE_ABERRATION_VARIANCE 0.6
+#define SHOCKWAVE_ABERRATION_VARIANCE 0.25
 
 /// Things to be drawn within the screen context
 #define RENDER_GROUP_SCREEN 850

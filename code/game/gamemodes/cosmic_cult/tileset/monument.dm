@@ -18,4 +18,4 @@
 	set_light(6, 1, "#42a4ae")
 
 /obj/cosmic_cult/monument/attack_hand(mob/living/user)
-	cosmic_cult_shockwave_vfx(src)
+	cosmic_cult_shockwave_vfx(get_step(src, NORTH))
