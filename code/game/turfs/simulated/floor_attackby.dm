@@ -162,7 +162,7 @@
 				var/singleton/flooring/F = singletons[flooring_type]
 				if(!F.build_type)
 					continue
-				if(S.type == F.build_type || S.build_type == F.build_type)
+				if(F.is_build_stack(S))
 					use_flooring = F
 					break
 			if(!use_flooring)
