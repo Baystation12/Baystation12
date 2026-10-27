@@ -16,7 +16,7 @@
 	for (var/L in languages)
 		player.current.add_language(L)
 
-var/global/list/cosmic_cult_powers = typesof(/datum/power/cosmic_cult) - /datum/power/cosmic_cult
+var/global/list/cosmic_cult_powers = subtypesof(/datum/power/cosmic_cult)
 
 /datum/cosmic_cultist/proc/Remove()
 	owning_mind.cosmic_cultist = null
