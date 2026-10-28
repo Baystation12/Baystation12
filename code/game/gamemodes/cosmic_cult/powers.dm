@@ -6,6 +6,9 @@
 	// cooldown for the action
 	var/cooldown
 
+	// tier
+	var/tier = 0
+
 // executes the power
 /datum/power/cosmic_cult/proc/execute(datum/cosmic_cultist/cultist, datum/action/cosmic_cult/action)
 	return FALSE

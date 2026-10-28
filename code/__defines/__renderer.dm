@@ -144,9 +144,10 @@
 #define OBSERVER_PLANE             200
 
 #define LIGHTING_PLANE             300 // For Lighting. - The highest plane (ignoring all other even higher planes)
-	#define LIGHTBULB_LAYER        0
-	#define LIGHTING_LAYER         1
-	#define ABOVE_LIGHTING_LAYER   2
+	#define LIGHTBULB_LAYER              0
+	#define LIGHTING_LAYER               1
+	#define ABOVE_LIGHTING_LAYER         2
+	#define ABOVE_ABOVE_LIGHTING_LAYER   3
 
 #define EFFECTS_ABOVE_LIGHTING_PLANE   400 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
 	#define EYE_GLOW_LAYER         1

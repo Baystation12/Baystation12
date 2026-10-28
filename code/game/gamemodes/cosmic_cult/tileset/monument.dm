@@ -8,7 +8,7 @@
 	bound_width = 96
 	density = TRUE
 	anchored = TRUE
-	layer = ABOVE_HUMAN_LAYER
+	layer = ABOVE_LIGHTING_LAYER
 
 /obj/cosmic_cult/monument/Initialize()
 	. = ..()
@@ -19,3 +19,6 @@
 
 /obj/cosmic_cult/monument/attack_hand(mob/living/user)
 	cosmic_cult_shockwave_vfx(get_step(src, NORTH))
+	cosmic_cult_monument_influence(src)
+	cosmic_cult_monument_projectile(src, user)
+	cosmic_cult_monument_influence_icon(user, new /datum/power/cosmic_cult/malign_glare)

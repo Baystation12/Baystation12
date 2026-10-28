@@ -2,7 +2,8 @@
 	name = "Malign Glare"
 	desc = "Emit a horrid pulse of cosmic light, slowing and disorienting everyone around you. Its effects are amplified against silicon-based entities."
 	ability_icon_state = "glare"
-	innate_power = TRUE // DEBUG
+	innate_power = FALSE
+	tier = 1
 	cooldown = 40 SECONDS
 	var/datum/callback/callback
 

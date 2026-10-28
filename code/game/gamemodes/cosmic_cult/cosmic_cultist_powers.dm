@@ -9,6 +9,13 @@ GLOBAL_ALIST_EMPTY(cosmic_cult_power_instances)
 
 	return GLOB.cosmic_cult_power_instances[T]
 
+// checks if cultist has a power
+/datum/cosmic_cultist/proc/has_power(T)
+	if (!ispath(T, /datum/power/cosmic_cult))
+		return FALSE
+
+	return !isnull(active_powers[T])
+
 // grants a power to the cosmic cultist
 /datum/cosmic_cultist/proc/grant_power(T)
 	if (!ispath(T, /datum/power/cosmic_cult))

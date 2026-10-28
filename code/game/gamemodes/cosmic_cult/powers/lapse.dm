@@ -2,7 +2,8 @@
 	name = "Astral Lapse"
 	desc = "Lapse your target's corporeal form, temporarily rendering it immutable, impassible, and frozen in place."
 	ability_icon_state = "lapse"
-	innate_power = TRUE // debug
+	innate_power = FALSE
+	tier = 1
 	cooldown = 45 SECONDS
 	var/static/list/lapse_forms = alist(
 		SPECIES_HUMAN = /mob/living/cosmic_cult/lapse/human,
