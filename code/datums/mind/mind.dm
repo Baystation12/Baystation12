@@ -50,6 +50,7 @@
 
 	var/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holde
+	var/datum/cosmic_cultist/cosmic_cultist		// cosmic cultist holder
 
 	///String. Last spoken message.
 	var/last_words
@@ -508,6 +509,7 @@
 	assigned_job =    null
 	faction =		  MOB_FACTION_NEUTRAL
 	changeling =      null
+	cosmic_cultist =  null
 	initial_account = null
 	objectives =      list()
 	special_verbs =   list()

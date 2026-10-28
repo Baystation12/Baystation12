@@ -192,6 +192,8 @@
 
 #define SPAN_OCCULT(X) SPAN_CLASS("cult", "[X]")
 
+#define SPAN_MALIGN(X) SPAN_CLASS("malign", "[X]")
+
 #define SPAN_LEGION(X) SPAN_CLASS("legion", "[X]")
 
 #define SPAN_MFAUNA(X) SPAN_CLASS("mfauna", "[X]")

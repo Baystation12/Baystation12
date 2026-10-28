@@ -305,8 +305,40 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	name = "Scene Group"
 	group = RENDER_GROUP_FINAL
 	plane = RENDER_GROUP_SCENE
+	render_target_name = SCENE_GROUP_TARGET
 	renderer_flags = RENDERER_FLAG_AUTO
 
+/// Renderer groups that amplify/reduce the strength of the shockwave effect for a specific color channel
+/atom/movable/renderer/chromatic_abberation
+	abstract_type = /atom/movable/renderer/chromatic_abberation
+	group = RENDER_GROUP_FINAL
+	relay_blend_mode = BLEND_ADD
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+
+	/// Matrix that isolates a color channel
+	var/list/channel_matrix
+	/// Displacement strength of the shockwave for the channel
+	var/fringe_size
+
+/atom/movable/renderer/chromatic_abberation/Initialize()
+	. = ..()
+	relay.render_source = SCENE_GROUP_TARGET
+	relay.filters += filter(type = "displace", render_source = SHOCKWAVE_EFFECT_TARGET, size = fringe_size)
+	relay.filters += filter(type = "color", color = channel_matrix)
+
+/atom/movable/renderer/chromatic_abberation/red
+	name = "Scene Chromatic Aberration Red"
+	plane = SCENE_CHROMATIC_ABERRATION_RED_PLANE
+	renderer_flags = RENDERER_FLAG_AUTO
+	channel_matrix = list(1,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
+	fringe_size = -SHOCKWAVE_ABERRATION_SIZE * SHOCKWAVE_ABERRATION_VARIANCE
+
+/atom/movable/renderer/chromatic_abberation/blue
+	name = "Scene Chromatic Aberration Blue"
+	plane = SCENE_CHROMATIC_ABERRATION_BLUE_PLANE
+	renderer_flags = RENDERER_FLAG_AUTO
+	channel_matrix = list(0,0,0,0, 0,0,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
+	fringe_size = SHOCKWAVE_ABERRATION_SIZE * SHOCKWAVE_ABERRATION_VARIANCE
 
 /// Render group for stuff OUTSIDE the typical game context - UI, full screen effects, etc.
 /atom/movable/renderer/screen_group
@@ -340,6 +372,16 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 	group = RENDER_GROUP_NONE
 	plane = WARP_EFFECT_PLANE
 	render_target_name = "*warp"
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	renderer_flags = RENDERER_FLAG_AUTO
+
+
+/// Renders the shockwave effect
+/atom/movable/renderer/shockwave
+	name = "Shockwave Effect"
+	group = RENDER_GROUP_NONE
+	plane = SHOCKWAVE_EFFECT_PLANE
+	render_target_name = SHOCKWAVE_EFFECT_TARGET
 	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	renderer_flags = RENDERER_FLAG_AUTO
 
@@ -399,6 +441,16 @@ INITIALIZE_IMMEDIATE(/atom/movable/renderer)
 		type = "displace",
 		render_source = HEAT_COMPOSITE_TARGET,
 		size = 2.5
+	)
+	filters += filter(
+		type = "displace",
+		render_source = SHOCKWAVE_EFFECT_TARGET,
+		size = SHOCKWAVE_ABERRATION_SIZE
+	)
+	// these are split out to the /atom/movable/renderer/chromatic_abberation renderers
+	relay.filters += filter(
+		type = "color",
+		color = list(0,0,0,0, 0,1,0,0, 0,0,0,0, 0,0,0,1, 0,0,0,0)
 	)
 
 
