@@ -96,12 +96,19 @@ Scent intensity
 		return PROCESS_KILL
 	emit_scent()
 
+/proc/can_detect_scents(mob/living/carbon/human/smeller)
+	var/turf/turf = get_turf(smeller.loc)
+	if(!turf)
+		return FALSE
+	if(smeller.stat != CONSCIOUS || smeller.failed_last_breath || smeller.wear_mask || smeller.head && smeller.head.permeability_coefficient < 1 || !turf.return_air())
+		return FALSE
+	return TRUE
+
 /datum/extension/scent/proc/emit_scent()
 	for(var/mob/living/carbon/human/H in all_hearers(holder, range))
-		var/turf/T = get_turf(H.loc)
-		if(!T)
+		if(H.species && !H.species.passive_scent_detection)
 			continue
-		if(H.stat != CONSCIOUS || H.failed_last_breath || H.wear_mask || H.head && H.head.permeability_coefficient < 1 || !T.return_air())
+		if(!can_detect_scents(H))
 			continue
 		if(H.last_smelt < world.time)
 			intensity.PrintMessage(H, descriptor, scent)
@@ -148,3 +155,49 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 			scent_intensity = r_scent_intensity
 	if(smelliest)
 		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)
+
+/*****
+Active sampling
+	Used by species that do not passively notice scents.
+	See also /singleton/species/passive_scent_detection.
+*****/
+#define SCENT_SAMPLE_RANGE 12
+
+/proc/get_scent_distance_text(distance)
+	if(distance <= 1)
+		return "very close"
+	if(distance <= 4)
+		return "nearby"
+	return "far off"
+
+/proc/sample_scents(mob/living/carbon/human/user)
+	var/turf/user_turf = get_turf(user)
+	if(!user_turf || !can_detect_scents(user))
+		return list()
+
+	var/list/nearest = list()
+	var/list/nearest_dist = list()
+
+	for(var/datum/extension/scent/S in SSscents.processing)
+		var/turf/source = get_turf(S.holder)
+		if(!source || source.z != user_turf.z)
+			continue
+		var/distance = get_dist(user_turf, source)
+		if(distance > SCENT_SAMPLE_RANGE)
+			continue
+		if(isnull(nearest_dist[S.scent]) || distance < nearest_dist[S.scent])
+			nearest[S.scent] = S
+			nearest_dist[S.scent] = distance
+
+	var/list/by_location = list()
+	for(var/scent_name in nearest)
+		var/datum/extension/scent/S = nearest[scent_name]
+		var/direction = get_dir(user_turf, get_turf(S.holder))
+		var/location = direction ? "[get_scent_distance_text(nearest_dist[scent_name])] to the [dir2text(direction)]" : "right where you stand"
+		LAZYADD(by_location[location], "the [S.descriptor] of [S.scent]")
+
+	var/list/messages = list()
+	for(var/location in by_location)
+		messages += "You taste [english_list(by_location[location])], [location]."
+
+	return messages
