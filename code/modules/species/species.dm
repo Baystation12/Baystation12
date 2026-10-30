@@ -178,6 +178,7 @@ GLOBAL_LIST_EMPTY(mob_ref_to_species_name)
 
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
+	var/passive_scent_detection = TRUE // Passively smells nearby scents.
 	var/has_fine_manipulation = 1 // Can use small items.
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight_range = 2       // Native darksight distance.
