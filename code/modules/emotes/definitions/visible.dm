@@ -336,3 +336,14 @@
 /singleton/emote/visible/tilt
 	key = "tilt"
 	emote_message_3p = "USER tilts USER_THEIR head."
+
+/singleton/emote/visible/flick
+	key = "flick"
+	emote_message_3p = "USER flicks USER_THEIR tongue."
+
+/singleton/emote/visible/flick/check_user(mob/living/carbon/human/user)
+	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
+
+/singleton/emote/visible/flick/do_emote(mob/living/carbon/human/user)
+	user.animate_tongue_flick()
+	..()
