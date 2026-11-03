@@ -22,6 +22,7 @@ GLOBAL_VAR_AS(minimum_safe_teleport_distance, 5)
 	target.forceMove(destination)
 	if(isliving(target))
 		var/mob/living/L = target
+		L.last_teleport_time = world.time
 		if(L.buckled)
 			var/atom/movable/buckled = L.buckled
 			buckled.forceMove(destination)
