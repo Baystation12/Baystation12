@@ -2016,6 +2016,7 @@
 #include "code\modules\games\cardemon.dm"
 #include "code\modules\games\cards.dm"
 #include "code\modules\games\hanafuda.dm"
+#include "code\modules\games\pokerchips.dm"
 #include "code\modules\games\spaceball_cards.dm"
 #include "code\modules\games\tarot.dm"
 #include "code\modules\genetics\side_effects.dm"
