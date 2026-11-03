@@ -16,6 +16,7 @@
 )
 
 /singleton/species/unathi/default_emotes = list(
+	/singleton/emote/visible/flick,
 	/singleton/emote/human/swish,
 	/singleton/emote/human/wag,
 	/singleton/emote/human/sway,
@@ -29,6 +30,7 @@
 )
 
 /singleton/species/unathi/yeosa/default_emotes = list(
+	/singleton/emote/visible/flick,
 	/singleton/emote/human/swish,
 	/singleton/emote/human/wag,
 	/singleton/emote/human/sway,

@@ -757,6 +757,25 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
+/atom/movable/tongue_flick
+	icon = 'icons/mob/human_races/species/unathi/tongue.dmi'
+	icon_state = "tongue-flick"
+	layer = ABOVE_HUMAN_LAYER
+	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_ID
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
+	simulated = FALSE
+	anchored = TRUE
+
+/mob/living/carbon/human/proc/animate_tongue_flick()
+	var/atom/movable/tongue_flick/tongue = new
+	add_vis_contents(tongue)
+	flick("tongue-flick", tongue)
+	addtimer(new Callback(src, PROC_REF(end_tongue_flick), tongue), 1 SECOND)
+
+/mob/living/carbon/human/proc/end_tongue_flick(atom/movable/tongue_flick/tongue)
+	remove_vis_contents(tongue)
+	qdel(tongue)
+
 /mob/living/carbon/human/proc/animate_tail_stop(update_icons=1)
 	set_tail_state("[species.get_tail(src)]_static")
 
