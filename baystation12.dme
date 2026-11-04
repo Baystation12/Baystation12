@@ -668,6 +668,7 @@
 #include "code\game\gamemodes\cosmic_cult\cosmic_cult.dm"
 #include "code\game\gamemodes\cosmic_cult\cosmic_cultist.dm"
 #include "code\game\gamemodes\cosmic_cult\cosmic_cultist_powers.dm"
+#include "code\game\gamemodes\cosmic_cult\debug.dm"
 #include "code\game\gamemodes\cosmic_cult\languages.dm"
 #include "code\game\gamemodes\cosmic_cult\powers.dm"
 #include "code\game\gamemodes\cosmic_cult\powers_click_handler.dm"

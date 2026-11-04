@@ -41,7 +41,7 @@ var/global/list/cosmic_cult_powers = subtypesof(/datum/power/cosmic_cult)
 	if (!isnull(src.granting_influence) || src.progress < src.next_influence_at)
 		return null
 
-	for (var/P in cosmic_cult_powers)
+	for (var/P in shuffle(cosmic_cult_powers))
 		if (has_power(P))
 			continue
 
@@ -58,4 +58,8 @@ var/global/list/cosmic_cult_powers = subtypesof(/datum/power/cosmic_cult)
 		return
 
 	grant_power(src.granting_influence)
+	var/datum/power/cosmic_cult/power = get_power_instance(src.granting_influence)
 	src.granting_influence = null
+
+	to_chat(owning_mind.current, SPAN_CLASS("malign", FONT_HUGE("<b>[power.name]</b>")))
+	to_chat(owning_mind.current, SPAN_CLASS("malign", FONT_LARGE(power.desc)))
