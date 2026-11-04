@@ -61,6 +61,5 @@
 /datum/action/cosmic_cult/Activate()
 	var/ok = power.execute(cultist, src)
 	if (ok && !isnull(cooldown))
-		cooldown_end = cooldown + world.time
-		button?.UpdateIcon()
+		StartCooldown(cooldown)
 

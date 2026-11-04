@@ -26,6 +26,7 @@
 	var/button_icon_state = "default"
 	var/background_icon_state = "bg_default"
 	var/mob/living/owner
+	var/cooldown_start
 	var/cooldown_end
 
 /datum/action/New(Target)
@@ -107,6 +108,11 @@
 /datum/action/proc/OnCooldown()
 	return !isnull(cooldown_end) && cooldown_end > world.time
 
+/datum/action/proc/StartCooldown(duration)
+	cooldown_start = world.time
+	cooldown_end = world.time + duration
+	button?.UpdateIcon()
+
 /datum/action/proc/Checks()// returns 1 if all checks pass
 	if(!owner)
 		return 0
@@ -143,6 +149,8 @@
 	screen_loc = "WEST,NORTH"
 	/// String. Title of the tooltip displayed on hover. Set during `Initialize()`, defaults to `owner.target.name`.
 	var/tooltip_title
+	/// Radial cooldown indicator.
+	var/obj/screen/action_cooldown/cooldown_ring
 
 
 /obj/screen/movable/action_button/Initialize(mapload, _owner)
@@ -150,6 +158,11 @@
 	owner = _owner
 	if (owner?.target)
 		tooltip_title = owner.target.name
+
+
+/obj/screen/movable/action_button/Destroy()
+	QDEL_NULL(cooldown_ring)
+	return ..()
 
 
 /obj/screen/movable/action_button/Click(location,control,params)
@@ -190,17 +203,61 @@
 	img.pixel_y = 0
 	AddOverlays(img)
 
+	animate(src)
 	if(!owner.IsAvailable())
 		color = rgb(128,0,0,128)
-	else if (owner.OnCooldown())
-		color = "#004e6e"
-		animate(src, color = COLOR_WHITE, time = (owner.cooldown_end - world.time), tag = "cooldown_animation")
-		animate(color = COLOR_BLACK, time = 2, easing = JUMP_EASING)
-		animate(color = COLOR_WHITE, time = 1, easing = JUMP_EASING)
 	else if (owner.processing)
 		color = "#5199bd"
+	else if (owner.OnCooldown())
+		color = "#7f7f7f"
+		animate(src, color = "#7f7f7f", time = owner.cooldown_end - world.time)
+		animate(color = COLOR_WHITE, time = 0)
 	else
 		color = rgb(255,255,255,255)
+
+	if (owner.OnCooldown())
+		if (!cooldown_ring)
+			cooldown_ring = new
+			vis_contents += cooldown_ring
+		cooldown_ring.Run(owner.cooldown_start, owner.cooldown_end)
+	else
+		cooldown_ring?.Stop()
+
+/obj/screen/action_cooldown
+	icon = 'icons/obj/action_buttons/cooldown.dmi'
+	icon_state = "progress"
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR | RESET_COLOR
+	vis_flags = VIS_INHERIT_LAYER | VIS_INHERIT_PLANE | VIS_INHERIT_ID
+	alpha = 0
+
+
+/obj/screen/action_cooldown/Initialize()
+	. = ..()
+	var/image/track = image(icon, "track")
+	track.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	underlays += track
+
+/obj/screen/action_cooldown/proc/ProgressMatrix(fraction)
+	return list(
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 255,
+		0.75, 0.92, 1, -255 * (1 - fraction)
+	)
+
+/obj/screen/action_cooldown/proc/Run(start, end)
+	var/duration = end - start
+	var/remaining = end - world.time
+	var/fraction = duration > 0 ? clamp(remaining / duration, 0, 1) : 0
+	alpha = 178
+	color = ProgressMatrix(fraction)
+	animate(src, color = ProgressMatrix(0), time = remaining)
+	animate(alpha = 0, time = 0)
+
+/obj/screen/action_cooldown/proc/Stop()
+	animate(src)
+	alpha = 0
 
 //Hide/Show Action Buttons ... Button
 /obj/screen/movable/action_button/hide_toggle
