@@ -1,6 +1,72 @@
 NanoBaseCallbacks = function () {
   var _canClick = true
-  var _baseBeforeUpdateCallbacks = {}
+  let _savedTextInputs = {}
+  let _savedScrollPositions = {}
+
+  const submitTextInput = (input) => {
+    const value = input.val()
+    if (!value || !_canClick || input.siblings('.textInputSend').hasClass('inactive'))
+      return
+    _canClick = false
+    $('body').oneTime(300, 'enableClick', () => {
+      _canClick = true
+    })
+    input.val('')
+    window.location.href = `${input.data('href')};${input.data('param')}=${encodeURIComponent(value)}`
+  }
+
+  const saveScrollPositions = () => {
+    _savedScrollPositions = {}
+    $('.scrollToBottom').each((i, el) => {
+      _savedScrollPositions[el.id] = {
+        scrollTop: el.scrollTop,
+        atBottom: el.scrollTop + el.clientHeight >= el.scrollHeight - 5
+      }
+    })
+  }
+
+  const restoreScrollPositions = () => {
+    $('.scrollToBottom').each((i, el) => {
+      const saved = _savedScrollPositions[el.id]
+      el.scrollTop = (!saved || saved.atBottom) ? el.scrollHeight : saved.scrollTop
+    })
+  }
+
+  const fillHeight = () => {
+    $('.fillHeight').each((i, el) => {
+      const minHeight = Number.parseInt($(el).css('min-height'), 10) || 0
+      el.style.height = `${minHeight}px`
+      const spare = document.documentElement.clientHeight - document.documentElement.offsetHeight
+      if (spare > 0)
+        el.style.height = `${minHeight + spare}px`
+    })
+  }
+
+  const onWindowResize = () => {
+    saveScrollPositions()
+    fillHeight()
+    restoreScrollPositions()
+  }
+
+  var _baseBeforeUpdateCallbacks = {
+    textInput: (updateData) => {
+      _savedTextInputs = {}
+      $('.textInput').each((i, el) => {
+        _savedTextInputs[el.id] = {
+          value: el.value,
+          focused: document.hasFocus() && document.activeElement === el,
+          selectionStart: el.selectionStart,
+          selectionEnd: el.selectionEnd
+        }
+      })
+      return updateData
+    },
+
+    scrollToBottom: (updateData) => {
+      saveScrollPositions()
+      return updateData
+    }
+  }
   var _baseAfterUpdateCallbacks = {
     status: function (updateData) {
       var uiStatusClass
@@ -68,6 +134,30 @@ NanoBaseCallbacks = function () {
         })
       $('#uiMapImage').attr('src', updateData['config']['mapName'] + '-' + updateData['config']['mapZLevel'] + '.png')
       return updateData
+    },
+
+    textInput: (updateData) => {
+      $('.textInput').each((i, el) => {
+        const saved = _savedTextInputs[el.id]
+        if (!saved)
+          return
+        el.value = saved.value
+        if (saved.focused) {
+          el.focus({ preventScroll: true })
+          el.setSelectionRange(saved.selectionStart, saved.selectionEnd)
+        }
+      })
+      return updateData
+    },
+
+    fillHeight: (updateData) => {
+      fillHeight()
+      return updateData
+    },
+
+    scrollToBottom: (updateData) => {
+      restoreScrollPositions()
+      return updateData
     }
   }
 
@@ -75,6 +165,18 @@ NanoBaseCallbacks = function () {
     addCallbacks: function () {
       NanoStateManager.addBeforeUpdateCallbacks(_baseBeforeUpdateCallbacks)
       NanoStateManager.addAfterUpdateCallbacks(_baseAfterUpdateCallbacks)
+      $(document)
+        .on('keydown.textInput', '.textInput', (event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault()
+            submitTextInput($(event.currentTarget))
+          }
+        })
+        .on('click.textInput', '.textInputSend', (event) => {
+          event.preventDefault()
+          submitTextInput($(event.currentTarget).siblings('.textInput'))
+        })
+      $(window).on('resize.fillHeight', onWindowResize)
     },
 
     removeCallbacks: function () {
@@ -84,6 +186,8 @@ NanoBaseCallbacks = function () {
       for (var callbackKey in _baseAfterUpdateCallbacks)
         if (_baseAfterUpdateCallbacks.hasOwnProperty(callbackKey))
           NanoStateManager.removeAfterUpdateCallback(callbackKey)
+      $(document).off('.textInput')
+      $(window).off('resize.fillHeight')
     }
   }
 }()
