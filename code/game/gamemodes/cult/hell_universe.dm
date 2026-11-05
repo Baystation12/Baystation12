@@ -29,7 +29,7 @@ In short:
 	//Separated into separate procs for profiling
 	MiscSet()
 	KillMobs()
-	SSskybox.change_skybox("narsie", new_use_stars = FALSE, new_use_overmap_details = FALSE)
+	SSskybox.change_skybox("narsie", new_use_stars = FALSE, new_use_overmap_details = FALSE, new_ignore_z_overrides = TRUE)
 
 /datum/universal_state/hell/OnExit()
 	SSskybox.change_skybox("dyable", new_use_stars = TRUE, new_use_overmap_details = TRUE)

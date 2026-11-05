@@ -335,6 +335,7 @@ var/global/list/admin_verbs_mod = list(
 		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
+		if(holder.rights & R_ADMIN)         verbs += cosmic_debug_verbs
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -352,7 +353,8 @@ var/global/list/admin_verbs_mod = list(
 		admin_verbs_sounds,
 		admin_verbs_spawn,
 		debug_verbs,
-		admin_verbs_mod
+		admin_verbs_mod,
+		cosmic_debug_verbs
 		)
 
 /client/proc/hide_most_verbs()//Allows you to keep some functionality while hiding some verbs
