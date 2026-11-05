@@ -16,5 +16,8 @@
 	if (!do_after(usr, 0.9 SECONDS, target))
 		return FALSE
 
+	cultist.adjust_progress(1)
+	GLOB.cosmic_cult.adjust_progress(1)
+
 	cosmic_cult_siphon_vfx(target, usr.client)
 	return TRUE

@@ -45,6 +45,9 @@ var/global/list/cosmic_cult_powers = subtypesof(/datum/power/cosmic_cult)
 		if (has_power(P))
 			continue
 
+		if (get_power_instance(P).tier > GLOB.cosmic_cult.tier)
+			continue
+
 		src.granting_influence = P
 		src.progress -= src.next_influence_at
 		src.next_influence_at += 1

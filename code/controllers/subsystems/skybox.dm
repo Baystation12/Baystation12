@@ -134,10 +134,13 @@ SUBSYSTEM_DEF(skybox)
 		client.update_skybox(TRUE)
 
 
-/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details, new_ignore_z_overrides = FALSE)
+/datum/controller/subsystem/skybox/proc/change_skybox(new_state, new_color, new_use_stars, new_use_overmap_details, new_ignore_z_overrides = FALSE, new_star_state = "stars")
 	var/need_rebuild = FALSE
 	if (new_ignore_z_overrides != ignore_z_overrides)
 		ignore_z_overrides = new_ignore_z_overrides
+		need_rebuild = TRUE
+	if (new_star_state != star_state)
+		star_state = new_star_state
 		need_rebuild = TRUE
 	if (new_state != background_icon)
 		background_icon = new_state
