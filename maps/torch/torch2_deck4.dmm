@@ -56,6 +56,20 @@
 	},
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fourthdeck/forestarboard)
+"am" = (
+/obj/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/railing/mapped{
+	dir = 8;
+	icon_state = "railing0-1"
+	},
+/obj/floor_decal/corner/brown{
+	dir = 4
+	},
+/obj/machinery/computer/shuttle_control/lift_floors/cargo,
+/turf/simulated/floor/tiled/steel_grid,
+/area/turbolift/cargo_lift)
 "an" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 4
@@ -171,6 +185,44 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
+"az" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/storage/upper)
+"aA" = (
+/obj/floor_decal/corner/brown/half,
+/obj/machinery/lift_call_button/cargo{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/storage/upper)
+"aB" = (
+/obj/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -21
+	},
+/turf/simulated/floor/tiled,
+/area/quartermaster/storage/upper)
 "aD" = (
 /obj/machinery/atmospherics/pipe/zpipe/up/supply,
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers,
@@ -9487,20 +9539,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"HL" = (
-/obj/floor_decal/techfloor{
-	dir = 8
-	},
-/obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1"
-	},
-/obj/floor_decal/corner/brown{
-	dir = 4
-	},
-/obj/machinery/computer/shuttle_control/lift/cargo,
-/turf/simulated/floor/tiled/steel_grid,
-/area/turbolift/cargo_lift)
 "HQ" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -11272,23 +11310,6 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/lounge)
-"Np" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/storage/upper)
 "Nq" = (
 /obj/floor_decal/industrial/warning{
 	dir = 4
@@ -14059,16 +14080,6 @@
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
-"Vb" = (
-/obj/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
-	},
-/obj/machinery/light/spot{
-	dir = 8
-	},
-/turf/simulated/floor/tiled,
-/area/quartermaster/storage/upper)
 "Vd" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/catwalk,
@@ -14825,14 +14836,6 @@
 /obj/floor_decal/corner/brown,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/fore)
-"Xr" = (
-/obj/floor_decal/corner/brown/half,
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -21
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/storage/upper)
 "Xs" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -37416,10 +37419,10 @@ gM
 nR
 bE
 fA
-Vb
-Np
-Xr
-HL
+aB
+az
+aA
+am
 Bf
 Yf
 BH

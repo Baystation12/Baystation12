@@ -114,6 +114,13 @@
 	for(var/turf/T in locs)
 		if(isnull(T)) continue
 		if(T.Adjacent(neighbor,src)) return 1
+	// A neighbour bigger than a tile can be reached at any of its tiles, not just its loc.
+	if(ismovable(neighbor))
+		var/atom/movable/big = neighbor
+		if(length(big.locs) > 1)
+			for(var/turf/their_turf in big.locs)
+				for(var/turf/T in locs)
+					if(their_turf.Adjacent(T, big)) return 1
 	return 0
 
 // This is necessary for storage items not on your person.

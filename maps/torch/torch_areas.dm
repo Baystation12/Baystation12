@@ -923,6 +923,10 @@
 	name = "\improper Upper Hangar Deck"
 	icon_state = "hangar_catwalk_p"
 
+/area/quartermaster/tractor
+	name = "\improper Tractor Rig Control"
+	icon_state = "quart"
+
 // Research
 /area/rnd/canister
 	name = "\improper Canister Storage"
