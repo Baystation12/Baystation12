@@ -45,6 +45,34 @@
 		to_chat(src, SPAN_CLASS("alium", "You channel a message: \"[msg]\" to [M]"))
 	return
 
+/mob/living/carbon/human/proc/sample_air()
+	set name = "Sample Air"
+	set desc = "Flick your tongue to taste the air for scents."
+	set category = "Abilities"
+
+	if(incapacitated())
+		to_chat(src, SPAN_WARNING("You can't do that right now!"))
+		return
+	if(!check_has_mouth())
+		to_chat(src, SPAN_WARNING("You have no mouth to taste the air with!"))
+		return
+	if(world.time < next_air_sample)
+		to_chat(src, SPAN_WARNING("You need a moment before you can sample the air again."))
+		return
+	next_air_sample = world.time + 3 SECONDS
+	emote("flick")
+	addtimer(new Callback(src, PROC_REF(finish_sample_air)), 5)
+
+/mob/living/carbon/human/proc/finish_sample_air()
+	if(stat != CONSCIOUS)
+		return
+	var/list/messages = sample_scents(src)
+	if(!length(messages))
+		to_chat(src, SPAN_NOTICE("You taste nothing unusual on the air."))
+		return
+	for(var/message in messages)
+		to_chat(src, SPAN_NOTICE(message))
+
 /***********
  diona verbs
 ***********/
