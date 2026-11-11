@@ -103,9 +103,11 @@
 	return active_tool == SWISSKNF_WBLADE
 
 
-/obj/item/material/knife/folding/swiss/use_before(atom/target, mob/living/user, click_parameters)
-	// Damage increase for windows and grilles
-	if (active_tool == SWISSKNF_GBLADE && (istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)))
+/obj/item/material/knife/folding/swiss/resolve_attackby(atom/target, mob/living/user, click_params)
+	// Damage increase for windows and grilles, applied only for this interaction
+	var/old_force = force
+	var/boosted = active_tool == SWISSKNF_GBLADE && (istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
+	if (boosted)
 		force *= 8
 
 	// Allow usage on huge or smaller items
@@ -114,15 +116,12 @@
 		if (target_item.w_class <= ITEM_SIZE_HUGE)
 			can_use_tools = TRUE
 
-	return ..()
+	. = ..()
 
-
-/obj/item/material/knife/folding/swiss/use_after(atom/target, mob/living/user, click_parameters)
-	// Reset per-use vars
-	update_force()
+	// Reset per-use vars. This can't live in use_after(), as the chain ends early once use_weapon() or use_tool() handles the call
+	if (boosted)
+		force = old_force
 	can_use_tools = FALSE
-
-	return ..()
 
 
 /obj/item/material/knife/folding/swiss/officer
