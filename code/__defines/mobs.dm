@@ -51,6 +51,13 @@
 #define GETPULSE_TOOL 1   // More accurate. (med scanner, sleeper, etc.)
 #define PULSE_MAX_BPM 250 // Highest, readable BPM by machines and humans.
 
+// Triage tags, also used as the icon state names of the triage tag icons.
+#define TRIAGE_NONE   "None"
+#define TRIAGE_GREEN  "Green"
+#define TRIAGE_YELLOW "Yellow"
+#define TRIAGE_RED    "Red"
+#define TRIAGE_BLACK  "Black"
+
 //intent flags
 #define I_HELP		"help"
 #define I_DISARM	"disarm"

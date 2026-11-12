@@ -959,15 +959,20 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (GET_BIT(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
-		var/image/holder = hud_list[HEALTH_HUD]
-		if(is_dead())
-			holder.icon_state = "0" 	// X_X
-		else if(is_asystole())
-			holder.icon_state = "flatline"
-		else
-			holder.icon_state = "[pulse()]"
-		hud_list[HEALTH_HUD] = holder
+	if (GET_BIT(hud_updateflag, HEALTH_HUD))
+		if (hud_list[HEALTH_HUD])
+			var/image/holder = hud_list[HEALTH_HUD]
+			if(is_dead())
+				holder.icon_state = "0" 	// X_X
+			else if(is_asystole())
+				holder.icon_state = "flatline"
+			else
+				holder.icon_state = "[pulse()]"
+			hud_list[HEALTH_HUD] = holder
+		if (hud_list[TRIAGE_HUD])
+			var/image/holder = hud_list[TRIAGE_HUD]
+			holder.icon_state = triage_tag
+			hud_list[TRIAGE_HUD] = holder
 
 	if (GET_BIT(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]

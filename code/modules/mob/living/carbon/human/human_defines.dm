@@ -109,4 +109,6 @@
 
 	var/last_smelt = 0
 
+	var/triage_tag = TRIAGE_NONE
+
 	weather_sensitive = TRUE
