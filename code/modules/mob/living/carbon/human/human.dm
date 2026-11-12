@@ -550,12 +550,14 @@
 	var/static/list/triage_tags
 	if (!triage_tags)
 		triage_tags = list()
-		triage_tags[TRIAGE_NONE] = image('icons/misc/mark.dmi', "x3")
 		for (var/triage_option in list(TRIAGE_GREEN, TRIAGE_YELLOW, TRIAGE_RED, TRIAGE_BLACK))
 			triage_tags[triage_option] = image(icon = 'icons/mob/screen/triage_tag.dmi', icon_state = triage_option)
 	var/chosen_tag = show_radial_menu(user, src, triage_tags, radius = 42, tooltips = TRUE)
 	if (chosen_tag && hasHUD(user, HUD_MEDICAL))
-		triage_tag = chosen_tag
+		if (chosen_tag == triage_tag)
+			triage_tag = TRIAGE_NONE
+		else
+			triage_tag = chosen_tag
 		SET_BIT(hud_updateflag, HEALTH_HUD)
 		handle_hud_list()
 	return TRUE
