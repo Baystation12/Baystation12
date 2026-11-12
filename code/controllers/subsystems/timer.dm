@@ -46,17 +46,13 @@ SUBSYSTEM_DEF(timer)
 
 
 /datum/controller/subsystem/timer/fire(resume, no_mc_tick)
-	var/queue_length = length(queue)
-	if (!queue_length)
-		return
 	var/datum/timer/timer
 	var/datum/target
-	for (var/i = 1 to queue_length)
-		timer = queue[i]
+	while (length(queue))
+		timer = queue[1]
 		if (world.time < timer.fire_time)
-			if (i > 1)
-				queue.Cut(1, i)
 			return
+		queue.Cut(1, 2)
 		target = timer.callback.target
 		if (target == GLOBAL_PROC || !QDELETED(target))
 			invoke_async(timer.callback)
@@ -67,9 +63,7 @@ SUBSYSTEM_DEF(timer)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(1, i + 1)
 			return
-	LIST_RESIZE(queue, 0)
 
 
 /proc/deltimer(datum/timer/timer, datum/controller/subsystem/timer/subsystem = SStimer)
