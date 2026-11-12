@@ -1,6 +1,7 @@
 // chip sprites from this PR: https://github.com/new-frontiers-14/frontier-station-14/pull/4445
 
 /obj/item/stack/pokerchip
+	name = ""
 	singular_name = "Poker chip"
 	plural_name = "Poker chips"
 	icon = 'icons/obj/pokerchips.dmi'
@@ -101,5 +102,6 @@
 	. = ..()
 	update()
 
-/obj/item/stack/proc/add_to_stacks(mob/user, check_hands)
+/obj/item/stack/pokerchip/transfer_to()
+	. = ..()
 	update()
