@@ -54,6 +54,9 @@
 	/// When the client has atom outlines enabled and hovers something applicable, that thing's outline
 	var/image/atom_outline
 
+	/// A hidden copy of the outline target without its transform. It masks the inside of atom_outline
+	var/image/atom_outline_mask
+
 	/// A resolvable to the current atom outline target, if any
 	var/weakref/outline_atom
 
