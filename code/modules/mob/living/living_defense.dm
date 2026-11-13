@@ -416,6 +416,7 @@
 		B.UpdateIcon()
 
 		B.SetName(A.UpdateName())
+		B.desc = A.UpdateDesc()
 
 		client.screen += B
 

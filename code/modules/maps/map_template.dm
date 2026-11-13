@@ -9,6 +9,9 @@
 	var/list/shuttles_to_initialise = list()
 	var/list/subtemplates_to_spawn
 	var/base_turf_for_zs = null
+	var/skybox_background_for_zs = null
+	var/skybox_stars_for_zs = null
+	var/skybox_color_for_zs = null
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 
@@ -132,6 +135,12 @@
 			GLOB.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
 			GLOB.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
+		if (skybox_background_for_zs)
+			GLOB.using_map.skybox_background_by_z[num2text(z_index)] = skybox_background_for_zs
+		if (skybox_stars_for_zs)
+			GLOB.using_map.skybox_stars_by_z[num2text(z_index)] = skybox_stars_for_zs
+		if (skybox_color_for_zs)
+			GLOB.using_map.skybox_color_by_z[num2text(z_index)] = skybox_color_for_zs
 		GLOB.using_map.player_levels |= z_index
 
 	//initialize things that are normally initialized after map load

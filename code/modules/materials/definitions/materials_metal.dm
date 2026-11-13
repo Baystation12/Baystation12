@@ -130,7 +130,8 @@
 	wall_flags = MATERIAL_PAINTABLE_MAIN|MATERIAL_PAINTABLE_STRIPE|MATERIAL_WALL_HAS_EDGES
 	wall_blend_icons = list(
 		"wood" = TRUE,
-		"stone" = TRUE
+		"stone" = TRUE,
+		"malign" = TRUE
 	)
 	icon_colour = COLOR_STEEL
 	hitsound = 'sound/weapons/smash.ogg'
