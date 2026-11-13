@@ -138,7 +138,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/northstar/deckone)
 "cl" = (
-/obj/wallframe_spawn/reinforced/polarized/full,
+/obj/wallframe_spawn/reinforced/polarized,
 /turf/simulated/floor,
 /area/northstar/deckone)
 "cx" = (
@@ -1638,7 +1638,7 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/northstar/deckone)
 "LS" = (
-/obj/wallframe_spawn/reinforced/polarized/full,
+/obj/wallframe_spawn/reinforced/polarized,
 /turf/space,
 /area/space)
 "LW" = (
