@@ -94,6 +94,10 @@
 	default_cultural_info = list(
 		TAG_CULTURE = CULTURE_HUMAN_VATGROWN
 	)
+	traits = list(
+		/singleton/trait/malus/sensitive_stomach = TRAIT_LEVEL_MINOR
+	)
+
 
 /singleton/species/human/tritonian
 	name = SPECIES_TRITONIAN
@@ -163,6 +167,10 @@
 	blood_volume =  SPECIES_BLOOD_DEFAULT * 0.85
 	min_age =       18
 	max_age =       45
+
+	traits = list(
+		/singleton/trait/malus/sensitive_stomach = TRAIT_LEVEL_MODERATE
+	)
 
 /singleton/species/human/mule/handle_post_spawn(mob/living/carbon/human/H)
 	if(!H.psi)
