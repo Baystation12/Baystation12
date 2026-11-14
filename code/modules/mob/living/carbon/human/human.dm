@@ -562,11 +562,6 @@
 		handle_hud_list()
 	return TRUE
 
-/mob/living/carbon/human/AltClick(mob/user)
-	if (change_triage_tag(user))
-		return TRUE
-	return ..()
-
 /mob/living/carbon/human/update_flavor_text(key)
 	var/msg
 	switch(key)
