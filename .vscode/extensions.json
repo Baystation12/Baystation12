@@ -5,6 +5,7 @@
     "platymuus.dm-langclient",
     "anturk.dmi-editor",
     "eamodio.gitlens",
-    "oderwat.indent-rainbow"
+    "oderwat.indent-rainbow",
+    "sohpea.auxtools"
   ]
 }

@@ -2,6 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "auxtools",
+      "request": "launch",
+      "name": "Build & DS Debug (Auxtools & Hot-Reload)",
+      "preLaunchTask": "dm: build - ${command:dreammaker.getFilenameDme}",
+      "dmb": "${workspaceFolder}/${command:dreammaker.getFilenameDmb}",
+      "server": "dreamseeker"
+    },
+    {
       "type": "byond",
       "request": "launch",
       "name": "Build & DS Debug",
