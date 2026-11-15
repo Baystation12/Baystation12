@@ -200,7 +200,7 @@
 /mob/living/momentum_do(power, datum/thrownthing/TT, atom/movable/AM)
 	if(power >= 0.75)		//snowflake to enable being pinned to walls
 		var/direction = TT.init_dir
-		var/range = min((TT.maxrange - TT.dist_travelled) * power, 10)
+		var/range = min(round(power, 1), 10)
 		var/speed = throw_speed * min(power, 1.5)
 		var/callback = new Callback(src, PROC_REF(pin_to_wall), AM, direction)
 		throw_at(get_edge_target_turf(src, direction), range, speed, callback = callback)
