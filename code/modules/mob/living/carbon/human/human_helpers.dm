@@ -279,6 +279,15 @@
 /mob/living/carbon/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)
 
+/mob/living/carbon/human/get_hearing_loss()
+	. = ..()
+	if (!.)
+		return
+	for (var/slot in list(slot_l_ear, slot_r_ear))
+		var/obj/item/device/hearing/device = get_equipped_item(slot)
+		if (istype(device))
+			. = device.adjust_hearing_loss(.)
+
 /mob/living/carbon/human/welding_eyecheck()
 	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]
 	if(!E)
