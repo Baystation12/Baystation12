@@ -16,6 +16,7 @@
 #define SS_PRIORITY_MACHINERY      95  // Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80  // ZAS processing.
 #define SS_PRIORITY_THROWING       75  // Throwing calculation and constant checks
+#define SS_PRIORITY_VR             75  // Virtual reality mobs and their logic.
 #define SS_PRIORITY_CHEMISTRY      60  // Multi-tick chemical reactions.
 #define SS_PRIORITY_LIGHTING       50  // Queued lighting engine updates.
 #define SS_PRIORITY_SPACEDRIFT     45  // Drifting things

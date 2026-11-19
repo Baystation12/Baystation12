@@ -129,7 +129,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(!listening_levels)
 		//Defaults to our Z level!
 		var/turf/position = get_turf(src)
-		listening_levels = GetConnectedZlevels(position.z)
+		update_listening_levels(position.z)
 
 	if(length(autolinkers))
 		// Links nearby machines
@@ -172,13 +172,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/Move()
 	. = ..()
-	listening_levels = GetConnectedZlevels(z)
+	update_listening_levels(z)
 	update_power()
 
 /obj/machinery/telecomms/forceMove(newloc)
 	. = ..(newloc)
-	listening_levels = GetConnectedZlevels(z)
+	update_listening_levels(z)
 	update_power()
+
+/obj/machinery/telecomms/proc/update_listening_levels(z)
+	listening_levels = GetConnectedZlevels(z)
+	if (z in GLOB.using_map.station_levels) //Allow radio while in VR
+		listening_levels |= GLOB.using_map.vr_levels
 
 /obj/machinery/telecomms/power_change()
 	. = ..()

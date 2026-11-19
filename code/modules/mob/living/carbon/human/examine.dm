@@ -185,13 +185,13 @@
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
-		if(!key)
-			msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. [P.He] won't be recovering any time soon. (Ghosted)") + "\n"
-		else if(!client)
-			msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. (Disconnected)") + "\n"
-
-	if (admin_paralyzed)
-		msg += SPAN_DEBUG("OOC: [P.He] [P.has] been paralyzed by staff. Please avoid interacting with [P.him] unless cleared to do so by staff.") + "\n"
+		if (!SSvirtual_reality.virtual_occupants_to_mobs[src]) // We are not in VR
+			if(!key)
+				msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. [P.He] won't be recovering any time soon. (Ghosted)") + "\n"
+			else if(!client)
+				msg += SPAN_DEBUG("[P.He] [P.is] [ssd_msg]. (Disconnected)") + "\n"
+		else // We are in VR - intercept the SSD message and replace it with something else
+			msg += SPAN_NOTICE(SPAN_ITALIC("[P.He] [P.is] [species.get_vr(src)].\n"))
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)

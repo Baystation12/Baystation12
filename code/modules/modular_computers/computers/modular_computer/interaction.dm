@@ -18,7 +18,6 @@
 /obj/item/modular_computer/verb/emergency_shutdown()
 	set name = "Forced Shutdown"
 	set category = "Object"
-	set src in view(1)
 
 	if(usr.incapacitated() || !istype(usr, /mob/living))
 		to_chat(usr, SPAN_WARNING("You can't do that."))

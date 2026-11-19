@@ -424,10 +424,12 @@
  * **Parameters**:
  * - `target` `/area`. The area to copy src's contents to.
  * - `plating_required` Boolean, default `FALSE`. If set, contents will only be copied to destination tiles that are not the same type as `get_base_area_by_turf()` before calling `ChangeTurf()`.
+ * - `yield` Boolean, default `FALSE`. If set, sleeps between turfs when over the tick limit. Caller must be able to sleep.
+ * - `changed_turfs` Optional list. Every target turf that was overwritten is added to it as a key.
  *
  * Returns List (`/atom`). A list containing all atoms that were created at the target area during the process.
  */
-/area/proc/copy_contents_to(area/target, plating_required)
+/area/proc/copy_contents_to(area/target, plating_required, yield = FALSE, list/changed_turfs)
 	RETURN_TYPE(/list)
 	if (!target || !src)
 		return
@@ -447,48 +449,42 @@
 			trg_min_x = turf.x
 		if (turf.y < trg_min_y || !trg_min_y)
 			trg_min_y = turf.y
-	var/list/refined_src = list()
-	for (var/turf/turf in turfs_src)
-		refined_src[turf] = list(turf.x - src_min_x, turf.y - src_min_y)
-	var/list/refined_trg = list()
+	// Index target turfs by relative offset so each source turf is an O(1) lookup instead of a scan.
+	var/list/trg_by_offset = list()
 	for (var/turf/turf in turfs_trg)
-		refined_trg[turf] = list(turf.x - trg_min_x, turf.y - trg_min_y)
+		var/key = "[turf.x - trg_min_x],[turf.y - trg_min_y]"
+		if (!trg_by_offset[key])
+			trg_by_offset[key] = turf
 	var/list/turfs_to_update = list()
 	var/list/copied_movables = list()
-	moving:
-		for (var/turf/source_turf in refined_src)
-			var/list/source_position = refined_src[source_turf]
-			for (var/turf/target_turf in refined_trg)
-				var/list/target_position = refined_trg[target_turf]
-				var/same_position = source_position[1] == target_position[1] \
-					&& source_position[2] == target_position[2]
-				if (same_position)
-					var/old_dir1 = source_turf.dir
-					var/old_icon_state1 = source_turf.icon_state
-					var/old_icon1 = source_turf.icon
-					var/old_underlays = source_turf.underlays.Copy()
-					if (plating_required)
-						if (istype(target_turf, get_base_turf_by_area(target_turf)))
-							continue moving
-					var/turf/temp_target_turf = target_turf
-					temp_target_turf.ChangeTurf(source_turf.type)
-					temp_target_turf.set_dir(old_dir1)
-					temp_target_turf.icon_state = old_icon_state1
-					temp_target_turf.icon = old_icon1
-					temp_target_turf.CopyOverlays(source_turf)
-					temp_target_turf.underlays = old_underlays
-					for (var/obj/obj in source_turf)
-						if (!obj.simulated)
-							continue
-						copied_movables += clone_atom(obj, TRUE, temp_target_turf)
-					for (var/mob/mob in source_turf)
-						if (!mob.simulated)
-							continue
-						copied_movables += clone_atom(mob, TRUE, temp_target_turf)
-					turfs_to_update += temp_target_turf
-					refined_src -= source_turf
-					refined_trg -= target_turf
-					continue moving
+	for (var/turf/source_turf in turfs_src)
+		var/key = "[source_turf.x - src_min_x],[source_turf.y - src_min_y]"
+		var/turf/target_turf = trg_by_offset[key]
+		if (!target_turf)
+			continue
+		if (plating_required && istype(target_turf, get_base_turf_by_area(target_turf)))
+			continue
+		trg_by_offset -= key
+		var/old_underlays = source_turf.underlays.Copy()
+		target_turf.ChangeTurf(source_turf.type)
+		target_turf.set_dir(source_turf.dir)
+		target_turf.icon_state = source_turf.icon_state
+		target_turf.icon = source_turf.icon
+		target_turf.CopyOverlays(source_turf)
+		target_turf.underlays = old_underlays
+		for (var/obj/obj in source_turf)
+			if (!obj.simulated)
+				continue
+			copied_movables += clone_atom(obj, TRUE, target_turf)
+		for (var/mob/mob in source_turf)
+			if (!mob.simulated)
+				continue
+			copied_movables += clone_atom(mob, TRUE, target_turf)
+		turfs_to_update += target_turf
+		if (changed_turfs)
+			changed_turfs[target_turf] = TRUE
+		if (yield)
+			CHECK_TICK
 	for (var/turf/simulated/simulated in turfs_to_update)
 		SSair.mark_for_update(simulated)
 	return copied_movables
