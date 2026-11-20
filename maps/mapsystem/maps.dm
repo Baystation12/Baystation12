@@ -37,6 +37,9 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
 	var/list/base_turf_by_z = list() // Custom base turf by Z-level. Defaults to world.turf for unlisted Z-levels
+	var/list/skybox_background_by_z = list() // Background icon override by Z-level
+	var/list/skybox_stars_by_z = list() // Star icon override by Z-level
+	var/list/skybox_color_by_z = list() // Background color override by Z-level
 	var/list/usable_email_tlds = list("freemail.net")
 	var/base_floor_type = /turf/simulated/floor/airless // The turf type used when generating floors between Z-levels at startup.
 	var/base_floor_area                                 // Replacement area, if a base_floor_type is generated. Leave blank to skip.
