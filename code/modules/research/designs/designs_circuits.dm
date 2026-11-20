@@ -81,6 +81,13 @@
 	build_path = /obj/item/stock_parts/circuitboard/cryo_cell
 	sort_string = "FACAF"
 
+/datum/design/circuit/vr_pod
+	name = "VR pod"
+	id = "vr_pod"
+	req_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 4)
+	build_path = /obj/item/stock_parts/circuitboard/vr_pod
+	sort_string = "FACAG"
+
 /datum/design/circuit/crewconsole
 	name = "crew monitoring console"
 	id = "crewconsole"
@@ -155,13 +162,6 @@
 	id = "accounts"
 	build_path = /obj/item/stock_parts/circuitboard/account_database
 	sort_string = "HAACF"
-
-/datum/design/circuit/holo
-	name = "holodeck control console"
-	id = "holo"
-	build_path = /obj/item/stock_parts/circuitboard/holodeckcontrol
-	req_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 2)
-	sort_string = "HAACG"
 
 /datum/design/circuit/aiupload
 	name = "AI upload console"

@@ -4,6 +4,12 @@
 		/area/space = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/shuttle/escape = NO_SCRUBBER|NO_VENT|NO_APC
 	)
+	area_usage_test_exempted_root_areas = list(
+		/area/map_template,
+		/area/exoplanet,
+		/area/ship,
+		/area/virtual_reality
+	)
 	area_usage_test_exempted_areas = list(
 		/area/beach,
 		/area/centcom,

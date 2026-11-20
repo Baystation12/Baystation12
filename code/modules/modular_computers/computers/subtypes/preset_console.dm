@@ -234,3 +234,9 @@
 		/datum/computer_file/program/ship/sensors/spacer
 	)
 	autorun_program = /datum/computer_file/program/ship/sensors/spacer
+
+/obj/machinery/computer/modular/preset/vr_control
+	default_software = list(
+		/datum/computer_file/program/vr_control
+	)
+	autorun_program = /datum/computer_file/program/vr_control

@@ -90,6 +90,10 @@
 		return
 	return os
 
+/// Silicons run this module directly without an NTOS network check, so VR isolation is enforced here.
+/datum/nano_module/program/email_client/proc/in_vr()
+	return (get_z(nano_host()) in GLOB.using_map.vr_levels)
+
 /datum/nano_module/program/email_client/proc/mail_received(datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
@@ -173,6 +177,10 @@
 
 /datum/nano_module/program/email_client/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data(program)
+
+	if(in_vr())
+		log_out()
+		error = "NTNet connection unavailable."
 
 	// Password has been changed by other client connected to this email account
 	if(current_account)
@@ -312,7 +320,7 @@
 	return
 
 /datum/nano_module/program/email_client/Topic(href, href_list)
-	if(..())
+	if(..() || in_vr())
 		return TOPIC_HANDLED
 	var/mob/living/user = usr
 

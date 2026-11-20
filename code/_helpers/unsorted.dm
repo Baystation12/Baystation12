@@ -352,7 +352,11 @@ GLOBAL_LIST_AS(duplicate_object_disallowed_vars, list(
 	"group",
 	"ai_holder",
 	"natural_weapon",
-	"extensions"
+	"extensions",
+	"contents",
+	"vis_contents",
+	"vis_locs",
+	"atmos_initalized"
 ))
 
 
@@ -371,7 +375,11 @@ GLOBAL_LIST_AS(duplicate_object_disallowed_vars, list(
 			continue
 		if (!issaved(vars[name]))
 			continue
-		result.vars[name] = vars[name]
+		var/value = vars[name]
+		// Deleting shared datums/lists would break the original atom potentially, so don't copy them.
+		if ((istype(value, /datum) || islist(value)) && name != "overlays" && name != "underlays")
+			continue
+		result.vars[name] = value
 	return result
 
 
