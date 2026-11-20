@@ -157,6 +157,12 @@
 	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
+/singleton/reaction/ondansetron
+	name = "Ondansetron"
+	result = /datum/reagent/ondansetron
+	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/potassium = 1, /datum/reagent/ammonia = 1)
+	result_amount = 3
+
 /singleton/reaction/arithrazine
 	name = "Arithrazine"
 	result = /datum/reagent/arithrazine

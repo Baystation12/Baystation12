@@ -36,6 +36,7 @@
 			sparks.start()
 
 			M.Move(pick(trange(50, center)))
+			M.last_teleport_time = world.time
 			sparks = new /datum/effect/spark_spread()
 			sparks.set_up(3, 0, M.loc)
 			sparks.start()
