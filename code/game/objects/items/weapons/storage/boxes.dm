@@ -564,7 +564,18 @@
 		/obj/item/checker/queen/red = 2,
 		/obj/item/checker/king/red = 1
 	)
-
+/obj/item/storage/box/pokerchips
+	name = "poker chips box"
+	desc = "This box has 20 of each common poker chip."
+	max_storage_space = 5
+	icon_state = "pokerbox"
+	startswith = list(
+		/obj/item/stack/pokerchip = 1,
+		/obj/item/stack/pokerchip/five = 1,
+		/obj/item/stack/pokerchip/ten = 1,
+		/obj/item/stack/pokerchip/twentyfive =1,
+		/obj/item/stack/pokerchip/fifty = 1,
+	)
 
 /obj/item/storage/box/headset
 	name = "box of spare headsets"
