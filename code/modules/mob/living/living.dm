@@ -747,6 +747,9 @@ default behaviour is:
 	ear_damage = max(0, ear_damage + damage)
 	ear_deaf = max(0, ear_deaf + deaf)
 
+/mob/living/get_hearing_loss()
+	return clamp(ear_damage / 100, 0, 1)
+
 //pass a negative argument to skip one of the variable
 /mob/living/setEarDamage(damage = null, deaf = null)
 	if(!isnull(damage))
