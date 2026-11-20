@@ -98,6 +98,20 @@
 "an" = (
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/fifthdeck/fore)
+"ao" = (
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/disposalpipe/segment,
+/obj/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/storage)
 "ap" = (
 /obj/floor_decal/industrial/warning{
 	dir = 4
@@ -784,6 +798,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/exploration_shuttle/crew)
+"bD" = (
+/obj/floor_decal/industrial/outline/yellow,
+/obj/machinery/floodlight,
+/obj/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/machinery/lift_call_button/cargo{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/quartermaster/storage)
 "bE" = (
 /obj/machinery/computer/air_control{
 	dir = 8;
@@ -3850,20 +3875,6 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled,
-/area/quartermaster/storage)
-"je" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/structure/disposalpipe/segment,
-/obj/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage)
 "jf" = (
 /obj/structure/extinguisher_cabinet{
@@ -38571,7 +38582,7 @@ ov
 ow
 jc
 jc
-je
+ao
 jg
 jg
 lo
@@ -39381,7 +39392,7 @@ hR
 iG
 mD
 jl
-jl
+bD
 Em
 uh
 pt
