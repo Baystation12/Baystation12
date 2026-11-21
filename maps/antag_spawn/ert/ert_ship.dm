@@ -326,5 +326,7 @@
 		/obj/item/storage/pill_bottle/assorted = 5,
 		/obj/item/storage/pill_bottle/hyronalin = 2,
 		/obj/item/reagent_containers/glass/bottle/ethylredoxrazine = 2,
-		/obj/item/reagent_containers/glass/bottle/arithrazine = 2
+		/obj/item/reagent_containers/glass/bottle/arithrazine = 2,
+		/obj/item/reagent_containers/glass/bottle/metorapan = 3,
+		/obj/item/reagent_containers/glass/bottle/cortolin = 3
 	)
