@@ -262,6 +262,9 @@
 /mob/proc/is_deaf()
 	return ((sdisabilities & DEAFENED) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
 
+/mob/proc/get_hearing_loss()
+	return 0
+
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
 
