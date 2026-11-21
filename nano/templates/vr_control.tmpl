@@ -1,3 +1,5 @@
+{{:helper.link(data.keep_access ? 'Access requirements: On' : 'Access requirements: Off', null, {'toggle_access': 1}, null, data.keep_access ? 'selected' : null)}}
+<br>
 {{for data.active_templates}}
     <h3><u>{{:value.name}}</u></h3>
     {{if value.zone == value.selected}}

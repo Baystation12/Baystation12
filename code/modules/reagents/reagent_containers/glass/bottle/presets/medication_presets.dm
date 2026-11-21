@@ -162,3 +162,13 @@
 	name = "venaxilin bottle"
 	desc = "A small bottle. Contains venaxilin - used to neutralize venom in the bloodstream."
 	preset_reagent = /datum/reagent/dylovene/venaxilin
+
+/obj/item/reagent_containers/glass/bottle/metorapan
+	name = "metorapan bottle"
+	desc = "A small bottle. Contains metorapan - an advanced brute medication."
+	preset_reagent = /datum/reagent/metorapan
+
+/obj/item/reagent_containers/glass/bottle/cortolin
+	name = "cortolin bottle"
+	desc = "A small bottle. Contains cortolin - used to treat cardiac damage."
+	preset_reagent = /datum/reagent/cortolin

@@ -24,6 +24,7 @@
 	var/area_cooldown = 0
 	var/list/simulated_objects = list()
 	var/selected_zone
+	var/keep_access = TRUE
 
 /datum/nano_module/program/vr_control/Topic(href, href_list)
 	if(..())
@@ -50,6 +51,10 @@
 		to_chat(usr, SPAN_NOTICE("Message sent to [L]: \"[our_msg]\""))
 		return TRUE
 
+	if (href_list["toggle_access"])
+		keep_access = !keep_access
+		return TRUE
+
 	if (href_list["load_template"])
 		spawn(0)
 			SSvirtual_reality.load_template(src, usr, selected_zone, href_list["load_template"])
@@ -66,6 +71,7 @@
 	var/list/data = host.initial_data()
 
 	data["on_cooldown"] = area_cooldown > world.time
+	data["keep_access"] = keep_access
 	data["occupants"] = list()
 	for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
 		var/mob/living/virtual = SSvirtual_reality.get_surrogate_for(L)
