@@ -1,3 +1,14 @@
+/// Pain below this doesn't slow you down
+#define PAIN_SLOWDOWN_MIN_SHOCK 10
+/// Lasting pain from wounds per point of movement delay
+#define WOUND_PAIN_PER_SLOWDOWN 20
+/// Lasting pain from wounds never adds more movement delay than this
+#define WOUND_PAIN_MAX_SLOWDOWN 2
+/// Fresh pain from new hits per point of movement delay
+#define FRESH_PAIN_PER_SLOWDOWN 10
+/// Shock stage from which shock adds its flat movement delay
+#define SHOCK_STAGE_SLOWDOWN 30
+
 /mob/living/carbon/human
 	move_intents = list(/singleton/move_intent/walk)
 
@@ -24,8 +35,7 @@
 	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
-	if(can_feel_pain())
-		if(get_shock() >= 10) tally += (get_shock() / 10) //pain shouldn't slow you down if you can't even feel it
+	tally += get_pain_slowdown()
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
@@ -54,7 +64,7 @@
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			tally += E ? E.movement_delay(4) : 4
 
-	if(shock_stage >= 10 || get_stamina() <= 0)
+	if(shock_stage >= SHOCK_STAGE_SLOWDOWN || get_stamina() <= 0)
 		tally += 3
 
 	if(is_asystole()) tally += 10  //heart attacks are kinda distracting
@@ -72,6 +82,23 @@
 		tally = 0
 
 	return tally
+
+/**
+ * Movement delay from pain. Lasting pain from wounds slows you down only up to a cap,
+ * while fresh pain from new hits slows you down on top of it until it fades.
+ */
+/mob/living/carbon/human/proc/get_pain_slowdown()
+	var/shock = get_shock()
+	if(shock < PAIN_SLOWDOWN_MIN_SHOCK)
+		return 0
+	var/fresh_pain = 0
+	for(var/obj/item/organ/external/organ in organs)
+		if(organ.can_feel_pain())
+			fresh_pain += organ.pain
+	// Painkillers dull the lasting pain first, so a new hit still breaks through
+	fresh_pain = min(fresh_pain, shock)
+	var/wound_pain = shock - fresh_pain
+	return min(wound_pain / WOUND_PAIN_PER_SLOWDOWN, WOUND_PAIN_MAX_SLOWDOWN) + fresh_pain / FRESH_PAIN_PER_SLOWDOWN
 
 /mob/living/carbon/human/size_strength_mod()
 	. = ..()
@@ -155,3 +182,9 @@
 
 /mob/living/carbon/human/can_sprint()
 	return (stamina > 0)
+
+#undef PAIN_SLOWDOWN_MIN_SHOCK
+#undef WOUND_PAIN_PER_SLOWDOWN
+#undef WOUND_PAIN_MAX_SLOWDOWN
+#undef FRESH_PAIN_PER_SLOWDOWN
+#undef SHOCK_STAGE_SLOWDOWN

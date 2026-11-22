@@ -108,5 +108,6 @@
 	var/list/descriptors
 
 	var/last_smelt = 0
+	var/next_air_sample = 0
 
 	weather_sensitive = TRUE

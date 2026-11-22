@@ -78,8 +78,11 @@
 		/obj/aura/regenerating/human/unathi
 		)
 
+	passive_scent_detection = FALSE
+
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_heal_toggle
+		/mob/living/carbon/human/proc/diona_heal_toggle,
+		/mob/living/carbon/human/proc/sample_air
 		)
 
 	has_organ = list(

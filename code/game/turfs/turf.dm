@@ -95,7 +95,8 @@
 	if (mapload && permit_ao)
 		queue_ao()
 
-	if (z_flags & ZM_MIMIC_BELOW)
+	// Floors with mimic flooring (e.g. glass) already enabled Z-mimic in New() via set_flooring().
+	if ((z_flags & ZM_MIMIC_BELOW) && !shadower)
 		setup_zmimic(mapload)
 
 /turf/on_update_icon()
