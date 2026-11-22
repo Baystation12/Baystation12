@@ -188,6 +188,8 @@ SUBSYSTEM_DEF(virtual_reality)
 			for (var/datum/skill_buff/virtual_reality/VRB in vr_buffs)
 				VRB.remove()
 		occ_mob.lastarea = vir_mob.lastarea
+	if (vir_mob.skillset && !ispath(vir_mob.skillset))
+		vir_mob.skillset.skill_buffs = null // null skill_buffs so that they don't try to apply to the occupant when the virtual mob is deleted
 	QDEL_NULL(vir_mob)
 	return TRUE
 
