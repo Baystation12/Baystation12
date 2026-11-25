@@ -126,7 +126,8 @@
 		/obj/item/paper,
 		/obj/item/pen,
 		/obj/item/storage/pill_bottle/dice,
-		/obj/item/dice
+		/obj/item/dice,
+		/obj/item/storage/fancy/egg_box
 	)
 
 /obj/item/gripper/organ //Used to handle organs.
