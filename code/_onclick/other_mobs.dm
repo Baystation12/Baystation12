@@ -79,7 +79,10 @@
  * - `user` - The mob that clicked on the atom.
  */
 /atom/proc/use_in_world(mob/user)
-	attack_hand(user)
+	if (isrobot(user))
+		attack_robot(user)
+	else
+		attack_hand(user)
 
 /**
  * Called when a mob attempts to use an empty hand on itself.

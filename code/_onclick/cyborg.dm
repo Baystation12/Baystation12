@@ -6,9 +6,15 @@
 	adjacency code.
 */
 
-/mob/living/silicon/robot/ClickOn(atom/A, params)
+/mob/living/silicon/robot/ClickOn(atom/A, params, use_in_world = FALSE)
 	if(world.time <= next_click)
 		return
+
+	if (istype(A, /obj/screen/item_relayed))
+		var/obj/screen/item_relayed/relay = A
+		if (!isnull(relay.hovered_on))
+			return ClickOn(relay.hovered_on, params, use_in_world)
+
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
@@ -61,6 +67,13 @@
 	*/
 
 	var/obj/item/W = get_active_hand()
+
+	if (use_in_world && !istype(A.loc, /obj/item/robot_module))
+		if (!buckled && isturf(loc) && A.Adjacent(src))
+			A.add_hiddenprint(src)
+			A.use_in_world(src)
+			return
+		W = null
 
 	// Cyborgs have no range-checking unless there is item use
 	if(!W || istype(A.loc, /obj/item/robot_module))
