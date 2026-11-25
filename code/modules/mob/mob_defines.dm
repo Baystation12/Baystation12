@@ -150,6 +150,9 @@
 
 	var/voice_name = "unidentifiable voice"
 
+	var/ear_hear_self = TRUE // VV debugging aid for hearing loss
+	var/ear_debug_segments = FALSE // VV debugging aid for hearing loss
+
 // To check if mobs can see shadows or not. By default they can.
 	var/seedarkness = 1
 

@@ -15,15 +15,26 @@ var/global/list/floating_chat_colors = list()
 /// LAZYLIST of `/image`. Floating text message images being processed by this atom.
 /atom/movable/var/list/stored_chat_text
 
-/atom/movable/proc/animate_chat(message, datum/language/language, size, list/show_to, icon_state_override, duration = CHAT_MESSAGE_LIFESPAN)
-	set waitfor = FALSE
-
+/proc/strip_floating_text(message)
 	/// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
 	message = replacetext(message, url_scheme, "")
 
 	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	message = replacetext(message, html_metachars, "")
+	return replacetext(message, html_metachars, "")
+
+/proc/format_floating_text(message, icon_prepend, limit)
+	message = strip_floating_text(message)
+	if(icon_prepend)
+		message = "[icon_prepend] [message]"
+	if(length_char(message) > limit)
+		message = "[copytext_char(message, 1, limit)]..."
+	return capitalize(message)
+
+/atom/movable/proc/animate_chat(raw_message, datum/language/language, size, list/show_to, icon_state_override, duration = CHAT_MESSAGE_LIFESPAN)
+	set waitfor = FALSE
+
+	var/message = strip_floating_text(raw_message)
 	var/original_message = message
 
 	//additional style params for the message
@@ -41,7 +52,6 @@ var/global/list/floating_chat_colors = list()
 		icon_prepend = "\icon[emote_icon]"
 
 	if(icon_prepend)
-		message = "[icon_prepend] [message]"
 		limit += length_char(icon_prepend)
 	if(size == RUNECHAT_SMALL)
 		fontsize = 6
@@ -53,24 +63,35 @@ var/global/list/floating_chat_colors = list()
 			limit += length_char(icon_prepend)
 		style += "font-weight: bold;"
 
-	if(length_char(message) > limit)
-		message = "[copytext_char(message, 1, limit)]..."
-
 	if(!global.floating_chat_colors[name])
 		global.floating_chat_colors[name] = get_random_colour(160, 230)
 	style += "color: [global.floating_chat_colors[name]];"
 
-	// create 2 messages, one that appears if you know the language, and one that appears when you don't know the language
-	var/image/understood = generate_floating_text(src, capitalize(message), style, fontsize, duration, show_to)
+	var/non_verbal = language?.flags & (NONVERBAL | SIGNLANG)
+	var/image/understood
+	var/shift_existing = TRUE
 	for(var/client/C in show_to)
-		if(!C.mob.is_deaf() && C.get_preference_value(/datum/client_preference/floating_messages) == GLOB.PREF_SHOW)
-			if(C.mob.say_understands(src, language))
-				C.images += understood
-			else
-				var/image/gibberish = language ? generate_floating_text(src, (icon_prepend ? "[icon_prepend] " : "") + language.scramble(original_message, C.mob.languages), style, fontsize, duration, show_to, 8) : understood
-				C.images += gibberish
+		var/mob/listener = C.mob
+		if(listener.is_deaf() || C.get_preference_value(/datum/client_preference/floating_messages) != GLOB.PREF_SHOW)
+			continue
+		var/image/shown
+		if(!listener.say_understands(src, language))
+			if(language)
+				shown = generate_floating_text(src, (icon_prepend ? "[icon_prepend] " : "") + language.scramble(original_message, listener.languages), style, fontsize, duration, show_to, 8, shift_existing)
+				shift_existing = FALSE
+		else if(!non_verbal && listener.get_hearing_loss() > 0)
+			var/heard = listener.apply_hearing_loss(raw_message, src, language, (src in view(listener)) && !listener.is_blind())
+			if(heard != raw_message)
+				shown = generate_floating_text(src, format_floating_text(heard, icon_prepend, limit), style, fontsize, duration, show_to, null, shift_existing)
+				shift_existing = FALSE
+		if(!shown)
+			if(!understood)
+				understood = generate_floating_text(src, format_floating_text(raw_message, icon_prepend, limit), style, fontsize, duration, show_to, null, shift_existing)
+				shift_existing = FALSE
+			shown = understood
+		C.images += shown
 
-/proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to, height_adjust)
+/proc/generate_floating_text(atom/movable/holder, message, style, size, duration, show_to, height_adjust, shift_existing = TRUE)
 	var/image/I = image(null, get_atom_on_turf(holder))
 	I.plane = HUD_PLANE
 	I.layer = HUD_ABOVE_ITEM_LAYER
@@ -85,10 +106,11 @@ var/global/list/floating_chat_colors = list()
 	I.maptext = "<center><span style=\"[style]\">[message]</span></center>"
 	animate(I, CHAT_MESSAGE_SPAWN_TIME, alpha = 255, pixel_z = 28)
 
-	var/move_up_z = 10
-	for(var/image/old in holder.stored_chat_text)
-		var/pixel_z_new = old.pixel_z + move_up_z
-		animate(old, CHAT_MESSAGE_SPAWN_TIME, pixel_z = pixel_z_new)
+	if(shift_existing)
+		var/move_up_z = 10
+		for(var/image/old in holder.stored_chat_text)
+			var/pixel_z_new = old.pixel_z + move_up_z
+			animate(old, CHAT_MESSAGE_SPAWN_TIME, pixel_z = pixel_z_new)
 
 	LAZYADD(holder.stored_chat_text, I)
 

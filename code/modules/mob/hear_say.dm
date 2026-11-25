@@ -67,6 +67,8 @@
 
 	if (do_stars)
 		display_message = stars(display_message)
+	else if (!non_verbal)
+		display_message = apply_hearing_loss(display_message, speaker, language, in_view && !is_blind())
 
 	if ((sleeping || stat == UNCONSCIOUS) && !non_verbal)
 		hear_sleep(display_message)
@@ -118,6 +120,32 @@
 	on_hear_say(final_message)
 
 
+/**
+ * Obfuscates a spoken message according to the mob's hearing loss.
+ *
+ * @param message The message to obfuscate
+ * @param speaker The speaker of the message.
+ * @param language The language it was spoken in.
+ * @param line_of_sight Whether the mob can see the speaker's face to lipread.
+ *
+ * @return The obfuscated message.
+ */
+/mob/proc/apply_hearing_loss(message, mob/speaker, datum/language/language, line_of_sight)
+	if ((speaker == src && ear_hear_self) || language?.flags & INNATE)
+		return message
+	var/hearing_loss = get_hearing_loss()
+	if (hearing_loss <= 0)
+		return message
+	var/items = null
+	if (ear_debug_segments)
+		items = list()
+	var/obfuscated = obfuscate_hearing(message, hearing_loss, line_of_sight, splittext(lowertext(real_name), " "), "\ref[src]", items)
+	if (ear_debug_segments)
+		for (var/alist/segment as anything in items)
+			to_chat(src, "t: [segment["t"]], k: [segment["k"]], src: [segment["src"]]")
+	return obfuscated
+
+
 /mob/proc/on_hear_say(message)
 	to_chat(src, message)
 
@@ -161,6 +189,9 @@
 				message = stars(message)
 			else // Used for compression
 				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
+
+	if (!(language && (language.flags & NONVERBAL)))
+		message = apply_hearing_loss(message, speaker, language, FALSE)
 
 	var/speaker_name = vname ? vname : speaker.name
 

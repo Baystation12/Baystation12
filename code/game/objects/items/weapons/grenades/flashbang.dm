@@ -55,26 +55,26 @@
 	else if(get_dist(M, T) <= 2)
 		M.Stun(3)
 		M.mod_confused(8)
-		M.ear_damage += rand(0, 5)
-		M.ear_deaf = max(M.ear_deaf,15)
+		M.ear_damage += rand(10, 20)
+		M.ear_deaf = max(M.ear_deaf,4)
 
 	else if(get_dist(M, T) <= 5)
 		M.Stun(2)
 		M.mod_confused(5)
-		M.ear_damage += rand(0, 3)
-		M.ear_deaf = max(M.ear_deaf,10)
+		M.ear_damage += rand(0, 10)
+		M.ear_deaf = max(M.ear_deaf,2)
 
 	else
 		M.Stun(1)
 		M.mod_confused(3)
-		M.ear_damage += rand(0, 1)
-		M.ear_deaf = max(M.ear_deaf,5)
+		M.ear_damage += rand(0, 5)
+		M.ear_deaf = max(M.ear_deaf,1)
 
 	//This really should be in mob not every check
-	if (M.ear_damage >= 15)
+	if (M.ear_damage >= 40)
 		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
 	else
-		if (M.ear_damage >= 5)
+		if (M.ear_damage >= 10)
 			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
 
 
