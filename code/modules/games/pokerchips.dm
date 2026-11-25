@@ -93,15 +93,10 @@
 		gender = NEUTER
 		icon_state = base_state
 
-/obj/item/stack/pokerchip/use(used)
-	. = ..()
-	update()
-	return
-
 /obj/item/stack/pokerchip/Initialize()
-	. = ..()
+	.=..()
 	update()
 
-/obj/item/stack/pokerchip/transfer_to()
-	. = ..()
-	update()
+/obj/item/stack/pokerchip/resolve_attackby()
+		. = ..()
+		update()
