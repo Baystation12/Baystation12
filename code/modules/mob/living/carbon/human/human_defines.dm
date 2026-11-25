@@ -110,4 +110,6 @@
 	var/last_smelt = 0
 	var/next_air_sample = 0
 
+	var/triage_tag = TRIAGE_NONE
+
 	weather_sensitive = TRUE

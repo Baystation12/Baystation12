@@ -330,6 +330,7 @@
 		msg += "[SPAN_CLASS("deptradio", "Medical records:")] <a href='byond://?src=\ref[src];medrecord=`'>\[View\]</a>\n"
 		if (R?.get_allergies())
 			msg += "[SPAN_CLASS("deptradio", "Allergies:")] <a href='byond://?src=\ref[src];allergies=1'>\[View\]</a>\n"
+		msg += "[SPAN_CLASS("deptradio", "Triage tag:")] <a href='byond://?src=\ref[src];triagetag=1'>\[[triage_tag]\]</a>\n"
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
