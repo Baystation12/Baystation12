@@ -174,36 +174,44 @@ var/global/obj/screen/robot_inventory
 			to_chat(usr, SPAN_DANGER("Selected module has no modules to select"))
 			return
 
-		if(!r.robot_modules_background)
-			return
-
-		var/display_rows = -round(-(length(r.module.equipment)) / 8)
-		r.robot_modules_background.screen_loc = "CENTER-4:16,SOUTH+1:7 to CENTER+3:16,SOUTH+[display_rows]:7"
-		r.client.screen += r.robot_modules_background
-
-		var/x = -4	//Start at CENTER-4,SOUTH+1
-		var/y = 1
-
 		//Unfortunately adding the emag module to the list of modules has to be here. This is because a borg can
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
 		if (r.emagged && !r.module.is_emagged)
 			r.module.handle_emagged(r)
 
+		var/display_rows = -round(-(length(r.module.equipment)) / 8)
+		var/slot_count = display_rows * 8
+
+		while (length(r.robot_module_slots) < slot_count)
+			r.robot_module_slots += new /obj/screen/item_relayed/robot_module_slot
+		while (length(r.robot_module_slots) > slot_count)
+			var/obj/screen/item_relayed/robot_module_slot/extra = r.robot_module_slots[length(r.robot_module_slots)]
+			LIST_DEC(r.robot_module_slots)
+			r.client.screen -= extra
+			qdel(extra)
+
+		for (var/i in 1 to slot_count)
+			var/obj/screen/item_relayed/robot_module_slot/slot = r.robot_module_slots[i]
+			slot.module_item = null
+			slot.hovered_on = null
+			slot.mouse_down_on = null
+			slot.screen_loc = robot_module_screen_loc(i)
+			r.client.screen += slot
+
+		var/slot_index = 1
 		for (var/atom/movable/A in r.module.equipment)
 			if (!r.IsHolding(A))
 				//Module is not currently active
 				r.client.screen += A
-				if(x < 0)
-					A.screen_loc = "CENTER[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
-				else
-					A.screen_loc = "CENTER+[x]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"
+				A.screen_loc = robot_module_screen_loc(slot_index)
 				A.hud_layerise()
 
-				x++
-				if(x == 4)
-					x = -4
-					y++
+				var/obj/screen/item_relayed/robot_module_slot/slot = r.robot_module_slots[slot_index]
+				if (isitem(A))
+					slot.module_item = A
+
+				slot_index++
 
 	else
 		//Modules display is hidden
@@ -213,4 +221,13 @@ var/global/obj/screen/robot_inventory
 				//Module is not currently active
 				r.client.screen -= A
 		r.shown_robot_modules = 0
-		r.client.screen -= r.robot_modules_background
+		for (var/obj/screen/item_relayed/robot_module_slot/slot as anything in r.robot_module_slots)
+			slot.module_item = null
+			slot.hovered_on = null
+			slot.mouse_down_on = null
+			r.client.screen -= slot
+
+/datum/hud/proc/robot_module_screen_loc(index)
+	var/x = ((index - 1) % 8) - 4
+	var/y = round((index - 1) / 8) + 1
+	return "CENTER[x < 0 ? "[x]" : "+[x]"]:[WORLD_ICON_SIZE/2],SOUTH+[y]:7"

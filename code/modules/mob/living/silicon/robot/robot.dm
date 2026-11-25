@@ -41,7 +41,7 @@
 	var/list/obj/screen/inv = list()
 
 	var/shown_robot_modules = 0 //Used to determine whether they have the module menu shown or not
-	var/obj/screen/robot_modules_background
+	var/list/obj/screen/item_relayed/robot_module_slot/robot_module_slots = list()
 
 //3 Modules can be activated at any one time.
 	var/obj/item/robot_module/module = null
@@ -102,8 +102,6 @@
 
 	wires = new(src)
 
-	robot_modules_background = new()
-	robot_modules_background.icon_state = "block"
 	ident = random_id(/mob/living/silicon/robot, 1, 999)
 	module_sprites["Basic"] = "robot"
 	icontype = "Basic"
@@ -206,6 +204,7 @@
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	connected_ai = null
+	QDEL_NULL_LIST(robot_module_slots)
 	QDEL_NULL(module)
 	QDEL_NULL(wires)
 	. = ..()
