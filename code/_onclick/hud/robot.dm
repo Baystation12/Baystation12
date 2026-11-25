@@ -21,32 +21,19 @@ var/global/obj/screen/robot_inventory
 
 	//Module select
 
-	using = new /obj/screen()
-	using.SetName("module1")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv1"
-	using.screen_loc = ui_inv1
-	src.adding += using
-	mymob:inv += using
+	var/mob/living/silicon/robot/robot = mymob
+	robot.inv = list()
 
-	using = new /obj/screen()
-	using.SetName("module2")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv2"
-	using.screen_loc = ui_inv2
-	src.adding += using
-	mymob:inv += using
-
-	using = new /obj/screen()
-	using.SetName("module3")
-	using.set_dir(SOUTHWEST)
-	using.icon = 'icons/mob/screen1_robot.dmi'
-	using.icon_state = "inv3"
-	using.screen_loc = ui_inv3
-	src.adding += using
-	mymob:inv += using
+	var/list/module_slot_locs = list(ui_inv1, ui_inv2, ui_inv3)
+	for (var/index in 1 to 3)
+		using = new /obj/screen()
+		using.SetName("module[index]")
+		using.set_dir(SOUTHWEST)
+		using.icon = 'icons/mob/screen1_robot.dmi'
+		using.icon_state = robot.module_selected(index) ? "inv[index] +a" : "inv[index]"
+		using.screen_loc = module_slot_locs[index]
+		src.adding += using
+		robot.inv += using
 
 	//End of module select
 
