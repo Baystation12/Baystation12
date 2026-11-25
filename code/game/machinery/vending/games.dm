@@ -39,7 +39,8 @@
 		/obj/item/board = 2,
 		/obj/item/storage/fancy/crayons = 3,
 		/obj/item/reagent_containers/spray/waterflower = 10,
-		/obj/item/storage/box/snappops = 15
+		/obj/item/storage/box/snappops = 15,
+		/obj/item/storage/box/pokerchips = 10
 	)
 	products = list(
 		/obj/item/toy/blink = 0,
@@ -58,7 +59,8 @@
 		/obj/item/board = 0,
 		/obj/item/storage/fancy/crayons = 0,
 		/obj/item/reagent_containers/spray/waterflower = 0,
-		/obj/item/storage/box/snappops = 0
+		/obj/item/storage/box/snappops = 0,
+		/obj/item/storage/box/pokerchips = 0
 	)
 	rare_products = list(
 		/obj/item/reagent_containers/spray/waterflower = 30,
