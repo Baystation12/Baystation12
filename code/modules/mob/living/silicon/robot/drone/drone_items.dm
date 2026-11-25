@@ -126,7 +126,8 @@
 		/obj/item/paper,
 		/obj/item/pen,
 		/obj/item/storage/pill_bottle/dice,
-		/obj/item/dice
+		/obj/item/dice,
+		/obj/item/storage/fancy/egg_box
 	)
 
 /obj/item/gripper/organ //Used to handle organs.
@@ -187,9 +188,32 @@
 		to_chat(user, "It is holding \a [wrapped].")
 
 /obj/item/gripper/attack_self(mob/user as mob)
-	if(wrapped)
-		return wrapped.attack_self(user)
-	return ..()
+	if(!wrapped)
+		for(var/obj/item/thing in src.contents)
+			wrapped = thing
+			update_icon()
+			break
+
+	if(!wrapped)
+		return ..()
+
+	wrapped.forceMove(user)
+	. = wrapped.attack_self(user)
+	reclaim_wrapped(user)
+
+/obj/item/gripper/proc/reclaim_wrapped(mob/living/user)
+	if(QDELETED(wrapped))
+		if (wrapped)
+			wrapped.forceMove(null)
+		wrapped = null
+		update_icon()
+		return
+
+	if(wrapped && user && wrapped.loc == user)
+		wrapped.forceMove(src)
+	else
+		wrapped = null
+	update_icon()
 
 /obj/item/gripper/verb/drop_gripped_item()
 
@@ -310,12 +334,7 @@
 	if(wrapped)
 		wrapped.force = force_holder
 
-	//If wrapped was neither deleted nor put into target, put it back into the gripper.
-	if(wrapped && user && !QDELETED(wrapped) && wrapped.loc == user)
-		wrapped.forceMove(src)
-	else
-		wrapped = null
-		update_icon()
+	reclaim_wrapped(user)
 
 
 /obj/item/gripper/on_update_icon()

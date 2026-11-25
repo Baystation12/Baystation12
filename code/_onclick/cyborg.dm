@@ -6,9 +6,15 @@
 	adjacency code.
 */
 
-/mob/living/silicon/robot/ClickOn(atom/A, params)
+/mob/living/silicon/robot/ClickOn(atom/A, params, use_in_world = FALSE)
 	if(world.time <= next_click)
 		return
+
+	if (istype(A, /obj/screen/item_relayed))
+		var/obj/screen/item_relayed/relay = A
+		if (!isnull(relay.hovered_on))
+			return ClickOn(relay.hovered_on, params, use_in_world)
+
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
@@ -62,6 +68,13 @@
 
 	var/obj/item/W = get_active_hand()
 
+	if (use_in_world && !istype(A.loc, /obj/item/robot_module))
+		if (!buckled && isturf(loc) && A.Adjacent(src))
+			A.add_hiddenprint(src)
+			A.use_in_world(src)
+			return
+		W = null
+
 	// Cyborgs have no range-checking unless there is item use
 	if(!W || istype(A.loc, /obj/item/robot_module))
 		A.add_hiddenprint(src)
@@ -81,9 +94,9 @@
 	if(A == loc || (A in loc) || (A in contents))
 		// No adjacency checks
 
-		var/resolved = W.resolve_attackby(A, src, params)
+		var/resolved = W.resolve_attackby(A, src, modifiers)
 		if(!resolved && A && W)
-			W.afterattack(A, src, 1, params) // 1 indicates adjacency
+			W.afterattack(A, src, 1, modifiers) // 1 indicates adjacency
 		return
 
 	if(!isturf(loc))
@@ -93,12 +106,12 @@
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 
-			var/resolved = W.resolve_attackby(A, src, params)
+			var/resolved = W.resolve_attackby(A, src, modifiers)
 			if(!resolved && A && W)
-				W.afterattack(A, src, 1, params) // 1 indicates adjacency
+				W.afterattack(A, src, 1, modifiers) // 1 indicates adjacency
 			return
 		else
-			W.afterattack(A, src, 0, params)
+			W.afterattack(A, src, 0, modifiers)
 			return
 	return
 

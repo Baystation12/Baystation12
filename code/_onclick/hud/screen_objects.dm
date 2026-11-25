@@ -198,6 +198,23 @@
 
 	return null
 
+/// Item relay used by the robot module selection grid
+/obj/screen/item_relayed/robot_module_slot
+	name = "module slot"
+	icon_state = "block"
+
+	var/obj/item/module_item = null
+
+/obj/screen/item_relayed/robot_module_slot/Destroy()
+	module_item = null
+	return ..()
+
+/obj/screen/item_relayed/robot_module_slot/find_item(params)
+	if (isnull(module_item) || !isrobot(usr))
+		return null
+
+	return module_item
+
 /obj/screen/zone_sel
 	name = "damage zone"
 	icon_state = "zone_sel"
