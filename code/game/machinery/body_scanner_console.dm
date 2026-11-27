@@ -44,9 +44,9 @@
 	for(var/D in GLOB.cardinal)
 		connected = locate(/obj/machinery/bodyscanner, get_step(src, D))
 		if(connected)
-			break
-		GLOB.destroyed_event.register(connected, src, PROC_REF(unlink_scanner))
-	update_icon()
+			GLOB.destroyed_event.register(connected, src, PROC_REF(unlink_scanner))
+			update_icon()
+			return TRUE
 
 /obj/machinery/body_scanconsole/proc/unlink_scanner(obj/machinery/bodyscanner/scanner)
 	GLOB.destroyed_event.unregister(scanner, src, PROC_REF(unlink_scanner))
@@ -61,8 +61,12 @@
 	return !!length(connected_displays)
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
-	if(!connected || connected.inoperable())
-		to_chat(user, SPAN_WARNING("This console is not connected to a functioning body scanner."))
+	if (connected?.inoperable())
+		to_chat(user, SPAN_WARNING("The body scanner is not functioning."))
+		return TRUE
+
+	if(!connected && !FindScanner())
+		to_chat(user, SPAN_WARNING("The console cannot locate a body scanner to connect to."))
 		return TRUE
 	return ..()
 

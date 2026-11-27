@@ -14848,7 +14848,6 @@
 "MW" = (
 /obj/structure/table/rack,
 /obj/floor_decal/industrial/outline/yellow,
-/obj/item/stock_parts/circuitboard/holodeckcontrol,
 /obj/item/stock_parts/circuitboard/mech_recharger,
 /obj/item/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/techfloor/grid,

@@ -33,6 +33,7 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
 	var/list/escape_levels = list()  // Z-levels that when a player is in, are considered to have 'escaped' after evacuations.
+	var/list/vr_levels = list()      // Z-levels used for VR simulations.
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
@@ -71,13 +72,6 @@ var/global/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/emergency_shuttle_recall_message
 
 	var/list/station_networks = list() 		// Camera networks that will show up on the console.
-
-	var/list/holodeck_programs = list() // map of string ids to /datum/holodeck_program instances
-	var/list/holodeck_supported_programs = list() // map of maps - first level maps from list-of-programs string id (e.g. "BarPrograms") to another map
-												  // this is in order to support multiple holodeck program listings for different holodecks
-	                                              // second level maps from program friendly display names ("Picnic Area") to program string ids ("picnicarea")
-	                                              // as defined in holodeck_programs
-	var/list/holodeck_restricted_programs = list() // as above... but EVIL!
 
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
 	var/default_spawn = "Arrivals Shuttle"

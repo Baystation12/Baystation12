@@ -595,7 +595,7 @@
 	name = "lift (third deck)"
 	lift_floor_label = "Deck 3"
 	lift_floor_name = "Habitation Deck"
-	lift_announce_str = "Arriving at Habitation Deck: Mess Hall. Officer's Mess. Lounge. Observation. Hydroponics. Cryogenic Storage. Holodeck. Gym."
+	lift_announce_str = "Arriving at Habitation Deck: Mess Hall. Officer's Mess. Lounge. Observation. Hydroponics. Cryogenic Storage. Gym."
 
 /area/turbolift/torch_first
 	name = "lift (fourth deck)"
@@ -1060,9 +1060,15 @@
 	name = "\improper Computer Lab"
 	icon_state = "conference"
 
-/area/holocontrol
-	name = "\improper Holodeck Control"
-	icon_state = "Holodeck"
+/area/crew_quarters/virtual_reality_control
+	name = "\improper VR Control"
+	icon_state = "vr_control"
+
+/area/crew_quarters/virtual_reality
+	name = "\improper VR Suites"
+	icon_state = "vr_suites"
+	sound_env = SMALL_SOFTFLOOR
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED // don't want to fry people who are in VR!
 
 // Borg Upload
 
@@ -1431,88 +1437,6 @@
 	name = "Auxiliary Tool Storage"
 	icon_state = "auxstorage"
 
-// Holodecks
-
-/area/holodeck
-	name = "\improper Holodeck"
-	icon_state = "Holodeck"
-	dynamic_lighting = 0
-	sound_env = LARGE_ENCLOSED
-	area_flags = AREA_FLAG_NO_MODIFY
-
-/area/holodeck/alphadeck
-	name = "\improper Holodeck Alpha"
-
-/area/holodeck/source_plating
-	name = "\improper Holodeck - Off"
-
-/area/holodeck/source_emptycourt
-	name = "\improper Holodeck - Empty Court"
-	sound_env = ARENA
-
-/area/holodeck/source_boxingcourt
-	name = "\improper Holodeck - Boxing Court"
-	sound_env = ARENA
-
-/area/holodeck/source_basketball
-	name = "\improper Holodeck - Basketball Court"
-	sound_env = ARENA
-
-/area/holodeck/source_thunderdomecourt
-	name = "\improper Holodeck - Thunderdome Court"
-	sound_env = ARENA
-
-/area/holodeck/source_courtroom
-	name = "\improper Holodeck - Courtroom"
-	sound_env = AUDITORIUM
-
-/area/holodeck/source_beach
-	name = "\improper Holodeck - Beach"
-	sound_env = PLAIN
-
-/area/holodeck/source_wildlife
-	name = "\improper Holodeck - Wildlife Simulation"
-
-/area/holodeck/source_meetinghall
-	name = "\improper Holodeck - Meeting Hall"
-	sound_env = AUDITORIUM
-
-/area/holodeck/source_theatre
-	name = "\improper Holodeck - Theatre"
-	sound_env = CONCERT_HALL
-
-/area/holodeck/source_picnicarea
-	name = "\improper Holodeck - Picnic Area"
-	sound_env = PLAIN
-
-/area/holodeck/source_snowfield
-	name = "\improper Holodeck - Snow Field"
-	sound_env = FOREST
-
-/area/holodeck/source_desert
-	name = "\improper Holodeck - Desert"
-	sound_env = PLAIN
-
-/area/holodeck/source_space
-	name = "\improper Holodeck - Space"
-	has_gravity = 0
-	sound_env = SPACE
-
-/area/holodeck/source_cafe
-	name = "\improper Holodeck - Cafe"
-	sound_env = PLAIN
-
-/area/holodeck/source_volleyball
-	name = "\improper Holodeck - Volleyball"
-	sound_env = PLAIN
-
-/area/holodeck/source_temple
-	name = "\improper Holodeck - Temple"
-	sound_env = SMALL_ENCLOSED
-
-/area/holodeck/source_plaza
-	name = "\improper Holodeck - Plaza"
-	sound_env = SMALL_ENCLOSED
 
 // Engineering
 

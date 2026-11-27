@@ -10,7 +10,6 @@
 		/area/engineering/fuelbay = NO_SCRUBBER|NO_VENT,
 		/area/engineering/wastetank = NO_SCRUBBER|NO_VENT,
 		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
-		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarport = NO_SCRUBBER|NO_VENT,
@@ -60,6 +59,13 @@
 		/area/centcom/control,
 		/area/torchexterior,
 		/area/space
+	)
+
+	area_usage_test_exempted_root_areas = list(
+		/area/map_template,
+		/area/exoplanet,
+		/area/ship,
+		/area/virtual_reality
 	)
 
 	area_usage_test_exempted_areas = list(

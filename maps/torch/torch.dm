@@ -16,7 +16,6 @@
 	#include "torch_areas.dm"
 	#include "torch_elevator.dm"
 	#include "torch_events.dm"
-	#include "torch_holodecks.dm"
 	#include "torch_lobby.dm"
 	#include "torch_machinery.dm"
 	#include "torch_map_templates.dm"
@@ -167,6 +166,7 @@
 	#include "torch6_bridge.dmm"
 	#include "z1_admin.dmm"
 	#include "z2_transit.dmm"
+	#include "z3_virtualreality.dmm"
 
 	#include "../away/empty.dmm"
 	#include "../away/mining/mining.dm"
