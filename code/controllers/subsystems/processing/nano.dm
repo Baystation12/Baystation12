@@ -5,6 +5,8 @@ PROCESSING_SUBSYSTEM_DEF(nano)
 
 	// a list of current open /nanoui UIs, grouped by src_object and ui_key
 	var/list/open_uis = list()
+	//Hash list of nano/ files used by open UIs, for dev hot-reload. Null when disabled.
+	var/list/hotreload_hashes
 
  /**
   * Get an open /nanoui ui for the current user, src_object and ui_key and try to update it with data
@@ -190,3 +192,48 @@ PROCESSING_SUBSYSTEM_DEF(nano)
 		newMob.open_uis += ui
 	oldMob.open_uis = null
 	return 1 // success
+
+/datum/controller/subsystem/processing/nano/fire(resume, no_mc_tick)
+	if (!resume && hotreload_hashes)
+		hot_reload()
+	..()
+
+/datum/controller/subsystem/processing/nano/proc/hot_reload()
+	var/list/paths = list()
+	for (var/datum/nanoui/ui as anything in processing)
+		for (var/key in ui.templates)
+			paths |= "nano/templates/[ui.templates[key]]"
+		for (var/name in ui.scripts)
+			paths |= "nano/js/[name]"
+		for (var/name in ui.stylesheets)
+			paths |= "nano/css/[name]"
+
+	var/list/changed = list()
+	for (var/path in paths)
+		if (!fexists(path))
+			continue
+		var/hash = md5(file(path))
+		if (hotreload_hashes[path] && hotreload_hashes[path] != hash)
+			changed[copytext(path, findlasttext(path, "/") + 1)] = fcopy_rsc(path)
+		hotreload_hashes[path] = hash
+	if (!length(changed))
+		return
+
+	var/datum/asset/nanoui/nano_assets = get_asset_datum(/datum/asset/nanoui)
+	for (var/name in changed)
+		register_asset(name, changed[name])
+		if (nano_assets.common[name])
+			nano_assets.common[name] = changed[name]
+	for (var/client/client as anything in GLOB.clients)
+		client.cache -= changed
+		send_asset_list(client, changed, FALSE)
+	for (var/datum/nanoui/ui as anything in processing)
+		ui.reinitialise()
+
+/client/proc/toggle_nano_hotreload()
+	set category = "Debug"
+	set name = "Toggle NanoUI Hot Reload"
+	if (!check_rights(R_DEBUG))
+		return
+	SSnano.hotreload_hashes = SSnano.hotreload_hashes ? null : list()
+	log_and_message_admins("has [SSnano.hotreload_hashes ? "enabled" : "disabled"] NanoUI hot reload.")
