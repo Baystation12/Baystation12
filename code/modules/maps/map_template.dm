@@ -143,6 +143,7 @@
 			GLOB.using_map.skybox_color_by_z[num2text(z_index)] = skybox_color_for_zs
 		GLOB.using_map.player_levels |= z_index
 
+	before_init(initial_z)
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
@@ -179,6 +180,7 @@
 			log_debug("Failed to load map file [mappath] for [src].")
 			return FALSE
 
+	before_init(T.z)
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
@@ -188,6 +190,9 @@
 	loaded++
 
 	return TRUE
+
+/datum/map_template/proc/before_init(z)
+	return
 
 /datum/map_template/proc/after_load(z)
 	for(var/obj/landmark/map_load_mark/mark in subtemplates_to_spawn)
