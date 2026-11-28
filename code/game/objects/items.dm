@@ -16,6 +16,9 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = "swing_hit"
+	var/hit_miss_sound = 'sound/weapons/punchmiss.ogg'
+	var/hit_glance_sound = null
+	var/hit_sounds_override_target = FALSE
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = FALSE			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASS_FLAG_TABLE

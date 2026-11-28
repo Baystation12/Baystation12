@@ -64,35 +64,7 @@
 	src.last_flash = world.time
 	use_power_oneoff(1500)
 
-	for (var/mob/living/O in viewers(src, null))
-		if (get_dist(src, O) > src.range)
-			continue
-
-		var/flash_time = strength
-		if(isliving(O))
-			if(O.eyecheck() > FLASH_PROTECTION_NONE)
-				continue
-			if(ishuman(O))
-				var/mob/living/carbon/human/H = O
-				flash_time = round(H.getFlashMod() * flash_time)
-				if(flash_time <= 0)
-					return
-				var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[H.species.vision_organ]
-				if(!E)
-					return
-				if(E.is_bruised() && prob(E.damage + 50))
-					H.flash_eyes()
-					E.damage += rand(1, 5)
-
-		if(!O.blinded)
-			do_flash(O, flash_time)
-
-/obj/machinery/flasher/proc/do_flash(mob/living/victim, flash_time)
-	victim.flash_eyes()
-	victim.eye_blurry += flash_time
-	victim.mod_confused(flash_time + 2)
-	victim.Stun(flash_time / 2)
-	victim.Weaken(3)
+	do_area_flash(src, range, strength, FLASH_PROTECTION_NONE)
 
 /obj/machinery/flasher/emp_act(severity)
 	if (operable() && prob(75 / severity))
@@ -128,6 +100,40 @@
 	else
 		ClearOverlays()
 	..()
+
+/proc/do_area_flash(atom/origin, range, strength, safety = FLASH_PROTECTION_NONE, datum/callback/predicate = null)
+	for (var/mob/living/O in viewers(origin, null))
+		if (get_dist(origin, O) > range)
+			continue
+
+		if (!isnull(predicate) && !invoke(predicate, O))
+			return
+
+		var/flash_time = strength
+		if(isliving(O))
+			if(O.eyecheck() > safety)
+				continue
+			if(ishuman(O))
+				var/mob/living/carbon/human/H = O
+				flash_time = round(H.getFlashMod() * flash_time)
+				if(flash_time <= 0)
+					return
+				var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[H.species.vision_organ]
+				if(!E)
+					return
+				if(E.is_bruised() && prob(E.damage + 50))
+					H.flash_eyes()
+					E.damage += rand(1, 5)
+
+		if(!O.blinded)
+			do_individual_flash(O, flash_time)
+
+/proc/do_individual_flash(mob/living/victim, flash_time)
+	victim.flash_eyes()
+	victim.eye_blurry += flash_time
+	victim.mod_confused(flash_time + 2)
+	victim.Stun(flash_time / 2)
+	victim.Weaken(3)
 
 /obj/machinery/button/flasher
 	name = "flasher button"

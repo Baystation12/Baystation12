@@ -9,6 +9,9 @@
 	var/list/shuttles_to_initialise = list()
 	var/list/subtemplates_to_spawn
 	var/base_turf_for_zs = null
+	var/skybox_background_for_zs = null
+	var/skybox_stars_for_zs = null
+	var/skybox_color_for_zs = null
 	var/accessibility_weight = 0
 	var/template_flags = TEMPLATE_FLAG_ALLOW_DUPLICATES
 
@@ -132,8 +135,15 @@
 			GLOB.using_map.accessible_z_levels[num2text(z_index)] = accessibility_weight
 		if (base_turf_for_zs)
 			GLOB.using_map.base_turf_by_z[num2text(z_index)] = base_turf_for_zs
+		if (skybox_background_for_zs)
+			GLOB.using_map.skybox_background_by_z[num2text(z_index)] = skybox_background_for_zs
+		if (skybox_stars_for_zs)
+			GLOB.using_map.skybox_stars_by_z[num2text(z_index)] = skybox_stars_for_zs
+		if (skybox_color_for_zs)
+			GLOB.using_map.skybox_color_by_z[num2text(z_index)] = skybox_color_for_zs
 		GLOB.using_map.player_levels |= z_index
 
+	before_init(initial_z)
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
@@ -170,6 +180,7 @@
 			log_debug("Failed to load map file [mappath] for [src].")
 			return FALSE
 
+	before_init(T.z)
 	//initialize things that are normally initialized after map load
 	init_atoms(atoms_to_initialise)
 	init_shuttles(shuttle_state)
@@ -179,6 +190,9 @@
 	loaded++
 
 	return TRUE
+
+/datum/map_template/proc/before_init(z)
+	return
 
 /datum/map_template/proc/after_load(z)
 	for(var/obj/landmark/map_load_mark/mark in subtemplates_to_spawn)

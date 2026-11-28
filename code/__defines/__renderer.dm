@@ -45,6 +45,9 @@
 #define HEAT_COMPOSITE_TARGET "*heatc"
 #define WARP_EFFECT_PLANE -3
 
+#define SHOCKWAVE_EFFECT_PLANE -2
+#define SHOCKWAVE_EFFECT_TARGET "*shockwave"
+
 #define DEFAULT_PLANE                   1
 	#define PLATING_LAYER               1
 	//ABOVE PLATING
@@ -141,9 +144,10 @@
 #define OBSERVER_PLANE             200
 
 #define LIGHTING_PLANE             300 // For Lighting. - The highest plane (ignoring all other even higher planes)
-	#define LIGHTBULB_LAYER        0
-	#define LIGHTING_LAYER         1
-	#define ABOVE_LIGHTING_LAYER   2
+	#define LIGHTBULB_LAYER              0
+	#define LIGHTING_LAYER               1
+	#define ABOVE_LIGHTING_LAYER         2
+	#define ABOVE_ABOVE_LIGHTING_LAYER   3
 
 #define EFFECTS_ABOVE_LIGHTING_PLANE   400 // For glowy eyes, laser beams, etc. that shouldn't be affected by darkness
 	#define EYE_GLOW_LAYER         1
@@ -180,6 +184,15 @@
 
 /// Things to be drawn within the game context
 #define RENDER_GROUP_SCENE 800
+#define SCENE_GROUP_TARGET "*scene"
+	#define SCENE_CHROMATIC_ABERRATION_RED_PLANE 801
+	#define SCENE_CHROMATIC_ABERRATION_BLUE_PLANE 802
+
+/// Pixels of displacement at full shockwave strength.
+#define SHOCKWAVE_ABERRATION_SIZE 28
+
+/// Modifier for how much the red/blue channels diverge from the green in the shockwave aberration
+#define SHOCKWAVE_ABERRATION_VARIANCE 0.25
 
 /// Things to be drawn within the screen context
 #define RENDER_GROUP_SCREEN 850

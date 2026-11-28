@@ -230,6 +230,10 @@ var/global/list/channel_to_radio_key = new
 		to_chat(src, SPAN_DANGER("You're muzzled and cannot speak!"))
 		return
 
+	if(speaking && (speaking.flags & AUDIBLE_HIVEMIND))
+		speaking.broadcast(src,trimtext(message))
+		whispering = TRUE
+
 	if (speaking)
 		if(whispering)
 			verb = speaking.whisper_verb ? speaking.whisper_verb : speaking.speech_verb

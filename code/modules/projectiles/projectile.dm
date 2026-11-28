@@ -61,6 +61,7 @@
 
 	var/hitscan = FALSE		// whether the projectile should be hitscan
 	var/step_delay = 0.65	// the delay between iterations if not a hitscan projectile
+	var/beam = FALSE        // whether the projectile is a non-hitscan but beamed projectile
 
 	// effect types to be used
 	var/muzzle_type
@@ -425,7 +426,7 @@
 			M.SetTransform(others = effect_transform)
 			M.pixel_x = round(location.pixel_x, 1)
 			M.pixel_y = round(location.pixel_y, 1)
-			if(!hitscan) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
+			if(!hitscan && !beam) //Bullets don't hit their target instantly, so we can't link the deletion of the muzzle flash to the bullet's Destroy()
 				QDEL_IN(M,1)
 			else
 				segments += M
@@ -438,7 +439,7 @@
 			P.SetTransform(others = effect_transform)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
-			if(hitscan)
+			if(hitscan || beam)
 				segments += P
 
 /obj/item/projectile/proc/impact_effect()
