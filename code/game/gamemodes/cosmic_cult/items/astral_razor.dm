@@ -54,45 +54,78 @@
 	hitscan = FALSE
 	beam = TRUE
 	distance_falloff = 1.5
+	step_delay = 0.3
 
 	muzzle_type = /obj/projectile/astral_razor/muzzle
 	tracer_type = /obj/projectile/astral_razor/tracer
 	impact_type = /obj/projectile/astral_razor/impact
 
+	var/list/beam_sources
+
+/obj/item/projectile/astral_razor_projectile/launch(atom/target, target_zone, x_offset, y_offset, angle_offset)
+	if (!beam_sources)
+		beam_sources = list()
+		for (var/state in list("start", "middle", "end"))
+			beam_sources[state] = new /obj/astral_razor_beam_render_source(null, state)
+	return ..()
+
 /obj/item/projectile/astral_razor_projectile/muzzle_effect()
 	..()
-	animate_segments()
+	attach_segments()
 
 /obj/item/projectile/astral_razor_projectile/tracer_effect()
 	..()
-	animate_segments()
+	attach_segments()
 
 /obj/item/projectile/astral_razor_projectile/impact_effect()
 	..()
-	animate_segments()
+	attach_segments()
 
-/obj/item/projectile/astral_razor_projectile/proc/animate_segments()
+/obj/item/projectile/astral_razor_projectile/proc/attach_segments()
 	for (var/obj/projectile/astral_razor/segment in segments)
-		segment.start_animation()
+		var/obj/astral_razor_beam_render_source/source = beam_sources?[segment.beam_state]
+		if (QDELETED(source))
+			qdel(segment)
+			continue
+		segment.render_source = source.render_target
+		source.segments += segment
 	segments.Cut()
 
-/obj/projectile/astral_razor
+/obj/astral_razor_beam_render_source
 	icon = 'icons/coscult/cosmic-hitscan.dmi'
 	icon_state = null
-	light_color = "#42a4ae"
-	var/anim_state
+	screen_loc = "1,1"
+	mouse_opacity = MOUSE_OPACITY_UNCLICKABLE
 	var/anim_start_delay = 1
 	var/anim_length = 4
+	var/list/obj/projectile/astral_razor/segments = list()
 
-/obj/projectile/astral_razor/proc/start_animation()
-	animate(src, icon_state = anim_state, time = 0, delay = anim_start_delay) // workaround so the animation actually plays on the damn client
+/obj/astral_razor_beam_render_source/Initialize(mapload, state)
+	. = ..()
+	render_target = "*astral-razor-[state]-\ref[src]"
+	for (var/client/C as anything in GLOB.clients)
+		C.screen += src
+
+	animate(src, icon_state = state, time = 0, delay = anim_start_delay) // workaround so the animation actually plays on the damn client
 	QDEL_IN(src, anim_start_delay + anim_length + 1)
 
+/obj/astral_razor_beam_render_source/Destroy()
+	for (var/client/C as anything in GLOB.clients)
+		C.screen -= src
+	QDEL_NULL_LIST(segments)
+	return ..()
+
+/obj/projectile/astral_razor
+	icon = null
+	icon_state = null
+	light_color = "#42a4ae"
+	var/beam_state
+
 /obj/projectile/astral_razor/tracer
-	anim_state = "middle"
+	beam_state = "middle"
 
 /obj/projectile/astral_razor/muzzle
-	anim_state = "start"
+	beam_state = "start"
 
 /obj/projectile/astral_razor/impact
-	anim_state = "end"
+	beam_state = "end"
