@@ -14,7 +14,7 @@
 
 	force = 20
 	armor_penetration = 20
-	throwforce = 36
+	throwforce = 30
 	puncture = TRUE
 	sharp = TRUE
 
