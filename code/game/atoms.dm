@@ -580,9 +580,11 @@
 			var/obj/O = AM
 			damage = O.throwforce
 			damage_type = O.damtype
-			if (use_weapon_hitsound && isitem(O))
+			if (isitem(O))
 				var/obj/item/I = O
-				damage_hitsound = I.hitsound
+				var/use_weapon_sounds = use_weapon_hitsound || I.hit_sounds_override_target
+				if (use_weapon_sounds)
+					damage_hitsound = I.hitsound
 		else if (ismob(AM))
 			var/mob/M = AM
 			damage = M.mob_size

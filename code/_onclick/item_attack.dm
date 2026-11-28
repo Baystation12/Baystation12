@@ -260,18 +260,20 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
 		var/damage_flags = weapon.damage_flags()
+		var/use_weapon_sounds = use_weapon_hitsound || weapon.hit_sounds_override_target
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
-			playsound(src, use_weapon_hitsound ? weapon.hitsound : damage_hitsound, 50, TRUE)
+			playsound(src, use_weapon_sounds ? weapon.hit_glance_sound || weapon.hitsound : damage_hitsound, 50, TRUE)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
 				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!")
 			)
 			return TRUE
-		playsound(src, use_weapon_hitsound ? weapon.hitsound : damage_hitsound, 75, TRUE)
+		playsound(src, use_weapon_sounds ? weapon.hitsound : damage_hitsound, 75, TRUE)
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
 			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
 		)
+		weapon.before_apply_hit_effect(src, user)
 		damage_health(weapon.force, weapon.damtype, damage_flags, skip_can_damage_check = TRUE)
 		return TRUE
 
@@ -291,7 +293,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		var/attack_verb = "[pick(weapon.attack_verb)]"
 
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
-			playsound(src, weapon.hitsound, 50, TRUE)
+			playsound(src, weapon.hit_glance_sound || weapon.hitsound, 50, TRUE)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hit \the [src] [weapon_mention], but it bounced off!"),
 				SPAN_WARNING("You hit \the [src] [weapon_mention], but it bounced off!"),
@@ -332,10 +334,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		var/datum/attack_result/result = hit_zone
 		if (istype(result))
 			if (result.hit_zone)
+				weapon.before_apply_hit_effect(src, user)
 				var/mob/living/victim = result.attackee ? result.attackee : src
 				weapon.apply_hit_effect(victim, user, result.hit_zone)
 				return TRUE
 		if (hit_zone)
+			weapon.before_apply_hit_effect(src, user)
 			weapon.apply_hit_effect(src, user, hit_zone)
 		return TRUE
 	return ..()
@@ -455,6 +459,16 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/use_before(atom/target, mob/living/user, click_parameters)
 	return FALSE
 
+/**
+ * Called when a weapon is used to make a successful melee attack on an atom, but before applying damage.
+ * Generally called by the target's `use_weapon()` proc.
+ *
+ * **Parameters**:
+ * - `target` - The atom struck with the weapon.
+ * - `user` - The mob using the weapon.
+ */
+/obj/item/proc/before_apply_hit_effect(atom/target, mob/living/user)
+	return
 
 /**
  * Called when a weapon is used to make a successful melee attack on a mob. Generally called by the target's `use_weapon()` proc.

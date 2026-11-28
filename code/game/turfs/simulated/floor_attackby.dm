@@ -31,7 +31,7 @@
 			SPAN_WARNING("\The [user] swings \a [weapon] wildly through the air, but hits nothing!"),
 			SPAN_WARNING("You swing \the [weapon] through the air, but hit nothing!")
 		)
-		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+		playsound(src, weapon.hit_miss_sound, 25, 1, -1)
 		return TRUE
 
 	return victim.use_weapon(weapon, user, click_params)
