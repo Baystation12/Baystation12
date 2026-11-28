@@ -85,6 +85,9 @@
 	if (human.ignore_hazard_flags & HAZARD_FLAG_SHARD)
 		return
 	if (!istype(human))
+		var/mob/mob = movable
+		if (mob.can_overcome_gravity())
+			return
 		to_chat(human, SPAN_WARNING("\A [src] cuts you!"))
 		human.take_overall_damage(force * 0.75, 0)
 		return

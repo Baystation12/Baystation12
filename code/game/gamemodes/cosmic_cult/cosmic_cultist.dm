@@ -8,13 +8,13 @@
 	var/notified_of_next_influence = FALSE
 	var/granting_influence = null
 
-/datum/cosmic_cultist/New(datum/mind/player)
+/datum/cosmic_cultist/New(datum/mind/player, is_full_cultist = TRUE)
 	player.cosmic_cultist = src
 	owning_mind = player
 
 	// grant powers available to all cosmic cultists
 	for (var/P in cosmic_cult_powers)
-		if (get_power_instance(P).innate_power)
+		if (get_power_instance(P).innate_power && is_full_cultist)
 			grant_power(P)
 
 	// grant languages
